@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 100,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-STRICTSEG-20260629/strict_segment/ntv2_250m_w4096/animal_fine/mouse_chr2.tsv",
+  "n_windows": 1200
+}

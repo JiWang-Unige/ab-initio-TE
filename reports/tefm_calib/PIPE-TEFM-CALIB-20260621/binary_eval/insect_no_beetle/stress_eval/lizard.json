@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0925822498473611,
+  "te_recall": 0.30301481692595467,
+  "te_f1": 0.14183013901954156,
+  "bg_f1": 0.8687137808582193,
+  "macro_f1": 0.5052719599388804,
+  "te_auprc": 0.09533388967893644,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/stress_eval/lizard",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_stress_eval",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "lizard"
+}

@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9297295383132463,
+  "te_recall": 0.8818649134142272,
+  "te_f1": 0.9051649037911726,
+  "bg_f1": 0.748921742072986,
+  "macro_f1": 0.8270433229320793,
+  "te_auprc": 0.963754002454282,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/plant_eval_fine/maize",
+  "n_windows": 1200,
+  "stage": "invert_to_plant_fine",
+  "model_key": "generanno",
+  "model": "TFREPAIR_invert_boost_animal_4096_seed42",
+  "window": 4096,
+  "species": "maize"
+}

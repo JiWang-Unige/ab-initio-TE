@@ -1,0 +1,56 @@
+{
+  "schema_version": "TEFM-BENCH-HITE-ISOLATED-1.0.0",
+  "exp_id": "BENCH-HITE-ISOLATED-20260811-R1",
+  "profile": "isolated_runtime_validity_smoke",
+  "implementation_status": "IMPLEMENTED_NOT_RUN",
+  "claim_eligible": false,
+  "offline": true,
+  "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "primary_metric": "hite_engineering_pass",
+  "expected_cell_keys": ["hite"],
+  "ownership": {"stale_lock_seconds": 21600},
+  "stop_policy": {
+    "parent_timeout_seconds": 600,
+    "isolated_retry_timeout_seconds": 1800,
+    "maximum_isolated_timeout_retries": 1,
+    "sentinel": "outputs/BENCH-HITE-ISOLATED-20260811-R1/STOP.json"
+  },
+  "timeouts_seconds": {"identity": 60, "minimum_input": 1800, "kill_after": 10},
+  "runtime_budget": {
+    "walltime_seconds": 3600,
+    "command_timeout_sum_seconds": 1860,
+    "max_command_count": 2,
+    "preflight_hash_budget_seconds": 300,
+    "required_post_command_headroom_seconds": 900
+  },
+  "resources": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 48, "walltime": "01:00:00", "gpus": 0},
+  "hite": {
+    "version": "3.3.3",
+    "source_commit": "ae317c879b3d217b419fefa38c6ff2cacbf1695c",
+    "preparation_parent_config_sha256": "6d387e243185e0b2a1f432b396b67fd01c87a206d946aa3be066cc17b82f5246",
+    "reference": "docker://kanghu/hite@sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce",
+    "sif": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif", "sha256": "3967895913c3aebbe0393a5b33eada1f752f10ca46d8ee787d5f2bace3f9dcdc"},
+    "manifest": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif.manifest.json", "sha256": "9c31b03c588e2a4190a5a040eafd39ed1445f841a1d9b67b79c1fbe6e08a3185"},
+    "help": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif.help.txt", "sha256": "10ddd915fb1d3835940cc265e38ee41b7c6c3ccf0de08ec21cf7f8a9bd888c06"},
+    "inspect": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif.inspect.json", "sha256": "4cc178d520bf67815e1fe002fca4ca45250894967bd14545a1a23f942f869248"},
+    "fixture": {"path": "refs/repos/hite_3_3_3/demo/genome.fa", "sha256": "ee5bd7cd02c631f31d43ebf2e434497a5b1dd8cd7b2bc62797f185a876cd3c37", "minimum_bp": 10000},
+    "preparation_code": {"path": "scripts/experiments/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/acquire_hite_exact.sh", "sha256": "62c7f578ad8220b8a9f4cf42dd8ada6de23ddd0b189ab3aad0dbe27b27a6921c"},
+    "preparation_environment": {"path": "outputs/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/preparation_environment_11522329.txt", "sha256": "cec5a3c77f3398e4d63cb1ebfeb2030d9981b8d8ffb6d12dadf3e88d9d5bb5df"},
+    "adapter": {"path": "scripts/experiments/BENCH-5TOOL-SMOKE-20260811-R1/adapter.py", "sha256": "3b29a9be5d8c5e5b84c6c00ca251d7141ea9620bd8ec3c367e6e340ccab0e8ea"},
+    "final_gff_guest": "/work/hite/HiTE.gff",
+    "direct_argv": ["python", "/HiTE/main.py", "--genome", "/work/input/hite.fa", "--thread", "2", "--annotate", "1", "--out_dir", "/work/hite"]
+  },
+  "parent_rm_evidence": {
+    "exp_id": "BENCH-RM-HITE-VALIDITY-20260811-R1",
+    "slurm_job_id": "11523819",
+    "aggregate_status": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/STATUS", "sha256": "03cbb6c52e522ce55e217e3f9d66dbd66d21ef6bf85024016a3b7f3080c7944f", "expected_text": "FAILED"},
+    "aggregate_metrics": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/metrics.json", "sha256": "0a2d4d3390195504dcf668bff295551862da1843ec55352cc8a62a0779e35204"},
+    "rm_cell_result": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/attempts/attempt-11523819/cells/repeatmodeler2_repeatmasker/result.json", "sha256": "2af0a74437518ee7ef9c946b453813bb9ad6640d969a56ee585e0194bacfeee2"},
+    "hite_cell_result": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/attempts/attempt-11523819/cells/hite/result.json", "sha256": "c5cc670021ffc9fdea5a0df6231aeade990575fac9ddb789470c3ef290b1ae4f"},
+    "artifact_manifest": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/artifact_manifest.json", "sha256": "5cac2997b245f864805c5a78efa0ebe6dc5982b8aa003d19d4ce416052c24bc1"},
+    "command_manifest": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/command_manifest.json", "sha256": "9a196d908e93f17a588e5b6054011a8697e10de882ba8fe0962af126b26f4970"},
+    "input_manifest": {"path": "outputs/BENCH-RM-HITE-VALIDITY-20260811-R1/attempts/attempt-11523819/input_manifest.json", "sha256": "7fcea7d20fdcb5992e8220c3ab02cdc1e6df62829e40aa275c9f5e0331da3331"},
+    "config": {"path": "configs/BENCH-RM-HITE-VALIDITY-20260811-R1.yaml", "sha256": "9a144c147c18ed5a1d8d193998a16a3ded3f7975a7afaeac058c98160b7efc44"},
+    "runner": {"path": "scripts/experiments/BENCH-RM-HITE-VALIDITY-20260811-R1/run_validity_smoke.py", "sha256": "b0d58686e2212930aea94e68175f126ebcd7694aa313f71a00592c4b03381173"}
+  }
+}

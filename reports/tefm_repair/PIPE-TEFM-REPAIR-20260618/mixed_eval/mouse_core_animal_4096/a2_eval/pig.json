@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8662770553396061,
+  "te_recall": 0.8844476779334413,
+  "te_f1": 0.8752680709659444,
+  "bg_f1": 0.9471641853726139,
+  "macro_f1": 0.9112161281692792,
+  "te_auprc": 0.9444743607080041,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_mouse_core_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/pig",
+  "n_windows": 1200,
+  "stage": "mouse_core_animal_4096_to_a2_eval",
+  "model_key": "generanno",
+  "model": "mouse_core_animal_4096",
+  "window": 4096,
+  "species": "pig"
+}

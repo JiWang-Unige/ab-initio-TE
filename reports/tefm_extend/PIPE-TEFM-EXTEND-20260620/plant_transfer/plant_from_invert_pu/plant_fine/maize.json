@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7450191243489583,
+  "te_recall": 1.0,
+  "te_f1": 0.8538807557503582,
+  "bg_precision": 0.0,
+  "bg_recall": 0.0,
+  "bg_f1": 0.0,
+  "macro_f1": 0.4269403778751791,
+  "te_auprc": 0.7133134425348379,
+  "pred_te_rate": 1.0,
+  "true_te_rate": 0.7450191243489583,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/plant_eval_fine/maize",
+  "stage": "plant_from_invert_pu_to_plant_fine",
+  "species": "maize",
+  "window": 4096,
+  "n_windows": 1200
+}

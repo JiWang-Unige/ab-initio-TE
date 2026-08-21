@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.2467563940908809,
+  "te_recall": 0.9858471641106681,
+  "te_f1": 0.3947158674369039,
+  "bg_f1": 0.8001293079009753,
+  "macro_f1": 0.5974225876689396,
+  "te_auprc": 0.49235179318558914,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_p5_archive_parity_4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/x_laevis",
+  "n_windows": 1200,
+  "stage": "p5_archive_parity_4096_to_a2_eval",
+  "model_key": "generanno",
+  "model": "p5_archive_parity_4096",
+  "window": 4096,
+  "species": "x_laevis"
+}

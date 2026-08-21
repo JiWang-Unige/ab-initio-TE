@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.5787475964814002,
+  "te_recall": 0.5032564605887302,
+  "te_f1": 0.5383685302773058,
+  "bg_f1": 0.9220551409139913,
+  "macro_f1": 0.7302118355956486,
+  "te_auprc": 0.5584508981988809,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/data/insect_primary_eval_fine/c_elegans",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_insect_fine",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "c_elegans"
+}

@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0,
+  "te_recall": 0.0,
+  "te_f1": 0.0,
+  "bg_f1": 0.9997362585838063,
+  "macro_f1": 0.49986812929190316,
+  "te_auprc": 0.38443046821456917,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/direct_western_honey_bee_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/direct_western_honey_bee",
+  "n_windows": 1200,
+  "stage": "direct_honeybee_own_holdout",
+  "model_key": "generanno",
+  "model": "direct_western_honey_bee_4096",
+  "window": 4096,
+  "species": "western_honey_bee"
+}

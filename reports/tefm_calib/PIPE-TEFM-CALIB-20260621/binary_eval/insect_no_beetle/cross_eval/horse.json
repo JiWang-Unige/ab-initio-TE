@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9879766076304815,
+  "te_recall": 0.10321533276111643,
+  "te_f1": 0.18690448589674039,
+  "bg_f1": 0.820584292477032,
+  "macro_f1": 0.5037443891868862,
+  "te_auprc": 0.8915689909022988,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/horse",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_cross_eval",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "horse"
+}

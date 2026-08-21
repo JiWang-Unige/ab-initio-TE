@@ -1,0 +1,16 @@
+{
+  "n": 1409,
+  "n_clusters": 7,
+  "ari": 0.8600064259121131,
+  "nmi": 0.8352940708844608,
+  "holdout_accuracy": 0.7563739376770539,
+  "holdout_macro_f1": 0.7598066930812,
+  "silhouette": 0.501857578754425,
+  "sklearn_available": true,
+  "setting": "C1",
+  "fragments": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/fragments/unknown_highscore_len512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "label_level": "sf5_or_bg",
+  "source": "unknown_highscore"
+}

@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.24656310131668543,
+  "te_recall": 0.9872759577830362,
+  "te_f1": 0.3945827783795458,
+  "bg_f1": 0.799609843384939,
+  "macro_f1": 0.5970963108822425,
+  "te_auprc": 0.46321406154991385,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/x_laevis",
+  "n_windows": 1200,
+  "stage": "cross_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "cross_supervised_4096",
+  "window": 4096,
+  "species": "x_laevis"
+}

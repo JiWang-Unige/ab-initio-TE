@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7942063207313648,
+  "te_recall": 0.840870274504261,
+  "te_f1": 0.8168724191543623,
+  "bg_f1": 0.7581641692654372,
+  "macro_f1": 0.7875182942098997,
+  "te_auprc": 0.9148491324012331,
+  "n_labeled_tokens": 1228558,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv3_100m_pre_8kb_H0_w1024_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/animal_fine_w1024/mouse",
+  "n_windows": 1200,
+  "stage": "ntv3_100m_pre_8kb_w1024_to_animal_fine",
+  "model_key": "ntv3_100m_pre_8kb",
+  "model": "ntv3_100m_pre_8kb_H0_w1024_seed42",
+  "window": 1024,
+  "species": "mouse"
+}

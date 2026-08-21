@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9022109480662142,
+  "te_recall": 0.8831136140593817,
+  "te_f1": 0.8925601404845789,
+  "bg_f1": 0.9485341521625539,
+  "macro_f1": 0.9205471463235664,
+  "te_auprc": 0.9570423637295375,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/horse",
+  "n_windows": 1200,
+  "stage": "cross_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "cross_supervised_4096",
+  "window": 4096,
+  "species": "horse"
+}

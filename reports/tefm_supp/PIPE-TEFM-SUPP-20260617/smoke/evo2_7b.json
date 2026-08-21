@@ -1,0 +1,6 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/evo2_7b_base",
+  "kind": "smoke_only",
+  "ok": false,
+  "error": "ValueError(\"Couldn't instantiate the backend tokenizer from one of: \\n(1) a `tokenizers` library serialization file, \\n(2) a slow tokenizer instance to convert or \\n(3) an equivalent slow tokenizer class to instantiate and convert. \\nYou need to have sentencepiece or tiktoken installed to convert a slow tokenizer to a fast one.\")"
+}

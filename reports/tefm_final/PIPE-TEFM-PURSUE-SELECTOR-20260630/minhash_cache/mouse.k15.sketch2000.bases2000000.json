@@ -1,0 +1,11 @@
+{
+  "species": "mouse",
+  "genome": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/mouse/mm39.fa",
+  "k": 15,
+  "sketch_size": 2000,
+  "max_bases": 2000000,
+  "sampled_bases": 2000000,
+  "valid_bases": 0,
+  "unique_kmers_seen": 0,
+  "sketch": []
+}

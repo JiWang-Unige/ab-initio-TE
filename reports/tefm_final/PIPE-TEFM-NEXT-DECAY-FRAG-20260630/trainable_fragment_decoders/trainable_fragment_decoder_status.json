@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-NEXT-DECAY-FRAG-20260630",
+  "n_windows": 40,
+  "train_fraction": 0.6,
+  "chrom_status": [
+    {
+      "chrom": "chr1",
+      "bp": 163840,
+      "train_bp": 98304,
+      "test_bp": 65536,
+      "train_chunks": 48
+    }
+  ],
+  "outputs": {
+    "metrics": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/trainable_fragment_decoders/trainable_fragment_decoder_metrics.tsv",
+    "report": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/trainable_fragment_decoders/TRAINABLE_FRAGMENT_DECODERS_REPORT.md",
+    "status": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/trainable_fragment_decoders/trainable_fragment_decoder_status.json"
+  }
+}

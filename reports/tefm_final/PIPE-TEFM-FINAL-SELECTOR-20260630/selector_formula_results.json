@@ -1,0 +1,69 @@
+{
+  "n_rows": 156,
+  "features": [
+    "log_distance_mya",
+    "target_gc",
+    "same_group_anchor",
+    "target_insect",
+    "target_other",
+    "target_plant",
+    "target_vertebrate",
+    "anchor_animal",
+    "anchor_cross",
+    "anchor_human_h0_ntv2_250m",
+    "anchor_human_h0_ntv2_500m",
+    "anchor_human_h0_ntv3_100m",
+    "anchor_insect",
+    "anchor_other_anchor",
+    "anchor_plant"
+  ],
+  "deployable_random_forest": {
+    "status": "ok",
+    "r2_in_sample": 0.8203082132723565,
+    "rmse_in_sample": 0.14723992406622274,
+    "leave_species_out_rmse": 0.3040429346936296,
+    "feature_importance": {
+      "log_distance_mya": 0.2248025156438735,
+      "target_gc": 0.21082064519071855,
+      "same_group_anchor": 0.04873541168232592,
+      "target_insect": 0.17619930327934336,
+      "target_other": 0.0033662411896735653,
+      "target_plant": 0.023569716730554396,
+      "target_vertebrate": 0.025489063391627213,
+      "anchor_animal": 0.032618878357479765,
+      "anchor_cross": 0.05575772114355741,
+      "anchor_human_h0_ntv2_250m": 0.024463538176408464,
+      "anchor_human_h0_ntv2_500m": 0.019660464101781756,
+      "anchor_human_h0_ntv3_100m": 0.01723397163214669,
+      "anchor_insect": 0.09499668812793621,
+      "anchor_other_anchor": 0.016776124862605987,
+      "anchor_plant": 0.025509716489967367
+    }
+  },
+  "annotation_aware_random_forest": {
+    "status": "ok",
+    "r2_in_sample": 0.8778579834163116,
+    "rmse_in_sample": 0.12139310341032927,
+    "leave_species_out_rmse": 0.2790802949255375,
+    "feature_importance": {
+      "log_distance_mya": 0.05576883896105471,
+      "target_gc": 0.03504541166162988,
+      "same_group_anchor": 0.07185871407200146,
+      "target_insect": 0.004653563802042452,
+      "target_other": 0.0012294877367272506,
+      "target_plant": 0.0037175905652050687,
+      "target_vertebrate": 0.010492129552151726,
+      "anchor_animal": 0.030441603919926775,
+      "anchor_cross": 0.06558279090084622,
+      "anchor_human_h0_ntv2_250m": 0.009840704055321479,
+      "anchor_human_h0_ntv2_500m": 0.007214006738464643,
+      "anchor_human_h0_ntv3_100m": 0.007362549601108217,
+      "anchor_insect": 0.05314417723072665,
+      "anchor_other_anchor": 0.000995025423149836,
+      "anchor_plant": 0.024036154390761,
+      "label_jaccard": 0.20881369402349081,
+      "ucsc_bp_covered_by_self": 0.054785436761660596,
+      "self_bp_covered_by_ucsc": 0.3550181206037311
+    }
+  }
+}

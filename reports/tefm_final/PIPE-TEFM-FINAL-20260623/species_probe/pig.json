@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9059485597565551,
+  "te_recall": 0.9139415960166869,
+  "te_f1": 0.9099275250061758,
+  "bg_f1": 0.9631783078418754,
+  "macro_f1": 0.9365529164240256,
+  "te_auprc": 0.9707672616766939,
+  "n_labeled_tokens": 823089,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/species_probe_ntv2_500m_pig_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/species_probe_ntv2_500m/pig",
+  "n_windows": 1200,
+  "stage": "species_specific_holdout",
+  "model_key": "ntv2_500m_probe",
+  "model": "species_probe_ntv2_500m_pig_w4096_seed42",
+  "window": 4096,
+  "species": "pig"
+}

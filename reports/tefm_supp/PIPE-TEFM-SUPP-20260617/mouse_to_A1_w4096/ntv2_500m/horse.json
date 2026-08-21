@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8896046921562892,
+  "te_recall": 0.8370060762016674,
+  "te_f1": 0.8625042150761779,
+  "bg_f1": 0.9361793707935514,
+  "macro_f1": 0.8993417929348646,
+  "te_auprc": 0.9434093351424463,
+  "n_labeled_tokens": 823200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_mouseA1_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A1_w4096/horse",
+  "n_windows": 1200,
+  "stage": "mouse_to_A1_w4096",
+  "model_key": "ntv2_500m",
+  "model": "ntv2_500m",
+  "window": 4096,
+  "species": "horse"
+}

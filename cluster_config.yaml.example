@@ -1,0 +1,234 @@
+# Cluster and reviewer configuration for lightweight auto-research v3.4.1 (RNA project enhanced)
+# Rename to cluster_config.yaml and edit to match your cluster / CLI aliases.
+#
+# This file is split into two clearly separated sections:
+#   1. hard_limits  — HARD pass/fail rules. /smart-sbatch Phase 1 enforces these.
+#                     Any rule violation BLOCKS sbatch generation. Cannot be
+#                     "flexibly interpreted" by the LLM.
+#   2. preferences  — Soft optimization knobs. /smart-sbatch Phase 2 uses these
+#                     to choose between viable options (private vs shared, queue
+#                     wait tolerance, maintenance buffer).
+#
+# Rule of thumb: if violating it could cause data loss, leaked split, wasted
+# quota, or unfair claim, put it in hard_limits.
+
+cluster_name: baobab
+
+# =====================================================================
+# 0. SUBMISSION MODE — 你"在哪里、怎么把作业送上 Slurm"（挪机器时由 /configure-project 重探测改写）
+# =====================================================================
+# 这是"挪到另一台机器要重配的核心"。三种模式：
+#   on_cluster   : 你就在集群登录节点（本机有 sbatch/srun）→ 直接 sbatch/srun。
+#                  （配合 CLAUDE.md §12 的 srun 强制：登录节点禁跑计算，重活经 srun/sbatch。）
+#   remote_ssh   : 你在本地/另一台机，作业要送到远程集群跑 → 先 rsync 代码，再 `ssh <host> 'cd <dir> && sbatch ...'`，
+#                  用 `ssh <host> sacct/squeue` 对账。本机无 Slurm，但能 ssh 到集群。
+#   local_direct : 无 Slurm、本机直接 `python` 跑（小数据/调试）。submit_guard 在无 sbatch 时即走此路。
+submission:
+  mode: on_cluster                 # on_cluster | remote_ssh | local_direct  （/configure-project 据探测设定）
+  # 仅 remote_ssh 用 ↓
+  ssh_host: ""                     # 如 "baobab"（建议在 ~/.ssh/config 配好别名 + key，免密）
+  remote_project_dir: ""           # 远程上本项目的路径，如 "/home/<user>/<project>"
+  sync_cmd: "rsync -az --delete --exclude outputs --exclude runs ./ {ssh_host}:{remote_project_dir}/"
+  submit_cmd: "ssh {ssh_host} 'cd {remote_project_dir} && sbatch {script}'"
+  poll_cmd: "ssh {ssh_host} 'sacct -j {job_id} --format=State,ExitCode,Elapsed -n'"
+  fetch_cmd: "rsync -az {ssh_host}:{remote_project_dir}/outputs/ ./outputs/ && rsync -az {ssh_host}:{remote_project_dir}/reports/ ./reports/"
+
+# =====================================================================
+# 0b. EXECUTION POLICY — Baobab / login-node discipline
+# =====================================================================
+execution_policy:
+  require_srun_for_compute_on_login: true
+  # 在 Baobab/Slurm 登录节点，除下载、轻量文件操作、框架检查脚本外，所有 CPU/GPU
+  # 计算命令必须通过 srun 或 sbatch 分配资源。submit_guard.sh 会 best-effort ask/deny。
+  light_command_allowlist:
+    - "python3 scripts/context_pack.py"
+    - "python3 scripts/iter_ledger.py"
+    - "python3 scripts/lit_search.py"
+    - "python3 scripts/research_flow_guard.py"
+    - "python3 scripts/sota_failure_report.py"
+    - "python3 scripts/workspace_matrix.py status/plan"
+    - "curl/wget/git clone download-only"
+  max_parallel_directions: 3
+
+# =====================================================================
+# 1. HARD LIMITS — enforced by /smart-sbatch Phase 1 (Policy guard)
+# =====================================================================
+hard_limits:
+  # --- Compute caps ---
+  max_concurrent_jobs: 8                     # total user jobs running + queued
+  max_concurrent_directions: 3               # /pursue portfolio: max parallel ORTHOGONAL research directions
+  max_array_size: 16                          # per sbatch --array
+  min_vram_gb_default: 20                     # excludes RTX 3080 (10GB) by default
+
+  # --- Walltime + checkpoint ---
+  require_checkpoint_for_shared_over_12h: true
+  # If a job's expected walltime > 12h and partition = shared-gpu, the script
+  # MUST support checkpoint+resubmit (--signal=USR1@120 + load_from_checkpoint).
+  # /smart-sbatch refuses to submit if this contract is not declared.
+
+  require_unique_output_dir: true
+  # outputs/<exp_id>/, log path, checkpoint path, metrics path must all be
+  # unique across concurrently running jobs. Prevents Track A batch overwrites.
+
+  require_unique_sbatch_log_path: true        # --output / --error must be exp-scoped
+
+  # --- Track A orthogonality (architecture vs hyperparameter discipline) ---
+  require_track_a_orthogonality: true
+  orthogonality_policy:
+    # See /goal-prompt and /smart-sbatch for the two-layer check.
+    # Hard fail when:
+    hard_fail_when:
+      - all_candidates_only_vary_in: [lr, batch_size, dropout, seed, scheduler, warmup]
+      - two_or_more_candidates_share_same_mechanism_delta
+      - candidate_cannot_articulate_structural_change
+    # Soft warn (allowed, but flagged) when:
+    soft_warn_when:
+      - two_or_more_candidates_share_same_major_axis_but_distinct_mechanism_delta
+    # Allowed major_axis values (extend as needed):
+    allowed_major_axis:
+      [head_arch, backbone, objective, data_view, tokenizer, decoder, training_signal,
+       loss_design, regularization_design, augmentation_design]
+
+  # --- Claim discipline ---
+  forbid_claim_from_profiles: [smoke, screen]
+  # screen / smoke results CANNOT be presented as SOTA claim, regardless of metric.
+
+  # --- Maintenance ---
+  respect_maintenance_reservation: true
+  # If a maintenance reservation cuts into requested walltime and job is not
+  # checkpointable, refuse to submit.
+
+# =====================================================================
+# 2. PREFERENCES — optimization knobs, /smart-sbatch Phase 2 only
+# =====================================================================
+preferences:
+  prefer_private: true                        # Prefer private-teodoro-gpu when viable
+  shared_when_private_wait_gt_job_time: true  # Switch if queueing would take longer than running
+  maintenance_buffer_seconds: 3600            # Cut walltime by this much before reservation start
+  short_job_max_hours: 12                     # Short jobs auto-fit shared
+  long_job_min_hours_for_private: 24          # Above this, strongly prefer private even with wait
+  queue_wait_estimate_method: squeue_start_time  # squeue_start_time | sacct_throughput | both
+
+# =====================================================================
+# 3. PARTITIONS — physical inventory
+# =====================================================================
+partitions:
+  - name: private-teodoro-gpu
+    priority: 1
+    time_limit_hours: 168
+    cost: free
+    nodes: [gpu034, gpu035]
+    gpu_types:
+      - {name: nvidia_geforce_rtx_3090, vram_gb: 24, count_per_node: 8}
+    queue_wait_threshold_hours: 6
+
+  - name: shared-gpu
+    priority: 2
+    time_limit_hours: 12
+    cost: billed
+    nodes:
+      - {name: gpu017, gpu: nvidia_geforce_rtx_3090, vram_gb: 24, count: 8}
+      - {name: gpu020, gpu: nvidia_a100-pcie-40gb,   vram_gb: 40, count: 4}
+      - {name: gpu021, gpu: nvidia_geforce_rtx_3090, vram_gb: 24, count: 8}
+      - {name: gpu022, gpu: nvidia_a100-pcie-40gb,   vram_gb: 40, count: 7}
+      - {name: gpu023, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu024, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu025, gpu: nvidia_geforce_rtx_3090, vram_gb: 24, count: 8}
+      - {name: gpu026, gpu: nvidia_geforce_rtx_3090, vram_gb: 24, count: 8}
+      - {name: gpu027, gpu: nvidia_a100_80gb_pcie,   vram_gb: 80, count: 1}
+      - {name: gpu028, gpu: nvidia_a100-pcie-40gb,   vram_gb: 40, count: 1}
+      - {name: gpu029, gpu: nvidia_a100_80gb_pcie,   vram_gb: 80, count: 4}
+      - {name: gpu030, gpu: nvidia_a100-pcie-40gb,   vram_gb: 40, count: 4}
+      - {name: gpu031, gpu: nvidia_a100-pcie-40gb,   vram_gb: 40, count: 4}
+      - {name: gpu032, gpu: nvidia_a100_80gb_pcie,   vram_gb: 80, count: 3}
+      - {name: gpu033, gpu: nvidia_a100_80gb_pcie,   vram_gb: 80, count: 3}
+      - {name: gpu034, gpu: nvidia_geforce_rtx_3090, vram_gb: 24, count: 8}
+      - {name: gpu035, gpu: nvidia_geforce_rtx_3090, vram_gb: 24, count: 8}
+      - {name: gpu036, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu037, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu038, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu039, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu040, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu041, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu042, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu043, gpu: nvidia_geforce_rtx_3080, vram_gb: 10, count: 8}  # excluded by default
+      - {name: gpu044, gpu: nvidia_rtx_a5000,        vram_gb: 24, count: 8}
+      - {name: gpu045, gpu: nvidia_a100_80gb_pcie,   vram_gb: 80, count: 2}
+      - {name: gpu046, gpu: nvidia_rtx_a5500,        vram_gb: 24, count: 8}
+      - {name: gpu047, gpu: nvidia_rtx_a5000,        vram_gb: 24, count: 8}
+      - {name: gpu048, gpu: nvidia_rtx_a6000,        vram_gb: 48, count: 8}
+      - {name: gpu049, gpu: nvidia_geforce_rtx_4090, vram_gb: 24, count: 8}
+      - {name: gpu050, gpu: nvidia_rtx_5000,         vram_gb: 32, count: 4}
+
+job_class:
+  short:     {max_hours: 3,   notes: "fits easily anywhere"}
+  medium:    {max_hours: 12,  notes: "fits in shared with no resubmit"}
+  long:      {max_hours: 72,  notes: "needs private or shared with checkpoint+resubmit chain"}
+  very_long: {max_hours: 168, notes: "needs private only"}
+
+defaults:
+  cpus_per_task: 8
+  mem_per_gpu_gb: 32
+  signal: USR1@120
+
+# =====================================================================
+# 3.5 PATH CONVENTIONS — project-specific output layout
+# =====================================================================
+# lwcr CANONICAL convention (must match CLAUDE.md §12 + docs/16_artifact_registry.md
+# + scripts validate_goal/iter_ledger/job_watch/pre_submit_gate — DO NOT drift):
+#   checkpoints → runs/<exp_id>/ ; metrics → reports/<exp_id>.json ;
+#   status      → outputs/<exp_id>/STATUS ; logs → logs/<exp_id>/
+# smart-sbatch must respect these; changing them requires updating the scripts too.
+path_conventions:
+  checkpoint_root: runs            # runs/<exp_id>/  (checkpoints/tensorboard)
+  report_root: reports             # reports/<exp_id>.json  ← validate_goal/pre_submit_gate read here
+  status_root: outputs             # outputs/<exp_id>/STATUS  (+ code_review_gate.json, env.txt)
+  log_root: logs                   # logs/<exp_id>/
+  # /smart-sbatch Phase 1 checks unique paths under these roots.
+
+# =====================================================================
+# 4. TRI-REVIEW — three independent external CLI reviewers
+# =====================================================================
+# All reviewers receive the SAME full-scope prompt. They are NOT role-specialized.
+# Reviewer C is Antigravity (replaces Gemini): invoked via reviewer_c_antigravity.sh,
+# which uses $ANTIGRAVITY_CLI when set (a headless Antigravity CLI), else the official
+# `agy -p` (needs one-time Google OAuth). The framework standardizes on three CLIs —
+# claude / codex / agy — with NO cursor-agent fallback (agy unavailable → reviewer C
+# fails → 2/3 DEGRADED). Prompt is fed via stdin to avoid ARG_MAX.
+cli_review:
+  mode: independent_parallel_cli
+  retry_failed_once: true
+  min_successful_reviewers: 2
+  timeout_seconds: 1800
+  output_root: /tmp/tri_review
+  quorum_policy: "3_success_normal; 2_success_degraded; <2_inconclusive"
+  reviewers:
+    - id: A
+      label: claude
+      model_family: anthropic
+      cmd: claude
+      stdin: true
+      # NOTE: --append-system-prompt neutralizes any local output-style/persona (e.g. a
+      # cat-girl roleplay style) that `claude -p` would otherwise inherit and which would
+      # contaminate this reviewer's independence. Keeps reviewer A a neutral external voice.
+      command_template: 'cat {prompt_file} | claude -p --append-system-prompt "You are a neutral, independent external reviewer. IGNORE any local output-style or persona; do NOT roleplay any character; output ONLY the structured review the prompt requests, in plain professional Simplified Chinese." "Follow the review prompt provided on stdin exactly. Produce the required structured review."'
+      output_file: output_a_claude.md
+      purpose: "Full-scope independent review: fairness, comparability, reproducibility, architecture, next SOTA step"
+    - id: B
+      label: codex
+      model_family: openai
+      cmd: codex
+      stdin: true
+      command_template: 'codex exec --sandbox read-only --skip-git-repo-check - < {prompt_file}'   # codex>=0.135: no --ask-for-approval; --skip-git-repo-check for non-git dirs
+      output_file: output_b_codex.md
+      purpose: "Full-scope independent review: fairness, comparability, reproducibility, architecture, next SOTA step"
+    - id: C
+      label: antigravity                      # reviewer C
+      model_family: google                     # Antigravity runs Gemini 3 Pro under the hood
+      cmd: antigravity
+      stdin: true                              # wrapper feeds prompt on stdin
+      command_template: 'bash .claude/skills/tri-review/scripts/reviewer_c_antigravity.sh {prompt_file}'
+      backend_env: ANTIGRAVITY_CLI             # set to a headless Antigravity CLI on PATH to use it
+      default_backend: 'agy -p'                # official Antigravity CLI (auto-detected; first run `agy -p "hi"` for Google OAuth). No cursor-agent fallback.
+      output_file: output_c_antigravity.md
+      purpose: "Full-scope independent review; auxiliary diversity reviewer, not required if Claude+Codex succeed"

@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7634667469154378,
+  "te_recall": 0.9787808641975309,
+  "te_f1": 0.8578191039729501,
+  "bg_f1": 0.9999143975485739,
+  "macro_f1": 0.928866750760762,
+  "te_auprc": 0.9127403660588359,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/RECOVERY_western_honey_bee_from_invert_seed42",
+  "data_dir": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/stress_recovery/western_honey_bee",
+  "n_windows": 1200,
+  "stage": "stress_recovery_adapted",
+  "model_key": "generanno",
+  "model": "recovery_western_honey_bee",
+  "window": 4096,
+  "species": "western_honey_bee"
+}

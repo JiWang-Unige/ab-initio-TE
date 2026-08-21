@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9855554900093544,
+  "te_recall": 0.08080060634827854,
+  "te_f1": 0.1493562637371058,
+  "bg_f1": 0.8388119819185599,
+  "macro_f1": 0.4940841228278329,
+  "te_auprc": 0.8314204575127938,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/pig",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_cross_eval",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "pig"
+}

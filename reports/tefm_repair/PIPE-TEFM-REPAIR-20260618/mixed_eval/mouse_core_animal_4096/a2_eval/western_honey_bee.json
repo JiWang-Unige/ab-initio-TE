@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.015997979202627036,
+  "te_recall": 1.0,
+  "te_f1": 0.03149214768159781,
+  "bg_f1": 0.9976165242084476,
+  "macro_f1": 0.5145543359450228,
+  "te_auprc": 0.6285059565536759,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_mouse_core_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/western_honey_bee",
+  "n_windows": 1200,
+  "stage": "mouse_core_animal_4096_to_a2_eval",
+  "model_key": "generanno",
+  "model": "mouse_core_animal_4096",
+  "window": 4096,
+  "species": "western_honey_bee"
+}

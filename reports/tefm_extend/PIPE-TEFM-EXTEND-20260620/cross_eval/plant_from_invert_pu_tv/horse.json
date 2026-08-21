@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.5973762428464183,
+  "te_recall": 0.9713427477723008,
+  "te_f1": 0.7397846072501153,
+  "bg_precision": 0.9799445678782511,
+  "bg_recall": 0.6814118580761969,
+  "bg_f1": 0.8038562205891194,
+  "macro_f1": 0.7718204139196174,
+  "te_auprc": 0.9279319854061643,
+  "pred_te_rate": 0.5322615559895834,
+  "true_te_rate": 0.32734110514322917,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/horse",
+  "stage": "plant_model_cross_eval",
+  "species": "horse",
+  "window": 4096,
+  "n_windows": 1200
+}

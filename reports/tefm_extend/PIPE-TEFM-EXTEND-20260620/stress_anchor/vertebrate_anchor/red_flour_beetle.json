@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0021380480032893046,
+  "te_recall": 0.1808695652173913,
+  "te_f1": 0.004226139076547976,
+  "bg_f1": 0.9796504500427154,
+  "macro_f1": 0.49193829455963173,
+  "te_auprc": 0.013725897056652739,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/anchor_vertebrate_anchor",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/stress_eval/red_flour_beetle",
+  "n_windows": 1200,
+  "stage": "anchor_vertebrate_anchor",
+  "model_key": "generanno",
+  "model": "anchor_vertebrate_anchor",
+  "window": 4096,
+  "species": "red_flour_beetle"
+}

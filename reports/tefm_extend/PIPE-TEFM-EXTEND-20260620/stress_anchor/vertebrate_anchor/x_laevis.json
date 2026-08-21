@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.25988412978329783,
+  "te_recall": 0.9834255840040612,
+  "te_f1": 0.4111231485950374,
+  "bg_f1": 0.8163295101622046,
+  "macro_f1": 0.613726329378621,
+  "te_auprc": 0.4768865488687248,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/anchor_vertebrate_anchor",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/stress_eval/x_laevis",
+  "n_windows": 1200,
+  "stage": "anchor_vertebrate_anchor",
+  "model_key": "generanno",
+  "model": "anchor_vertebrate_anchor",
+  "window": 4096,
+  "species": "x_laevis"
+}

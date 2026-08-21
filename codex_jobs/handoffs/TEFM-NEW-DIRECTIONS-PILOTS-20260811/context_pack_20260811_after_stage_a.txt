@@ -1,0 +1,191 @@
+# Research Context Pack — purpose=iterate (deterministic rebuild from disk)
+> 脚本从磁盘 lossless 重建的续跑背景。对话历史可能已压缩——**以本 pack + 引用文件为唯一权威背景**，不要靠记忆。
+
+## Master plan / user navigation  (0.0d old)
+# Master Plan / TE-FM 总路线合同
+
+> 由 `$master-plan` 维护。最后更新：2026-08-11（保留 2026-07-01 主线历史，新增 bounded cohort）。
+>
+> 本文件现在是项目唯一中文主入口：既是导航图，也是 TE foundation model 研究路线合同。`docs/23_te_refinement_publication_route.md` 已并入本文件，之后仅作英文旧版参考，不再作为主路线维护。
+
+## 0. 当前导航
+
+### 2026-08-11 bounded direct-pilots overlay
+
+- **当前动作**: 执行 `TEFM-NEW-DIRECTIONS-PILOTS-20260811`。先修 Stage-A deterministic guard，再运行 `BENCH-5TOOL-SMOKE-20260811-R1`；通过独立 code review 后，F/S 可并行。G 因五个 anchor 的 exact run record 缺失、E 因 2,200-fragment bindings/weights 未冻结，默认保持 asset-gated，不得用历史 bundle 冒充已就绪。
+- **为什么先做**: 五工具的实际版本、数据库和 adapter 是后续 FM-vs-workflow 可比性的地基；F/S 是对旧 fragmentation/open-set limitation 的新机制测试，但只有在 truth/split 闸通过后才有科学意义。
+- **与旧决策兼容**: F 的 re-entry 仅限“immutable leaves + typed parent joins + richer/global evidence”，不重启 `DEC-001/002` 已否决的 gap/HMM/CRF/阈值或轻量 post-hoc cousin。S 把 Unknown 视为不确定性/更高 ontology node/abstain，绝不把它当普通生物 superfamily。
+- **授权和上限**: 用户已一次性批准本 cohort 的 bounded smoke/screen；每作业 ≤12h，新增总 GPU ≤24 GPU-hours，CPU smoke 0 GPU，最大并行方向 3。禁止 full/scale、部署、数据库迁移、commit/push 和论文主张。
+- **恢复指令**: 读 handoff prompt/protocol、`docs/02/03/19/20`、`cluster_config.yaml` 和 `codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/
+…(truncated, full: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/11_master_plan.md)
+
+## Active goal contract  (41.7d old)
+goal: Iteratively improve two publication-validation support components for the TE foundation-model project: (A) turn the genome-derived anchor selector into a conservative trust router, and (B) improve TE fragmentation handling via joint structured / interval-aware decoder objectives.
+scope=milestone | status=active | primary_metric=selector_top2_contains_best (higher)
+success_criteria: selector_top2_contains_best>=0.85; selector_mean_regret<=0.03; selector_leave_clade_abstention_rate>=0.95; decoder_segment_f1_delta_vs_ce>0.0; decoder_boundary_f1_delta_vs_ce>0.0; decoder_missed_true_rate_delta_vs_ce<=0.03
+screen_anchor=0.85 (screen 永不 claim; src: user-defined conservative router gate for bounded publication-validation support)
+sota_benchmark=0.95 (full/scale 才判 claim; src: no published SOTA claim target for this milestone)
+tuning_gap_threshold=0.05 (gap≥此 → 禁调参换架构) | max_parallel_directions=2
+
+## Recent results (trend, not one point)  (41.1d old)
+## Result: PIPE-TEFM-SEG-SF-20260618
+
+Date: 2026-06-18
+
+Status: semantic success, screen complete.
+
+Scope: GENERanno-only follow-up with 2048 bp and 4096 bp windows, seed=42. The run completed overlap center-merge inference, segment/boundary/fragmentation/postprocess evaluation, superfamily token-head training, and TE-fragment embedding clustering over B_animal and D_crosskingdom panels.
+
+Primary output:
+
+- Final report: `reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/FINAL_REPORT.md`
+- Overlap/postprocess: `reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/summaries/overlap_postprocess_summary.tsv`
+- Edge bins: `reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/summaries/edge_bin_summary.tsv`
+- Superfamily: `reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/summaries/superfamily_summary.tsv`
+- Embedding clustering: `reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/summaries/embedding_cluster_summary.tsv`
+
+Key metrics:
+
+- Best segment-level setting: 4096 window, stride 2048, `hmm_penalty2`, bp-F1 0.9427, segment-F1@IoU0.5 0.7442, boundary-F1@100bp 0.6261.
+- 4096 stride 1024 is essentially tied: bp-F1 0.9429, segment-F1@IoU0.5 0.7440, boundary-F1@100bp 0.6255.
+- Raw-threshold segment-F1 is much lower: 4096 stride 2048 raw segment-F1 0.5021; 2048 stride 512 raw segment-F1 0.4630. This supports overlap plus smoothing/postprocess for annotation usability.
+- Superfamily 2048: TE-detect F1 0.9326, class macro-F1 0.6858, all-6 macro-F1 0.7287.
+- Superfamily 4096: TE-detect F1 0.9393, class macro-F1 0.7109, all-6 macro-F1 0.7494.
+- Embedding clustering best individual run: B_animal length 512 C1 basic sequence features + contrastive projection, ARI 0.9399, NMI 0.9165, holdout macro-F1 0.9083.
+- Embedding clustering mean: C1 basic+contrastive holdout macro-F1 0.7405; A1 pretrained GENERanno+con
+…(truncated, full: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/06_results_log.md)
+
+## Latest iteration  (41.1d old)
+## ITER-20260701: threshold and length-adaptive fragmentation diagnostic
+
+- Date (UTC): 2026-07-01
+- Linked `/goal` command summary: `$capability-pursue` diagnostic prompted by user concern that strict thresholds may be too harsh and that short-vs-long TE fragments may need different postprocess handling.
+- Experiment ID(s): `PIPE-TEFM-CAP-POSTPROC-20260701`
+- Track: Capability support diagnostic / comparator audit
+- Execution mode: smart-sbatch bounded screen
+- Resource profile: small human/mouse panel, seed `42`
+- Claim eligibility: cannot claim; no capability promotion
+
+### Hypothesis being tested
+
+Strict thresholding and uniform smoothing may be over-pruning biologically real fragmented TE annotations. A multi-threshold view and length-adaptive short-raw/long-HMM strategy might reveal a safer practical postprocess rule.
+
+### Architecture changes
+
+- No new model architecture and no training.
+- Compared raw threshold curves, gap/min-length heuristics, fixed HMM-style smoothing, HMM plus short-fragment rescue, and length-adaptive short-raw/long-HMM rules.
+- This is diagnostic evidence only because `DEC-001` and `DEC-002` already stop threshold/gap/HMM/CRF/post-hoc tuning as the ma
+…(truncated, full: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/04_experiment_iterations.md)
+
+## Latest pivot decision  (41.6d old)
+# Pivot Decision: PIPE-TEFM-REPAIR-20260618
+
+Date: 2026-06-19
+
+## Inputs consumed
+
+- `$tri-review`: `docs/07_tri_review.md#tri-review-pipe-tefm-repair-20260618`
+- `$result-log`: `docs/06_results_log.md#result-pipe-tefm-repair-20260618`
+- Resource profile: screen
+
+## Current evidence summary
+
+`PIPE-TEFM-REPAIR-20260618` completed semantically. `invert_boost_animal_4096` is the strongest no-human animal branch in the current screen, with B-panel mean TE-F1 0.9351 and A1 mean TE-F1 0.8985. A2 all-species mean remains about 0.575 because beetle/honeybee and distant stress species dominate the failure. Segment annotation requires smoothing: threshold 0.35 + `hmm_penalty2` gives segment-F1@IoU0.5 0.7339, much better than raw-threshold segment-F1 0.4846. Superfamily main4 macro-F1 is 0.8927, but `Other` remains unlearned. Embedding diagnostics show C1/A1 are strong baselines, while binary fine-
+…(truncated, full: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/08_pivot_decisions.md)
+
+## Abandoned routes — DO NOT retry  (41.6d old)
+# Decisions Log (read before each new iteration)
+
+每次 /goal-prompt 生成新迭代前,Claude 必须先读完整个本文件,确认新方向与任何 abandoned route 都没有 unexplained overlap。
+
+如果新方向落在某个 cousin 列表里,必须在 /goal command 的「差异化说明」段明确写"这次为什么不同",或考虑放弃。
+
+**注意:单次实验失败不进本文件**,进 docs/06_results_log.md 就够。只有 /tri-review + /pivot 决定 abandon 整条 route 才进这里。
+
+每个 entry 用 ## DEC-<NNN>: <route name> 开头。模板见 /decisions-log SKILL.md。
+
+---
+
+## DEC-001: structured decoder fragmentation objectives for TE interval cleanup
+
+- **Date** (UTC): 2026-06-30
+- **Abandoned by**: pivot decision `docs/08_pivot_decisions.md#pivot-decision-pipe-tefm-pursue-retconstr-20260630`
+- **Evidence base**: result-log entries `PIPE-TEFM-STRUCTDEC-20260630`, `PIPE-TEFM-PURSUE-DECAY-STRUCT-20260630`, `PIPE-TEFM-PURSUE-MINHASH-INTERVALSURV-20260630`, and `PIPE-TEFM-PURSUE-RETCONSTR-20260630`; tri-review `docs/07_tri_review.md#tri-review-pipe-tefm-pursue-retconstr-20260630`
+- **Resource profile of evidence**: bounded screen, single seed `42`
+
+### What was tried
+
+The route t
+…(truncated, full: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/09_decisions_log.md)
+
+## Evaluator contract / metric truth source  (0.0d old)
+# Evaluator Contract / 评估器与可比性合约
+
+> 由 `/benchmark-roadmap`、`/reproduce-baselines`、`/code-review-gate`、`/result-log` 共同维护。本文档是“我们的指标到底怎么算、什么结果可 claim”的中央真相源。
+
+## 0. Contract Status
+- Status: bounded-screen-ready; claim-not-ready
+- Owner skill: `$benchmark-roadmap` + per-route `$code-review-gate`
+- Last verified: 2026-08-11
+- Applies to goal: `TEFM-NEW-DIRECTIONS-PILOTS-20260811` and historical TE-FM goal where explicitly cross-referenced
+
+## 1. Primary Metric Definition
+| Field | Value |
+|---|-
+…(truncated, full: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/19_evaluator_contract.md)
+
+## Baseline reproduction ledger
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/20_baseline_reproduction.md)
+
+## Code review gate log
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/21_code_review_log.md)
+
+## Findings (avoid re-stepping)
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/10_findings.md)
+
+## Run tracker & pending integration
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/05_todo.md)
+
+## Publication strategy / validation burden
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/12_publication_strategy.md)
+
+## Pipeline blueprint / IO contracts
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/13_pipeline_blueprint.md)
+
+## Validation matrix / downstream tasks
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/14_validation_matrix.md)
+
+## Evidence register / capture status
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/15_evidence_register.md)
+
+## Parallel workspace / optional worktrees
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/17_parallel_workspace.md)
+
+## Review board audit log
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/23_review_board.md)
+
+## Sprint and capability-pursue ledger
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/24_sprint_pursue_ledger.md)
+
+## Unconsumed ideas (next directions)
+(omitted for budget — open /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/wiki/ideas)
+
+## next_files_to_open_if_needed
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/11_master_plan.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/06_results_log.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/04_experiment_iterations.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/08_pivot_decisions.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/09_decisions_log.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/19_evaluator_contract.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/20_baseline_reproduction.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/21_code_review_log.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/10_findings.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/05_todo.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/12_publication_strategy.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/13_pipeline_blueprint.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/14_validation_matrix.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/15_evidence_register.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/17_parallel_workspace.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/23_review_board.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/docs/24_sprint_pursue_ledger.md
+- /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/wiki/ideas

@@ -1,0 +1,12 @@
+species_code	expected_chunks	complete_markers	final_complete_chunks	missing_final_chunks	missing_chunk_ids	species_complete_marker	merged_out_present	merged_gff_present	merged_tbl_present	merged_masked_present	status	species_output_dir
+c_elegans	3	3	3	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/c_elegans
+chicken	18	18	18	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/chicken
+fruit_fly	4	4	4	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/fruit_fly
+grape	14	14	14	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/grape
+green_foxtail	10	10	10	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/green_foxtail
+maize	12	12	12	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/maize
+mouse	28	28	28	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/mouse
+rice	11	11	11	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/rice
+thale_cress	3	3	3	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/thale_cress
+tomato	13	13	13	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/tomato
+zebrafish	33	33	33	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANCHOR5_PLANTS_20260616/zebrafish

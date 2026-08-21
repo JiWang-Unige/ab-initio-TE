@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7688956433637285,
+  "te_recall": 0.12020527874720831,
+  "te_f1": 0.20790736538347387,
+  "bg_f1": 0.9630600471999743,
+  "macro_f1": 0.5854837062917241,
+  "te_auprc": 0.2936880518762903,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/plant_eval_fine/thale_cress",
+  "n_windows": 1200,
+  "stage": "invert_to_plant_fine",
+  "model_key": "generanno",
+  "model": "TFREPAIR_invert_boost_animal_4096_seed42",
+  "window": 4096,
+  "species": "thale_cress"
+}

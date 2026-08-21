@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6645117278907248,
+  "te_recall": 0.44388220083930313,
+  "te_f1": 0.5322384408901031,
+  "bg_f1": 0.7084374517359228,
+  "macro_f1": 0.620337946313013,
+  "te_auprc": 0.6322690588709946,
+  "n_labeled_tokens": 819829,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv2_50m_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/animal_fine_w4096/western_clawed_frog",
+  "n_windows": 1200,
+  "stage": "ntv2_50m_w4096_to_animal_fine",
+  "model_key": "ntv2_50m",
+  "model": "ntv2_50m_H0_w4096_seed42",
+  "window": 4096,
+  "species": "western_clawed_frog"
+}

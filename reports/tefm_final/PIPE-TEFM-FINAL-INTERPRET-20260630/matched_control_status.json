@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-FINAL-INTERPRET-20260630",
+  "high_score_cases": 9,
+  "high_score_control_pool": 63,
+  "high_score_pairs": 9,
+  "unknown_main4like_cases_ge_0p8": 32,
+  "unknown_known_control_pool": 661,
+  "unknown_pairs": 32,
+  "pdf_extraction": {
+    "ok": true,
+    "pdfs": {
+      "1703.01365v2.pdf": {
+        "exists": true,
+        "pages_scanned": 8,
+        "keyword_hits": {
+          "interpret": 3,
+          "attention": 5,
+          "attribution": 93,
+          "integrated gradients": 40
+        }
+      },
+      "2009.07896v1.pdf": {
+        "exists": true,
+        "pages_scanned": 8,
+        "keyword_hits": {
+          "saliency": 2,
+          "occlusion": 2,
+          "interpret": 7,
+          "attribution": 47,
+          "integrated gradients": 6
+        }
+      },
+      "ocag070.pdf": {
+        "exists": true,
+        "pages_scanned": 8,
+        "keyword_hits": {
+          "attribution": 1
+        }
+      }
+    }
+  },
+  "outputs": {
+    "matched_control_pairs": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/matched_control_pairs.tsv",
+    "matched_group_summary": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/matched_group_summary.tsv",
+    "matched_quality_summary": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/matched_quality_summary.tsv",
+    "matched_kmer_enrichment": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/matched_kmer_enrichment.tsv",
+    "pdf_method_alignment": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/pdf_method_alignment.md"
+  }
+}

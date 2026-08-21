@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9488551007970366,
+  "te_recall": 0.3394196853519278,
+  "te_f1": 0.4999866538098367,
+  "bg_f1": 0.5237853881133436,
+  "macro_f1": 0.5118860209615902,
+  "te_auprc": 0.9112834884084453,
+  "n_labeled_tokens": 2457600,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/fruit_fly",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 2048,
+  "species": "fruit_fly"
+}

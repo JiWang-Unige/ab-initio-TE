@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9472330214690309,
+  "te_recall": 0.13393087249416868,
+  "te_f1": 0.23467995135426353,
+  "bg_f1": 0.43428226149768595,
+  "macro_f1": 0.33448110642597473,
+  "te_auprc": 0.8561183412922874,
+  "n_labeled_tokens": 823200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w4096/maize",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w4096",
+  "model_key": "ntv2_500m",
+  "model": "ntv2_500m",
+  "window": 4096,
+  "species": "maize"
+}

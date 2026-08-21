@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_FORK_SUBAGENT": "1",
+    "AUTORESEARCH_MAX_PARALLEL_DIRECTIONS": "3"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python3 scripts/context_pack.py:*)",
+      "Bash(python3 scripts/iter_ledger.py:*)",
+      "Bash(python3 scripts/validate_goal.py:*)",
+      "Bash(python3 scripts/lit_search.py:*)",
+      "Bash(python3 scripts/build_atlas.py:*)",
+      "Bash(python3 scripts/check_data.py:*)",
+      "Bash(bash wiki/wiki.sh:*)",
+      "Bash(bash refs/archive_source.sh:*)",
+      "Bash(python3 scripts/sota_seed_matrix.py:*)",
+      "Bash(python3 scripts/note_gate.py:*)",
+      "Bash(python3 scripts/artifact_registry.py:*)",
+      "Bash(python3 scripts/validate_stage_c.py:*)",
+      "Bash(python3 scripts/next_evidence_id.py:*)",
+      "Bash(python3 scripts/research_flow_guard.py:*)",
+      "Bash(python3 scripts/sota_failure_report.py:*)",
+      "Bash(python3 scripts/workspace_matrix.py:*)",
+      "Bash(python3 scripts/validate_codex_skills.py:*)",
+      "Bash(bash scripts/job_watch.sh:*)",
+      "Bash(bash scripts/sync_agents_md.sh:*)",
+      "Bash(python3 scripts/repair_advisor.py:*)",
+      "Bash(python3 scripts/build_codex_skills.py:*)",
+      "Bash(python3 scripts/pre_submit_gate.py:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/session_status.sh\"",
+            "timeout": 15,
+            "statusMessage": "Loading auto-research project snapshot..."
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/research_bootstrap.sh\"",
+            "timeout": 30,
+            "statusMessage": "Rebuilding research context from disk..."
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/research_bootstrap.sh\"",
+            "timeout": 30,
+            "statusMessage": "Injecting subagent research context..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/wiki_reindex.sh\"",
+            "timeout": 20
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/iter_record_nudge.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/stage_flow_nudge.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/guard_paths.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/submit_guard.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/loop_ledger.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/hooks/precompact_flush.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

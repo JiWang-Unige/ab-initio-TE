@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "n_policy_rows": 512,
+  "any_usable_action_policy": true,
+  "best": {
+    "feature_set": "baseline_plus_kmer",
+    "split": "leave_species_out",
+    "margin": 0.0,
+    "min_pred": 0.0,
+    "max_sd": 0.05,
+    "n_species": 22,
+    "single_anchor_coverage": 0.0,
+    "single_anchor_top1_accuracy": NaN,
+    "top2_or_probe_coverage": 1.0,
+    "action_contains_true_best_rate": 0.8636363636363636,
+    "action_contains_true_top2_rate": 0.8636363636363636,
+    "mean_regret_after_action": 0.007082966203372802,
+    "p90_regret_after_action": 0.0007707140409847897,
+    "low_best_species_rate": 0.13636363636363635,
+    "low_chosen_species_rate": 0.18181818181818182,
+    "usable_action_policy": true
+  },
+  "outputs": {
+    "summary": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_action_policy/selector_action_policy_summary.tsv",
+    "species": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_action_policy/selector_action_policy_species.tsv",
+    "report": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_action_policy/SELECTOR_ACTION_POLICY_REPORT.md"
+  }
+}

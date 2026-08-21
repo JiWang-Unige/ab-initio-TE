@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.3333333333333333,
+  "te_recall": 0.09631147540983606,
+  "te_f1": 0.14944356120826707,
+  "bg_f1": 0.9996749243971367,
+  "macro_f1": 0.5745592428027019,
+  "te_auprc": 0.12073379702438919,
+  "n_labeled_tokens": 823200,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/species_probe_ntv2_500m_red_flour_beetle_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/species_probe_ntv2_500m/red_flour_beetle",
+  "n_windows": 1200,
+  "stage": "species_specific_holdout",
+  "model_key": "ntv2_500m_probe",
+  "model": "species_probe_ntv2_500m_red_flour_beetle_w4096_seed42",
+  "window": 4096,
+  "species": "red_flour_beetle"
+}

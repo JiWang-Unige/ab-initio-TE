@@ -1,0 +1,50 @@
+pipeline_id: PIPE-TEFM-ANCHOR-20260621
+purpose: Background-inclusive embedding, Unknown/high-score candidate relabeling diagnostics, insect primary anchor, and deployable anchor recommendation formula.
+seed: 42
+window: 4096
+fragment_len: 512
+model:
+  pretrained_path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  animal_invert_boost_4096: software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42
+  cross_supervised_4096: software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096
+  plant_supervised_4096: software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096
+  insect_no_beetle_4096: software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096
+  sf5_base_pretrained: software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/sf5_base_pretrained/best_model
+manifests:
+  animal_b: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  plant: software_outputs/repeatmasker_dfam/02_ready_by_design/C_plantTE/SPLIT_MANIFEST.tsv
+  cross: software_outputs/repeatmasker_dfam/02_ready_by_design/D_cross_kingdom_animal_plant/SPLIT_MANIFEST.tsv
+  concordance: reports/repeatmasker_dfam/SELF_LABELA_VS_UCSC_FULLPARTITIONS_20260619/summary.tsv
+existing:
+  calib_eval_data: software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data
+  calib_binary_eval: reports/tefm_calib/PIPE-TEFM-CALIB-20260621/summaries/binary_eval.tsv
+  calib_decay_rows: reports/tefm_calib/PIPE-TEFM-CALIB-20260621/decay_formula_extended/decay_rows_extended.tsv
+  lock_recovery: reports/tefm_lock/PIPE-TEFM-LOCK-20260619/summaries/recovery_eval.tsv
+  repair_mixed: reports/tefm_repair/PIPE-TEFM-REPAIR-20260618/summaries/mixed_eval.tsv
+  extend_transfer: reports/tefm_extend/PIPE-TEFM-EXTEND-20260620/summaries/transfer_eval.tsv
+species:
+  insect_primary_train:
+    fruit_fly: 0.34
+    c_elegans: 0.33
+    western_honey_bee: 0.33
+  insect_primary_eval_fine: [fruit_fly, c_elegans]
+  insect_primary_eval_stress: [western_honey_bee, red_flour_beetle, lizard, x_laevis]
+  diagnostic_species: [fruit_fly, c_elegans, western_honey_bee, red_flour_beetle, lizard, x_laevis, human, rice, maize, soybean]
+quick_profile:
+  total_windows: 18000
+  eval_windows_per_species: 1200
+  max_steps: 2000
+  eval_steps: 250
+  max_eval_samples: 1200
+  fragment_max_per_label: 220
+  fragment_max_bg: 260
+  fragment_max_unknown: 260
+  fragment_max_highscore: 260
+  highscore_threshold: 0.85
+  highscore_max_windows: 700
+  embedding_max_records: 1800
+  embedding_contrastive_epochs: 120
+outputs:
+  root: software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621
+  reports: reports/tefm_anchor/PIPE-TEFM-ANCHOR-20260621
+  logs: logs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621

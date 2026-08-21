@@ -1,0 +1,118 @@
+# Cohort runtime contract materialized by $configure-project on 2026-08-11.
+# Source: live Baobab sinfo/sacct/scontrol/conda probes plus
+# codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/.
+
+cluster_name: baobab
+
+submission:
+  mode: on_cluster
+
+execution_policy:
+  require_srun_for_compute_on_login: true
+  light_command_allowlist:
+    - "python3 scripts/context_pack.py"
+    - "python3 scripts/iter_ledger.py"
+    - "python3 scripts/research_flow_guard.py"
+    - "python3 scripts/sota_failure_report.py"
+    - "curl/wget/git clone download-only"
+  max_parallel_directions: 3
+
+hard_limits:
+  max_concurrent_jobs: 8
+  max_concurrent_directions: 3
+  max_array_size: 16
+  min_vram_gb_default: 20
+  require_checkpoint_for_shared_over_12h: true
+  require_unique_output_dir: true
+  require_unique_sbatch_log_path: true
+  require_track_a_orthogonality: true
+  orthogonality_policy:
+    hard_fail_when:
+      - all_candidates_only_vary_in: [lr, batch_size, dropout, seed, scheduler, warmup]
+      - two_or_more_candidates_share_same_mechanism_delta
+      - candidate_cannot_articulate_structural_change
+    soft_warn_when:
+      - two_or_more_candidates_share_same_major_axis_but_distinct_mechanism_delta
+    allowed_major_axis: [head_arch, backbone, objective, data_view, tokenizer, decoder, training_signal, loss_design, regularization_design, augmentation_design]
+  forbid_claim_from_profiles: [smoke, screen]
+  respect_maintenance_reservation: true
+
+cohort_limits:
+  cohort_id: TEFM-NEW-DIRECTIONS-PILOTS-20260811
+  max_job_walltime_hours: 12
+  max_new_gpu_hours: 24
+  cpu_smoke_gpus: 0
+  claim_allowed: false
+
+preferences:
+  prefer_private: true
+  shared_when_private_wait_gt_job_time: true
+  maintenance_buffer_seconds: 3600
+  short_job_max_hours: 12
+  long_job_min_hours_for_private: 24
+  queue_wait_estimate_method: squeue_start_time
+
+partitions:
+  - name: private-teodoro-gpu
+    priority: 1
+    time_limit_hours: 168
+    cost: free
+    nodes: [gpu034, gpu035]
+    gpu_types:
+      - {name: nvidia_geforce_rtx_3090, vram_gb: 24, count_per_node: 8}
+    queue_wait_threshold_hours: 6
+  - name: shared-gpu
+    priority: 2
+    time_limit_hours: 12
+    cost: billed
+    gpu_types:
+      - {name: nvidia_geforce_rtx_3090, vram_gb: 24}
+      - {name: nvidia_rtx_a5000, vram_gb: 25}
+      - {name: nvidia_rtx_a5500, vram_gb: 24}
+      - {name: nvidia_a100-pcie-40gb, vram_gb: 40}
+      - {name: nvidia_a100_80gb_pcie, vram_gb: 80}
+      - {name: nvidia_rtx_a6000, vram_gb: 48}
+      - {name: nvidia_rtx_5000, vram_gb: 32}
+      - {name: nvidia_geforce_rtx_4090, vram_gb: 24}
+      - {name: nvidia_h100_nvl, vram_gb: 94}
+    excluded_nodes: [gpu023, gpu024, gpu036, gpu037, gpu038, gpu039, gpu040, gpu041, gpu042, gpu043]
+
+job_class:
+  smoke: {max_hours: 4, gpus: 0}
+  screen: {max_hours: 12, max_gpus: 1}
+
+defaults:
+  cpus_per_task: 8
+  mem_per_gpu_gb: 32
+  signal: USR1@600
+
+path_conventions:
+  checkpoint_root: runs
+  report_root: reports
+  status_root: outputs
+  log_root: logs
+
+cli_review:
+  mode: independent_parallel_cli
+  min_successful_reviewers: 2
+  timeout_seconds: 1800
+  output_root: /tmp/tri_review
+  reviewers:
+    - id: A
+      label: claude
+      cmd: claude
+      stdin: true
+      command_template: 'cat {prompt_file} | claude -p --append-system-prompt "You are a neutral independent external reviewer. Output only the requested structured review in professional Simplified Chinese." "Follow stdin exactly."'
+      output_file: output_a_claude.md
+    - id: B
+      label: codex
+      cmd: codex
+      stdin: true
+      command_template: 'codex exec --sandbox read-only --skip-git-repo-check - < {prompt_file}'
+      output_file: output_b_codex.md
+    - id: C
+      label: antigravity
+      cmd: antigravity
+      stdin: true
+      command_template: 'bash .agents/skills/tri-review/scripts/reviewer_c_antigravity.sh {prompt_file}'
+      output_file: output_c_antigravity.md

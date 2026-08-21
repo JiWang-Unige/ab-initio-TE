@@ -1,0 +1,6 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_650M_pre",
+  "kind": "wrapper_mlm",
+  "ok": false,
+  "error": "OSError(\"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\")"
+}

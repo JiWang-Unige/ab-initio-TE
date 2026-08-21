@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.42462211002678324,
+  "te_recall": 0.17113964886159191,
+  "te_f1": 0.24395549974353986,
+  "bg_f1": 0.9729910574658756,
+  "macro_f1": 0.6084732786047077,
+  "te_auprc": 0.207669579204108,
+  "n_labeled_tokens": 1639200,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv2_100m_H0_w8192_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/plant_fine_w8192/brachypodium",
+  "n_windows": 1200,
+  "stage": "ntv2_100m_w8192_to_plant_fine",
+  "model_key": "ntv2_100m",
+  "model": "ntv2_100m_H0_w8192_seed42",
+  "window": 8192,
+  "species": "brachypodium"
+}

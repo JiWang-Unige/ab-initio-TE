@@ -1,0 +1,8 @@
+{
+  "pipeline_id": "PIPE-TEFM-LOCK-20260619",
+  "recovery_rows": 8,
+  "sf5_rows": 2,
+  "segment_rows": 60,
+  "embedding_rows": 6,
+  "stress_audit": "reports/tefm_lock/PIPE-TEFM-LOCK-20260619/summaries/stress_panel_audit.tsv"
+}

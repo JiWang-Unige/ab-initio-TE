@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7563789514474357,
+  "te_recall": 0.8404433256878835,
+  "te_f1": 0.7961983628825922,
+  "bg_f1": 0.9077783542633077,
+  "macro_f1": 0.85198835857295,
+  "te_auprc": 0.9006598289800577,
+  "n_labeled_tokens": 2455200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/human",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "hyenadna",
+  "model": "hyenadna",
+  "window": 2048,
+  "species": "human"
+}

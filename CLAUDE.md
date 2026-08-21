@@ -1,0 +1,609 @@
+# TE Foundation-Model Annotation Guide
+
+> 本项目使用 **Auto-Research · Claude Code (lwcr v4.0+，中文优先 / 三模式推进 / 对抗council+冷导入 / 投稿与 pipeline 阶段 / 智能归档 / 可靠性闭环 / 双壳/三壳)** 作为研究自动化框架。
+>
+> **回答语言：始终用简体中文**（代码注释跟随现有代码库语言）。
+>
+> 这是**预设为「基因组深度学习注释」方向的模板**（§0-2 已填该领域默认；做其它方向只需改 §0-2/§12-15）。
+> 安装后微调 §0-2（具体子任务/数据集/SOTA）与 §12-15（compute/canonical commands），并把 `ACTIVE_GOAL.json` 改成你的 goal 合约。
+> 其余章节（§3-11、§16 + skills/scripts/refs/wiki）是框架通用部分，开箱即用。
+> 启用 codex 壳时：改完本文件跑 `bash scripts/sync_agents_md.sh` 重生成 AGENTS.md（零漂移）。
+
+---
+
+## HERO · 反过度防御范围合同
+
+> 来源：[HERO-Anti-OverDefense](https://github.com/wanshuiyin/HERO-Anti-OverDefense)（MIT License，固定参考提交 `be64527c3cea55ccb7700ee9afaff094cceb40de`）。本节约束修法与额外流程，不压掉真实发现。
+
+=== 范围约束(约束你提议什么修法,不约束你找什么)===
+凡是这里真的有问题,都要报——包括听起来罕见但本项目确实会产生的情况。
+然后把修法收在范围内:
+1. 这不是一篇安全攻防论文。可以校验,禁止过度防御。除非本项目另有说明,默认操作者是
+   自己机器上的合作者;如果它真有对手,它会写明,以那个范围为准。
+2. 不要加哈希/校验和/指纹,除非它替代了一个实质上更贵的操作,并且结果会改变下一步做什么。
+3. 禁止防御性脚手架:不为这里不会发生的情况加 feature flag、迁移框架、兼容层、包装层。
+4. 禁止钻牛角尖:冷门编码、符号链接竞态、RTL 文本、毫秒级竞态一律不在范围内,
+   除非该情况经由本项目**受支持的用法**可达——它的文档示例、它公开的接口、它真实的
+   数据。可达即可,不需要你复现出来;但"理论上构造得出"不算。
+5. 该判断的地方就判断,不要换成评分表、检查清单,或对已经定论的东西再跑一遍校验。
+6. 以上都不覆盖用户、本项目自己的约定、或更高优先级规则明确要求的安全、迁移、校验与
+   审阅。那些是被要求的,是活儿本身,不算范围外。
+已经见过的形状,供你校准。是例子不是清单——一个真问题不会因为"长得像其中一条"就被驳回:
+  H  为了比对两个表格的差异,给每一行都算哈希——直接比单元格就能回答
+  H  写下一堆校验和文件,而没有任何代码会去读它们
+  E  给一个没有用户、没有部署的应用做账号安全加固
+  R  用一整夜对自己的补丁反复审计,而功能一行没写
+  R  一个对任何提交都给不通过的审阅者
+  O  一层守卫的理由是上一层守卫,而不是需求
+另有两种长得像上面、但不是的。这些要报:
+  ✓  用摘要比对来跳过重读一个你已经有的大文件
+  ✓  本项目自己的文档示例就会产生的那种"听起来罕见"的输入
+跑任何检查之前先回答:这次运行会检测出什么具体的失败?真出现了我下一步会做什么不同的事?
+答不上来就别跑。
+对的就说对。不要为了交差硬找问题。
+
+**本项目具体解释**：§0 的数据/split/claim 约束，以及 `code-review-gate → smart-sbatch → result-log → validate_goal → tri-review → pivot` 等明确阶段闸，属于第 6 条保留的科研与运行合同。只在各自定义的阶段边界执行一次；若相关代码、数据、评估器或结论输入未变，不得重复运行。不得在既有合同之上自行增加新的 hash/manifest、审计链、review packet、迁移层、版本 root 或复验循环；确有 live uncertainty 时，先说明它能暴露的具体失败及失败后会改变的动作，再做最小针对性检查。
+
+---
+
+## 0. Current Scope (项目硬约束 — 已预设基因组DL注释，按你的子任务微调)
+
+**当前工作流模式**：`Mixed`（Publication-Validation + Pipeline-Execution + bounded Discovery）。2026-08-11 当前 bounded cohort 为 `TEFM-NEW-DIRECTIONS-PILOTS-20260811`；它服务主 TE-FM claim，但所有 smoke/screen 均 claim-ineligible。
+
+**默认方向**：raw-genome foundation-model transposable-element annotation，辅以严格的 workflow benchmark、fragment interval reconstruction、hierarchical open-set superfamily、transfer routing 与 representation falsification。
+- **Active scope**：多物种 TE bp/segment/boundary annotation 与 superfamily/open-set support evidence。当前 cohort primary outputs 为 engineering PASS/valid negative/typed block/claim-ineligible screen signal，而不是一个可发表 headline metric。
+- **基因组特有硬约束（默认生效，勿忘）**：① split 必须按**染色体/物种**且经**同源去冗余**（CD-HIT/MMseqs2），不能随机 split（旁系同源会泄漏）；② 元件注释常**极端类不平衡**（正类 <1%）→ 优先 AUPRC/macro-F1，慎用 accuracy；③ 多物种/跨物种泛化是常见卖点；④ 长序列建模注意感受野/显存。
+- **out-of-scope**：论文撰写、full/scale、部署、多数据库迁移、结果后换版本、超过 12h 的单作业、超过 24 GPU-hours 的 cohort 新增计算，以及 smoke/screen SOTA claim。
+
+**Read first** (任何新会话开局必读):
+
+1. `README.auto-research.md` — 框架总览
+2. `docs/11_master_plan.md` — 用户导航图：当前模式、当前步骤、为什么先做这一步
+3. `docs/00_active_goal.md` — 当前意图备忘
+4. `docs/01_literature_review.md` — 综述
+5. `docs/02_sota_model_inventory.md` — 验证过的 SOTA 表
+6. `docs/03_benchmark_roadmap.md` — benchmark contract + paths
+7. `docs/04_experiment_iterations.md` — ITER 历史
+8. `docs/10_findings.md` — 已知 research/engineering 发现（避免重复踩坑）
+9. `docs/15_evidence_register.md` — 智能归档索引：指标、讨论、偏好、外部输出是否已持久化
+10. `docs/17_parallel_workspace.md` — 多方向并行 / optional git worktree 契约（需要并行共享代码时读）
+11. `docs/18_runtime_playbook.md` — 换驱动、迁移、Baobab srun、compact/resume 恢复
+12. `docs/19_evaluator_contract.md` — 评估器/指标/split/claim 可比性合约
+13. `docs/20_baseline_reproduction.md` — SOTA/基线复现中央账本
+14. `docs/21_code_review_log.md` — 真实训练前代码审查记录
+15. `docs/22_upgrade_log.md` — 框架升级与兼容修复记录
+16. `docs/23_review_board.md` — 评审板独立会诊审计日志
+17. `docs/24_sprint_pursue_ledger.md` — 分层推进与证据短跑台账
+18. `codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/` — 2026-08-11 cohort prompt/protocol/guard/contract
+
+**上下文卫生**（lwcr 工作流启动后追加读）：`docs/05_todo.md`、`docs/06_results_log.md`、`docs/09_decisions_log.md`、`docs/19_evaluator_contract.md`、`docs/20_baseline_reproduction.md`、`docs/24_sprint_pursue_ledger.md`。投稿/流程化阶段追加读：`docs/12_publication_strategy.md`、`docs/13_pipeline_blueprint.md`、`docs/14_validation_matrix.md`、`docs/16_artifact_registry.md`、`docs/23_review_board.md`。并行/迁移/换壳/升级场景追加读：`docs/17_parallel_workspace.md`、`docs/18_runtime_playbook.md`、`docs/21_code_review_log.md`、`docs/22_upgrade_log.md`。
+
+
+## 1. Active Data
+
+- **五工具 smoke**：deterministic tiny FASTA + official test assets；runtime candidates under `container_candidates/`，Dfam 4.0 candidates under `dfam_candidates/`。它只验 identity/help/min-input/adapter。
+- **F fragmentation**：使用同一 frozen prediction/truth subset；raw positives 是 immutable leaves；truth tier 必须显式为 T0/T1/T2，partial truth 不得冒充 whole-genome precision。
+- **S superfamily**：从 `software_outputs/repeatmasker_dfam/03_canonical_snapshot/PRE-S0-CANONICAL-20260810-R2/` 派生；family/homology components 与 clade roles 在 test 前冻结。
+- **split**：按 genome/species/clade/family/homology component；禁随机相邻窗口或同源 copy 泄漏。每 route 运行 `check_data.py` 或确定性等价审计。
+- **环境**：`benchmark_core` 用于轻量 Python/审计，`te_benchmark` 用于 TE adapters，`generanno` 用于需要现有 FM runtime 的 pilot，`edta_native` 仅用于其明确 job。禁止 base；每个 sbatch 显式激活对应 env。
+
+## 2. Historical Reference / Baseline
+
+- **五工具 denominator**：RepeatModeler2 2.0.9 + RepeatMasker 4.2.4、EDTA 2.3.0、Earl Grey 7.3.0、HiTE 3.3.3、conditional TEtrimmer 1.7.4 source commit；详见 `docs/02`。TE_Bench 是 evaluator anchor，MCHelper 不在 denominator。
+- **F comparators**：raw、CENTER70、MERGE_STRICT、MERGE_LOOSE、当前 accepted postprocessor；lattice 必须报告 leaf retention、parent recovery、false fusion、nested preservation、segment/boundary curves。
+- **S comparators**：flat softmax/direct-superfamily head、k-mer nearest prototype 与 hierarchical calibrated predictor，全部使用同一 split/calibration budget。
+- **screen anchor**：本 cohort 只对 frozen internal comparators 判进展，永不对 published SOTA claim。
+- **当前 baseline evidence**：六月/七月 strict segment、postprocess、fragment graph、superfamily 和 selector reports 均只作历史 screen evidence；`docs/20` 记录本 cohort 的 non-claim reproduction waiver 与后续补证义务。
+
+---
+
+## 2.5 语言与 deep research 默认策略
+
+- **对话、计划、报告、docs 默认简体中文**，便于用户持续讨论与复盘。
+- **学术检索仍以英文为主**：deep research prompt 默认要求外部平台用英文关键词检索，保留 paper title / model / dataset / metric / repo / weights / command 的英文原名与 URL。
+- **默认 deep research 产物是“中文正文 + 英文术语/引用”**，不是纯英文报告。这样兼顾大模型/学术语料的英文覆盖与用户阅读效率。
+- 只有用户明确要求全英文投稿草稿或英文报告时，才切换全英文；否则 `zh-CN report + English retrieval terms` 是默认。
+
+---
+
+## 3. 总体研究偏好（不可妥协）
+
+- **架构优先于调参**：核心指标与 SOTA 存在明显差距时（一般 `gap ≥ 0.05` 或 `>10%` 相对差），不要陷入 learning rate / batch size / dropout 搜索；优先怀疑架构假设。
+- **接近 SOTA 才调参**：`gap < 0.02` 时才把系统化调参 / scaling / ablation 视为合理路径。
+- **多 seed 留到最后**：迭代期（screen 筛架构 + scale 比较候选）默认**单 seed**，不要求多 seed；多 seed（≥3 + paired 检验）只在**确定好 direction 后的 `/generalization`** 做（详见 §9）。先单 seed 迭代清方向，最后多 seed 钉稳健 SOTA。
+- **严格超越定义**：higher-is-better 必须 `observed > SOTA`，等号不算。
+- **公平比较合同**：claim 前必须确认 split、metric 实现、preprocessing、外部权重版本、test-time inference 一致。
+- **并行优先，但不抢写**：能用 subagent 并行做的检索 / 审阅 / 候选配置，应并行；但每个写入型 subagent 只能写自己的 exp_id/config/output，不得写同一文件。
+- **归档纪律（治"讨论死在对话里"）**：**run 后** hook(`iter_record_nudge`)会自动提醒 result-log/note-gate/exp-log；但 **hook 探测不到"纯讨论"**——所以**每次重大讨论 / 计划 / 换方向 / 用户表态偏好后，agent 必须主动 `/note-gate`**（把讨论结论/用户偏好/机制洞见路由到 docs/15 + docs/11/12），必要时 `/master-plan` 更新导航。不要让任何"已确定/已否决/为什么这么选"只活在上下文里。
+- **长讨论的归档（你自控压缩，不必每轮自动存）**：用户会自己盯 context 进度、在合适处**手动 `/compact`**——所以**不需要每个子结论都自动 append**（太碎、费 token）。约定：① skill 跑完本就会落 docs（grill→docs/00、council→docs/00+11）；② **用户准备压缩前，agent 先 `/note-gate` 把当前未落盘的讨论结论 flush 一次**；③ PreCompact hook 在压缩时兜底提醒。即"**用户定时机 + 压缩前 flush 一次**"，而非持续自动存。代价：若没手动压缩、撞上 auto-compact，可能丢最后一段未 flush 的讨论——故 context 快满时主动 flush 或 `/compact`。
+- **人闸必须可读**：每次完成阶段、准备让用户拍板、或遇到阻塞问题时，先用 3-6 句通俗话解释“做了什么 / 问题是什么 / 为什么影响结果 / 选项 A/B/C 怎么走 / 推荐与风险”，再给专业表格。不能只丢术语和 reviewer 原文让用户回翻上下文。
+
+---
+
+## 4. 二段式主流程（lwcr）
+
+### 段 A · 实验前，人类掌舵
+
+```text
+[A0 仅"导入半成品研究"时] /ingest-existing  (subagent 系统梳理旧 code/结果/笔记/数据/refs → 汇报 → 共定目标/模式 → 回填 docs)
+/research-interview
+  → 用户拿 prompt 去外部平台跑 deep research
+/research-synthesize
+/sota-inventory          (filter 粗筛 → subagent 先下载后深读全文 → 验证表)
+/grill                   (读完论文/代码后二次拷问技术细节，钉死方向)
+  [可选] /council         (基础关键/有争议的方向 → 多 agent 对抗式辩论 + 你裁判，烧 GPU 前辩穿)
+/configure-project       (AI 据澄清上下文+探测集群/env 填 CLAUDE§0-2/§12-15 + cluster_config + ACTIVE_GOAL，人闸；免开局手填)
+/benchmark-roadmap
+/reproduce-baselines     (写代码前本地复现 1-2 个 SOTA，核实指标算法/数据集口径)
+/goal-prompt <iteration description>
+```
+
+段 A 不 autopilot。每步看输出后再决定下一步。
+- `/ingest-existing`（A0，仅冷导入时）：把**外部做了一半、还没进框架**的研究用 subagent 系统梳理（试过什么/结论/为什么/缺口）→ 汇报 → 共定目标+工作流模式 → 回填 docs；区别于 `/research-interview` CONTINUATION（接续**已在框架内**的项目）。旧主张默认未核实，待 sota-inventory/reproduce 重核。
+- `/grill` 在读完 sota-inventory 的论文/代码后、`/configure-project` 之前对你做**两段式**深聊：Phase 1 和你**共创深挖思路本身**（steelman + 铺开假设空间 + 找出彩点），Phase 2 对抗式**钉死技术细节**（治"模糊概念烧 GPU"，反谄媚）。
+- `/council`（可选，比 grill 重）：对**基础关键/有争议**的方向，让 Claude/Codex/Antigravity 三方 CLI **逐轮交叉反驳**（指派 Proponent/Opponent/Referee 立场）+ 你当裁判，把基础辩穿——是"对抗版"的多 agent 讨论（区别于 `/tri-review` 的实验后独立发散审）。日常拷问用 grill，重大方向才开 council。
+- `/council` 也可在 `/pursue` 前用于重大互斥路线选择：没有实验结果、争议是“该先走哪条基础路线”时用 council；已有 run 结果、要决定 continue/scale/pivot/abandon 时用 `/tri-review`。
+- `/configure-project` 在 grill 后（诉求澄清 + SOTA 核实）让 **AI 据上下文 + 探测集群/conda 填好 CLAUDE §0-2/§12-15 + cluster_config + ACTIVE_GOAL（提议 diff→你确认才写）**——免去开局手填、防疏漏；挪集群/换方向后可重调。
+- `/reproduce-baselines` 在写自己模型前先复现 SOTA、核实指标/数据集 ground truth；**未复现（或未显式 waive）不进 /goal 迭代**（hook 闸）。
+- `/benchmark-roadmap` 必须先草拟 3-5 条 technical paths，再与你讨论风险偏好和优先方向后定稿。
+
+### 段 B · 实验迭代，/goal 驱动
+
+`/goal-prompt` 生成 `/goal` command 后，Claude 在 goal 内自动衔接：
+
+```text
+读 docs/05 + docs/06 + docs/09
+→ 声明 Track A / Track B / generalization
+→ 明确 Subagent fan-out plan
+→ 实施架构变化
+→ `/code-review-gate`（实现后、提交前独立审查；BLOCKED 未修不得提交）
+→ inline comparability + data contract checklist
+→ /smart-sbatch
+→ run-and-evaluate 或 submit-and-handoff
+→ /result-log → /note-gate → /tri-review → /pivot
+→ 若 abandon route: /decisions-log
+→ 更新 docs/05_todo.md + docs/11_master_plan.md（若导航改变）
+```
+
+主候选严格超越 SOTA 后进入 `/generalization`（Phase 8 八维泛化评估）。
+
+> **Plan 模式落点（Claude `plan` / Codex plan，强烈推荐）**：plan 模式 = **只读勘查 + 反复细聊 + 批准才动手**，有两类价值，**研究方向那几步尤其该用**——
+>
+> **① 深思熟虑/讨论价值（"想清楚比动手难"的步，最该套 plan）**：
+> - **`/grill`**：纯思路深聊（Phase 1 共创 + Phase 2 拷问），只读 docs/dossiers + 和你来回辩，最后才 append docs/00。
+> - **`/benchmark-roadmap`**：读 docs/02+dossiers（只读）→ 草拟 3-5 技术路径 → 和你深聊风险偏好/优先级 → 批准后才落 docs/03。这步的"先提候选→讨论→才定稿"**本来就是 plan 模式形状**。
+> - **`/configure-project`**：只读探测 sinfo/sacct/conda → 提议 diff → 讨论 → 批准（plan 的批准 = 它"确认才写"的人闸，天然合一）→ 落 CLAUDE/cluster/ACTIVE_GOAL + sync AGENTS。
+>
+> **② 写动作闸价值（写文件前先勘查+批准）**：
+> - **`/implement`**（非平凡架构改动）：只读勘查 baseline(`refs/repos`)+脚手架(§14-15)+数据接口 → 计划 → 批准 → 退出写码。挡"写错代码"于动笔前，与 implement 自带的 self-review/check_data/smoke（写后、跑全量前）叠成两道闸。
+>
+> **统一模式**：plan 里只读勘查+细聊+草拟 → `ExitPlanMode` 批准 → 退出后才真正落盘（docs/03 / 配置 / 训练代码）。
+> **read-only 边界**：plan 模式只读，所以**以下载/写盘为核心动作的步不要整步套 plan**——如 `/sota-inventory` 要 `archive_source.sh` 下载 PDF/仓库（写 refs/），只在其"规划子阶段"用或不用。
+
+### 段 B 的两种驱动模式
+
+| 模式 | 用法 | 适合 |
+|---|---|---|
+| **手动 `/goal`**（逐轮） | `/goal-prompt` 生成一个 `/goal`，你看完一轮再发下一轮 | 你想紧盯、单次探索 |
+| **监督式自主 `/pursue`**（goal 级） | 设好 `ACTIVE_GOAL.json` 终极目标，`/pursue` 自主多轮迭代到达成 | 不想手写每个 /goal、不想盯每步 |
+
+### §4.5 监督式自主（/pursue）—— 为什么不是 autoloop
+
+诉求：goal 直接设成"搭建好 SOTA 模型"，系统自己推进，不用主人盯每步。
+风险：全自主 autoloop 的通病是**跑失败了 agent 不自知、静默续跑劣化**。
+
+**解法**：续/停由**确定性脚本**裁决，不靠 agent 自评。
+
+```text
+ACTIVE_GOAL.json (机器可读：success_criteria + guardrails + sota_benchmark + scope)
+        │  /pursue 读它，自主循环 i=1..max：
+        ▼
+  plan → /smart-sbatch → (远程跑) → /result-log → ★ scripts/validate_goal.py（不可跳）
+        ▼ 按 validate.status：
+   failed_run ─► 立即 STOP + 写 docs/08 + 通知主人（绝不续跑）   ← 这是 autoloop 缺的红线
+   not_yet/progress ─► /tri-review → /pivot → 规划下一轮 i++
+   success ─► /tri-review 复核 → human gate → 宣布达成（terminal 可进 /generalization）
+```
+
+- `scope=terminal`：一个 goal 跑到 SOTA 模型达成；`scope=milestone`：跑到一个中间里程碑。两种都支持。
+- 闸门四态：`failed_run`(run失败/语义失败/退化) / `not_yet`(成功标准未达) / `progress`(达进度门未严格超SOTA) / `success`。
+- 本机无 Slurm：`/pursue` 跑决策逻辑，训练 submit-and-handoff 到远程；闸门逻辑一致。
+
+**三个确定性纪律（validate_goal.py 强制，治 agent 自律失效）**：
+1. **反调参硬闸**：`gap_to_target ≥ tuning_gap_threshold(0.05)` → `tuning_allowed=false`，pivot/pursue **禁止调参，必须换架构轴**。
+2. **两层锚点**：`--profile screen` 只比 `screen_anchor`（同预算参考）**永不 claim**；`full/scale` 才比 `sota_benchmark`（published）。消除小样本 vs 大样本不公平。先建 screen_anchor。
+3. **portfolio 并行**：每轮 ≤ `max_parallel_directions(3)` 个正交方向并行（受 `cluster_config.max_concurrent_directions` + 分配感知约束）。
+4. **goal 防漂移**：新 SOTA 超 `sota_benchmark` → `/note-gate` 标记 + `validate_goal --challenger-sota` 报 `stale_benchmark` → `/revise-goal`（人闸）。
+
+#### §4.5.1 可见性与介入边界（HARD）—— `/pursue` 不是后台黑盒
+
+`/pursue` 是**前台对话内**的监督式自主：每轮的 plan / validate_goal 判定 / tri-review 意见 / pivot 决策都**打印在对话里**，你随时能看到迭代到哪、随时插话改方向。它不在后台跑，所以"自主"不等于"失控"。
+
+- **训练本身**才 handoff 到远程集群（`submit-and-handoff`）；本机只跑决策逻辑，每个关键节点回到对话留痕。
+- **续/停由 `validate_goal.py` 确定性裁决**：跑失败 → `failed_run` 立即停 + 通知，绝不静默续跑（这就是你"不想盯每步又怕跑飞"的解）。幽灵 run（`STATUS=RUNNING` 但 `iter_ledger.py` 报 `stale_signal` 无存活进程/作业）同样按 `failed_run` 处理。
+- **首次正式训练前停一次问你，其余全自主**：每个 goal 第一次提交真实训练前，`/pursue` 用 `AskUserQuestion` 跟你确认方向/数据/profile（**goal-scoped** sentinel `outputs/.first_run_approved_<goal签名>`，只记一次；换 goal/`/revise-goal`/`/route-reset`/切段 C 后签名变、自动重新确认一次），之后多轮自主推进、不再逐轮打断；只有 `failed_run`/幽灵 run、claim 前（`human_gate_before_claim`）、阻塞性 intervention 才会再主动停。
+- ⚠️ **不要把 `/pursue` 套进 `/loop` 或丢后台**——那才会变成"看不到、没法介入"。定时器（`/loop`/cron）只能用来**等外部事实**（远程 job 跑完、GPU 空、每日新文献 sweep），**绝不能**包裹 tri-review / result-log / validate_goal 这类**裁决步**（"schedule-the-wait, never-the-verdict"）。
+- 多 agent 后台 **Workflow**（如一次性审计/检索扇出）是另一回事：只读分析、跑完即返，与研究迭代的前台可见性互不冲突。
+
+---
+
+### 段 C · 已有完整思路 / 已有强候选后的“投稿与流程化推进”
+
+并非所有项目都处在“探索迭代找最好模型”的阶段。若已经有明确方案、强候选模型、超 SOTA 结果，或已有 raw data 与固定生信流程，进入段 C。
+
+**何时从段 A/B 转入段 C**：① 段 B 主候选已稳定/严格超 SOTA（`validate_goal` 报 success 且过 human gate）→ 转 `/master-plan` 切 Publication-Validation 模式补证据投稿；② 一开始就是"已有完整思路/raw data 走固定流程"→ 段 A 澄清后直接 `/master-plan` 切对应模式，跳过探索迭代。转入时先跑 `/master-plan` 把"为什么现在转段 C、当前在哪步"写进 docs/11。
+
+```text
+C0 /master-plan              先把用户导航图写清：模式、当前步骤、已定选择、开放问题
+C1 /publication-plan          定位期刊/会议层级 → 定核心贡献 → 证据矩阵 → figure/table plan
+C2 /pipeline-blueprint        raw data / 生信流程 / 外部软件调用 → DAG + IO contract + QC gates
+C3 /sota-randomized           对 SOTA 做小样本随机重训/多 seed 预测，建立公平 screen_anchor
+C4 /artifact-registry         目录与产物契约：scripts/configs/runs/reports/software_outputs/data 落位
+Ph8 /generalization           下游任务、OOD、robustness、ablation、统计检验
+*  /note-gate                 每个阶段结束智能归档：指标、讨论、用户偏好、外部输出不留在聊天里
+```
+
+段 C 与段 B 的关系：
+- **不是抛弃迭代**，而是把迭代从“找方向”改成“补证据缺口”。
+- `/pivot` 仍可用于单次实验后决策，但主线由 `docs/12_publication_strategy.md` 与 `docs/14_validation_matrix.md` 驱动。
+- 对 raw data / pipeline 项目，主线由 `docs/13_pipeline_blueprint.md` 的 DAG stage 与 QC gates 驱动。
+- 用户随时通过 `docs/11_master_plan.md` 知道当前处于哪一步、为什么先做这一步、哪些选择已经确定。
+
+### 三类工作流如何选择
+
+| 场景 | 主模式 | 第一入口 | 核心输出 |
+|---|---|---|---|
+| 方向模糊，需要找 SOTA 机会 | Discovery-Iteration | `/research-interview` | docs/00-10 |
+| 已有模型/想法，需要做到可投稿 | Publication-Validation | `/master-plan` → `/publication-plan` | docs/11/12/14/15 |
+| 已有 raw data / 生信分析流程 | Pipeline-Execution | `/master-plan` → `/pipeline-blueprint` | docs/11/13/16 |
+
+> 三类工作流共享同一套 docs/scripts/refs/wiki 与 `/master-plan` 导航、`/note-gate` 归档、`/artifact-registry` 目录契约；可中途切换（如 Discovery 跑出强候选 → 转 Publication）。本表与 ARCHITECTURE.md 的 three-workflow 表一致。
+
+### 重新开线 / 切换 pipeline
+
+当当前路线不可行、需要从 deep research 重新做一轮、或 A/B 阶段完成后要切到 C 阶段，**不要新建项目、也不要直接覆盖旧 docs**。走 `/route-reset`：
+
+```text
+/route-reset
+  → 通俗摘要（用户先看懂发生了什么）
+  → carry-forward / park / abandon 账本
+  → 重写 docs/11 pipeline map
+  → 必要时转 /research-interview 或 /publication-plan / /pipeline-blueprint
+```
+
+`/reframe` 负责战略判断，`/route-reset` 负责同项目内的操作化重排和落盘。
+
+---
+
+## 5. Skills 一览（lwcr）
+
+| Skill | 阶段 | 用途 |
+|---|---|---|
+| `/ingest-existing` | **A0·冷导入** | subagent 系统梳理外部半成品研究(code/结果/笔记/数据/refs/旧手稿) → 汇报 → 共定目标+模式 → 回填 docs；区别于 research-interview CONTINUATION |
+| `/research-interview` | A | 模糊目标访谈 → deep research prompt + active goal |
+| `/research-synthesize` | A | 合并 deep research → claim ledger / conflict matrix / 综述 |
+| `/sota-inventory` | A | filter 粗筛 → subagent 先下载后深读全文 → 验证 paper/GitHub/weights/dataset/metrics（lit_search 扩候选） |
+| `/grill` | A | 读完论文/代码后**两段式**深聊（Phase1 共创思路 + Phase2 对抗拷问 grill-me/devils_advocate），钉死方向再烧 GPU |
+| `/council` | **A3.5+·对抗** | 重大/有争议方向：Claude/Codex/Antigravity 三方 CLI **逐轮交叉反驳**(指派 Proponent/Opponent/Referee)+你裁判，烧 GPU 前辩穿基础（对抗版多agent；区别 tri-review 的实验后独立发散审）；opt-in |
+| `/review-board` | **A3.6·独立评审** | 对任意争议、方案、文档做三方独立盲审，不依赖 exp_id，也不直接触发 pivot，写 docs/23 |
+| `/configure-project` | A（人闸） | **AI 据澄清上下文+探测集群/conda 填** CLAUDE §0-2/§12-15 + cluster_config + ACTIVE_GOAL（propose diff→确认才写）；免开局手填、可重调 |
+| `/benchmark-roadmap` | A | benchmark contract + data readiness + technical roadmap |
+| `/reproduce-baselines` | A→B | **写代码前本地复现 SOTA**，核实指标算法/数据集是否纯raw（hook 闸：未复现不进 /goal） |
+| `/goal-prompt` | A→B | 生成可复制 `/goal` command |
+| `/evidence-sprint` | **B1.2·单点求证** | 1-2步动作快速收集单点证据或诊断问题，写 docs/24 |
+| `/capability-pursue` | **B1.3·有界组件** | 2-5轮原创能力组件有界推进与原型开发，写 docs/24，可经人闸 promote_to_claim 升舱为 /pursue |
+| `/implement` | A→B | path→可跑训练代码 + 自审 + `/code-review-gate` + check_data 数据闸门 + sanity smoke + 有界自动 debug（跑全量前抓代码 bug） |
+| `/code-review-gate` | **B1.5·审前闸** | `/implement` 后、真实训练前 read-only 审查 label/metric/split/output/evaluator/runtime；写 docs/21；BLOCKED 不进 `/smart-sbatch` |
+| `/smart-sbatch` | B | Slurm plan（分配感知）、resource profile、parallel batch matrix；提交前读 Run tracker 跳已完成 |
+| `/result-log` | B | semantic success + metrics + SOTA gap |
+| `/tri-review` | B | Claude/Codex/Antigravity 三个外部 CLI reviewer 独立全功能并行审阅 |
+| `/pivot` | B | 消费 tri-review → 单一决策 |
+| `/decisions-log` | B | route-level abandon 时记录 cousin 列表 + re-entry criteria |
+| `/retrospective` | B (周期触发) | 每 5 ITER / 同路线 3 次无进展 / Track B 失败 2 次 / 连续 2 pivot=tune → 跨实验 advisory 审视，找 marginal tuning、skipped signal、可重启 abandoned route |
+| `/generalization` | Phase 8 | 泛化、OOD、robustness、secondary metrics、cost、ablation |
+| `/master-plan` | **C0·导航** | 维护 `docs/11_master_plan.md`：当前模式、当前步骤、为什么先做、用户已定选择、开放问题、恢复指令 |
+| `/publication-plan` | **C1·投稿推进** | 已有强候选/完整思路后，定位期刊层级、定义核心贡献、拆证据矩阵、figure/table plan，写 docs/12+14 |
+| `/pipeline-blueprint` | **C2·流程化推进** | raw data / 生信流程 / 外部软件调用 → DAG、IO contract、QC gates、stage ledger，写 docs/13 |
+| `/sota-randomized` | **A3.5/B·公平小样本基线** | 对 SOTA 模型做随机初始化小样本重训/多 seed 预测，建立公平 screen_anchor，写 docs/14+02+06 |
+| `/note-gate` | **任意·智能归档门控** | 每个阶段结束判断指标/讨论/用户偏好/外部输出是否要入档，路由到 docs/15、note-add、master-plan 等 |
+| `/artifact-registry` | **任意·目录契约** | 初始化/审计 scripts/configs/runs/reports/software_outputs/data/docs 的落位规则，写 docs/16+PROJECT_STRUCTURE |
+| `/workspace-matrix` | **任意·并行隔离** | 多方向同时改共享代码时，创建/维护 optional git branch/worktree matrix；人闸，最多3线，不自动 commit/merge，写 docs/17 |
+| `/note-add` | **任意时刻**（实验进行中也可） | 统一捕获 paper/idea/note；通常由 `/note-gate` 判定后调用。paper→refs+docs/01+docs/05，idea/note→wiki，并写 docs/15 索引 |
+| `/pursue` | **B 段·监督式自主** | 读 `ACTIVE_GOAL.json` 目标，自主多轮迭代（**portfolio：每轮并行 ≤3 正交方向**）；续/停由 `validate_goal.py` 确定性裁决，**不靠 agent 自评**；`failed_run` 必停通知；反调参硬闸 + 两层锚点 |
+| `/revise-goal` | B（人闸） | 据新 SOTA/证据修订 `ACTIVE_GOAL.json`：提议 diff→tri-review 复核可比性→**你确认**才落盘。闭合"插入文献→调整目标" |
+| `/reframe` | **任意时刻·人闸** | **战略重定向**：假设错了/新路径/阶段重排序（先A再B）。carry-forward 账本(迁移/暂存/弃用)保留结论不推倒，重排研究阶段。比 revise-goal(只改目标值)/pivot(单轮) 高一层 |
+| `/route-reset` | **任意·重开线** | 同一项目内重新开研究路线、重跑 Stage A、或 A/B→C 切换；重写 docs/11 pipeline map，carry-forward/park/abandon，不新建项目 |
+| `/framework-upgrade` | **任意·框架升级** | v3→v4 或 v4 minor 兼容升级；保留研究内容，更新 skills/docs/hooks/scripts，写 docs/22 |
+| `/exp-log` | **任意·每实验后** | 写 `docs/experiments/<exp_id>.md`(思路/架构/数据/结果/父实验) + `build_atlas.py` 生成按方法族分类的 `ATLAS.md` 总览（预训练类/传统DL类…推进树）。result-log 后调，hook 提醒 |
+| `/spike` | **任意时刻** | 插隔离 side 实验(`SPIKE-*` 命名空间)：结果记录但**不进主线晋升/不污染轨迹/永不claim**；好了显式 promote，差了主线无痕 |
+
+> **归档区 `refs/`**：`refs/{pdfs,repos,supp,dossiers,sources.md}`（dossier=数据集来源/指标实现/split）。由 `/sota-inventory` 与 `/note-add` 经 `refs/archive_source.sh` 维护。
+> **可检索 wiki `wiki/`**：`wiki/{ideas,notes,INDEX.md}` + `wiki/wiki.sh`（add-idea/add-note/index/search）。随时索引 ideas/文章/跑过一次的笔记，知道下一步方向。
+> **监督式自主**：`ACTIVE_GOAL.json`（机器可读 goal 合约：success_criteria + guardrails + sota_benchmark + scope=terminal/milestone）+ `scripts/validate_goal.py`（确定性闸门：run成功+语义成功+成功标准+SOTA严格超越 → success/progress/not_yet/failed_run）。见 §4.5。
+> **可靠性脚本 `scripts/`**：`context_pack.py`（B1 确定性上下文重建，/pursue 每轮开局先跑，治丢上下文）、`validate_goal.py`（goal 闸门）、`check_data.py`（训练前数据泄漏硬闸，**基因组 group/同源 split 默认强制**，非基因组 `--no-genomic-scope` 关）、`pre_submit_gate.py`（**提交真实训练前的代码审硬闸**：读 `outputs/<exp>/code_review_gate.json`，缺失/BLOCKED/**审后改代码 hash 过期**/screen+full+scale 的 reviewed_files 空 → 拦提交；机器 waive = `code_review_waived.json`；submit_guard 调它 deny）、`job_watch.sh`（Slurm 作业对账，检测卡死/超时/OOM，不假设成功；**remote_ssh 走 ssh 远程对账**）、`repair_advisor.py`（失败日志分类→有界修复计划 OOM/超时/缺依赖/NaN）、`iter_ledger.py`（迭代对账+链路闭合+阶段闸+幽灵run检测[remote_ssh 走 ssh squeue]，Stop hook 调）、`lit_search.py`（Semantic Scholar 检索：search/cited-by/similar，治"换架构/找替代凭空猜"，配 MCP anysearch[academic 找论文/general 找榜单]/exa/deepwiki；key 走环境变量 `S2_API_KEY`/`EXA_API_KEY`/`ANYSEARCH_API_KEY`，均可缺省降级）。`/implement`、`/code-review-gate` 和 `/pursue` 串起"开局重建上下文→跑前自检/审查→跑中对账→跑后判定→有界修复"闭环。
+> **双壳生成脚本**：`build_codex_skills.py`（从 .claude/skills 生成精简 `.agents/skills` 与 `.codex/skills`，短 YAML-safe desc 避开 8000 预算）、`sync_agents_md.sh`（从 CLAUDE.md 生成 AGENTS.md，零漂移）。
+> **master/evidence/publication/pipeline docs**：`docs/11_master_plan.md`（用户导航）、`docs/12_publication_strategy.md`（投稿策略）、`docs/13_pipeline_blueprint.md`（流程 DAG）、`docs/14_validation_matrix.md`（下游/可靠性矩阵）、`docs/15_evidence_register.md`（智能归档索引）、`docs/16_artifact_registry.md`（目录契约）、`docs/17_parallel_workspace.md`（并行 worktree 契约）、`docs/18_runtime_playbook.md`（换壳/迁移/Baobab 规则）、`docs/19_evaluator_contract.md`（评估器合约）、`docs/20_baseline_reproduction.md`（复现账本）、`docs/21_code_review_log.md`（代码审前闸）、`docs/22_upgrade_log.md`（框架升级记录）、`docs/23_review_board.md`（评审板独立会诊审计日志）、`docs/24_sprint_pursue_ledger.md`（分层推进与证据短跑台账）。
+
+> **findings**：`docs/10_findings.md`（Research / Engineering 发现分离，会话恢复必读）。
+
+### Skill 调用链（B 段标准顺序）
+
+```text
+[advisory] /retrospective ──► (若 trigger)
+      ▼
+/goal-prompt
+      ▼
+Subagent fan-out  ──►  Orthogonality declaration (Track A batch)
+      ▼
+/implement ──► /code-review-gate (BLOCKED 不得提交)
+      ▼
+/smart-sbatch (Phase 1 policy guard → Phase 2 optimization)
+      ▼
+sbatch submit
+      ├─ run-and-evaluate ──► /result-log (写 06+04+05+00) ──► /note-gate ──► /tri-review ──► /pivot
+      └─ submit-and-handoff  ──► While-waiting Scout plan (advisory, read-only)
+                                       ▼
+                              (job 完成后另开 goal)
+                                       ▼
+                              /result-log ──► /note-gate ──► /tri-review ──► /pivot
+                                                                 ▼
+                                                  若 pivot=abandon → /decisions-log
+```
+
+`/retrospective` 永远是 advisory，不在 binding chain 上。
+
+---
+
+## 6. Subagent policy
+
+Subagents 用于减少主上下文污染并提升并行速度。项目级 subagents 在 `.claude/agents/`：
+
+- `literature-claim-extractor`（lwcr）：并行抽取多份 deep research 报告中的 claim
+- `sota-source-verifier`（lwcr）：并行验证 paper/GitHub/weights 链接
+- `code-plan-reviewer`（lwcr）：sbatch 前 read-only 审阅 code/config/metric/split
+- `experiment-implementer`（lwcr）：scoped write，每个 subagent 只写自己 exp_id 的 config/sbatch/notes
+
+（本 DEMO 未安装 labloop 备用 agents；如需 autopilot state machine 风格可另行引入。）
+
+硬规则：
+
+- Read-only subagent 不得 Edit/Write。
+- 写入型 subagent 必须有独立 file scope。
+- 主 agent 负责 merge、最终 sbatch、最终写 docs。
+- 不要让 subagent 再 spawn subagent。
+
+**上下文继承（治"单窗口堆活、目标偏离"）**：
+
+- 开启 `CLAUDE_CODE_FORK_SUBAGENT=1`（在 `.claude/settings.json` 的 `env`）让 subagent 启动时继承父代理 fork 那一刻的上下文副本；Codex 侧等价开关在 `.codex/config.toml`（`multi_agent=true`）。
+- 无论 fork 是否生效，`SubagentStart` hook（`scripts/hooks/research_bootstrap.sh`）都会给每个 subagent 注入 ~4200 char 的磁盘 `context_pack` + 操作纪律，作为**确定性兜底**——subagent 永远拿得到磁盘真值，不靠"记忆"。
+- **最省主上下文的用法**：把"读大量文献/repo/历史"的重活**下放给 read-only subagent**，结果精炼返回主代理；subagent 用完即弃，其上下文不回污染主窗口——主代理只保留决策与 merge。这样主窗口不会把所有事堆在一起导致目标漂移。
+- Codex 还提供两个原生 read-only subagent（`.codex/agents/{research_scout,iteration_auditor}.toml`，沙箱级 read-only）：scout 做文献/repo/历史侦察，auditor 审一条实验链的链路闭合。
+
+---
+
+## 7. Tri-review CLI policy
+
+`/tri-review` 是 CLI-based review，**不是** subagent review。映射：A=Claude CLI、B=Codex CLI、**C=Antigravity CLI**（替代原 Gemini）。三方并行执行，收到同一个 full-scope prompt，都必须审阅：
+
+- benchmark fairness / comparability
+- semantic success / metric validity
+- leakage / reproducibility / seed variance
+- architecture hypothesis and alternatives
+- Track A promotion / Track B scale-up / pivot decision
+- next step most likely to reach SOTA
+
+失败策略（三态降级，治"单 reviewer 环境整条链卡死"）：任一 reviewer 失败后**最多重试三次**（原 backend → 压缩版 `context_pack.py --purpose tri-review` prompt → fallback backend）。仍失败时：
+
+- **3 方成功**：正常 tri-review，confidence 可达 High。
+- **2 方成功**：继续 synthesis + pivot，标 `DEGRADED_REVIEW`，confidence ≤ Medium。
+- **1 方成功**：走 `SINGLE_REVIEW_CONTINUATION`——**仅限可逆、单 exp_id、非 claim、非 abandon、非 goal/benchmark 修订**的普通迭代，confidence 必须 Low，须在 `docs/07`+`docs/08` 标 `Quorum: 1/3`；claim / abandon / goal 修订仍要求 ≥2 方独立成功。
+- **0 方成功**：STOP + 通知主人，不能 pivot。
+
+host self-check 只 advisory、**不能凑 quorum**；唯一 reviewer 若提 comparability/leakage/semantic blocker 则不得继续，先解 blocker。
+
+**Reviewer C = Antigravity（替代 Gemini）**：经 `.claude/skills/tri-review/scripts/reviewer_c_antigravity.sh` 启动，后端按序解析：①`$ANTIGRAVITY_CLI`（显式覆盖）②**官方 Antigravity CLI `agy -p`（自动检测，首选）**。`agy` 需**一次性 Google OAuth 登录**（首次跑 `agy -p "hi"` 完成浏览器授权）；未登录时该 reviewer 计为失败、走 DEGRADED_REVIEW。**本框架统一三个 CLI：claude / codex / agy，无 cursor-agent 兜底**。评审记录会标注实际后端。详见 §7 与 SKILL.md。
+
+---
+
+## 7.5 · Scout / Retrospective advisory boundary (HARD)
+
+Scout 任务（submit-and-handoff 等待期）、Retrospective（周期审视）、Subagent 的所有输出都是 **advisory only**。它们 **不可**：
+
+- overwrite `docs/03_benchmark_roadmap.md`
+- cancel / kill / modify any currently running sbatch job
+- override an active Track B promotion in progress
+- replace a user-approved technical path
+- 直接 write `docs/09_decisions_log.md`（只有 /pivot 决定 abandon route 才能写）
+
+任何 major change（换 architecture axis、复活 abandoned route、kill running job、改 Track B promotion rule）必须走：
+
+```text
+/tri-review (把 advisory 作为额外 context 让三方评)
+  → /pivot (单一决策)
+  → 用户可见确认
+```
+
+Scout 的核心原则（再强调一遍）：
+
+- 只做 read-only / planning / separate-exp-id。
+- 不修改 running job 的 config / output_dir / split / metric / checkpoint。
+- 不启动会争抢 running job 资源的并行 sbatch。
+- "WebFetch arXiv/GitHub" 类任务仅在 WebFetch 可用时执行；否则只写入 docs/05 TODO，不假装已检查。
+
+---
+
+## 8. Track A / Track B
+
+**Track A · screen**：小样本、少 epoch、低 patience、少 seed，并行比较架构候选。目标是找接近 SOTA 或达到 primary_progress_gate 的潜力架构。screen 永远不能 claim。
+
+**Track B · scale-up**：只接收 Track A 晋升候选。扩大样本、epoch、patience、seeds，验证架构是否随数据量提升。若不提升，优先怀疑架构不可扩展，而不是只调参。
+
+Track A 和 Track B 可以并行推进。
+
+### Track A orthogonality（两层校验，不是"同 axis 绝对不能重复"）
+
+Track A parallel batch（≥ 2 候选）必须声明：
+
+| exp_id | major_axis | mechanism_delta | why structural | not merely hyperparam? |
+|---|---|---|---|---|
+
+`major_axis` 取值范围（粗分类）：`head_arch / backbone / objective / data_view / tokenizer / decoder / training_signal / loss_design / regularization_design / augmentation_design`。
+
+`mechanism_delta` 是真正的结构性差异点（例：`CRF transition modeling` / `HMM latent-state smoothing` / `contrastive auxiliary loss` / `multi-species pretraining`）。
+
+**Hard fail**（整批阻止 sbatch）：
+
+- 所有候选只改 `lr / batch_size / dropout / seed / scheduler / warmup`。
+- ≥ 2 候选的 `mechanism_delta` 实质相同。
+- 候选无法解释 `why structural`。
+
+**Soft warn**（允许，但必须显式标 `⚠️ FOCUSED ARCH BATCH on <axis>`）：
+
+- ≥ 2 候选共享同一 `major_axis`，但 `mechanism_delta` 不同（例：CRF head / HMM head / Transformer decoder head 都是 head_arch 但 mechanism 不同，是有价值的 *focused architecture batch*）。
+
+校验在两道闸：`/goal-prompt` 生成阶段 inline 输出表 + verdict；`/smart-sbatch` Phase 1 policy guard 再校验一次。
+
+---
+
+## 9. Resource profile 与 claim policy
+
+| Profile | Purpose | Claim policy |
+|---|---|---|
+| smoke | pipeline 验证 | 永远不能 claim |
+| screen | Track A 架构筛查 | 永远不能 claim |
+| full | 主 benchmark 训练 | 可作为 claim 候选 |
+| scale | 大资源验证 / ablation / pretraining | 可作为强证据 |
+
+**★ 多 seed 时机（迭代期不做，留到最后确认 direction 再做）**：探索/迭代期——`screen` 筛架构 **以及** `full/scale` 比较候选选方向——**默认单 seed**（最多跑 1-2 个看是否偶然崩），**不要求多 seed**：此时多 seed 的方差/统计检验对"哪个方向赢"帮助很小、只徒耗算力。**多 seed（≥3 seeds + paired 统计检验）只在确定好一个 direction 之后的 `/generalization`（最终确认 / robust-SOTA claim 前）做**——先用单 seed 把方向迭代清楚，最后再用多 seed 把赢家钉成稳健 SOTA。单 seed 的 `full` 结果可作 claim **候选**，但**最终 robust SOTA claim 必须过 `/generalization` 的多 seed paired test**（这是唯一强制多 seed 的关口）。`validate_goal.py` 不对 seed 数设硬闸，迭代时不会因"只跑了 1 个 seed"被卡。
+
+---
+
+## 10. Comparability + data contract checklist
+
+每次 claim 前必须 inline 走完：
+
+**Comparability**:
+- Dataset version
+- Split scheme
+- Metric implementation
+- Preprocessing
+- External weights version
+- Test-time inference
+- Evaluator contract: `docs/19_evaluator_contract.md`
+- Baseline reproduction evidence: `docs/20_baseline_reproduction.md`
+- Code-review gate for changed evaluator/training code: `docs/21_code_review_log.md`
+
+**Data contract**:
+- Schema / dtype 匹配
+- Target 分布合理
+- Split 边界明确
+- No same ID across splits
+- No future info in train
+- No target-derived features
+- Preprocessing fit on train only
+- Edge cases handled
+
+任一 `❌` → 阻止 claim；若在 sbatch 前发现关键数据问题，也阻止训练。
+
+---
+
+## 11. Long-job policy
+
+- `run-and-evaluate`：short smoke/screen，在同一个 goal 内训练、result-log、tri-review、pivot。
+- `submit-and-handoff`（原 `submit-and-stop`）：full/scale/multi-seed/跨天训练，只提交 sbatch 并写 job_id/output/resume instruction；训练结束后另开 result-processing goal。
+
+expected_walltime > 12h 默认 `submit-and-handoff`。
+
+---
+
+## 12. 项目特定 Compute Rules（预设 baobab/Teodoro，换集群按需改）
+
+- **真实训练必须 `sbatch`/`srun`**（baobab 有 Slurm）；提交前用 `/smart-sbatch`（分配感知：可用 GPU = CfgTRES − AllocTRES，**不靠 nvidia-smi 判可用**）。
+- **★ srun 强制（HARD，登录节点禁跑计算）**：在 baobab 等有 Slurm 的集群上，**所有计算/训练/评估/数据预处理命令都必须经 `srun` 分配 CPU/GPU 后运行（或 `sbatch` 提交），绝不在登录节点(login node)直接跑**——登录节点是共享资源，直接跑重计算违反 HPC 规约、会被管理员杀进程。
+  - 交互小跑/调试：`srun -p <partition> --time=<hh:mm> --pty bash` 拿到节点再跑，或 `srun -p <partition> --time=<hh:mm> python …`；批量/长任务走 `/smart-sbatch` → `sbatch`。
+  - **唯一豁免（可在登录节点直接跑）**：下载数据(curl/wget/git/rsync/hf download)、文件操作(ls/cp/mv/mkdir/tar)、查看编辑文本、git、conda/pip 装依赖、轻量框架脚本(context_pack/validate_goal/iter_ledger/lit_search…)、squeue/sacct/sinfo——I/O 或秒级任务无需 srun。
+  - **判不准时默认用 srun**；hook `submit_guard.sh` 在登录节点见到未经 srun 的重计算（python 跑训练 / torchrun 等）会 `ask` 提醒（不是 bug，是守卫）。
+- **提交模式（挪机器要重配的核心）= `cluster_config.yaml` 的 `submission.mode`**：`on_cluster`（本机就在集群，直接 sbatch/srun）/ `remote_ssh`（本地→`ssh <host> sbatch`、先 rsync 代码、`ssh sacct` 对账）/ `local_direct`（无 Slurm 本地直跑）。**挪到新机器后跑 `/configure-project`** 让 AI 重探测环境并改写此项 + §12 命令 + cluster_config（人闸）——不必手改一堆配置。
+- **Partition**：优先 `private-teodoro-gpu`（免费、7 天）；`shared-gpu`（12h 上限、有时起得快）仅 smoke / 经批准 screen / 短任务。大模型训练默认 VRAM ≥20GB 筛选。
+- **walltime**：选最长允许；`expected_walltime > 12h` → `submit-and-handoff`。scale 前先 smoke/screen。
+- **目录**：logs→`logs/`、checkpoints→`runs/<exp_id>/`、reports→`reports/<exp_id>.json`。
+- **作业对账（不可跳）**：提交后 `scripts/job_watch.sh`（sacct/squeue → COMPLETED/FAILED/TIMEOUT/OOM/STALE，不假设成功）。
+- **检索 API key 在 `secrets.env`**（chmod 600 + gitignore，随框架走、填一次）：`S2_API_KEY` 由 `lit_search.py` 自动读取；`EXA_API_KEY`/`ANYSEARCH_API_KEY` 给 MCP，需 `source secrets.env`（或加进 `~/.bashrc` 一次）。缺省自动降级，**绝不把真实 key 写进 .mcp.json 或 commit**。
+- **★ 环境纪律（HARD，防污染 base）**：跑或装任何东西前，**先探测并激活本项目的 conda 环境，绝不在 `base` 装依赖**：
+  - **开局探测**：`conda env list` + `echo $CONDA_DEFAULT_ENV`；本项目 env 名应记在 §1。无明确 env → 看 `environment.yml`/README 或**问主人**，**不要默认用 base**。
+  - **缺依赖**：先 `conda activate <env>` 再装进**该 env**（`conda install -n <env> …` 或激活后 `pip install`）；装前 inline 说明"装什么 / 装进哪个 env"。
+  - **sbatch 脚本里必须显式 `conda activate <env>`**（计算节点不继承登录 shell 的激活态）；按需先 `module load`（baobab 的 miniconda/cuda module）。
+  - **若当前在 base 且要装东西 → 停下提醒主人**先建/选对 env，绝不污染 base。
+
+## 13. 项目特定 Canonical Training Template（baobab sbatch；填具体 trainer + env 名）
+
+```bash
+sbatch sbatch/<exp_id>.sbatch        # /smart-sbatch 生成/提交；脚本内含 #SBATCH + conda activate <env>
+```
+sbatch 脚本骨架（`/smart-sbatch` 填 partition/--time/--gres）：
+```bash
+#!/usr/bin/env bash
+#SBATCH --partition=private-teodoro-gpu --gres=gpu:1 --time=<hh:mm:ss>
+set -euo pipefail                                                # 任一步失败即中止 → COMPLETED 不会被写
+module load <miniconda/cuda 如需>; conda activate <your-env>    # ← 环境纪律：显式激活, 不用 base
+mkdir -p outputs/<exp_id>
+{ conda list 2>/dev/null || pip freeze; nvidia-smi -L 2>/dev/null; } > outputs/<exp_id>/env.txt  # per-run env 快照(可复现)
+echo RUNNING > outputs/<exp_id>/STATUS                           # 先 RUNNING（幽灵run/clobber 守卫据此）
+python -m <your.trainer> --config configs/<exp_id>.yaml --output_dir runs/<exp_id>
+# 原子写指标：先 .tmp 再 rename，避免半写的 JSON 被 validate_goal 读到
+python scripts/experiments/<exp_id>/eval.py --output_json reports/<exp_id>.json.tmp <...> && mv -f reports/<exp_id>.json.tmp reports/<exp_id>.json
+echo "COMPLETED" > outputs/<exp_id>/STATUS                       # ★最后才写 COMPLETED（前面任何步崩 → STATUS 停在 RUNNING → job_watch/iter_ledger 抓到）
+```
+> `/implement` 据此生成/改写本轮训练代码，跑全量前做 self-review + `/code-review-gate` + check_data + sanity smoke。
+
+## 14. 项目特定 Canonical Evaluation Template（baobab；填具体 eval）
+
+```bash
+conda activate <your-env> && \
+python scripts/experiments/<exp_id>/eval.py --checkpoint_dir runs/<exp_id>/model_best --val_data <val> \
+  --output_json reports/<exp_id>.json
+```
+
+> eval 必须产出 `validate_goal.py` 可读的 metrics JSON（含 `primary_metric` 键）。
+> 可复用 trainer/evaluator 放项目代码或 `scripts/`；单次实验专用 wrapper 放 `scripts/experiments/<exp_id>/`；Slurm 提交脚本放 `sbatch/<exp_id>.sbatch`。
+
+## 15. Update Discipline
+
+After every real experiment, update（走 lwcr 工作流时）：
+
+- `docs/06_results_log.md`（主体）、`docs/04_experiment_iterations.md`（ITER）、`docs/05_todo.md`（含 Run tracker 状态）、`docs/00` 的 `## last_result_summary`
+- **`docs/10_findings.md`**：提炼本轮 Research / Engineering 发现（会话恢复必读）
+- **`docs/15_evidence_register.md` via `/note-gate`**：记录本轮指标/决策/用户偏好/失败原因是否已入档
+- **`docs/11_master_plan.md` via `/master-plan`**：若当前阶段、下一步或用户已定选择改变，更新导航图
+- **`docs/19_evaluator_contract.md`**：metric/split/evaluator/schema 变化必须同步；claim 前必须可用
+- **`docs/20_baseline_reproduction.md`**：SOTA/基线复现或 waive 必须中央留档
+- **`docs/21_code_review_log.md`**：训练/eval/config/job 脚本变更后、真实训练前必须有 `/code-review-gate` 记录
+- 投稿阶段同步 `docs/12_publication_strategy.md` + `docs/14_validation_matrix.md`；流程阶段同步 `docs/13_pipeline_blueprint.md` + `docs/16_artifact_registry.md`；并行共享代码时同步 `docs/17_parallel_workspace.md`；换壳/迁移/Baobab 策略变化时同步 `docs/18_runtime_playbook.md`
+- 框架升级/兼容修复同步 `docs/22_upgrade_log.md`（走 `/framework-upgrade`）
+- 项目特定 `reports/` / `findings.md`（如有）
+
+Promotion 需要 offline full validation 在项目 active scope 上。
+
+---
+
+## 16. 框架说明
+
+**主线**：lwcr v4.0，吸收 labloop 5 亮点（正交两层校验 / retrospective / policy guard / while-waiting scout / multi-doc 联动），并新增：监督式自主 `/pursue` + 确定性 `validate_goal` 闸门、中文优先 deep research、段 C 投稿/流程化推进、`/sota-randomized` 公平小样本 SOTA 重训、`/note-gate` 智能归档、`docs/11` 用户导航图、`docs/19-22` 评估器/复现/代码审查/升级账本、`refs/` 归档、可检索 `wiki/`、`/implement` 代码生成+sanity、`/code-review-gate` 审前闸、`/route-reset` 同项目重开线、`/framework-upgrade` 兼容升级、作业可靠性脚本（check_data / job_watch / repair_advisor）、tri-review 第三方改 Antigravity(`agy`)，并加入阶段顺序守卫、SOTA失败源汇报、optional git/worktree 并行隔离。
+
+**本版双壳增强**（从 codex 实跑迭代回灌）：
+
+- **单仓双壳**：`.claude/`+`CLAUDE.md`（Claude 壳）与 `.codex/`+`AGENTS.md`+`RUN_PROMPT.codex.md`（Codex 壳）并存；`scripts/skills/agents/docs/refs/wiki` 共享；`.agents/skills` 与 `.codex/skills` 是由 `scripts/build_codex_skills.py` 从 `.claude/skills` 生成的短描述真实目录（避免 Codex skill-list 超预算/loader 不兼容），`.agents/agents` 复制 `.claude/agents`；**`AGENTS.md` 由 `scripts/sync_agents_md.sh` 从本文件确定性生成，改这里再重生成即可，零漂移**。
+- **上下文闭环**：`research_bootstrap.sh` 挂 SessionStart(`startup|resume|compact`) + SubagentStart，compact/resume/subagent 启动时从磁盘重注入 `context_pack` + 纪律（治丢上下文 / 单窗口目标漂移）；subagent fork `CLAUDE_CODE_FORK_SUBAGENT=1`（见 §6）。
+- **可靠性**：`iter_ledger.py` 幽灵 run 检测（`STATUS=RUNNING` 但无存活进程/squeue 作业 → `stale_signal`，按 failed_run 处理）；`context_pack.py` 按 exp_id 语义排序 + 磁盘 STATUS 对账；`note_gate.py` / `/note-gate` 防止指标、讨论选择和外部输出只留在聊天上下文。
+- **决策**：tri-review 第三态 `SINGLE_REVIEW_CONTINUATION`（单 reviewer 可逆非 claim 迭代不卡死，见 §7）；pivot 先记录全部 reviewer 结论 + 按 reviewer 给可并行 cohort 方向；pursue 首次正式训练前 human gate（仅一次）+ 之后全自主 + 每轮 `/note-gate` 判断并路由归档。
+- **目录契约**：`docs/16_artifact_registry.md` + `PROJECT_STRUCTURE.md` 规定 scripts/configs/sbatch/runs/reports/software_outputs/data/docs 的落位，配合 `/artifact-registry` 审计。
+- **阶段闸与失败源**：`research_flow_guard.py`/`stage_flow_nudge.sh` 防止跳步；`sota_failure_report.py` 把 PDF/repo/weights/supp 失败项列给主人手动补。
+- **git 定位**：框架运行不强制 git，但本项目规模已建议启用 git 版本化框架代码、skills、脚本、docs 模板与轻量研究记录；大数据、runs、outputs、logs、software_outputs、secrets、checkpoint 永不入库。普通并行靠 `exp_id`/`run_id` 目录隔离；若多方向同时改共享代码，走 `/workspace-matrix` 人闸建 git worktree（最多3线，不自动 commit/merge）。
+
+参考文档：
+
+- 架构说明：`ARCHITECTURE.md`
+- README：`README.auto-research.md`
+- Slurm + reviewer 配置模板：`cluster_config.yaml.example`
+- iteration goal 模板：`goals/iteration-goal-template.md`
+- goal 合约模板：`ACTIVE_GOAL.json`

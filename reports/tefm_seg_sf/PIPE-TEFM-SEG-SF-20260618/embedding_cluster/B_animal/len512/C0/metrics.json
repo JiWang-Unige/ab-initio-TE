@@ -1,0 +1,15 @@
+{
+  "n": 480,
+  "n_clusters": 4,
+  "ari": 0.20343966402962504,
+  "nmi": 0.2769427997877827,
+  "holdout_accuracy": 0.48333333333333334,
+  "holdout_macro_f1": 0.4658521303258145,
+  "silhouette": 0.12379639595746994,
+  "sklearn_available": true,
+  "setting": "C0",
+  "fragments": "software_outputs/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/embedding_fragments/B_animal/fragments_512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "length": 512
+}

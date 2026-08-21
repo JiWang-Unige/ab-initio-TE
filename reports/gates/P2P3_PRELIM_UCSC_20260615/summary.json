@@ -1,0 +1,8 @@
+{
+  "source": ".backup/data (UCSC/external/legacy labels)",
+  "claim_eligible": false,
+  "species_total": 65,
+  "species_with_te_annotation": 47,
+  "issues_count": 0,
+  "issues_sample": []
+}

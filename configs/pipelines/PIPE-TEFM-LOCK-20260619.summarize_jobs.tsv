@@ -1,0 +1,1 @@
+summarize	python3 pipelines/PIPE-TEFM-LOCK-20260619/summarize_results.py --config configs/pipelines/PIPE-TEFM-LOCK-20260619.yaml

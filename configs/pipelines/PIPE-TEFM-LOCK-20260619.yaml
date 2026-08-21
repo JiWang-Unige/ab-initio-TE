@@ -1,0 +1,38 @@
+pipeline_id: PIPE-TEFM-LOCK-20260619
+purpose: Non-claim comparability-lock validation for primary/stress panels, recovery, fragmentation, and main4+Unknown superfamily.
+seed: 42
+window: 4096
+stride: 2048
+model:
+  key: generanno
+  pretrained_path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  binary_h0_4096: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42
+  invert_boost_4096: software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42
+manifests:
+  animal_b: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  stress_pool: software_outputs/repeatmasker_dfam/02_ready_by_design/heldout_stress_pool/SPLIT_MANIFEST.tsv
+  concordance: reports/repeatmasker_dfam/SELF_LABELA_VS_UCSC_FULLPARTITIONS_20260619/summary.tsv
+  mixed_eval: reports/tefm_repair/PIPE-TEFM-REPAIR-20260618/summaries/mixed_eval.tsv
+species:
+  primary_segment: [mouse, fruit_fly, c_elegans, chicken, western_clawed_frog, zebrafish]
+  stress_segment: [lizard, x_laevis, western_honey_bee, red_flour_beetle]
+  recovery: [lizard, x_laevis, western_honey_bee, red_flour_beetle]
+  sf5_train: [mouse, zebrafish, chicken, western_clawed_frog, fruit_fly, c_elegans]
+quick_profile:
+  recovery_max_train_windows: 2400
+  recovery_max_val_windows: 600
+  recovery_max_test_windows: 1200
+  recovery_max_steps: 700
+  recovery_eval_steps: 140
+  segment_max_windows: 600
+  sf5_max_train_per_species: 900
+  sf5_max_val_per_species: 240
+  sf5_max_test_per_species: 360
+  sf5_max_steps: 1000
+  sf5_eval_steps: 200
+  max_eval_samples: 1200
+  embedding_max_records: 2500
+outputs:
+  root: software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619
+  reports: reports/tefm_lock/PIPE-TEFM-LOCK-20260619
+  logs: logs/tefm_lock/PIPE-TEFM-LOCK-20260619

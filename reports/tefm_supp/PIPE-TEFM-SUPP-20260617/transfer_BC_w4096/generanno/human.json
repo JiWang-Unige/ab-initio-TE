@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9752214365463342,
+  "te_recall": 0.991259151285278,
+  "te_f1": 0.9831748957889089,
+  "bg_f1": 0.9918861100070505,
+  "macro_f1": 0.9875305028979797,
+  "te_auprc": 0.9983199303004878,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w4096/human",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "human"
+}

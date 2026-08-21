@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.5732724384432089,
+  "te_recall": 0.035120629081389354,
+  "te_f1": 0.06618645000366812,
+  "bg_f1": 0.9061463125995398,
+  "macro_f1": 0.48616638130160394,
+  "te_auprc": 0.3627015910603627,
+  "n_labeled_tokens": 2388080,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv3_100m_pre_8kb_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/animal_fine_w2048/c_elegans",
+  "n_windows": 1200,
+  "stage": "ntv3_100m_pre_8kb_w2048_to_animal_fine",
+  "model_key": "ntv3_100m_pre_8kb",
+  "model": "ntv3_100m_pre_8kb_H0_w2048_seed42",
+  "window": 2048,
+  "species": "c_elegans"
+}

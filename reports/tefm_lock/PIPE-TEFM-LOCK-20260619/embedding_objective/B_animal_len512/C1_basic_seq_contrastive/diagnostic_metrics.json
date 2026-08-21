@@ -1,0 +1,22 @@
+{
+  "n": 2000,
+  "n_clusters": 4,
+  "ari": 0.9207762257026628,
+  "nmi": 0.888980799777585,
+  "holdout_accuracy": 0.878,
+  "holdout_macro_f1": 0.8784218226643037,
+  "silhouette": 0.5846186280250549,
+  "sklearn_available": true,
+  "pair_pos_sim_mean": 0.7720550894737244,
+  "pair_neg_sim_mean": -0.26474910974502563,
+  "pair_auc": 0.98560292,
+  "n_pairs": 10000,
+  "linear_probe_accuracy": 0.888,
+  "linear_probe_macro_f1": 0.888607340607391,
+  "setting": "C1",
+  "fragments": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/embedding_fragments/B_animal/fragments_512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "n_records": 2000,
+  "length": 512
+}

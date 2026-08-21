@@ -1,0 +1,6 @@
+species_code	expected_chunks	complete_markers	final_complete_chunks	missing_final_chunks	missing_chunk_ids	species_complete_marker	merged_out_present	merged_gff_present	merged_tbl_present	merged_masked_present	status	species_output_dir
+human_hg19	25	25	25	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_STRESS_HUMAN_ASSEMBLIES_20260617/human_hg19
+human_hg38	38	38	38	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_STRESS_HUMAN_ASSEMBLIES_20260617/human_hg38
+lizard	22	22	22	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_STRESS_HUMAN_ASSEMBLIES_20260617/lizard
+opossum	11	11	11	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_STRESS_HUMAN_ASSEMBLIES_20260617/opossum
+x_laevis	23	23	23	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_STRESS_HUMAN_ASSEMBLIES_20260617/x_laevis

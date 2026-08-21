@@ -1,0 +1,21 @@
+{
+  "primary_metric": 0.3756097560975609,
+  "selector_top2_contains_best": 0.8636363636363636,
+  "selector_mean_regret": 0.007082966203372802,
+  "selector_leave_clade_abstention_rate": 1.0,
+  "selector_confidently_wrong_single_anchor_rate": 0.0,
+  "decoder_segment_f1_delta_vs_ce": 0.06871320437342304,
+  "decoder_boundary_f1_delta_vs_ce": 0.03910849453322121,
+  "decoder_missed_true_rate_delta_vs_ce": 0.02868852459016391,
+  "decoder_deleted_true_backed_fraction": 0.4591836734693877,
+  "decoder_segment_f1": 0.3756097560975609,
+  "decoder_boundary_f1": 0.1804878048780488,
+  "decoder_missed_true_rate": 0.290983606557377,
+  "decoder_ce_segment_f1": 0.3068965517241379,
+  "decoder_ce_boundary_f1": 0.1413793103448276,
+  "decoder_ce_missed_true_rate": 0.2622950819672131,
+  "selector_selected_leave_species_feature_set": "baseline_plus_kmer",
+  "selector_selected_leave_clade_feature_set": "baseline_plus_kmer_minhash",
+  "selector_gate_pass": true,
+  "decoder_promotion_gate_pass_without_guardrail": true
+}

@@ -1,0 +1,55 @@
+{
+  "n_rows": 146,
+  "formulas": [
+    {
+      "features": [
+        "intercept",
+        "distance_bucket"
+      ],
+      "coef": {
+        "intercept": 0.8428235188467734,
+        "distance_bucket": -0.3862446432140979
+      },
+      "r2": 0.18699145117856908,
+      "rmse": 0.3181472521568199,
+      "n": 146,
+      "status": "ok"
+    },
+    {
+      "features": [
+        "intercept",
+        "distance_bucket",
+        "label_jaccard"
+      ],
+      "coef": {
+        "intercept": 0.3861475156241359,
+        "distance_bucket": -0.030998650453816667,
+        "label_jaccard": 0.6757917099602225
+      },
+      "r2": 0.4128100610747004,
+      "rmse": 0.2703771110117107,
+      "n": 146,
+      "status": "ok"
+    },
+    {
+      "features": [
+        "intercept",
+        "distance_bucket",
+        "label_jaccard",
+        "te_bp_log10",
+        "kingdom_plant"
+      ],
+      "coef": {
+        "intercept": 0.6458109535790705,
+        "distance_bucket": -0.5362343825046313,
+        "label_jaccard": 0.5664152578669485,
+        "te_bp_log10": 0.0,
+        "kingdom_plant": 0.4564137221932755
+      },
+      "r2": 0.5248684189807344,
+      "rmse": 0.2432134394710582,
+      "n": 146,
+      "status": "ok"
+    }
+  ]
+}

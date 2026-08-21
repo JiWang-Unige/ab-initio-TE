@@ -1,0 +1,16 @@
+{
+  "n": 1140,
+  "n_clusters": 5,
+  "ari": 0.08707354625544114,
+  "nmi": 0.1300534379989442,
+  "holdout_accuracy": 0.37543859649122807,
+  "holdout_macro_f1": 0.31569560797519947,
+  "silhouette": 0.08962592482566833,
+  "sklearn_available": true,
+  "setting": "C0",
+  "fragments": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/fragments/bg_main4_len512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "label_level": "sf5_or_bg",
+  "source": "bg_main4"
+}

@@ -1,0 +1,212 @@
+{
+  "all_five_prov_valid": false,
+  "anchors": [
+    {
+      "accepted_training_bindings": [],
+      "anchor_id": "human_h0",
+      "anchor_role": "fixed_transfer_anchor",
+      "candidate_training_binding_count": 0,
+      "content_aliases": [],
+      "evidence_graph": {
+        "edges": [],
+        "nodes": []
+      },
+      "failure_codes": [
+        "PROV_RUN_RECORD_MISSING"
+      ],
+      "frozen_checkpoint": {
+        "asset_id": "h0_checkpoint",
+        "content_sha256": "97a17c7496d6bbb6274af70ba767ff50eabd64cc8a38a7b7ccd1af2a0244a244",
+        "identity_source": "accepted_job_11473644_prerequisite",
+        "project_relative_path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model"
+      },
+      "observed_checkpoint_identity_v1": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "sorted_relpath_file_sha256_merkle_v1",
+        "content_sha256": "7a24554526f44b14f8ce3c8b0c4cf29910096350a3a3426e71f8e16532861a5b",
+        "file_count": 9,
+        "kind": "directory",
+        "physical_inventory_sha256": "efe6fb8db6860bc6629cbd91c9e7fa812ac968153d5b2a5b38ae8db588e627ec",
+        "project_relative_path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model"
+      },
+      "observed_checkpoint_job11473644_hash_all_identity": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "job11473644_v10_hash_all_project_relative_file_sha256_manifest",
+        "content_sha256": "97a17c7496d6bbb6274af70ba767ff50eabd64cc8a38a7b7ccd1af2a0244a244",
+        "file_count": 9,
+        "kind": "directory",
+        "project_relative_path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model"
+      },
+      "status": "PROV_RUN_RECORD_MISSING"
+    },
+    {
+      "accepted_training_bindings": [],
+      "anchor_id": "animal",
+      "anchor_role": "fixed_transfer_anchor",
+      "candidate_training_binding_count": 0,
+      "content_aliases": [],
+      "evidence_graph": {
+        "edges": [],
+        "nodes": []
+      },
+      "failure_codes": [
+        "PROV_RUN_RECORD_MISSING"
+      ],
+      "frozen_checkpoint": {
+        "asset_id": "animal_checkpoint",
+        "content_sha256": "856305f96cc4e7651969df340329e52e5ef840ae9ecee829beb3aeb10fcb9c05",
+        "identity_source": "accepted_job_11473644_prerequisite",
+        "project_relative_path": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42/best_model"
+      },
+      "observed_checkpoint_identity_v1": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "sorted_relpath_file_sha256_merkle_v1",
+        "content_sha256": "2b99326b34aa4bd3a222a8b765d3f8c0bf026fc6cbfc1020ffbd42e18459b319",
+        "file_count": 9,
+        "kind": "directory",
+        "physical_inventory_sha256": "316445572b9b6679949a8bb271e2a9879536b7eec5e70a8018794e9d9c489188",
+        "project_relative_path": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42/best_model"
+      },
+      "observed_checkpoint_job11473644_hash_all_identity": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "job11473644_v10_hash_all_project_relative_file_sha256_manifest",
+        "content_sha256": "856305f96cc4e7651969df340329e52e5ef840ae9ecee829beb3aeb10fcb9c05",
+        "file_count": 9,
+        "kind": "directory",
+        "project_relative_path": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42/best_model"
+      },
+      "status": "PROV_RUN_RECORD_MISSING"
+    },
+    {
+      "accepted_training_bindings": [],
+      "anchor_id": "cross",
+      "anchor_role": "fixed_transfer_anchor",
+      "candidate_training_binding_count": 0,
+      "content_aliases": [],
+      "evidence_graph": {
+        "edges": [],
+        "nodes": []
+      },
+      "failure_codes": [
+        "PROV_RUN_RECORD_MISSING"
+      ],
+      "frozen_checkpoint": {
+        "asset_id": "cross_checkpoint",
+        "content_sha256": "9d20e5af5a86bdfc156a095d46bed76bafd73ed9640de3f167edaf46672afe53",
+        "identity_source": "accepted_job_11473644_prerequisite",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096/best_model"
+      },
+      "observed_checkpoint_identity_v1": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "sorted_relpath_file_sha256_merkle_v1",
+        "content_sha256": "edb97297c292c99ed02d96233238c6c3bb434b6aa8859d653e2d1698017a0b41",
+        "file_count": 9,
+        "kind": "directory",
+        "physical_inventory_sha256": "2143f40bbc017fe8a145176ba786b014d6e356c57ef7009f02c69adc2bd59143",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096/best_model"
+      },
+      "observed_checkpoint_job11473644_hash_all_identity": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "job11473644_v10_hash_all_project_relative_file_sha256_manifest",
+        "content_sha256": "9d20e5af5a86bdfc156a095d46bed76bafd73ed9640de3f167edaf46672afe53",
+        "file_count": 9,
+        "kind": "directory",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096/best_model"
+      },
+      "status": "PROV_RUN_RECORD_MISSING"
+    },
+    {
+      "accepted_training_bindings": [],
+      "anchor_id": "plant",
+      "anchor_role": "fixed_transfer_anchor",
+      "candidate_training_binding_count": 0,
+      "content_aliases": [],
+      "evidence_graph": {
+        "edges": [],
+        "nodes": []
+      },
+      "failure_codes": [
+        "PROV_RUN_RECORD_MISSING"
+      ],
+      "frozen_checkpoint": {
+        "asset_id": "plant_checkpoint",
+        "content_sha256": "76b0fd21d8b4b69b8d119fbe2d1d458cf3def3b74ea46e3bf9b7a8a097acf0ec",
+        "identity_source": "accepted_job_11473644_prerequisite",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096/best_model"
+      },
+      "observed_checkpoint_identity_v1": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "sorted_relpath_file_sha256_merkle_v1",
+        "content_sha256": "0a9d0c43e993ae84cbffe4c1991e82b3ea367bc82505a4a2d676be909658b48f",
+        "file_count": 9,
+        "kind": "directory",
+        "physical_inventory_sha256": "6ffdfdab5e0b1d051d223831a940bac29b8272d20f205b8c314c8110ea166271",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096/best_model"
+      },
+      "observed_checkpoint_job11473644_hash_all_identity": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "job11473644_v10_hash_all_project_relative_file_sha256_manifest",
+        "content_sha256": "76b0fd21d8b4b69b8d119fbe2d1d458cf3def3b74ea46e3bf9b7a8a097acf0ec",
+        "file_count": 9,
+        "kind": "directory",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096/best_model"
+      },
+      "status": "PROV_RUN_RECORD_MISSING"
+    },
+    {
+      "accepted_training_bindings": [],
+      "anchor_id": "insect",
+      "anchor_role": "fixed_transfer_anchor",
+      "candidate_training_binding_count": 0,
+      "content_aliases": [],
+      "evidence_graph": {
+        "edges": [],
+        "nodes": []
+      },
+      "failure_codes": [
+        "PROV_RUN_RECORD_MISSING"
+      ],
+      "frozen_checkpoint": {
+        "asset_id": "insect_checkpoint",
+        "content_sha256": "a66f428f954bf5e4f76380a589c4cf573e8f6afa84889149c09ac4d01e619f63",
+        "identity_source": "accepted_job_11473644_prerequisite",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096/best_model"
+      },
+      "observed_checkpoint_identity_v1": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "sorted_relpath_file_sha256_merkle_v1",
+        "content_sha256": "22e1d8c978f28134bb59b14e8fbefbc98404bf385d3b1aee204f5183202d850a",
+        "file_count": 9,
+        "kind": "directory",
+        "physical_inventory_sha256": "695e7368afc14e7d1340fe4b7c525d89cef74aa19ce587fcfa610744610cf87b",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096/best_model"
+      },
+      "observed_checkpoint_job11473644_hash_all_identity": {
+        "bytes": 1973418475,
+        "content_hash_algorithm": "job11473644_v10_hash_all_project_relative_file_sha256_manifest",
+        "content_sha256": "a66f428f954bf5e4f76380a589c4cf573e8f6afa84889149c09ac4d01e619f63",
+        "file_count": 9,
+        "kind": "directory",
+        "project_relative_path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096/best_model"
+      },
+      "status": "PROV_RUN_RECORD_MISSING"
+    }
+  ],
+  "forbidden_scope": [
+    "Mash acquisition or execution",
+    "target panel or anchor-target cube construction",
+    "checkpoint scientific evaluation",
+    "FATS or PAS fitting",
+    "model training",
+    "generalization-decay performance claims"
+  ],
+  "prerequisite": {
+    "artifact_manifest_sha256": "8623362dffd9534afc6904373eeab9af697420a7f3096747a304c3167952cfb7",
+    "failed_state_semantics": "FAILED 2:0 is an accepted fail-closed asset-semantic result, not a scientific failure",
+    "job_id": "11473644",
+    "pilot_feasibility_report_sha256": "2107172a2c92961de98e0ede1cdb3744d8a204f4d5b9d8983642b0b785d1a6d5"
+  },
+  "schema_version": "FIXED_ANCHOR_PROVENANCE_V1",
+  "scientific_authorization": false,
+  "scope": "Track G P1 backward provenance reconstruction only"
+}

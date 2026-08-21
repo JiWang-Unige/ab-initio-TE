@@ -1,0 +1,93 @@
+{
+  "schema_version": "FRAG-EVIDENCE-REGISTRY-CONFIG-2.1",
+  "exp_id": "FRAG-EVIDENCE-REGISTRY-20260811-R2",
+  "mode": "asset_registry_and_historical_comparator_freeze_only",
+  "coordinate_system": "zero_based_half_open",
+  "scientific_execution_authorized": false,
+  "execution_contract": {
+    "pre_run_status": "IMPLEMENTED_NOT_RUN",
+    "typed_block_status": "FOUNDATIONAL_TYPED_BLOCK",
+    "integrity_failure_status": "INVALID_ASSET_INTEGRITY",
+    "formal_requires_slurm_job_id": true,
+    "no_slurm_exit_code": 2,
+    "typed_block_exit_code": 0,
+    "integrity_failure_exit_code": 2
+  },
+  "command_assets": [
+    {"id": "builder", "path": "scripts/experiments/FRAG-EVIDENCE-REGISTRY-20260811-R2/build_registry.py", "sha256": "23ab0edf94a6a5b7350e49c85fb80d5e9b949aff27fa9a2bd5e985079b72d383"},
+    {"id": "semantics", "path": "scripts/experiments/FRAG-EVIDENCE-REGISTRY-20260811-R2/frozen_semantics.py", "sha256": "eb5ef94311793384e4abe7aac184b62f3e764d8f608fa981475746b4edf42d09"},
+    {"id": "sbatch", "path": "sbatch/FRAG-EVIDENCE-REGISTRY-20260811-R2.sbatch", "sha256": "e0560d2d43c41bdafcecd5c9e3bc80fb58cfd1d040f17c4d30eafdc883e22b54"},
+    {"id": "protocol", "path": "codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/UNIGE_DIRECT_CONTINUATION_PROTOCOL_20260811.md", "sha256": "be89907febcf59adcb5720a4bc4afc271a3c647971544a127881a9aa19ea3aff"},
+    {"id": "evaluator_contract", "path": "docs/19_evaluator_contract.md", "sha256": "1d4e15e2d40f8bc8062a79649beccec07b974b685cb6fd15ff1fdc29140e0443"}
+  ],
+  "h0_directory_pin": {
+    "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model",
+    "hash_algorithm": "FRAG_R2_DIR_INVENTORY_V1",
+    "expected_bytes": 1973418475,
+    "expected_file_count": 9,
+    "sha256": "4942f175bd9a96f8235f0dfaab917ce5b1e8024a5f16f1019b736a0c8dea35a2"
+  },
+  "assets": [
+    {"id": "t0_truth_elements", "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A2/truth_elements.tsv", "sha256": "f10f4fc08f31ee2e352b7456c8e92c22f5e8506edc0306b10d45e0b3564d7474"},
+    {"id": "t0_truth_body_segments", "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A2/truth_body_segments.tsv", "sha256": "b45e791cc23775768412155a222f8a28d8cecc049fa4604efb35c9dccec31b35"},
+    {"id": "t0_raw_fragments", "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A2/raw_fragments.tsv", "sha256": "4c46376788ef6983711ee53b1e6680b3e337f6bf0722ef58d1cf33b335b81947"},
+    {"id": "t0_center70_fragments", "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A2/centre70_fragments.tsv", "sha256": "91227c8f25404336cdee9295d111f3291f91215649d838468cd7cd77fe51791d"},
+    {"id": "t0_validation", "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A2/A2_validation_report.json", "sha256": "df9b6290f0f81381c44ecf359de439252e6c2e50b0b4029570c20e971328da5a"},
+    {"id": "flybase_assembly", "path": "data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/dmel-all-chromosome-r6.68.fasta.gz", "sha256": "81751d3b66bc504525ab88342aa91817eee80bfff136c893e9cda76ea05643b1"},
+    {"id": "flybase_truth", "path": "data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/derived/curated_positive_truth_v1/flybase_r668_curated_positive_instances.bed", "sha256": "d47d94aa56b4c65ce8199838c3c71a37a58bc54590ce277f1ffdf14b10413bd2"},
+    {"id": "flybase_manifest", "path": "data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/derived/curated_positive_truth_v1/flybase_r668_curated_positive_truth_manifest.json", "sha256": "fb1a651d412488f279b164145f55ad7276d4b8b407dd5068c61b7dd9e89cd6a7"},
+    {"id": "flybase_summary", "path": "data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/derived/curated_positive_truth_v1/flybase_r668_curated_positive_truth_summary.json", "sha256": "77f7b3d451b716b92026500bf531be2e2861ff64722d15246dfe2c5c9da8ba5b"},
+    {"id": "flybase_verification", "path": "data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/derived/curated_positive_truth_v1/independent_verification.json", "sha256": "1b0d21792b4fe6b392d664b406f1dcb0e35ef2e2449feffbc7f8615396ecf424"},
+    {"id": "rice_assembly", "path": "data/raw/benchmark_v1/rice/RGAP7/all.con", "sha256": "db8b7efb4df6ae33195143f3444b8816917441e1b964d150663ceeb2249506c4"},
+    {"id": "rice_truth", "path": "data/raw/benchmark_v1/rice/derived/edta_v230_positive_segments_v1/rice_rgap7_edta_v230_te_positive_segments.bed", "sha256": "df4d734e95efd7c168a0e573922440a75d6bb637d296721a47adfbd15e2f853a"},
+    {"id": "rice_manifest", "path": "data/raw/benchmark_v1/rice/derived/edta_v230_positive_segments_v1/rice_rgap7_edta_v230_positive_segments_manifest.json", "sha256": "23c209c44b8cb2678c46a457cd429f2d44d10517cdf725489fc51c0b61fbaa56"},
+    {"id": "rice_summary", "path": "data/raw/benchmark_v1/rice/derived/edta_v230_positive_segments_v1/rice_rgap7_edta_v230_positive_segments_summary.json", "sha256": "db8f142589702fcc6425f0a460a21244c3faec3a306b069f89c340181c8260c7"},
+    {"id": "rice_verification", "path": "data/raw/benchmark_v1/rice/derived/edta_v230_positive_segments_v1/independent_verification.json", "sha256": "54f70891de2e07b37badcd76fb9d15a2d60eee17f1b6516d2a64c2f4e0a0cac0"}
+  ],
+  "truth_registry": {
+    "T0": [{"input_id": "SYNTHETIC_FRAG_R2_A2", "truth_scope": "complete_controlled_synthetic", "biological_claim_eligible": false, "truth_asset_ids": ["t0_truth_elements", "t0_truth_body_segments"], "same_input_reference_assets": ["t0_raw_fragments", "t0_center70_fragments"]}],
+    "T1": [
+      {"input_id": "FLYBASE_FB2026_02_DMEL_R6_68", "genome_id": "dmel_r6.68", "assembly_asset_id": "flybase_assembly", "truth_asset_id": "flybase_truth", "truth_scope": "curated_positive_only", "unlabeled_space_is_negative": false},
+      {"input_id": "RICE_RGAP7_EDTA_V230", "genome_id": "rice_rgap7", "assembly_asset_id": "rice_assembly", "truth_asset_id": "rice_truth", "truth_scope": "reference_positive_segments_only", "unlabeled_space_is_negative": false}
+    ],
+    "T2": [],
+    "real_T0_available": false,
+    "T2_absence_reason": "No independently reviewed byte-pinned same-input T2 asset was found."
+  },
+  "same_input_contract": {
+    "source_window_schema": ["input_id", "genome_id", "contig_id", "window_id", "window_start0", "window_end0", "probabilities"],
+    "aggregation_semantics": {
+      "RAW": "CONTIG_MEAN_FULL_V1",
+      "CENTER70": "CONTIG_MEAN_CENTER70_V1",
+      "HMM2": "CONTIG_MEAN_FULL_V1"
+    },
+    "source_leaf_semantics": "SOURCE_LEAF_RUNS_V1",
+    "predicted_loci_schema": ["input_id", "comparator_id", "genome_id", "contig_id", "locus_id", "locus_type", "start0", "end0", "score", "active_for_scoring", "immutable", "parent_id", "child_leaf_ids", "source_window_ids"],
+    "required_comparators": ["RAW", "CENTER70", "MERGE_STRICT", "MERGE_LOOSE", "HMM2"],
+    "accepted_postprocessor": null,
+    "comparators": {
+      "RAW": {"role": "fixed_comparator", "parameters": {"threshold": 0.5}, "aggregation": "CONTIG_MEAN_FULL_V1", "probe": "RAW_THRESHOLD_V1"},
+      "CENTER70": {"role": "fixed_comparator", "parameters": {"window_length": 4096, "relative_start": 615, "relative_end": 3481, "threshold": 0.5}, "aggregation": "CONTIG_MEAN_CENTER70_V1", "probe": "CONTIG_MEAN_CENTER70_V1"},
+      "MERGE_STRICT": {"role": "fixed_comparator_only", "parameters": {"max_gap_bp": 20, "leaf_policy": "retain_source_leaves", "projection": "comparator_merge_parent"}, "probe": "MERGE_STRICT_V1"},
+      "MERGE_LOOSE": {"role": "fixed_comparator_only", "parameters": {"max_gap_bp": 100, "leaf_policy": "retain_source_leaves", "projection": "comparator_merge_parent"}, "probe": "MERGE_LOOSE_V1"},
+      "HMM2": {"role": "historical_fixed_comparator", "parameters": {"switch_penalty": 2.0}, "aggregation": "CONTIG_MEAN_FULL_V1", "probe": "HISTORICAL_VITERBI_PENALTY_2_V1", "accepted": false}
+    },
+    "required_semantic_probes": ["CONTIG_MEAN_FULL_V1", "CONTIG_MEAN_CENTER70_V1", "SOURCE_LEAF_RUNS_V1", "RAW_THRESHOLD_V1", "HISTORICAL_VITERBI_PENALTY_2_V1", "MERGE_STRICT_V1", "MERGE_LOOSE_V1", "COMPARATOR_LEAF_RETENTION_V1"]
+  },
+  "scientific_lattice": {
+    "implemented": false,
+    "typed_blocker": "SCIENTIFIC_LATTICE_UNIMPLEMENTED",
+    "note": "merge_typed_parents is a fixed comparator projection only and is not a scientific lattice or re-entry implementation."
+  },
+  "predicted_loci_schema": {
+    "schema_version": "FRAG-PREDICTED-LOCI-SCHEMA-1.1",
+    "coordinate_system": "zero_based_half_open",
+    "fields": ["input_id", "comparator_id", "genome_id", "contig_id", "locus_id", "locus_type", "start0", "end0", "score", "active_for_scoring", "immutable", "parent_id", "child_leaf_ids", "source_window_ids"],
+    "scope": "historical/fixed comparator outputs only; not scientific lattice nodes"
+  },
+  "t1_only_metric_contract": {
+    "allowed": ["positive_recovery", "matched_boundary_error_bp", "truth_fragmentation_count", "truth_topology_preservation", "false_fusion_proxy"],
+    "forbidden": ["whole_genome_precision", "whole_genome_recall", "whole_genome_f1", "bp_precision", "bp_f1", "segment_precision", "segment_f1"],
+    "claim_boundary": "positive-only diagnostic evidence; unlabeled genome space is unknown, never negative"
+  }
+}

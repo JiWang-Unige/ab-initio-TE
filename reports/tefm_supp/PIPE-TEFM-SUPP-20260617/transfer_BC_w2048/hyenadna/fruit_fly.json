@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7739848968415912,
+  "te_recall": 0.6288680479429926,
+  "te_f1": 0.6939207320677092,
+  "bg_f1": 0.42851512527566715,
+  "macro_f1": 0.5612179286716882,
+  "te_auprc": 0.7882236024999452,
+  "n_labeled_tokens": 2455200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/fruit_fly",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "hyenadna",
+  "model": "hyenadna",
+  "window": 2048,
+  "species": "fruit_fly"
+}

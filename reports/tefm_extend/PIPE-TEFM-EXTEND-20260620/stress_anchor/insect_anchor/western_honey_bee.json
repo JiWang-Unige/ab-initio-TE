@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0006662225183211193,
+  "te_recall": 0.02894736842105263,
+  "te_f1": 0.0013024687703510746,
+  "bg_f1": 0.9982810429989925,
+  "macro_f1": 0.4997917558846718,
+  "te_auprc": 0.002187740296809888,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/anchor_insect_anchor",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/stress_eval/western_honey_bee",
+  "n_windows": 1200,
+  "stage": "anchor_insect_anchor",
+  "model_key": "generanno",
+  "model": "anchor_insect_anchor",
+  "window": 4096,
+  "species": "western_honey_bee"
+}

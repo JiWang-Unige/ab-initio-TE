@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.943385199278765,
+  "te_recall": 0.983425352506528,
+  "te_f1": 0.9629892479990331,
+  "bg_f1": 0.8822643984346323,
+  "macro_f1": 0.9226268232168326,
+  "te_auprc": 0.9924392641633226,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/maize",
+  "n_windows": 1200,
+  "stage": "cross_supervised_to_plant_fine",
+  "model_key": "generanno",
+  "model": "cross_supervised_4096",
+  "window": 4096,
+  "species": "maize"
+}

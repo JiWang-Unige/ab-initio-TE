@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "source": "reports/repeatmasker_dfam/SELF_LABELA_VS_UCSC_CURRENT_READY_RERUN_20260629_V6/summary.tsv",
+  "rows": 7,
+  "mean_jaccard": 0.07838528571428573,
+  "min_jaccard": 0.042709,
+  "max_jaccard": 0.121572,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-PLANTQC-20260629/plant_label_qc.tsv"
+}

@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8753722374587842,
+  "te_recall": 0.9594003661358848,
+  "te_f1": 0.9154621597006131,
+  "bg_f1": 0.9674857702796139,
+  "macro_f1": 0.9414739649901135,
+  "te_auprc": 0.9731408773639174,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/sorghum",
+  "n_windows": 1200,
+  "stage": "cross_supervised_to_plant_fine",
+  "model_key": "generanno",
+  "model": "cross_supervised_4096",
+  "window": 4096,
+  "species": "sorghum"
+}

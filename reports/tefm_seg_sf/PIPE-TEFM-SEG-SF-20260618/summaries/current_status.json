@@ -1,0 +1,7 @@
+{
+  "n_overlap_rows": 72,
+  "n_edge_rows": 60,
+  "n_superfamily_rows": 2,
+  "n_embedding_rows": 48,
+  "report_root": "reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618"
+}

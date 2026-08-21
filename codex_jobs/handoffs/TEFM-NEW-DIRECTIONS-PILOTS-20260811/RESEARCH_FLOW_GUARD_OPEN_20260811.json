@@ -1,0 +1,18 @@
+{
+  "ok_to_goal": true,
+  "recommended_next": [
+    "/goal-prompt 或 /pursue"
+  ],
+  "blockers": [],
+  "warnings": [],
+  "facts": {
+    "candidate_inventory": true,
+    "verified_refs": true,
+    "grill_or_council_marker": true,
+    "configured": true,
+    "roadmap_ready": true,
+    "evaluator_contract_ready": true,
+    "baseline_reproduced_or_waived": true,
+    "screen_anchor_present": true
+  }
+}

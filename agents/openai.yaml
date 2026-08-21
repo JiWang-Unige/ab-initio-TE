@@ -1,0 +1,14 @@
+interface:
+  display_name: "Auto-Research Codex"
+  short_description: "Portable lwcr research workflow for Codex"
+  brand_color: "#2563EB"
+  default_prompt: "Use the Auto-Research Codex skills in .agents/skills/ to run Stage A planning and Stage B experiment iteration."
+
+policy:
+  allow_implicit_invocation: true
+
+resources:
+  instruction_file: "AGENTS.md"
+  skills_dir: ".agents/skills"
+  subagents_dir: ".agents/agents"
+  reliability_scripts_dir: "scripts"

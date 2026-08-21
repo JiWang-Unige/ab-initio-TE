@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8371344420717363,
+  "te_recall": 0.7172897558555136,
+  "te_f1": 0.7725921410289065,
+  "bg_f1": 0.9059333648250353,
+  "macro_f1": 0.839262752926971,
+  "te_auprc": 0.8587209232974712,
+  "n_labeled_tokens": 1636971,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv2_250m_H0_w8192_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/animal_fine_w8192/zebrafish",
+  "n_windows": 1200,
+  "stage": "ntv2_250m_w8192_to_animal_fine",
+  "model_key": "ntv2_250m",
+  "model": "ntv2_250m_H0_w8192_seed42",
+  "window": 8192,
+  "species": "zebrafish"
+}

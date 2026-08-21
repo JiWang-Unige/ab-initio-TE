@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.901190509823461,
+  "te_recall": 0.9414209121275673,
+  "te_f1": 0.9208665285059306,
+  "bg_f1": 0.9311834198436347,
+  "macro_f1": 0.9260249741747827,
+  "te_auprc": 0.9744970249182936,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_mouse_core_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/cattle",
+  "n_windows": 1200,
+  "stage": "mouse_core_animal_4096_to_a2_eval",
+  "model_key": "generanno",
+  "model": "mouse_core_animal_4096",
+  "window": 4096,
+  "species": "cattle"
+}

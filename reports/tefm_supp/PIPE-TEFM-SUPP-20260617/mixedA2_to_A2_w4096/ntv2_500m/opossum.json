@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8303390959027893,
+  "te_recall": 0.7875401387624151,
+  "te_f1": 0.8083735210835572,
+  "bg_f1": 0.8613594704737617,
+  "macro_f1": 0.8348664957786595,
+  "te_auprc": 0.9105825723336328,
+  "n_labeled_tokens": 823200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_mixedA2_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/opossum",
+  "n_windows": 1200,
+  "stage": "mixedA2_to_A2_w4096",
+  "model_key": "ntv2_500m",
+  "model": "ntv2_500m",
+  "window": 4096,
+  "species": "opossum"
+}

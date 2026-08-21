@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 100,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/strict_segment/animal_invert_boost_4096/human_h0_human.tsv",
+  "n_windows": 1200
+}

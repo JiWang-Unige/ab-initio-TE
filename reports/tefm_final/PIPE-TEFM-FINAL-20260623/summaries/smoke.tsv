@@ -1,0 +1,10 @@
+model_key	model_path	kind	ok	tokenizer_class	model_class	n_params
+ntv2_100m	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-100m-multi-species	auto_token	True	EsmTokenizer	EsmForTokenClassification	95519587
+ntv2_250m	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-250m-multi-species	auto_token	True	EsmTokenizer	EsmForTokenClassification	231371907
+ntv2_50m	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-50m-multi-species	auto_token	True	EsmTokenizer	EsmForTokenClassification	53535427
+ntv3_100m_pre	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_100M_pre	wrapper_mlm	True	NTv3Tokenizer	WrappedTokenClassifier	106464957
+ntv3_100m_pre_8kb	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_100M_pre_8kb	wrapper_mlm	True	NTv3Tokenizer	WrappedTokenClassifier	106464957
+ntv3_650m_pre	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_650M_pre	wrapper_mlm	True	NTv3Tokenizer	WrappedTokenClassifier	651832509
+ntv3_650m_pre_8kb	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_650M_pre_8kb	wrapper_mlm	True	NTv3Tokenizer	WrappedTokenClassifier	651832509
+ntv3_8m_pre	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_8M_pre	wrapper_mlm	True	NTv3Tokenizer	WrappedTokenClassifier	7692989
+ntv3_8m_pre_8kb	/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_8M_pre_8kb	wrapper_mlm	True	NTv3Tokenizer	WrappedTokenClassifier	7692989

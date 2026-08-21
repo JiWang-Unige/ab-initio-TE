@@ -1,0 +1,15 @@
+{
+  "n": 480,
+  "n_clusters": 4,
+  "ari": 0.2525407297585944,
+  "nmi": 0.31566107293390794,
+  "holdout_accuracy": 0.5916666666666667,
+  "holdout_macro_f1": 0.5179622132253712,
+  "silhouette": 0.6192333102226257,
+  "sklearn_available": true,
+  "setting": "B1",
+  "fragments": "software_outputs/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/embedding_fragments/B_animal/fragments_256.jsonl.gz",
+  "model_path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w2048_seed42/best_model",
+  "model_kind": "token",
+  "length": 256
+}

@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8752301318051986,
+  "te_recall": 0.26169861619731105,
+  "te_f1": 0.4029214931015273,
+  "bg_f1": 0.4159278002400327,
+  "macro_f1": 0.40942464667078,
+  "te_auprc": 0.8291230692991992,
+  "n_labeled_tokens": 1228800,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv3_100m_pre_H0_w1024_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/plant_fine_w1024/maize",
+  "n_windows": 1200,
+  "stage": "ntv3_100m_pre_w1024_to_plant_fine",
+  "model_key": "ntv3_100m_pre",
+  "model": "ntv3_100m_pre_H0_w1024_seed42",
+  "window": 1024,
+  "species": "maize"
+}

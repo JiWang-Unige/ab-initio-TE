@@ -1,0 +1,11 @@
+{
+  "exp_id": "PIPE-TEFM-REPAIR-20260618",
+  "window": 4096,
+  "stride": 2048,
+  "n_windows": 3600,
+  "chroms": [
+    "chr17"
+  ],
+  "summary_tsv": "reports/tefm_repair/PIPE-TEFM-REPAIR-20260618/segment_threshold/thr_0.5/summary_w4096_s2048.tsv",
+  "edge_tsv": "reports/tefm_repair/PIPE-TEFM-REPAIR-20260618/segment_threshold/thr_0.5/edge_bins_w4096_s2048.tsv"
+}

@@ -1,0 +1,344 @@
+{
+  "n_rows": 268,
+  "deployable_linear": {
+    "status": "ok",
+    "features": [
+      "intercept",
+      "log_distance_mya",
+      "target_gc",
+      "same_kingdom_anchor",
+      "cross_anchor",
+      "plant_target",
+      "insect_target",
+      "vertebrate_target"
+    ],
+    "coef": {
+      "intercept": 1.719791205940471,
+      "log_distance_mya": -0.28985302791603884,
+      "target_gc": -0.22785258963046603,
+      "same_kingdom_anchor": 0.08545911381305096,
+      "cross_anchor": 0.06763563201750471,
+      "plant_target": -0.1743301334958978,
+      "insect_target": -0.6791430897290147,
+      "vertebrate_target": -0.4621287351540564
+    },
+    "r2": 0.30731636405152185,
+    "rmse": 0.30132961073643394,
+    "leave_species_out_rmse": 0.4089340599553428,
+    "n": 268
+  },
+  "annotation_aware_linear": {
+    "status": "ok",
+    "features": [
+      "intercept",
+      "log_distance_mya",
+      "target_gc",
+      "same_kingdom_anchor",
+      "cross_anchor",
+      "plant_target",
+      "insect_target",
+      "vertebrate_target",
+      "label_jaccard",
+      "library_completeness",
+      "self_ucsc_ratio_log"
+    ],
+    "coef": {
+      "intercept": -0.5530263929364896,
+      "log_distance_mya": 0.17865676992586166,
+      "target_gc": 0.001439957234304609,
+      "same_kingdom_anchor": 0.07580692088409767,
+      "cross_anchor": 0.07138593545089941,
+      "plant_target": 0.3765075867166309,
+      "insect_target": -0.026770031332502484,
+      "vertebrate_target": 0.2914994194400271,
+      "label_jaccard": 0.6812705877336289,
+      "library_completeness": 0.24975779887244157,
+      "self_ucsc_ratio_log": -0.059551349185353576
+    },
+    "r2": 0.5087278802725599,
+    "rmse": 0.2537671519879778,
+    "leave_species_out_rmse": 0.5417820100206738,
+    "n": 268
+  },
+  "deployable_random_forest": {
+    "status": "ok",
+    "model": "RandomForestRegressor",
+    "features": [
+      "log_distance_mya",
+      "target_gc",
+      "same_kingdom_anchor",
+      "cross_anchor",
+      "plant_target",
+      "insect_target",
+      "vertebrate_target"
+    ],
+    "r2": 0.7630553044445713,
+    "rmse": 0.1762373045576211,
+    "leave_species_out_rmse": 0.34666870431227387,
+    "feature_importance": {
+      "log_distance_mya": 0.04322762579279939,
+      "target_gc": 0.7572250455623943,
+      "same_kingdom_anchor": 0.06245898458644066,
+      "cross_anchor": 0.010887991069190228,
+      "plant_target": 0.02243266553383136,
+      "insect_target": 0.09636905717981646,
+      "vertebrate_target": 0.007398630275527534
+    },
+    "n": 268
+  },
+  "annotation_aware_random_forest": {
+    "status": "ok",
+    "model": "RandomForestRegressor",
+    "features": [
+      "log_distance_mya",
+      "target_gc",
+      "same_kingdom_anchor",
+      "cross_anchor",
+      "plant_target",
+      "insect_target",
+      "vertebrate_target",
+      "label_jaccard",
+      "library_completeness",
+      "self_ucsc_ratio_log"
+    ],
+    "r2": 0.7509592783172061,
+    "rmse": 0.1806797702688118,
+    "leave_species_out_rmse": 0.30174413271140293,
+    "feature_importance": {
+      "log_distance_mya": 0.10789790628674133,
+      "target_gc": 0.10208913171051662,
+      "same_kingdom_anchor": 0.062039404386640205,
+      "cross_anchor": 0.00998921555242299,
+      "plant_target": 0.005798334597737836,
+      "insect_target": 0.005457546509032641,
+      "vertebrate_target": 0.004916307354877289,
+      "label_jaccard": 0.5853231598775314,
+      "library_completeness": 0.05203414320611435,
+      "self_ucsc_ratio_log": 0.06445485051838555
+    },
+    "n": 268
+  },
+  "anchor_recommendations": [
+    {
+      "species": "brachypodium",
+      "best_model": "cross_supervised_4096",
+      "best_anchor_type": "cross",
+      "target_kingdom": "plant",
+      "te_f1": 0.8175422271365038,
+      "distance_mya_proxy": 1500.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "c_elegans",
+      "best_model": "invert_boost_animal_4096",
+      "best_anchor_type": "animal",
+      "target_kingdom": "other",
+      "te_f1": 0.9053972034713066,
+      "distance_mya_proxy": 900.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "cattle",
+      "best_model": "p5_archive_parity_4096",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9224743217803422,
+      "distance_mya_proxy": 96.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "chicken",
+      "best_model": "invert_boost_animal_4096",
+      "best_anchor_type": "animal",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9526735217094694,
+      "distance_mya_proxy": 310.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "fruit_fly",
+      "best_model": "insect_no_beetle_4096",
+      "best_anchor_type": "insect",
+      "target_kingdom": "insect",
+      "te_f1": 0.944818571090276,
+      "distance_mya_proxy": 780.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "horse",
+      "best_model": "p5_archive_parity_4096",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9036845538801594,
+      "distance_mya_proxy": 96.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "human",
+      "best_model": "p5_archive_parity_4096",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.936231828325669,
+      "distance_mya_proxy": 6.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "lizard",
+      "best_model": "recovery_lizard",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9516363498464144,
+      "distance_mya_proxy": 320.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "maize",
+      "best_model": "cross_supervised_4096",
+      "best_anchor_type": "cross",
+      "target_kingdom": "plant",
+      "te_f1": 0.9629892479990331,
+      "distance_mya_proxy": 1500.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "mouse",
+      "best_model": "invert_boost_animal_4096",
+      "best_anchor_type": "animal",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9622946321173395,
+      "distance_mya_proxy": 90.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "opossum",
+      "best_model": "p5_archive_parity_4096",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.8811934035689308,
+      "distance_mya_proxy": 160.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "pig",
+      "best_model": "p5_archive_parity_4096",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.8830790481060521,
+      "distance_mya_proxy": 96.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "red_flour_beetle",
+      "best_model": "recovery_red_flour_beetle",
+      "best_anchor_type": "insect",
+      "target_kingdom": "insect",
+      "te_f1": 0.07138643067846608,
+      "distance_mya_proxy": 820.0,
+      "verdict": "train_new_anchor_or_audit_labels",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "rice",
+      "best_model": "cross_supervised_4096",
+      "best_anchor_type": "cross",
+      "target_kingdom": "plant",
+      "te_f1": 0.8757886614942711,
+      "distance_mya_proxy": 1500.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "sorghum",
+      "best_model": "cross_supervised_4096",
+      "best_anchor_type": "cross",
+      "target_kingdom": "plant",
+      "te_f1": 0.9154621597006131,
+      "distance_mya_proxy": 1500.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "soybean",
+      "best_model": "TFREPAIR_invert_boost_animal_4096_seed42",
+      "best_anchor_type": "animal",
+      "target_kingdom": "plant",
+      "te_f1": 0.5650860204945004,
+      "distance_mya_proxy": 1550.0,
+      "verdict": "reuse_with_calibration",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "teosinte",
+      "best_model": "plant_supervised_4096",
+      "best_anchor_type": "plant",
+      "target_kingdom": "plant",
+      "te_f1": 0.9308197551982428,
+      "distance_mya_proxy": 1500.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "thale_cress",
+      "best_model": "cross_supervised_4096",
+      "best_anchor_type": "cross",
+      "target_kingdom": "plant",
+      "te_f1": 0.7121875392581978,
+      "distance_mya_proxy": 1550.0,
+      "verdict": "reuse_with_calibration",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "western_clawed_frog",
+      "best_model": "invert_boost_animal_4096",
+      "best_anchor_type": "animal",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9384484554812158,
+      "distance_mya_proxy": 360.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "western_honey_bee",
+      "best_model": "insect_primary_4096",
+      "best_anchor_type": "insect",
+      "target_kingdom": "insect",
+      "te_f1": 0.946524064171123,
+      "distance_mya_proxy": 820.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "x_laevis",
+      "best_model": "recovery_x_laevis",
+      "best_anchor_type": "unknown",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9342699448068239,
+      "distance_mya_proxy": 370.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    },
+    {
+      "species": "zebrafish",
+      "best_model": "invert_boost_animal_4096",
+      "best_anchor_type": "animal",
+      "target_kingdom": "vertebrate",
+      "te_f1": 0.9079971499897331,
+      "distance_mya_proxy": 430.0,
+      "verdict": "reuse_current_anchor",
+      "note": "MYA is a coarse proxy; label/source audit overrides distance when concordance is low."
+    }
+  ],
+  "publication_note": "Deployable models deliberately exclude TE annotation-derived variables; annotation-aware models are explanatory controls only."
+}

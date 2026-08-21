@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6311259595020652,
+  "te_recall": 0.9759634709963045,
+  "te_f1": 0.7665483580219882,
+  "bg_precision": 0.9670653211232716,
+  "bg_recall": 0.553034668447141,
+  "bg_f1": 0.7036650916434507,
+  "macro_f1": 0.7351067248327194,
+  "te_auprc": 0.915484335786349,
+  "pred_te_rate": 0.6793684895833333,
+  "true_te_rate": 0.43932698567708334,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/opossum",
+  "stage": "plant_model_cross_eval",
+  "species": "opossum",
+  "window": 4096,
+  "n_windows": 1200
+}

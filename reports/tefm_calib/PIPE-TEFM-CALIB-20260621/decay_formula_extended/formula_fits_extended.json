@@ -1,0 +1,91 @@
+{
+  "n_rows": 244,
+  "formulas": [
+    {
+      "features": [
+        "intercept",
+        "distance_bucket"
+      ],
+      "coef": {
+        "intercept": 0.6474856756614666,
+        "distance_bucket": -0.18468476467314435
+      },
+      "r2": 0.03963873148550201,
+      "rmse": 0.35260027142958555,
+      "n": 244,
+      "status": "ok"
+    },
+    {
+      "features": [
+        "intercept",
+        "distance_bucket",
+        "label_jaccard",
+        "repeat_library_completeness"
+      ],
+      "coef": {
+        "intercept": 0.26327862738467633,
+        "distance_bucket": 0.18192014731277234,
+        "label_jaccard": 1.0656790772653915,
+        "repeat_library_completeness": -0.4205834851631809
+      },
+      "r2": 0.3818203390507945,
+      "rmse": 0.28289331183928446,
+      "n": 244,
+      "status": "ok"
+    },
+    {
+      "features": [
+        "intercept",
+        "distance_bucket",
+        "label_jaccard",
+        "ucsc_te_bp_log10",
+        "class_entropy",
+        "gc"
+      ],
+      "coef": {
+        "intercept": -0.7502072859756062,
+        "distance_bucket": 0.15510336078264142,
+        "label_jaccard": 0.4015390827733655,
+        "ucsc_te_bp_log10": 0.14593468809460974,
+        "class_entropy": 0.03346972894149726,
+        "gc": -0.3367681336039195
+      },
+      "r2": 0.5675177798546112,
+      "rmse": 0.23661891188906128,
+      "n": 244,
+      "status": "ok"
+    },
+    {
+      "features": [
+        "intercept",
+        "distance_bucket",
+        "label_jaccard",
+        "repeat_library_completeness",
+        "ucsc_te_bp_log10",
+        "class_entropy",
+        "gc",
+        "train_clade_covered",
+        "stress_panel",
+        "kingdom_plant",
+        "insect_panel"
+      ],
+      "coef": {
+        "intercept": -1.1685574137808634,
+        "distance_bucket": 0.19093175510727467,
+        "label_jaccard": -0.2638050723540831,
+        "repeat_library_completeness": 0.31121486241855056,
+        "ucsc_te_bp_log10": 0.20620652156954994,
+        "class_entropy": 0.1030684325967983,
+        "gc": -0.4228215278828902,
+        "train_clade_covered": 0.19688694120009975,
+        "stress_panel": -0.29051624260819886,
+        "kingdom_plant": -0.05671372581036288,
+        "insect_panel": 0.20710327278372162
+      },
+      "r2": 0.7407212536235049,
+      "rmse": 0.18320983478801375,
+      "n": 244,
+      "status": "ok"
+    }
+  ]
+}

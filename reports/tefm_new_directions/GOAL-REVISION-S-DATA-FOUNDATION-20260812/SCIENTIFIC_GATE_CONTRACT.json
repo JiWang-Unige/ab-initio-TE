@@ -1,0 +1,96 @@
+{
+  "schema_version": "s_data_foundation_scientific_gates_v1",
+  "goal_id": "TEFM_S_ACCESSION_DATA_FOUNDATION_R1",
+  "frozen_denominator": {
+    "name": "canonical_old_occurrence_ledger",
+    "p_occurrence_count": 6432583,
+    "conservation_required": "exact",
+    "shrinkage_allowed": false
+  },
+  "identity_and_label_contract": {
+    "each_p_occurrence_requires_unique_versioned_accession": true,
+    "each_p_occurrence_requires_official_consensus_sha256": true,
+    "direct_superfamily_label_source": "raw_repeatmasker_class_only",
+    "label_contract_excluded_identifier_count": 10,
+    "label_contract_excluded_handling": "U_ignore_and_separate_audit",
+    "x13_line_handling": "ambiguity_stratum_audit_only_not_primary",
+    "copy_derived_identity_proxy_allowed": false,
+    "prefix_case_or_fuzzy_identity_guess_allowed": false
+  },
+  "split_contract": {
+    "representative_windows_frozen_before_evaluation": true,
+    "old_occurrence_categories_exactly_once": true,
+    "homology_input_label_blind": true,
+    "homology_scope": "all_species",
+    "component_construction_precedes_split": true,
+    "cross_split_component_overlap_required": 0,
+    "component_direct_label_conflict_handling": "typed_block"
+  },
+  "execution_metrics": [
+    "leaf_exact_access_executed",
+    "leaf_adapter_syntax_executed",
+    "paired_repeatmasker_roundtrip_executed",
+    "repeatmasker_executed",
+    "annotation_executed",
+    "geometry_evaluated",
+    "representative_annotation_executed",
+    "representative_prefreeze_verified",
+    "occurrence_categories_exact_once_verified",
+    "accession_dataset_executed",
+    "data_stage_executed",
+    "occurrence_ledger_conservation_verified",
+    "per_p_identity_completeness_verified",
+    "raw_class_label_source_verified",
+    "u_x13_boundary_verified",
+    "homology_split_executed",
+    "homology_data_audit_executed",
+    "label_blind_all_species_homology_verified",
+    "component_before_split_verified",
+    "zero_component_overlap_verified",
+    "component_conflicts_typed_block_verified"
+  ],
+  "gates": [
+    {
+      "index": 0,
+      "metric": "leaf_exact_access_gate_pass",
+      "scientific_semantics": "Six frozen accessions resolve exact-once over twelve installed FamDB leaves with no name, prefix, case, alias, or copy fallback.",
+      "allowed_true_authorization": "leaf_adapter_preflight_human_gate_eligible",
+      "required_execution_metrics": ["leaf_exact_access_executed"]
+    },
+    {
+      "index": 1,
+      "metric": "leaf_adapter_syntax_gate_pass",
+      "scientific_semantics": "The same six exact leaf records produce paired name/accession-version header views with byte-identical sequence order and raw class.",
+      "allowed_true_authorization": "representative_cpu_proposal_human_gate_eligible",
+      "required_execution_metrics": ["leaf_adapter_syntax_executed"]
+    },
+    {
+      "index": 2,
+      "metric": "paired_repeatmasker_roundtrip_gate_pass",
+      "scientific_semantics": "Paired RepeatMasker CPU smoke executes both libraries; per-hit geometry and raw class are exact and each candidate hit retains one unique versioned accession.",
+      "allowed_true_authorization": "representative_annotation_proposal_human_gate_eligible",
+      "required_execution_metrics": ["paired_repeatmasker_roundtrip_executed", "repeatmasker_executed", "annotation_executed", "geometry_evaluated"]
+    },
+    {
+      "index": 3,
+      "metric": "representative_annotation_gate_pass",
+      "scientific_semantics": "Representative real windows are frozen before evaluation and every frozen old-ledger occurrence is classified into exactly one registered category.",
+      "allowed_true_authorization": "accession_dataset_proposal_human_gate_eligible",
+      "required_execution_metrics": ["representative_annotation_executed", "representative_prefreeze_verified", "occurrence_categories_exact_once_verified"]
+    },
+    {
+      "index": 4,
+      "metric": "accession_preserving_dataset_gate_pass",
+      "scientific_semantics": "The complete 6,432,583-P-occurrence ledger is conserved exactly; every P occurrence has one unique versioned accession and official consensus SHA256; direct label is raw RepeatMasker class only; ten excluded identifiers remain U/ignore and X13_LINE remains audit-only.",
+      "allowed_true_authorization": "homology_split_proposal_human_gate_eligible",
+      "required_execution_metrics": ["accession_dataset_executed", "data_stage_executed", "occurrence_ledger_conservation_verified", "per_p_identity_completeness_verified", "raw_class_label_source_verified", "u_x13_boundary_verified"]
+    },
+    {
+      "index": 5,
+      "metric": "homology_split_data_gate_pass",
+      "scientific_semantics": "All-species homology construction is label-blind, components are frozen before split, component overlap across splits is zero, and within-component direct-label conflicts are typed blocks.",
+      "allowed_true_authorization": "direct_s0_goal_revision_human_gate_eligible",
+      "required_execution_metrics": ["homology_split_executed", "homology_data_audit_executed", "label_blind_all_species_homology_verified", "component_before_split_verified", "zero_component_overlap_verified", "component_conflicts_typed_block_verified"]
+    }
+  ]
+}

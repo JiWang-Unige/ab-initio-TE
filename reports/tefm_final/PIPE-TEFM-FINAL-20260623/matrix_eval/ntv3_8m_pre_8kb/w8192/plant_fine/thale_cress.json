@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.2830114054451803,
+  "te_recall": 0.03468915164962029,
+  "te_f1": 0.06180301131250803,
+  "bg_f1": 0.9499507315475824,
+  "macro_f1": 0.5058768714300452,
+  "te_auprc": 0.12474008334384351,
+  "n_labeled_tokens": 9830400,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv3_8m_pre_8kb_H0_w8192_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/plant_fine_w8192/thale_cress",
+  "n_windows": 1200,
+  "stage": "ntv3_8m_pre_8kb_w8192_to_plant_fine",
+  "model_key": "ntv3_8m_pre_8kb",
+  "model": "ntv3_8m_pre_8kb_H0_w8192_seed42",
+  "window": 8192,
+  "species": "thale_cress"
+}

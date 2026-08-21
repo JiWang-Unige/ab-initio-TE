@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-FINAL-STRICTSEG-20260629",
+  "strict_json": 66,
+  "strict_tsv": 66,
+  "rows": 6600,
+  "summary_rows": 400,
+  "all_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-STRICTSEG-20260629/summaries/strict_segment.tsv",
+  "summary_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-STRICTSEG-20260629/summaries/strict_segment_summary.tsv",
+  "headline_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-STRICTSEG-20260629/summaries/strict_segment_headline_iou80_boundary5.tsv",
+  "best_variant_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-STRICTSEG-20260629/summaries/strict_segment_best_variant_iou80_boundary5.tsv",
+  "models": [
+    "ntv2_250m_w4096",
+    "ntv3_100m_pre_w2048"
+  ],
+  "panels": [
+    "animal_fine",
+    "plant_fine"
+  ],
+  "ntv2_retry_job": "9852364",
+  "ntv3_retry_job": "9850150"
+}

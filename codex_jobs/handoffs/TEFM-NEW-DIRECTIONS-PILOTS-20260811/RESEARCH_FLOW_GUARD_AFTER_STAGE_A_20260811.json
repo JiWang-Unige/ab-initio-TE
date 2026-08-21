@@ -1,0 +1,20 @@
+{
+  "ok_to_goal": false,
+  "recommended_next": [
+    "/benchmark-roadmap 更新 docs/19_evaluator_contract.md"
+  ],
+  "blockers": [
+    "尚无可用 evaluator_contract；写训练/评估代码前必须固化 primary metric、split、metrics JSON schema。"
+  ],
+  "warnings": [],
+  "facts": {
+    "candidate_inventory": true,
+    "verified_refs": true,
+    "grill_or_council_marker": true,
+    "configured": true,
+    "roadmap_ready": true,
+    "evaluator_contract_ready": false,
+    "baseline_reproduced_or_waived": false,
+    "screen_anchor_present": true
+  }
+}

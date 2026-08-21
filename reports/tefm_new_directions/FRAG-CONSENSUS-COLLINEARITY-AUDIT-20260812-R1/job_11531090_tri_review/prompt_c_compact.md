@@ -1,0 +1,9 @@
+You are Reviewer C (Antigravity), independent from all other reviewers. Output professional Simplified Chinese with the exact heading `### 1. Overall judgment`.
+
+Review a claim-ineligible Rice T1 positive-only CPU information-sufficiency audit. Method: immutable leaves are mapped by fixed exact k-mer evidence to frozen consensus identity/strand/coordinates, then grouped by chromosome-wide monotonic consensus-collinearity DAG/minimum path cover. Truth parent IDs are evaluator-only; leaves cannot be deleted; no genomic gap enters the candidate. GAP20/GAP100 are positive-only comparators. Whole-genome precision/F1 and SOTA claims are forbidden.
+
+Job11531090 completed 0:0, exact 8CPU/32GiB/2h/0GPU, all input/command/environment/payload hashes verify, finite metrics, 1000 chromosome-block bootstraps. Candidate: mapped fraction .5551, leaf retention 1.0, exact recovery .1389, pairwise harmonic .3082, topology .1053, false fusion .07586. GAP100: exact .3717, harmonic .6691, topology .4737. GAP20 false fusion .05162. Shuffle: exact .001323, harmonic .000540. Candidate-minus-best comparator bootstrap intervals are wholly negative: exact [-.2801,-.1734], harmonic [-.4489,-.2736], topology [-.4523,-.2743]. Terminal is semantic-successful `VALID_NEGATIVE_INFORMATION_INSUFFICIENT`; all promotion gates except retention/shuffle separation/topology-evaluable fail.
+
+Old ACTIVE_GOAL expects unrelated selector keys and reports failed_run; consume it only as automation stop, not as route-local semantic verdict. Do not suggest threshold tuning, Fly/H0, GPU, or abandoned gap/HMM/CRF/local-graph/lightweight-head cousins.
+
+Required sections: `### 1. Overall judgment` choosing exactly one of continue-current-route/replace-component/abandon-route/return-to-literature/run-sanity-check-first; `### 2. Valid-negative and comparability audit`; `### 3. Mechanism interpretation`; `### 4. Stop vs re-entry criteria`; `### 5. One next non-compute action`; `### 6. Confidence`.

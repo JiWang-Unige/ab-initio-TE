@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9086715116923828,
+  "te_recall": 0.9343078553510024,
+  "te_f1": 0.9213113792693673,
+  "bg_f1": 0.932591105007718,
+  "macro_f1": 0.9269512421385426,
+  "te_auprc": 0.96761315194098,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/cattle",
+  "n_windows": 1200,
+  "stage": "cross_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "cross_supervised_4096",
+  "window": 4096,
+  "species": "cattle"
+}

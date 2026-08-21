@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 120,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-FRAGSANITY-20260630/fragment_sanity/mouse_chr1.tsv",
+  "n_windows": 120
+}

@@ -1,0 +1,11 @@
+{
+  "exp_id": "PIPE-TEFM-SEG-SF-20260618",
+  "window": 4096,
+  "stride": 4096,
+  "n_windows": 1200,
+  "chroms": [
+    "chr17"
+  ],
+  "summary_tsv": "reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/overlap_segment/summary_w4096_s4096.tsv",
+  "edge_tsv": "reports/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/overlap_segment/edge_bins_w4096_s4096.tsv"
+}

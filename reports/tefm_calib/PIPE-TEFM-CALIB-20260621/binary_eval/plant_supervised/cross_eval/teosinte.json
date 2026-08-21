@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9124282143413766,
+  "te_recall": 0.9499679736839393,
+  "te_f1": 0.9308197551982428,
+  "bg_f1": 0.834625322997416,
+  "macro_f1": 0.8827225390978294,
+  "te_auprc": 0.9531804997906701,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/teosinte",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "teosinte"
+}

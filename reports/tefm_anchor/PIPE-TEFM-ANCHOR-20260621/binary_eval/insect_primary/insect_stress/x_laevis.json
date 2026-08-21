@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.1705660789794679,
+  "te_recall": 0.33861795940424627,
+  "te_f1": 0.22685996910251235,
+  "bg_f1": 0.8653223728680347,
+  "macro_f1": 0.5460911709852735,
+  "te_auprc": 0.24427404830140062,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/runs/insect_primary_4096",
+  "data_dir": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/data/insect_primary_eval_stress/x_laevis",
+  "n_windows": 1200,
+  "stage": "insect_primary_to_insect_stress",
+  "model_key": "generanno",
+  "model": "insect_primary_4096",
+  "window": 4096,
+  "species": "x_laevis"
+}

@@ -1,0 +1,24 @@
+{
+  "goal_id": "TEFM_B_DENOMINATOR_CLOSURE_R2",
+  "status": "active",
+  "scope": "milestone",
+  "goal": "Close the exact five-workflow TE denominator without silent identity or database substitution.",
+  "primary_metric": "terminal_cell_count",
+  "direction": "higher",
+  "success_criteria": [
+    {"metric": "engineering_pass_fraction", "op": ">=", "threshold": 1.0},
+    {"metric": "invalid_cell_fraction", "op": "<=", "threshold": 0.0},
+    {"metric": "silent_substitution_count", "op": "<=", "threshold": 0.0}
+  ],
+  "guardrails": [
+    {"metric": "claim_eligible", "op": "<=", "threshold": 0.0}
+  ],
+  "screen_anchor": {"metric": "terminal_cell_count", "value": 4.0, "direction": "higher", "source": "five-cell denominator completeness gate; engineering status is evaluated separately"},
+  "sota_benchmark": {"metric": "terminal_cell_count", "value": 5.0, "direction": "higher", "strict_exceed": false, "source": "engineering completeness target, not scientific SOTA"},
+  "tuning_gap_threshold": 0.05,
+  "max_parallel_directions": 3,
+  "max_internal_iterations": 3,
+  "on_failed_run": "stop_and_notify",
+  "human_gate_before_claim": true,
+  "claim_allowed": false
+}

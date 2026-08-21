@@ -1,0 +1,81 @@
+{
+  "schema_version": "TEFM-SF-DFAM39-ALLFAMILY-TARGET-CROSSWALK-AUDIT-1.0.0",
+  "exp_id": "SF-DFAM39-ALLFAMILY-TARGET-CROSSWALK-AUDIT-20260812-R1",
+  "profile": "cpu_dfam39_allfamily_target_only_crosswalk_audit",
+  "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "preview_root": "outputs/SF-DFAM39-ALLFAMILY-TARGET-CROSSWALK-AUDIT-20260812-R1/preview",
+  "claim_eligible": false,
+  "formal_slurm_required": true,
+  "source_contract": {
+    "grammar_revision": "DFAM39-EMBL-ALIAS-GRAMMAR-REPAIR-1.0.0",
+    "release": "Dfam_3.9",
+    "license": "CC0-1.0",
+    "matching": "case-sensitive exact identifier equality",
+    "exact_alias_fields": ["NM", "PI", "SN", "DR"],
+    "nm_sn_grammar": "one non-empty exact value; punctuation is data, not a generic terminator",
+    "pi_grammar": "one or more non-empty semicolon-separated exact alias tokens with required final semicolon",
+    "dr_grammar": "Database; Primary-id followed by exactly one legal terminator, semicolon or period",
+    "exact_identity_fields": ["AC", "ID"],
+    "identity_field_rule": "AC/ID only for accession-shaped frozen targets",
+    "accession_target_regex": "^(?:DF|DR)[0-9]+(?:\\.[0-9]+)?$",
+    "df_record_semantics": "must reconcile exactly to frozen curated Job11527999 target candidates",
+    "dr_record_semantics": "RAW_ONLY_SUPPORT; cannot override curated resolved identities or resolve curated ambiguity",
+    "prefix_casefold_substring_forbidden": true,
+    "full_catalog_materialization_forbidden": true,
+    "single_decompression_pass_target_only": true
+  },
+  "full_embl": {
+    "path": "refs/supp/dfam39-full-embl/Dfam-1.embl.gz",
+    "sha256": "5497d435be65a4aefda0816e0d0778cd265b1958b0163cded230e2859666467c",
+    "md5": "eafeb77ccf06e2595300c9e8ff612585",
+    "size_bytes": 2677249806,
+    "md5_sidecar_path": "refs/supp/dfam39-full-embl/Dfam-1.embl.gz.md5",
+    "md5_sidecar_sha256": "e8354e0769dc84dfcd99d163c6125a0371d2737129e791aead088883e433932b",
+    "source_manifest_path": "refs/supp/dfam39-full-embl/SOURCE_MANIFEST.json",
+    "source_manifest_sha256": "86661cc129d3a51aa46e0594a02a5e6d84eac4f70b13d7269898c5bb19606c01",
+    "source_manifest_schema": "DFAM39-FULL-EMBL-SOURCE-1.0.0",
+    "sequence_normalization": "SQ body ASCII uppercase U->T; reject non-IUPAC; SHA256 normalized bytes",
+    "max_target_candidate_rows": 100000
+  },
+  "curated_job11527999": {
+    "attempt_root": "outputs/SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-20260812-R1/preview/attempts/slurm-11527999",
+    "payload_manifest_sha256": "fa3a1705436cc2a2f6671ec27f425faf70b221046b29d264f4a81edd9f753ba0",
+    "candidates_sha256": "e962d49992eb7bdc2c871acdf12f0029c192758e69955fce6a56f4a07323cfdf",
+    "resolution_sha256": "8fe6158985e2a4a7821809cf1f1ad116b1c27c2fd8df2cf8fdc87cdd77725940",
+    "metrics_sha256": "a5c545ed4a84e9ffa7ee095e5b513ff28f838ce6bdba6eb96abae124b0e24b8e",
+    "targets_sha256": "7f847fd897ed6dda1cffaba5d299075e388f8b78a8e324285e0453241890f621",
+    "excluded_sha256": "0814b1d2c9ed2c36fae36a7d749931effd6792f1fb11fa7e006baf16e80fee3d",
+    "x13_sha256": "22185b7850f85875f7ea7b73db15103f052996204d256f59c356f8013ddf8377",
+    "target_identifier_count": 279,
+    "target_occurrence_mass": 6432583,
+    "curated_resolved_unique_count": 50,
+    "curated_ambiguous_count": 2,
+    "curated_ambiguous_identifiers": ["L1HS", "L1PREC2"]
+  },
+  "frozen_contracts": {
+    "direct_labeler_path": "scripts/experiments/SF-DIRECT-BASELINE-SCREEN-20260811-R2/direct_s0_data.py",
+    "direct_labeler_sha256": "e61cf6185a08505d7e8d8e529c9882d1b2138b9882ff9194ec6e1042d54ee9d7",
+    "evaluator_contract_path": "docs/19_evaluator_contract.md",
+    "evaluator_contract_sha256": "fe0d63e9b525a0bac5ee03b3b88b83385fc4582f8a1b3f9802d171c72594ade2"
+  },
+  "denominator": {
+    "target_identifier_count": 279,
+    "target_occurrence_mass": 6432583,
+    "u_ignore_identifier_count": 10,
+    "u_ignore_occurrence_mass": 43728,
+    "x13_identifier": "X13_LINE",
+    "x13_occurrence_mass": 686
+  },
+  "authorization": {
+    "full_catalog_stage_authorized": false,
+    "homology_split_authorized": false,
+    "data_stage_authorized": false,
+    "gpu_authorized": false,
+    "s1_authorized": false
+  },
+  "resource_contract": {"cpus": 1, "memory_mib": 4096, "walltime_minutes": 120, "gpus": 0},
+  "experiment_doc_path": "docs/experiments/SF-DFAM39-ALLFAMILY-TARGET-CROSSWALK-AUDIT-20260812-R1.md",
+  "code_review_gate_path": "outputs/SF-DFAM39-ALLFAMILY-TARGET-CROSSWALK-AUDIT-20260812-R1/code_review_gate.json",
+  "slurm_log_dir": "outputs/SF-DFAM39-ALLFAMILY-TARGET-CROSSWALK-AUDIT-20260812-R1/preview/logs",
+  "owner_lock_name": ".allfamily-crosswalk-owner.lock"
+}

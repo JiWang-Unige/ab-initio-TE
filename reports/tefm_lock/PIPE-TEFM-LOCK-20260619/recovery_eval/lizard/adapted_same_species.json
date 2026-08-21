@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9582297385593185,
+  "te_recall": 0.9451330766655507,
+  "te_f1": 0.9516363498464144,
+  "bg_f1": 0.9975463207316659,
+  "macro_f1": 0.9745913352890402,
+  "te_auprc": 0.9800393500104518,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/RECOVERY_lizard_from_invert_seed42",
+  "data_dir": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/stress_recovery/lizard",
+  "n_windows": 1200,
+  "stage": "stress_recovery_adapted",
+  "model_key": "generanno",
+  "model": "recovery_lizard",
+  "window": 4096,
+  "species": "lizard"
+}

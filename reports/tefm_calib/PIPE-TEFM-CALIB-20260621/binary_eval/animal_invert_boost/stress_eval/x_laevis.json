@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.2520076589926687,
+  "te_recall": 0.9855073650424544,
+  "te_f1": 0.40137759810717816,
+  "bg_f1": 0.806757557954432,
+  "macro_f1": 0.6040675780308051,
+  "te_auprc": 0.46391031567212787,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/stress_eval/x_laevis",
+  "n_windows": 1200,
+  "stage": "animal_invert_boost_to_stress_eval",
+  "model_key": "generanno",
+  "model": "TFREPAIR_invert_boost_animal_4096_seed42",
+  "window": 4096,
+  "species": "x_laevis"
+}

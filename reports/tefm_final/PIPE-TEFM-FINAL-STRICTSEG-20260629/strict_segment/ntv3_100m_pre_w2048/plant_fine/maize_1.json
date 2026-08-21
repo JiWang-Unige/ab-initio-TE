@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 100,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-STRICTSEG-20260629/strict_segment/ntv3_100m_pre_w2048/plant_fine/maize_1.tsv",
+  "n_windows": 1200
+}

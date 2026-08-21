@@ -1,0 +1,12 @@
+{
+  "<your_primary_metric>": 0.5913734313074746,
+  "best_cross_eval_mean_te_f1": 0.5913734313074746,
+  "invert_to_plant_eval_mean_te_f1": 0.7269048192737689,
+  "invert_to_plant_fine_mean_te_f1": 0.6254480672153463,
+  "sf5_te_detect_f1": 0.898164452805933,
+  "sf5_main4_conditional_macro_f1": 0.8546881801998749,
+  "sf5_unknown_recall": 0.39573138376274986,
+  "decay_formula_best_r2": 0.5248684189807344,
+  "semantic_ok": 1,
+  "screen_only": 1
+}

@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.5254356173581489,
+  "te_recall": 0.9688804320715126,
+  "te_f1": 0.6813609318671622,
+  "bg_precision": 0.9799491974515034,
+  "bg_recall": 0.6347751212784186,
+  "bg_f1": 0.7704688205207002,
+  "macro_f1": 0.7259148761939311,
+  "te_auprc": 0.9029848674233761,
+  "pred_te_rate": 0.5429801432291667,
+  "true_te_rate": 0.2944647216796875,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/pig",
+  "stage": "plant_model_cross_eval",
+  "species": "pig",
+  "window": 4096,
+  "n_windows": 1200
+}

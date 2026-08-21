@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.13773655610907484,
+  "te_recall": 0.9837285714753701,
+  "te_f1": 0.24163994447685527,
+  "bg_f1": 0.7433793286543815,
+  "macro_f1": 0.4925096365656184,
+  "te_auprc": 0.18947575388458787,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/lizard",
+  "n_windows": 1200,
+  "stage": "invert_cross_eval",
+  "model_key": "generanno",
+  "model": "TFREPAIR_invert_boost_animal_4096_seed42",
+  "window": 4096,
+  "species": "lizard"
+}

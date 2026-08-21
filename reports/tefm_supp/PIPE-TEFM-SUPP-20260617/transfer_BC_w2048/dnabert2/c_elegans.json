@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.3400954128440367,
+  "te_recall": 0.28431011633043735,
+  "te_f1": 0.3097107948963019,
+  "bg_f1": 0.8749577760477898,
+  "macro_f1": 0.5923342854720458,
+  "te_auprc": 0.28872922355043584,
+  "n_labeled_tokens": 487785,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/c_elegans",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "dnabert2",
+  "model": "dnabert2",
+  "window": 2048,
+  "species": "c_elegans"
+}

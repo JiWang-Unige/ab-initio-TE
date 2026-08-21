@@ -1,0 +1,15 @@
+species_code	scientific_name	ucsc_db	source_format	local_source	source_url	notes
+rice	Oryza sativa	local_external	bed	.backup/data/genome_data/current_eukaryotes/plants/rice/rmsk_te.bed.gz		PlantTE core; local external TE BED copied/materialized
+maize	Zea mays	local_external	bed	.backup/data/genome_data/current_eukaryotes/plants/maize/rmsk_te.bed.gz		PlantTE core; local external TE BED copied/materialized
+sorghum	Sorghum bicolor	GCF_000003195.3	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/plants/sorghum/GCF_000003195.3.repeatMasker.out.gz		PlantTE core; local RepeatMasker output copied/materialized
+brachypodium	Brachypodium distachyon	GCF_000005505.3	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/plants/purple_false_brome/GCF_000005505.3.repeatMasker.out.gz		PlantTE core; local directory purple_false_brome
+thale_cress	Arabidopsis thaliana	local_external	bed	.backup/data/genome_data/current_eukaryotes/plants/thale_cress/rmsk_te.bed.gz		PlantTE core; local external TE BED copied/materialized
+teosinte	Zea diploperennis	local_external	bed	.backup/data/genome_data/current_eukaryotes/plants/zea_diploperennis_gigi/rmsk_te.bed.gz		Plant held-out; local directory zea_diploperennis_gigi
+soybean	Glycine max	local_external	bed	.backup/data/genome_data/current_eukaryotes/plants/soybean/rmsk_te.bed.gz		Plant stress/reserve; local external TE BED copied/materialized
+yeast	Saccharomyces cerevisiae	local_external	bed	.backup/data/genome_data/current_eukaryotes/fungi/budding_yeast/saccharomyces_cerevisiae_rmsk_repeats.bed.gz		Fungi core; repeats BED fallback copied/materialized
+fission_yeast	Schizosaccharomyces pombe	ASM294v2	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/fungi/fission_yeast/repeatmasker/Schizosaccharomyces_pombe.ASM294v2.dna.toplevel.fa.out		Fungi core; local RepeatMasker output copied/materialized
+neurospora	Neurospora crassa	local_external	bed	.backup/data/genome_data/current_eukaryotes/fungi/bread_mold/neurospora_crassa_rmsk_repeats.bed.gz		Fungi core; repeats BED fallback copied/materialized
+aspergillus	Aspergillus nidulans	local_external	bed	.backup/data/genome_data/current_eukaryotes/fungi/nidulans_mold/aspergillus_nidulans_rmsk_repeats.bed.gz		Fungi core; local directory nidulans_mold
+magnaporthe	Magnaporthe oryzae	GCF_000002495.2	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/fungi/rice_blast_fungus/GCF_000002495.2.repeatMasker.out.gz		Fungi core; local directory rice_blast_fungus
+fusarium	Fusarium graminearum	GCA_000240135.3	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/fungi/wheat_scab_fungus/GCA_000240135.3.repeatMasker.out.gz		Fungi core; local RepeatMasker output copied/materialized
+cryptococcus	Cryptococcus neoformans	GCA_000149245.3	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/fungi/cryptococcus/GCA_000149245.3.repeatMasker.out.gz		Fungi core; local RepeatMasker output copied/materialized

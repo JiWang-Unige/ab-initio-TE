@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "eval_json": 66,
+  "summaries": {
+    "eval_chrom_repeats.tsv": "reports/tefm_final/PIPE-TEFM-FINAL-EBAR-20260629/summaries/eval_chrom_repeats.tsv",
+    "eval_chrom_repeat_summary.tsv": "reports/tefm_final/PIPE-TEFM-FINAL-EBAR-20260629/summaries/eval_chrom_repeat_summary.tsv",
+    "eval_panel_summary.tsv": "reports/tefm_final/PIPE-TEFM-FINAL-EBAR-20260629/summaries/eval_panel_summary.tsv"
+  }
+}

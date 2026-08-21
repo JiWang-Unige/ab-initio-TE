@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code-Review-Gate"
+  short_description: "Run a mandatory pre-submit code review gate"
+  default_prompt: "Review the implementation, config, evaluator, and job plan before submitting training."

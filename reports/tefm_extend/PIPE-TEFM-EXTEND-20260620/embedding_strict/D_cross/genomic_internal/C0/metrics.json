@@ -1,0 +1,16 @@
+{
+  "n": 1440,
+  "n_clusters": 8,
+  "ari": 0.09979776073771919,
+  "nmi": 0.17748147965833488,
+  "holdout_accuracy": 0.28055555555555556,
+  "holdout_macro_f1": 0.22118284205866873,
+  "silhouette": 0.08363673835992813,
+  "sklearn_available": true,
+  "setting": "C0",
+  "fragments": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/embedding_fragments/D_cross/genomic_internal/family_len512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "label_level": "family",
+  "source": "genomic_internal"
+}

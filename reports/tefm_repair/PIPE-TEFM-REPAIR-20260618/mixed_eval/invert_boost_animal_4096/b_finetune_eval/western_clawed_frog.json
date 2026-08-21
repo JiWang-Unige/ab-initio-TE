@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9060519977742699,
+  "te_recall": 0.9732475316660966,
+  "te_f1": 0.9384484554812158,
+  "bg_f1": 0.9440390721453071,
+  "macro_f1": 0.9412437638132615,
+  "te_auprc": 0.9880703503509191,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w4096/western_clawed_frog",
+  "n_windows": 1200,
+  "stage": "invert_boost_animal_4096_to_b_finetune_eval",
+  "model_key": "generanno",
+  "model": "invert_boost_animal_4096",
+  "window": 4096,
+  "species": "western_clawed_frog"
+}

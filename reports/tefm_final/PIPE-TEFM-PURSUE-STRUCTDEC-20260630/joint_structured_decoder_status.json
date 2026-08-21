@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "seed": 42,
+  "device": "cuda",
+  "init_model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick",
+  "variants": [
+    "ce_baseline",
+    "joint_hmm",
+    "joint_crf",
+    "joint_semimarkov_proxy",
+    "boundary_aux",
+    "semimarkov_retention"
+  ],
+  "freeze_backbone": false,
+  "metrics": "reports/tefm_final/PIPE-TEFM-PURSUE-STRUCTDEC-20260630/joint_structured_decoder_metrics.tsv",
+  "best_test_variant": "semimarkov_retention",
+  "best_test_segment_f1": 0.4439252336448598,
+  "best_test_boundary_f1": 0.22897196261682246,
+  "best_test_missed_true_rate": 0.3524590163934426,
+  "ce_test_segment_f1": 0.30689655172413793,
+  "ce_test_boundary_f1": 0.1413793103448276,
+  "ce_test_missed_true_rate": 0.26229508196721313,
+  "promotion_gate_pass": false
+}

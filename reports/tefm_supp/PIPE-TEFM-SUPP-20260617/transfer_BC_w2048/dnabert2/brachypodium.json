@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.3131263232180663,
+  "te_recall": 0.1718967921896792,
+  "te_f1": 0.22194987744485015,
+  "bg_f1": 0.9677611915549825,
+  "macro_f1": 0.5948555344999163,
+  "te_auprc": 0.1562011733094879,
+  "n_labeled_tokens": 502453,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w2048/brachypodium",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "dnabert2",
+  "model": "dnabert2",
+  "window": 2048,
+  "species": "brachypodium"
+}

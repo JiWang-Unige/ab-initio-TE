@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7553361230409206,
+  "te_recall": 0.41369299807485943,
+  "te_f1": 0.5345927824223837,
+  "bg_f1": 0.28437048616942934,
+  "macro_f1": 0.40948163429590656,
+  "te_auprc": 0.7578767784193814,
+  "n_labeled_tokens": 2455200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w2048/maize",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "hyenadna",
+  "model": "hyenadna",
+  "window": 2048,
+  "species": "maize"
+}

@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "seed": 42,
+  "device": "cuda",
+  "init_model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick",
+  "variants": [
+    "ce_baseline",
+    "retention_constrained_raw",
+    "retention_constrained_decoder"
+  ],
+  "freeze_backbone": false,
+  "metrics": "reports/tefm_final/PIPE-TEFM-PURSUE-RETCONSTR-20260630/joint_structured_decoder_metrics.tsv",
+  "best_test_variant": "ce_baseline",
+  "best_test_segment_f1": 0.30689655172413793,
+  "best_test_boundary_f1": 0.1413793103448276,
+  "best_test_missed_true_rate": 0.26229508196721313,
+  "best_gate_variant": "",
+  "best_gate_segment_f1": 0.0,
+  "best_gate_boundary_f1": 0.0,
+  "best_gate_missed_true_rate": 1.0,
+  "ce_test_segment_f1": 0.30689655172413793,
+  "ce_test_boundary_f1": 0.1413793103448276,
+  "ce_test_missed_true_rate": 0.26229508196721313,
+  "max_deleted_true_backed_fraction": 0.15,
+  "best_gate_deleted_true_backed_fraction": 1.0,
+  "promotion_gate_pass": false
+}

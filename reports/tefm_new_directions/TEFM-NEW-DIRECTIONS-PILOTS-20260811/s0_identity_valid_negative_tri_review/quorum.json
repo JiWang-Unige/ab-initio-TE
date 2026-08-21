@@ -1,0 +1,13 @@
+{
+  "exp_id": "SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1",
+  "job_id": "11524255",
+  "quorum": "3/3",
+  "reviewers": [
+    {"backend": "claude", "status": "complete", "judgment": "replace-component", "confidence": "High"},
+    {"backend": "codex", "status": "complete", "judgment": "comparability-blocker", "confidence": "High (0.97)"},
+    {"backend": "antigravity", "status": "complete", "judgment": "comparability-blocker", "confidence": "10/10"}
+  ],
+  "consensus": "valid asset-level negative; identity contract is not split-ready; no S0 DATA/GPU or S1",
+  "next_action": "human-gated identity/homology and label-exclusion contract decision",
+  "claim_eligible": false
+}

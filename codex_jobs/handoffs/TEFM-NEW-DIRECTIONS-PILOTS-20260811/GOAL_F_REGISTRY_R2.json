@@ -1,0 +1,22 @@
+{
+  "goal_id": "TEFM_F_EVIDENCE_REGISTRY_R2",
+  "status": "active",
+  "scope": "milestone",
+  "goal": "Deterministically audit and freeze the available H0 identity, truth tiers and historical same-input comparator semantics, while retaining typed blockers for every missing scientific prerequisite.",
+  "primary_metric": "integrity_check_count_passed",
+  "direction": "higher",
+  "success_criteria": [
+    {"metric": "integrity_check_count_passed", "op": ">=", "threshold": 6.0}
+  ],
+  "guardrails": [
+    {"metric": "claim_eligible", "op": "<=", "threshold": 0.0}
+  ],
+  "screen_anchor": {"metric": "integrity_check_count_passed", "value": 0.0, "direction": "higher", "source": "FRAG-PARENT-LATTICE-SCREEN-20260811-R1 foundational typed block"},
+  "sota_benchmark": {"metric": "integrity_check_count_passed", "value": 6.0, "direction": "higher", "strict_exceed": false, "source": "asset-integrity completeness milestone, not scientific SOTA"},
+  "tuning_gap_threshold": 0.05,
+  "max_parallel_directions": 3,
+  "max_internal_iterations": 3,
+  "on_failed_run": "stop_and_notify",
+  "human_gate_before_claim": true,
+  "claim_allowed": false
+}

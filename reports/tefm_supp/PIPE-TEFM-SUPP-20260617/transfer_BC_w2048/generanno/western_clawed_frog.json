@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8372057292646524,
+  "te_recall": 0.5541592295878128,
+  "te_f1": 0.6668922901701417,
+  "bg_f1": 0.839011960001352,
+  "macro_f1": 0.7529521250857469,
+  "te_auprc": 0.8011032011915595,
+  "n_labeled_tokens": 2457600,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/western_clawed_frog",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 2048,
+  "species": "western_clawed_frog"
+}

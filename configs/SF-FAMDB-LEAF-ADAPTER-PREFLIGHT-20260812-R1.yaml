@@ -1,0 +1,59 @@
+{
+  "schema_version": "TEFM-SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-1.0.0",
+  "exp_id": "SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1",
+  "profile": "cpu_famdb_leaf_adapter_preflight",
+  "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "preview_root": "outputs/SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1/preview",
+  "claim_eligible": false,
+  "parent_contract": {
+    "exp_id": "SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1",
+    "job_id": "11534847",
+    "config": "configs/SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1.yaml",
+    "config_sha256": "9ad8493196b931b088cc7ba7c046c69acdd9b804afc9a74abec9492c264eaa84",
+    "runner": "scripts/experiments/SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1/close_only_probe.py",
+    "runner_sha256": "f9534f53a9b664fead9bc489b88aa8d7438188c46a8fe1c1a0e064ac5ea7810b",
+    "selected_records_sha256": "83f3d583f17a81d1fbdc851b8c1babda5dfec0a23af10297a80045f73067c36a",
+    "artifacts": {
+      "outputs/SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1/AUDITED_MANIFEST_11534847.sha256": "e863e1b9d85171fa99cd3f2b47752543707a5f839325abe29df1fe972843a33a",
+      "outputs/SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1/result_semantic_audit.11534847.json": "2c3d828adf339e667011981cda65aa76968ecb143f0ca9f712f4b4fe7344cd10",
+      "outputs/SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1/validate_goal.11534847.json": "0be870802e4ad7567882fc2235eea7bdec7db40699e8223cb24f3d3239b14efb",
+      "outputs/SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1/code_review_gate.json": "add65cea7e5cd259603b4e54cb4c8a94a5e6dd2b3019a066d5c8fdda216ed222"
+    },
+    "expected_result": {"status": "LEAF_CLOSE_ONLY_PASS", "scientific_call_count": 72, "target_count": 6, "resolved_count": 6, "unique_handle_count": 12, "closed_count": 12}
+  },
+  "adapter_contract": {
+    "target_count": 6,
+    "partition_count": 12,
+    "exact_api_call_count": 72,
+    "lookup": "FamDBLeaf.get_family_by_accession",
+    "lookup_key": "unversioned_accession_exact_case_sensitive",
+    "views": ["canonical_name", "accession.version"],
+    "sequence_normalization": "uppercase_U_to_T",
+    "fasta_line_width": 60,
+    "control_header_grammar": ">{canonical_name_if_nonempty_else_unversioned_accession}#{raw_class}",
+    "candidate_header_grammar": ">{accession.version}#{raw_class}",
+    "header_ascii_exact_case_single_hash_no_whitespace": true,
+    "empty_canonical_name_explicit": true,
+    "sequence_order_raw_class_identical_required": true,
+    "name_prefix_case_alias_copy_fallback_forbidden": true
+  },
+  "resource_contract": {"cpus": 1, "memory_mib": 4096, "walltime_minutes": 10, "gpus": 0},
+  "slurm_contract": {
+    "scontrol_binary": "/usr/bin/scontrol",
+    "scontrol_sha256": "ac078c833b1b9a6915196bad3a2735a2a303ffb588623ba2a85f185db30ceb57",
+    "query_timeout_seconds": 10,
+    "partition": "private-teodoro-gpu",
+    "time_limit": "00:10:00",
+    "num_cpus": "1",
+    "memory_mib": 4096,
+    "gpus": 0,
+    "exact_tres": {"cpu": "1", "mem": "4G", "node": "1", "billing": "2"},
+    "command": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/sbatch/SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1.sbatch",
+    "submit_line": "sbatch sbatch/SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1.sbatch",
+    "sbatch_sha256": "65bcd9b2efbdf4a989bd5ddde08dbb3e7825ca6f51c8d9257b0498379b68b20d"
+  },
+  "terminal_contract": {"pass": "LEAF_ADAPTER_PREFLIGHT_PASS", "typed_block": "LEAF_ADAPTER_PREFLIGHT_TYPED_BLOCK", "failure": "LEAF_ADAPTER_PREFLIGHT_FAILED", "typed_block_rc": 0, "failure_rc": 2},
+  "authorization": {"representative_cpu_proposal_human_gate_eligible": false, "repeatmasker_authorized": false, "genome_authorized": false, "representative_catalog_authorized": false, "full_catalog_stage_authorized": false, "homology_split_authorized": false, "data_stage_authorized": false, "training_authorized": false, "gpu_authorized": false, "s1_authorized": false},
+  "code_review_gate_path": "outputs/SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1/code_review_gate.json",
+  "owner_lock_name": ".leaf-adapter-owner.lock"
+}

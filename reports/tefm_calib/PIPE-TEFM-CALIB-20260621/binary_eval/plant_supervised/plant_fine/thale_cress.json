@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7334199161932273,
+  "te_recall": 0.6648935327690983,
+  "te_f1": 0.6974776069597389,
+  "bg_f1": 0.9760122456835273,
+  "macro_f1": 0.8367449263216331,
+  "te_auprc": 0.7492270271581867,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/thale_cress",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_plant_fine",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "thale_cress"
+}

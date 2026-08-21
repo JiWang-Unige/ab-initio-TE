@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "promotion_gate_pass": false,
+  "gate_pass_panels": [],
+  "gate_definition": "candidate beats CE and CRF-style smoothing on segment-F1@0.8 and boundary-F1@5bp; missed_true_rate <= CE+0.03; deleted_true_backed_fraction <= threshold; pred_true_backed_rate retained",
+  "exp_id": "PIPE-TEFM-CAP-FRAGGRAPH-20260701",
+  "seed": 42,
+  "device": "cuda",
+  "init_model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "train_data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick",
+  "eval_panel": [
+    "human_test:software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick/test/data.jsonl.gz",
+    "mouse_quick:software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/mouse_A1_w4096_quick/test/data.jsonl.gz"
+  ],
+  "metrics": "reports/tefm_capability/PIPE-TEFM-CAP-FRAGGRAPH-20260701/fragment_graph_metrics.tsv",
+  "new_architectures": [
+    "fragment_graph_keepall",
+    "fragment_graph_keepdrop"
+  ],
+  "same_panel_baselines": [
+    "ce_raw",
+    "crf_style_penalty4"
+  ],
+  "non_goal": "No threshold/gap/HMM/CRF/survival-retention tuning; edge/link thresholds are fixed screen defaults."
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": "TEFM-BENCH-RM-HITE-VALIDITY-1.0.0",
+  "exp_id": "BENCH-RM-HITE-VALIDITY-20260811-R1",
+  "profile": "runtime_validity_smoke",
+  "implementation_status": "IMPLEMENTED_NOT_RUN",
+  "claim_eligible": false,
+  "offline": true,
+  "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "coordinate_convention": "zero_based_half_open",
+  "primary_metric": "engineering_pass_count",
+  "expected_cell_keys": ["repeatmodeler2_repeatmasker", "hite"],
+  "timeouts_seconds": {"identity": 60, "db_probe": 60, "minimum_input": 600},
+  "runtime_budget": {
+    "walltime_seconds": 3600,
+    "command_timeout_sum_seconds": 2100,
+    "max_command_count": 8,
+    "kill_after_seconds": 10,
+    "asset_hash_budget_seconds": 300,
+    "publish_budget_seconds": 120,
+    "required_headroom_seconds": 900
+  },
+  "ownership": {"stale_lock_seconds": 21600},
+  "parent_contract": {
+    "exp_id": "BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2",
+    "config": {"path": "configs/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2.yaml", "sha256": "6d387e243185e0b2a1f432b396b67fd01c87a206d946aa3be066cc17b82f5246"},
+    "runner": {"path": "scripts/experiments/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/run_closure_smoke.py", "sha256": "5560b68605f91acad1353ebbb482ac0ccaa4642f4f6d9ca5296338a2fad6e69a"},
+    "adapter": {"path": "scripts/experiments/BENCH-5TOOL-SMOKE-20260811-R1/adapter.py", "sha256": "3b29a9be5d8c5e5b84c6c00ca251d7141ea9620bd8ec3c367e6e340ccab0e8ea"},
+    "hite_preparation_code": {"path": "scripts/experiments/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/acquire_hite_exact.sh", "sha256": "62c7f578ad8220b8a9f4cf42dd8ada6de23ddd0b189ab3aad0dbe27b27a6921c"},
+    "famdb_preparation_code": {"path": "scripts/experiments/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/prepare_famdb.py", "sha256": "b14a2076dadc34d487a13bed25e98e0e823b6e8bc88d49bdcb0e0438bfd94135"}
+  },
+  "fixture_inputs": {
+    "repeatmodeler_repeatmasker": {"path": "refs/repos/edta_2_3_0/test/genome.fa", "sha256": "f64e2aed9233831f668241800b82293623ce575a51ccfd0fa28766119d70d0a3", "minimum_bp": 10000},
+    "hite": {"path": "refs/repos/hite_3_3_3/demo/genome.fa", "sha256": "ee5bd7cd02c631f31d43ebf2e434497a5b1dd8cd7b2bc62797f185a876cd3c37", "minimum_bp": 10000}
+  },
+  "asset_root": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2",
+  "asset_pins": {
+    "famdb_manifest": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2/manifest.json", "sha256": "b41cefe229aa7a6fc8fa9813145ebd8860391935c536f8fd9ffd097a3389f5ad"},
+    "hite_sif": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif", "sha256": "3967895913c3aebbe0393a5b33eada1f752f10ca46d8ee787d5f2bace3f9dcdc"},
+    "hite_manifest": {"path": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif.manifest.json", "sha256": "9c31b03c588e2a4190a5a040eafd39ed1445f841a1d9b67b79c1fbe6e08a3185"},
+    "rm_license": {"path": "refs/dossiers/repeatmodeler2_repeatmasker.md", "sha256": "566845a1c89e38a001c2957be9e806022bfc0de4571959f32aa389f5ff252855"},
+    "hite_license": {"path": "refs/dossiers/hite_3_3_3.md", "sha256": "a2b679df8f1624a7b40fa9062afcd876efc3e65decc21cfc9b9c5f055aebbe53"}
+  },
+  "dfam40": {
+    "asset_subdir": "famdb-v2",
+    "full": {"path": "dfam_candidates/D1-DFAM40-CC-ACQUIRE-20260809A/dfam40.0.h5.gz", "sha256": "bd36979e0500e4fce5e11f4c18ffc09ecb4511626b1028fb6da7bb005cc3fbb3"},
+    "curated_consensus": {"path": "dfam_candidates/D1-DFAM40-CC-ACQUIRE-20260809A/dfam40.curated.consensus.0.h5.gz", "sha256": "6d7452452a561e8609af3c71bc2519dcfde7bbaf504da5775df509819ede0a01"},
+    "query_taxon": "Homo sapiens",
+    "query_family": "MIR3",
+    "required_database": "Dfam 4.0"
+  },
+  "components": {
+    "repeatmodeler_2_0_9": {"path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif", "sha256": "93f5801a64dcc8adaec9b3307f188ff5feb65ed8c893764d0e5ab56f75020384"},
+    "repeatmasker_4_2_4": {"path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif", "sha256": "3a2d62dec0b930fa6a6aa463132976fb8de5405eedd1c4ce122ec7511689cd8c"}
+  },
+  "license_evidence": {
+    "repeatmodeler2_repeatmasker": "refs/dossiers/repeatmodeler2_repeatmasker.md",
+    "hite": "refs/dossiers/hite_3_3_3.md"
+  },
+  "exact_sources": {
+    "hite": {
+      "version": "3.3.3",
+      "commit": "ae317c879b3d217b419fefa38c6ff2cacbf1695c",
+      "oci_digest": "sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce",
+      "reference": "docker://kanghu/hite@sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce",
+      "local_sif": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif"
+    }
+  },
+  "resources": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 48, "walltime": "01:00:00", "gpus": 0}
+}

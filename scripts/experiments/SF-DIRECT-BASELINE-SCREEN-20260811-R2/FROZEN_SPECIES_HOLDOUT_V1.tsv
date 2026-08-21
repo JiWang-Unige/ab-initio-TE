@@ -1,0 +1,16 @@
+species_code	scientific_name	taxid	order_taxid	order_name	role	evaluation_partition
+human	Homo sapiens	9606	9443	Primates	train_core	fit_only
+mouse	Mus musculus	10090	9989	Rodentia	train_core	fit_only
+zebrafish	Danio rerio	7955	7952	Cypriniformes	train_core	fit_only
+chicken	Gallus gallus	9031	8976	Galliformes	train_core	fit_only
+western_clawed_frog	Xenopus tropicalis	8364	8342	Anura	train_core	fit_only
+fruit_fly	Drosophila melanogaster	7227	7147	Diptera	train_core	fit_only
+c_elegans	Caenorhabditis elegans	6239	6236	Rhabditida	train_core	fit_only
+pig	Sus scrofa	9823	91561	Artiodactyla	mammal_holdout	primary_test
+cattle	Bos taurus	9913	91561	Artiodactyla	mammal_holdout	primary_test
+horse	Equus caballus	9796	9787	Perissodactyla	mammal_holdout	primary_test
+western_honey_bee	Apis mellifera	7460	7399	Hymenoptera	invertebrate_holdout	primary_test
+red_flour_beetle	Tribolium castaneum	7070	7041	Coleoptera	invertebrate_holdout	primary_test
+opossum	Monodelphis domestica	13616	38605	Didelphimorphia	optional_stress	audit_only
+lizard	Anolis carolinensis	28377	8509	Squamata	optional_stress	audit_only
+x_laevis	Xenopus laevis	8355	8342	Anura	optional_stress	audit_only

@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-FINAL-INTERVALREFINER-20260630",
+  "n_windows": 40,
+  "train_fraction": 0.6,
+  "prob_mode": "consensus_min",
+  "chrom_status": [
+    {
+      "chrom": "chr1",
+      "train_bp": 98304,
+      "test_bp": 65536,
+      "keep_model": {
+        "status": "random_forest",
+        "n": 152,
+        "fit_n": 152,
+        "positive_rate": 0.7039473684210527,
+        "fit_positive_rate": 0.7039473684210527
+      },
+      "merge_model": {
+        "status": "random_forest",
+        "n": 151,
+        "fit_n": 151,
+        "positive_rate": 0.271523178807947,
+        "fit_positive_rate": 0.271523178807947
+      },
+      "tuned": {
+        "variant": "keep_drop_gap_merge",
+        "proxy_score": 0.9518126267498351,
+        "keep_thr": 0.3,
+        "merge_thr": 0.5
+      }
+    }
+  ],
+  "keep_model": {
+    "status": "random_forest",
+    "n": 152,
+    "fit_n": 152,
+    "positive_rate": 0.7039473684210527,
+    "fit_positive_rate": 0.7039473684210527
+  },
+  "merge_model": {
+    "status": "random_forest",
+    "n": 151,
+    "fit_n": 151,
+    "positive_rate": 0.271523178807947,
+    "fit_positive_rate": 0.271523178807947
+  },
+  "outputs": {
+    "metrics": "reports/tefm_final/PIPE-TEFM-FINAL-INTERVALREFINER-20260630/interval_refiner_metrics.tsv",
+    "report": "reports/tefm_final/PIPE-TEFM-FINAL-INTERVALREFINER-20260630/INTERVAL_REFINER_REPORT.md",
+    "status": "reports/tefm_final/PIPE-TEFM-FINAL-INTERVALREFINER-20260630/interval_refiner_status.json"
+  }
+}

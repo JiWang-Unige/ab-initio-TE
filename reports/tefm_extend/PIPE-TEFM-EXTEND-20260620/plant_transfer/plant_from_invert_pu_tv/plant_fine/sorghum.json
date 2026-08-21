@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.4899930823626193,
+  "te_recall": 0.985720700493938,
+  "te_f1": 0.6545934990845218,
+  "bg_precision": 0.9918918671544128,
+  "bg_recall": 0.629984733162533,
+  "bg_f1": 0.7705601438891794,
+  "macro_f1": 0.7125768214868506,
+  "te_auprc": 0.8863320861057834,
+  "pred_te_rate": 0.5332106526692708,
+  "true_te_rate": 0.2650543212890625,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/plant_eval_fine/sorghum",
+  "stage": "plant_from_invert_pu_tv_to_plant_fine",
+  "species": "sorghum",
+  "window": 4096,
+  "n_windows": 1200
+}

@@ -1,0 +1,14 @@
+{
+  "job_id": "11475199",
+  "manifest_objects_verified": 23,
+  "next_stage_authorized": false,
+  "production_homology_allowlist_expected_empty": true,
+  "python39_grammar_files": 17,
+  "python_runtime": "3.9.25 (main, Mar 26 2026, 00:00:00) \n[GCC 11.5.0 20240719 (Red Hat 11.5.0-11)]",
+  "remote_real_assets_executed": false,
+  "run_id": "PIPE-TEFM-SF-R2-CODETEST-20260809-R2",
+  "schema_version": "TRACK_S_CODETEST_SUMMARY_V1",
+  "scientific_execution_performed": false,
+  "unit_tests_failed": 0,
+  "unit_tests_passed": 51
+}

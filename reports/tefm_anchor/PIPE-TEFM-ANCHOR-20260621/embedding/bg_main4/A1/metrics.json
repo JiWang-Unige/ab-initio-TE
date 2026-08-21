@@ -1,0 +1,16 @@
+{
+  "n": 1140,
+  "n_clusters": 5,
+  "ari": 0.4066984571075202,
+  "nmi": 0.4168980465248707,
+  "holdout_accuracy": 0.5719298245614035,
+  "holdout_macro_f1": 0.5630350879271084,
+  "silhouette": 0.21265548467636108,
+  "sklearn_available": true,
+  "setting": "A1",
+  "fragments": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/fragments/bg_main4_len512.jsonl.gz",
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+  "model_kind": "base",
+  "label_level": "sf5_or_bg",
+  "source": "bg_main4"
+}

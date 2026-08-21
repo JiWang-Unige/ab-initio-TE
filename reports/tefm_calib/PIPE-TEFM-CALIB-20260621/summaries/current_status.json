@@ -1,0 +1,6 @@
+{
+  "pipeline_id": "PIPE-TEFM-CALIB-20260621",
+  "binary_eval_rows": 98,
+  "embedding_rows": 4,
+  "decay_formula_extended": "reports/tefm_calib/PIPE-TEFM-CALIB-20260621/decay_formula_extended/formula_fits_extended.json"
+}

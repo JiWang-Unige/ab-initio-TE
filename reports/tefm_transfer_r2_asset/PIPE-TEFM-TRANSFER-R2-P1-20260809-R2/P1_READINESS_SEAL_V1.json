@@ -1,0 +1,21 @@
+{
+  "all_five_prov_valid": false,
+  "anchor_statuses": {
+    "animal": "PROV_RUN_RECORD_MISSING",
+    "cross": "PROV_RUN_RECORD_MISSING",
+    "human_h0": "PROV_RUN_RECORD_MISSING",
+    "insect": "PROV_RUN_RECORD_MISSING",
+    "plant": "PROV_RUN_RECORD_MISSING"
+  },
+  "authorization_note": "This seal authorizes no Mash acquisition/execution, panel/cube build, checkpoint evaluation, FATS/PAS fitting, model training, or scientific claim.",
+  "next_stage_authorized": false,
+  "prerequisite": {
+    "artifact_manifest_sha256": "8623362dffd9534afc6904373eeab9af697420a7f3096747a304c3167952cfb7",
+    "failed_state_semantics": "FAILED 2:0 is an accepted fail-closed asset-semantic result, not a scientific failure",
+    "job_id": "11473644",
+    "pilot_feasibility_report_sha256": "2107172a2c92961de98e0ede1cdb3744d8a204f4d5b9d8983642b0b785d1a6d5"
+  },
+  "readiness": "P1_PROVENANCE_BLOCKED",
+  "schema_version": "P1_READINESS_SEAL_V1",
+  "scope": "Track G P1 provenance only"
+}

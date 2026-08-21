@@ -1,0 +1,15 @@
+{
+  "n": 480,
+  "n_clusters": 4,
+  "ari": 0.4339036874698174,
+  "nmi": 0.4510037040138218,
+  "holdout_accuracy": 0.6833333333333333,
+  "holdout_macro_f1": 0.5872561399816429,
+  "silhouette": 0.3083307147026062,
+  "sklearn_available": true,
+  "setting": "A0",
+  "fragments": "software_outputs/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/embedding_fragments/D_crosskingdom/fragments_512.jsonl.gz",
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+  "model_kind": "base",
+  "length": 512
+}

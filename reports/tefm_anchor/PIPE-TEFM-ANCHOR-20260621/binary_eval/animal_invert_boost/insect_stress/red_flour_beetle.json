@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0022521425129795954,
+  "te_recall": 0.1808695652173913,
+  "te_f1": 0.004448888579938293,
+  "bg_f1": 0.9806934016025696,
+  "macro_f1": 0.49257114509125394,
+  "te_auprc": 0.017505476603382118,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/data/insect_primary_eval_stress/red_flour_beetle",
+  "n_windows": 1200,
+  "stage": "animal_invert_boost_to_insect_stress",
+  "model_key": "generanno",
+  "model": "TFREPAIR_invert_boost_animal_4096_seed42",
+  "window": 4096,
+  "species": "red_flour_beetle"
+}

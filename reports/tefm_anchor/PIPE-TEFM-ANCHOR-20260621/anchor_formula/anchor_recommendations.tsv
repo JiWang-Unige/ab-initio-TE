@@ -1,0 +1,23 @@
+species	best_model	best_anchor_type	target_kingdom	te_f1	distance_mya_proxy	verdict	note
+brachypodium	cross_supervised_4096	cross	plant	0.8175422271365038	1500.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+c_elegans	invert_boost_animal_4096	animal	other	0.9053972034713066	900.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+cattle	p5_archive_parity_4096	unknown	vertebrate	0.9224743217803422	96.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+chicken	invert_boost_animal_4096	animal	vertebrate	0.9526735217094694	310.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+fruit_fly	insect_no_beetle_4096	insect	insect	0.944818571090276	780.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+horse	p5_archive_parity_4096	unknown	vertebrate	0.9036845538801594	96.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+human	p5_archive_parity_4096	unknown	vertebrate	0.936231828325669	6.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+lizard	recovery_lizard	unknown	vertebrate	0.9516363498464144	320.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+maize	cross_supervised_4096	cross	plant	0.9629892479990331	1500.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+mouse	invert_boost_animal_4096	animal	vertebrate	0.9622946321173395	90.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+opossum	p5_archive_parity_4096	unknown	vertebrate	0.8811934035689308	160.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+pig	p5_archive_parity_4096	unknown	vertebrate	0.8830790481060521	96.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+red_flour_beetle	recovery_red_flour_beetle	insect	insect	0.07138643067846608	820.0	train_new_anchor_or_audit_labels	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+rice	cross_supervised_4096	cross	plant	0.8757886614942711	1500.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+sorghum	cross_supervised_4096	cross	plant	0.9154621597006131	1500.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+soybean	TFREPAIR_invert_boost_animal_4096_seed42	animal	plant	0.5650860204945004	1550.0	reuse_with_calibration	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+teosinte	plant_supervised_4096	plant	plant	0.9308197551982428	1500.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+thale_cress	cross_supervised_4096	cross	plant	0.7121875392581978	1550.0	reuse_with_calibration	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+western_clawed_frog	invert_boost_animal_4096	animal	vertebrate	0.9384484554812158	360.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+western_honey_bee	insect_primary_4096	insect	insect	0.946524064171123	820.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+x_laevis	recovery_x_laevis	unknown	vertebrate	0.9342699448068239	370.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.
+zebrafish	invert_boost_animal_4096	animal	vertebrate	0.9079971499897331	430.0	reuse_current_anchor	MYA is a coarse proxy; label/source audit overrides distance when concordance is low.

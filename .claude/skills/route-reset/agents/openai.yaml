@@ -1,0 +1,4 @@
+interface:
+  display_name: "Route-Reset"
+  short_description: "Restart or switch the research route inside the same project"
+  default_prompt: "Reset the current research route while preserving reusable evidence and decisions."

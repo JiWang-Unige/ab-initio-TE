@@ -1,0 +1,66 @@
+pipeline_id: PIPE-TEFM-REPAIR-20260618
+purpose: Confirm and repair surprising mixed-animal and embedding/superfamily/fragmentation results.
+seed: 42
+model:
+  key: generanno
+  pretrained_path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  binary_h0_4096: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42
+window: 4096
+stride: 2048
+quick_profile:
+  total_mixed_windows: 18000
+  total_p5_nonhuman_windows: 6000
+  max_train_steps: 2000
+  eval_steps: 250
+  max_eval_samples: 1800
+  superfamily_max_windows_per_split: 6000
+  superfamily_max_steps: 1500
+  embedding_max_per_class: 500
+  embedding_max_records: 2500
+manifests:
+  human_h0: software_outputs/repeatmasker_dfam/02_ready_by_design/H0_human_only_upper_bound/SPLIT_MANIFEST.tsv
+  mixed_a2: software_outputs/repeatmasker_dfam/02_ready_by_design/A2_full_no_human_animal/SPLIT_MANIFEST.tsv
+  animal_b: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+eval_panels:
+  a2_eval: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096
+  b_finetune_eval: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w4096
+  a1_eval: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A1_w4096
+mixed_variants:
+  p5_archive_parity_4096:
+    rationale: Old Phase5-style diagnostic; includes human and train-species dm6, so it tests parity not no-human animal claim.
+    human_quota_train: 12150
+    human_quota_val: 1350
+    nonhuman_proportions:
+      mouse: 0.40
+      zebrafish: 0.40
+      fruit_fly: 0.20
+  mouse_core_animal_4096:
+    rationale: No-human animal model with mouse as the main anchor and small cross-clade support.
+    proportions:
+      mouse: 0.50
+      zebrafish: 0.15
+      chicken: 0.10
+      western_clawed_frog: 0.10
+      fruit_fly: 0.10
+      c_elegans: 0.05
+  invert_boost_animal_4096:
+    rationale: No-human animal model that tests whether A2 invertebrate failure was caused by under-sampling invertebrates.
+    proportions:
+      mouse: 0.30
+      zebrafish: 0.15
+      chicken: 0.10
+      western_clawed_frog: 0.10
+      fruit_fly: 0.20
+      c_elegans: 0.15
+threshold_sweep: [0.35, 0.40, 0.45, 0.50, 0.55, 0.60]
+embedding:
+  panels: [B_animal]
+  lengths: [256, 512]
+  settings:
+    - {name: C1_large, setting: C1, model_path: "", model_kind: base}
+    - {name: A1_pretrained_large, setting: A1, model_path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base, model_kind: base}
+    - {name: B1_h0_binary_large, setting: B1, model_path: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model, model_kind: token}
+outputs:
+  root: software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618
+  reports: reports/tefm_repair/PIPE-TEFM-REPAIR-20260618
+  logs: logs/tefm_repair/PIPE-TEFM-REPAIR-20260618

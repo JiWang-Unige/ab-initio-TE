@@ -1,0 +1,20 @@
+{
+  "primary_metric": 0.2534246575342466,
+  "selector_top2_contains_best": 0.8636363636363636,
+  "selector_mean_regret": 0.007082966203372802,
+  "selector_leave_clade_abstention_rate": 1.0,
+  "selector_confidently_wrong_single_anchor_rate": 0.0,
+  "decoder_segment_f1_delta_vs_ce": -0.05347189418989129,
+  "decoder_boundary_f1_delta_vs_ce": -0.055762871988663296,
+  "decoder_missed_true_rate_delta_vs_ce": -0.008196721311475363,
+  "decoder_deleted_true_backed_fraction": 0.2727272727272727,
+  "decoder_variant": "retention_constrained_decoder",
+  "decoder_segment_f1": 0.2534246575342466,
+  "decoder_boundary_f1": 0.0856164383561643,
+  "decoder_missed_true_rate": 0.2540983606557377,
+  "decoder_ce_segment_f1": 0.3068965517241379,
+  "decoder_ce_boundary_f1": 0.1413793103448276,
+  "decoder_ce_missed_true_rate": 0.2622950819672131,
+  "selector_gate_pass": true,
+  "decoder_promotion_gate_pass": false
+}

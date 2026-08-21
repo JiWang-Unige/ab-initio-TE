@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 100,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/strict_segment/generanno_4096/plant_fine_maize.tsv",
+  "n_windows": 1200
+}

@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "source_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-FRAGSANITY-20260630/fragment_sanity/mouse_chr1.tsv",
+  "headline_iou": 0.8,
+  "headline_boundary_bp": 5,
+  "forward_raw_segment_f1": 0.3062015503875969,
+  "forward_crf_segment_f1": 0.3568773234200743,
+  "best_non_oracle_merge_mode": "consensus_min",
+  "best_non_oracle_postprocess": "crf_style_penalty4",
+  "best_non_oracle_segment_f1": 0.4149068322981366,
+  "best_non_oracle_boundary_f1": 0.1267080745341615,
+  "best_non_oracle_missed_true_rate": 0.0929095354523227,
+  "best_oracle_connect_segment_f1": 0.4338983050847457,
+  "best_oracle_connect_boundary_f1": 0.1468926553672316,
+  "best_oracle_fill_segment_f1": 0.9710691823899372,
+  "best_oracle_fill_boundary_f1": 0.9710691823899372
+}

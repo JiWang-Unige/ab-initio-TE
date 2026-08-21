@@ -1,0 +1,70 @@
+pipeline_id: PIPE-TEFM-SUPP-20260617
+purpose: UCSC strict RepeatMasker TE binary annotation fine-tuning and transfer evidence.
+seed: 42
+label_source: comparator_strict
+primary_window: 2048
+window_sweep: [512, 1024, 2048, 4096, 8192]
+quick_profile:
+  max_train_windows_per_split: 3000
+  max_eval_windows_per_species: 1200
+  max_steps: 1200
+  eval_steps: 200
+  te_class_weight: 3.0
+human_tefinal_split:
+  train: [chr1, chr3, chr5, chr7, chr9]
+  val: [chr11, chr13, chr15]
+  test: [chr17, chr19, chr20, chr21, chr22]
+models:
+  dnabert2:
+    path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/DNABERT-2-117M
+    kind: wrapper_auto
+    token_label_mode: offset
+    batch_size: 4
+    grad_accum: 8
+  ntv3_650m:
+    path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_650M_pre
+    kind: wrapper_mlm
+    token_label_mode: offset_or_kmer
+    batch_size: 1
+    grad_accum: 16
+  ntv2_500m:
+    path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species
+    kind: auto_token
+    token_label_mode: nt_kmer
+    batch_size: 2
+    grad_accum: 8
+  evo2_7b:
+    path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/evo2_7b_base
+    kind: smoke_only
+    token_label_mode: unsupported_pending_adapter
+    batch_size: 1
+    grad_accum: 16
+  generanno:
+    path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+    kind: auto_token
+    token_label_mode: single_nt
+    batch_size: 1
+    grad_accum: 16
+  hyenadna:
+    path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/hyenadna-large-1m-seqlen-hf
+    kind: wrapper_auto
+    token_label_mode: offset_or_single
+    batch_size: 1
+    grad_accum: 16
+manifests:
+  human_h0: software_outputs/repeatmasker_dfam/02_ready_by_design/H0_human_only_upper_bound/SPLIT_MANIFEST.tsv
+  animal_b: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  plant_c: software_outputs/repeatmasker_dfam/02_ready_by_design/C_plantTE/SPLIT_MANIFEST.tsv
+  mouse_a1: software_outputs/repeatmasker_dfam/02_ready_by_design/A1_vertebrate_no_human/SPLIT_MANIFEST.tsv
+  mixed_a2: software_outputs/repeatmasker_dfam/02_ready_by_design/A2_full_no_human_animal/SPLIT_MANIFEST.tsv
+mixed_a2_proportions:
+  mouse: 0.30
+  zebrafish: 0.20
+  chicken: 0.15
+  western_clawed_frog: 0.15
+  fruit_fly: 0.10
+  c_elegans: 0.10
+outputs:
+  root: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617
+  reports: reports/tefm_supp/PIPE-TEFM-SUPP-20260617
+  logs: logs/tefm_supp/PIPE-TEFM-SUPP-20260617

@@ -1,0 +1,16 @@
+{
+  "n": 1800,
+  "n_clusters": 10,
+  "ari": 0.14226619246029854,
+  "nmi": 0.23857979018718714,
+  "holdout_accuracy": 0.39111111111111113,
+  "holdout_macro_f1": 0.338527813254082,
+  "silhouette": 0.07447575777769089,
+  "sklearn_available": true,
+  "setting": "C0",
+  "fragments": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/embedding_fragments/Dfam_consensus/family_len512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "label_level": "family",
+  "source": "dfam_consensus"
+}

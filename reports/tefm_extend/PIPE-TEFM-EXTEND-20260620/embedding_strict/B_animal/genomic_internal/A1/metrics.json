@@ -1,0 +1,16 @@
+{
+  "n": 1440,
+  "n_clusters": 8,
+  "ari": 0.4524920938571919,
+  "nmi": 0.5084831667360448,
+  "holdout_accuracy": 0.5833333333333334,
+  "holdout_macro_f1": 0.5839244547478495,
+  "silhouette": 0.2183593064546585,
+  "sklearn_available": true,
+  "setting": "A1",
+  "fragments": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/embedding_fragments/B_animal/genomic_internal/family_len512.jsonl.gz",
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+  "model_kind": "base",
+  "label_level": "family",
+  "source": "genomic_internal"
+}

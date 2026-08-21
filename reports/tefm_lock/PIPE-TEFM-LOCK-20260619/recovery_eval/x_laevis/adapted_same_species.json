@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9301554854288306,
+  "te_recall": 0.9384209657960135,
+  "te_f1": 0.9342699448068239,
+  "bg_f1": 0.9943409319735189,
+  "macro_f1": 0.9643054383901715,
+  "te_auprc": 0.9791742144557349,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/RECOVERY_x_laevis_from_invert_seed42",
+  "data_dir": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/stress_recovery/x_laevis",
+  "n_windows": 1200,
+  "stage": "stress_recovery_adapted",
+  "model_key": "generanno",
+  "model": "recovery_x_laevis",
+  "window": 4096,
+  "species": "x_laevis"
+}

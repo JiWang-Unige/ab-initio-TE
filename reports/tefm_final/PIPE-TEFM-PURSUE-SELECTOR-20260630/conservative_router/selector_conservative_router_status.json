@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "deployable_features_only": true,
+  "target_te_annotation_features_excluded_from_selector": true,
+  "selected_router_gate_pass": true,
+  "selected_router": {
+    "selected_router_gate_pass": true,
+    "leave_species_policy": {
+      "feature_set": "baseline_plus_kmer",
+      "split": "leave_species_out",
+      "n_species": 22,
+      "top1_accuracy": 0.45454545454545453,
+      "top2_contains_best_rate": 0.8636363636363636,
+      "top2_probe_mean_regret": 0.007082966203372802,
+      "top2_probe_p90_regret": 0.0007707140409847897,
+      "ece_risk_bin": 0.037236140047392285,
+      "abstention_rate": 0.0,
+      "local_probe_recommended_rate": 1.0,
+      "deployed_mean_regret": 0.007082966203372802,
+      "deployed_p90_regret": 0.0007707140409847897,
+      "single_anchor_high_conf_coverage": 0.0,
+      "confidently_wrong_single_anchor_rate": 0.0,
+      "leave_clade_abstention_rule": "not applicable",
+      "passes_conservative_gate": true
+    },
+    "leave_clade_policy": {
+      "feature_set": "genome_only",
+      "split": "leave_clade_out",
+      "n_species": 22,
+      "top1_accuracy": 0.36363636363636365,
+      "top2_contains_best_rate": 0.6363636363636364,
+      "top2_probe_mean_regret": 0.015851947610477878,
+      "top2_probe_p90_regret": 0.05659517604436676,
+      "ece_risk_bin": 0.22001438142308713,
+      "abstention_rate": 1.0,
+      "local_probe_recommended_rate": 1.0,
+      "deployed_mean_regret": NaN,
+      "deployed_p90_regret": NaN,
+      "single_anchor_high_conf_coverage": 0.0,
+      "confidently_wrong_single_anchor_rate": 0.0,
+      "leave_clade_abstention_rule": "abstain all leave-clade-out species until local chromosome probe",
+      "passes_conservative_gate": true
+    },
+    "rule": "leave-species/in-panel: top2 shortlist + local chromosome probe; leave-clade/new clade: abstain and require local probe/new anchor"
+  },
+  "outputs": {
+    "summary": "reports/tefm_final/PIPE-TEFM-PURSUE-SELECTOR-20260630/conservative_router/selector_conservative_router_summary.tsv",
+    "species": "reports/tefm_final/PIPE-TEFM-PURSUE-SELECTOR-20260630/conservative_router/selector_conservative_router_species.tsv",
+    "risk_bins": "reports/tefm_final/PIPE-TEFM-PURSUE-SELECTOR-20260630/conservative_router/selector_conservative_router_risk_bins.tsv",
+    "report": "reports/tefm_final/PIPE-TEFM-PURSUE-SELECTOR-20260630/conservative_router/SELECTOR_CONSERVATIVE_ROUTER_REPORT.md"
+  }
+}

@@ -1,0 +1,20 @@
+# Codex driver config for the auto-research workflow.
+# Mirrors the Claude shell (.claude/settings.json) on the Codex side.
+#
+# Codex has no Claude-style CLAUDE_CODE_FORK_SUBAGENT environment switch. The
+# equivalent in this framework is: multi_agent + bounded threads + SubagentStart
+# hook that deterministically rebuilds context from disk via context_pack.py.
+[features]
+hooks = true
+multi_agent = true
+skills = true
+
+[agents]
+max_threads = 4   # at most 3 experiment directions + 1 auditor/scout; actual exp cap lives in ACTIVE_GOAL/cluster_config
+max_depth = 1     # subagents do NOT spawn subagents
+
+[workspace]
+# Skills are generated to both paths for compatibility:
+#   .agents/skills  = cross-agent/Antigravity-compatible filesystem skills
+#   .codex/skills   = Codex-skill-loader mirror
+skills_roots = [".agents/skills", ".codex/skills"]

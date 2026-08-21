@@ -1,0 +1,8 @@
+{
+  "pipeline_id": "PIPE-TEFM-EXTEND-20260620",
+  "transfer_rows": 81,
+  "embedding_rows": 20,
+  "sf5_rows": 1,
+  "segment_rows": 72,
+  "decay_formula": "reports/tefm_extend/PIPE-TEFM-EXTEND-20260620/decay_formula/formula_fits.json"
+}

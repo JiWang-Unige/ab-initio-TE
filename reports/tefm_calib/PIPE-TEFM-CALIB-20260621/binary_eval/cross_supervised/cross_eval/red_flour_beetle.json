@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0015570187069546835,
+  "te_recall": 0.17869565217391303,
+  "te_f1": 0.00308713842548429,
+  "bg_f1": 0.9722458928325346,
+  "macro_f1": 0.4876665156290094,
+  "te_auprc": 0.016046885910420337,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/cross_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/red_flour_beetle",
+  "n_windows": 1200,
+  "stage": "cross_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "cross_supervised_4096",
+  "window": 4096,
+  "species": "red_flour_beetle"
+}

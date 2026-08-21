@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "seed": 42,
+  "device": "cuda",
+  "init_model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick",
+  "variants": [
+    "ce_baseline",
+    "interval_survival_raw",
+    "interval_survival_decoder"
+  ],
+  "freeze_backbone": false,
+  "metrics": "reports/tefm_final/PIPE-TEFM-PURSUE-INTERVALSURV-20260630/joint_structured_decoder_metrics.tsv",
+  "best_test_variant": "interval_survival_decoder",
+  "best_test_segment_f1": 0.3756097560975609,
+  "best_test_boundary_f1": 0.1804878048780488,
+  "best_test_missed_true_rate": 0.29098360655737704,
+  "best_gate_variant": "interval_survival_decoder",
+  "best_gate_segment_f1": 0.3756097560975609,
+  "best_gate_boundary_f1": 0.1804878048780488,
+  "best_gate_missed_true_rate": 0.29098360655737704,
+  "ce_test_segment_f1": 0.30689655172413793,
+  "ce_test_boundary_f1": 0.1413793103448276,
+  "ce_test_missed_true_rate": 0.26229508196721313,
+  "promotion_gate_pass": true
+}

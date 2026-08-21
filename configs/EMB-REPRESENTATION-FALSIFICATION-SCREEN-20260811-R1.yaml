@@ -1,0 +1,23 @@
+{
+  "schema_version": "TEFM-FAIL-CLOSED-ASSET-GATE-1.0.0",
+  "exp_id": "EMB-REPRESENTATION-FALSIFICATION-SCREEN-20260811-R1",
+  "route": "embedding_representation_falsification",
+  "profile": "screen",
+  "claim_eligible": false,
+  "scientific_screen_authorized": false,
+  "terminal_status_on_failed_gate": "FOUNDATIONAL_TYPED_BLOCK",
+  "project_root": "/home/users/j/jwang/ab-initio-TE",
+  "protocol": "codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/UNIGE_DIRECT_PILOTS_PROTOCOL_20260811.md",
+  "evidence": [
+    {"id": "cohort_contract", "path": "codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/COHORT_CONTRACT.json", "sha256": "5c309a6178fb7833eaf7e80e31d3e5ca8d8dbaf9305d9a38fbdc99e20823db1a"},
+    {"id": "feasibility_report", "path": "software_outputs/scientific_evidence/EVSPRINT-PILOT-FEASIBILITY-20260809B/run_11473644/results/feasibility_report.json", "sha256": "2107172a2c92961de98e0ede1cdb3744d8a204f4d5b9d8983642b0b785d1a6d5"},
+    {"id": "dfam_2200_fragments", "path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/embedding_fragments/Dfam_consensus/family_len512.jsonl.gz", "sha256": "e77c50bb14eaa580201bfacd59731cfb7ca214aaa9ededfa0ba79520d0a4fc0d"},
+    {"id": "genomic_2000_fragments", "path": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/embedding_fragments/B_animal/fragments_512.jsonl.gz", "sha256": "c420896c9d93f7df2fcfcde89fca598686bea15e0f1144780cfd22b7019895b1"}
+  ],
+  "required_gate_assertions": [
+    {"id": "prior_embedding_gate_ready", "kind": "json_equals", "path": "software_outputs/scientific_evidence/EVSPRINT-PILOT-FEASIBILITY-20260809B/run_11473644/results/feasibility_report.json", "key": "track_gates.embedding_clustering.status", "expected": "READY", "blocker": "prior audit is BLOCKED_BY_FAMILY_COPY_PROVENANCE_OR_ASSETS"},
+    {"id": "exact_2200_family_copy_component_bindings", "kind": "jsonl_records_have_fields", "path": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/embedding_fragments/Dfam_consensus/family_len512.jsonl.gz", "expected_records": 2200, "fields": ["family_id", "copy_id", "component_id", "accession"], "blocker": "2,200 Dfam rows lack exact family/copy/component/accession bindings"},
+    {"id": "genomic_family_copy_species_component_bindings", "kind": "jsonl_records_have_fields", "path": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/embedding_fragments/B_animal/fragments_512.jsonl.gz", "expected_records": 2000, "fields": ["assembly", "family_id", "copy_id", "component_id", "species"], "blocker": "genomic rows lack assembly/family/copy/component bindings"},
+    {"id": "backend_and_weight_pins_frozen", "kind": "json_equals", "path": "codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/COHORT_CONTRACT.json", "key": "routes.EMB-REPRESENTATION-FALSIFICATION-SCREEN-20260811-R1.current_preflight", "expected": "READY", "blocker": "cohort contract records bindings, backend pins and weights incomplete"}
+  ]
+}

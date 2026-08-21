@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8300026292444103,
+  "te_recall": 0.9157463129788498,
+  "te_f1": 0.8707687905287769,
+  "bg_f1": 0.945725041738301,
+  "macro_f1": 0.9082469161335389,
+  "te_auprc": 0.9226047970230756,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/rice",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_plant_fine",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "rice"
+}

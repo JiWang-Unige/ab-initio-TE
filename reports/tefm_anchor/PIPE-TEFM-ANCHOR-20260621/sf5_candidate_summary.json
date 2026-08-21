@@ -1,0 +1,22 @@
+{
+  "high_score_strict_bg": {
+    "n": 9,
+    "best_main4_counts": {
+      "SINE": 9
+    },
+    "mean_best_main4_frac": 0.0,
+    "mean_unknown_frac": 0.0026041666666666665,
+    "mean_bg_frac": 0.9973958333333334
+  },
+  "unknown_annotation": {
+    "n": 260,
+    "best_main4_counts": {
+      "SINE": 104,
+      "DNA": 131,
+      "LTR": 25
+    },
+    "mean_best_main4_frac": 0.47058293269230766,
+    "mean_unknown_frac": 0.06196664663461538,
+    "mean_bg_frac": 0.38255709134615384
+  }
+}

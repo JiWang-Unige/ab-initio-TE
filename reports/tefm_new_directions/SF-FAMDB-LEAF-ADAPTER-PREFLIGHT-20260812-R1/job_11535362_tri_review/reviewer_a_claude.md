@@ -1,0 +1,7 @@
+- reviewer_verdict: PASS_WITH_WARNINGS
+- component_result_trustworthy: true
+- recommended_action: continue-current-route
+- representative_cpu_proposal_human_gate_eligible: true
+- hard_boundaries: proposal only; new exp/contract/implementation/review/smart-sbatch; no gate reuse; no RM/representative/full annotation/catalog/homology/DATA/training/GPU/S0/S1/claim; restore goal consistency before next proposal.
+- key_reasoning: clean Slurm run; exact 72 calls and handle closure; paired FASTA semantic identity; hash-closed artifacts; explicit anti-overclaim; stale goal is schema stop.
+- confidence: High

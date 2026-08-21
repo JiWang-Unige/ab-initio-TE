@@ -1,0 +1,11 @@
+{
+  "exp_id": "PIPE-TEFM-EXTEND-20260620",
+  "window": 4096,
+  "stride": 4096,
+  "n_windows": 600,
+  "chroms": [
+    "18"
+  ],
+  "summary_tsv": "reports/tefm_extend/PIPE-TEFM-EXTEND-20260620/pu_segment/plant_from_invert_pu/soybean/summary_w4096_s4096.tsv",
+  "edge_tsv": "reports/tefm_extend/PIPE-TEFM-EXTEND-20260620/pu_segment/plant_from_invert_pu/soybean/edge_bins_w4096_s4096.tsv"
+}

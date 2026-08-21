@@ -1,0 +1,10 @@
+species_code	expected_chunks	complete_markers	final_complete_chunks	missing_final_chunks	missing_chunk_ids	species_complete_marker	merged_out_present	merged_gff_present	merged_tbl_present	merged_masked_present	status	species_output_dir
+cattle	32	32	32	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/cattle
+dog	40	40	40	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/dog
+horse	34	34	34	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/horse
+human	24	24	22	2	human_chunk_00013_chr12,human_chunk_00022_chr19	1	1	1	1	1	MISSING_CHUNK_FINAL_OUTPUTS	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/human
+pig	22	22	22	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/pig
+rat	24	24	24	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/rat
+red_flour_beetle	5	5	5	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/red_flour_beetle
+western_clawed_frog	11	11	11	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/western_clawed_frog
+western_honey_bee	6	6	6	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_SPECIES_ANIMALS_CHR_20260615/western_honey_bee

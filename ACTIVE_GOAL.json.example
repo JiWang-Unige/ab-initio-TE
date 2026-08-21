@@ -1,0 +1,37 @@
+{
+  "_comment": "监督式自主(/pursue)的机器可读 goal 合约模板。按你的项目填写后由 /pursue 使用，validate_goal.py 据此判定。",
+  "_howto": "scope=terminal: 一个 goal 跑到 SOTA 模型达成；scope=milestone: 跑到一个中间里程碑。两种都支持。",
+  "program": "<your-program-name>",
+  "scope": "terminal",
+  "goal": "<一句话终极目标，如：在 <数据集> 上得到 <主指标> 严格超越 SOTA 的 <模型>>",
+  "primary_metric": "<your_primary_metric>",
+  "direction": "higher",
+  "success_criteria": [
+    {"metric": "<your_primary_metric>", "op": ">=", "threshold": 0.0}
+  ],
+  "guardrails": [
+    {"metric": "<secondary_metric_guardrail>", "op": ">=", "threshold": 0.0}
+  ],
+  "screen_anchor": {
+    "_note": "同预算公平参考：参考架构/baseline 在你的小样本协议下跑出的值。Track A screen 只比这个，永不比 published SOTA（消除小样本 vs 大样本不公平）。",
+    "metric": "<your_primary_metric>",
+    "value": 0.0,
+    "direction": "higher",
+    "source": "<reference arch @ your screen protocol>"
+  },
+  "sota_benchmark": {
+    "metric": "<your_primary_metric>",
+    "value": 0.0,
+    "direction": "higher",
+    "strict_exceed": true,
+    "_note": "已发表大样本 SOTA：仅 full/scale 阶段判 claim。",
+    "source": "<SOTA 出处；用 /sota-inventory 核实后填，存 refs/dossiers/<slug>.md>"
+  },
+  "tuning_gap_threshold": 0.05,
+  "max_parallel_directions": 3,
+  "max_internal_iterations": 8,
+  "on_failed_run": "stop_and_notify",
+  "validate_command": "python3 scripts/validate_goal.py --goal ACTIVE_GOAL.json --metrics <metrics.json> [--run-status <status_file>]",
+  "human_gate_before_claim": true,
+  "status": "draft"
+}

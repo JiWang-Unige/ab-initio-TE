@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.773636200395044,
+  "te_recall": 0.35511182398293506,
+  "te_f1": 0.48678244619370387,
+  "bg_f1": 0.9492209731405012,
+  "macro_f1": 0.7180017096671025,
+  "te_auprc": 0.5524793292774516,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_only/soybean",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_plant_eval",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "soybean"
+}

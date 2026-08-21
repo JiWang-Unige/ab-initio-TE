@@ -1,0 +1,25 @@
+{
+  "schema_version": "TEFM-FAIL-CLOSED-ASSET-GATE-1.0.0",
+  "exp_id": "SF-HIER-OPENSET-SCREEN-20260811-R1",
+  "route": "hierarchical_open_set_superfamily",
+  "profile": "screen",
+  "claim_eligible": false,
+  "scientific_screen_authorized": false,
+  "terminal_status_on_failed_gate": "FOUNDATIONAL_TYPED_BLOCK",
+  "project_root": "/home/users/j/jwang/ab-initio-TE",
+  "protocol": "codex_jobs/handoffs/TEFM-NEW-DIRECTIONS-PILOTS-20260811/UNIGE_DIRECT_PILOTS_PROTOCOL_20260811.md",
+  "evidence": [
+    {"id": "canonical_report", "path": "software_outputs/repeatmasker_dfam/03_canonical_snapshot/PRE-S0-CANONICAL-20260810-R2/PRE_S0_CANONICAL_SNAPSHOT_REPORT_V1.json", "sha256": "2d62e0ef4ff475166f2a21910932b0b8848bbe8bfcf7b2172db18ec2317603b1"},
+    {"id": "canonical_split_manifest", "path": "software_outputs/repeatmasker_dfam/03_canonical_snapshot/PRE-S0-CANONICAL-20260810-R2/manifests/SPLIT_MANIFEST.tsv", "sha256": "a5c54cc4ed94f7ec495fdb85ad843ec0541a52c4fcb598172ab3e84c7cd28ec4"},
+    {"id": "ontology_contract", "path": "docs/ONTOLOGY_MAPPING_CONTRACT_V0_1_20260808.md", "sha256": "12300380faaedf18069ff7c4f09b5ee74e2106164814c714bb802e0c8d6d80cb"},
+    {"id": "sf_target_set", "path": "refs/dossiers/sf_target_set.md", "sha256": "d832a2929d7e37986a93718f32e15a04c86bfa8bbf5f6d06f873df1edd66d943"},
+    {"id": "s0_s4_runbook", "path": "software_outputs/tefm_sf_r2_asset/PIPE-TEFM-SF-R2-REAL-S0-S4-20260809-R1/extracted/REAL_S0_S4_RUNBOOK.md", "sha256": "1916dc57da54a812250e8ca37723b71f020de2a07122419d40dee47544152e26"}
+  ],
+  "required_gate_assertions": [
+    {"id": "canonical_scientific_run_authorized", "kind": "json_equals", "path": "software_outputs/repeatmasker_dfam/03_canonical_snapshot/PRE-S0-CANONICAL-20260810-R2/PRE_S0_CANONICAL_SNAPSHOT_REPORT_V1.json", "key": "authorizes_scientific_performance_run", "expected": true, "blocker": "canonical snapshot authorizes only S0 input review"},
+    {"id": "family_component_and_clade_split_frozen", "kind": "tsv_has_columns", "path": "software_outputs/repeatmasker_dfam/03_canonical_snapshot/PRE-S0-CANONICAL-20260810-R2/manifests/SPLIT_MANIFEST.tsv", "columns": ["family_or_homology_component", "clade"], "blocker": "canonical split manifest has no family/homology-component or clade keys"},
+    {"id": "sf_target_ontology_frozen", "kind": "text_excludes_all", "path": "refs/dossiers/sf_target_set.md", "needles": ["Status: draft", "TBD"], "blocker": "superfamily target dossier is draft/TBD"},
+    {"id": "production_homology_pin_authorized", "kind": "text_excludes_all", "path": "software_outputs/tefm_sf_r2_asset/PIPE-TEFM-SF-R2-REAL-S0-S4-20260809-R1/extracted/REAL_S0_S4_RUNBOOK.md", "needles": ["production homology allowlist remains empty", "No command below supplies a homology algorithm/version or homology manifest"], "blocker": "production homology allowlist and manifest are absent"},
+    {"id": "legacy_direct_head_exact_rejoin_ready", "kind": "text_excludes_all", "path": "software_outputs/tefm_sf_r2_asset/PIPE-TEFM-SF-R2-REAL-S0-S4-20260809-R1/extracted/REAL_S0_S4_RUNBOOK.md", "needles": ["S4 is expected to exit `2`", "No fallback to old"], "blocker": "historical direct head is not exactly rejoined to canonical loci"}
+  ]
+}

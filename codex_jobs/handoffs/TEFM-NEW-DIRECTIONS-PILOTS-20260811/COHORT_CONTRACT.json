@@ -1,0 +1,79 @@
+{
+  "cohort_id": "TEFM-NEW-DIRECTIONS-PILOTS-20260811",
+  "date_frozen": "2026-08-11",
+  "mode": "publication-validation_bounded-discovery",
+  "authorization": {
+    "first_run_approved": true,
+    "max_job_walltime_hours": 12,
+    "max_new_gpu_hours": 24,
+    "max_parallel_directions": 3,
+    "cpu_smoke_gpus": 0,
+    "profiles_allowed": ["smoke", "screen"],
+    "claim_allowed": false,
+    "forbidden": ["full", "scale", "deployment", "database_migration", "git_commit", "git_push", "manuscript_claim"]
+  },
+  "common_gates": [
+    "implementation_complete",
+    "independent_code_review_pass",
+    "data_or_equivalent_leakage_audit_pass",
+    "smart_sbatch_phase1_pass",
+    "smart_sbatch_phase2_recorded",
+    "slurm_terminal_reconciled",
+    "finite_metrics_json",
+    "semantic_validation",
+    "tri_review",
+    "pivot"
+  ],
+  "routes": {
+    "BENCH-5TOOL-SMOKE-20260811-R1": {
+      "profile": "smoke",
+      "order": 1,
+      "success_semantics": "matrix_complete",
+      "required_cells": ["repeatmodeler2_repeatmasker", "edta", "earlgrey", "hite", "tetrimmer"],
+      "required_checks": ["identity", "version", "database", "license", "offline_help", "minimum_input", "canonical_adapter", "resource_capture"],
+      "allowed_cell_status": ["ENGINEERING_PASS", "FOUNDATIONAL_TYPED_BLOCK", "VERSION_MISMATCH", "INVALID_RUN"],
+      "silent_substitution_forbidden": true
+    },
+    "FRAG-PARENT-LATTICE-SCREEN-20260811-R1": {
+      "profile": "screen",
+      "order": 2,
+      "asset_gate": "truth registry and tier frozen",
+      "success_semantics": "screen_signal_or_typed_block",
+      "hard_constraints": {"leaf_retention": 1.0, "true_backed_fragment_deletion": 0.0},
+      "comparators": ["raw", "CENTER70", "MERGE_STRICT", "MERGE_LOOSE", "accepted_postprocessor", "lattice"],
+      "stop_rules": ["no_true_backed_leaf_deletion", "no_material_false_fusion_rise", "gain_at_more_than_one_tolerance"]
+    },
+    "SF-HIER-OPENSET-SCREEN-20260811-R1": {
+      "profile": "screen",
+      "order": 2,
+      "asset_gate": "ontology and family_or_homology_components frozen",
+      "success_semantics": "screen_signal_or_typed_block",
+      "split_keys": ["family_or_homology_component", "clade"],
+      "calibration_source": "validation_only",
+      "outputs": ["deepest_supported_node", "higher_node", "Unknown", "abstain"],
+      "stop_rules": ["no_homology_leakage", "no_test_calibration", "usable_coverage"]
+    },
+    "DECAY-TRANSFER-SURFACE-SCREEN-20260811-R1": {
+      "profile": "screen",
+      "order": 3,
+      "asset_gate": "all_anchor_training_code_config_evaluation_run_records_exact",
+      "current_preflight": "FOUNDATIONAL_TYPED_BLOCK",
+      "block_reason": "five anchor run records missing",
+      "clean_rebuild_required_if_reopened": true
+    },
+    "EMB-REPRESENTATION-FALSIFICATION-SCREEN-20260811-R1": {
+      "profile": "screen",
+      "order": 3,
+      "asset_gate": "exact_2200_family_copy_species_component_bindings_and_weights_frozen",
+      "current_preflight": "FOUNDATIONAL_TYPED_BLOCK",
+      "block_reason": "bindings backend pins and weights incomplete"
+    }
+  },
+  "terminal_verdicts": [
+    "ENGINEERING_PASS",
+    "VALID_SCIENTIFIC_NEGATIVE",
+    "FOUNDATIONAL_TYPED_BLOCK",
+    "INVALID_RUN",
+    "CLAIM_INELIGIBLE_SCREEN_SIGNAL"
+  ]
+}

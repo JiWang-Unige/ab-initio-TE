@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-FINAL-SELECTOR-20260630",
+  "species_probe_rows": 22,
+  "anchor_perf_rows": 156,
+  "recommendation_rows": 22,
+  "poor_species_after_species_probe": [
+    "red_flour_beetle",
+    "thale_cress"
+  ],
+  "partial_recovery_species": [
+    "soybean",
+    "c_elegans"
+  ],
+  "outputs": {
+    "species_probe_quality": "reports/tefm_final/PIPE-TEFM-FINAL-SELECTOR-20260630/species_probe_quality_audit.tsv",
+    "anchor_performance": "reports/tefm_final/PIPE-TEFM-FINAL-SELECTOR-20260630/anchor_performance_matrix.tsv",
+    "recommendations": "reports/tefm_final/PIPE-TEFM-FINAL-SELECTOR-20260630/multi_anchor_recommendations.tsv",
+    "selector": "reports/tefm_final/PIPE-TEFM-FINAL-SELECTOR-20260630/selector_formula_results.json",
+    "report": "reports/tefm_final/PIPE-TEFM-FINAL-SELECTOR-20260630/FINAL_REPORT.md"
+  }
+}

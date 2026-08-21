@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6636394442561844,
+  "te_recall": 0.13555567860900383,
+  "te_f1": 0.2251267372486809,
+  "bg_f1": 0.8364149968087249,
+  "macro_f1": 0.5307708670287029,
+  "te_auprc": 0.5064437147048937,
+  "n_labeled_tokens": 499052,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w2048/sorghum",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "dnabert2",
+  "model": "dnabert2",
+  "window": 2048,
+  "species": "sorghum"
+}

@@ -1,0 +1,30 @@
+{
+  "goal_id": "TEFM_S_DIRECT_SUPERFAMILY_BASELINE_R2",
+  "status": "active",
+  "scope": "milestone",
+  "goal": "Validate that direct superfamily annotation is acceptable on leakage-safe family/homology and clade-held-out splits before attempting hierarchical error correction.",
+  "primary_metric": "main4_conditional_macro_f1",
+  "direction": "higher",
+  "success_criteria": [
+    {"metric": "main4_conditional_macro_f1", "op": ">=", "threshold": 0.80},
+    {"metric": "te_detect_f1", "op": ">=", "threshold": 0.85},
+    {"metric": "unknown_recall", "op": ">=", "threshold": 0.30},
+    {"metric": "main4_false_unknown_rate", "op": "<=", "threshold": 0.02},
+    {"metric": "eligible_main4_coverage", "op": ">=", "threshold": 0.70},
+    {"metric": "minimum_clade_main4_macro_f1", "op": ">=", "threshold": 0.60},
+    {"metric": "homology_component_overlap_count", "op": "<=", "threshold": 0.0}
+  ],
+  "guardrails": [
+    {"metric": "test_calibration_count", "op": "<=", "threshold": 0.0},
+    {"metric": "claim_eligible", "op": "<=", "threshold": 0.0}
+  ],
+  "screen_anchor": {"metric": "main4_conditional_macro_f1", "value": 0.80, "direction": "higher", "source": "preregistered leakage-safe acceptance floor from historical SF5 0.8547-0.8644"},
+  "sota_benchmark": {"metric": "main4_conditional_macro_f1", "value": 0.8644, "direction": "higher", "strict_exceed": false, "source": "historical internal SF5 reference, not published SOTA"},
+  "tuning_gap_threshold": 0.05,
+  "max_parallel_directions": 3,
+  "max_internal_iterations": 3,
+  "on_failed_run": "stop_and_notify",
+  "human_gate_before_claim": true,
+  "claim_allowed": false,
+  "hierarchical_stage_authorized_only_if_success": true
+}

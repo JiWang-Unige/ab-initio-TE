@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6325834346709904,
+  "te_recall": 0.31073390080807073,
+  "te_f1": 0.41675290138086807,
+  "bg_f1": 0.9663244308329623,
+  "macro_f1": 0.6915386661069152,
+  "te_auprc": 0.43960541484133614,
+  "n_labeled_tokens": 823200,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/species_probe_ntv2_500m_thale_cress_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/species_probe_ntv2_500m/thale_cress",
+  "n_windows": 1200,
+  "stage": "species_specific_holdout",
+  "model_key": "ntv2_500m_probe",
+  "model": "species_probe_ntv2_500m_thale_cress_w4096_seed42",
+  "window": 4096,
+  "species": "thale_cress"
+}

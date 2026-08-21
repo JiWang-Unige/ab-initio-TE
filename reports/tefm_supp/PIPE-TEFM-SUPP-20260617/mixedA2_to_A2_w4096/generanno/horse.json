@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9193779363011494,
+  "te_recall": 0.8132014292577692,
+  "te_f1": 0.8630363107054198,
+  "bg_f1": 0.9389135755471315,
+  "macro_f1": 0.9009749431262757,
+  "te_auprc": 0.9391256604400969,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_mixedA2_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/horse",
+  "n_windows": 1200,
+  "stage": "mixedA2_to_A2_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "horse"
+}

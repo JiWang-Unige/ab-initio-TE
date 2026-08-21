@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.27408883135795475,
+  "te_recall": 0.23584642962808264,
+  "te_f1": 0.2535336432774249,
+  "bg_f1": 0.9660535015329482,
+  "macro_f1": 0.6097935724051866,
+  "te_auprc": 0.23682139984284006,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w4096/brachypodium",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "brachypodium"
+}

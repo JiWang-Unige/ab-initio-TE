@@ -1,0 +1,30 @@
+{
+  "schema_version": "SF-DFAM-H5-INDEX-LAYOUT-1.0.0",
+  "database": {
+    "name": "Dfam",
+    "db_version": "3.9",
+    "famdb_version": "2.0.0"
+  },
+  "rmlib_config_sha256": "9f789bae6b7d9199382510120305c2099e3928a686f9e06cef4dc85f8846c545",
+  "partitions": [
+    {"filename": "dfam39_full.0.h5", "partition": 0, "size_bytes": 77419947, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.1.h5", "partition": 1, "size_bytes": 77508945488, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.2.h5", "partition": 2, "size_bytes": 70600895880, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.3.h5", "partition": 3, "size_bytes": 63939647016, "lookup": true, "lookup_by_name": false, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.4.h5", "partition": 4, "size_bytes": 61134648712, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.5.h5", "partition": 5, "size_bytes": 60495304728, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.6.h5", "partition": 6, "size_bytes": 63600229216, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.7.h5", "partition": 7, "size_bytes": 60315350408, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.12.h5", "partition": 12, "size_bytes": 79045757464, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.13.h5", "partition": 13, "size_bytes": 42436434968, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.15.h5", "partition": 15, "size_bytes": 74268523920, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true},
+    {"filename": "dfam39_full.16.h5", "partition": 16, "size_bytes": 37293992576, "lookup": true, "lookup_by_name": true, "lookup_by_stage": true, "lookup_by_taxon": true}
+  ],
+  "required_object_type": "h5py.Group",
+  "lookup_paths": {
+    "lookup": "Lookup",
+    "lookup_by_name": "Lookup/ByName",
+    "lookup_by_stage": "Lookup/ByStage",
+    "lookup_by_taxon": "Lookup/ByTaxon"
+  }
+}

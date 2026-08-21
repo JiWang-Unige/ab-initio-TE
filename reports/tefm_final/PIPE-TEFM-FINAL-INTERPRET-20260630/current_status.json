@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-FINAL-INTERPRET-20260630",
+  "fragment_rows": 1409,
+  "source_counts": {
+    "known_main4": 880,
+    "unknown_annotation": 260,
+    "background_strict_negative": 260,
+    "high_score_strict_bg": 9
+  },
+  "high_score_n": 9,
+  "high_score_mean_binary_prob": 0.8892925182978312,
+  "high_score_mean_sf5_bg_frac": 0.9973958333333334,
+  "unknown_n": 260,
+  "unknown_mean_best_main4_frac": 0.47058293269230766,
+  "outputs": {
+    "feature_table": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/fragment_feature_table.tsv",
+    "source_summary": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/source_feature_summary.tsv",
+    "high_score_cases": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/high_score_strict_bg_cases.tsv",
+    "unknown_main4_like": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/unknown_main4_like_top30.tsv"
+  },
+  "pdf_note": "docs/inputs PDFs are present and pypdf is available; see pdf_method_alignment.md for keyword-level method scoping."
+}

@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0004679361979166667,
+  "te_recall": 1.0,
+  "te_f1": 0.0009354346720894764,
+  "bg_precision": 0.0,
+  "bg_recall": 0.0,
+  "bg_f1": 0.0,
+  "macro_f1": 0.0004677173360447382,
+  "te_auprc": 0.0003922879289177781,
+  "pred_te_rate": 1.0,
+  "true_te_rate": 0.0004679361979166667,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/cross_kingdom_pu",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/red_flour_beetle",
+  "stage": "cross_kingdom_eval",
+  "species": "red_flour_beetle",
+  "window": 4096,
+  "n_windows": 1200
+}

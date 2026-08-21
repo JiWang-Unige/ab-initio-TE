@@ -1,0 +1,8 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/hyenadna-large-1m-seqlen-hf",
+  "kind": "wrapper_auto",
+  "ok": true,
+  "tokenizer_class": "HyenaDNATokenizer",
+  "model_class": "WrappedTokenClassifier",
+  "n_params": 6551042
+}

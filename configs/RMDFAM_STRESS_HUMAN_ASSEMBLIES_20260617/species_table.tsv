@@ -1,0 +1,6 @@
+species_code	scientific_name	repeatmasker_species	fasta	taxid	priority	existing_complete
+opossum	Monodelphis domestica	Monodelphis domestica	.backup/data/genome_data/current_eukaryotes/animals/opossum/monDom5.fa.gz	13616	optional_stress	
+lizard	Anolis carolinensis	Anolis carolinensis	.backup/data/genome_data/current_eukaryotes/animals/green_anole/anoCar2.fa.gz	28377	optional_stress	
+x_laevis	Xenopus laevis	Xenopus laevis	.backup/data/genome_data/current_eukaryotes/animals/african_clawed_frog/xenLae2.fa.gz	8355	optional_stress	
+human_hg19	Homo sapiens	Homo sapiens	data/raw/ucsc/human/hg19/hg19.fa.gz	9606	human_assembly_audit	
+human_hg38	Homo sapiens	Homo sapiens	data/raw/ucsc/human/hg38/hg38.fa.gz	9606	human_assembly_audit	

@@ -1,0 +1,11 @@
+stage	model_key	n	pearson_distance_vs_f1	linear_slope_f1_per_distance_unit	note
+mixedA2_to_A2_w4096	generanno	9	-0.9234546892718268	-0.20776818626775462	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+mixedA2_to_A2_w4096	ntv2_500m	9	-0.9304699347644529	-0.207254135866091	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+mouse_to_A1_w4096	generanno	4	-0.31086948779863666	-0.018986706095640384	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+mouse_to_A1_w4096	ntv2_500m	4	-0.5062334260094873	-0.06812137792033332	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+transfer_BC_w2048	dnabert2	12	-0.9292328716735863	-0.12414050993882535	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+transfer_BC_w2048	generanno	12	-0.884979523301071	-0.11726887224858631	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+transfer_BC_w2048	hyenadna	12	-0.6579079749816594	-0.0701377418137904	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+transfer_BC_w2048	ntv2_500m	12	-0.8863352526767047	-0.13019550874236047	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+transfer_BC_w4096	generanno	12	-0.9032124888740557	-0.13220524699397876	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent
+transfer_BC_w4096	ntv2_500m	12	-0.90727131213887	-0.14616579823472695	ordinal-distance screen only; abandon as claim formula if correlation is weak or sign-inconsistent

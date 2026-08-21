@@ -1,0 +1,46 @@
+test_deletion_occurs_at_declared_indel_position (__main__.UpstreamSimulatorContractTests) ... FAIL
+test_identity_sampling_is_bounded_below_by_zero (__main__.UpstreamSimulatorContractTests) ... FAIL
+test_nested_outer_right_fragment_starts_after_nested_interval (__main__.UpstreamSimulatorContractTests) ... FAIL
+test_non_tsd_element_does_not_inherit_previous_element_tsd (__main__.UpstreamSimulatorContractTests) ... FAIL
+
+======================================================================
+FAIL: test_deletion_occurs_at_declared_indel_position (__main__.UpstreamSimulatorContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/users/j/jwang/ab-initio-TE/evidence/t0_simulator_preflight/test_upstream_denovote_simulator.py", line 36, in test_deletion_occurs_at_declared_indel_position
+    self.assertEqual(observed, "ACGA", "deletion must remove declared zero-based position 3")
+AssertionError: 'CGTA' != 'ACGA'
+- CGTA
+?   -
++ ACGA
+? +
+ : deletion must remove declared zero-based position 3
+
+======================================================================
+FAIL: test_identity_sampling_is_bounded_below_by_zero (__main__.UpstreamSimulatorContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/users/j/jwang/ab-initio-TE/evidence/t0_simulator_preflight/test_upstream_denovote_simulator.py", line 65, in test_identity_sampling_is_bounded_below_by_zero
+    self.assertGreaterEqual(observed, 0)
+AssertionError: -5 not greater than or equal to 0
+
+======================================================================
+FAIL: test_nested_outer_right_fragment_starts_after_nested_interval (__main__.UpstreamSimulatorContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/users/j/jwang/ab-initio-TE/evidence/t0_simulator_preflight/test_upstream_denovote_simulator.py", line 97, in test_nested_outer_right_fragment_starts_after_nested_interval
+    self.assertEqual(int(outer_right[3]), int(nested[4]) + 1)
+AssertionError: 8 != 9
+
+======================================================================
+FAIL: test_non_tsd_element_does_not_inherit_previous_element_tsd (__main__.UpstreamSimulatorContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/users/j/jwang/ab-initio-TE/evidence/t0_simulator_preflight/test_upstream_denovote_simulator.py", line 56, in test_non_tsd_element_does_not_inherit_previous_element_tsd
+    self.assertEqual(
+AssertionError: 14 != 10 : only the first element is configured to receive the 2+2 bp TSD
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.276s
+
+FAILED (failures=4)

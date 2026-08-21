@@ -1,0 +1,22 @@
+{
+  "n": 2000,
+  "n_clusters": 4,
+  "ari": 0.3344610219227165,
+  "nmi": 0.41674248558420984,
+  "holdout_accuracy": 0.602,
+  "holdout_macro_f1": 0.5282945609049877,
+  "silhouette": 0.5047699809074402,
+  "sklearn_available": true,
+  "pair_pos_sim_mean": 0.5547448992729187,
+  "pair_neg_sim_mean": -0.11840108782052994,
+  "pair_auc": 0.77839152,
+  "n_pairs": 10000,
+  "linear_probe_accuracy": 0.632,
+  "linear_probe_macro_f1": 0.6128148604357484,
+  "setting": "B1",
+  "fragments": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/embedding_fragments/B_animal/fragments_256.jsonl.gz",
+  "model_path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model",
+  "model_kind": "token",
+  "n_records": 2000,
+  "length": 256
+}

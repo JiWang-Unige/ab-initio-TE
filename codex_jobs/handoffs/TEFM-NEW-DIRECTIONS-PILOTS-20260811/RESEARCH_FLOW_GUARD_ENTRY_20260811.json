@@ -1,0 +1,20 @@
+{
+  "ok_to_goal": false,
+  "recommended_next": [
+    "/sota-inventory"
+  ],
+  "blockers": [
+    "docs/02 尚无可用 Candidate models；不能进入 benchmark-roadmap。"
+  ],
+  "warnings": [],
+  "facts": {
+    "candidate_inventory": false,
+    "verified_refs": true,
+    "grill_or_council_marker": true,
+    "configured": false,
+    "roadmap_ready": false,
+    "evaluator_contract_ready": false,
+    "baseline_reproduced_or_waived": false,
+    "screen_anchor_present": true
+  }
+}

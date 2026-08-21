@@ -1,0 +1,34 @@
+{
+  "schema_version": "TEFM-SF-DIRECT-ASSETS-1.0.0",
+  "base_checkpoint_files": {
+    "config.json": "0adc9ea915a53763102d84de42bed58791bc7059e39a4c2bde756644796f1efc",
+    "model.safetensors": "da8baaca6ba858f43c0f2911301597f1a99f755f70773a1be4d815c3492e6660",
+    "configuration_generanno.py": "7a979aed9842232514880ffcf6d62192119ed94fde2cb53b9f9c9c5cb3b5b83b",
+    "modeling_generanno.py": "df95706c5dc76e27d2b27f8f6b788df6b206298418a2901d96037a3c63492933",
+    "tokenizer.py": "94063f5d9eae056e6d422e104f984248c8a67f2e717203979e8536bc40f2f0cc",
+    "tokenizer_config.json": "8b6400987a9b2c3293a2ae438faae461244a420e3a22f5f470ce6cac8262982f",
+    "special_tokens_map.json": "3efd0923378f6fed452723d39d30e35b1abe33dab914649b6a8a3be97e776904",
+    "vocab.txt": "55c6de055e49615c2f5b40977726dbb2c0bb7cf0819bfa6f859f96414f0041eb"
+  },
+  "historical_head_files": {
+    "config.json": "5f93180ea86e246d12888b3a7515ed4785a65fbe303efdcd2c1487cc0adee8b0",
+    "pytorch_model.bin": "65201723b09e94af2ed24a4e9a532af08a7a4e40557363694c830f2e6104defa",
+    "configuration_generanno.py": "7a979aed9842232514880ffcf6d62192119ed94fde2cb53b9f9c9c5cb3b5b83b",
+    "modeling_generanno.py": "df95706c5dc76e27d2b27f8f6b788df6b206298418a2901d96037a3c63492933",
+    "tokenizer.py": "94063f5d9eae056e6d422e104f984248c8a67f2e717203979e8536bc40f2f0cc",
+    "tokenizer_config.json": "08d596af66e0c81a6ca2a981cc9226f03eb1bdb681753eb99ea1c10463da6403",
+    "special_tokens_map.json": "3efd0923378f6fed452723d39d30e35b1abe33dab914649b6a8a3be97e776904",
+    "vocab.txt": "55c6de055e49615c2f5b40977726dbb2c0bb7cf0819bfa6f859f96414f0041eb"
+  },
+  "historical_data_files": {
+    "train/data.jsonl.gz": {"sha256": "b353263c9896b9630967e3dadaa4c2a99c575261258e0a4b995173ff2e9fa56a", "records": 5400},
+    "val/data.jsonl.gz": {"sha256": "67b2fb4e4f46dae0c66f32c7c1453f421811331b0fb62f1e33e049d2df855f94", "records": 1440},
+    "test/data.jsonl.gz": {"sha256": "395193ccee557ddb9faf6abf2c926c51cb1699019deed2316a8c6508c12afacd", "records": 2160},
+    "metadata.json": {"sha256": "e69bd107fbeb5151a5a32b38fe166538535c03306d942691b5be11afe5707b96"},
+    "label_map.json": {"sha256": "d43a44984ab4333a820338215a7f9a6a07b6321a4183aa9703d5f0cb9ccd337b"}
+  },
+  "historical_expected_total_records": 9000,
+  "repeatmasker_version": "RepeatMasker version 4.2.2",
+  "dfam_release": "Dfam 3.9",
+  "dfam_required_partitions": [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 15, 16]
+}

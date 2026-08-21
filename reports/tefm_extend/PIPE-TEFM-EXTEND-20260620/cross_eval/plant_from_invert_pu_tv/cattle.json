@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6406500493932729,
+  "te_recall": 0.9796043482343683,
+  "te_f1": 0.7746728847039254,
+  "bg_precision": 0.9695053707078798,
+  "bg_recall": 0.5413044208608789,
+  "bg_f1": 0.6947235133651256,
+  "macro_f1": 0.7346981990345255,
+  "te_auprc": 0.8935909692230752,
+  "pred_te_rate": 0.6956978352864583,
+  "true_te_rate": 0.4549784342447917,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/cattle",
+  "stage": "plant_model_cross_eval",
+  "species": "cattle",
+  "window": 4096,
+  "n_windows": 1200
+}

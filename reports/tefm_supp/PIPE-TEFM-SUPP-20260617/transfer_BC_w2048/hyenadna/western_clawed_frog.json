@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.42731227946874145,
+  "te_recall": 0.6467275176876196,
+  "te_f1": 0.514607765019391,
+  "bg_f1": 0.5284551344024718,
+  "macro_f1": 0.5215314497109313,
+  "te_auprc": 0.4117531216846065,
+  "n_labeled_tokens": 2455200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/western_clawed_frog",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "hyenadna",
+  "model": "hyenadna",
+  "window": 2048,
+  "species": "western_clawed_frog"
+}

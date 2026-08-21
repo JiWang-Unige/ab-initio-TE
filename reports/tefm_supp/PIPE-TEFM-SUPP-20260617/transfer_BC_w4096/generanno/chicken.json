@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8094781107053877,
+  "te_recall": 0.8630866710144601,
+  "te_f1": 0.8354232678621717,
+  "bg_f1": 0.9710612178598521,
+  "macro_f1": 0.9032422428610118,
+  "te_auprc": 0.888771759241679,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w4096/chicken",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "chicken"
+}

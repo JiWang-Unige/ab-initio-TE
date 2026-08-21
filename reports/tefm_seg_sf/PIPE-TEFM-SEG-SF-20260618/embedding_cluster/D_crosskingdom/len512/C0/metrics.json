@@ -1,0 +1,15 @@
+{
+  "n": 480,
+  "n_clusters": 4,
+  "ari": 0.3600622458403316,
+  "nmi": 0.3825935164370783,
+  "holdout_accuracy": 0.6,
+  "holdout_macro_f1": 0.5174595962874018,
+  "silhouette": 0.1323527991771698,
+  "sklearn_available": true,
+  "setting": "C0",
+  "fragments": "software_outputs/tefm_seg_sf/PIPE-TEFM-SEG-SF-20260618/embedding_fragments/D_crosskingdom/fragments_512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "length": 512
+}

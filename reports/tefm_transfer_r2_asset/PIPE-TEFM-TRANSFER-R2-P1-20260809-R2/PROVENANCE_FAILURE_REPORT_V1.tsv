@@ -1,0 +1,6 @@
+schema_version	anchor_id	code	stage	message	evidence_path	locator
+PROVENANCE_FAILURE_REPORT_V1	animal	PROV_RUN_RECORD_MISSING	run_discovery	no archived run/job record qualified from the exact checkpoint literal		
+PROVENANCE_FAILURE_REPORT_V1	cross	PROV_RUN_RECORD_MISSING	run_discovery	no archived run/job record qualified from the exact checkpoint literal		
+PROVENANCE_FAILURE_REPORT_V1	human_h0	PROV_RUN_RECORD_MISSING	run_discovery	no archived run/job record qualified from the exact checkpoint literal		
+PROVENANCE_FAILURE_REPORT_V1	insect	PROV_RUN_RECORD_MISSING	run_discovery	no archived run/job record qualified from the exact checkpoint literal		
+PROVENANCE_FAILURE_REPORT_V1	plant	PROV_RUN_RECORD_MISSING	run_discovery	no archived run/job record qualified from the exact checkpoint literal		

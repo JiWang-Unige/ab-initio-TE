@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6908246824424528,
+  "te_recall": 0.49939987181728135,
+  "te_f1": 0.5797187709247824,
+  "bg_f1": 0.9585338884480921,
+  "macro_f1": 0.7691263296864372,
+  "te_auprc": 0.6190218928729591,
+  "n_labeled_tokens": 823200,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/species_probe_ntv2_500m_soybean_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/species_probe_ntv2_500m/soybean",
+  "n_windows": 1200,
+  "stage": "species_specific_holdout",
+  "model_key": "ntv2_500m_probe",
+  "model": "species_probe_ntv2_500m_soybean_w4096_seed42",
+  "window": 4096,
+  "species": "soybean"
+}

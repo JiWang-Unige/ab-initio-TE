@@ -1,0 +1,8 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/DNABERT-2-117M",
+  "kind": "wrapper_auto",
+  "ok": true,
+  "tokenizer_class": "PreTrainedTokenizerFast",
+  "model_class": "WrappedTokenClassifier",
+  "n_params": 117070082
+}

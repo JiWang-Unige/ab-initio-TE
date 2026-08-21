@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9551405217051486,
+  "te_recall": 0.9710549186773165,
+  "te_f1": 0.9630319771140563,
+  "bg_f1": 0.9843941943006842,
+  "macro_f1": 0.9737130857073703,
+  "te_auprc": 0.9934100179228756,
+  "n_labeled_tokens": 410400,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w2048_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_B_finetune_w2048/human",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w2048",
+  "model_key": "ntv2_500m",
+  "model": "ntv2_500m",
+  "window": 2048,
+  "species": "human"
+}

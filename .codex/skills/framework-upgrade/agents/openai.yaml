@@ -1,0 +1,4 @@
+interface:
+  display_name: "Framework-Upgrade"
+  short_description: "Upgrade auto-research framework versions safely"
+  default_prompt: "Upgrade this auto-research project to the current framework version with compatibility checks."

@@ -1,0 +1,13 @@
+{
+  "pipeline_id": "PIPE-TEFM-FINAL-20260623",
+  "smoke_rows": 9,
+  "matrix_eval_rows": 495,
+  "species_probe_rows": 22,
+  "strict_segment_rows": 1200,
+  "summaries": {
+    "smoke": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/summaries/smoke.tsv",
+    "matrix_eval": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/summaries/matrix_eval.tsv",
+    "species_probe": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/summaries/species_probe.tsv",
+    "strict_segment": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/summaries/strict_segment.tsv"
+  }
+}

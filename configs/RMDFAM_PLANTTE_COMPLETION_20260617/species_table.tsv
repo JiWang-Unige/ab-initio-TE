@@ -1,0 +1,8 @@
+species_code	scientific_name	repeatmasker_species	fasta	taxid	priority	existing_complete
+sorghum	Sorghum bicolor	Sorghum bicolor	.backup/data/genome_data/current_eukaryotes/plants/sorghum/GCF_000003195.3.fa.gz	4558	plantTE_completion_train	
+brachypodium	Brachypodium distachyon	Brachypodium distachyon	.backup/data/genome_data/current_eukaryotes/plants/purple_false_brome/GCF_000005505.3.fa.gz	15368	plantTE_completion_train	
+setaria_italica	Setaria italica	Setaria italica	.backup/data/genome_data/current_eukaryotes/plants/foxtail_millet/Setaria_italica.Setaria_italica_v2.0.dna.toplevel.fa.gz	4555	plantTE_completion_train	
+wild_rice	Oryza longistaminata	Oryza longistaminata	.backup/data/genome_data/current_eukaryotes/plants/longstamen_rice/Oryza_longistaminata.O_longistaminata_v1.0.dna.toplevel.fa.gz	4528	plantTE_completion_eval	
+teosinte	Zea diploperennis	Zea diploperennis	.backup/data/genome_data/current_eukaryotes/plants/zea_diploperennis_gigi/Zd-Gigi-REFERENCE-PanAnd-1.0.fa.gz	4579	plantTE_completion_eval	
+arabidopsis_lyrata	Arabidopsis lyrata	Arabidopsis lyrata	.backup/data/genome_data/current_eukaryotes/plants/arabidopsis_lyrata/Arabidopsis_lyrata.v.1.0.dna.toplevel.fa.gz	81972	plantTE_completion_eval	
+soybean	Glycine max	Glycine max	.backup/data/genome_data/current_eukaryotes/plants/soybean/Glycine_max.Glycine_max_v2.1.dna.toplevel.fa.gz	3847	plantTE_completion_stress	

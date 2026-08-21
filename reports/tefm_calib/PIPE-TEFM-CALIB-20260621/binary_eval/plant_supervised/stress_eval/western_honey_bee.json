@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0001921751922683004,
+  "te_recall": 0.6789473684210526,
+  "te_f1": 0.00038424162543143403,
+  "bg_f1": 0.8418391999052725,
+  "macro_f1": 0.4211117207653519,
+  "te_auprc": 0.00015990210131833587,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/stress_eval/western_honey_bee",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_stress_eval",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "western_honey_bee"
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "asset-gate-config-v1",
+  "exp_id": "FRAG-PARENT-LATTICE-SCREEN-20260811-R1",
+  "route": "F_parent_aware_fragment_lattice",
+  "execution_mode": "asset_gate_only",
+  "scientific_screen_authorized": false,
+  "claim_eligible": false,
+  "terminal_status": "FOUNDATIONAL_TYPED_BLOCK",
+  "required_block_codes": [
+    "F_A0_H0_PIN",
+    "F_A4_NO_REAL_T0_OR_TIERED_INPUT_REGISTRY",
+    "F_A5_CENTER70_MERGE_STRICT_MERGE_LOOSE_AND_ACCEPTED_POSTPROCESS_UNFROZEN"
+  ],
+  "evidence": [
+    {
+      "id": "a0_identity_lock",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A0/A0_identity_lock_report.json",
+      "sha256": "79fdac5c9d833cddd477dca284747a26414440a93d35a0f20486689f32d06ace"
+    },
+    {
+      "id": "a2_synthetic_t0",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A2/A2_validation_report.json",
+      "sha256": "df9b6290f0f81381c44ecf359de439252e6c2e50b0b4029570c20e971328da5a"
+    },
+    {
+      "id": "a3_evaluator",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A3/A3_golden_report.json",
+      "sha256": "124c9be755bce69706332e245e394c02ea34f90182570355e70baf2da1e444c2"
+    },
+    {
+      "id": "a4_real_t0",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A4/A4_real_t0_report.json",
+      "sha256": "cacc6593637fe57f2826e0a8ab5b7475bc64dae0859b430e33b7089e1fdbc6f9"
+    },
+    {
+      "id": "a5_comparator",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A5/A5_comparator_report.json",
+      "sha256": "dcb8e97dc56cfcb6cff9b3d25e7f7f1a7a038616510162f08d8c94ae72eab973"
+    },
+    {
+      "id": "a6_readiness",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/stages/A6/A6_readiness_seal.json",
+      "sha256": "48369d6e11ff04a48f6f8af895efbf54d909fe9fc7e21d9d004bc3d38602e25c"
+    },
+    {
+      "id": "real_t0_registry",
+      "path": "software_outputs/scientific_evidence/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/run_11475540/payload/inputs/real_t0_registry.json",
+      "sha256": "f44af8dbe5b12e7c8de6feedea08ca902cab8feade34e1b5b0d6bea73e931a92"
+    },
+    {
+      "id": "comparator_freeze",
+      "path": "software_outputs/tefm_frag_r2_asset/PIPE-TEFM-FRAG-R2-REAL-A0-A6-20260809-R3/extracted/pipelines/PIPE-TEFM-FRAG-R2-ASSET-20260809/config/comparator_freeze_v1.json",
+      "sha256": "957744f2ad7b9998839d9d2b2ce7cb0760f263d917a859097eddece818ae8740"
+    }
+  ],
+  "expected": {
+    "a0_status": "BLOCKED_A0_IDENTITY_LOCK",
+    "a2_status": "PASS_SYNTHETIC_T0_SEMANTICS",
+    "a3_status": "PASS_EVALUATOR_V2_SEMANTICS",
+    "a4_status": "BLOCKED_A4_REAL_T0_AUDIT",
+    "a5_status": "BLOCKED_A5_COMPARATOR_FREEZE",
+    "a6_status": "BLOCKED_A6_NOT_READY",
+    "blocked_comparators": ["CENTER70", "MERGE_LOOSE", "MERGE_STRICT"]
+  }
+}

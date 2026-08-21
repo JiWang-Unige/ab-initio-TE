@@ -1,0 +1,95 @@
+# Secrets and machine-local configuration
+secrets.env
+.env
+.env.*
+!.env.example
+.mcp.json
+.claude/settings.local.json
+
+# Python/editor caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+*.swp
+*.tmp
+
+# Framework caches and generated backups
+.cache/
+.backup/
+.spec-workflow/
+*.backup-*
+
+# Raw/processed data, checkpoints, and runtime products
+data/
+runs/
+outputs/
+logs/
+software_outputs/
+external_runs/
+worktrees/
+container_candidates/
+dfam_candidates/
+software/
+RM_*/
+slurm-*.out
+slurm-*.err
+
+# Large reference assets; keep lightweight dossiers and sources metadata
+refs/pdfs/
+refs/repos/
+refs/supp/
+refs/weights/
+
+# Codex execution bundles are runtime artifacts; retain lightweight handoffs
+codex_jobs/*
+!codex_jobs/handoffs/
+!codex_jobs/handoffs/**
+codex_jobs/handoffs/**/*.zip
+
+# Heavy benchmark payloads; keep lightweight reports from other report families
+reports/de_novo_benchmark/
+reports/repeatmasker_dfam/*/
+
+# Common biological datasets and model artifacts
+*.fa
+*.fasta
+*.fna
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.2bit
+*.bam
+*.bai
+*.cram
+*.crai
+*.vcf
+*.vcf.gz
+*.npy
+*.npz
+*.parquet
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.hdf5
+*.safetensors
+*.onnx
+*.sif
+*.img
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Logs and compressed/generated payloads
+*.log
+*.gz
+*.bz2
+*.xz

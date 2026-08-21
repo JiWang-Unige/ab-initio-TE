@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.31431260277089285,
+  "te_recall": 0.7934179153831428,
+  "te_f1": 0.45025616967691756,
+  "bg_f1": 0.9506342852138322,
+  "macro_f1": 0.7004452274453749,
+  "te_auprc": 0.41231511843409313,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/brachypodium",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_plant_fine",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "brachypodium"
+}

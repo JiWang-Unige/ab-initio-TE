@@ -1,0 +1,5 @@
+{
+  "status": "skipped",
+  "reason": "empty fragments",
+  "fragments": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/embedding_fragments/Dfam_consensus/family_len512.jsonl.gz"
+}

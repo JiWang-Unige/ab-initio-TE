@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.1710328527617968,
+  "te_recall": 0.9621972790349196,
+  "te_f1": 0.29043941020534336,
+  "bg_precision": 0.9847370109513877,
+  "bg_recall": 0.3433908689574307,
+  "bg_f1": 0.5092125585201259,
+  "macro_f1": 0.39982598436273464,
+  "te_auprc": 0.39664402313352853,
+  "pred_te_rate": 0.6943241373697917,
+  "true_te_rate": 0.12341776529947916,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/soybean",
+  "stage": "plant_model_cross_eval",
+  "species": "soybean",
+  "window": 4096,
+  "n_windows": 1200
+}

@@ -1,0 +1,8 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+  "kind": "auto_token",
+  "ok": true,
+  "tokenizer_class": "SingleNucleotideTokenizer",
+  "model_class": "GenerannoForTokenClassification",
+  "n_params": 493315840
+}

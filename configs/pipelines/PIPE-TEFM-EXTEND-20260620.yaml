@@ -1,0 +1,66 @@
+pipeline_id: PIPE-TEFM-EXTEND-20260620
+purpose: Publication-validation supplement screen for stricter embeddings, SF5 base-init, plant transfer/fine-tune, cross-kingdom fine-tune, PU learning, stress anchors, and decay formula refinement.
+seed: 42
+window: 4096
+model:
+  pretrained_path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  invert_boost_4096: software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42
+  binary_h0_4096: software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42
+manifests:
+  animal_b: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  plant: software_outputs/repeatmasker_dfam/02_ready_by_design/C_plantTE/SPLIT_MANIFEST.tsv
+  cross: software_outputs/repeatmasker_dfam/02_ready_by_design/D_cross_kingdom_animal_plant/SPLIT_MANIFEST.tsv
+  concordance: reports/repeatmasker_dfam/SELF_LABELA_VS_UCSC_FULLPARTITIONS_20260619/summary.tsv
+dfam_consensus_fasta: ""
+species:
+  plant_train: [rice, maize, sorghum, brachypodium, thale_cress, setaria_italica]
+  plant_fine_eval: [rice, maize, sorghum, brachypodium, thale_cress]
+  plant_eval_only: [teosinte, soybean]
+  cross_train: [mouse, zebrafish, chicken, western_clawed_frog, fruit_fly, c_elegans, rice, maize, sorghum, brachypodium, thale_cress, setaria_italica]
+  cross_eval: [cattle, pig, horse, opossum, lizard, western_honey_bee, red_flour_beetle, teosinte, soybean]
+  stress_eval: [lizard, x_laevis, western_honey_bee, red_flour_beetle]
+  sf5_train: [mouse, zebrafish, chicken, western_clawed_frog, fruit_fly, c_elegans]
+mixtures:
+  cross_kingdom_50_50:
+    mouse: 0.083333
+    zebrafish: 0.083333
+    chicken: 0.083333
+    western_clawed_frog: 0.083333
+    fruit_fly: 0.083333
+    c_elegans: 0.083333
+    rice: 0.083333
+    maize: 0.083333
+    sorghum: 0.083333
+    brachypodium: 0.083333
+    thale_cress: 0.083333
+    setaria_italica: 0.083333
+  stress_anchors:
+    vertebrate_anchor:
+      western_clawed_frog: 0.60
+      chicken: 0.40
+    insect_anchor:
+      fruit_fly: 1.00
+quick_profile:
+  eval_windows_per_species: 1200
+  pu_train_windows: 7200
+  pu_val_windows: 1200
+  pu_max_steps: 800
+  pu_eval_steps: 160
+  anchor_total_windows: 7200
+  anchor_max_steps: 800
+  anchor_eval_steps: 160
+  sf5_train_per_species: 900
+  sf5_val_per_species: 240
+  sf5_test_per_species: 360
+  sf5_max_steps: 1000
+  sf5_eval_steps: 200
+  max_eval_samples: 1200
+  segment_max_windows: 600
+  embedding_top_families: 8
+  embedding_min_per_label: 30
+  embedding_max_per_label: 180
+  embedding_max_records: 1500
+outputs:
+  root: software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620
+  reports: reports/tefm_extend/PIPE-TEFM-EXTEND-20260620
+  logs: logs/tefm_extend/PIPE-TEFM-EXTEND-20260620

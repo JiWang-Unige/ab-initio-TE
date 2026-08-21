@@ -1,0 +1,16 @@
+{
+  "byte_identical_regeneration": true,
+  "full_frozen_panel": true,
+  "full_synthetic_panel_generated": true,
+  "job_id": "11475001",
+  "manifest_objects_verified": 36,
+  "next_stage_authorized": false,
+  "python39_grammar_files": 9,
+  "python_runtime": "3.9.25 (main, Mar 26 2026, 00:00:00) \n[GCC 11.5.0 20240719 (Red Hat 11.5.0-11)]",
+  "remote_real_assets_executed": false,
+  "run_id": "PIPE-TEFM-FRAG-R2-CODETEST-20260809-R1",
+  "schema_version": "TRACK_F_CODETEST_SUMMARY_V1",
+  "scientific_execution_performed": false,
+  "unit_tests_failed": 0,
+  "unit_tests_passed": 33
+}

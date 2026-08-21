@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 100,
+  "out_tsv": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/strict_segment/animal_invert_boost_4096/species_probe_western_honey_bee.tsv",
+  "n_windows": 1200
+}

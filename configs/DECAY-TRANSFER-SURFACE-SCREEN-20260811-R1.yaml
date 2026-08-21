@@ -1,0 +1,43 @@
+{
+  "schema_version": "asset-gate-config-v1",
+  "exp_id": "DECAY-TRANSFER-SURFACE-SCREEN-20260811-R1",
+  "route": "G_decay_transfer_surface",
+  "execution_mode": "asset_gate_only",
+  "scientific_screen_authorized": false,
+  "claim_eligible": false,
+  "terminal_status": "FOUNDATIONAL_TYPED_BLOCK",
+  "required_block_codes": ["G_P1_ALL_FIVE_PROV_RUN_RECORD_MISSING"],
+  "evidence": [
+    {
+      "id": "p1_readiness_seal",
+      "path": "reports/tefm_transfer_r2_asset/PIPE-TEFM-TRANSFER-R2-P1-20260809-R2/P1_READINESS_SEAL_V1.json",
+      "sha256": "c9af8bbc542049518aa56f990c46d13b7cba4cd1bff7fe266b66b12e9a77dfc3"
+    },
+    {
+      "id": "p1_slurm_summary",
+      "path": "software_outputs/tefm_transfer_r2_asset/PIPE-TEFM-TRANSFER-R2-P1-20260809-R2/SLURM_RUN_SUMMARY.json",
+      "sha256": "15655a479081362c929529e2996bfda1e5af88275754358899a8b8e9cf4c146d"
+    },
+    {
+      "id": "fixed_anchor_provenance",
+      "path": "reports/tefm_transfer_r2_asset/PIPE-TEFM-TRANSFER-R2-P1-20260809-R2/FIXED_ANCHOR_PROVENANCE_V1.json",
+      "sha256": "29614d40c18f3357f075b4e4790d57de60f8ba75a871e2b53540105ada1b139d"
+    },
+    {
+      "id": "provenance_failure_report",
+      "path": "reports/tefm_transfer_r2_asset/PIPE-TEFM-TRANSFER-R2-P1-20260809-R2/PROVENANCE_FAILURE_REPORT_V1.tsv",
+      "sha256": "feb49220c9c93c5b8224901e872533ea5f95c1ce7fa70a7ca3a51ac6901f5453"
+    }
+  ],
+  "expected": {
+    "readiness": "P1_PROVENANCE_BLOCKED",
+    "anchor_count": 5,
+    "anchor_statuses": {
+      "animal": "PROV_RUN_RECORD_MISSING",
+      "cross": "PROV_RUN_RECORD_MISSING",
+      "human_h0": "PROV_RUN_RECORD_MISSING",
+      "insect": "PROV_RUN_RECORD_MISSING",
+      "plant": "PROV_RUN_RECORD_MISSING"
+    }
+  }
+}

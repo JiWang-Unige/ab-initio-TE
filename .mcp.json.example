@@ -1,0 +1,23 @@
+{
+  "_comment": "可选检索增强 MCP（项目级，已启用）。anysearch=通用网页+academic学术+批量搜索+URL提取(治常规paper检索不好用)；exa=neural网页搜索；mcp-deepwiki=读懂GitHub仓库；context7=库文档。不可用则优雅降级到 scripts/lit_search.py(Semantic Scholar)+WebFetch——框架核心不依赖任何 MCP。Key 全走环境变量(不写进本文件)：anysearch 需 ANYSEARCH_API_KEY(可选,匿名可用,免费 https://anysearch.com/console/api-keys)，exa 需 EXA_API_KEY；context7/deepwiki 免key。anysearch 若你的 Claude Code 版本不支持 type:http，可改 stdio 代理: {command:npx,args:[-y,mcp-remote,https://api.anysearch.com/mcp,--header,'Authorization: Bearer ${ANYSEARCH_API_KEY}']}；或改用 anysearch 的 skill 安装(scripts/anysearch_cli.py)。要停用某个：删对应条目。首次进会话 Claude Code 会要你批准这些项目级 MCP。",
+  "mcpServers": {
+    "anysearch": {
+      "type": "http",
+      "url": "https://api.anysearch.com/mcp",
+      "headers": { "Authorization": "Bearer ${ANYSEARCH_API_KEY}" }
+    },
+    "exa": {
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": { "EXA_API_KEY": "${EXA_API_KEY}" }
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "mcp-deepwiki": {
+      "command": "npx",
+      "args": ["-y", "mcp-deepwiki@latest"]
+    }
+  }
+}

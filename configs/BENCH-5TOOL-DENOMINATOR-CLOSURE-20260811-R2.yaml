@@ -1,0 +1,40 @@
+{
+  "schema_version": "TEFM-BENCH-5TOOL-DENOMINATOR-CLOSURE-1.0.0",
+  "exp_id": "BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2",
+  "profile": "runtime_closure_smoke",
+  "claim_eligible": false,
+  "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "coordinate_convention": "zero_based_half_open",
+  "timeouts_seconds": {"identity": 120, "db_probe": 180, "minimum_input": 900},
+  "primary_metric": "terminal_cell_count",
+  "expected_cell_keys": ["repeatmodeler2_repeatmasker", "earlgrey", "hite", "edta", "tetrimmer"],
+  "ownership": {"stale_lock_seconds": 21600},
+  "fixture_inputs": {
+    "repeatmodeler_repeatmasker": {"path": "refs/repos/edta_2_3_0/test/genome.fa", "sha256": "f64e2aed9233831f668241800b82293623ce575a51ccfd0fa28766119d70d0a3", "minimum_bp": 10000},
+    "earlgrey": {"path": "refs/repos/earlgrey_7_3_1/test/test.fasta", "sha256": "4647f3af51c09fa2f991917b903273a94ed66aef2b56d848ee958cbb4f3559cd", "minimum_bp": 10000},
+    "hite": {"path": "refs/repos/hite_3_3_3/demo/genome.fa", "sha256": "ee5bd7cd02c631f31d43ebf2e434497a5b1dd8cd7b2bc62797f185a876cd3c37", "minimum_bp": 10000},
+    "edta": {"path": "refs/repos/edta_2_3_0/test/genome.fa", "sha256": "f64e2aed9233831f668241800b82293623ce575a51ccfd0fa28766119d70d0a3", "minimum_bp": 10000},
+    "tetrimmer_input": {"path": "refs/repos/tetrimmer_target_1_7_4/tests/test_input.fa", "sha256": "fcc76f250280c433a45cab1b7c275b36f28a359415d2646260c31939ed4c836d"},
+    "tetrimmer_genome": {"path": "refs/repos/tetrimmer_target_1_7_4/tests/test_genome.fa", "sha256": "a952f45011f318d221067e7c3f1d811e34848b292572be72e7e1a6a21c76ef13"}
+  },
+  "asset_root": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2",
+  "dfam40": {
+    "asset_subdir": "famdb-v2",
+    "full": {"path": "dfam_candidates/D1-DFAM40-CC-ACQUIRE-20260809A/dfam40.0.h5.gz", "sha256": "bd36979e0500e4fce5e11f4c18ffc09ecb4511626b1028fb6da7bb005cc3fbb3"},
+    "curated_consensus": {"path": "dfam_candidates/D1-DFAM40-CC-ACQUIRE-20260809A/dfam40.curated.consensus.0.h5.gz", "sha256": "6d7452452a561e8609af3c71bc2519dcfde7bbaf504da5775df509819ede0a01"},
+    "query_taxon": "Homo sapiens", "query_family": "MIR3", "required_database": "Dfam 4.0"
+  },
+  "components": {
+    "repeatmodeler_2_0_9": {"path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif", "sha256": "93f5801a64dcc8adaec9b3307f188ff5feb65ed8c893764d0e5ab56f75020384"},
+    "repeatmasker_4_2_4": {"path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif", "sha256": "3a2d62dec0b930fa6a6aa463132976fb8de5405eedd1c4ce122ec7511689cd8c"},
+    "earlgrey_7_3_0": {"path": "container_candidates/E1B2R2-EARLGREY-ACQUIRE-20260809A/earlgrey_7_3_0.sif", "sha256": "60bed858ec262243ce3f0e4a12209f805e6029c18346f48d030f78de6445335d"},
+    "edta_2_3_0_base": {"path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif", "sha256": "812f277d85d575ba745c08ff2a3876d36aeb8fc0e0a08d95db28404b3837f40e"},
+    "tetrimmer_dependency_1_7_2": {"path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/tetrimmer_1_7_2.sif", "sha256": "38c0c325731cd40eb234056b981ef9ed940bc381ac703ab13fa867a086d5b612"}
+  },
+  "license_evidence": {"repeatmodeler2_repeatmasker": "refs/dossiers/repeatmodeler2_repeatmasker.md", "earlgrey": "refs/dossiers/earlgrey_7_3_1.md", "hite": "refs/dossiers/hite_3_3_3.md", "edta": "refs/dossiers/edta_2_3_0.md", "tetrimmer": "refs/dossiers/tetrimmer_target_1_7_4.md"},
+  "exact_sources": {
+    "hite": {"version": "3.3.3", "commit": "ae317c879b3d217b419fefa38c6ff2cacbf1695c", "oci_digest": "sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce", "reference": "docker://kanghu/hite@sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce", "local_sif": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif"},
+    "edta": {"version": "2.3.0", "release_tag": "v2.3.0", "commit": "a9f7a56d6a1c1a9cdcf2a1d7b8c27a74a38dbfc2", "overlay_dir": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0"},
+    "tetrimmer": {"version": "1.7.4", "commit": "61456873f27b3b97ac2938f1972fc01807d550d1", "source_tar": "refs/supp/tetrimmer_target_1_7_4/source-commit-61456873.tar.gz", "source_sha256": "3ac444549eeffb372d9fdff9af2ccb78e6a9fed9dd00aef20d42c8f165807edc", "pfam_dir": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/tetrimmer/pfam", "pfam_release": "UNFROZEN_CURRENT_RELEASE_TYPED_BLOCK", "pfam_hmm_url": "https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz", "pfam_dat_url": "https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.dat.gz", "pfam_hmm_sha256": "REQUIRED_BEFORE_PREPARATION", "pfam_dat_sha256": "REQUIRED_BEFORE_PREPARATION", "preparation_submittable": false, "documented_final_library": "TEtrimmer_consensus_merged.fasta"}
+  }
+}

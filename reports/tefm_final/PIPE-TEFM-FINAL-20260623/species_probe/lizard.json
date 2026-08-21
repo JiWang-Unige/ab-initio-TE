@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9462603174603175,
+  "te_recall": 0.9473429951690822,
+  "te_f1": 0.9468013468013469,
+  "bg_f1": 0.9973290533545036,
+  "macro_f1": 0.9720652000779253,
+  "te_auprc": 0.9790601676591283,
+  "n_labeled_tokens": 823157,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/species_probe_ntv2_500m_lizard_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/species_probe_ntv2_500m/lizard",
+  "n_windows": 1200,
+  "stage": "species_specific_holdout",
+  "model_key": "ntv2_500m_probe",
+  "model": "species_probe_ntv2_500m_lizard_w4096_seed42",
+  "window": 4096,
+  "species": "lizard"
+}

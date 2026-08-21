@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.08911823214625346,
+  "te_recall": 0.9883369147998162,
+  "te_f1": 0.16349420922345012,
+  "bg_precision": 0.993814222248358,
+  "bg_recall": 0.1564679730482202,
+  "bg_f1": 0.27036860620380426,
+  "macro_f1": 0.21693140771362718,
+  "te_auprc": 0.46985969563620705,
+  "pred_te_rate": 0.8546917724609375,
+  "true_te_rate": 0.07706746419270834,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/plant_eval_fine/thale_cress",
+  "stage": "plant_from_invert_pu_tv_to_plant_fine",
+  "species": "thale_cress",
+  "window": 4096,
+  "n_windows": 1200
+}

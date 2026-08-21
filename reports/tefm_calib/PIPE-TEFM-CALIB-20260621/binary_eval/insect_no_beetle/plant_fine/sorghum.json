@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8335106244723383,
+  "te_recall": 0.6645980372967351,
+  "te_f1": 0.7395318366775196,
+  "bg_f1": 0.9185578403231268,
+  "macro_f1": 0.8290448385003233,
+  "te_auprc": 0.8263451375866807,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/sorghum",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_plant_fine",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "sorghum"
+}

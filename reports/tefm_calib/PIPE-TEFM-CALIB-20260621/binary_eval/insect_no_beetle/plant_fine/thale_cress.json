@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.7978072128227961,
+  "te_recall": 0.07568597842672425,
+  "te_f1": 0.13825595918387032,
+  "bg_f1": 0.9620421803586408,
+  "macro_f1": 0.5501490697712555,
+  "te_auprc": 0.20618649217551457,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/thale_cress",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_plant_fine",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "thale_cress"
+}

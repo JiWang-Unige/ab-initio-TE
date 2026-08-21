@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8141074575664188,
+  "te_recall": 0.8010135244780534,
+  "te_f1": 0.8075074141674281,
+  "bg_f1": 0.9323516005174219,
+  "macro_f1": 0.869929507342425,
+  "te_auprc": 0.8861754602249458,
+  "n_labeled_tokens": 822736,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/species_probe_ntv2_500m_rice_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/species_probe_ntv2_500m/rice",
+  "n_windows": 1200,
+  "stage": "species_specific_holdout",
+  "model_key": "ntv2_500m_probe",
+  "model": "species_probe_ntv2_500m_rice_w4096_seed42",
+  "window": 4096,
+  "species": "rice"
+}

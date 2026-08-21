@@ -1,0 +1,91 @@
+{
+  "schema_version": "TEFM-SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-1.0.0",
+  "exp_id": "SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-20260812-R1",
+  "profile": "cpu_authoritative_identity_crosswalk_audit",
+  "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "preview_root": "outputs/SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-20260812-R1/preview",
+  "claim_eligible": false,
+  "formal_slurm_required": true,
+
+  "source_contract": {
+    "publisher": "Dfam Consortium",
+    "release": "Dfam_3.9",
+    "release_date": "2025-03-10",
+    "license": "CC0-1.0",
+    "offline_only": true,
+    "export_dialect": "Dfam curated EMBL: ID carries accession+SV, NM is canonical name, AC accession; PI/SN/DR are exact aliases; SQ/body supplies consensus",
+    "parsed_fields": ["ID", "NM", "AC", "PI", "SN", "DR", "SQ"],
+    "exact_relation_fields": ["NM", "PI", "SN", "DR", "AC", "ID"],
+    "exact_alias_fields": ["NM", "PI", "SN", "DR"],
+    "exact_identity_fields": ["AC", "ID"],
+    "identity_field_rule": "AC/ID participate only when the frozen target identifier itself is exactly an accession or versioned accession",
+    "matching": "case-sensitive exact UTF-8 identifier equality",
+    "current_api_forbidden": true,
+    "local_repbase_metadata_forbidden": true,
+    "prefix_casefold_substring_forbidden": true,
+    "genome_copy_or_taxonomy_candidate_selection_forbidden": true
+  },
+  "curated_embl": {
+    "path": "refs/supp/dfam39-authoritative-alias/supp-1.gz",
+    "sha256": "8bbe1d3dd0c772ca4e55d9f4f84e00faf4101af74ffdcc380bcd35fef9f85050",
+    "size_bytes": 25501240,
+    "md5": "c1cd35fc6b3a9569f18d06a5f01c935a",
+    "expected_record_count": 26279,
+    "expected_field_counts": {"ID": 26279, "NM": 22937, "AC": 26279, "PI": 0, "SN": 0, "DR": 3570, "SQ": 26279},
+    "expected_sequence_record_count": 26279,
+    "sequence_normalization": "concatenate SQ body letters, ASCII uppercase, U->T; reject non-IUPAC DNA; SHA256 normalized bytes"
+  },
+  "md5_sidecar": {
+    "path": "refs/supp/dfam39-authoritative-alias/supp-2.dat",
+    "sha256": "57fbebec45465d930d59d30f57d3328d2e40127130e5707e2cbe56cd319c8f26",
+    "size_bytes": 62
+  },
+  "release_notes": {
+    "path": "refs/supp/dfam39-authoritative-alias/supp-3.txt",
+    "sha256": "506783775a32b646ef3bdc239249144da7a86137b867e1a2d4b904d20165083f",
+    "size_bytes": 18424
+  },
+  "frozen_inputs": {
+    "targets_path": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2/preview/attempts/slurm-11526905/frozen_targets.tsv",
+    "targets_sha256": "7f847fd897ed6dda1cffaba5d299075e388f8b78a8e324285e0453241890f621",
+    "target_identifier_count": 279,
+    "target_occurrence_mass": 6432583,
+    "identifier_audit_path": "outputs/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/preview/attempts/audit-slurm-11524255/identifier_audit.tsv",
+    "identifier_audit_sha256": "c32dd5d6236282c2851676995a5ae0dac4394ff253d9768d396a33731c9da67b",
+    "identifier_audit_count": 6727,
+    "excluded_path": "outputs/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/preview/attempts/audit-slurm-11524255/label_contract_excluded.tsv",
+    "excluded_sha256": "0814b1d2c9ed2c36fae36a7d749931effd6792f1fb11fa7e006baf16e80fee3d",
+    "excluded_identifier_count": 10,
+    "excluded_occurrence_mass": 43728,
+    "x13_path": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2/preview/attempts/slurm-11526905/x13_audit_only.tsv",
+    "x13_sha256": "22185b7850f85875f7ea7b73db15103f052996204d256f59c356f8013ddf8377",
+    "x13_identifier": "X13_LINE",
+    "x13_occurrence_mass": 686,
+    "job11526905_audit_path": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2/result_semantic_audit.json",
+    "job11526905_audit_sha256": "735bd8fc843cc78873e41feaf8ef51dadacc35df05ad2881b492447579dafa64",
+    "direct_labeler_path": "scripts/experiments/SF-DIRECT-BASELINE-SCREEN-20260811-R2/direct_s0_data.py",
+    "direct_labeler_sha256": "e61cf6185a08505d7e8d8e529c9882d1b2138b9882ff9194ec6e1042d54ee9d7",
+    "evaluator_contract_path": "docs/19_evaluator_contract.md",
+    "evaluator_contract_sha256": "fe0d63e9b525a0bac5ee03b3b88b83385fc4582f8a1b3f9802d171c72594ade2"
+  },
+  "preliminary_probe_expectation": {
+    "authoritative_hit_identifier_count": 52,
+    "resolved_unique_identifier_count": 50,
+    "ambiguous_identifier_count": 2,
+    "ambiguous_identifiers": ["L1HS", "L1PREC2"],
+    "expected_terminal": "IDENTITY_SOURCE_TYPED_BLOCK",
+    "scientific_result_precomputed": false
+  },
+  "authorization": {
+    "full_catalog_stage_authorized": false,
+    "homology_split_authorized": false,
+    "data_stage_authorized": false,
+    "gpu_authorized": false,
+    "s1_authorized": false
+  },
+  "resource_contract": {"cpus": 1, "memory_gib": 2, "walltime_minutes": 20, "gpus": 0},
+  "experiment_doc_path": "docs/experiments/SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-20260812-R1.md",
+  "code_review_gate_path": "outputs/SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-20260812-R1/code_review_gate.json",
+  "slurm_log_dir": "outputs/SF-DFAM39-AUTHORITATIVE-CROSSWALK-AUDIT-20260812-R1/preview/logs",
+  "owner_lock_name": ".authoritative-crosswalk-owner.lock"
+}

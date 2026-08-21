@@ -1,0 +1,17 @@
+species_code	scientific_name	ucsc_db	source_format	local_source	source_url	notes
+human_hg19	Homo sapiens	hg19	ucsc_table	software_outputs/repeatmasker_dfam/ucsc_reference_repeatmasker/human/hg19/raw/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz	human legacy control
+human_hg38	Homo sapiens	hg38	ucsc_table	software_outputs/repeatmasker_dfam/ucsc_reference_repeatmasker/human/hg38/raw/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/rmsk.txt.gz	human legacy control
+human_hs1	Homo sapiens	hs1	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/animals/human/hs1.repeatMasker.out.gz	https://hgdownload.soe.ucsc.edu/goldenPath/hs1/bigZips/hs1.repeatMasker.out.gz	human T2T control; UCSC database/rmsk.txt.gz not available
+mouse	Mus musculus	mm39	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/mouse/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/mm39/database/rmsk.txt.gz	audit species
+rat	Rattus norvegicus	rn7	ucsc_table		https://hgdownload.soe.ucsc.edu/goldenPath/rn7/database/rmsk.txt.gz	audit species
+dog	Canis lupus familiaris	canFam6	ucsc_table		https://hgdownload.soe.ucsc.edu/goldenPath/canFam6/database/rmsk.txt.gz	audit species
+chicken	Gallus gallus	galGal6	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/galGal6/database/rmsk.txt.gz	audit species
+zebrafish	Danio rerio	danRer11	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/zebrafish/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/danRer11/database/rmsk.txt.gz	audit species
+fruit_fly	Drosophila melanogaster	dm6	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/fruit_fly/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/dm6/database/rmsk.txt.gz	audit species
+c_elegans	Caenorhabditis elegans	ce11	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/c_elegans/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/ce11/database/rmsk.txt.gz	audit species
+pig	Sus scrofa	susScr11	ucsc_table		https://hgdownload.soe.ucsc.edu/goldenPath/susScr11/database/rmsk.txt.gz	audit species
+cattle	Bos taurus	bosTau9	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/cattle/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/bosTau9/database/rmsk.txt.gz	audit species
+horse	Equus caballus	equCab3	ucsc_table		https://hgdownload.soe.ucsc.edu/goldenPath/equCab3/database/rmsk.txt.gz	audit species
+western_clawed_frog	Xenopus tropicalis	xenTro10	ucsc_table	.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/rmsk.txt.gz	https://hgdownload.soe.ucsc.edu/goldenPath/xenTro10/database/rmsk.txt.gz	audit species
+western_honey_bee	Apis mellifera	apiMel2	ucsc_table		https://hgdownload.soe.ucsc.edu/goldenPath/apiMel2/database/rmsk.txt.gz	old UCSC snapshot
+red_flour_beetle	Tribolium castaneum	triCas2	repeatmasker_out	.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.fa.out.gz	https://hgdownload.soe.ucsc.edu/goldenPath/triCas2/bigZips/triCas2.fa.out.gz	old UCSC bigZips RepeatMasker snapshot; database/rmsk.txt.gz unavailable

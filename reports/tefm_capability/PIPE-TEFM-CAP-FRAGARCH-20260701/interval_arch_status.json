@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "gate_pass_panels": [],
+  "promotion_gate_pass": false,
+  "gate_definition": "candidate beats CE and crf_style_penalty4 on segment-F1@0.8 and boundary-F1@5bp; missed_true_rate <= CE+0.03; deleted_true_backed_fraction <= threshold; pred_true_backed_rate retained",
+  "exp_id": "PIPE-TEFM-CAP-FRAGARCH-20260701",
+  "seed": 42,
+  "device": "cuda",
+  "init_model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "train_data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick",
+  "eval_panel": [
+    "human_test:software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/human_H0_w4096_quick/test/data.jsonl.gz",
+    "mouse_quick:software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/mouse_A1_w4096_quick/test/data.jsonl.gz"
+  ],
+  "metrics": "reports/tefm_capability/PIPE-TEFM-CAP-FRAGARCH-20260701/interval_arch_metrics.tsv",
+  "new_architectures": [
+    "boundary_proposal",
+    "anchor_free_interval"
+  ],
+  "same_panel_baselines": [
+    "ce_raw",
+    "hmm_penalty2",
+    "crf_style_penalty4"
+  ],
+  "historical_references": [
+    "prior_interval_survival_decoder",
+    "prior_retention_constrained_decoder"
+  ],
+  "overlap_center_merge_note": "Deferred to Stage-2 because this quick panel is non-overlap data; not fabricated as same-panel result."
+}

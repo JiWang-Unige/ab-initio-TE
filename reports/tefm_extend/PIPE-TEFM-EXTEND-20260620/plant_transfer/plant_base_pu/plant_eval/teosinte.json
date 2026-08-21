@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.6908457438151042,
+  "te_recall": 1.0,
+  "te_f1": 0.8171599879434643,
+  "bg_precision": 0.0,
+  "bg_recall": 0.0,
+  "bg_f1": 0.0,
+  "macro_f1": 0.40857999397173217,
+  "te_auprc": 0.7551314092361472,
+  "pred_te_rate": 1.0,
+  "true_te_rate": 0.6908457438151042,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_base_pu",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/plant_eval_only/teosinte",
+  "stage": "plant_base_pu_to_plant_eval",
+  "species": "teosinte",
+  "window": 4096,
+  "n_windows": 1200
+}

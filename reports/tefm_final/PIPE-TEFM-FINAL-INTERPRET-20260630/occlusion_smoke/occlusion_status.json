@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "device": "cuda",
+  "n_fragments": 34,
+  "n_detail_rows": 612,
+  "chunk": 64,
+  "binary_context": "fragment_length_plus_special_tokens",
+  "sf5_context": "fragment_length_plus_special_tokens",
+  "outputs": {
+    "detail": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/occlusion_smoke/occlusion_detail.tsv",
+    "summary": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/occlusion_smoke/occlusion_summary.tsv"
+  }
+}

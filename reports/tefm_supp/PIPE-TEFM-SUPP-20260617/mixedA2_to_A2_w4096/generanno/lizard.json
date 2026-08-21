@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.1417790505133893,
+  "te_recall": 0.9744348241984675,
+  "te_f1": 0.24754116982769775,
+  "bg_f1": 0.7565185065603465,
+  "macro_f1": 0.5020298381940221,
+  "te_auprc": 0.1427398976844377,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_mixedA2_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/lizard",
+  "n_windows": 1200,
+  "stage": "mixedA2_to_A2_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "lizard"
+}

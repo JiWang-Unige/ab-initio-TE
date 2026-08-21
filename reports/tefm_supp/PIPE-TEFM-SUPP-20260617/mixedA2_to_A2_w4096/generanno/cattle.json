@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9248404739773907,
+  "te_recall": 0.8836221275225706,
+  "te_f1": 0.9037615779912517,
+  "bg_f1": 0.9228859349644742,
+  "macro_f1": 0.9133237564778629,
+  "te_auprc": 0.9618056853276544,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_mixedA2_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_A2_w4096/cattle",
+  "n_windows": 1200,
+  "stage": "mixedA2_to_A2_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "cattle"
+}

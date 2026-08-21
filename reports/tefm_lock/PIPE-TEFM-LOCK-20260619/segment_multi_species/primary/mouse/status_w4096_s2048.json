@@ -1,0 +1,11 @@
+{
+  "exp_id": "PIPE-TEFM-LOCK-20260619",
+  "window": 4096,
+  "stride": 2048,
+  "n_windows": 600,
+  "chroms": [
+    "chr1"
+  ],
+  "summary_tsv": "reports/tefm_lock/PIPE-TEFM-LOCK-20260619/segment_multi_species/primary/mouse/summary_w4096_s2048.tsv",
+  "edge_tsv": "reports/tefm_lock/PIPE-TEFM-LOCK-20260619/segment_multi_species/primary/mouse/edge_bins_w4096_s2048.tsv"
+}

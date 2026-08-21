@@ -1,0 +1,8 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/NTv3_8M_pre_8kb",
+  "kind": "wrapper_mlm",
+  "ok": true,
+  "tokenizer_class": "NTv3Tokenizer",
+  "model_class": "WrappedTokenClassifier",
+  "n_params": 7692989
+}

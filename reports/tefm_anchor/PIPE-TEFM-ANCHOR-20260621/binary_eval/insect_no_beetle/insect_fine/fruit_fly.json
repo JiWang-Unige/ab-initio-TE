@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9041293896212387,
+  "te_recall": 0.9893426665996573,
+  "te_f1": 0.944818571090276,
+  "bg_f1": 0.8859151752072785,
+  "macro_f1": 0.9153668731487772,
+  "te_auprc": 0.989483606118654,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/insect_no_beetle_4096",
+  "data_dir": "software_outputs/tefm_anchor/PIPE-TEFM-ANCHOR-20260621/data/insect_primary_eval_fine/fruit_fly",
+  "n_windows": 1200,
+  "stage": "insect_no_beetle_to_insect_fine",
+  "model_key": "generanno",
+  "model": "insect_no_beetle_4096",
+  "window": 4096,
+  "species": "fruit_fly"
+}

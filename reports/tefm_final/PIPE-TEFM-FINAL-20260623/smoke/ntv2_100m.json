@@ -1,0 +1,8 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-100m-multi-species",
+  "kind": "auto_token",
+  "ok": true,
+  "tokenizer_class": "EsmTokenizer",
+  "model_class": "EsmForTokenClassification",
+  "n_params": 95519587
+}

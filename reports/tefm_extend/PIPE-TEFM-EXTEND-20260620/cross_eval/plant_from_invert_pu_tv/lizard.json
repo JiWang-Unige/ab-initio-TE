@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.08982915819929453,
+  "te_recall": 0.9951123472199018,
+  "te_f1": 0.16478326991453718,
+  "bg_precision": 0.9990271206422568,
+  "bg_recall": 0.33234698665340834,
+  "bg_f1": 0.49876837969292265,
+  "macro_f1": 0.3317758248037299,
+  "te_auprc": 0.1493344928404609,
+  "pred_te_rate": 0.6879899088541667,
+  "true_te_rate": 0.0621051025390625,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/lizard",
+  "stage": "plant_model_cross_eval",
+  "species": "lizard",
+  "window": 4096,
+  "n_windows": 1200
+}

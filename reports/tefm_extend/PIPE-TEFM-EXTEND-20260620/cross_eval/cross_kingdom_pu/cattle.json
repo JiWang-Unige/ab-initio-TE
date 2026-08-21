@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.4549784342447917,
+  "te_recall": 1.0,
+  "te_f1": 0.6254091793201715,
+  "bg_precision": 0.0,
+  "bg_recall": 0.0,
+  "bg_f1": 0.0,
+  "macro_f1": 0.31270458966008574,
+  "te_auprc": 0.4482207370006193,
+  "pred_te_rate": 1.0,
+  "true_te_rate": 0.4549784342447917,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/cross_kingdom_pu",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/cattle",
+  "stage": "cross_kingdom_eval",
+  "species": "cattle",
+  "window": 4096,
+  "n_windows": 1200
+}

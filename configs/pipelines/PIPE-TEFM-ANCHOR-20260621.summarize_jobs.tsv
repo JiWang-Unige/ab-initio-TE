@@ -1,0 +1,1 @@
+summarize_anchor	python3 pipelines/PIPE-TEFM-ANCHOR-20260621/summarize_results.py --config configs/pipelines/PIPE-TEFM-ANCHOR-20260621.yaml

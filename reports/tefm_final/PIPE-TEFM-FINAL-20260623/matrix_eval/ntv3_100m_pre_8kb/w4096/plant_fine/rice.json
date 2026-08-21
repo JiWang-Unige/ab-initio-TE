@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8068506476098563,
+  "te_recall": 0.07620362151670815,
+  "te_f1": 0.13925518174956011,
+  "bg_f1": 0.8432576623109006,
+  "macro_f1": 0.49125642203023034,
+  "te_auprc": 0.5096202957745456,
+  "n_labeled_tokens": 4910487,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv3_100m_pre_8kb_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/plant_fine_w4096/rice",
+  "n_windows": 1200,
+  "stage": "ntv3_100m_pre_8kb_w4096_to_plant_fine",
+  "model_key": "ntv3_100m_pre_8kb",
+  "model": "ntv3_100m_pre_8kb_H0_w4096_seed42",
+  "window": 4096,
+  "species": "rice"
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": "TEFM-SF-DFAM-P3-SHARD-PREFLIGHT-1.0.0",
+  "exp_id": "SF-DFAM-P3-SHARD-THROUGHPUT-PREFLIGHT-20260812-R1",
+  "profile": "cpu_h5_shard_throughput_preflight",
+  "claim_eligible": false,
+  "project_root": "/home/users/j/jwang/ab-initio-TE",
+  "preview_root": "outputs/SF-DFAM-P3-SHARD-THROUGHPUT-PREFLIGHT-20260812-R1/preview",
+  "slurm_log_dir": "outputs/SF-DFAM-P3-SHARD-THROUGHPUT-PREFLIGHT-20260812-R1/preview/logs",
+  "owner_lock_name": ".shard-preflight-owner.lock",
+  "source_h5": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions/dfam39_full.3.h5",
+  "source_h5_size_bytes": 63939647016,
+  "source_partition": 3,
+  "source_database": {"name": "Dfam", "db_version": "3.9", "famdb_version": "2.0.0"},
+  "layout_manifest": "scripts/experiments/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/FROZEN_DFAM_H5_INDEX_LAYOUT_V1.json",
+  "layout_manifest_sha256": "347888519fda03d115a3f271f1ec71e6407b2fc82ec4179fdf00e32349fac3e3",
+  "rmlib_config": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions/rmlib.config",
+  "rmlib_config_sha256": "9f789bae6b7d9199382510120305c2099e3928a686f9e06cef4dc85f8846c545",
+  "evaluator_contract": "docs/19_evaluator_contract.md",
+  "evaluator_contract_sha256": "fe0d63e9b525a0bac5ee03b3b88b83385fc4582f8a1b3f9802d171c72594ade2",
+  "parent_r0_config": "configs/SF-DFAM-P3-IDENTITY-RECOVERY-20260812-R1.yaml",
+  "parent_r0_config_sha256": "db33924089882afc2f959f71d2326f8a3848eee58cbb08243e63a33e76e1ff84",
+  "r0_observed_telemetry": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-20260812-R1/metrics.audited.json",
+  "r0_observed_telemetry_sha256": "d5605364dd19e86934feef046f0fe57a5e96b949a84b31fbb8f3e713f4f6e32d",
+  "topology": {
+    "unit_definition": "Families/Aux/<bin> and Families/DR/<prefix1>/<prefix2>",
+    "expected_unit_count": 35,
+    "ordered_unit_list_sha256": "bfea5e8dfc69eb5f6a38f2fb118a8a59b79050060cfe8078a8014459b10e94c2",
+    "expected_full_dataset_count": 321856
+  },
+  "materialization": {
+    "rebuilds": 2,
+    "assignment_first_pass": "ordered topology units round-robin over 4 workers",
+    "assignment_second_pass": "largest-unit-first greedy balance using first-pass exact counts",
+    "independent_read_only_h5_handle_per_worker": true,
+    "per_rebuild_timeout_seconds": 180,
+    "path_discovery_is_included_in_conservative_eta": true,
+    "first_pass_is_correctness_calibration_not_formal_runtime": true
+  },
+  "workload": {
+    "representative_dataset_paths": 8192,
+    "selection": "exact-count proportional stratified sampling with every nonempty topology unit covered and deterministic midpoint indices",
+    "shards": 4,
+    "assignment": "uint64(sha256(dataset_path)[0:16]) mod 4",
+    "batch_size": 256,
+    "serial_child_timeout_seconds": 540,
+    "parallel_child_timeout_seconds": 180,
+    "cache_and_extrapolation_safety_factor": 4.0
+  },
+  "feasibility": {
+    "allocation_seconds": 1200,
+    "reserved_tests_and_publish_seconds": 120,
+    "minimum_headroom_fraction": 0.25,
+    "maximum_conservative_eta_seconds": 900,
+    "r0_observed_datasets": 30000,
+    "r0_observed_elapsed_seconds": 1480,
+    "r0_projected_full_scan_seconds": 15878,
+    "maximum_explainable_parallel_speedup": 4.0,
+    "maximum_allowed_known_path_speedup_vs_r0": 4.0,
+    "performance_timeout_is_valid_negative": true
+  },
+  "authorization": {
+    "r0_authorized": false,
+    "r1_authorized": false,
+    "r2_authorized": false,
+    "gpu_authorized": false,
+    "s1_authorized": false,
+    "scientific_identity_conclusion_authorized": false
+  },
+  "prohibited_actions": ["target_resolution", "recovered_missing_absence_terminal", "scientific_identity_conclusion",
+                           "full_partition_identity_resolution", "r0_execution", "r1_execution", "r2_execution", "gpu_execution", "s1_execution"],
+  "resource_contract": {"gpus": 0, "cpus": 4, "memory_gib": 16, "walltime_minutes": 20}
+}

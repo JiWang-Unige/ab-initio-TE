@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.660174235245005,
+  "te_recall": 0.9426460606693469,
+  "te_f1": 0.7765195434514967,
+  "bg_f1": 0.986550928040428,
+  "macro_f1": 0.8815352357459623,
+  "te_auprc": 0.8822696721115963,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_fine/brachypodium",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_plant_fine",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "brachypodium"
+}

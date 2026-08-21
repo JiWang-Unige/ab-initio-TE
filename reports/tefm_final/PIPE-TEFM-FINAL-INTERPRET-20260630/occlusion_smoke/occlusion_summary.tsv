@@ -1,0 +1,9 @@
+contrast_role	source	model	n_occluded_chunks	mean_delta_score	max_delta_score	min_delta_score	mean_abs_delta_score
+high_score_strict_bg_vs_matched_bg:case	high_score_strict_bg	binary	72	0.005333963619907283	0.11047983169555664	-0.014236599206924438	0.006485893242319839
+high_score_strict_bg_vs_matched_bg:case	high_score_strict_bg	sf5	72	0.0	0.0	0.0	0.0
+high_score_strict_bg_vs_matched_bg:control	background_strict_negative	binary	72	-0.0005501475308038709	0.011714554857462645	-0.028505688533186913	0.0021857695375931347
+high_score_strict_bg_vs_matched_bg:control	background_strict_negative	sf5	72	-0.002170138888888889	0.0	-0.15625	0.002170138888888889
+unknown_main4like_vs_matched_known_main4:case	unknown_annotation	binary	64	0.09157231589779258	0.32315754890441895	-0.03941059112548828	0.09475209517404437
+unknown_main4like_vs_matched_known_main4:case	unknown_annotation	sf5	64	0.302825927734375	0.728515625	-0.009765625	0.303131103515625
+unknown_main4like_vs_matched_known_main4:control	known_main4	binary	64	0.06980948982163682	0.4152650237083435	-0.14993977546691895	0.07609242431863095
+unknown_main4like_vs_matched_known_main4:control	known_main4	sf5	64	0.06298828125	0.7734375	0.0	0.06298828125

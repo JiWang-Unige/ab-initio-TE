@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8453449586351158,
+  "te_recall": 0.19470191680972027,
+  "te_f1": 0.3165055108526608,
+  "bg_f1": 0.8570121893091535,
+  "macro_f1": 0.5867588500809071,
+  "te_auprc": 0.7040897572321463,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w4096/rice",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "rice"
+}

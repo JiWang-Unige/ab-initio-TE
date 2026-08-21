@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.657528162650932,
+  "te_recall": 0.49543291302835535,
+  "te_f1": 0.5650860204945004,
+  "bg_f1": 0.9472300865776174,
+  "macro_f1": 0.7561580535360589,
+  "te_auprc": 0.6029840065658596,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/soybean",
+  "n_windows": 1200,
+  "stage": "invert_cross_eval",
+  "model_key": "generanno",
+  "model": "TFREPAIR_invert_boost_animal_4096_seed42",
+  "window": 4096,
+  "species": "soybean"
+}

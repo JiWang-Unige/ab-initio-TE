@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.8064288556506227,
+  "te_recall": 0.19427706100825237,
+  "te_f1": 0.3131202191971405,
+  "bg_f1": 0.7426077882442014,
+  "macro_f1": 0.527864003720671,
+  "te_auprc": 0.7642608427024801,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/opossum",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "opossum"
+}

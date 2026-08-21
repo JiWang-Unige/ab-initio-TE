@@ -1,0 +1,133 @@
+{
+  "schema_version": "TEFM-SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-2.0.0",
+  "exp_id": "SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2",
+  "profile": "cpu_asset_identity_recovery_sharded_resumable",
+  "claim_eligible": false,
+  "project_root": "/home/users/j/jwang/ab-initio-TE",
+  "project_root_alias_contract": {
+    "canonical_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+    "allowed_aliases": [
+      "/home/users/j/jwang/ab-initio-TE",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE"
+    ]
+  },
+  "preview_root": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2/preview",
+  "checkpoint_root": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2/checkpoints",
+  "slurm_log_dir": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-SHARDED-20260812-R2/preview/logs",
+  "owner_lock_name": ".sharded-recovery-owner.lock",
+
+  "parent_r0_config": "configs/SF-DFAM-P3-IDENTITY-RECOVERY-20260812-R1.yaml",
+  "parent_r0_config_sha256": "db33924089882afc2f959f71d2326f8a3848eee58cbb08243e63a33e76e1ff84",
+  "parent_r0_evaluator": "scripts/experiments/SF-DFAM-P3-IDENTITY-RECOVERY-20260812-R1/recover_p3_identities.py",
+  "parent_r0_evaluator_sha256": "4ea7ae30be25930ce5554a2bd87fdcce03ddb6458962d40750269081c0d173e9",
+  "parent_r0_observed_telemetry": "outputs/SF-DFAM-P3-IDENTITY-RECOVERY-20260812-R1/metrics.audited.json",
+  "parent_r0_observed_telemetry_sha256": "d5605364dd19e86934feef046f0fe57a5e96b949a84b31fbb8f3e713f4f6e32d",
+
+  "identity_config": "configs/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1.yaml",
+  "identity_config_sha256": "7a827c4288c5c3d90ae14905744de5e32237d0939c2c9f627aeb815b76dcd626",
+  "identity_evaluator": "scripts/experiments/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/identity_provenance_audit.py",
+  "identity_evaluator_sha256": "fad6b175dedec985079436e70a4fd4b71c5e651c123e776542e0c28f796056f9",
+  "identity_layout_manifest": "scripts/experiments/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/FROZEN_DFAM_H5_INDEX_LAYOUT_V1.json",
+  "identity_layout_manifest_sha256": "347888519fda03d115a3f271f1ec71e6407b2fc82ec4179fdf00e32349fac3e3",
+  "identity_payload": "outputs/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/preview/attempts/audit-slurm-11524255/PAYLOAD_MANIFEST.json",
+  "identity_payload_sha256": "d5b30fe7d749aacec900a32282d1a4d9bc3b00d2bb286c7eb54c587c63d3f489",
+  "identity_identifier_audit": "outputs/SF-IDENTITY-PROVENANCE-AUDIT-20260811-R1/preview/attempts/audit-slurm-11524255/identifier_audit.tsv",
+  "identity_identifier_audit_sha256": "c32dd5d6236282c2851676995a5ae0dac4394ff253d9768d396a33731c9da67b",
+  "evaluator_contract": "docs/19_evaluator_contract.md",
+  "evaluator_contract_sha256": "fe0d63e9b525a0bac5ee03b3b88b83385fc4582f8a1b3f9802d171c72594ade2",
+
+  "target_resolution_status": "missing",
+  "expected_target_identifier_count": 279,
+  "expected_target_occurrence_mass": 6432583,
+  "excluded_existing_ambiguity_identifiers": ["X13_LINE"],
+  "audit_ambiguity_identifiers": ["X13_LINE"],
+  "expected_x13_occurrence_mass": 686,
+
+  "famdb_partition": 3,
+  "famdb_partition_path": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions/dfam39_full.3.h5",
+  "famdb_partition_normalized_realpath": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_model/RepeatMasker_Libraries_te_benchmark/famdb/dfam39_full.3.h5",
+  "famdb_partition_size_bytes": 63939647016,
+  "famdb_source_identity": {
+    "symlink_target_sha256": "217f18bbcf35bc1e13aeac4c90f635ab33f9f85aa76f9df3de94e12bd739da50",
+    "resolved_device": 42,
+    "resolved_inode": 3873985988255185360,
+    "resolved_size": 63939647016,
+    "resolved_mtime_ns": 1781725800000000000,
+    "resolved_mode_octal": "0o644",
+    "full_64gb_content_sha256_available": false,
+    "limitation": "inode+mtime+size+H5 metadata+layout+rmlib detect ordinary same-size mutation, but are not cryptographic full-content identity"
+  },
+  "famdb_expected_family_dataset_count": 321856,
+  "famdb_expected_consensus_attribute_count": 321856,
+  "famdb_expected_model_attribute_count": 321818,
+  "famdb_database": {"name": "Dfam", "db_version": "3.9", "famdb_version": "2.0.0"},
+  "famdb_rmlib_config": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions/rmlib.config",
+  "famdb_rmlib_config_sha256": "9f789bae6b7d9199382510120305c2099e3928a686f9e06cef4dc85f8846c545",
+
+  "topology": {
+    "unit_definition": "Families/Aux/<bin> and Families/DR/<prefix1>/<prefix2>",
+    "expected_families_root_keys": ["Aux", "DR"],
+    "ordered_unit_list_sha256": "bfea5e8dfc69eb5f6a38f2fb118a8a59b79050060cfe8078a8014459b10e94c2",
+    "expected_unit_count": 35,
+    "estimated_count_semantics": "uniform prior from frozen total; scheduling only, never scientific evidence",
+    "ordered_units_with_estimated_counts": [
+      ["Families/Aux/ac", 9196], ["Families/Aux/al", 9196], ["Families/Aux/d2", 9196],
+      ["Families/Aux/fl", 9196], ["Families/Aux/fr", 9196], ["Families/Aux/gs", 9196],
+      ["Families/Aux/hs", 9196], ["Families/Aux/is", 9196], ["Families/Aux/su", 9196],
+      ["Families/Aux/tn", 9196], ["Families/Aux/tr", 9196], ["Families/Aux/u1", 9196],
+      ["Families/DR/00/06", 9196], ["Families/DR/00/07", 9196], ["Families/DR/00/12", 9196],
+      ["Families/DR/00/13", 9196], ["Families/DR/00/14", 9196], ["Families/DR/00/15", 9196],
+      ["Families/DR/00/17", 9196], ["Families/DR/00/20", 9196], ["Families/DR/00/21", 9196],
+      ["Families/DR/00/22", 9196], ["Families/DR/00/23", 9196], ["Families/DR/00/24", 9196],
+      ["Families/DR/00/25", 9196], ["Families/DR/00/26", 9196], ["Families/DR/00/27", 9196],
+      ["Families/DR/00/28", 9196], ["Families/DR/00/29", 9196], ["Families/DR/00/30", 9196],
+      ["Families/DR/00/31", 9196], ["Families/DR/00/32", 9195], ["Families/DR/00/33", 9195],
+      ["Families/DR/00/34", 9195], ["Families/DR/00/38", 9195]
+    ]
+  },
+
+  "resolver_contract": {
+    "method": "index-independent exhaustive Families dataset attribute scan",
+    "match": "case-sensitive exact name attribute equality",
+    "required_fields": ["accession", "version", "consensus"],
+    "prefix_guess_forbidden": true,
+    "casefold_forbidden": true,
+    "copy_derived_proxy_forbidden": true,
+    "clustering_forbidden": true,
+    "split_construction_forbidden": true,
+    "model_execution_forbidden": true
+  },
+  "resume_contract": {
+    "unit_checkpoint_publish": "unit-specific temporary directory atomically renamed to COMPLETE directory",
+    "complete_unit_requires_all_pin_and_payload_hashes": true,
+    "partial_unit_policy": "quarantine_then_recompute",
+    "stale_pin_or_source_policy": "fail_closed_integrity",
+    "locally_tampered_complete_payload_policy": "quarantine_only_bad_unit_then_recompute",
+    "partial_identity_publication_forbidden": true
+  },
+  "runtime": {
+    "workers": 4,
+    "work_completion_cutoff_seconds": 8100,
+    "new_unit_claim_cutoff_seconds": 7980,
+    "sigterm_before_walltime_seconds": 900,
+    "sigterm_checkpoint_grace_seconds": 780,
+    "publish_reserve_seconds": 120,
+    "child_poll_seconds": 0.2
+  },
+  "resource_evidence": {
+    "allocation_seconds": 10800,
+    "minimum_headroom_fraction": 0.25,
+    "headroom_target_seconds": 8100,
+    "observed_serial_bound_seconds": 15878,
+    "minimum_required_parallel_speedup": 1.9603,
+    "beegfs_speedup_guaranteed": false,
+    "checkpointing_controls_retry_risk_only": true
+  },
+  "authorization": {
+    "full_catalog_stage_authorized": false,
+    "homology_split_authorized": false,
+    "gpu_authorized": false,
+    "s1_authorized": false
+  },
+  "resource_contract": {"gpus": 0, "cpus": 4, "memory_gib": 48, "walltime_hours": 3}
+}

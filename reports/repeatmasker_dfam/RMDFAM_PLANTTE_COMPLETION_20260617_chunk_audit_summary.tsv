@@ -1,0 +1,8 @@
+species_code	expected_chunks	complete_markers	final_complete_chunks	missing_final_chunks	missing_chunk_ids	species_complete_marker	merged_out_present	merged_gff_present	merged_tbl_present	merged_masked_present	status	species_output_dir
+arabidopsis_lyrata	5	5	5	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/arabidopsis_lyrata
+brachypodium	5	5	5	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/brachypodium
+setaria_italica	9	9	9	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/setaria_italica
+sorghum	11	11	11	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/sorghum
+soybean	21	21	21	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/soybean
+teosinte	35	35	35	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/teosinte
+wild_rice	7	7	7	0		1	1	1	1	1	OK	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/RMDFAM_PLANTTE_COMPLETION_20260617/wild_rice

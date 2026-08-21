@@ -1,0 +1,129 @@
+{
+  "_comment": "PROPOSAL ONLY. Requires tri-review and explicit user approval before replacing ACTIVE_GOAL.json.",
+  "program": "TEFM_direct_superfamily_first",
+  "goal_id": "TEFM_S_ACCESSION_DATA_FOUNDATION_R1",
+  "status": "active",
+  "scope": "milestone",
+  "validation_mode": "ordered_evidence_milestone_v1",
+  "goal": "Build a leakage-safe, accession-preserving annotation data foundation before evaluating direct superfamily S0; hierarchical S1 remains forbidden.",
+  "objective": "Close six ordered CPU-only gates. This milestone is non-claim and cannot authorize direct-S0 execution, training, GPU, full/scale, or S1.",
+  "primary_metric": "data_foundation_gate_count_passed",
+  "direction": "higher",
+  "milestone_gate": {
+    "schema_version": "ordered_milestone_gate_v1",
+    "snapshot_schema_version": "ordered_milestone_progress_snapshot_v2",
+    "primary_metric": "data_foundation_gate_count_passed",
+    "primary_type": "integer_count",
+    "ordered_flags": [
+      "leaf_exact_access_gate_pass",
+      "leaf_adapter_syntax_gate_pass",
+      "paired_repeatmasker_roundtrip_gate_pass",
+      "representative_annotation_gate_pass",
+      "accession_preserving_dataset_gate_pass",
+      "homology_split_data_gate_pass"
+    ],
+    "gate_order_sha256": "665fd1b9d992d75fb53ac1e60b67a782ea4f3196260c08b02b02226dff466e07",
+    "required_zero_metrics": [
+      "training_executed", "gpu_executed", "gpu_hours", "direct_s0_executed", "s1_executed",
+      "claim_eligible", "training_authorized", "gpu_authorized", "direct_s0_authorized",
+      "s1_authorized", "claim_authorized", "full_scale_authorized",
+      "silent_identifier_substitution_count", "denominator_shrinkage_count",
+      "homology_component_overlap_count", "test_calibration_count"
+    ],
+    "execution_metrics": [
+      "leaf_exact_access_executed", "leaf_adapter_syntax_executed",
+      "paired_repeatmasker_roundtrip_executed", "repeatmasker_executed", "annotation_executed",
+      "geometry_evaluated", "representative_annotation_executed", "representative_prefreeze_verified",
+      "occurrence_categories_exact_once_verified", "accession_dataset_executed", "data_stage_executed",
+      "occurrence_ledger_conservation_verified", "per_p_identity_completeness_verified",
+      "raw_class_label_source_verified", "u_x13_boundary_verified", "homology_split_executed",
+      "homology_data_audit_executed", "label_blind_all_species_homology_verified",
+      "component_before_split_verified", "zero_component_overlap_verified",
+      "component_conflicts_typed_block_verified"
+    ],
+    "route_stop_metric": "route_stop_required",
+    "continuation_metric": "continuation_allowed",
+    "genesis_snapshot": {
+      "path": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/progress_chain/progress-02-6e7e24f4a6c3b8f38cb9be56d4d1f91385620b830ccef2dfa8a7c14af3652c62.json",
+      "sha256": "6e7e24f4a6c3b8f38cb9be56d4d1f91385620b830ccef2dfa8a7c14af3652c62",
+      "count": 2
+    },
+    "snapshot_metrics_fields": {"path": "progress_snapshot_path", "sha256": "progress_snapshot_sha256"},
+    "progress_chain_directory": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/progress_chain",
+    "current_pointer": {"path": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/CURRENT", "schema_version": "ordered_milestone_current_v1", "atomic_replace_required": true},
+    "carry_forward_reattestation": {
+      "path": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/CARRY_FORWARD_REATTESTATION.json",
+      "sha256": "5db46ec5544ea2ffb9a3fdf3330b1f34bba30dac5d3a3eb0f71ffc8db429f2f3",
+      "schema_version": "carry_forward_reattestation_v1"
+    },
+    "scientific_contract": {
+      "path": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/SCIENTIFIC_GATE_CONTRACT.json",
+      "sha256": "5a9cfe0b4a817ff2244315e38c282621ca2f53bd5299a2822ce17fc40aac5389",
+      "schema_version": "s_data_foundation_scientific_gates_v1"
+    },
+    "advancement_protocol": {
+      "path": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/build_progress.py",
+      "sha256": "b2556dc8bddb3049ad2d3e7e8dc4ae7f4f0baa7a22fd687ec28b058fcd076289",
+      "commands": ["--check", "--advance-evidence"]
+    },
+    "terminal_status": "success",
+    "human_gate_required": true,
+    "claim_full_scale_gpu_s1_authorized": false
+  },
+  "success_criteria": [
+    {"metric": "data_foundation_gate_count_passed", "op": "==", "threshold": 6},
+    {"metric": "leaf_exact_access_gate_pass", "op": "==", "threshold": 1},
+    {"metric": "leaf_adapter_syntax_gate_pass", "op": "==", "threshold": 1},
+    {"metric": "paired_repeatmasker_roundtrip_gate_pass", "op": "==", "threshold": 1},
+    {"metric": "representative_annotation_gate_pass", "op": "==", "threshold": 1},
+    {"metric": "accession_preserving_dataset_gate_pass", "op": "==", "threshold": 1},
+    {"metric": "homology_split_data_gate_pass", "op": "==", "threshold": 1}
+  ],
+  "guardrails": [
+    {"metric": "training_executed", "op": "==", "threshold": 0},
+    {"metric": "gpu_executed", "op": "==", "threshold": 0},
+    {"metric": "gpu_hours", "op": "==", "threshold": 0},
+    {"metric": "direct_s0_executed", "op": "==", "threshold": 0},
+    {"metric": "s1_executed", "op": "==", "threshold": 0},
+    {"metric": "claim_eligible", "op": "==", "threshold": 0},
+    {"metric": "training_authorized", "op": "==", "threshold": 0},
+    {"metric": "gpu_authorized", "op": "==", "threshold": 0},
+    {"metric": "direct_s0_authorized", "op": "==", "threshold": 0},
+    {"metric": "s1_authorized", "op": "==", "threshold": 0},
+    {"metric": "claim_authorized", "op": "==", "threshold": 0},
+    {"metric": "full_scale_authorized", "op": "==", "threshold": 0},
+    {"metric": "silent_identifier_substitution_count", "op": "==", "threshold": 0},
+    {"metric": "denominator_shrinkage_count", "op": "==", "threshold": 0},
+    {"metric": "homology_component_overlap_count", "op": "==", "threshold": 0},
+    {"metric": "test_calibration_count", "op": "==", "threshold": 0}
+  ],
+  "parked_metadata": {
+    "source_active_goal_sha256": "80b27cae844f75b60f1b97603456b0d1c2922dd07c8878b978e9760fdeffad94",
+    "anchors_evaluated": false,
+    "screen_anchor": {"_note": "This goal is non-claim. Screen comparisons are against these internal safety gates only; screen profile can never claim SOTA.", "metric": "selector_top2_contains_best", "value": 0.85, "direction": "higher", "source": "user-defined conservative router gate for bounded publication-validation support"},
+    "screen_anchor_sha256": "2231e7c53e9653801841987fe8bac73fddc07a34ceecd7375fd91f9bd11d914b",
+    "sota_benchmark": {"_note": "Not applicable for this support milestone. This placeholder intentionally prevents SOTA interpretation.", "metric": "selector_top2_contains_best", "value": 0.95, "direction": "higher", "strict_exceed": true, "source": "no published SOTA claim target for this milestone"},
+    "sota_benchmark_sha256": "2a52965478f7a0e4ae1c41cf12064f18a06e8434a11d5119b0bfd2a976e5cc47",
+    "reason": "Previous anchors are immutable migration provenance only and are never evaluated by ordered_evidence_milestone_v1."
+  },
+  "claim_policy": {"sota_claim_allowed": false, "screen_profile_can_claim": false, "publication_use": "data-foundation engineering evidence only"},
+  "current_frozen_progress": {
+    "status": "REVIEWED_AUTHORITATIVE_2_OF_6",
+    "data_foundation_gate_count_passed": 2,
+    "genesis_snapshot": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/progress_chain/progress-02-6e7e24f4a6c3b8f38cb9be56d4d1f91385620b830ccef2dfa8a7c14af3652c62.json",
+    "aggregate_metrics": "reports/tefm_new_directions/GOAL-REVISION-S-DATA-FOUNDATION-20260812/metrics-02-6e7e24f4a6c3b8f38cb9be56d4d1f91385620b830ccef2dfa8a7c14af3652c62.json",
+    "evidence_jobs": ["11534847", "11535362"],
+    "legacy_validate_goal_classification": "legacy_goal_contract_mismatch"
+  },
+  "metric_schema_policy": "Primary is strict integer 0..6; six flags are derived from an immutable genesis-rooted append-only snapshot chain; each advancement adds exactly the next independently reviewed gate and its execution evidence; global model/claim guardrails remain exact zero.",
+  "comparability_policy": {"old_annotation_metrics_comparable": false, "old_direct_s0_metrics_inherited": false},
+  "guardrail_policy": {"seed": 42, "max_parallel_directions": 1, "cpu_only": true, "gpu_forbidden": true, "s1_forbidden": true, "code_review_gate_required": true, "smart_sbatch_required_for_real_compute": true, "result_chain_required": ["result-log", "validate_goal", "note-gate", "tri-review", "pivot", "iter_ledger"], "installation_authorizes_only": "design_and_implementation_of_next_ordered_cpu_gate", "job_submission_requires_fresh_independent_review": true},
+  "stop_rules": {"typed_scientific_block": "Emit route_stop_required=1 and continuation_allowed=0; validator returns not_yet and the orchestrator must stop for human review.", "integrity_runtime": "failed_run rc3"},
+  "tuning_gap_threshold": 1,
+  "max_parallel_directions": 1,
+  "max_internal_iterations": 4,
+  "on_failed_run": "stop_and_notify",
+  "validate_command": "python3 scripts/validate_goal.py --goal ACTIVE_GOAL.json --metrics <metrics.json> --run-status <status_file> --profile smoke",
+  "human_gate_before_claim": true,
+  "next_goal_human_gate": "After exact 6/6 success, stop for explicit user-approved goal revision; no automatic continuation or authorization."
+}

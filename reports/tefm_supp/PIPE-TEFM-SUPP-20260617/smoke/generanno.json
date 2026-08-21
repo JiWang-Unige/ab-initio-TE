@@ -1,0 +1,6 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+  "kind": "auto_token",
+  "ok": false,
+  "error": "AttributeError('SingleNucleotideTokenizer has no attribute _special_tokens_map')"
+}

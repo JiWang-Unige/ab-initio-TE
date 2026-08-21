@@ -1,0 +1,71 @@
+{
+  "schema_version": "TEFM-BENCH-5TOOL-SMOKE-1.0.0",
+  "exp_id": "BENCH-5TOOL-SMOKE-20260811-R1",
+  "profile": "smoke",
+  "project_root": "/home/users/j/jwang/ab-initio-TE",
+  "canonical_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "claim_eligible": false,
+  "coordinate_convention": "zero_based_half_open",
+  "timeouts_seconds": {"identity": 120, "help": 120, "minimum_input": 1800},
+  "inputs": [
+    {"id": "edta_test_genome", "path": "refs/repos/edta_2_3_0/test/genome.fa", "sha256": "f64e2aed9233831f668241800b82293623ce575a51ccfd0fa28766119d70d0a3"},
+    {"id": "edta_test_cds", "path": "refs/repos/edta_2_3_0/test/genome.cds.fa", "sha256": "c969fe941fb3bd0ef76f8a7e273eff309f38e913a78c3ea1903fe23a5f1b2dbf"},
+    {"id": "edta_test_exclude", "path": "refs/repos/edta_2_3_0/test/genome.exclude.bed", "sha256": "4b79232fa396f5ede893b6205774b167e44747d68018c3f1817187016edce703"},
+    {"id": "earlgrey_test_genome", "path": "refs/repos/earlgrey_7_3_1/test/test.fasta", "sha256": "4647f3af51c09fa2f991917b903273a94ed66aef2b56d848ee958cbb4f3559cd"},
+    {"id": "tetrimmer_test_input", "path": "refs/repos/tetrimmer_target_1_7_4/tests/test_input.fa", "sha256": "fcc76f250280c433a45cab1b7c275b36f28a359415d2646260c31939ed4c836d"},
+    {"id": "tetrimmer_test_genome", "path": "refs/repos/tetrimmer_target_1_7_4/tests/test_genome.fa", "sha256": "a952f45011f318d221067e7c3f1d811e34848b292572be72e7e1a6a21c76ef13"},
+    {"id": "dfam40_full_candidate", "path": "dfam_candidates/D1-DFAM40-CC-ACQUIRE-20260809A/dfam40.0.h5.gz", "sha256": "bd36979e0500e4fce5e11f4c18ffc09ecb4511626b1028fb6da7bb005cc3fbb3"},
+    {"id": "dfam40_curated_candidate", "path": "dfam_candidates/D1-DFAM40-CC-ACQUIRE-20260809A/dfam40.curated.consensus.0.h5.gz", "sha256": "6d7452452a561e8609af3c71bc2519dcfde7bbaf504da5775df509819ede0a01"},
+    {"id": "tetrimmer_174_source", "path": "refs/supp/tetrimmer_target_1_7_4/source-commit-61456873.tar.gz", "sha256": "3ac444549eeffb372d9fdff9af2ccb78e6a9fed9dd00aef20d42c8f165807edc"}
+  ],
+  "workflows": {
+    "repeatmodeler2_repeatmasker": {
+      "target_version": "RepeatModeler 2.0.9 and RepeatMasker 4.2.4",
+      "license": "OSL-2.1",
+      "license_evidence": "refs/dossiers/repeatmodeler2_repeatmasker.md",
+      "components": [
+        {"id": "repeatmodeler_2_0_9", "path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif", "sha256": "93f5801a64dcc8adaec9b3307f188ff5feb65ed8c893764d0e5ab56f75020384"},
+        {"id": "repeatmasker_4_2_4", "path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif", "sha256": "3a2d62dec0b930fa6a6aa463132976fb8de5405eedd1c4ce122ec7511689cd8c"}
+      ],
+      "predeclared_blockers": ["Dfam 4.0 candidate partitions are not FamDB-queried, configured, or promoted"]
+    },
+    "edta": {
+      "target_version": "2.3.0",
+      "license": "GPL-3.0",
+      "license_evidence": "refs/dossiers/edta_2_3_0.md",
+      "components": [
+        {"id": "edta_2_3_0", "path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif", "sha256": "812f277d85d575ba745c08ff2a3876d36aeb8fc0e0a08d95db28404b3837f40e"}
+      ],
+      "predeclared_blockers": []
+    },
+    "earlgrey": {
+      "target_version": "7.3.0",
+      "license": "OSL-2.1",
+      "license_evidence": "refs/dossiers/earlgrey_7_3_1.md",
+      "components": [
+        {"id": "earlgrey_7_3_0", "path": "container_candidates/E1B2R2-EARLGREY-ACQUIRE-20260809A/earlgrey_7_3_0.sif", "sha256": "60bed858ec262243ce3f0e4a12209f805e6029c18346f48d030f78de6445335d"}
+      ],
+      "predeclared_blockers": ["Earl Grey SIF is not configured with frozen Dfam 4.0 FamDB partitions"]
+    },
+    "hite": {
+      "target_version": "3.3.3",
+      "target_commit": "ae317c879b3d217b419fefa38c6ff2cacbf1695c",
+      "target_registry_digest": "sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce",
+      "license": "GPL-3.0",
+      "license_evidence": "refs/dossiers/hite_3_3_3.md",
+      "components": [],
+      "predeclared_blockers": ["No locally accepted exact HiTE 3.3.3 SIF; legacy unpinned 3.0 SIF is forbidden"]
+    },
+    "tetrimmer": {
+      "target_version": "1.7.4",
+      "target_commit": "61456873f27b3b97ac2938f1972fc01807d550d1",
+      "license": "GPL-3.0",
+      "license_evidence": "refs/dossiers/tetrimmer_target_1_7_4.md",
+      "components": [
+        {"id": "tetrimmer_dependency_runtime_1_7_2", "path": "container_candidates/E1B-OCI-ACQUIRE-20260809A/tetrimmer_1_7_2.sif", "sha256": "38c0c325731cd40eb234056b981ef9ed940bc381ac703ab13fa867a086d5b612"}
+      ],
+      "source_overlay_input_id": "tetrimmer_174_source",
+      "predeclared_blockers": ["The dependency SIF is 1.7.2; only execution of the exact 1.7.4 source overlay can satisfy target identity"]
+    }
+  }
+}

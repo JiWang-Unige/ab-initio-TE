@@ -1,0 +1,62 @@
+pipeline_id: PIPE-TEFM-CALIB-20260621
+purpose: Standard supervised plant/cross/insect calibration screen, Dfam consensus family embedding, SF5 Unknown audit, and extended generalization-decay formula.
+seed: 42
+window: 4096
+model:
+  pretrained_path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  invert_boost_4096: software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/runs/TFREPAIR_invert_boost_animal_4096_seed42
+manifests:
+  animal_b: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  plant: software_outputs/repeatmasker_dfam/02_ready_by_design/C_plantTE/SPLIT_MANIFEST.tsv
+  cross: software_outputs/repeatmasker_dfam/02_ready_by_design/D_cross_kingdom_animal_plant/SPLIT_MANIFEST.tsv
+  concordance: reports/repeatmasker_dfam/SELF_LABELA_VS_UCSC_FULLPARTITIONS_20260619/summary.tsv
+dfam_consensus_fasta: .backup/data/libraries/dfam/3.9/families/Dfam-RepeatMasker.lib.gz
+species:
+  plant_train: [rice, maize, sorghum, brachypodium, thale_cress]
+  plant_eval_fine: [rice, maize, sorghum, brachypodium, thale_cress]
+  plant_eval_only: [teosinte, soybean]
+  cross_train_animals: [mouse, zebrafish, chicken, western_clawed_frog, fruit_fly, c_elegans]
+  cross_train_plants: [rice, maize, sorghum, brachypodium, thale_cress]
+  cross_eval: [human, cattle, pig, horse, opossum, lizard, x_laevis, western_honey_bee, red_flour_beetle, teosinte, soybean]
+  stress_eval: [western_honey_bee, red_flour_beetle, lizard, x_laevis]
+mixtures:
+  plant_supervised:
+    rice: 0.25
+    maize: 0.25
+    sorghum: 0.20
+    brachypodium: 0.15
+    thale_cress: 0.15
+  cross_supervised:
+    mouse: 0.15
+    zebrafish: 0.075
+    chicken: 0.05
+    western_clawed_frog: 0.05
+    fruit_fly: 0.10
+    c_elegans: 0.075
+    rice: 0.10
+    maize: 0.10
+    sorghum: 0.10
+    brachypodium: 0.10
+    thale_cress: 0.10
+  insect_no_beetle:
+    fruit_fly: 0.50
+    western_honey_bee: 0.50
+quick_profile:
+  eval_windows_per_species: 1200
+  total_windows: 18000
+  max_steps: 2000
+  eval_steps: 250
+  direct_species_train_windows: 3600
+  direct_species_val_windows: 900
+  direct_species_test_windows: 1200
+  direct_species_max_steps: 800
+  direct_species_eval_steps: 160
+  max_eval_samples: 1200
+  embedding_top_families: 10
+  embedding_min_per_label: 30
+  embedding_max_per_label: 220
+  embedding_max_records: 1800
+outputs:
+  root: software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621
+  reports: reports/tefm_calib/PIPE-TEFM-CALIB-20260621
+  logs: logs/tefm_calib/PIPE-TEFM-CALIB-20260621

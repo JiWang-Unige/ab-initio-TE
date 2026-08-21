@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.912157327489826,
+  "te_recall": 0.3131229395261726,
+  "te_f1": 0.4662074325077214,
+  "bg_f1": 0.8843935035273691,
+  "macro_f1": 0.6753004680175453,
+  "te_auprc": 0.800978858918481,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/data/eval_C_finetune_w4096/sorghum",
+  "n_windows": 1200,
+  "stage": "transfer_BC_w4096",
+  "model_key": "generanno",
+  "model": "generanno",
+  "window": 4096,
+  "species": "sorghum"
+}

@@ -1,0 +1,14 @@
+{
+  "exp_id": "BENCH-HITE-ISOLATED-20260811-R1",
+  "job_id": "11524485",
+  "quorum": "3/3",
+  "reviewers": [
+    {"backend": "claude", "status": "complete", "judgment": "continue", "confidence": "High"},
+    {"backend": "codex", "status": "complete", "judgment": "continue", "confidence": "High (0.96)"},
+    {"backend": "antigravity", "status": "complete", "judgment": "continue", "confidence": "High (100%)"}
+  ],
+  "consensus": "isolated HiTE pass is valid; parent RM plus isolated HiTE is defensible two-job/two-cell evidence; parent aggregate remains FAILED; no new run authorized",
+  "semantic_warning": "raw further_retry_allowed=true conflicts with the exhausted one-attempt human authorization",
+  "next_action": "record operational retry authorization as false and stop at a human gate for remaining denominator scope",
+  "claim_eligible": false
+}

@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "exp_id": "PIPE-TEFM-FINAL-GENOMEDECAY-20260630",
+  "n_species": 22,
+  "n_anchor_rows": 156,
+  "mash_available": false,
+  "sourmash_available": false,
+  "outputs": {
+    "features": "reports/tefm_final/PIPE-TEFM-FINAL-GENOMEDECAY-20260630/genome_feature_table.tsv",
+    "pair_features": "reports/tefm_final/PIPE-TEFM-FINAL-GENOMEDECAY-20260630/anchor_pair_genome_features.tsv",
+    "selector": "reports/tefm_final/PIPE-TEFM-FINAL-GENOMEDECAY-20260630/selector_genome_feature_results.json",
+    "report": "reports/tefm_final/PIPE-TEFM-FINAL-GENOMEDECAY-20260630/GENOME_DECAY_REPORT.md"
+  }
+}

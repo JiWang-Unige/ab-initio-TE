@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.2752004226742488,
+  "te_recall": 0.8157142080006857,
+  "te_f1": 0.41155355059138393,
+  "bg_f1": 0.8094407774510747,
+  "macro_f1": 0.6104971640212293,
+  "te_auprc": 0.3395061062533617,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/plant_eval_only/soybean",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_plant_eval",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "soybean"
+}

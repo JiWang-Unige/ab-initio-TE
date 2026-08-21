@@ -1,0 +1,7 @@
+gate	status	evidence	remaining
+CHROM-LADDER	PRELIM_PARTIAL	species_manifest_prelim.tsv; chromosome_ladder_prelim.tsv	manual role freeze; self-run Label-A provenance; homology/near-duplicate leakage report
+TE-LEN-VIZ	PRELIM_PARTIAL	te_len_viz_summary_prelim.tsv	plots; Label-A/B overlay; claim-eligible self-run labels
+LABEL-CONCORDANCE	BLOCKED_NO_LABEL_B	none	produce Label-B from RepeatModeler2/EDTA/HiTE or selected audit source
+U-QUALITY	PRELIM_PROXY_ONLY	u_quality_prelim.tsv	construct RN/hardN masks; interval overlaps; independent evidence; self-run labels
+SF-TARGET	PRELIM_PARTIAL	sf_target_step1_prelim.tsv	per-kingdom threshold decision; Label-A/B concordance; freeze refs/dossiers/sf_target_set.md
+WIN-MATRIX	PRELIM_INPUT_ONLY	te_len_viz_summary_prelim.tsv	backbone context limits; GPU smoke; refs/dossiers/window_matrix.md freeze

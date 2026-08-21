@@ -1,0 +1,7 @@
+species_code	scientific_name	kingdom	reason
+setaria_italica	Setaria italica	plants	listed in docs/species.md but no local UCSC/external rmsk source found
+green_foxtail	Setaria viridis	plants	listed in docs/species.md but no local UCSC/external rmsk source found
+tomato	Solanum lycopersicum	plants	docs says available, but no local UCSC/external rmsk source found in current_eukaryotes
+wild_rice	Oryza longistaminata	plants	listed held-out; no local UCSC/external rmsk source found
+arabidopsis_lyrata	Arabidopsis lyrata	plants	listed held-out; no local UCSC/external rmsk source found
+grape	Vitis vinifera	plants	listed reserve; no local UCSC/external rmsk source found

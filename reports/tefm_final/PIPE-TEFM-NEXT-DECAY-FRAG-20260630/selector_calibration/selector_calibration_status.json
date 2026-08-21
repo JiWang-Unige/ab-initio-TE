@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "n_summary_rows": 8,
+  "any_usable_screen": false,
+  "best": {
+    "feature_set": "baseline_plus_kmer",
+    "split": "leave_species_out",
+    "n_rows": 156,
+    "n_species": 22,
+    "rmse": 0.26424692687131895,
+    "mae": 0.21944477308837795,
+    "r2": 0.42124207894264165,
+    "ece_by_predicted_bin": 0.037236140047392285,
+    "q80_abs_error": 0.33875683661245454,
+    "q90_abs_error": 0.44327776217671633,
+    "coverage_q80_interval": 0.7948717948717948,
+    "coverage_q90_interval": 0.9038461538461539,
+    "anchor_top1_accuracy": 0.45454545454545453,
+    "anchor_top2_accuracy": 0.6818181818181818,
+    "mean_regret": 0.06801272229845959,
+    "p90_regret": 0.23969685096090357,
+    "usable_screen": false
+  },
+  "outputs": {
+    "summary": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_calibration/selector_calibration_summary.tsv",
+    "bins": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_calibration/selector_calibration_bins.tsv",
+    "species": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_calibration/selector_species_recommendations.tsv",
+    "predictions": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_calibration/selector_row_predictions.tsv",
+    "report": "reports/tefm_final/PIPE-TEFM-NEXT-DECAY-FRAG-20260630/selector_calibration/SELECTOR_CALIBRATION_REPORT.md"
+  }
+}

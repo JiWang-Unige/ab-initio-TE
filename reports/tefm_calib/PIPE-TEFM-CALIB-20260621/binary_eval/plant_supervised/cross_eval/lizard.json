@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.0953537619422238,
+  "te_recall": 0.35815160240975696,
+  "te_f1": 0.15060947596156826,
+  "bg_f1": 0.8528195532917933,
+  "macro_f1": 0.5017145146266808,
+  "te_auprc": 0.09456747787383071,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/runs/plant_supervised_4096",
+  "data_dir": "software_outputs/tefm_calib/PIPE-TEFM-CALIB-20260621/data/cross_eval/lizard",
+  "n_windows": 1200,
+  "stage": "plant_supervised_to_cross_eval",
+  "model_key": "generanno",
+  "model": "plant_supervised_4096",
+  "window": 4096,
+  "species": "lizard"
+}

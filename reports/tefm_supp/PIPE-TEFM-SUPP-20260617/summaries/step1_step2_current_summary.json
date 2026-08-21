@@ -1,0 +1,495 @@
+{
+  "pipeline": "PIPE-TEFM-SUPP-20260617",
+  "seed": 42,
+  "transfer_best_by_mean_te_f1": {
+    "model": "generanno",
+    "n_species": 12,
+    "mean_te_f1": 0.5477451533890066,
+    "median_te_f1": 0.5114970331807985,
+    "mean_te_auprc": 0.7295194724632695,
+    "species": [
+      {
+        "species": "brachypodium",
+        "te_f1": 0.4002205964588869,
+        "te_auprc": 0.3073834611986904
+      },
+      {
+        "species": "c_elegans",
+        "te_f1": 0.19415088642539793,
+        "te_auprc": 0.5523115841874366
+      },
+      {
+        "species": "chicken",
+        "te_f1": 0.8438237985830672,
+        "te_auprc": 0.8970891370935811
+      },
+      {
+        "species": "fruit_fly",
+        "te_f1": 0.4999866538098367,
+        "te_auprc": 0.9112834884084453
+      },
+      {
+        "species": "human",
+        "te_f1": 0.9792423530863605,
+        "te_auprc": 0.9969731602864893
+      },
+      {
+        "species": "maize",
+        "te_f1": 0.41356328986593993,
+        "te_auprc": 0.9031565123214927
+      },
+      {
+        "species": "mouse",
+        "te_f1": 0.8998303782568525,
+        "te_auprc": 0.9561414088042183
+      },
+      {
+        "species": "rice",
+        "te_f1": 0.35196224937894727,
+        "te_auprc": 0.6501808013455189
+      },
+      {
+        "species": "sorghum",
+        "te_f1": 0.5230074125517604,
+        "te_auprc": 0.7805246830996175
+      },
+      {
+        "species": "thale_cress",
+        "te_f1": 0.06355753806470868,
+        "te_auprc": 0.18768225372312985
+      },
+      {
+        "species": "western_clawed_frog",
+        "te_f1": 0.6668922901701417,
+        "te_auprc": 0.8011032011915595
+      },
+      {
+        "species": "zebrafish",
+        "te_f1": 0.7367043940161797,
+        "te_auprc": 0.810403977899054
+      }
+    ]
+  },
+  "window_best_by_te_f1": {
+    "model": "ntv2_500m",
+    "window": 4096,
+    "te_f1": 0.945780106280564,
+    "te_auprc": 0.9892534081928671,
+    "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w4096_seed42/test_results.json"
+  },
+  "transfer": [
+    {
+      "model": "dnabert2",
+      "n_species": 12,
+      "mean_te_f1": 0.45351508507046784,
+      "median_te_f1": 0.37949931770203205,
+      "mean_te_auprc": 0.6052658784028817,
+      "species": [
+        {
+          "species": "brachypodium",
+          "te_f1": 0.22194987744485015,
+          "te_auprc": 0.1562011733094879
+        },
+        {
+          "species": "c_elegans",
+          "te_f1": 0.3097107948963019,
+          "te_auprc": 0.28872922355043584
+        },
+        {
+          "species": "chicken",
+          "te_f1": 0.7844844184063593,
+          "te_auprc": 0.8304638067878073
+        },
+        {
+          "species": "fruit_fly",
+          "te_f1": 0.5475223014380077,
+          "te_auprc": 0.8870014468227732
+        },
+        {
+          "species": "human",
+          "te_f1": 0.9279750309578467,
+          "te_auprc": 0.9819542426919837
+        },
+        {
+          "species": "maize",
+          "te_f1": 0.3235615757425127,
+          "te_auprc": 0.8565213797036318
+        },
+        {
+          "species": "mouse",
+          "te_f1": 0.9034323998334859,
+          "te_auprc": 0.9738298008163813
+        },
+        {
+          "species": "rice",
+          "te_f1": 0.15868805981240033,
+          "te_auprc": 0.40398730638316976
+        },
+        {
+          "species": "sorghum",
+          "te_f1": 0.2251267372486809,
+          "te_auprc": 0.5064437147048937
+        },
+        {
+          "species": "thale_cress",
+          "te_f1": 0.10160916042150112,
+          "te_auprc": 0.10867683140867762
+        },
+        {
+          "species": "western_clawed_frog",
+          "te_f1": 0.43543705966155144,
+          "te_auprc": 0.6400812118221179
+        },
+        {
+          "species": "zebrafish",
+          "te_f1": 0.5026836049821154,
+          "te_auprc": 0.6293004028332202
+        }
+      ]
+    },
+    {
+      "model": "generanno",
+      "n_species": 12,
+      "mean_te_f1": 0.5477451533890066,
+      "median_te_f1": 0.5114970331807985,
+      "mean_te_auprc": 0.7295194724632695,
+      "species": [
+        {
+          "species": "brachypodium",
+          "te_f1": 0.4002205964588869,
+          "te_auprc": 0.3073834611986904
+        },
+        {
+          "species": "c_elegans",
+          "te_f1": 0.19415088642539793,
+          "te_auprc": 0.5523115841874366
+        },
+        {
+          "species": "chicken",
+          "te_f1": 0.8438237985830672,
+          "te_auprc": 0.8970891370935811
+        },
+        {
+          "species": "fruit_fly",
+          "te_f1": 0.4999866538098367,
+          "te_auprc": 0.9112834884084453
+        },
+        {
+          "species": "human",
+          "te_f1": 0.9792423530863605,
+          "te_auprc": 0.9969731602864893
+        },
+        {
+          "species": "maize",
+          "te_f1": 0.41356328986593993,
+          "te_auprc": 0.9031565123214927
+        },
+        {
+          "species": "mouse",
+          "te_f1": 0.8998303782568525,
+          "te_auprc": 0.9561414088042183
+        },
+        {
+          "species": "rice",
+          "te_f1": 0.35196224937894727,
+          "te_auprc": 0.6501808013455189
+        },
+        {
+          "species": "sorghum",
+          "te_f1": 0.5230074125517604,
+          "te_auprc": 0.7805246830996175
+        },
+        {
+          "species": "thale_cress",
+          "te_f1": 0.06355753806470868,
+          "te_auprc": 0.18768225372312985
+        },
+        {
+          "species": "western_clawed_frog",
+          "te_f1": 0.6668922901701417,
+          "te_auprc": 0.8011032011915595
+        },
+        {
+          "species": "zebrafish",
+          "te_f1": 0.7367043940161797,
+          "te_auprc": 0.810403977899054
+        }
+      ]
+    },
+    {
+      "model": "hyenadna",
+      "n_species": 12,
+      "mean_te_f1": 0.4257927691207821,
+      "median_te_f1": 0.39287832812300694,
+      "mean_te_auprc": 0.4209499217817693,
+      "species": [
+        {
+          "species": "brachypodium",
+          "te_f1": 0.09208231788900124,
+          "te_auprc": 0.05672937898179801
+        },
+        {
+          "species": "c_elegans",
+          "te_f1": 0.247648136835675,
+          "te_auprc": 0.15678391225453894
+        },
+        {
+          "species": "chicken",
+          "te_f1": 0.2645164113279731,
+          "te_auprc": 0.19756411302108096
+        },
+        {
+          "species": "fruit_fly",
+          "te_f1": 0.6939207320677092,
+          "te_auprc": 0.7882236024999452
+        },
+        {
+          "species": "human",
+          "te_f1": 0.7961983628825922,
+          "te_auprc": 0.9006598289800577
+        },
+        {
+          "species": "maize",
+          "te_f1": 0.5345927824223837,
+          "te_auprc": 0.7578767784193814
+        },
+        {
+          "species": "mouse",
+          "te_f1": 0.7075690194338708,
+          "te_auprc": 0.7911290284728146
+        },
+        {
+          "species": "rice",
+          "te_f1": 0.3393679711331198,
+          "te_auprc": 0.28941884732192086
+        },
+        {
+          "species": "sorghum",
+          "te_f1": 0.35870834417490444,
+          "te_auprc": 0.28997056056232073
+        },
+        {
+          "species": "thale_cress",
+          "te_f1": 0.1332530741916557,
+          "te_auprc": 0.07811099974535168
+        },
+        {
+          "species": "western_clawed_frog",
+          "te_f1": 0.514607765019391,
+          "te_auprc": 0.4117531216846065
+        },
+        {
+          "species": "zebrafish",
+          "te_f1": 0.42704831207110944,
+          "te_auprc": 0.333178889437415
+        }
+      ]
+    },
+    {
+      "model": "ntv2_500m",
+      "n_species": 12,
+      "mean_te_f1": 0.5366507255401123,
+      "median_te_f1": 0.555875124771798,
+      "mean_te_auprc": 0.7010502214455858,
+      "species": [
+        {
+          "species": "brachypodium",
+          "te_f1": 0.44136359320102553,
+          "te_auprc": 0.36453423874968777
+        },
+        {
+          "species": "c_elegans",
+          "te_f1": 0.38787594404969394,
+          "te_auprc": 0.5562781448197343
+        },
+        {
+          "species": "chicken",
+          "te_f1": 0.8264788027846097,
+          "te_auprc": 0.8918714253022295
+        },
+        {
+          "species": "fruit_fly",
+          "te_f1": 0.6948593954312847,
+          "te_auprc": 0.9218224908778048
+        },
+        {
+          "species": "human",
+          "te_f1": 0.9630319771140563,
+          "te_auprc": 0.9934100179228756
+        },
+        {
+          "species": "maize",
+          "te_f1": 0.2855488945982808,
+          "te_auprc": 0.866892278647072
+        },
+        {
+          "species": "mouse",
+          "te_f1": 0.9247580165409949,
+          "te_auprc": 0.9777068884762998
+        },
+        {
+          "species": "rice",
+          "te_f1": 0.17007269436253758,
+          "te_auprc": 0.46968993418421534
+        },
+        {
+          "species": "sorghum",
+          "te_f1": 0.24677326990000442,
+          "te_auprc": 0.6254009656836439
+        },
+        {
+          "species": "thale_cress",
+          "te_f1": 0.033877284595300254,
+          "te_auprc": 0.14009708417805794
+        },
+        {
+          "species": "western_clawed_frog",
+          "te_f1": 0.6703866563425706,
+          "te_auprc": 0.748642431859775
+        },
+        {
+          "species": "zebrafish",
+          "te_f1": 0.7947821775609891,
+          "te_auprc": 0.8562567566456346
+        }
+      ]
+    }
+  ],
+  "window_sweep": [
+    {
+      "model": "dnabert2",
+      "window": 1024,
+      "te_f1": 0.8922343253630325,
+      "te_auprc": 0.9583243973476265,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w1024_seed42/test_results.json"
+    },
+    {
+      "model": "dnabert2",
+      "window": 2048,
+      "te_f1": 0.8999460254238866,
+      "te_auprc": 0.9657376334858743,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w2048_seed42/test_results.json"
+    },
+    {
+      "model": "dnabert2",
+      "window": 4096,
+      "te_f1": 0.9101104325342315,
+      "te_auprc": 0.9749215384492478,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w4096_seed42/test_results.json"
+    },
+    {
+      "model": "dnabert2",
+      "window": 512,
+      "te_f1": 0.7985799450733472,
+      "te_auprc": 0.9199778577858242,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_dnabert2_H0_w512_seed42/test_results.json"
+    },
+    {
+      "model": "generanno",
+      "window": 1024,
+      "te_f1": 0.8782669896414894,
+      "te_auprc": 0.9483062853463532,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w1024_seed42/test_results.json"
+    },
+    {
+      "model": "generanno",
+      "window": 2048,
+      "te_f1": 0.9325691861447712,
+      "te_auprc": 0.9792680105290812,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w2048_seed42/test_results.json"
+    },
+    {
+      "model": "generanno",
+      "window": 4096,
+      "te_f1": 0.9430298542004165,
+      "te_auprc": 0.9868809417499953,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/test_results.json"
+    },
+    {
+      "model": "generanno",
+      "window": 512,
+      "te_f1": 0.8701678721715559,
+      "te_auprc": 0.9414832328255449,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w512_seed42/test_results.json"
+    },
+    {
+      "model": "hyenadna",
+      "window": 1024,
+      "te_f1": 0.6947403080450237,
+      "te_auprc": 0.8102769143142123,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w1024_seed42/test_results.json"
+    },
+    {
+      "model": "hyenadna",
+      "window": 2048,
+      "te_f1": 0.7570578903919225,
+      "te_auprc": 0.8810692522327043,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w2048_seed42/test_results.json"
+    },
+    {
+      "model": "hyenadna",
+      "window": 4096,
+      "te_f1": 0.7930165333589275,
+      "te_auprc": 0.9166400472849905,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w4096_seed42/test_results.json"
+    },
+    {
+      "model": "hyenadna",
+      "window": 512,
+      "te_f1": 0.679992497876237,
+      "te_auprc": 0.7134360581057334,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w512_seed42/test_results.json"
+    },
+    {
+      "model": "hyenadna",
+      "window": 8192,
+      "te_f1": 0.7835282289824367,
+      "te_auprc": 0.9084024441968668,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_hyenadna_H0_w8192_seed42/test_results.json"
+    },
+    {
+      "model": "ntv2_500m",
+      "window": 1024,
+      "te_f1": 0.9068373649424808,
+      "te_auprc": 0.967376561460517,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w1024_seed42/test_results.json"
+    },
+    {
+      "model": "ntv2_500m",
+      "window": 2048,
+      "te_f1": 0.9380019927204701,
+      "te_auprc": 0.9846098227035458,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w2048_seed42/test_results.json"
+    },
+    {
+      "model": "ntv2_500m",
+      "window": 4096,
+      "te_f1": 0.945780106280564,
+      "te_auprc": 0.9892534081928671,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w4096_seed42/test_results.json"
+    },
+    {
+      "model": "ntv2_500m",
+      "window": 512,
+      "te_f1": 0.8117761538608308,
+      "te_auprc": 0.9239208059990176,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w512_seed42/test_results.json"
+    },
+    {
+      "model": "ntv2_500m",
+      "window": 8192,
+      "te_f1": 0.9395668225583098,
+      "te_auprc": 0.9872704889320859,
+      "path": "software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_ntv2_500m_H0_w8192_seed42/test_results.json"
+    }
+  ],
+  "blocked_models": {
+    "ntv3_650m_pre": "local checkpoint requires missing remote-code module InstaDeepAI/ntv3_base_model; not trainable offline yet",
+    "evo2_7b_base": "local checkpoint lacks HF-recognized model_type/tokenizer adapter; not trainable with current HF task wrapper"
+  },
+  "pending": {
+    "dnabert2_w8192": "running as Slurm 9060945_5",
+    "generanno_w8192": "running as Slurm 9060945_15",
+    "downstream_generanno_w4096": "running as Slurm 9069910"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "n": 1440,
+  "n_clusters": 8,
+  "ari": 0.8669355918396553,
+  "nmi": 0.8569735724951133,
+  "holdout_accuracy": 0.7555555555555555,
+  "holdout_macro_f1": 0.754428123420181,
+  "silhouette": 0.4805542826652527,
+  "sklearn_available": true,
+  "setting": "C1",
+  "fragments": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/embedding_fragments/D_cross/genomic_boundary/family_len512.jsonl.gz",
+  "model_path": "",
+  "model_kind": "base",
+  "label_level": "family",
+  "source": "genomic_boundary"
+}

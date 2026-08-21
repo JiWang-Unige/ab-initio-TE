@@ -1,0 +1,21 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.00012823887527756966,
+  "te_recall": 1.0,
+  "te_f1": 0.00025644486435416386,
+  "bg_precision": 1.0,
+  "bg_recall": 0.39716205273031363,
+  "bg_f1": 0.56852682472185,
+  "macro_f1": 0.2843916347931021,
+  "te_auprc": 0.0004934332609984756,
+  "pred_te_rate": 0.60286865234375,
+  "true_te_rate": 7.731119791666666e-05,
+  "n_labeled_tokens": 4915200,
+  "model_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/runs/plant_from_invert_pu_tv",
+  "data_dir": "software_outputs/tefm_extend/PIPE-TEFM-EXTEND-20260620/data/cross_eval/western_honey_bee",
+  "stage": "plant_model_cross_eval",
+  "species": "western_honey_bee",
+  "window": 4096,
+  "n_windows": 1200
+}

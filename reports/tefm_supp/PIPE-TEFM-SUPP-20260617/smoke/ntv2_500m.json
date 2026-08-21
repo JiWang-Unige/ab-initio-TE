@@ -1,0 +1,7 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "kind": "auto_token",
+  "ok": false,
+  "tokenizer_class": "EsmTokenizer",
+  "error": "ImportError(\"cannot import name 'find_pruneable_heads_and_indices' from 'transformers.pytorch_utils' (/home/users/j/jwang/.conda/envs/coding-rna/lib/python3.12/site-packages/transformers/pytorch_utils.py)\")"
+}

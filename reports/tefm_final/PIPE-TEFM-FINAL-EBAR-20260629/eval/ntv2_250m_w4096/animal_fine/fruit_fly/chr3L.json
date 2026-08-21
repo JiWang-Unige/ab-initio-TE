@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.9000250773217421,
+  "te_recall": 0.4147374908516621,
+  "te_f1": 0.5678198502267693,
+  "bg_f1": 0.9898096094326085,
+  "macro_f1": 0.7788147298296889,
+  "te_auprc": 0.6299429734908012,
+  "n_labeled_tokens": 823151,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv2_250m_H0_w4096_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-EBAR-20260629/data/w4096/animal_fine/fruit_fly/chr3L/fruit_fly",
+  "n_windows": 1200,
+  "stage": "ntv2_250m_w4096_to_animal_fine_ebar",
+  "model_key": "ntv2_250m",
+  "model": "ntv2_250m_H0_w4096_seed42",
+  "window": 4096,
+  "species": "fruit_fly"
+}

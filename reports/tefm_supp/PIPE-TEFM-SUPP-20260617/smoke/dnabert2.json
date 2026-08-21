@@ -1,0 +1,7 @@
+{
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/DNABERT-2-117M",
+  "kind": "wrapper_auto",
+  "ok": false,
+  "tokenizer_class": "TokenizersBackend",
+  "error": "AttributeError(\"'BertConfig' object has no attribute 'pad_token_id'\")"
+}

@@ -1,0 +1,182 @@
+{
+  "schema_version": "TEFM-FRAG-CONSENSUS-COLLINEARITY-AUDIT-1.0.0",
+  "exp_id": "FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1",
+  "profile": "rice_t1_cpu_information_sufficiency_audit",
+  "implementation_status": "IMPLEMENTED_NOT_RUN",
+  "claim_eligible": false,
+  "scientific_scope": "T1 curated-positive parent-group information sufficiency only",
+  "coordinate_system": "zero_based_half_open",
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "cpus": 8,
+    "memory_gib": 32,
+    "walltime_seconds": 7200,
+    "gpus": 0,
+    "payload_timeout_seconds": 5940,
+    "kill_after_seconds": 30,
+    "required_publish_headroom_seconds": 900,
+    "preflight_budget_seconds": 300,
+    "preflight_command_timeout_seconds": 295,
+    "preflight_kill_after_seconds": 5
+  },
+  "inputs": {
+    "assembly": {
+      "path": "data/raw/benchmark_v1/rice/RGAP7/all.con",
+      "sha256": "db8b7efb4df6ae33195143f3444b8816917441e1b964d150663ceeb2249506c4"
+    },
+    "positive_segments": {
+      "path": "data/raw/benchmark_v1/rice/derived/edta_v230_positive_segments_v1/rice_rgap7_edta_v230_te_positive_segments.tsv",
+      "sha256": "06ac8f7cb0976aeae2a061f6c184779aebb5caf0b162b9755967985a0a89c6bf",
+      "truth_tier": "T1",
+      "unlabelled_space_is_negative": false
+    },
+    "consensus_library": {
+      "path": "data/raw/benchmark_v1/rice/EDTA_v2.3.0/rice7.0.0.liban",
+      "sha256": "bb470806821d8ba990fc0e89ae61cba2341dcde7cc72cfbcd264a1adf6abef2b",
+      "source": "EDTA_v2.3.0_Rice_reference_library"
+    }
+  },
+  "sampling": {
+    "seed": 20260812,
+    "eligible_primary_contigs": ["Chr1", "Chr2", "Chr3", "Chr4", "Chr5", "Chr6", "Chr7", "Chr8", "Chr9", "Chr10", "Chr11", "Chr12"],
+    "minimum_rows_per_truth_group": 2,
+    "maximum_rows_per_truth_group": 12,
+    "maximum_groups_per_stratum": 48,
+    "maximum_groups_total": 768,
+    "row_count_bins": [[2, 2, "two"], [3, 4, "three_four"], [5, 12, "five_twelve"]],
+    "rank_rule": "sha256(seed,seqid,rm_id); ascending; independent of outcomes"
+  },
+  "sequence_evidence": {
+    "workers": 8,
+    "kmer_size": 13,
+    "query_stride": 4,
+    "maximum_consensus_postings_per_kmer": 64,
+    "diagonal_band_bp": 32,
+    "minimum_inlier_seed_count": 3,
+    "minimum_query_seed_coverage": 0.08,
+    "minimum_top_to_second_coverage_margin": 0.02,
+    "identity_semantics": "exact consensus identifier selected by fixed seed-chain evidence; not percent identity"
+  },
+  "global_partition": {
+    "algorithm": "deterministic minimum path cover on chromosome-wide consensus-collinearity DAG",
+    "allowed_evidence_fields": ["leaf_id", "consensus_id", "consensus_strand", "consensus_start0", "consensus_end0", "consensus_length", "seed_coverage", "inlier_seed_count"],
+    "maximum_consensus_overlap_fraction": 0.10,
+    "uses_genomic_gap": false,
+    "uses_truth_rm_id": false,
+    "uses_truth_parent_boundary": false,
+    "leaf_policy": "immutable_exactly_once"
+  },
+  "controls": {
+    "comparators": {
+      "RAW_SINGLETON": {"role": "fixed_comparator"},
+      "POSITIVE_ONLY_GAP20": {"role": "experiment_local_positive_only_comparator", "maximum_genomic_gap_bp": 20},
+      "POSITIVE_ONLY_GAP100": {"role": "experiment_local_positive_only_comparator", "maximum_genomic_gap_bp": 100}
+    },
+    "evidence_shuffle_null": {
+      "enabled": true,
+      "seed": 20260813,
+      "semantics": "permute complete sequence-evidence records among public leaves without reading evaluator truth"
+    }
+  },
+  "evaluation": {
+    "truth_only_fields": ["rm_id", "truth_parent_start0", "truth_parent_end0", "class_root", "repeat_name", "truth_strand", "overlap_marker"],
+    "allowed_t1_metrics": [
+      "leaf_count", "parent_count", "mapped_leaf_fraction", "leaf_retention",
+      "exact_truth_group_recovery", "complete_truth_group_recovery",
+      "pairwise_same_parent_purity", "pairwise_same_parent_recall", "pairwise_same_parent_harmonic",
+      "cross_rm_id_false_fusion_proxy", "false_fusion_safety", "mean_truth_fragmentation_count",
+      "topology_truth_group_count", "truth_topology_preservation",
+      "matched_left_boundary_error_bp", "matched_right_boundary_error_bp",
+      "matched_boundary_within_5bp", "matched_boundary_within_10bp",
+      "matched_boundary_within_25bp", "matched_boundary_within_50bp"
+    ],
+    "forbidden_metrics": [
+      "whole_genome_precision",
+      "whole_genome_recall",
+      "whole_genome_f1",
+      "bp_precision",
+      "bp_f1",
+      "segment_precision",
+      "segment_f1"
+    ],
+    "boundary_tolerances_bp": [5, 10, 25, 50],
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 20260814,
+    "report_strata": ["class_root", "row_count_bin", "seqid"]
+  },
+  "result_schema": {
+    "required_metrics_fields": [
+      "schema_version", "exp_id", "profile", "truth_tier", "claim_eligible", "semantic_success",
+      "scientific_screen_executed", "primary_metric_name", "primary_metric",
+      "information_sufficiency_gate_pass", "terminal_status", "whole_genome_metrics_authorized",
+      "methods", "stop_gate_checks", "comparator_max_by_promotion_metric",
+      "paired_bootstrap_uncertainty", "stratum_metric_path"
+    ],
+    "required_method_fields": [
+      "method", "leaf_count", "parent_count", "mapped_leaf_fraction", "leaf_retention",
+      "exact_truth_group_recovery", "complete_truth_group_recovery", "pairwise_same_parent_purity",
+      "pairwise_same_parent_recall", "pairwise_same_parent_harmonic", "cross_rm_id_false_fusion_proxy",
+      "false_fusion_safety", "mean_truth_fragmentation_count", "topology_truth_group_count", "truth_topology_preservation",
+      "matched_left_boundary_error_bp", "matched_right_boundary_error_bp",
+      "matched_boundary_within_5bp", "matched_boundary_within_10bp",
+      "matched_boundary_within_25bp", "matched_boundary_within_50bp"
+    ],
+    "finite_numeric_fields": [
+      "leaf_count", "parent_count", "mapped_leaf_fraction", "leaf_retention",
+      "exact_truth_group_recovery", "complete_truth_group_recovery", "pairwise_same_parent_purity",
+      "pairwise_same_parent_recall", "pairwise_same_parent_harmonic", "cross_rm_id_false_fusion_proxy",
+      "false_fusion_safety", "mean_truth_fragmentation_count", "topology_truth_group_count", "truth_topology_preservation",
+      "matched_left_boundary_error_bp", "matched_right_boundary_error_bp",
+      "matched_boundary_within_5bp", "matched_boundary_within_10bp",
+      "matched_boundary_within_25bp", "matched_boundary_within_50bp"
+    ]
+  },
+  "promotion_metrics": {
+    "mapped_leaf_fraction": {"comparator_required": false, "direction": "higher"},
+    "exact_truth_group_recovery": {"comparator_required": true, "direction": "higher"},
+    "pairwise_same_parent_harmonic": {"comparator_required": true, "direction": "higher"},
+    "false_fusion_safety": {"comparator_required": true, "direction": "higher"},
+    "matched_boundary_within_5bp": {"comparator_required": true, "direction": "higher"},
+    "matched_boundary_within_10bp": {"comparator_required": true, "direction": "higher"},
+    "matched_boundary_within_25bp": {"comparator_required": true, "direction": "higher"},
+    "matched_boundary_within_50bp": {"comparator_required": true, "direction": "higher"},
+    "truth_topology_preservation": {"comparator_required": true, "direction": "higher"},
+    "leaf_retention": {"comparator_required": false, "direction": "higher"}
+  },
+  "stop_gates": {
+    "minimum_mapped_leaf_fraction": 0.60,
+    "minimum_exact_group_recovery_delta_over_comparator_max": 0.05,
+    "minimum_pairwise_harmonic_delta_over_comparator_max": 0.05,
+    "maximum_cross_rm_id_false_fusion_proxy": 0.05,
+    "minimum_false_fusion_safety_delta_over_comparator_max": 0.0,
+    "minimum_boundary_delta_over_comparator_max": {"5": 0.0, "10": 0.0, "25": 0.0, "50": 0.0},
+    "minimum_truth_topology_preservation": 0.95,
+    "minimum_topology_truth_group_count": 1,
+    "minimum_truth_topology_delta_over_comparator_max": 0.0,
+    "minimum_exact_group_recovery_delta_over_shuffle_null": 0.10,
+    "pass_semantics": "information_sufficient_for_bounded_followup_only; never a biological or whole-genome claim"
+  },
+  "runtime_code_files": [
+    "scripts/pre_submit_gate.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/common.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/build_sample.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/map_consensus_evidence.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/partition_collinearity.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/evaluate_t1.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/runtime_hashes.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/preflight.sh",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/run_payload.sh",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/run_audit.py",
+    "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/test_contract.py",
+    "sbatch/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1.sbatch"
+  ],
+  "runtime_contract": {
+    "python_environment": "benchmark_core",
+    "pre_submit_gate": {"path": "scripts/pre_submit_gate.py", "sha256": "4996364f5641014dc9bd5e7531586cbf9967c87a02d61e3df0bcd207c1122be1"},
+    "pre_submit_argv": ["python", "scripts/pre_submit_gate.py", "--exp-id", "FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1"],
+    "test_argv": ["python", "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/test_contract.py"],
+    "runner_argv": ["python", "scripts/experiments/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/run_audit.py", "--root", "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE", "--config", "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/configs/FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1.yaml", "--environment-snapshot", "<JOB_SCOPED_ENV_SNAPSHOT>", "--preflight-receipt", "<JOB_SCOPED_PREFLIGHT_RECEIPT>", "--scheduler-snapshot", "<JOB_SCOPED_SCHEDULER_SNAPSHOT>", "--runtime-prehash", "<JOB_SCOPED_RUNTIME_PREHASH>", "--owner-token", "<JOB_SCOPED_OWNER_TOKEN>"],
+    "preflight_timeout_argv_prefix": ["timeout", "--signal=TERM", "--kill-after=5s", "295s"],
+    "wrapper_timeout_argv_prefix": ["timeout", "--signal=TERM", "--kill-after=30s", "5940s"]
+  }
+}

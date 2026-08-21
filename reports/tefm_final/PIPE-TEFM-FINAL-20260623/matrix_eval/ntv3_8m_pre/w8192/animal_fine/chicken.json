@@ -1,0 +1,19 @@
+{
+  "primary_metric": "te_f1",
+  "metric_direction": "higher_is_better",
+  "te_precision": 0.5236323935239287,
+  "te_recall": 0.7869231726913922,
+  "te_f1": 0.628830207674136,
+  "bg_f1": 0.932209338180768,
+  "macro_f1": 0.780519772927452,
+  "te_auprc": 0.760826384844252,
+  "n_labeled_tokens": 9828024,
+  "model_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv3_8m_pre_H0_w8192_seed42",
+  "data_dir": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/animal_fine_w8192/chicken",
+  "n_windows": 1200,
+  "stage": "ntv3_8m_pre_w8192_to_animal_fine",
+  "model_key": "ntv3_8m_pre",
+  "model": "ntv3_8m_pre_H0_w8192_seed42",
+  "window": 8192,
+  "species": "chicken"
+}

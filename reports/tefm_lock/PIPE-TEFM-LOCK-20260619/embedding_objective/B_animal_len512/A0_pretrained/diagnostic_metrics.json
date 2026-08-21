@@ -1,0 +1,22 @@
+{
+  "n": 2000,
+  "n_clusters": 4,
+  "ari": 0.3281619688569679,
+  "nmi": 0.3722342661810314,
+  "holdout_accuracy": 0.62,
+  "holdout_macro_f1": 0.5264671844889393,
+  "silhouette": 0.29566529393196106,
+  "sklearn_available": true,
+  "pair_pos_sim_mean": 0.22012746334075928,
+  "pair_neg_sim_mean": -0.07802504301071167,
+  "pair_auc": 0.65976896,
+  "n_pairs": 10000,
+  "linear_probe_accuracy": 0.744,
+  "linear_probe_macro_f1": 0.7401627780839197,
+  "setting": "A0",
+  "fragments": "software_outputs/tefm_repair/PIPE-TEFM-REPAIR-20260618/embedding_fragments/B_animal/fragments_512.jsonl.gz",
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+  "model_kind": "base",
+  "n_records": 2000,
+  "length": 512
+}
