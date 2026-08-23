@@ -205,60 +205,55 @@ class WeightedTrainer(Trainer):
             "contrastive_loss_sum": 0.0,
         }
 
-    def boundary_distance_loss(self, hidden: torch.Tensor, labels: torch.Tensor, model) -> tuple[torch.Tensor, int]:
-        targets = torch.zeros((*labels.shape, 2), dtype=hidden.dtype, device=hidden.device)
-        mask = torch.zeros((*labels.shape, 2), dtype=torch.bool, device=hidden.device)
+    def run_geometry(self, labels: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         positive = labels.eq(1)
         starts = positive & ~torch.cat([torch.zeros_like(positive[:, :1]), positive[:, :-1]], dim=1)
+        stops = positive & ~torch.cat([positive[:, 1:], torch.zeros_like(positive[:, :1])], dim=1)
         run_ids = torch.cumsum(starts.long(), dim=1) - 1
         run_ids[~positive] = -1
-        for batch_index in range(labels.shape[0]):
-            for run_id in torch.unique(run_ids[batch_index]):
-                if run_id < 0:
-                    continue
-                positions = torch.nonzero(run_ids[batch_index].eq(run_id), as_tuple=False).flatten()
-                start = int(positions[0])
-                stop = int(positions[-1]) + 1
-                scale = float(self.boundary_distance_cap)
-                if start > 0 and labels[batch_index, start - 1].eq(0):
-                    targets[batch_index, positions, 0] = torch.clamp(positions - start, max=self.boundary_distance_cap).to(hidden.dtype) / scale
-                    mask[batch_index, positions, 0] = True
-                if stop < labels.shape[1] and labels[batch_index, stop].eq(0):
-                    targets[batch_index, positions, 1] = torch.clamp(stop - 1 - positions, max=self.boundary_distance_cap).to(hidden.dtype) / scale
-                    mask[batch_index, positions, 1] = True
+        positions = torch.arange(labels.shape[1], device=labels.device)[None, :].expand_as(labels)
+        start_positions = torch.cummax(torch.where(starts, positions, -1), dim=1).values
+        stop_seeds = torch.where(stops, positions, labels.shape[1])
+        stop_positions = torch.flip(torch.cummin(torch.flip(stop_seeds, dims=[1]), dim=1).values, dims=[1])
+        left_index = (start_positions - 1).clamp_min(0)
+        right_index = (stop_positions + 1).clamp_max(labels.shape[1] - 1)
+        left_valid = positive & start_positions.gt(0) & labels.gather(1, left_index).eq(0)
+        right_valid = positive & stop_positions.lt(labels.shape[1] - 1) & labels.gather(1, right_index).eq(0)
+        run_ids = run_ids + torch.arange(labels.shape[0], device=labels.device)[:, None] * (labels.shape[1] + 1)
+        run_ids[~positive] = -1
+        return run_ids, start_positions, stop_positions, left_valid, right_valid
+
+    def boundary_distance_loss(self, hidden: torch.Tensor, geometry, model) -> tuple[torch.Tensor, int]:
+        _, start_positions, stop_positions, left_valid, right_valid = geometry
+        positions = torch.arange(hidden.shape[1], device=hidden.device)[None, :]
+        targets = torch.stack(
+            [
+                (positions - start_positions).clamp(0, self.boundary_distance_cap),
+                (stop_positions - positions).clamp(0, self.boundary_distance_cap),
+            ],
+            dim=-1,
+        ).to(hidden.dtype) / float(self.boundary_distance_cap)
+        mask = torch.stack([left_valid, right_valid], dim=-1)
         predictions = model.boundary_distance_head(hidden)
         if not mask.any():
             return hidden.sum() * 0.0, 0
         return F.smooth_l1_loss(predictions[mask], targets[mask]), int(mask.sum())
 
-    def run_contrastive_loss(self, hidden: torch.Tensor, labels: torch.Tensor) -> tuple[torch.Tensor, int, int]:
-        positive = labels.eq(1)
-        starts = positive & ~torch.cat([torch.zeros_like(positive[:, :1]), positive[:, :-1]], dim=1)
-        run_ids = torch.cumsum(starts.long(), dim=1) - 1
-        run_ids[~positive] = -1
-        vectors = []
-        groups = []
-        group_id = 0
-        for batch_index in range(labels.shape[0]):
-            for run_id in torch.unique(run_ids[batch_index]):
-                if run_id < 0:
-                    continue
-                positions = torch.nonzero(run_ids[batch_index].eq(run_id), as_tuple=False).flatten()
-                if int(positions[-1] - positions[0]) < self.run_min_separation:
-                    continue
-                take = torch.linspace(0, positions.numel() - 1, steps=min(8, positions.numel()), device=hidden.device).long()
-                selected = positions[take]
-                vectors.append(hidden[batch_index, selected])
-                groups.extend([group_id] * selected.numel())
-                group_id += 1
-                if sum(x.shape[0] for x in vectors) >= 256:
-                    break
-            if sum(x.shape[0] for x in vectors) >= 256:
-                break
-        if group_id < 2:
-            return hidden.sum() * 0.0, 0, group_id
-        representation = F.normalize(torch.cat(vectors, dim=0)[:256], dim=-1)
-        group = torch.tensor(groups[: representation.shape[0]], device=hidden.device)
+    def run_contrastive_loss(self, hidden: torch.Tensor, geometry) -> tuple[torch.Tensor, int, int]:
+        run_ids, start_positions, stop_positions, _, _ = geometry
+        positions = torch.arange(hidden.shape[1], device=hidden.device)[None, :]
+        run_length = stop_positions - start_positions + 1
+        within_run = positions - start_positions
+        sample_step = torch.div(run_length + 7, 8, rounding_mode="floor").clamp_min(1)
+        selected = run_ids.ge(0) & run_length.gt(self.run_min_separation) & torch.remainder(within_run, sample_step).eq(0)
+        coordinates = torch.nonzero(selected, as_tuple=False)[:256]
+        if coordinates.shape[0] == 0:
+            return hidden.sum() * 0.0, 0, 0
+        group = run_ids[coordinates[:, 0], coordinates[:, 1]]
+        group_count = int(torch.unique(group).numel())
+        if group_count < 2:
+            return hidden.sum() * 0.0, 0, group_count
+        representation = F.normalize(hidden[coordinates[:, 0], coordinates[:, 1]], dim=-1)
         logits = representation @ representation.T / self.run_temperature
         self_mask = torch.eye(logits.shape[0], dtype=torch.bool, device=hidden.device)
         positive_mask = group[:, None].eq(group[None, :]) & ~self_mask
@@ -267,7 +262,7 @@ class WeightedTrainer(Trainer):
         log_probability = logits - denominator[:, None]
         positive_log_probability = log_probability.masked_fill(~positive_mask, 0.0).sum(dim=1) / positive_mask.sum(dim=1).clamp_min(1)
         loss = -positive_log_probability[valid].mean()
-        return loss, int(valid.sum()), group_id
+        return loss, int(valid.sum()), group_count
 
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
         labels = inputs.pop("labels")
@@ -280,8 +275,9 @@ class WeightedTrainer(Trainer):
         loss_fn = torch.nn.CrossEntropyLoss(weight=self.te_weight.to(outputs.logits.device), ignore_index=-100)
         loss = loss_fn(outputs.logits.reshape(-1, 2), labels.reshape(-1))
         if self.structure_aux:
-            boundary_loss, boundary_targets = self.boundary_distance_loss(hidden, labels, model)
-            contrastive_loss, anchors, runs = self.run_contrastive_loss(hidden, labels)
+            geometry = self.run_geometry(labels)
+            boundary_loss, boundary_targets = self.boundary_distance_loss(hidden, geometry, model)
+            contrastive_loss, anchors, runs = self.run_contrastive_loss(hidden, geometry)
             loss = loss + self.boundary_distance_weight * boundary_loss + self.run_contrastive_weight * contrastive_loss
             self.structure_stats["train_batches"] += 1
             self.structure_stats["boundary_targets"] += boundary_targets
