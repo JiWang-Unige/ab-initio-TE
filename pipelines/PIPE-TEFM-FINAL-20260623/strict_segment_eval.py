@@ -194,6 +194,19 @@ def infer_probs_for_label_mode(
     label_mode: str,
 ) -> np.ndarray:
     """Mirror the tokenization/label geometry used during fine-tuning."""
+    if label_mode == "single_nt_nospecial":
+        enc = tokenizer(
+            seq[:window],
+            add_special_tokens=False,
+            truncation=True,
+            max_length=window,
+            padding="max_length",
+            return_tensors="pt",
+        )
+        enc = {k: v.to(device) for k, v in enc.items() if k in {"input_ids", "attention_mask"}}
+        with torch.no_grad():
+            logits = model(**enc).logits[0]
+        return torch.softmax(logits, dim=-1)[:, 1].detach().cpu().numpy()[:window]
     if label_mode == "ntv3_single":
         enc = tokenizer(seq[:window], truncation=True, max_length=window, padding="max_length", return_tensors="pt")
         enc = {k: v.to(device) for k, v in enc.items() if k in {"input_ids", "attention_mask"}}

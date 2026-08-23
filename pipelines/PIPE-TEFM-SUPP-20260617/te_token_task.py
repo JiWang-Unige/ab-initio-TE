@@ -14,6 +14,7 @@ os.environ.setdefault("WANDB_DISABLED", "true")
 import numpy as np
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import Dataset
 from transformers import (
     AutoModel,
@@ -61,6 +62,20 @@ class WindowDataset(Dataset):
             token_labels = labels[:self.window]
             token_labels.extend([-100] * (max_len - len(token_labels)))
             return enc, token_labels[:max_len]
+
+        if self.label_mode == "single_nt_nospecial":
+            max_len = self.window
+            enc = self.tokenizer(
+                seq,
+                add_special_tokens=False,
+                truncation=True,
+                max_length=max_len,
+                padding="max_length",
+            )
+            token_labels = labels[:max_len]
+            token_labels.extend([-100] * (max_len - len(token_labels)))
+            assert len(enc["input_ids"]) == len(token_labels) == max_len
+            return enc, token_labels
 
         if self.label_mode == "single_nt":
             max_len = self.window + 2
@@ -161,15 +176,119 @@ class WrappedTokenClassifier(nn.Module):
 
 
 class WeightedTrainer(Trainer):
-    def __init__(self, *args, te_class_weight: float = 3.0, **kwargs):
+    def __init__(
+        self,
+        *args,
+        te_class_weight: float = 3.0,
+        structure_aux: bool = False,
+        boundary_distance_weight: float = 0.0,
+        run_contrastive_weight: float = 0.0,
+        boundary_distance_cap: int = 256,
+        run_temperature: float = 0.07,
+        run_min_separation: int = 64,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
         self.te_weight = torch.tensor([1.0, te_class_weight])
+        self.structure_aux = structure_aux
+        self.boundary_distance_weight = boundary_distance_weight
+        self.run_contrastive_weight = run_contrastive_weight
+        self.boundary_distance_cap = boundary_distance_cap
+        self.run_temperature = run_temperature
+        self.run_min_separation = run_min_separation
+        self.structure_stats = {
+            "train_batches": 0,
+            "boundary_targets": 0,
+            "contrastive_anchors": 0,
+            "contrastive_runs": 0,
+            "boundary_loss_sum": 0.0,
+            "contrastive_loss_sum": 0.0,
+        }
+
+    def boundary_distance_loss(self, hidden: torch.Tensor, labels: torch.Tensor, model) -> tuple[torch.Tensor, int]:
+        targets = torch.zeros((*labels.shape, 2), dtype=hidden.dtype, device=hidden.device)
+        mask = torch.zeros((*labels.shape, 2), dtype=torch.bool, device=hidden.device)
+        positive = labels.eq(1)
+        starts = positive & ~torch.cat([torch.zeros_like(positive[:, :1]), positive[:, :-1]], dim=1)
+        run_ids = torch.cumsum(starts.long(), dim=1) - 1
+        run_ids[~positive] = -1
+        for batch_index in range(labels.shape[0]):
+            for run_id in torch.unique(run_ids[batch_index]):
+                if run_id < 0:
+                    continue
+                positions = torch.nonzero(run_ids[batch_index].eq(run_id), as_tuple=False).flatten()
+                start = int(positions[0])
+                stop = int(positions[-1]) + 1
+                scale = float(self.boundary_distance_cap)
+                if start > 0 and labels[batch_index, start - 1].eq(0):
+                    targets[batch_index, positions, 0] = torch.clamp(positions - start, max=self.boundary_distance_cap).to(hidden.dtype) / scale
+                    mask[batch_index, positions, 0] = True
+                if stop < labels.shape[1] and labels[batch_index, stop].eq(0):
+                    targets[batch_index, positions, 1] = torch.clamp(stop - 1 - positions, max=self.boundary_distance_cap).to(hidden.dtype) / scale
+                    mask[batch_index, positions, 1] = True
+        predictions = model.boundary_distance_head(hidden)
+        if not mask.any():
+            return hidden.sum() * 0.0, 0
+        return F.smooth_l1_loss(predictions[mask], targets[mask]), int(mask.sum())
+
+    def run_contrastive_loss(self, hidden: torch.Tensor, labels: torch.Tensor) -> tuple[torch.Tensor, int, int]:
+        positive = labels.eq(1)
+        starts = positive & ~torch.cat([torch.zeros_like(positive[:, :1]), positive[:, :-1]], dim=1)
+        run_ids = torch.cumsum(starts.long(), dim=1) - 1
+        run_ids[~positive] = -1
+        vectors = []
+        groups = []
+        group_id = 0
+        for batch_index in range(labels.shape[0]):
+            for run_id in torch.unique(run_ids[batch_index]):
+                if run_id < 0:
+                    continue
+                positions = torch.nonzero(run_ids[batch_index].eq(run_id), as_tuple=False).flatten()
+                if int(positions[-1] - positions[0]) < self.run_min_separation:
+                    continue
+                take = torch.linspace(0, positions.numel() - 1, steps=min(8, positions.numel()), device=hidden.device).long()
+                selected = positions[take]
+                vectors.append(hidden[batch_index, selected])
+                groups.extend([group_id] * selected.numel())
+                group_id += 1
+                if sum(x.shape[0] for x in vectors) >= 256:
+                    break
+            if sum(x.shape[0] for x in vectors) >= 256:
+                break
+        if group_id < 2:
+            return hidden.sum() * 0.0, 0, group_id
+        representation = F.normalize(torch.cat(vectors, dim=0)[:256], dim=-1)
+        group = torch.tensor(groups[: representation.shape[0]], device=hidden.device)
+        logits = representation @ representation.T / self.run_temperature
+        self_mask = torch.eye(logits.shape[0], dtype=torch.bool, device=hidden.device)
+        positive_mask = group[:, None].eq(group[None, :]) & ~self_mask
+        denominator = logits.masked_fill(self_mask, float("-inf")).logsumexp(dim=1)
+        valid = positive_mask.any(dim=1)
+        log_probability = logits - denominator[:, None]
+        positive_log_probability = log_probability.masked_fill(~positive_mask, 0.0).sum(dim=1) / positive_mask.sum(dim=1).clamp_min(1)
+        loss = -positive_log_probability[valid].mean()
+        return loss, int(valid.sum()), group_id
 
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
         labels = inputs.pop("labels")
-        outputs = model(**inputs)
+        if self.structure_aux:
+            base_outputs = model.model(**inputs, output_hidden_states=True, return_dict=True)
+            hidden = base_outputs.hidden_states[model.feature_layer]
+            outputs = TokenClassifierOutput(logits=model.score(hidden), hidden_states=base_outputs.hidden_states)
+        else:
+            outputs = model(**inputs)
         loss_fn = torch.nn.CrossEntropyLoss(weight=self.te_weight.to(outputs.logits.device), ignore_index=-100)
         loss = loss_fn(outputs.logits.reshape(-1, 2), labels.reshape(-1))
+        if self.structure_aux:
+            boundary_loss, boundary_targets = self.boundary_distance_loss(hidden, labels, model)
+            contrastive_loss, anchors, runs = self.run_contrastive_loss(hidden, labels)
+            loss = loss + self.boundary_distance_weight * boundary_loss + self.run_contrastive_weight * contrastive_loss
+            self.structure_stats["train_batches"] += 1
+            self.structure_stats["boundary_targets"] += boundary_targets
+            self.structure_stats["contrastive_anchors"] += anchors
+            self.structure_stats["contrastive_runs"] += runs
+            self.structure_stats["boundary_loss_sum"] += float(boundary_loss.detach())
+            self.structure_stats["contrastive_loss_sum"] += float(contrastive_loss.detach())
         return (loss, outputs) if return_outputs else loss
 
     def prediction_step(self, model, inputs, prediction_loss_only, ignore_keys=None):
@@ -315,8 +434,24 @@ def command_train(args) -> None:
     else:
         tokenizer = load_tokenizer(args.model_path)
         model = build_model(args.model_path, args.kind)
+    if args.structure_aux:
+        if args.kind != "auto_token":
+            raise ValueError("structure-aware training currently requires kind=auto_token")
+        model.boundary_distance_head = nn.Linear(model.config.hidden_size, 2)
     train = WindowDataset(str(Path(args.data_dir) / "train/data.jsonl.gz"), tokenizer, args.window, args.token_label_mode)
     val = WindowDataset(str(Path(args.data_dir) / "val/data.jsonl.gz"), tokenizer, args.window, args.token_label_mode, args.max_eval_samples)
+    probe = train[0]
+    input_geometry = {
+        "raw_bp": len(train.records[0]["sequence"][: args.window]),
+        "input_tokens": int(probe["attention_mask"].sum()),
+        "tensor_tokens": int(probe["input_ids"].numel()),
+        "labeled_tokens": int(probe["labels"].ne(-100).sum()),
+        "bos_tokens": int(probe["input_ids"].eq(tokenizer.bos_token_id).sum()) if tokenizer.bos_token_id is not None else 0,
+        "eos_tokens": int(probe["input_ids"].eq(tokenizer.eos_token_id).sum()) if tokenizer.eos_token_id is not None else 0,
+        "first_label": int(probe["labels"][0]),
+        "last_label": int(probe["labels"][-1]),
+    }
+    print(json.dumps({"input_geometry": input_geometry}, indent=2), flush=True)
     targs = TrainingArguments(
         output_dir=str(out / "checkpoints"),
         overwrite_output_dir=True,
@@ -334,7 +469,7 @@ def command_train(args) -> None:
         save_steps=args.eval_steps,
         save_total_limit=2,
         save_safetensors=False,
-        load_best_model_at_end=True,
+        load_best_model_at_end=not args.fixed_final_checkpoint,
         metric_for_best_model="te_f1",
         greater_is_better=True,
         logging_steps=50,
@@ -353,11 +488,19 @@ def command_train(args) -> None:
         compute_metrics=metrics,
         data_collator=default_data_collator,
         te_class_weight=args.te_class_weight,
+        structure_aux=args.structure_aux,
+        boundary_distance_weight=args.boundary_distance_weight,
+        run_contrastive_weight=args.run_contrastive_weight,
+        boundary_distance_cap=args.boundary_distance_cap,
+        run_temperature=args.run_temperature,
+        run_min_separation=args.run_min_separation,
     )
     trainer.train()
     best = out / "best_model"
     best.mkdir(parents=True, exist_ok=True)
     if args.kind == "auto_token":
+        if args.structure_aux:
+            del model.boundary_distance_head
         trainer.save_model(str(best))
     else:
         torch.save(model.state_dict(), best / "model_state.pt")
@@ -367,6 +510,9 @@ def command_train(args) -> None:
         meta["init_model_path"] = init_model_path
     meta["n_train_windows"] = len(train)
     meta["n_val_windows"] = len(val)
+    meta["input_geometry"] = input_geometry
+    if args.structure_aux:
+        meta["structure_stats"] = trainer.structure_stats
     (out / "training_meta.json").write_text(json.dumps(meta, indent=2, default=str) + "\n")
     if (Path(args.data_dir) / "test/data.jsonl.gz").exists():
         test = WindowDataset(str(Path(args.data_dir) / "test/data.jsonl.gz"), tokenizer, args.window, args.token_label_mode, args.max_eval_samples)
@@ -424,6 +570,13 @@ def main() -> None:
     p.add_argument("--max-eval-samples", type=int, default=1200)
     p.add_argument("--bf16", action="store_true")
     p.add_argument("--gradient-checkpointing", action="store_true")
+    p.add_argument("--fixed-final-checkpoint", action="store_true")
+    p.add_argument("--structure-aux", action="store_true")
+    p.add_argument("--boundary-distance-weight", type=float, default=0.0)
+    p.add_argument("--run-contrastive-weight", type=float, default=0.0)
+    p.add_argument("--boundary-distance-cap", type=int, default=256)
+    p.add_argument("--run-temperature", type=float, default=0.07)
+    p.add_argument("--run-min-separation", type=int, default=64)
     p = sub.add_parser("eval")
     p.add_argument("--model-dir", required=True)
     p.add_argument("--data-dir", required=True)
