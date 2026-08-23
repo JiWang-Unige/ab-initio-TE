@@ -267,9 +267,11 @@ class WeightedTrainer(Trainer):
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
         labels = inputs.pop("labels")
         if self.structure_aux:
-            base_outputs = model.model(**inputs, output_hidden_states=True, return_dict=True)
-            hidden = base_outputs.hidden_states[model.feature_layer]
-            outputs = TokenClassifierOutput(logits=model.score(hidden), hidden_states=base_outputs.hidden_states)
+            captured_hidden = []
+            hook = model.score.register_forward_pre_hook(lambda _module, module_inputs: captured_hidden.append(module_inputs[0]))
+            outputs = model(**inputs)
+            hook.remove()
+            hidden = captured_hidden[0]
         else:
             outputs = model(**inputs)
         loss_fn = torch.nn.CrossEntropyLoss(weight=self.te_weight.to(outputs.logits.device), ignore_index=-100)
