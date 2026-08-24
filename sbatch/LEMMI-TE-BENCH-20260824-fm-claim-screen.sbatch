@@ -43,7 +43,8 @@ fail() { FINAL_STATUS=FAILED; REASON=$1; echo "FAILED: $1" >&2; exit 2; }
 [[ "$(tr -d '[:space:]' <"$PREFLIGHT_ATTEMPT/STATUS" 2>/dev/null || true)" == PASS ]] || block "preflight is not PASS"
 LENGTHS="$PREFLIGHT_ATTEMPT/contig_lengths.json"
 TRUTH="$PREFLIGHT_ATTEMPT/truth.canonical.tsv"
-[[ -r "$LENGTHS" && -r "$TRUTH" ]] || block "preflight lengths/truth canonical missing"
+PREFLIGHT_MANIFEST="$PREFLIGHT_ATTEMPT/preflight_manifest.json"
+[[ -r "$LENGTHS" && -r "$TRUTH" && -r "$PREFLIGHT_MANIFEST" ]] || block "preflight manifest/lengths/truth canonical missing"
 
 config_value() { python3 - "$CONFIG" "$1" <<'PY'
 import json, sys
@@ -63,6 +64,17 @@ EXPECTED_TRUTH_SHA=$(config_value frozen_instance.truth_sha256)
 [[ -r "$ASSEMBLY" && -r "$TRUTH_SOURCE" ]] || block "frozen assembly/truth missing"
 [[ "$(sha256sum "$ASSEMBLY" | awk '{print $1}')" == "$EXPECTED_ASSEMBLY_SHA" ]] || block "assembly SHA256 mismatch"
 [[ "$(sha256sum "$TRUTH_SOURCE" | awk '{print $1}')" == "$EXPECTED_TRUTH_SHA" ]] || block "truth SHA256 mismatch"
+python3 - "$PREFLIGHT_MANIFEST" "$ASSEMBLY" "$EXPECTED_ASSEMBLY_SHA" "$TRUTH_SOURCE" "$EXPECTED_TRUTH_SHA" <<'PY'
+import json, sys
+manifest = json.load(open(sys.argv[1], encoding="utf-8"))
+if manifest.get("status") != "PASS" or manifest.get("profile") != "frozen_truth_preflight":
+    raise SystemExit("preflight manifest is not a PASS frozen_truth_preflight")
+assembly = manifest.get("assembly", {}); truth = manifest.get("truth", {})
+if assembly.get("path") != sys.argv[2] or assembly.get("expected_sha256") != sys.argv[3] or assembly.get("observed_sha256") != sys.argv[3]:
+    raise SystemExit("preflight assembly identity mismatch")
+if truth.get("path") != sys.argv[4] or truth.get("expected_sha256") != sys.argv[5] or truth.get("observed_sha256") != sys.argv[5]:
+    raise SystemExit("preflight truth identity mismatch")
+PY
 
 case "$TASK" in
   0) MODEL_NAME=base_ce; MODEL_DIR=${BASE_CE_MODEL_DIR:-} ;;
@@ -83,12 +95,23 @@ python3 "$ADAPTER" convert --input "$PREDICTION" --output "$CANONICAL" --format 
 RAW_METRICS="$ATTEMPT/metrics.adapter.json"
 python3 "$ADAPTER" evaluate --truth "$TRUTH" --prediction "$CANONICAL" --lengths "$LENGTHS" \
   --truth-tier T1 --iou-threshold 0.8 --boundary-tol-bp 5 --overlap-policy flat_union >"$RAW_METRICS"
+V2_METRICS="$ATTEMPT/metrics.adapter.v2.json"
+python3 - "$RAW_METRICS" "$V2_METRICS" <<'PY'
+import json, sys
+from pathlib import Path
+metrics = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+# v2 comparison fields describe strict dense-mask runs; raw interval-union
+# audits remain available in metrics.adapter.json.
+metrics["truth_union_run_count"] = metrics["true_segments"]
+metrics["prediction_union_run_count"] = metrics["pred_segments"]
+Path(sys.argv[2]).write_text(json.dumps(metrics, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
+PY
 
-export MODEL_NAME MODEL_DIR ASSEMBLY LENGTHS TRUTH PREDICTION CANONICAL RAW_METRICS PRED_MANIFEST JOB_ID TASK
+export MODEL_NAME MODEL_DIR ASSEMBLY LENGTHS TRUTH PREDICTION CANONICAL RAW_METRICS V2_METRICS PRED_MANIFEST PREFLIGHT_MANIFEST JOB_ID TASK
 python3 - "$ATTEMPT/metrics.json" <<'PY'
 import json, os, sys
 from pathlib import Path
-raw = json.loads(Path(os.environ["RAW_METRICS"]).read_text())
+raw = json.loads(Path(os.environ["V2_METRICS"]).read_text())
 if raw.get("truth_tier") != "T1":
     raise SystemExit("adapter did not return T1 metrics")
 payload = {
@@ -100,7 +123,8 @@ payload = {
     "model_dir": os.environ["MODEL_DIR"], "assembly": os.environ["ASSEMBLY"],
     "contig_lengths": os.environ["LENGTHS"], "truth": os.environ["TRUTH"],
     "prediction_bed": os.environ["PREDICTION"], "prediction_canonical": os.environ["CANONICAL"],
-    "prediction_manifest": os.environ["PRED_MANIFEST"], "metrics": raw,
+    "prediction_manifest": os.environ["PRED_MANIFEST"], "preflight_manifest": os.environ["PREFLIGHT_MANIFEST"],
+    "metrics_adapter_raw": os.environ["RAW_METRICS"], "metrics": raw,
 }
 Path(sys.argv[1]).write_text(json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n")
 PY
