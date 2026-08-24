@@ -176,7 +176,7 @@ def _interval_audit(rows: list[tuple[str, int, int]]) -> dict[str, int]:
                 participating.add(index)
                 participating.update(item[1] for item in active)
             heapq.heappush(active, (end, index))
-            if active_end is None or start >= active_end:
+            if active_end is None or start > active_end:
                 union_run_count += 1
                 active_end = end
             else:

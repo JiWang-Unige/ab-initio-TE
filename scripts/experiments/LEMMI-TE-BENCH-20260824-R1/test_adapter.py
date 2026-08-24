@@ -62,6 +62,12 @@ class AdapterTest(unittest.TestCase):
         self.assertEqual(audit["overlap_interval_count"], 3)
         self.assertEqual(audit["union_run_count"], 2)
 
+    def test_union_audit_merges_adjacent_intervals_like_flat_mask(self):
+        audit = adapter._interval_audit([("chr1", 0, 5), ("chr1", 5, 8)])
+        self.assertEqual(audit["overlap_count"], 0)
+        self.assertEqual(audit["overlap_interval_count"], 0)
+        self.assertEqual(audit["union_run_count"], 1)
+
     def test_cli_has_explicit_subcommands_and_evaluate_t1(self):
         script = str(Path(__file__).with_name("adapter.py"))
         help_result = subprocess.run([sys.executable, script, "-h"], check=True, capture_output=True, text=True)
