@@ -85,8 +85,13 @@ class AdapterTest(unittest.TestCase):
         self.assertIn("THREADS=${SLURM_CPUS_PER_TASK:-}", text)
         self.assertIn('--thread "$THREADS"', text)
         self.assertNotIn("--thread 2", text)
+        self.assertIn("PROJECT_ROOT=${PROJECT_ROOT:-/home/users/j/jwang/ab-initio-TE}", text)
+        self.assertNotIn("BASH_SOURCE", text)
         self.assertIn('"claim_scope": "T1_positive_only_recall_boundary_fragmentation"', text)
         self.assertIn('"whole_genome_precision_f1_claim": False', text)
+        preflight = script.with_name("LEMMI-TE-BENCH-20260824-preflight.sbatch").read_text(encoding="utf-8")
+        self.assertIn("PROJECT_ROOT=${PROJECT_ROOT:-/home/users/j/jwang/ab-initio-TE}", preflight)
+        self.assertNotIn("BASH_SOURCE", preflight)
 
 
 if __name__ == "__main__":
