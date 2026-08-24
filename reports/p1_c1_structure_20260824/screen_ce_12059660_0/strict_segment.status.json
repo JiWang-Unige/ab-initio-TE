@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "rows": 80,
+  "out_tsv": "reports/p1_c1_structure_20260824/screen_ce_12059660_0/strict_segment.tsv",
+  "n_windows": 1200
+}
