@@ -1,0 +1,77 @@
+{
+  "schema_version": "LEMMI-TE-BENCH-1.0.0",
+  "exp_id": "LEMMI-TE-BENCH-20260824-R1",
+  "profile": "frozen_truth_screen",
+  "implementation_status": "IMPLEMENTED_NOT_RUN",
+  "claim_eligible": false,
+  "framework": {
+    "name": "LEMMI",
+    "scope": "metagenomics classifier continuous benchmarking",
+    "official_docs": "https://www.ezlab.org/lemmi-v2-documentation.html",
+    "te_extension": "adapter_only; LEMMI is not a TE caller or TE truth source"
+  },
+  "coordinate_convention": "zero_based_half_open",
+  "evaluator": {
+    "anchor": "pipelines/PIPE-TEFM-FINAL-20260623/strict_segment_eval.py",
+    "iou_threshold": 0.8,
+    "boundary_tolerance_bp": 5,
+    "threshold_fit": "none_on_test",
+    "overlap_policy": "flat_union",
+    "known_truth_topology": "FlyBase truth has 812 overlapping intervals; raw/overlap/union counts are reported; instance track may opt into require_nonoverlap"
+  },
+  "frozen_instance": {
+    "name": "flybase_fb2026_02_dmel_r6.68",
+    "truth_tier": "T1",
+    "truth_source": "FlyBase FB2026_02 same-release curated TE instances",
+    "truth_is_independent_of_callers": true,
+    "truth_path": "/home/users/j/jwang/ab-initio-TE/data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/derived/curated_positive_truth_v1/flybase_r668_curated_positive_instances.bed",
+    "truth_sha256": "d47d94aa56b4c65ce8199838c3c71a37a58bc54590ce277f1ffdf14b10413bd2",
+    "assembly_path": "/home/users/j/jwang/ab-initio-TE/data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/dmel-all-chromosome-r6.68.fasta.gz",
+    "assembly_sha256": "81751d3b66bc504525ab88342aa91817eee80bfff136c893e9cda76ea05643b1",
+    "contig_lengths_path": "data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/contig_lengths.tsv",
+    "split": {"name": "genome_holdout_v1", "train": [], "validation": [], "test": ["dmel_r6.68"], "fitting_allowed_on_test": false}
+  },
+  "methods": {
+    "fm_base_ce": {"tool_versions": "TE-FM base CE comparator", "output": null, "status": "BLOCKED", "blocker": "no registered prediction on frozen FlyBase instance"},
+    "fm_dapt_ce": {"tool_versions": "TE-FM DAPT CE comparator", "output": null, "status": "BLOCKED", "blocker": "no registered prediction on frozen FlyBase instance"},
+    "repeatmodeler2_repeatmasker": {"tool_versions": "RepeatModeler 2.0.9 + RepeatMasker 4.2.4", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered; smoke output is not scientific prediction"},
+    "edta": {"tool_versions": "EDTA 2.3.0", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered; EDTA rice reference cannot be used as independent truth for EDTA"},
+    "hite": {"tool_versions": "HiTE 3.3.3", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered; prior result is engineering smoke only"},
+    "earlgrey": {"tool_versions": "Earl Grey 7.3.0", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered"},
+    "tetrimmer": {"tool_versions": "TEtrimmer 1.7.4", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered"}
+  },
+  "existing_output_audit_only": [
+    {"tool": "repeatmodeler", "path": "software_outputs/de_novo_benchmark/DENOVO_B_ANIMAL_EVAL_20260620/dfam_augmented/pig/repeatmodeler/annotation.bed", "provenance": "denovo + Dfam 3.9", "eligible_for_frozen_comparison": false, "reason": "different species/assembly and Dfam-derived comparator; audit only"},
+    {"tool": "edta", "path": "software_outputs/de_novo_benchmark/DENOVO_B_ANIMAL_EVAL_20260620/dfam_augmented/pig/edta/annotation.gff3", "provenance": "denovo + Dfam 3.9", "eligible_for_frozen_comparison": false, "reason": "different species/assembly and no independent FlyBase truth pairing"},
+    {"tool": "earlgrey", "path": "software_outputs/de_novo_benchmark/DENOVO_B_ANIMAL_EVAL_20260620/dfam_augmented/cattle/earlgrey/annotation.gff3", "provenance": "denovo + Dfam 3.9", "eligible_for_frozen_comparison": false, "reason": "different species/assembly and Dfam-derived comparator; audit only"}
+  ],
+  "adapter": {"path": "scripts/experiments/LEMMI-TE-BENCH-20260824-R1/adapter.py", "formats": ["bed", "gff3", "repeatmasker_out"], "canonical_fields": ["seqid", "start", "end", "name", "score", "strand", "source", "attributes"]},
+  "preflight": {"sbatch_script": "sbatch/LEMMI-TE-BENCH-20260824-preflight.sbatch", "caller_executed": false, "output_identity": "outputs/LEMMI-TE-BENCH-20260824-R1/attempt-$SLURM_JOB_ID"},
+  "claim_screen": {
+    "sbatch_script": "sbatch/LEMMI-TE-BENCH-20260824-hite-claim-screen.sbatch",
+    "caller": "hite",
+    "version": "3.3.3",
+    "source_commit": "ae317c879b3d217b419fefa38c6ff2cacbf1695c",
+    "sif_path": "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+    "sif_sha256": "3967895913c3aebbe0393a5b33eada1f752f10ca46d8ee787d5f2bace3f9dcdc",
+    "reference": "docker://kanghu/hite@sha256:902c3d469c9f60f01801b6b8ab65e8269e0d513640c008998799fb514397e4ce",
+    "direct_argv_template": ["python", "/HiTE/main.py", "--genome", "/work/input/hite.fa", "--thread", "$SLURM_CPUS_PER_TASK", "--annotate", "1", "--out_dir", "/work/hite"],
+    "thread_source": "SLURM_CPUS_PER_TASK",
+    "network_policy": "loopback_discard_proxy",
+    "runtime_cap_seconds": 39600,
+    "kill_after_seconds": 60,
+    "claim_eligible": false,
+    "claim_eligible_when_pass": true,
+    "claim_scope": "T1_positive_only_recall_boundary_fragmentation"
+  },
+  "resources": {"execution": "authorized by user on 2026-08-24; pending main-agent submission", "adapter_evaluator": {"cpus": 1, "memory_gb": 2, "gpu": 0}, "hite_claim_screen": {"cpus": 40, "memory_gb": 128, "gpu": 0, "walltime_hours": 12}}
+  ,"next_cell_recommendation": {
+    "tool": "hite",
+    "reason": "exact hash-pinned HiTE 3.3.3 SIF and direct argv already passed isolated engineering smoke; it does not require Dfam truth and can consume the same FlyBase assembly",
+    "input": "frozen_instance.assembly_path",
+    "output_contract": "HiTE.gff -> canonical adapter -> T1 positive-only metrics",
+    "walltime_cap_hours": 12,
+    "suggested_resources": {"cpus": 40, "memory_gb": 128, "gpu": 0},
+    "preconditions": ["preflight PASS", "user execution authority recorded", "output/log paths are unique"]
+  }
+}
