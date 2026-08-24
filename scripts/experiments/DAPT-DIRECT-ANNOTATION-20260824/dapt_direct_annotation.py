@@ -123,7 +123,10 @@ def build_dataset(torch, Dataset, tokenizer, sequences: list[str]):
             )
             if len(encoded["input_ids"]) != WINDOW:
                 raise ValueError("tokenizer did not preserve the frozen 8192-token geometry")
-            return {key: torch.tensor(value, dtype=torch.long) for key, value in encoded.items()}
+            return {
+                key: torch.tensor(encoded[key], dtype=torch.long)
+                for key in ("input_ids", "attention_mask", "special_tokens_mask")
+            }
 
     return SequenceDataset()
 

@@ -15,6 +15,30 @@ spec.loader.exec_module(dapt)
 
 
 class MaskingTests(unittest.TestCase):
+    def test_dataset_drops_token_type_ids_not_accepted_by_generanno_mlm(self):
+        class FakeTorch:
+            long = "long"
+
+            @staticmethod
+            def tensor(value, dtype=None):
+                return value
+
+        class FakeDataset:
+            pass
+
+        class FakeTokenizer:
+            def __call__(self, sequence, **kwargs):
+                size = kwargs["max_length"]
+                return {
+                    "input_ids": [1] * size,
+                    "attention_mask": [1] * size,
+                    "special_tokens_mask": [0] * size,
+                    "token_type_ids": [0] * size,
+                }
+
+        row = dapt.build_dataset(FakeTorch, FakeDataset, FakeTokenizer(), ["A" * dapt.WINDOW])[0]
+        self.assertEqual(set(row), {"input_ids", "attention_mask", "special_tokens_mask"})
+
     def test_matched_ce_array_uses_auto_token(self):
         sbatch = (HERE.parents[2] / "sbatch/DAPT-DIRECT-ANNOTATION-20260824-ce.sbatch").read_text(encoding="utf-8")
         self.assertIn("--kind auto_token", sbatch)
