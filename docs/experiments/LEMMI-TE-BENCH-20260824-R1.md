@@ -84,6 +84,8 @@ On a successful cell, the per-run metrics/manifest set
 precision/F1 remains explicitly non-claimable. The thread count is read from
 numeric `SLURM_CPUS_PER_TASK` and passed through to HiTE, so the 40-CPU
 recommendation is not silently reduced to the earlier 2-thread smoke setting.
+The D. melanogaster cell also passes `--plant 0`; HiTE's plant default is not
+valid for this animal genome.
 
 The most executable same-instance caller cell within a 12-hour window is
 HiTE 3.3.3: the exact 3.6-GB SIF, source commit, direct argv, and output GFF

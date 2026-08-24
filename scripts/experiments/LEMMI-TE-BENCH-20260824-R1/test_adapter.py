@@ -84,6 +84,7 @@ class AdapterTest(unittest.TestCase):
         text = script.read_text(encoding="utf-8")
         self.assertIn("THREADS=${SLURM_CPUS_PER_TASK:-}", text)
         self.assertIn('--thread "$THREADS"', text)
+        self.assertIn('--plant 0 --annotate 1', text)
         self.assertNotIn("--thread 2", text)
         self.assertIn("PROJECT_ROOT=${PROJECT_ROOT:-/home/users/j/jwang/ab-initio-TE}", text)
         self.assertNotIn("BASH_SOURCE", text)

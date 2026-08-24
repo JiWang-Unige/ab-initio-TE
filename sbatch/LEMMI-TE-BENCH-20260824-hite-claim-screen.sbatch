@@ -160,7 +160,7 @@ timeout --foreground --kill-after="${KILL_AFTER}s" "${RUNTIME_CAP}s" \
     FTP_PROXY=http://127.0.0.1:9 ALL_PROXY=socks5://127.0.0.1:9 \
     NO_PROXY=localhost,127.0.0.1 no_proxy=localhost,127.0.0.1 \
     python /HiTE/main.py --genome /work/input/hite.fa --thread "$THREADS" \
-      --annotate 1 --out_dir /work/hite >"$COMMAND_LOG" 2>&1
+      --plant 0 --annotate 1 --out_dir /work/hite >"$COMMAND_LOG" 2>&1
 RC=$?
 set -e
 [[ "$RC" == 0 ]] || fail "HiTE direct argv failed or timed out (rc=$RC)"
@@ -237,7 +237,7 @@ manifest = {
     "preflight_attempt": os.environ["PREFLIGHT_ATTEMPT"],
     "config": {"path": os.environ["CONFIG"], "sha256": os.environ["CONFIG_SHA256"]},
     "adapter": {"path": os.environ["ADAPTER"], "sha256": os.environ["ADAPTER_SHA256"]},
-    "hite": {"sif": os.environ["SIF"], "sif_sha256": os.environ["EXPECTED_SIF_SHA"], "direct_argv": ["python", "/HiTE/main.py", "--genome", "/work/input/hite.fa", "--thread", os.environ["THREADS"], "--annotate", "1", "--out_dir", "/work/hite"]},
+    "hite": {"sif": os.environ["SIF"], "sif_sha256": os.environ["EXPECTED_SIF_SHA"], "direct_argv": ["python", "/HiTE/main.py", "--genome", "/work/input/hite.fa", "--thread", os.environ["THREADS"], "--plant", "0", "--annotate", "1", "--out_dir", "/work/hite"]},
     "whole_genome_precision_f1_claim": False,
     "threads": int(os.environ["THREADS"]),
     "artifacts": {"gff": {"path": os.environ["GFF_PATH"], "sha256": os.environ["GFF_SHA256"]}, "canonical": {"path": os.environ["CANONICAL"], "sha256": os.environ["CANONICAL_SHA256"]}, "metrics": {"path": os.environ["METRICS"], "sha256": os.environ["METRICS_SHA256"]}},
