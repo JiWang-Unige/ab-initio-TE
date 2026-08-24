@@ -4,6 +4,9 @@
 set -Eeuo pipefail
 umask 022
 
+eval "$(conda shell.bash hook)"
+conda activate te_benchmark
+
 PROJECT_ROOT=${PROJECT_ROOT:-/home/users/j/jwang/ab-initio-TE}
 CONFIG=${CONFIG:-$PROJECT_ROOT/configs/LEMMI-TE-BENCH-20260824-R1.yaml}
 ADAPTER=${ADAPTER:-$PROJECT_ROOT/scripts/experiments/LEMMI-TE-BENCH-20260824-R1/adapter.py}
