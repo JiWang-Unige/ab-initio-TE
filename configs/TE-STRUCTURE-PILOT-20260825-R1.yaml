@@ -1,0 +1,85 @@
+experiment_id: TE-STRUCTURE-PILOT-20260825-R1
+base_commit: 67e1fd8396278b9982a3aaaafde54027d84aa411
+window_bp: 8192
+seed: 42
+
+claim_contract:
+  human_truth: repeatmasker_ucsc_style_comparator
+  human_claim: comparator_agreement_only
+  flybase_truth: curated_positive_T1
+  flybase_claim: recall_boundary_fragmentation_only
+  full_copy_truth: not_yet_established
+
+splits:
+  human_train: chr1_prefix
+  human_validation: chr11_prefix
+  human_test: chr17_prefix_0_9830400
+  drosophila_holdout: all_Drosophila_excluded_from_posttraining
+  augmentation: after_species_chromosome_family_copy_split
+
+remote_assets_to_audit:
+  human_data: software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/human_h0_w8192
+  human_split_manifest: H0_human_only_upper_bound/SPLIT_MANIFEST.tsv
+  flybase_assembly: data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/dmel-all-chromosome-r6.68.fasta.gz
+  flybase_truth: data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/derived/curated_positive_truth_v1/flybase_r668_curated_positive_instances.bed
+  flybase_lengths: data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/contig_lengths.tsv
+  dm6_ucsc_repeatmasker: .backup/data/genome_data/current_eukaryotes/animals/fruit_fly/rmsk.txt.gz
+  generanno_base: .backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  hite_image: unresolved_from_frozen_HiTE_3_3_3_manifest
+
+round1:
+  D1:
+    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/length_stratified_eval.py
+    truth_length_bins: ["<80", "80-499", "500-999", ">=1000"]
+    iou: 0.8
+    boundary_tolerances_bp: [5, 25]
+    resource: cpu
+  D2:
+    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/repeatmasker_flybase_alignment.py
+    truth_tier: T1
+    resource: cpu
+    blocked_until: exact_dm6_FlyBase_r6_68_assembly_and_contig_contract_is_confirmed
+  H1:
+    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/hite_chr17_pilot.py
+    status: engineering_pilot
+    resource: cpu
+  P2_M:
+    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/te_span_mlm.py
+    status: mechanism_smoke_only
+    span_bp: 32
+    masked_fraction: 0.15
+    strata: [interior, boundary, flank]
+  P2:
+    status: blocked_until_copy_level_assets
+    max_steps: 800
+    resource: gpu
+  P3:
+    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/te_unet_segmentation.py
+    status: comparator_run_engineering_pilot
+    states: [background, interior, left_boundary, right_boundary]
+    head_width: 128
+    max_steps: 800
+    resource: gpu
+  P4:
+    status: blocked_until_P2_and_P3_independently_pass
+
+gates:
+  human_retention:
+    minimum_short_rate_reduction: 0.20
+    minimum_fragments_per_truth_reduction: 0.15
+    maximum_bp_f1_drop: 0.005
+    maximum_missed_rate_increase: 0.03
+    require_positive_segment_f1_delta: true
+    require_positive_boundary_f1_5bp_delta: true
+  long_seed_screen:
+    require_monotonic_length_trend: true
+    minimum_ge1000_segment_recall_ratio_vs_80_499: 2.0
+  direct_stop:
+    flybase_ge1000_minimum_segment_recall: 0.05
+    flybase_minimum_fraction_of_hite_recall: 0.10
+
+deferred:
+  - mixture_of_experts
+  - large_multispecies_training
+  - te_specific_hmm
+  - cross_window_continuity
