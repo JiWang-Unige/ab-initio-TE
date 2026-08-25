@@ -2,8 +2,8 @@
   "schema_version": "LEMMI-TE-BENCH-1.0.0",
   "exp_id": "LEMMI-TE-BENCH-20260824-R1",
   "profile": "frozen_truth_screen",
-  "implementation_status": "IMPLEMENTED_NOT_RUN",
-  "claim_eligible": false,
+  "implementation_status": "COMPLETED_R1",
+  "claim_eligible": true,
   "framework": {
     "name": "LEMMI",
     "scope": "metagenomics classifier continuous benchmarking",
@@ -32,11 +32,11 @@
     "split": {"name": "genome_holdout_v1", "train": [], "validation": [], "test": ["dmel_r6.68"], "fitting_allowed_on_test": false}
   },
   "methods": {
-    "fm_base_ce": {"tool_versions": "TE-FM base CE comparator", "output": null, "status": "BLOCKED", "blocker": "no registered prediction on frozen FlyBase instance"},
-    "fm_dapt_ce": {"tool_versions": "TE-FM DAPT CE comparator", "output": null, "status": "BLOCKED", "blocker": "no registered prediction on frozen FlyBase instance"},
+    "fm_base_ce": {"tool_versions": "TE-FM matched Base-CE, Slurm 12094741", "output": "outputs/LEMMI-TE-BENCH-20260824-R1/fm-claim-attempt-12094741-0", "status": "PASS", "claim_scope": "T1_positive_only_recall_boundary_fragmentation"},
+    "fm_dapt_ce": {"tool_versions": "TE-FM matched DAPT-CE, Slurm 12094740", "output": "outputs/LEMMI-TE-BENCH-20260824-R1/fm-claim-attempt-12094740-1", "status": "PASS", "claim_scope": "T1_positive_only_recall_boundary_fragmentation"},
     "repeatmodeler2_repeatmasker": {"tool_versions": "RepeatModeler 2.0.9 + RepeatMasker 4.2.4", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered; smoke output is not scientific prediction"},
     "edta": {"tool_versions": "EDTA 2.3.0", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered; EDTA rice reference cannot be used as independent truth for EDTA"},
-    "hite": {"tool_versions": "HiTE 3.3.3", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered; prior result is engineering smoke only"},
+    "hite": {"tool_versions": "HiTE 3.3.3", "output": "outputs/LEMMI-TE-BENCH-20260824-R1/hite-claim-attempt-12066193", "status": "PASS", "claim_scope": "T1_positive_only_recall_boundary_fragmentation"},
     "earlgrey": {"tool_versions": "Earl Grey 7.3.0", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered"},
     "tetrimmer": {"tool_versions": "TEtrimmer 1.7.4", "output": null, "status": "BLOCKED", "blocker": "no frozen FlyBase-cell output registered"}
   },
@@ -61,18 +61,28 @@
     "network_policy": "loopback_discard_proxy",
     "runtime_cap_seconds": 39600,
     "kill_after_seconds": 60,
-    "claim_eligible": false,
+    "claim_eligible": true,
     "claim_eligible_when_pass": true,
     "claim_scope": "T1_positive_only_recall_boundary_fragmentation"
   },
-  "resources": {"execution": "authorized by user on 2026-08-24; pending main-agent submission", "adapter_evaluator": {"cpus": 1, "memory_gb": 2, "gpu": 0}, "hite_claim_screen": {"cpus": 40, "memory_gb": 128, "gpu": 0, "walltime_hours": 12}}
+  "fm_claim_screen": {
+    "sbatch_script": "sbatch/LEMMI-TE-BENCH-20260824-fm-claim-screen.sbatch",
+    "array_job": "12094740",
+    "task_0_slurm_job": "12094741",
+    "task_1_slurm_job": "12094740",
+    "geometry": {"window": 8192, "stride": 8192, "threshold": 0.5},
+    "coverage": {"contigs": 1870, "bp": 143726002, "windows": 18935, "missing_bp": 0, "overlap_bp": 0},
+    "claim_eligible": true,
+    "claim_scope": "T1_positive_only_recall_boundary_fragmentation"
+  },
+  "resources": {"execution": "completed under user authorization", "adapter_evaluator": {"cpus": 1, "memory_gb": 2, "gpu": 0}, "hite_claim_screen": {"cpus": 40, "memory_gb": 128, "gpu": 0, "walltime_hours": 12}, "fm_claim_screen": {"array_tasks": 2, "gpu_per_task": "nvidia_a100_80gb_pcie:1", "cpus_per_task": 8, "memory_gb_per_task": 128, "walltime_hours": 7}}
   ,"next_cell_recommendation": {
-    "tool": "hite",
-    "reason": "exact hash-pinned HiTE 3.3.3 SIF and direct argv already passed isolated engineering smoke; it does not require Dfam truth and can consume the same FlyBase assembly",
+    "tool": "repeatmodeler2_repeatmasker",
+    "reason": "HiTE and both FM cells are complete; a second traditional comparator is useful only after its exact FlyBase software and library provenance are frozen",
     "input": "frozen_instance.assembly_path",
-    "output_contract": "HiTE.gff -> canonical adapter -> T1 positive-only metrics",
+    "output_contract": "RepeatModeler library plus RepeatMasker annotation -> canonical adapter -> T1 positive-only metrics",
     "walltime_cap_hours": 12,
     "suggested_resources": {"cpus": 40, "memory_gb": 128, "gpu": 0},
-    "preconditions": ["preflight PASS", "user execution authority recorded", "output/log paths are unique"]
+    "preconditions": ["exact RepeatModeler2 and RepeatMasker versions/container frozen", "library provenance frozen", "preflight PASS", "output/log paths are unique"]
   }
 }

@@ -1,106 +1,73 @@
 # LEMMI-TE-BENCH-20260824-R1
 
-## Scope and finding
+## Scope
 
-LEMMI is the EZlab continuous benchmarking framework for metagenomics
-classifiers, not a transposable-element caller or a TE truth generator. This
-cell adopts only its useful benchmark discipline: a frozen instance, explicit
-tool-cell status, and provenance. The official LEMMI documentation is linked in
-`configs/LEMMI-TE-BENCH-20260824-R1.yaml`.
+LEMMI is a continuous benchmarking framework for metagenomics classifiers,
+not a TE caller or truth source. This experiment adopts its frozen-instance,
+provenance and explicit cell-status discipline for a TE benchmark.
 
-The repository contains reusable engineering-smoke material for RepeatModeler2
-2.0.9 + RepeatMasker 4.2.4, EDTA 2.3.0, HiTE 3.3.3, EarlGrey 7.3.0 and
-TEtrimmer 1.7.4. Those outputs validate runtime identity and conversion only;
-they are not predictions on the frozen FlyBase instance. Existing EDTA rice
-reference output is explicitly not used as independent truth for an EDTA cell.
+The frozen instance is FlyBase FB2026_02 *D. melanogaster* r6.68 with T1
+curated-positive truth. Evaluation uses zero-based half-open coordinates,
+flat-union masks, IoU 0.8 and a 5-bp boundary tolerance. T1 supports recall,
+boundary and fragmentation claims only. Whole-genome precision/F1, FP and TN
+remain non-claimable because unlabelled sequence is not an exhaustive negative
+set.
 
-The remote checkout also contains reusable BED/GFF payloads under
-`software_outputs/de_novo_benchmark/DENOVO_B_ANIMAL_EVAL_20260620/` (for
-example pig RepeatModeler/EDTA and cattle EarlGrey). They are recorded in the
-config as audit-only candidates: they are Dfam-augmented, use different
-assemblies/species, and therefore cannot be silently promoted into this frozen
-FlyBase comparison.
+## Frozen identity
 
-## Implemented
+- Assembly SHA256:
+  `81751d3b66bc504525ab88342aa91817eee80bfff136c893e9cda76ea05643b1`
+- Truth SHA256:
+  `d47d94aa56b4c65ce8199838c3c71a37a58bc54590ce277f1ffdf14b10413bd2`
+- 1,870 contigs; 143,726,002 bp.
+- 5,734 raw truth intervals; 594 overlapping pairs; 812 intervals participate
+  in overlap; dense flat union contains 4,972 truth runs.
+- Preflight Slurm `12066076`: `PASS`.
 
-`adapter.py` accepts BED, GFF3 and RepeatMasker `.out`, emits the canonical
-zero-based half-open TSV consumed by the FM strict evaluator, and computes
-matching bp, segment IoU/F1, boundary and fragmentation fields. It uses the
-same IoU/boundary defaults (`0.8`, `5 bp`) as the strict screen and has a
-deterministic synthetic smoke fixture. The CLI has explicit `convert`,
-`evaluate`, and `self-test` subcommands. Flat strict masks use interval union
-by default while reporting raw interval, overlap-pair, and union-run counts;
-`require_nonoverlap` is available for an instance/topology track.
+## Completed cells
 
-For T1 positive-only truth, the evaluator sets whole-genome FP, TN,
-precision/F1, and true-backed prediction rates to `null`; it retains positive
-coverage/recall, matched boundary recall/error, and fragments-per-truth. It
-never treats unlabeled sequence as negative.
+| Method | Slurm | Status | Output |
+|---|---:|---|---|
+| HiTE 3.3.3, animal mode | 12066193 | PASS | `outputs/LEMMI-TE-BENCH-20260824-R1/hite-claim-attempt-12066193` |
+| matched Base-CE | 12094741 | PASS | `outputs/LEMMI-TE-BENCH-20260824-R1/fm-claim-attempt-12094741-0` |
+| matched DAPT-CE | 12094740 | PASS | `outputs/LEMMI-TE-BENCH-20260824-R1/fm-claim-attempt-12094740-1` |
 
-## Current status / blockers
+Both FM manifests cover all 1,870 contigs, 143,726,002 bp and 18,935 windows,
+with zero missing or overlapping coverage bp. The first FM wrapper attempt
+`12094732` failed before inference because it used the wrong Python environment
+and is excluded from scientific results.
 
-The config freezes FlyBase FB2026_02 D. melanogaster r6.68 as independent T1
-curated-positive truth and a genome-level holdout split. It deliberately marks
-all five tool cells `BLOCKED`: no frozen FlyBase-cell BED/GFF output and no
-locally verified contig-length manifest are present in this checkout. No
-caller, Slurm job, or biological benchmark was run here; the engineering
-smoke is claim-ineligible.
+## T1 positive-only results
 
-The FlyBase truth manifest also records overlapping instances (812 intervals
-participate in an overlap). The default flat-union track preserves this in
-audit counts; an instance/topology track must explicitly use
-`require_nonoverlap` or a topology-aware evaluator amendment.
+| Metric | HiTE | Base-CE | DAPT-CE |
+|---|---:|---:|---:|
+| bp recall | 0.448982 | 0.003408 | 0.018514 |
+| Segment recall, IoU 0.8 | 0.216412 | 0 | 0.000402 |
+| Boundary recall, 5 bp | 0.119670 | 0 | 0.000201 |
+| Median matched boundary error, bp | 2.5 | undefined | 5.5 |
+| Mean matched IoU | 0.972959 | 0 | 0.877056 |
+| Mean fragments / truth | 1.023733 | 2.927595 | 11.703138 |
+| Split-truth rate | 0.193081 | 0.076830 | 0.465205 |
+| Missed-truth rate | 0.492961 | 0.897828 | 0.461585 |
+| Short-prediction rate | 0.838667 | 0.999506 | 0.998044 |
+| Predicted segments | 110,126 | 159,832 | 388,073 |
 
-Required before a real cell: verify assembly/truth bytes and contig lengths,
-register one output artifact per tool with its tool/database provenance, and
-run the common evaluator against this same truth/split. Self-Dfam truth and
-same-run homologous-caller output must never be compared as independent
-evidence.
+DAPT increases bp recall about 5.43-fold over Base and lowers missed truth, but
+it recovers only 2/4,972 truth segments at IoU 0.8 and creates 11.70 fragments
+per truth. HiTE is substantially stronger on segment, boundary and bp recall
+while remaining near one fragment per truth. None of these T1 results supports
+a whole-genome precision or F1 claim.
 
-## CPU preflight and next cell
+## Implementation
 
-`sbatch/LEMMI-TE-BENCH-20260824-preflight.sbatch` is a CPU-only, no-caller
-preflight. It requires a numeric `SLURM_JOB_ID`, creates a unique
-`attempt-$SLURM_JOB_ID`, verifies the frozen assembly/truth SHA-256 values,
-streams the gzip FASTA into contig-length TSV/JSON, converts the FlyBase BED,
-audits raw/overlap/union counts, and writes a manifest plus terminal `STATUS`.
-Resource flags are supplied externally through `sbatch`; this worker only ran
-`bash -n` and did not submit it.
+`scripts/experiments/LEMMI-TE-BENCH-20260824-R1/adapter.py` converts BED, GFF3
+and RepeatMasker `.out` into a canonical zero-based half-open TSV and evaluates
+the shared T1 contract. `pipelines/PIPE-TEFM-FINAL-20260623/infer_fasta_to_bed.py`
+provides frozen 8,192/8,192 FM inference with complete tail/short-contig
+coverage. The HiTE and FM Slurm wrappers record unique attempts and terminal
+statuses.
 
-`sbatch/LEMMI-TE-BENCH-20260824-hite-claim-screen.sbatch` is the dependent
-same-instance cell. It requires `PREFLIGHT_ATTEMPT` pointing to a PASS
-preflight, revalidates the preflight manifest identity, streams the frozen
-assembly into `/work/input/hite.fa`, runs the exact direct HiTE argv with the
-known loopback-discard proxy policy, requires exactly one non-empty
-`HiTE.gff`, then writes canonical output and `metrics.json` from the preflight
-contig lengths/truth. It records `claim_eligible=false`; T1 positive-only
-metrics never treat Dfam or unlabelled sequence as truth/negative.
-The runner also repeats the exact `main.py -h`/version-3.3.3 identity gate
-before the long minimum command.
-
-On a successful cell, the per-run metrics/manifest set
-`claim_eligible=true` only for the declared
-`T1_positive_only_recall_boundary_fragmentation` scope; whole-genome
-precision/F1 remains explicitly non-claimable. The thread count is read from
-numeric `SLURM_CPUS_PER_TASK` and passed through to HiTE, so the 40-CPU
-recommendation is not silently reduced to the earlier 2-thread smoke setting.
-The D. melanogaster cell also passes `--plant 0`; HiTE's plant default is not
-valid for this animal genome.
-
-The most executable same-instance caller cell within a 12-hour window is
-HiTE 3.3.3: the exact 3.6-GB SIF, source commit, direct argv, and output GFF
-contract are already hash-verified, and the prior isolated demo completed in
-about 22 minutes on 4 CPU/48 GiB. The D. melanogaster assembly is 145.9 Mb
-uncompressed. A conservative proposed cell is 40 CPU/128 GiB/0 GPU with a
-12-hour cap, writing `HiTE.gff` and then using the T1 evaluator. RepeatModeler2
-+ RepeatMasker is less executable in this window because it requires the
-multi-step BuildDatabase/RepeatModeler/RepeatMasker chain plus Dfam/FamDB
-configuration; its existing outputs remain audit-only.
-
-Read-only remote audit found Apptainer 1.4.5, the exact HiTE SIF and manifest
-under `software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/`,
-and RM2/RM SIFs plus a Dfam 4.0 FamDB manifest. The existing HiTE runner uses
-direct `python /HiTE/main.py` argv with isolated `/work`, loopback-discard
-proxies, and no network; the existing RM runner adds BuildDatabase and a
-RepeatModeler minimum before RepeatMasker. No caller command was executed in
-this task.
+RepeatModeler2+RepeatMasker, EDTA, EarlGrey and TEtrimmer have engineering or
+different-species assets only; they are not results in this R1. A second
+traditional cell must first freeze its exact FlyBase software/container,
+library provenance and output contract.
