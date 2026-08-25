@@ -53,6 +53,9 @@ The project then retains the direct model only as a long/high-confidence seed
 generator and moves to C5. Complex MoE, large multi-species training and a
 TE-specific HMM remain out of Round 1.
 
+P3 is a 128-channel minimal falsification pilot, not a reproduction of
+SegmentNT's much larger segmentation head or its original label ontology.
+
 ## What would demonstrate structure rather than composition
 
 P2/P3 cannot use lower MLM/CE loss alone. A structural interpretation requires

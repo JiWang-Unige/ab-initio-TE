@@ -43,3 +43,20 @@ blocked at the mechanism-smoke stage until the remote asset audit proves more.
 
 The complete operational decision and gates are frozen in
 `TE-STRUCTURE-PILOT-20260825-R1-MATRIX.md`.
+
+## Primary-paper check
+
+- [SegmentNT](https://pmc.ncbi.nlm.nih.gov/articles/PMC12615259/) replaces the
+  original language-model head with a two-down/two-up 1D U-Net, uses skip
+  connections and trains encoder and segmentation head end to end. P3 borrows
+  only that multiscale geometry; its 128-channel pilot is not a reproduction of
+  SegmentNT's much larger head or its 14-class label ontology.
+- [Tiberius](https://pmc.ncbi.nlm.nih.gov/articles/PMC11645249/) integrates a
+  differentiable HMM into training and inference, but its 15 states encode
+  gene-specific exon, intron, frame, splice and start/stop constraints. The
+  transferable principle is end-to-end structural bias, not the gene grammar.
+- [HiTE](https://pmc.ncbi.nlm.nih.gov/articles/PMC11219922/) explicitly uses
+  target-genome all-vs-all alignments, clustering, MAFFT consensus construction
+  and TE-type-specific structure/homology modules. The FlyBase advantage cannot
+  be attributed to a single factor without ablating multi-copy, structure and
+  classification/library components.
