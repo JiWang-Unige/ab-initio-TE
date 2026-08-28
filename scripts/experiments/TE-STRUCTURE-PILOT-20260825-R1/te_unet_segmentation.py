@@ -151,7 +151,7 @@ def train(args) -> None:
     tokenizer = AutoTokenizer.from_pretrained(args.checkpoint, trust_remote_code=True, local_files_only=local)
     DatasetType = dataset_class()
     train_data = DatasetType(args.data_dir / "train" / "data.jsonl.gz", tokenizer)
-    validation = DatasetType(args.data_dir / "validation" / "data.jsonl.gz", tokenizer, args.max_eval_samples)
+    validation = DatasetType(args.data_dir / "val" / "data.jsonl.gz", tokenizer, args.max_eval_samples)
     Model = model_class()
     model = Model(str(args.checkpoint), args.width)
     training_args = TrainingArguments(

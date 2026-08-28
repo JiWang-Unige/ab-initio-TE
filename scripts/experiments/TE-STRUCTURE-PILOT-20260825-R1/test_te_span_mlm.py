@@ -114,6 +114,13 @@ class SpanMaskMechanismTests(unittest.TestCase):
             "flank": 0.25,
         })
 
+    def test_smoke_exercises_explicit_masks_and_exclusions(self):
+        result = MODULE.smoke()
+        self.assertEqual(result["status"], "PASS")
+        self.assertGreater(result["selected_bp"], 0)
+        self.assertEqual(result["unknown_excluded_bp"], 50)
+        self.assertEqual(result["n_excluded_bp"], 40)
+
     def test_reference_annotation_run_gate(self):
         self.assertTrue(MODULE.metadata_allows_training({
             "annotation_level": "reference_annotation_run",
@@ -162,6 +169,21 @@ class SpanMaskMechanismTests(unittest.TestCase):
             MODULE.sample_contiguous_spans(
                 candidate, target_fraction=0.1, span_length=32, seed=7, strict_selected_bp=True
             )
+
+    def test_interval_sampler_does_not_waste_a_packable_span(self):
+        candidate = {
+            "interior": [100 <= i < 164 for i in range(MODULE.WINDOW)],
+            "boundary": [False] * MODULE.WINDOW,
+            "flank": [False] * MODULE.WINDOW,
+        }
+        result = MODULE.sample_contiguous_spans(
+            candidate,
+            target_fraction=64 / MODULE.WINDOW,
+            span_length=32,
+            seed=7,
+            strict_selected_bp=True,
+        )
+        self.assertEqual(result["selected_bp"], 64)
 
     def test_mask_budget_is_fraction_of_callable_window_not_candidate_subset(self):
         candidate = masks(interior=(100, 2100), boundary=(3000, 3100), flank=(4000, 6000))
@@ -283,6 +305,85 @@ class AnnotationSpanCorpusTests(unittest.TestCase):
             self.assertEqual(written["claim_scope"], "reference annotation run only; not biological full-copy")
             output = json.loads(output_path.read_text(encoding="utf-8"))
             self.assertEqual(set(output["candidate_masks"]), {"interior", "boundary", "flank"})
+
+    def test_packable_retention_skips_sparse_window(self):
+        record = self._record([(300, 340)])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            input_path = root / "input.jsonl"
+            output_path = root / "output.jsonl"
+            metadata_path = root / "metadata.json"
+            input_path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+            metadata = BUILDER.build(
+                type("Args", (), {
+                    "input_jsonl": input_path,
+                    "output_jsonl": output_path,
+                    "metadata": metadata_path,
+                    "flank_bp": 256,
+                    "max_records": None,
+                    "retain_packable_windows": 1,
+                })()
+            )
+            self.assertEqual(metadata["scanned_records"], 1)
+            self.assertEqual(metadata["retained_records"], 0)
+            self.assertEqual(metadata["filtered_records"], 1)
+            self.assertEqual(output_path.read_text(encoding="utf-8"), "")
+            self.assertIn("clean boundary span", metadata["filter_rule"])
+
+    def test_packable_retention_scans_until_requested_count(self):
+        sparse = self._record([(300, 340)])
+        rich_runs = [(300 + index * 700, 600 + index * 700) for index in range(11)]
+        first_rich = self._record(rich_runs)
+        first_rich["start"] = 10
+        second_sparse = self._record([(600, 640)])
+        second_rich = self._record(rich_runs)
+        second_rich["start"] = 30
+        rows = [sparse, first_rich, second_sparse, second_rich]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            input_path = root / "input.jsonl"
+            output_path = root / "output.jsonl"
+            metadata_path = root / "metadata.json"
+            input_path.write_text(
+                "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
+            )
+            metadata = BUILDER.build(
+                type("Args", (), {
+                    "input_jsonl": input_path,
+                    "output_jsonl": output_path,
+                    "metadata": metadata_path,
+                    "flank_bp": 256,
+                    "max_records": None,
+                    "retain_packable_windows": 2,
+                })()
+            )
+            output_rows = [json.loads(line) for line in output_path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual([row["start"] for row in output_rows], [10, 30])
+            self.assertEqual(metadata["scanned_records"], 4)
+            self.assertEqual(metadata["retained_records"], 2)
+            self.assertEqual(metadata["filtered_records"], 2)
+            self.assertEqual(metadata["retention_limit"], 2)
+
+    def test_packable_retention_requires_total_capacity_and_boundary(self):
+        record = self._record([(1000, 7000)])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            input_path = root / "input.jsonl"
+            output_path = root / "output.jsonl"
+            metadata_path = root / "metadata.json"
+            input_path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+            metadata = BUILDER.build(
+                type("Args", (), {
+                    "input_jsonl": input_path,
+                    "output_jsonl": output_path,
+                    "metadata": metadata_path,
+                    "flank_bp": 256,
+                    "max_records": None,
+                    "retain_packable_windows": 1,
+                })()
+            )
+            self.assertEqual(metadata["retained_records"], 1)
+            self.assertEqual(metadata["filtered_records"], 0)
 
 
 if __name__ == "__main__":

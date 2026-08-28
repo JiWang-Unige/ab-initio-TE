@@ -87,16 +87,21 @@ def _take_nonoverlapping(
     rng: random.Random,
     occupied: list[tuple[int, int]],
 ) -> list[tuple[int, int]]:
-    rng.shuffle(starts)
-    chosen: list[tuple[int, int]] = []
-    for start in starts:
+    # All spans have the same length, so earliest-finish interval scheduling
+    # gives the maximum packable set.  Shuffling that set preserves stochastic
+    # selection without letting an unlucky middle start reduce the mask budget.
+    packable: list[tuple[int, int]] = []
+    for start in sorted(starts):
         span = (start, start + span_length)
         if any(span[0] < occupied_end and occupied_start < span[1] for occupied_start, occupied_end in occupied):
             continue
-        chosen.append(span)
+        packable.append(span)
         occupied.append(span)
-        if len(chosen) >= quota:
-            break
+    for span in packable:
+        occupied.remove(span)
+    rng.shuffle(packable)
+    chosen = packable[:quota]
+    occupied.extend(chosen)
     return chosen
 
 
@@ -481,6 +486,26 @@ def smoke() -> dict[str, object]:
         "boundary": [2048 <= index < 2112 for index in range(WINDOW)],
         "flank": [2112 <= index < 4096 for index in range(WINDOW)],
     }
+    unknown = [3000 <= index < 3050 for index in range(WINDOW)]
+    n_mask = [3500 <= index < 3540 for index in range(WINDOW)]
+    sampled = sample_contiguous_spans(
+        candidate_masks,
+        unknown_mask=unknown,
+        n_mask=n_mask,
+        target_fraction=0.15,
+        span_length=32,
+        seed=SEED,
+    )
+    return {
+        "status": "PASS",
+        "window": WINDOW,
+        "boundary_source": "explicit_candidate_mask_only",
+        "selected_bp": sampled["selected_bp"],
+        "spans": sampled["spans"],
+        "selected_by_stratum": sampled["selected_by_stratum"],
+        "unknown_excluded_bp": sum(unknown),
+        "n_excluded_bp": sum(n_mask),
+    }
 
 
 def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
@@ -522,26 +547,6 @@ def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
             name: selected_spans[name] / total_spans for name in STRATA
         },
         "target_weights": STRATUM_WEIGHTS,
-    }
-    unknown = [3000 <= index < 3050 for index in range(WINDOW)]
-    n_mask = [3500 <= index < 3540 for index in range(WINDOW)]
-    sampled = sample_contiguous_spans(
-        candidate_masks,
-        unknown_mask=unknown,
-        n_mask=n_mask,
-        target_fraction=0.15,
-        span_length=32,
-        seed=SEED,
-    )
-    return {
-        "status": "PASS",
-        "window": WINDOW,
-        "boundary_source": "explicit_candidate_mask_only",
-        "selected_bp": sampled["selected_bp"],
-        "spans": sampled["spans"],
-        "selected_by_stratum": sampled["selected_by_stratum"],
-        "unknown_excluded_bp": sum(unknown),
-        "n_excluded_bp": sum(n_mask),
     }
 
 

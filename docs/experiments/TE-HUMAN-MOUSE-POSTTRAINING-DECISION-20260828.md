@@ -12,12 +12,12 @@ It is not sufficient to call an annotation run a biological full-length copy.
 Round 1 is therefore:
 
 1. D1-H, D1-F, D2 and the HiTE Human chr17 engineering pilot on CPU.
-2. P2-H: Human-only annotation-conditioned span-MLM, then the identical CE
-   stage. Mouse chr1 is external transfer with no tuning; Drosophila is absent
-   from all training.
+2. P2-H: Human-only, high-confidence RepeatMasker-reference-enriched,
+   annotation-conditioned span-MLM, then the identical CE stage. Mouse chr1 is
+   external transfer with no tuning; Drosophila is absent from all training.
 3. P3-H: Base checkpoint plus joint four-state multiscale U-Net training on the
    same Human split.
-4. P2-C only if P2-H passes the Human gate. P2-C uses the same Human windows,
+4. P2-C only if P2-H passes the Human gate. P2-C uses the same retained Human windows,
    32-bp spans, masked bp and training budget, but selects masks without TE
    coordinates and matches local GC/4-mer composition.
 5. P2-HM and P4 are conditional Round 2 and receive no Round-1 GPU budget.
@@ -51,6 +51,11 @@ identity; unseen-family generalization is therefore not claimable.
 
 ## P2-H construction contract
 
+- The masking sidecar is rebuilt from the Human hs1 raw RepeatMasker `.out`.
+  Round-1 keeps LINE/SINE/LTR/DNA/RC/Retroposon rows with SW score >=225,
+  divergence <=50%, deletion/insertion <=20% and aligned query span >=64 bp.
+  Consensus coverage, `repLeft`, family-specific filters, age filters and class
+  balancing are not used.
 - 8192-bp inputs, 800 optimizer steps, 15% masked bases and the existing
   80/10/10 MLM replacement rule.
 - Fixed 32-bp contiguous spans allocated 45% interior, 30% reference-boundary
@@ -63,6 +68,14 @@ identity; unseen-family generalization is therefore not claimable.
 - Runs may union only when intervals overlap or directly touch. Positive gaps
   are not merged, and consensus coordinates are not used to fabricate copies.
 - Unknown, N, pad and window-edge transitions are never eligible.
+- Original class-strict positives outside the high-confidence sidecar are not
+  eligible candidates or clean flanks, but they do not shrink the original
+  callable-bp denominator. The downstream CE labels remain unchanged.
+- A window is retained only when the three TE-conditioned strata can pack the
+  complete fixed-span 15% budget and provide at least one clean boundary span.
+  There is no neutral/random fill. The corpus gate requires at least 1,000
+  retained windows and global selected-span fractions of 40-50% interior,
+  25-35% boundary and 20-30% flank.
 
 The first raw-row eligibility pass uses valid query coordinates, normalized
 strand, SW score >=225, milliDiv <=500, milliDel/milliIns <=200, genomic span
@@ -88,7 +101,9 @@ least 95% of P1. FlyBase is a stress test, not the Round-1 blocker; supportive
 transfer is bp recall >=0.025, segment recall >=0.002, boundary recall >=0.001
 and fragments/truth below 11.703138.
 
-If P2-H passes Human, P2-H must then beat P2-C by at least 0.01 segment F1 and
+P2-H versus the historical P1 estimates the complete enriched-corpus plus
+annotation-conditioned recipe, not a masking-only intervention. If P2-H passes
+Human, P2-H must then beat P2-C by at least 0.01 segment F1 and
 0.01 boundary F1, with at least 5% relative improvement in short rate or
 fragments/truth. Otherwise the result supports contiguous span MLM, not TE
 annotation conditioning.
@@ -156,3 +171,20 @@ Base and DAPT do not recover any `>=1000` truth at IoU 0.8; their rising
 fragments/truth with length is fragmentation, not complete long-TE recovery.
 This supports a long-seed substrate for HiTE/hybrid methods, not yet for the
 current direct genome-LM models.
+
+### P2 corpus audit correction
+
+The callable-budget audit `12097656` failed before training because one random
+window required 1,216 selected bp but exposed only 832 bp of non-overlapping
+eligible spans. A full read-only audit separated 183 failures into 142 true
+capacity shortages and 41 losses caused by the old random greedy packing; 55
+windows had no eligible TE span. The sampler now uses maximum interval packing.
+
+On the old class-strict masks, total capacity would retain 2,858/3,000 windows
+and adding the clean-boundary requirement would retain about 2,830/3,000. The
+actual Round-1 decision is intentionally deferred to a CPU audit of the new
+high-confidence sidecar. A result below 1,000 retained windows, a mismatch in
+the exact fixed-span 15% budget, or a corpus-level stratum fraction outside the
+frozen ranges closes P2-H before any GPU allocation. Failure `12097656` is an
+engineering/corpus-contract result and is not part of a model-performance
+denominator.

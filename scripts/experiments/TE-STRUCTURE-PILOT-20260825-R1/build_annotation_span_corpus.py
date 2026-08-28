@@ -27,6 +27,9 @@ DEFAULT_FLANK_BP = 256
 FLANK_MIN_DISTANCE = 64
 FLANK_MAX_DISTANCE = 256
 CLEAN_OUTSIDE_BP = 128
+MASK_FRACTION_NUMERATOR = 15
+MASK_FRACTION_DENOMINATOR = 100
+STRATUM_WEIGHTS = {"interior": 0.45, "boundary": 0.30, "flank": 0.25}
 
 
 def _open_text(path: Path):
@@ -39,6 +42,84 @@ def _open_output(path: Path):
     if str(path).endswith(".gz"):
         return gzip.open(path, "wt", encoding="utf-8")
     return path.open("wt", encoding="utf-8")
+
+
+def _merge_intervals(intervals: Iterable[tuple[int, int]]) -> list[tuple[int, int]]:
+    merged: list[tuple[int, int]] = []
+    for start, end in sorted(intervals):
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    return merged
+
+
+def read_annotation_bed(path: Path) -> dict[str, list[tuple[int, int]]]:
+    """Read and union zero-based half-open annotation intervals by sequence."""
+    intervals: dict[str, list[tuple[int, int]]] = {}
+    with _open_text(path) as handle:
+        for line_no, line in enumerate(handle, 1):
+            if not line.strip() or line.startswith(("#", "track", "browser")):
+                continue
+            columns = line.rstrip("\n").split("\t")
+            if len(columns) < 3:
+                raise ValueError(f"annotation BED row {line_no} has fewer than 3 columns")
+            seqid = columns[0]
+            try:
+                start, end = int(columns[1]), int(columns[2])
+            except ValueError as exc:
+                raise ValueError(f"annotation BED row {line_no} has non-integer coordinates") from exc
+            if not seqid or start < 0 or end <= start:
+                raise ValueError(f"annotation BED row {line_no} has invalid interval")
+            intervals.setdefault(seqid, []).append((start, end))
+    return {seqid: _merge_intervals(rows) for seqid, rows in intervals.items()}
+
+
+def _annotation_mask(record: dict, annotation_intervals: dict[str, list[tuple[int, int]]]) -> list[bool]:
+    sequence = record["sequence"]
+    seqid = record.get("chr")
+    if not isinstance(seqid, str) or not seqid:
+        raise ValueError("annotation-bed conditioning requires record chr")
+    try:
+        window_start, window_end = int(record["start"]), int(record["end"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("annotation-bed conditioning requires integer record start/end") from exc
+    if window_start < 0 or window_end - window_start != len(sequence):
+        raise ValueError("annotation-bed conditioning requires record coordinates to span its sequence")
+    mask = [False] * len(sequence)
+    for start, end in annotation_intervals.get(seqid, []):
+        if end <= window_start:
+            continue
+        if start >= window_end:
+            break
+        left = max(start, window_start) - window_start
+        right = min(end, window_end) - window_start
+        for index in range(left, right):
+            mask[index] = True
+    return mask
+
+
+def apply_annotation_bed(
+    record: dict,
+    annotation_intervals: dict[str, list[tuple[int, int]]],
+) -> dict:
+    """Build temporary candidate labels from the high-confidence union.
+
+    Existing class-strict positives outside the sidecar become ignore (-100),
+    so low-confidence TE cannot become a clean flank.  Existing -100 values
+    remain -100; sidecar-covered known bases become positive candidates.  The
+    caller uses these labels only to construct candidate masks; the original
+    labels remain the output labels so the callable MLM denominator is frozen.
+    """
+    labels = record["labels"]
+    high_confidence = _annotation_mask(record, annotation_intervals)
+    conditioned = [
+        -100 if label < 0 else 1 if high_confidence[index] else -100 if label == 1 else 0
+        for index, label in enumerate(labels)
+    ]
+    output = dict(record)
+    output["labels"] = conditioned
+    return output
 
 
 def _known(labels: list[int], sequence: str, value: int, index: int) -> bool:
@@ -63,6 +144,33 @@ def _mask(window: int, positions: Iterable[int]) -> list[bool]:
     for index in positions:
         result[index] = True
     return result
+
+
+def _runs(mask: list[bool]) -> list[tuple[int, int]]:
+    runs: list[tuple[int, int]] = []
+    start: int | None = None
+    for index, value in enumerate(mask + [False]):
+        if value and start is None:
+            start = index
+        elif not value and start is not None:
+            runs.append((start, index))
+            start = None
+    return runs
+
+
+def _packable_span_counts(candidate_masks: dict[str, list[bool]]) -> dict[str, int]:
+    """Return the maximum number of fixed-length spans in each disjoint stratum."""
+    return {
+        name: sum((end - start) // SPAN_LENGTH for start, end in _runs(candidate_masks[name]))
+        for name in STRATUM_WEIGHTS
+    }
+
+
+def _callable_bp(record: dict) -> int:
+    return sum(
+        label >= 0 and base.upper() != "N"
+        for label, base in zip(record["labels"], record["sequence"])
+    )
 
 
 def _transition_records(labels: list[int], sequence: str) -> list[tuple[int, int, int, int]]:
@@ -133,7 +241,15 @@ def _boundary_intervals(labels: list[int], sequence: str) -> list[tuple[int, int
     return [interval for index, interval in enumerate(intervals) if keep[index]]
 
 
-def build_record(record: dict, *, flank_bp: int = DEFAULT_FLANK_BP) -> dict:
+def build_record(
+    record: dict,
+    *,
+    flank_bp: int = DEFAULT_FLANK_BP,
+    annotation_intervals: dict[str, list[tuple[int, int]]] | None = None,
+) -> dict:
+    original_record = record
+    if annotation_intervals is not None:
+        record = apply_annotation_bed(record, annotation_intervals)
     sequence = record["sequence"]
     labels = record["labels"]
     if not isinstance(sequence, str) or len(sequence) != WINDOW:
@@ -207,6 +323,9 @@ def build_record(record: dict, *, flank_bp: int = DEFAULT_FLANK_BP) -> dict:
         "flank": _mask(WINDOW, sorted(flank_positions)),
     }
     output["unknown_mask"] = [value < 0 for value in labels]
+    if annotation_intervals is not None:
+        output["labels"] = list(original_record["labels"])
+        output["unknown_mask"] = [value < 0 for value in original_record["labels"]]
     output["boundary_intervals"] = [[left, right] for left, right in boundary_intervals]
     output["boundary_exclusion_intervals"] = [[left, right] for left, right in exclusion_intervals]
     return output
@@ -214,7 +333,23 @@ def build_record(record: dict, *, flank_bp: int = DEFAULT_FLANK_BP) -> dict:
 
 def build(args) -> dict[str, object]:
     args.output_jsonl.parent.mkdir(parents=True, exist_ok=True)
+    retain_limit = getattr(args, "retain_packable_windows", None)
+    annotation_bed = getattr(args, "annotation_bed", None)
+    annotation_intervals = read_annotation_bed(annotation_bed) if annotation_bed is not None else None
+    annotation_union_intervals = (
+        sum(len(intervals) for intervals in annotation_intervals.values())
+        if annotation_intervals is not None
+        else 0
+    )
+    annotation_high_confidence_bp = 0
+    annotation_demoted_positive_bp = 0
+    annotation_preserved_unknown_bp = 0
+    if retain_limit is not None and retain_limit < 0:
+        raise ValueError("retain_packable_windows must be non-negative")
     records = 0
+    scanned_records = 0
+    filtered_records = 0
+    packable_span_totals = {name: 0 for name in STRATUM_WEIGHTS}
     totals = {name: 0 for name in ("interior", "boundary", "flank")}
     boundary_count = 0
     exclusion_count = 0
@@ -222,9 +357,50 @@ def build(args) -> dict[str, object]:
         for index, line in enumerate(source):
             if args.max_records is not None and index >= args.max_records:
                 break
+            if retain_limit is not None and records >= retain_limit:
+                break
             if not line.strip():
                 continue
-            record = build_record(json.loads(line), flank_bp=args.flank_bp)
+            scanned_records += 1
+            input_record = json.loads(line)
+            if annotation_intervals is not None:
+                original_labels = input_record["labels"]
+                high_confidence = _annotation_mask(input_record, annotation_intervals)
+                record = build_record(
+                    input_record,
+                    flank_bp=args.flank_bp,
+                    annotation_intervals=annotation_intervals,
+                )
+                annotation_high_confidence_bp += sum(
+                    old >= 0 and selected
+                    for old, selected in zip(original_labels, high_confidence)
+                )
+                annotation_demoted_positive_bp += sum(
+                    old == 1 and not selected
+                    for old, selected in zip(original_labels, high_confidence)
+                )
+                annotation_preserved_unknown_bp += sum(
+                    old < 0 for old in original_labels
+                )
+            else:
+                record = build_record(input_record, flank_bp=args.flank_bp)
+            if retain_limit is not None:
+                callable_bp = _callable_bp(record)
+                target_bp = round(
+                    callable_bp * MASK_FRACTION_NUMERATOR / MASK_FRACTION_DENOMINATOR
+                )
+                required_spans = target_bp // SPAN_LENGTH
+                if target_bp > 0 and required_spans == 0:
+                    required_spans = 1
+                packable_by_stratum = _packable_span_counts(record["candidate_masks"])
+                if (
+                    sum(packable_by_stratum.values()) < required_spans
+                    or packable_by_stratum["boundary"] < 1
+                ):
+                    filtered_records += 1
+                    continue
+                for name in STRATUM_WEIGHTS:
+                    packable_span_totals[name] += packable_by_stratum[name]
             for name, values in record["candidate_masks"].items():
                 totals[name] += sum(values)
             boundary_count += len(record["boundary_intervals"])
@@ -251,9 +427,40 @@ def build(args) -> dict[str, object]:
         "biological_copy_claim": False,
         "claim_scope": "reference annotation run only; not biological full-copy",
         "records": records,
+        "scanned_records": scanned_records,
+        "retained_records": records,
+        "filtered_records": filtered_records,
+        "retention_limit": retain_limit,
+        "retained_packable_span_totals": packable_span_totals,
+        "filter_rule": (
+            "retain only windows where the disjoint candidate masks can satisfy the total "
+            "floor(round(0.15 * callable_bp) / 32) span budget and provide at least one "
+            "clean boundary span"
+            if retain_limit is not None
+            else "none; emit every input record"
+        ),
         "boundary_intervals": boundary_count,
         "boundary_exclusion_intervals": exclusion_count,
         "candidate_bp": totals,
+        "annotation_bed": str(annotation_bed) if annotation_bed is not None else None,
+        "annotation_union_intervals": annotation_union_intervals,
+        "annotation_conditioning": (
+            "high_confidence_repeatmasker_union_over_original_reference_runs"
+            if annotation_intervals is not None
+            else "none"
+        ),
+        "annotation_conditioning_semantics": (
+            "sidecar-covered known bases condition candidate masks; original labels and "
+            "unknown_mask remain unchanged; original positives outside the sidecar are "
+            "excluded from candidates; existing -100 is preserved; sidecar intervals are "
+            "unioned before boundary derivation; callable denominator remains the original "
+            "known-base count; not biological full-copy truth"
+            if annotation_intervals is not None
+            else "original labels and sequence are unchanged"
+        ),
+        "annotation_high_confidence_positive_bp": annotation_high_confidence_bp,
+        "annotation_demoted_positive_bp": annotation_demoted_positive_bp,
+        "annotation_preserved_unknown_bp": annotation_preserved_unknown_bp,
     }
     args.metadata.parent.mkdir(parents=True, exist_ok=True)
     args.metadata.write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -267,6 +474,8 @@ def main() -> None:
     parser.add_argument("--metadata", type=Path, required=True)
     parser.add_argument("--flank-bp", type=int, default=DEFAULT_FLANK_BP)
     parser.add_argument("--max-records", type=int)
+    parser.add_argument("--retain-packable-windows", type=int)
+    parser.add_argument("--annotation-bed", type=Path)
     args = parser.parse_args()
     print(json.dumps(build(args), indent=2, sort_keys=True))
 

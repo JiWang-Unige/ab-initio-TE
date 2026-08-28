@@ -56,7 +56,7 @@ round1:
     failed_attempts: [12097522, 12097635]
     failure_reason: existing_UCSC_dm6_contigs_do_not_match_FlyBase_r6_68_truth_contract
   H1:
-    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/hite_chr17_pilot.py
+    script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/run_hite_chr17_pilot.py
     status: engineering_pilot
     resource: cpu
   P2_M:
@@ -73,11 +73,18 @@ round1:
     clean_outside_bp: 128
     flank_range_bp: [64, 256]
   P2:
-    status: ready_after_mask_builder_smoke
+    status: blocked_until_high_confidence_corpus_cpu_gate
     training_species: human
     mouse_role: external_transfer_no_tuning
-    annotation_level: reference_annotation_run
+    annotation_level: high_confidence_repeatmasker_reference_run
     full_copy_truth: false
+    minimum_retained_windows: 1000
+    retained_window_rule: total_packable_32bp_capacity_for_15pct_callable_and_at_least_one_clean_boundary
+    neutral_fill_bp: 0
+    corpus_selected_fraction_bounds:
+      interior: [0.40, 0.50]
+      boundary: [0.25, 0.35]
+      flank: [0.20, 0.30]
     max_steps: 800
     resource: gpu
     gpu_hour_ceiling: 8
