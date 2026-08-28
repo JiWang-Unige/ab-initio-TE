@@ -476,6 +476,44 @@ def smoke() -> dict[str, object]:
         "boundary": [2048 <= index < 2112 for index in range(WINDOW)],
         "flank": [2112 <= index < 4096 for index in range(WINDOW)],
     }
+
+
+def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
+    selected_bp = 0
+    selected_spans = {name: 0 for name in STRATA}
+    observed = 0
+    with _open_text(data_jsonl) as handle:
+        for index, line in enumerate(handle):
+            if index >= records:
+                break
+            record = json.loads(line)
+            sequence = record["sequence"]
+            sampled = sample_contiguous_spans(
+                record["candidate_masks"],
+                unknown_mask=_mask_or_false(record.get("unknown_mask"), "unknown_mask", WINDOW),
+                n_mask=[base.upper() == "N" for base in sequence],
+                target_fraction=MASK_PROBABILITY,
+                span_length=SPAN_LENGTH,
+                seed=SEED + index,
+                strict_selected_bp=True,
+            )
+            selected_bp += int(sampled["selected_bp"])
+            for name in STRATA:
+                selected_spans[name] += int(sampled["selected_by_stratum"][name])
+            observed += 1
+    if observed != records:
+        raise ValueError(f"expected exactly {records} records, got {observed}")
+    total_spans = sum(selected_spans.values())
+    return {
+        "status": "PASS",
+        "records": observed,
+        "selected_bp": selected_bp,
+        "selected_spans": selected_spans,
+        "selected_span_fractions": {
+            name: selected_spans[name] / total_spans for name in STRATA
+        },
+        "target_weights": STRATUM_WEIGHTS,
+    }
     unknown = [3000 <= index < 3050 for index in range(WINDOW)]
     n_mask = [3500 <= index < 3540 for index in range(WINDOW)]
     sampled = sample_contiguous_spans(
@@ -502,6 +540,10 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("smoke")
+    audit_parser = sub.add_parser("audit-corpus")
+    audit_parser.add_argument("--data-jsonl", type=Path, required=True)
+    audit_parser.add_argument("--records", type=int, default=3000)
+    audit_parser.add_argument("--out-json", type=Path, required=True)
     train_parser = sub.add_parser("train")
     train_parser.add_argument("--data-jsonl", type=Path, required=True)
     train_parser.add_argument("--metadata", type=Path, required=True)
@@ -515,6 +557,12 @@ def main() -> None:
     args = parser.parse_args()
     if args.command == "smoke":
         print(json.dumps(smoke(), indent=2, sort_keys=True))
+        return
+    if args.command == "audit-corpus":
+        result = audit_corpus(args.data_jsonl, args.records)
+        args.out_json.parent.mkdir(parents=True, exist_ok=True)
+        args.out_json.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        print(json.dumps(result, indent=2, sort_keys=True))
         return
     raise SystemExit(train(args))
 

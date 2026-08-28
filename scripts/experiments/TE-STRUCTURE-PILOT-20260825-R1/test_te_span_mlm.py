@@ -123,6 +123,22 @@ class SpanMaskMechanismTests(unittest.TestCase):
             "biological_copy_claim": True,
         }))
 
+    def test_corpus_audit_requires_full_record_count_and_reports_selected_mass(self):
+        record = {
+            "sequence": "A" * MODULE.WINDOW,
+            "candidate_masks": masks(),
+            "unknown_mask": [False] * MODULE.WINDOW,
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "corpus.jsonl"
+            path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+            result = MODULE.audit_corpus(path, 1)
+            self.assertEqual(result["status"], "PASS")
+            self.assertGreater(result["selected_bp"], 0)
+            self.assertAlmostEqual(sum(result["selected_span_fractions"].values()), 1.0)
+            with self.assertRaisesRegex(ValueError, "expected exactly 2 records"):
+                MODULE.audit_corpus(path, 2)
+
     def test_strict_selection_refills_scarce_stratum(self):
         candidate = {
             "interior": [100 <= i < 132 for i in range(MODULE.WINDOW)],
