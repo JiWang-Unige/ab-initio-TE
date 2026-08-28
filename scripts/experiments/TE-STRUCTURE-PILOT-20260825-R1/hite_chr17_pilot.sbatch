@@ -13,6 +13,7 @@ set -euo pipefail
 
 ROOT=/home/users/j/jwang/ab-initio-TE
 SCRIPT_ROOT=${ROOT}/scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1
+: "${SLURM_TMPDIR:?SLURM_TMPDIR is required for the HiTE working set}"
 ASSEMBLY=${ROOT}/.backup/data/genome_data/current_eukaryotes/animals/human/hs1.fa
 STRICT_BED=${ROOT}/software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/UCSC_RMSK_SPECIES_ANIMALS_20260617/human_hs1/human_hs1.rmsk_te_strict.bed
 PLUS_UNKNOWN_BED=${ROOT}/software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/UCSC_RMSK_SPECIES_ANIMALS_20260617/human_hs1/human_hs1.rmsk_te_plus_unknown.bed

@@ -15,6 +15,7 @@ import importlib.util
 import json
 import os
 import shlex
+import shutil
 import subprocess
 from pathlib import Path
 from typing import Any, Iterator
@@ -242,6 +243,16 @@ def parse_model_prediction(items: list[str] | None) -> dict[str, Path]:
     return result
 
 
+def scratch_workdir(output_root: Path) -> Path:
+    scratch_text = os.environ.get("SLURM_TMPDIR")
+    if not scratch_text:
+        raise RuntimeError("SLURM_TMPDIR is required for the HiTE pilot")
+    scratch_root = Path(scratch_text)
+    if not scratch_root.is_dir():
+        raise FileNotFoundError(f"SLURM_TMPDIR is not a directory: {scratch_root}")
+    return scratch_root / output_root.name
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.project_root.resolve()
     if not args.assembly.is_file() or not args.strict_bed.is_file() or not args.plus_unknown_bed.is_file() or not args.sif.is_file():
@@ -250,7 +261,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         raise ValueError("threads must be positive")
     output_root = args.output_root.resolve()
     output_root.mkdir(parents=True, exist_ok=False)
-    work = output_root / "work"
+    work = scratch_workdir(output_root)
+    work.mkdir(parents=True)
     input_dir = work / "input"
     input_dir.mkdir(parents=True)
     work.joinpath("home").mkdir()
@@ -272,14 +284,18 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     lengths = {CHROM: PREFIX_END}
     lengths_path.write_text(json.dumps(lengths, indent=2) + "\n", encoding="utf-8")
     command = build_hite_command(args.sif, work, args.threads)
-    hite_log = output_root / "hite.command.log"
+    hite_log = work / "hite.command.log"
     with hite_log.open("w", encoding="utf-8") as log:
         completed = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=False)
+    persisted_hite_log = output_root / "hite.command.log"
+    shutil.copy2(hite_log, persisted_hite_log)
     if completed.returncode != 0:
         raise subprocess.CalledProcessError(completed.returncode, command)
     hite_gff = work / "hite" / "HiTE.gff"
     if not hite_gff.is_file() or hite_gff.stat().st_size == 0:
         raise FileNotFoundError(f"HiTE did not produce a non-empty expected GFF: {hite_gff}")
+    persisted_hite_gff = output_root / "HiTE.gff"
+    shutil.copy2(hite_gff, persisted_hite_gff)
     adapter = load_adapter(root)
     truth_canonical = output_root / "truth.canonical.tsv"
     unknown_canonical = output_root / "unknown.canonical.tsv"
@@ -304,11 +320,15 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "strict_rows_in_prefix": strict_rows, "unknown_rows_in_prefix": unknown_rows_count,
         },
         "artifacts": {
-            "prefix_fasta": str(fasta), "truth_bed": str(truth_bed), "unknown_bed": str(unknown_bed),
             "truth_canonical": str(truth_canonical), "unknown_canonical": str(unknown_canonical),
-            "hite_gff": str(hite_gff), "hite_canonical": str(hite_canonical),
+            "hite_gff": str(persisted_hite_gff), "hite_canonical": str(hite_canonical),
+            "command_log": str(persisted_hite_log),
         },
-        "command": {"argv": command, "shell": shlex.join(command), "log": str(hite_log), "threads": args.threads},
+        "runtime": {
+            "scratch_workdir": str(work), "prefix_fasta": str(fasta),
+            "truth_bed": str(truth_bed), "unknown_bed": str(unknown_bed),
+        },
+        "command": {"argv": command, "shell": shlex.join(command), "log": str(persisted_hite_log), "threads": args.threads},
         "methods": methods,
         "same_truth_and_unknown_mask": True,
     }

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import importlib.util
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 HERE = Path(__file__).resolve().parent
@@ -76,6 +78,17 @@ class HiTERunTest(unittest.TestCase):
             hite_run.parse_model_prediction(["base=/x/a.tsv", "base=/x/b.tsv"])
         with self.assertRaisesRegex(ValueError, "name=/absolute"):
             hite_run.parse_model_prediction(["base.tsv"])
+
+    def test_scratch_workdir_uses_slurm_tmpdir_and_output_job_name(self):
+        with tempfile.TemporaryDirectory() as td:
+            scratch = Path(td) / "slurm-tmp"
+            scratch.mkdir()
+            output_root = Path(td) / "outputs" / "hite-chr17-123"
+            with patch.dict(os.environ, {"SLURM_TMPDIR": str(scratch)}, clear=False):
+                self.assertEqual(
+                    hite_run.scratch_workdir(output_root),
+                    scratch / "hite-chr17-123",
+                )
 
     def test_masked_evaluate_reports_boundary_at_5_and_25_bp(self):
         class Adapter:
