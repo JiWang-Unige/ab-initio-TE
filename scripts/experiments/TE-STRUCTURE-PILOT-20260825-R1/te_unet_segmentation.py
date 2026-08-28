@@ -167,6 +167,7 @@ def train(args) -> None:
         logging_steps=20,
         bf16=args.bf16,
         gradient_checkpointing=True,
+        disable_tqdm=True,
         report_to="none",
         remove_unused_columns=False,
     )
