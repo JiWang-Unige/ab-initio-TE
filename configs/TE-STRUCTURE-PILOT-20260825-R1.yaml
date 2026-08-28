@@ -8,14 +8,28 @@ claim_contract:
   human_claim: comparator_agreement_only
   flybase_truth: curated_positive_T1
   flybase_claim: recall_boundary_fragmentation_only
-  full_copy_truth: not_yet_established
+  p2_annotation_conditioned: true
+  p2_label_source: UCSC_RepeatMasker
+  p2_claim_scope: reference_annotation_conditioned_regions
+  full_copy_truth: false
 
 splits:
-  human_train: chr1_prefix
-  human_validation: chr11_prefix
-  human_test: chr17_prefix_0_9830400
+  human_round1_materialized_train: chr1_prefix_3000_windows
+  human_round1_materialized_validation: chr11_prefix_3000_windows
+  human_round1_materialized_test: chr17_prefix_3000_windows
+  human_round1_matched_evaluation: chr17_prefix_1200_windows
+  human_confirmatory_planned_train: [chr1, chr3, chr5, chr7, chr9]
+  human_confirmatory_planned_validation: [chr11, chr13, chr15]
+  human_confirmatory_planned_test: [chr17, chr19, chr20, chr21, chr22]
+  human_confirmatory_quota_per_chromosome: 600
+  mouse_round1_external_test: chr1
+  mouse_round2_train: chr2-chr13
+  mouse_round2_validation: chr14-chr16
+  mouse_round2_test: chr17-chr19
+  mouse_round2_excluded: [chr1, chrX, chrY, chrM]
   drosophila_holdout: all_Drosophila_excluded_from_posttraining
-  augmentation: after_species_chromosome_family_copy_split
+  augmentation: after_species_chromosome_split
+  family_homology_leakage: unknown_not_claimable
 
 remote_assets_to_audit:
   human_data: software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/human_h0_w8192
@@ -25,7 +39,7 @@ remote_assets_to_audit:
   flybase_lengths: data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68/contig_lengths.tsv
   dm6_ucsc_repeatmasker: .backup/data/genome_data/current_eukaryotes/animals/fruit_fly/rmsk.txt.gz
   generanno_base: .backup/pretrained_models/GENERanno-eukaryote-0.5b-base
-  hite_image: unresolved_from_frozen_HiTE_3_3_3_manifest
+  hite_image: software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif
 
 round1:
   D1:
@@ -38,7 +52,9 @@ round1:
     script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/repeatmasker_flybase_alignment.py
     truth_tier: T1
     resource: cpu
-    blocked_until: exact_dm6_FlyBase_r6_68_assembly_and_contig_contract_is_confirmed
+    status: blocked_same_assembly_repeatmasker_required
+    failed_attempts: [12097522, 12097635]
+    failure_reason: existing_UCSC_dm6_contigs_do_not_match_FlyBase_r6_68_truth_contract
   H1:
     script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/hite_chr17_pilot.py
     status: engineering_pilot
@@ -48,11 +64,23 @@ round1:
     status: mechanism_smoke_only
     span_bp: 32
     masked_fraction: 0.15
-    strata: [interior, boundary, flank]
+    strata_weights:
+      interior: 0.45
+      boundary: 0.30
+      flank: 0.25
+    boundary_exclusion_band_bp: 64
+    boundary_min_each_side_bp: 8
+    clean_outside_bp: 128
+    flank_range_bp: [64, 256]
   P2:
-    status: blocked_until_copy_level_assets
+    status: ready_after_mask_builder_smoke
+    training_species: human
+    mouse_role: external_transfer_no_tuning
+    annotation_level: reference_annotation_run
+    full_copy_truth: false
     max_steps: 800
     resource: gpu
+    gpu_hour_ceiling: 8
   P3:
     script: scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1/te_unet_segmentation.py
     status: comparator_run_engineering_pilot
@@ -60,17 +88,42 @@ round1:
     head_width: 128
     max_steps: 800
     resource: gpu
+    gpu_hour_ceiling: 10
+  P2_C:
+    status: conditional_on_P2_H_human_gate
+    control: same_windows_same_32bp_spans_same_masked_bp_local_GC_4mer_matched_without_TE_coordinates
+    gpu_hour_ceiling: 8
   P4:
     status: blocked_until_P2_and_P3_independently_pass
 
 gates:
   human_retention:
+    minimum_segment_f1: 0.400724
+    minimum_boundary_f1_5bp: 0.244286
+    maximum_short_rate: 0.497931
+    maximum_fragments_per_truth: 1.180148
+    minimum_bp_f1: 0.929173
+    maximum_missed_rate: 0.087532
     minimum_short_rate_reduction: 0.20
     minimum_fragments_per_truth_reduction: 0.15
     maximum_bp_f1_drop: 0.005
     maximum_missed_rate_increase: 0.03
     require_positive_segment_f1_delta: true
     require_positive_boundary_f1_5bp_delta: true
+  mouse_external_transfer:
+    minimum_segment_delta_vs_P1: 0.01
+    minimum_boundary_5bp_delta_vs_P1: 0.005
+    maximum_fragments_relative_vs_P1: 1.10
+    minimum_bp_recall_retention_vs_P1: 0.95
+  flybase_supportive_transfer:
+    minimum_bp_recall: 0.025
+    minimum_segment_recall: 0.002
+    minimum_boundary_5bp_recall: 0.001
+    maximum_fragments_per_truth: 11.703138
+  p2_composition_control:
+    minimum_segment_f1_delta: 0.01
+    minimum_boundary_f1_5bp_delta: 0.01
+    minimum_short_or_fragments_relative_improvement: 0.05
   long_seed_screen:
     require_monotonic_length_trend: true
     minimum_ge1000_segment_recall_ratio_vs_80_499: 2.0

@@ -6,9 +6,11 @@ The sampler consumes explicit, disjoint ``interior``, ``boundary`` and
 from a binary label transition.  The MLM target is still the nucleotide token
 at the selected positions; the candidate masks only choose where to mask.
 
-Training is intentionally blocked unless the sidecar metadata declares
-copy-level supervision.  ``smoke`` is independent of that gate and exercises
-only the masking mechanism with synthetic explicit masks.
+Training is allowed for an explicit reference-annotation-run sidecar so that
+the comparator-conditioned pilot can be exercised.  Its boundaries remain
+reference-run boundaries, not biological copy boundaries.  ``smoke`` is
+independent of that gate and exercises only the masking mechanism with
+synthetic explicit masks.
 """
 from __future__ import annotations
 
@@ -21,6 +23,7 @@ from typing import Iterable
 
 WINDOW = 8192
 STRATA = ("interior", "boundary", "flank")
+STRATUM_WEIGHTS = {"interior": 0.45, "boundary": 0.30, "flank": 0.25}
 MASK_PROBABILITY = 0.15
 SPAN_LENGTH = 32
 SEED = 42
@@ -107,6 +110,7 @@ def sample_contiguous_spans(
     span_length: int = SPAN_LENGTH,
     seed: int = SEED,
     stratum_weights: dict[str, float] | None = None,
+    strict_selected_bp: bool = True,
     window: int = WINDOW,
 ) -> dict[str, object]:
     """Sample fixed-length, non-overlapping spans from explicit candidate masks.
@@ -134,7 +138,7 @@ def sample_contiguous_spans(
     if target_bp > 0 and target_spans == 0:
         target_spans = 1
 
-    weights = stratum_weights or {name: 1.0 for name in STRATA}
+    weights = stratum_weights or STRATUM_WEIGHTS
     if set(weights) != set(STRATA) or any(float(weights[name]) < 0 for name in STRATA):
         raise ValueError("stratum_weights must contain non-negative interior/boundary/flank values")
     available = [name for name in STRATA if starts_by_stratum[name]]
@@ -162,6 +166,34 @@ def sample_contiguous_spans(
             starts_by_stratum[name], quotas[name], span_length, rng, occupied
         )
 
+    # A scarce stratum must not silently lower the masking budget.  Reuse any
+    # still-eligible, non-overlapping span from the remaining strata; only
+    # report a shortage after every eligible start has been considered.
+    selected_count = sum(len(spans_by_stratum[name]) for name in STRATA)
+    if selected_count < target_spans:
+        remaining_starts = [
+            (name, start)
+            for name in STRATA
+            for start in starts_by_stratum[name]
+        ]
+        rng.shuffle(remaining_starts)
+        for name, start in remaining_starts:
+            if selected_count >= target_spans:
+                break
+            span = (start, start + span_length)
+            if any(span[0] < occupied_end and occupied_start < span[1] for occupied_start, occupied_end in occupied):
+                continue
+            spans_by_stratum[name].append(span)
+            occupied.append(span)
+            selected_count += 1
+
+    required_selected_bp = target_spans * span_length
+    if strict_selected_bp and selected_count < target_spans:
+        raise ValueError(
+            "insufficient non-overlapping eligible spans for strict selected-bp target: "
+            f"required={required_selected_bp}, available={selected_count * span_length}"
+        )
+
     selected = [False] * window
     selected_stratum: list[str | None] = [None] * window
     spans: list[dict[str, object]] = []
@@ -178,7 +210,9 @@ def sample_contiguous_spans(
         "eligible_bp": eligible_bp,
         "target_bp": target_bp,
         "target_spans": target_spans,
+        "target_selected_bp": required_selected_bp,
         "selected_bp": sum(selected),
+        "strict_selected_bp": strict_selected_bp,
         "selected_by_stratum": {name: sum(1 for row in spans if row["stratum"] == name) for name in STRATA},
     }
 
@@ -223,6 +257,8 @@ def apply_span_mask(
 
 
 def metadata_allows_training(metadata: dict) -> bool:
+    if metadata.get("annotation_level") == "reference_annotation_run":
+        return not bool(metadata.get("biological_copy_claim", False))
     if metadata.get("copy_level") is False:
         return False
     return metadata.get("copy_level") is True or metadata.get("label_level") == "copy_level"
@@ -289,7 +325,7 @@ class SpanDataset:
 
 
 class SpanMaskingCollator:
-    def __init__(self, tokenizer, torch_module, *, seed: int = SEED, target_fraction: float = MASK_PROBABILITY, span_length: int = SPAN_LENGTH):
+    def __init__(self, tokenizer, torch_module, *, seed: int = SEED, target_fraction: float = MASK_PROBABILITY, span_length: int = SPAN_LENGTH, strict_selected_bp: bool = True):
         self.tokenizer = tokenizer
         self.torch = torch_module
         self.generator = torch_module.Generator()
@@ -297,6 +333,7 @@ class SpanMaskingCollator:
         self.seed = seed
         self.target_fraction = target_fraction
         self.span_length = span_length
+        self.strict_selected_bp = strict_selected_bp
         self.mask_token_id = tokenizer.mask_token_id
         if self.mask_token_id is None:
             raise ValueError("tokenizer has no mask token")
@@ -328,6 +365,7 @@ class SpanMaskingCollator:
                 target_fraction=self.target_fraction,
                 span_length=self.span_length,
                 seed=self.sample_seed + row_index,
+                strict_selected_bp=self.strict_selected_bp,
             )
             masked, labels, _selected = apply_span_mask(
                 row["input_ids"].unsqueeze(0),
@@ -354,7 +392,7 @@ def train(args) -> int:
     if not metadata_allows_training(metadata):
         status = blocked_status(
             metadata,
-            "TE-aware span MLM requires explicit copy-level metadata; current assets are not assumed to be full-copy labels",
+            "TE-aware span MLM requires explicit copy-level or reference-annotation-run metadata",
         )
         if args.status_json:
             args.status_json.parent.mkdir(parents=True, exist_ok=True)
@@ -374,7 +412,13 @@ def train(args) -> int:
     dataset = SpanDataset(args.data_jsonl, tokenizer, torch, args.records)
     if len(dataset) != args.records:
         raise ValueError(f"expected exactly {args.records} records, got {len(dataset)}")
-    collator = SpanMaskingCollator(tokenizer, torch, target_fraction=args.target_fraction, span_length=args.span_length)
+    collator = SpanMaskingCollator(
+        tokenizer,
+        torch,
+        target_fraction=args.target_fraction,
+        span_length=args.span_length,
+        strict_selected_bp=True,
+    )
     args.output_dir.parent.mkdir(parents=True, exist_ok=True)
     args.output_dir.mkdir(parents=True, exist_ok=False)
     training_args = TrainingArguments(
@@ -400,27 +444,28 @@ def train(args) -> int:
     trainer.train()
     trainer.save_model(str(args.output_dir))
     tokenizer.save_pretrained(str(args.output_dir))
+    training_metadata = {
+        "recipe": "te_aware_span_mlm",
+        "source_metadata": str(args.metadata),
+        "annotation_level": metadata.get("annotation_level", "unspecified"),
+        "boundary_semantics": metadata.get("boundary_semantics", "unspecified"),
+        "biological_copy_claim": bool(metadata.get("biological_copy_claim", False)),
+        "claim_scope": metadata.get("claim_scope", "not specified"),
+        "window": WINDOW,
+        "candidate_strata": list(STRATA),
+        "target_fraction": args.target_fraction,
+        "span_length": args.span_length,
+        "mask_replacement": {"mask": 0.8, "random_acgt": 0.1, "unchanged": 0.1},
+        "target": "nucleotide_token_only",
+        "boundary_source": "explicit_candidate_mask_only",
+        "records": len(dataset),
+        "optimizer_steps": args.max_steps,
+    }
+    for key in ("copy_level", "label_level"):
+        if key in metadata:
+            training_metadata[key] = metadata[key]
     (args.output_dir / "te_span_mlm_meta.json").write_text(
-        json.dumps(
-            {
-                "recipe": "te_aware_span_mlm",
-                "source_metadata": str(args.metadata),
-                "copy_level": True,
-                "window": WINDOW,
-                "candidate_strata": list(STRATA),
-                "target_fraction": args.target_fraction,
-                "span_length": args.span_length,
-                "mask_replacement": {"mask": 0.8, "random_acgt": 0.1, "unchanged": 0.1},
-                "target": "nucleotide_token_only",
-                "boundary_source": "explicit_candidate_mask_only",
-                "records": len(dataset),
-                "optimizer_steps": args.max_steps,
-            },
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
-        encoding="utf-8",
+        json.dumps(training_metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
     return 0
 

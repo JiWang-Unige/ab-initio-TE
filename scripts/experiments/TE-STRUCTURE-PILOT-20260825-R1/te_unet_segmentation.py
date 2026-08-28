@@ -38,6 +38,14 @@ def four_state_labels(binary: list[int]) -> list[int]:
     return out
 
 
+def iter_jsonl_rows(path: Path, limit: int):
+    with gzip.open(path, "rt", encoding="utf-8") as handle:
+        for index, line in enumerate(handle):
+            if index >= limit:
+                break
+            yield json.loads(line)
+
+
 def te_probability(logits):
     """Return P(interior or either boundary) from four-state logits."""
     import torch
@@ -222,9 +230,7 @@ def evaluate(args) -> None:
     sums: dict[str, np.ndarray] = {}
     weight_sums: dict[str, np.ndarray] = {}
     truths: dict[str, np.ndarray] = {}
-    with gzip.open(args.data_jsonl, "rt", encoding="utf-8") as handle:
-        for line in handle:
-            row = json.loads(line)
+    for row in iter_jsonl_rows(args.data_jsonl, args.max_windows):
             seqid, start, end = row["chr"], int(row["start"]), int(row["end"])
             encoded = tokenizer(
                 row["sequence"][:WINDOW], add_special_tokens=False, truncation=True,
@@ -286,6 +292,7 @@ def evaluate(args) -> None:
         "profile": "P3_comparator_run_engineering_pilot",
         "claim_scope": "RepeatMasker-style comparator agreement only",
         "weight_mode": args.weight_mode,
+        "max_windows": args.max_windows,
         "rows": metric_rows,
     }, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -312,6 +319,7 @@ def main() -> None:
     eval_parser.add_argument("--metrics-json", type=Path, required=True)
     eval_parser.add_argument("--threshold", type=float, default=0.5)
     eval_parser.add_argument("--weight-mode", choices=["flat", "triangular", "cosine"], default="triangular")
+    eval_parser.add_argument("--max-windows", type=int, default=1200)
     eval_parser.add_argument("--cpu", action="store_true")
     args = parser.parse_args()
     if args.command == "train":

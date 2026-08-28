@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 import importlib.util
+import gzip
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -20,6 +23,14 @@ class FourStateLabelTest(unittest.TestCase):
 
     def test_separate_runs_remain_separate(self):
         self.assertEqual(te_unet.four_state_labels([0, 1, 0, 1, 1, 0]), [0, 3, 0, 2, 3, 0])
+
+    def test_evaluation_rows_stop_at_matched_denominator(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "data.jsonl.gz"
+            with gzip.open(path, "wt", encoding="utf-8") as handle:
+                for index in range(3):
+                    handle.write(json.dumps({"index": index}) + "\n")
+            self.assertEqual(list(te_unet.iter_jsonl_rows(path, 2)), [{"index": 0}, {"index": 1}])
 
 
 if __name__ == "__main__":

@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import importlib.util
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -11,6 +13,13 @@ SPEC = importlib.util.spec_from_file_location("te_span_mlm", HERE / "te_span_mlm
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader
 SPEC.loader.exec_module(MODULE)
+
+BUILDER_SPEC = importlib.util.spec_from_file_location(
+    "build_annotation_span_corpus", HERE / "build_annotation_span_corpus.py"
+)
+BUILDER = importlib.util.module_from_spec(BUILDER_SPEC)
+assert BUILDER_SPEC.loader
+BUILDER_SPEC.loader.exec_module(BUILDER)
 
 
 def masks(interior=(100, 1000), boundary=(1000, 1100), flank=(1100, 2200)):
@@ -96,6 +105,152 @@ class SpanMaskMechanismTests(unittest.TestCase):
         self.assertTrue(MODULE.metadata_allows_training({"label_level": "copy_level"}))
         self.assertFalse(MODULE.metadata_allows_training({"copy_level": False}))
         self.assertFalse(MODULE.metadata_allows_training({"label_level": "reference_run"}))
+
+    def test_default_stratum_weights_are_frozen(self):
+        self.assertEqual(MODULE.STRATUM_WEIGHTS, {
+            "interior": 0.45,
+            "boundary": 0.30,
+            "flank": 0.25,
+        })
+
+    def test_reference_annotation_run_gate(self):
+        self.assertTrue(MODULE.metadata_allows_training({
+            "annotation_level": "reference_annotation_run",
+            "biological_copy_claim": False,
+        }))
+        self.assertFalse(MODULE.metadata_allows_training({
+            "annotation_level": "reference_annotation_run",
+            "biological_copy_claim": True,
+        }))
+
+    def test_strict_selection_refills_scarce_stratum(self):
+        candidate = {
+            "interior": [100 <= i < 132 for i in range(MODULE.WINDOW)],
+            "boundary": [1000 <= i < 1016 for i in range(MODULE.WINDOW)],
+            "flank": [2000 <= i < 2320 for i in range(MODULE.WINDOW)],
+        }
+        result = MODULE.sample_contiguous_spans(
+            candidate, target_fraction=0.5, span_length=32, seed=7, strict_selected_bp=True
+        )
+        self.assertEqual(result["selected_bp"], result["target_selected_bp"])
+        self.assertGreater(result["selected_by_stratum"]["flank"], 2)
+
+    def test_strict_selection_reports_real_shortage(self):
+        candidate = {
+            "interior": [100 <= i < 116 for i in range(MODULE.WINDOW)],
+            "boundary": [1000 <= i < 1016 for i in range(MODULE.WINDOW)],
+            "flank": [2000 <= i < 2016 for i in range(MODULE.WINDOW)],
+        }
+        with self.assertRaisesRegex(ValueError, "no contiguous eligible span"):
+            MODULE.sample_contiguous_spans(
+                candidate, target_fraction=1.0, span_length=32, seed=7, strict_selected_bp=True
+            )
+
+
+class AnnotationSpanCorpusTests(unittest.TestCase):
+    def _record(self, positive_runs, unknown=(), n_positions=()):
+        labels = [0] * BUILDER.WINDOW
+        for start, end in positive_runs:
+            labels[start:end] = [1] * (end - start)
+        for start, end in unknown:
+            labels[start:end] = [-100] * (end - start)
+        sequence = ["A"] * BUILDER.WINDOW
+        for start, end in n_positions:
+            sequence[start:end] = ["N"] * (end - start)
+        return {"sequence": "".join(sequence), "labels": labels, "chr": "chrTest", "start": 0, "end": BUILDER.WINDOW}
+
+    def test_boundary_spans_cross_only_single_known_transition(self):
+        record = self._record([(300, 500), (900, 1100)])
+        result = BUILDER.build_record(record)
+        self.assertEqual(
+            result["boundary_intervals"],
+            [[276, 324], [476, 524], [876, 924], [1076, 1124]],
+        )
+        boundary = result["candidate_masks"]["boundary"]
+        transitions = (300, 500, 900, 1100)
+        for row in result["boundary_intervals"]:
+            left, right = row
+            edge = min(transitions, key=lambda value: abs(value - (left + right) // 2))
+            for start in range(left, right - MODULE.SPAN_LENGTH + 1):
+                end = start + MODULE.SPAN_LENGTH
+                self.assertTrue(start < edge < end)
+                self.assertGreaterEqual(edge - start, BUILDER.BOUNDARY_MIN_EACH_SIDE)
+                self.assertGreaterEqual(end - edge, BUILDER.BOUNDARY_MIN_EACH_SIDE)
+        for start in MODULE._span_starts(boundary, MODULE.SPAN_LENGTH):
+            end = start + MODULE.SPAN_LENGTH
+            self.assertTrue(any(start < edge < end for edge in transitions))
+        for index, value in enumerate(result["candidate_masks"]["interior"]):
+            self.assertFalse(value and boundary[index])
+
+    def test_window_edge_unknown_and_n_transitions_are_not_boundaries(self):
+        edge_result = BUILDER.build_record(self._record([(0, 300)]))
+        self.assertEqual(edge_result["boundary_intervals"], [[276, 324]])
+        self.assertNotIn([-24, 24], edge_result["boundary_intervals"])
+
+        unknown_result = BUILDER.build_record(self._record([(300, 500)], unknown=((299, 300),)))
+        self.assertNotIn([276, 324], unknown_result["boundary_intervals"])
+        self.assertEqual(unknown_result["boundary_intervals"], [[476, 524]])
+
+        n_result = BUILDER.build_record(self._record([(800, 1000)], n_positions=((799, 800),)))
+        self.assertNotIn([776, 824], n_result["boundary_intervals"])
+        self.assertEqual(n_result["boundary_intervals"], [[976, 1024]])
+
+    def test_boundary_with_another_run_in_clean_outer_128_is_rejected(self):
+        result = BUILDER.build_record(self._record([(300, 500), (600, 700)]))
+        self.assertEqual(result["boundary_intervals"], [[276, 324], [676, 724]])
+        self.assertNotIn([476, 524], result["boundary_intervals"])
+        self.assertNotIn([576, 624], result["boundary_intervals"])
+
+    def test_flank_is_not_emitted_for_a_boundary_with_ambiguous_candidate_band(self):
+        result = BUILDER.build_record(self._record([(300, 340)]))
+        self.assertEqual(result["boundary_intervals"], [])
+        self.assertEqual(sum(result["candidate_masks"]["boundary"]), 0)
+        self.assertEqual(sum(result["candidate_masks"]["flank"]), 0)
+
+    def test_interior_is_outside_64bp_exclusion_and_flank_is_64_to_256bp(self):
+        result = BUILDER.build_record(self._record([(300, 500)]))
+        interior_runs = MODULE._runs(result["candidate_masks"]["interior"])
+        flank_runs = MODULE._runs(result["candidate_masks"]["flank"])
+        self.assertEqual(interior_runs, [(364, 436)])
+        self.assertEqual(flank_runs, [(44, 237), (564, 757)])
+        for start, end in flank_runs:
+            self.assertTrue(end <= 237 or start >= 564)
+
+    def test_separated_runs_are_not_connected_by_candidate_masks(self):
+        result = BUILDER.build_record(self._record([(300, 500), (650, 850)]))
+        interior_runs = MODULE._runs(result["candidate_masks"]["interior"])
+        boundary_runs = MODULE._runs(result["candidate_masks"]["boundary"])
+        self.assertFalse(any(start < 575 < end for start, end in interior_runs))
+        self.assertFalse(any(start < 575 < end for start, end in boundary_runs))
+
+    def test_metadata_declares_reference_run_semantics(self):
+        record = self._record([(100, 300)])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            input_path = root / "input.jsonl"
+            output_path = root / "output.jsonl"
+            metadata_path = root / "metadata.json"
+            input_path.write_text(json.dumps(record) + "\n", encoding="utf-8")
+            metadata = BUILDER.build(
+                type("Args", (), {
+                    "input_jsonl": input_path,
+                    "output_jsonl": output_path,
+                    "metadata": metadata_path,
+                    "flank_bp": 256,
+                    "max_records": None,
+                })()
+            )
+            self.assertEqual(metadata["annotation_level"], "reference_annotation_run")
+            self.assertEqual(metadata["boundary_semantics"], "reference_run_boundary")
+            self.assertFalse(metadata["biological_copy_claim"])
+            self.assertEqual(metadata["boundary_exclusion_half_width_bp"], 64)
+            self.assertEqual(metadata["boundary_exclusion_band_bp"], 64)
+            self.assertEqual(metadata["boundary_min_each_side_bp"], 8)
+            self.assertEqual(metadata["flank_range_bp"], [64, 256])
+            written = json.loads(metadata_path.read_text(encoding="utf-8"))
+            self.assertEqual(written["claim_scope"], "reference annotation run only; not biological full-copy")
+            output = json.loads(output_path.read_text(encoding="utf-8"))
+            self.assertEqual(set(output["candidate_masks"]), {"interior", "boundary", "flank"})
 
 
 if __name__ == "__main__":
