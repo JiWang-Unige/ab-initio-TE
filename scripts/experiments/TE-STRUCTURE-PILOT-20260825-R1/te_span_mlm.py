@@ -723,7 +723,7 @@ class SpanMaskingCollator:
         batch_size = len(examples)
         batch = {
             key: torch.stack([row[key] for row in examples])
-            for key in ("input_ids", "attention_mask", "special_tokens_mask")
+            for key in ("input_ids", "attention_mask")
         }
         masked_rows = []
         label_rows = []
@@ -843,6 +843,7 @@ def train(args) -> int:
         bf16=True,
         fp16=False,
         gradient_checkpointing=True,
+        disable_tqdm=True,
         seed=SEED,
         report_to="none",
         remove_unused_columns=False,
