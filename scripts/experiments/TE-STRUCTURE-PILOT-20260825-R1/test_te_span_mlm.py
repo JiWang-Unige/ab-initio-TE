@@ -217,6 +217,12 @@ class AnnotationSpanCorpusTests(unittest.TestCase):
         self.assertNotIn([476, 524], result["boundary_intervals"])
         self.assertNotIn([576, 624], result["boundary_intervals"])
 
+    def test_long_flanks_do_not_overlap_another_run_boundary_bucket(self):
+        result = BUILDER.build_record(self._record([(300, 500), (700, 900)]))
+        boundary = result["candidate_masks"]["boundary"]
+        flank = result["candidate_masks"]["flank"]
+        self.assertFalse(any(left and right for left, right in zip(boundary, flank)))
+
     def test_flank_is_not_emitted_for_a_boundary_with_ambiguous_candidate_band(self):
         result = BUILDER.build_record(self._record([(300, 340)]))
         self.assertEqual(result["boundary_intervals"], [])

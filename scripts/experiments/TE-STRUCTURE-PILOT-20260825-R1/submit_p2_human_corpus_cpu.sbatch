@@ -4,14 +4,14 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --time=01:00:00
-#SBATCH --output=/home/users/j/jwang/ab-initio-TE/outputs/TE-STRUCTURE-PILOT-20260825-R1/p2-corpus-20260828/logs/corpus-%j.out
-#SBATCH --error=/home/users/j/jwang/ab-initio-TE/outputs/TE-STRUCTURE-PILOT-20260825-R1/p2-corpus-20260828/logs/corpus-%j.err
+#SBATCH --output=/home/users/j/jwang/ab-initio-TE/outputs/TE-STRUCTURE-PILOT-20260825-R1/p2-corpus-20260828-r2/logs/corpus-%j.out
+#SBATCH --error=/home/users/j/jwang/ab-initio-TE/outputs/TE-STRUCTURE-PILOT-20260825-R1/p2-corpus-20260828-r2/logs/corpus-%j.err
 
 set -euo pipefail
 
 ROOT=/home/users/j/jwang/ab-initio-TE
 SCRIPT_ROOT=${ROOT}/scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1
-RUN_ROOT=${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1/p2-corpus-20260828
+RUN_ROOT=${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1/p2-corpus-20260828-r2
 INPUT=${ROOT}/software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/human_h0_w8192/train/data.jsonl.gz
 
 mkdir -p "${RUN_ROOT}"

@@ -198,6 +198,8 @@ def build_record(record: dict, *, flank_bp: int = DEFAULT_FLANK_BP) -> dict:
                 flank_positions.add(index)
                 index += 1
 
+    flank_positions.difference_update(boundary_positions)
+
     output = dict(record)
     output["candidate_masks"] = {
         "interior": _mask(WINDOW, sorted(interior_positions)),
