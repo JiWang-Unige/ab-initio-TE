@@ -133,7 +133,11 @@ def sample_contiguous_spans(
     }
     starts_by_stratum = {name: _span_starts(mask, span_length) for name, mask in allowed_by_stratum.items()}
     eligible_bp = sum(sum(mask) for mask in allowed_by_stratum.values())
-    target_bp = int(round(eligible_bp * target_fraction))
+    callable_bp = sum(
+        attention[index] and not unknown[index] and not n_values[index]
+        for index in range(window)
+    )
+    target_bp = int(round(callable_bp * target_fraction))
     target_spans = target_bp // span_length
     if target_bp > 0 and target_spans == 0:
         target_spans = 1
@@ -208,6 +212,7 @@ def sample_contiguous_spans(
         "selected_stratum": selected_stratum,
         "spans": sorted(spans, key=lambda row: int(row["start"])),
         "eligible_bp": eligible_bp,
+        "callable_bp": callable_bp,
         "target_bp": target_bp,
         "target_spans": target_spans,
         "target_selected_bp": required_selected_bp,
@@ -480,6 +485,7 @@ def smoke() -> dict[str, object]:
 
 def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
     selected_bp = 0
+    callable_bp = 0
     selected_spans = {name: 0 for name in STRATA}
     observed = 0
     with _open_text(data_jsonl) as handle:
@@ -498,6 +504,7 @@ def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
                 strict_selected_bp=True,
             )
             selected_bp += int(sampled["selected_bp"])
+            callable_bp += int(sampled["callable_bp"])
             for name in STRATA:
                 selected_spans[name] += int(sampled["selected_by_stratum"][name])
             observed += 1
@@ -508,6 +515,8 @@ def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
         "status": "PASS",
         "records": observed,
         "selected_bp": selected_bp,
+        "callable_bp": callable_bp,
+        "selected_fraction_of_callable": selected_bp / callable_bp,
         "selected_spans": selected_spans,
         "selected_span_fractions": {
             name: selected_spans[name] / total_spans for name in STRATA

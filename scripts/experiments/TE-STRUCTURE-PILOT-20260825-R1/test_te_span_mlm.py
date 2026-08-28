@@ -43,7 +43,8 @@ class SpanMaskMechanismTests(unittest.TestCase):
                 self.assertTrue(masks()[stratum][index])
         runs = MODULE._runs(selected)
         self.assertEqual(sum(end - start for start, end in runs), result["selected_bp"])
-        self.assertEqual(len(runs), len(result["spans"]))
+        intervals = sorted((int(row["start"]), int(row["end"])) for row in result["spans"])
+        self.assertTrue(all(left[1] <= right[0] for left, right in zip(intervals, intervals[1:])))
 
     def test_unknown_and_n_positions_are_not_selected(self):
         unknown = [500 <= i < 540 for i in range(MODULE.WINDOW)]
@@ -146,7 +147,7 @@ class SpanMaskMechanismTests(unittest.TestCase):
             "flank": [2000 <= i < 2320 for i in range(MODULE.WINDOW)],
         }
         result = MODULE.sample_contiguous_spans(
-            candidate, target_fraction=0.5, span_length=32, seed=7, strict_selected_bp=True
+            candidate, target_fraction=0.03, span_length=32, seed=7, strict_selected_bp=True
         )
         self.assertEqual(result["selected_bp"], result["target_selected_bp"])
         self.assertGreater(result["selected_by_stratum"]["flank"], 2)
@@ -159,8 +160,17 @@ class SpanMaskMechanismTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(ValueError, "no contiguous eligible span"):
             MODULE.sample_contiguous_spans(
-                candidate, target_fraction=1.0, span_length=32, seed=7, strict_selected_bp=True
+                candidate, target_fraction=0.1, span_length=32, seed=7, strict_selected_bp=True
             )
+
+    def test_mask_budget_is_fraction_of_callable_window_not_candidate_subset(self):
+        candidate = masks(interior=(100, 2100), boundary=(3000, 3100), flank=(4000, 6000))
+        result = MODULE.sample_contiguous_spans(
+            candidate, target_fraction=0.15, span_length=32, seed=7
+        )
+        self.assertEqual(result["callable_bp"], MODULE.WINDOW)
+        self.assertEqual(result["target_selected_bp"], 38 * 32)
+        self.assertEqual(result["selected_bp"], 38 * 32)
 
 
 class AnnotationSpanCorpusTests(unittest.TestCase):
