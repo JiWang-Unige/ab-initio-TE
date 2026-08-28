@@ -105,6 +105,114 @@ def _take_nonoverlapping(
     return chosen
 
 
+def _eligible_masks(
+    candidate_masks: dict[str, Iterable[object]],
+    *,
+    attention_mask: Iterable[object] | None = None,
+    unknown_mask: Iterable[object] | None = None,
+    n_mask: Iterable[object] | None = None,
+    window: int = WINDOW,
+) -> tuple[dict[str, list[bool]], list[bool], list[bool], list[bool], dict[str, list[bool]]]:
+    masks = validate_candidate_masks(candidate_masks, window)
+    attention = _mask_or_false(attention_mask, "attention_mask", window) if attention_mask is not None else [True] * window
+    unknown = _mask_or_false(unknown_mask, "unknown_mask", window)
+    n_values = _mask_or_false(n_mask, "n_mask", window)
+    allowed_by_stratum: dict[str, list[bool]] = {
+        name: [value and attention[i] and not unknown[i] and not n_values[i] for i, value in enumerate(mask)]
+        for name, mask in masks.items()
+    }
+    return masks, attention, unknown, n_values, allowed_by_stratum
+
+
+def materialize_span_plan(
+    candidate_masks: dict[str, Iterable[object]],
+    spans: Iterable[dict[str, object]],
+    *,
+    attention_mask: Iterable[object] | None = None,
+    unknown_mask: Iterable[object] | None = None,
+    n_mask: Iterable[object] | None = None,
+    target_fraction: float = MASK_PROBABILITY,
+    span_length: int = SPAN_LENGTH,
+    strict_selected_bp: bool = True,
+    window: int = WINDOW,
+) -> dict[str, object]:
+    """Materialize a persisted plan without sampling a new span.
+
+    This is the shared audit/training interface for R2.  Every persisted span
+    remains in its explicit candidate stratum and all callable exclusions are
+    re-applied before it can become an MLM target.
+    """
+    if not 0.0 < target_fraction <= 1.0:
+        raise ValueError("target_fraction must be in (0, 1]")
+    if span_length < 1 or span_length > window:
+        raise ValueError(f"span_length must be in [1, {window}]")
+    _masks, attention, _unknown, _n_values, allowed_by_stratum = _eligible_masks(
+        candidate_masks,
+        attention_mask=attention_mask,
+        unknown_mask=unknown_mask,
+        n_mask=n_mask,
+        window=window,
+    )
+    callable_bp = sum(
+        attention[index]
+        and not _unknown[index]
+        and not _n_values[index]
+        for index in range(window)
+    )
+    target_bp = int(round(callable_bp * target_fraction))
+    target_spans = target_bp // span_length
+    if target_bp > 0 and target_spans == 0:
+        target_spans = 1
+
+    selected = [False] * window
+    selected_stratum: list[str | None] = [None] * window
+    normalized: list[dict[str, object]] = []
+    selected_by_stratum = {name: 0 for name in STRATA}
+    for row in spans:
+        stratum = str(row["stratum"])
+        if stratum not in STRATA:
+            raise ValueError(f"persisted span has unsupported stratum: {stratum}")
+        start = int(row["start"])
+        end = int(row["end"])
+        if end - start != span_length or start < 0 or end > window:
+            raise ValueError("persisted span violates the frozen span geometry")
+        if not all(allowed_by_stratum[stratum][index] for index in range(start, end)):
+            raise ValueError("persisted span is outside its callable explicit candidate mask")
+        if any(selected[index] for index in range(start, end)):
+            raise ValueError("persisted spans overlap")
+        for index in range(start, end):
+            selected[index] = True
+            selected_stratum[index] = stratum
+        normalized.append({"stratum": stratum, "start": start, "end": end})
+        selected_by_stratum[stratum] += 1
+
+    normalized.sort(key=lambda row: (int(row["start"]), int(row["end"]), str(row["stratum"])))
+    selected_bp = sum(selected)
+    if strict_selected_bp and len(normalized) != target_spans:
+        raise ValueError(
+            "persisted plan does not preserve the per-window span budget: "
+            f"required={target_spans}, selected={len(normalized)}"
+        )
+    if strict_selected_bp and selected_bp != target_spans * span_length:
+        raise ValueError(
+            "persisted plan does not preserve the per-window selected-bp budget: "
+            f"required={target_spans * span_length}, selected={selected_bp}"
+        )
+    return {
+        "selected": selected,
+        "selected_stratum": selected_stratum,
+        "spans": normalized,
+        "eligible_bp": sum(sum(mask) for mask in allowed_by_stratum.values()),
+        "callable_bp": callable_bp,
+        "target_bp": target_bp,
+        "target_spans": target_spans,
+        "target_selected_bp": target_spans * span_length,
+        "selected_bp": selected_bp,
+        "strict_selected_bp": strict_selected_bp,
+        "selected_by_stratum": selected_by_stratum,
+    }
+
+
 def sample_contiguous_spans(
     candidate_masks: dict[str, Iterable[object]],
     *,
@@ -225,6 +333,243 @@ def sample_contiguous_spans(
     }
 
 
+R2_FRACTION_BOUNDS = {
+    "interior": (0.40, 0.50),
+    "boundary": (0.25, 0.35),
+    "flank": (0.20, 0.30),
+}
+R2_PLAN_SCHEMA = "te_span_mlm_r2_plan_v1"
+
+
+def _span_rows(spans: Iterable[dict[str, object]]) -> list[dict[str, object]]:
+    return [
+        {"stratum": str(row["stratum"]), "start": int(row["start"]), "end": int(row["end"])}
+        for row in spans
+    ]
+
+
+def _record_identity(record: dict[str, object]) -> dict[str, object]:
+    return {name: record[name] for name in ("chr", "start", "end") if name in record}
+
+
+def _plan_summary(entries: list[dict[str, object]], field: str = "spans") -> dict[str, object]:
+    selected_spans = {name: 0 for name in STRATA}
+    selected_bp = 0
+    callable_bp = 0
+    selected_spans_by_record: list[int] = []
+    selected_bp_by_record: list[int] = []
+    callable_bp_by_record: list[int] = []
+    for entry in entries:
+        spans = entry[field]
+        counts = {name: 0 for name in STRATA}
+        for row in spans:
+            counts[str(row["stratum"])] += 1
+        count = sum(counts.values())
+        selected_spans_by_record.append(count)
+        selected_bp_by_record.append(count * SPAN_LENGTH)
+        callable_bp_by_record.append(int(entry["callable_bp"]))
+        for name in STRATA:
+            selected_spans[name] += counts[name]
+        selected_bp += count * SPAN_LENGTH
+        callable_bp += int(entry["callable_bp"])
+    total_spans = sum(selected_spans.values())
+    fractions = {
+        name: selected_spans[name] / total_spans if total_spans else 0.0
+        for name in STRATA
+    }
+    return {
+        "records": len(entries),
+        "selected_bp": selected_bp,
+        "callable_bp": callable_bp,
+        "selected_fraction_of_callable": selected_bp / callable_bp if callable_bp else 0.0,
+        "selected_spans": selected_spans,
+        "selected_span_fractions": fractions,
+        "selected_spans_by_record": selected_spans_by_record,
+        "selected_bp_by_record": selected_bp_by_record,
+        "callable_bp_by_record": callable_bp_by_record,
+        "neutral_spans": 0,
+    }
+
+
+def _r2_allocate_spans(entries: list[dict[str, object]]) -> dict[str, object]:
+    """Replace non-boundary spans breadth-first until the corpus gate is met."""
+    initial = _plan_summary(entries)
+    total_spans = int(initial["selected_spans"]["interior"])
+    total_spans += int(initial["selected_spans"]["boundary"])
+    total_spans += int(initial["selected_spans"]["flank"])
+    boundary_spans = int(initial["selected_spans"]["boundary"])
+    rounds = 0
+    replacements = 0
+
+    while 4 * boundary_spans < total_spans:
+        rounds += 1
+        changed = 0
+        for entry in sorted(entries, key=lambda row: int(row["record_index"])):
+            if 4 * boundary_spans >= total_spans:
+                break
+            current = list(entry["spans"])
+            removable = next(
+                (
+                    row
+                    for row in sorted(
+                        current,
+                        key=lambda row: (int(row["start"]), int(row["end"]), str(row["stratum"])),
+                    )
+                    if str(row["stratum"]) in ("interior", "flank")
+                ),
+                None,
+            )
+            occupied = [(int(row["start"]), int(row["end"])) for row in current]
+            boundary_start = next(
+                (
+                    start
+                    for start in sorted(set(int(value) for value in entry["boundary_starts"]))
+                    if not any(
+                        start < occupied_end and occupied_start < start + SPAN_LENGTH
+                        for occupied_start, occupied_end in occupied
+                    )
+                ),
+                None,
+            )
+            if removable is None or boundary_start is None:
+                continue
+            current.remove(removable)
+            current.append(
+                {"stratum": "boundary", "start": boundary_start, "end": boundary_start + SPAN_LENGTH}
+            )
+            current.sort(key=lambda row: (int(row["start"]), int(row["end"]), str(row["stratum"])))
+            if len(current) != int(entry["target_spans"]):
+                raise ValueError("R2 replacement changed the per-window span count")
+            entry["spans"] = current
+            entry["r2_replacements"] = int(entry.get("r2_replacements", 0)) + 1
+            boundary_spans += 1
+            replacements += 1
+            changed += 1
+        if changed == 0:
+            break
+
+    final = _plan_summary(entries)
+    return {
+        "initial": initial,
+        "final": final,
+        "rounds": rounds,
+        "replacements": replacements,
+        "boundary_gate": 4 * int(final["selected_spans"]["boundary"]) >= int(total_spans),
+    }
+
+
+def build_r2_plan(data_jsonl: Path, records: int) -> dict[str, object]:
+    """Build and return the deterministic P2-H-R2 corpus-wide span plan."""
+    entries: list[dict[str, object]] = []
+    with _open_text(data_jsonl) as handle:
+        for index, line in enumerate(handle):
+            if index >= records:
+                break
+            record = json.loads(line)
+            sequence = record["sequence"]
+            unknown = _mask_or_false(record.get("unknown_mask"), "unknown_mask", WINDOW)
+            n_mask = [base.upper() == "N" for base in sequence]
+            sampled = sample_contiguous_spans(
+                record["candidate_masks"],
+                unknown_mask=unknown,
+                n_mask=n_mask,
+                target_fraction=MASK_PROBABILITY,
+                span_length=SPAN_LENGTH,
+                seed=SEED + index,
+                strict_selected_bp=True,
+            )
+            _masks, _attention, _unknown, _n_values, allowed = _eligible_masks(
+                record["candidate_masks"], unknown_mask=unknown, n_mask=n_mask, window=WINDOW
+            )
+            entries.append(
+                {
+                    "record_index": index,
+                    "identity": _record_identity(record),
+                    "callable_bp": int(sampled["callable_bp"]),
+                    "target_spans": int(sampled["target_spans"]),
+                    "target_selected_bp": int(sampled["target_selected_bp"]),
+                    "spans": _span_rows(sampled["spans"]),
+                    "boundary_starts": _span_starts(allowed["boundary"], SPAN_LENGTH),
+                    "r2_replacements": 0,
+                }
+            )
+    if len(entries) != records:
+        raise ValueError(f"expected exactly {records} records, got {len(entries)}")
+
+    allocation = _r2_allocate_spans(entries)
+    initial = allocation["initial"]
+    final = allocation["final"]
+    fraction_pass = all(
+        lower <= float(final["selected_span_fractions"][name]) <= upper
+        for name, (lower, upper) in R2_FRACTION_BOUNDS.items()
+    )
+    criteria = {
+        "boundary_fraction_at_least_25pct": bool(allocation["boundary_gate"]),
+        "selected_bp_unchanged": int(final["selected_bp"]) == int(initial["selected_bp"]),
+        "neutral_spans_zero": int(final["neutral_spans"]) == 0,
+        "selected_span_fractions": fraction_pass,
+    }
+    record_plans = []
+    for entry in entries:
+        record_plans.append(
+            {
+                "record_index": int(entry["record_index"]),
+                "identity": entry["identity"],
+                "callable_bp": int(entry["callable_bp"]),
+                "target_spans": int(entry["target_spans"]),
+                "target_selected_bp": int(entry["target_selected_bp"]),
+                "spans": entry["spans"],
+                "selected_bp": len(entry["spans"]) * SPAN_LENGTH,
+                "r2_replacements": int(entry["r2_replacements"]),
+            }
+        )
+    return {
+        "schema": R2_PLAN_SCHEMA,
+        "window": WINDOW,
+        "span_length": SPAN_LENGTH,
+        "target_fraction": MASK_PROBABILITY,
+        "seed": SEED,
+        "records": records,
+        "algorithm": (
+            "fixed-seed per-window 15pct plan followed by fixed-coordinate breadth-first "
+            "round-robin boundary replacements; one interior/flank span per window per round"
+        ),
+        "initial": initial,
+        "final": final,
+        "rounds": int(allocation["rounds"]),
+        "replacements": int(allocation["replacements"]),
+        "neutral_spans": 0,
+        "fraction_bounds": {name: list(bounds) for name, bounds in R2_FRACTION_BOUNDS.items()},
+        "criteria": criteria,
+        "decision": "GO" if all(criteria.values()) else "NO_GO",
+        "record_plans": record_plans,
+    }
+
+
+def load_r2_plan(path: Path) -> dict[str, object]:
+    plan = json.loads(path.read_text(encoding="utf-8"))
+    if plan.get("schema") != R2_PLAN_SCHEMA:
+        raise ValueError(f"unexpected persisted span-plan schema: {plan.get('schema')}")
+    if int(plan["window"]) != WINDOW or int(plan["span_length"]) != SPAN_LENGTH:
+        raise ValueError("persisted span plan does not use the frozen window/span geometry")
+    if float(plan["target_fraction"]) != MASK_PROBABILITY or int(plan["seed"]) != SEED:
+        raise ValueError("persisted span plan does not use the frozen sampling recipe")
+    if len(plan["record_plans"]) != int(plan["records"]):
+        raise ValueError("persisted span plan record count is inconsistent")
+    return plan
+
+
+def _plan_entry_for_record(
+    plan_records: list[dict[str, object]], index: int, record: dict[str, object]
+) -> dict[str, object]:
+    entry = plan_records[index]
+    if int(entry["record_index"]) != index:
+        raise ValueError("persisted span plan record order does not match the corpus")
+    if entry.get("identity", {}) != _record_identity(record):
+        raise ValueError(f"persisted span plan identity mismatch at record {index}")
+    return entry
+
+
 def apply_span_mask(
     input_ids,
     attention_mask,
@@ -285,8 +630,16 @@ def _runtime():
 
 
 class SpanDataset:
-    def __init__(self, path: Path, tokenizer, torch_module, max_samples: int | None = None):
+    def __init__(
+        self,
+        path: Path,
+        tokenizer,
+        torch_module,
+        max_samples: int | None = None,
+        plan_records: list[dict[str, object]] | None = None,
+    ):
         self.records = []
+        self.plan_records = plan_records
         with _open_text(path) as handle:
             for index, line in enumerate(handle):
                 if max_samples is not None and index >= max_samples:
@@ -296,6 +649,15 @@ class SpanDataset:
                 if not isinstance(sequence, str) or len(sequence) != WINDOW:
                     raise ValueError(f"record {index} sequence length is not {WINDOW}")
                 validate_candidate_masks(record["candidate_masks"])
+                if plan_records is not None:
+                    entry = _plan_entry_for_record(plan_records, index, record)
+                    materialize_span_plan(
+                        record["candidate_masks"],
+                        entry["spans"],
+                        unknown_mask=record.get("unknown_mask"),
+                        n_mask=[base.upper() == "N" for base in sequence],
+                        strict_selected_bp=True,
+                    )
                 self.records.append(record)
         self.tokenizer = tokenizer
         self.torch = torch_module
@@ -329,6 +691,8 @@ class SpanDataset:
         output["n_mask"] = torch.tensor(
             [base.upper() == "N" for base in sequence], dtype=torch.bool
         )
+        if self.plan_records is not None:
+            output["span_plan"] = self.plan_records[index]["spans"]
         return output
 
 
@@ -365,16 +729,28 @@ class SpanMaskingCollator:
         label_rows = []
         for row_index, row in enumerate(examples):
             candidate = {name: row[f"{name}_mask"].tolist() for name in STRATA}
-            sampled = sample_contiguous_spans(
-                candidate,
-                attention_mask=row["attention_mask"].tolist(),
-                unknown_mask=row["unknown_mask"].tolist(),
-                n_mask=row["n_mask"].tolist(),
-                target_fraction=self.target_fraction,
-                span_length=self.span_length,
-                seed=self.sample_seed + row_index,
-                strict_selected_bp=self.strict_selected_bp,
-            )
+            if "span_plan" in row:
+                sampled = materialize_span_plan(
+                    candidate,
+                    row["span_plan"],
+                    attention_mask=row["attention_mask"].tolist(),
+                    unknown_mask=row["unknown_mask"].tolist(),
+                    n_mask=row["n_mask"].tolist(),
+                    target_fraction=self.target_fraction,
+                    span_length=self.span_length,
+                    strict_selected_bp=self.strict_selected_bp,
+                )
+            else:
+                sampled = sample_contiguous_spans(
+                    candidate,
+                    attention_mask=row["attention_mask"].tolist(),
+                    unknown_mask=row["unknown_mask"].tolist(),
+                    n_mask=row["n_mask"].tolist(),
+                    target_fraction=self.target_fraction,
+                    span_length=self.span_length,
+                    seed=self.sample_seed + row_index,
+                    strict_selected_bp=self.strict_selected_bp,
+                )
             masked, labels, _selected = apply_span_mask(
                 row["input_ids"].unsqueeze(0),
                 row["attention_mask"].unsqueeze(0),
@@ -407,6 +783,23 @@ def train(args) -> int:
             args.status_json.write_text(json.dumps(status, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(json.dumps(status, indent=2, sort_keys=True))
         return 3
+    plan = load_r2_plan(args.plan_json) if args.plan_json is not None else None
+    if plan is not None and plan["decision"] != "GO":
+        status = blocked_status(
+            metadata,
+            "persisted R2 span plan did not satisfy the corpus boundary/fraction gate",
+        )
+        status["span_plan"] = {
+            "schema": plan["schema"],
+            "records": plan["records"],
+            "decision": plan["decision"],
+            "criteria": plan["criteria"],
+        }
+        if args.status_json:
+            args.status_json.parent.mkdir(parents=True, exist_ok=True)
+            args.status_json.write_text(json.dumps(status, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        print(json.dumps(status, indent=2, sort_keys=True))
+        return 3
 
     torch, Dataset, AutoModelForMaskedLM, AutoTokenizer, Trainer, TrainingArguments, set_seed = _runtime()
     set_seed(SEED)
@@ -417,7 +810,13 @@ def train(args) -> int:
     if not all(parameter.requires_grad for parameter in model.parameters()):
         raise ValueError("TE-aware span MLM requires the full backbone and MLM head to be trainable")
     model.config.use_cache = False
-    dataset = SpanDataset(args.data_jsonl, tokenizer, torch, args.records)
+    dataset = SpanDataset(
+        args.data_jsonl,
+        tokenizer,
+        torch,
+        args.records,
+        plan_records=plan["record_plans"] if plan is not None else None,
+    )
     if len(dataset) != args.records:
         raise ValueError(f"expected exactly {args.records} records, got {len(dataset)}")
     collator = SpanMaskingCollator(
@@ -469,6 +868,15 @@ def train(args) -> int:
         "records": len(dataset),
         "optimizer_steps": args.max_steps,
     }
+    if plan is not None:
+        training_metadata.update(
+            {
+                "span_plan_schema": plan["schema"],
+                "span_plan_records": int(plan["records"]),
+                "span_plan_decision": plan["decision"],
+                "span_plan_replacements": int(plan["replacements"]),
+            }
+        )
     for key in ("copy_level", "label_level"):
         if key in metadata:
             training_metadata[key] = metadata[key]
@@ -506,10 +914,18 @@ def smoke() -> dict[str, object]:
     }
 
 
-def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
+def audit_corpus(
+    data_jsonl: Path, records: int, plan_json: Path | None = None
+) -> dict[str, object]:
+    plan = load_r2_plan(plan_json) if plan_json is not None else None
+    if plan is not None and int(plan["records"]) != records:
+        raise ValueError("persisted span plan record count does not match audit records")
     selected_bp = 0
     callable_bp = 0
     selected_spans = {name: 0 for name in STRATA}
+    selected_bp_by_record: list[int] = []
+    selected_spans_by_record: list[int] = []
+    callable_bp_by_record: list[int] = []
     observed = 0
     with _open_text(data_jsonl) as handle:
         for index, line in enumerate(handle):
@@ -517,17 +933,34 @@ def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
                 break
             record = json.loads(line)
             sequence = record["sequence"]
-            sampled = sample_contiguous_spans(
-                record["candidate_masks"],
-                unknown_mask=_mask_or_false(record.get("unknown_mask"), "unknown_mask", WINDOW),
-                n_mask=[base.upper() == "N" for base in sequence],
-                target_fraction=MASK_PROBABILITY,
-                span_length=SPAN_LENGTH,
-                seed=SEED + index,
-                strict_selected_bp=True,
-            )
+            unknown_mask = _mask_or_false(record.get("unknown_mask"), "unknown_mask", WINDOW)
+            n_mask = [base.upper() == "N" for base in sequence]
+            if plan is None:
+                sampled = sample_contiguous_spans(
+                    record["candidate_masks"],
+                    unknown_mask=unknown_mask,
+                    n_mask=n_mask,
+                    target_fraction=MASK_PROBABILITY,
+                    span_length=SPAN_LENGTH,
+                    seed=SEED + index,
+                    strict_selected_bp=True,
+                )
+            else:
+                entry = _plan_entry_for_record(plan["record_plans"], index, record)
+                sampled = materialize_span_plan(
+                    record["candidate_masks"],
+                    entry["spans"],
+                    unknown_mask=unknown_mask,
+                    n_mask=n_mask,
+                    target_fraction=MASK_PROBABILITY,
+                    span_length=SPAN_LENGTH,
+                    strict_selected_bp=True,
+                )
             selected_bp += int(sampled["selected_bp"])
             callable_bp += int(sampled["callable_bp"])
+            selected_bp_by_record.append(int(sampled["selected_bp"]))
+            selected_spans_by_record.append(sum(int(sampled["selected_by_stratum"][name]) for name in STRATA))
+            callable_bp_by_record.append(int(sampled["callable_bp"]))
             for name in STRATA:
                 selected_spans[name] += int(sampled["selected_by_stratum"][name])
             observed += 1
@@ -545,6 +978,11 @@ def audit_corpus(data_jsonl: Path, records: int) -> dict[str, object]:
             name: selected_spans[name] / total_spans for name in STRATA
         },
         "target_weights": STRATUM_WEIGHTS,
+        "selected_bp_by_record": selected_bp_by_record,
+        "selected_spans_by_record": selected_spans_by_record,
+        "callable_bp_by_record": callable_bp_by_record,
+        "neutral_spans": 0,
+        "plan_schema": plan["schema"] if plan is not None else None,
     }
 
 
@@ -555,13 +993,19 @@ def main() -> None:
     audit_parser = sub.add_parser("audit-corpus")
     audit_parser.add_argument("--data-jsonl", type=Path, required=True)
     audit_parser.add_argument("--records", type=int, default=3000)
+    audit_parser.add_argument("--plan-json", type=Path)
     audit_parser.add_argument("--out-json", type=Path, required=True)
+    plan_parser = sub.add_parser("build-r2-plan")
+    plan_parser.add_argument("--data-jsonl", type=Path, required=True)
+    plan_parser.add_argument("--records", type=int, required=True)
+    plan_parser.add_argument("--out-json", type=Path, required=True)
     train_parser = sub.add_parser("train")
     train_parser.add_argument("--data-jsonl", type=Path, required=True)
     train_parser.add_argument("--metadata", type=Path, required=True)
     train_parser.add_argument("--base-checkpoint", type=Path, default=Path("/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base"))
     train_parser.add_argument("--output-dir", type=Path, required=True)
     train_parser.add_argument("--status-json", type=Path)
+    train_parser.add_argument("--plan-json", type=Path)
     train_parser.add_argument("--records", type=int, default=3000)
     train_parser.add_argument("--max-steps", type=int, default=800)
     train_parser.add_argument("--target-fraction", type=float, default=MASK_PROBABILITY)
@@ -571,7 +1015,13 @@ def main() -> None:
         print(json.dumps(smoke(), indent=2, sort_keys=True))
         return
     if args.command == "audit-corpus":
-        result = audit_corpus(args.data_jsonl, args.records)
+        result = audit_corpus(args.data_jsonl, args.records, args.plan_json)
+        args.out_json.parent.mkdir(parents=True, exist_ok=True)
+        args.out_json.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        print(json.dumps(result, indent=2, sort_keys=True))
+        return
+    if args.command == "build-r2-plan":
+        result = build_r2_plan(args.data_jsonl, args.records)
         args.out_json.parent.mkdir(parents=True, exist_ok=True)
         args.out_json.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(json.dumps(result, indent=2, sort_keys=True))

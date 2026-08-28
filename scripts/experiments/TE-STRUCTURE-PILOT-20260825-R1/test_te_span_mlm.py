@@ -209,6 +209,78 @@ class SpanMaskMechanismTests(unittest.TestCase):
         self.assertEqual(result["target_selected_bp"], 38 * 32)
         self.assertEqual(result["selected_bp"], 38 * 32)
 
+    def test_persisted_plan_materializes_without_resampling(self):
+        candidate = masks(interior=(100, 2100), boundary=(3000, 3100), flank=(4000, 6000))
+        sampled = MODULE.sample_contiguous_spans(candidate, target_fraction=0.15, seed=7)
+        materialized = MODULE.materialize_span_plan(candidate, sampled["spans"])
+        self.assertEqual(materialized["selected"], sampled["selected"])
+        self.assertEqual(materialized["selected_bp"], sampled["selected_bp"])
+        self.assertEqual(materialized["selected_by_stratum"], sampled["selected_by_stratum"])
+
+    def test_persisted_plan_rejects_neutral_span(self):
+        candidate = masks()
+        with self.assertRaisesRegex(ValueError, "unsupported stratum"):
+            MODULE.materialize_span_plan(
+                candidate,
+                [{"stratum": "neutral", "start": 100, "end": 132}],
+                target_fraction=32 / MODULE.WINDOW,
+            )
+
+    def test_r2_replacements_are_breadth_first_round_robin(self):
+        def span(stratum, start):
+            return {"stratum": stratum, "start": start, "end": start + MODULE.SPAN_LENGTH}
+
+        entries = [
+            {
+                "record_index": 0,
+                "callable_bp": MODULE.WINDOW,
+                "target_spans": 8,
+                "spans": [span("interior", 100 + 64 * index) for index in range(8)],
+                "boundary_starts": [2000, 3000, 4000, 5000],
+                "r2_replacements": 0,
+            },
+            {
+                "record_index": 1,
+                "callable_bp": MODULE.WINDOW,
+                "target_spans": 8,
+                "spans": [span("flank", 100 + 64 * index) for index in range(8)],
+                "boundary_starts": [2000, 3000, 4000, 5000],
+                "r2_replacements": 0,
+            },
+        ]
+        result = MODULE._r2_allocate_spans(entries)
+        self.assertEqual(result["rounds"], 2)
+        self.assertEqual(result["replacements"], 4)
+        self.assertEqual([entry["r2_replacements"] for entry in entries], [2, 2])
+        self.assertEqual(
+            [[row["start"] for row in entry["spans"] if row["stratum"] == "boundary"] for entry in entries],
+            [[2000, 3000], [2000, 3000]],
+        )
+        self.assertEqual(result["final"]["selected_spans"], {"interior": 6, "boundary": 4, "flank": 6})
+
+    def test_r2_plan_is_the_audit_plan(self):
+        record = {
+            "sequence": "A" * MODULE.WINDOW,
+            "candidate_masks": masks(interior=(100, 2100), boundary=(3000, 3100), flank=(4000, 6000)),
+            "unknown_mask": [False] * MODULE.WINDOW,
+            "chr": "chrTest",
+            "start": 0,
+            "end": MODULE.WINDOW,
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            corpus = root / "corpus.jsonl"
+            plan_path = root / "plan.json"
+            corpus.write_text(json.dumps(record) + "\n", encoding="utf-8")
+            plan = MODULE.build_r2_plan(corpus, 1)
+            plan_path.write_text(json.dumps(plan) + "\n", encoding="utf-8")
+            audit = MODULE.audit_corpus(corpus, 1, plan_path)
+        self.assertEqual(audit["plan_schema"], MODULE.R2_PLAN_SCHEMA)
+        self.assertEqual(audit["selected_bp"], plan["final"]["selected_bp"])
+        self.assertEqual(audit["callable_bp"], plan["final"]["callable_bp"])
+        self.assertEqual(audit["selected_bp_by_record"], plan["final"]["selected_bp_by_record"])
+        self.assertEqual(audit["neutral_spans"], 0)
+
 
 class AnnotationSpanCorpusTests(unittest.TestCase):
     def _record(self, positive_runs, unknown=(), n_positions=()):
