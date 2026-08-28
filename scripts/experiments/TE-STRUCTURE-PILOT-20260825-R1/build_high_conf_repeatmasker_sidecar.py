@@ -99,19 +99,29 @@ def iter_repeatmasker_hits(path: Path) -> Iterator[dict[str, object]]:
                     columns[11], line_no=line_no, field="repeat left",
                     allow_zero=True, allow_negative=True,
                 )
-                repeat_end = _coordinate(columns[12], line_no=line_no, field="repeat end")
-                repeat_start = _coordinate(columns[13], line_no=line_no, field="repeat start")
+                repeat_end = _coordinate(
+                    columns[12], line_no=line_no, field="repeat end",
+                    allow_zero=True, allow_negative=True,
+                )
+                repeat_start = _coordinate(
+                    columns[13], line_no=line_no, field="repeat start",
+                    allow_zero=True, allow_negative=True,
+                )
             else:
-                repeat_start = _coordinate(columns[11], line_no=line_no, field="repeat start")
-                repeat_end = _coordinate(columns[12], line_no=line_no, field="repeat end")
+                repeat_start = _coordinate(
+                    columns[11], line_no=line_no, field="repeat start",
+                    allow_zero=True, allow_negative=True,
+                )
+                repeat_end = _coordinate(
+                    columns[12], line_no=line_no, field="repeat end",
+                    allow_zero=True, allow_negative=True,
+                )
                 _coordinate(
                     columns[13], line_no=line_no, field="repeat left",
                     allow_zero=True, allow_negative=True,
                 )
             if query_end < query_start:
                 raise ValueError(f"RepeatMasker .out row {line_no} has reversed query coordinates")
-            if strand == "+" and repeat_end < repeat_start:
-                raise ValueError(f"RepeatMasker .out row {line_no} has reversed repeat coordinates")
             yield {
                 "seqid": columns[4],
                 "start": query_start - 1,
