@@ -180,18 +180,16 @@ def sample_contiguous_spans(
     # report a shortage after every eligible start has been considered.
     selected_count = sum(len(spans_by_stratum[name]) for name in STRATA)
     if selected_count < target_spans:
-        remaining_starts = [
-            (name, start)
-            for name in STRATA
-            for start in starts_by_stratum[name]
-        ]
-        rng.shuffle(remaining_starts)
-        for name, start in remaining_starts:
-            if selected_count >= target_spans:
-                break
-            span = (start, start + span_length)
-            if any(span[0] < occupied_end and occupied_start < span[1] for occupied_start, occupied_end in occupied):
-                continue
+        refillable: list[tuple[str, tuple[int, int]]] = []
+        for name in STRATA:
+            spans = _take_nonoverlapping(
+                starts_by_stratum[name], target_spans, span_length, rng, occupied
+            )
+            for span in spans:
+                occupied.remove(span)
+                refillable.append((name, span))
+        rng.shuffle(refillable)
+        for name, span in refillable[: target_spans - selected_count]:
             spans_by_stratum[name].append(span)
             occupied.append(span)
             selected_count += 1

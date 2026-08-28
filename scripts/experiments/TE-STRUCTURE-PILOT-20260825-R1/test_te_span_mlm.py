@@ -185,6 +185,21 @@ class SpanMaskMechanismTests(unittest.TestCase):
         )
         self.assertEqual(result["selected_bp"], 64)
 
+    def test_refill_preserves_the_maximum_packable_set(self):
+        candidate = {
+            "interior": [100 <= i < 132 for i in range(MODULE.WINDOW)],
+            "boundary": [1000 <= i < 1032 for i in range(MODULE.WINDOW)],
+            "flank": [2000 <= i < 3152 for i in range(MODULE.WINDOW)],
+        }
+        result = MODULE.sample_contiguous_spans(
+            candidate,
+            target_fraction=0.15,
+            span_length=32,
+            seed=7,
+            strict_selected_bp=True,
+        )
+        self.assertEqual(result["selected_bp"], 38 * 32)
+
     def test_mask_budget_is_fraction_of_callable_window_not_candidate_subset(self):
         candidate = masks(interior=(100, 2100), boundary=(3000, 3100), flank=(4000, 6000))
         result = MODULE.sample_contiguous_spans(
