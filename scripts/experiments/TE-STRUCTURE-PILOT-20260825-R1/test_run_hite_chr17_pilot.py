@@ -35,6 +35,15 @@ class HiTERunTest(unittest.TestCase):
             self.assertEqual(hite_run.crop_bed(source, output, "chr17", 20), 1)
             self.assertEqual(output.read_text(), "chr17\t2\t12\ta\n")
 
+    def test_bed_crop_normalizes_repeatmasker_complement_strand(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source.bed"
+            source.write_text("chr17\t2\t12\ta\t1\tC\n")
+            output = root / "prefix.bed"
+            self.assertEqual(hite_run.crop_bed(source, output, "chr17", 20), 1)
+            self.assertEqual(output.read_text(), "chr17\t2\t12\ta\t1\t-\n")
+
     def test_plus_unknown_difference_is_not_treated_as_all_te(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)

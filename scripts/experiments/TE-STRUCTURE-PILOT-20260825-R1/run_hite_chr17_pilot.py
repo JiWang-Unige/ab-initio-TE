@@ -95,6 +95,8 @@ def crop_bed(path: Path, output: Path, seqid: str = CHROM, end: int = PREFIX_END
             if clipped_start >= clipped_end:
                 continue
             columns[1], columns[2] = str(clipped_start), str(clipped_end)
+            if len(columns) >= 6 and columns[5] == "C":
+                columns[5] = "-"
             handle.write("\t".join(columns) + "\n")
             count += 1
     return count
