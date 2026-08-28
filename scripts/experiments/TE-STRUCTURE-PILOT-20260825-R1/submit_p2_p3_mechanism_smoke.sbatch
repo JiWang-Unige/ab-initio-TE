@@ -24,9 +24,11 @@ DATA_DIR=${ROOT}/software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/data/human
 BASE_CHECKPOINT=${ROOT}/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
 CORPUS_ROOT=${P2_CORPUS_ROOT}
 CORPUS_META=${CORPUS_ROOT}/human_reference_run_masks.meta.json
-TASK_ROOT=${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1/mechanism-smoke-${ATTEMPT_TAG}/task-${SLURM_ARRAY_TASK_ID}
+ATTEMPT_ROOT=${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1/mechanism-smoke-${ATTEMPT_TAG}
+TASK_ROOT=${ATTEMPT_ROOT}/task-${SLURM_ARRAY_TASK_ID}
 
 mkdir -p "${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1"
+mkdir -p "${ATTEMPT_ROOT}"
 mkdir "${TASK_ROOT}"
 
 cd "${ROOT}"
