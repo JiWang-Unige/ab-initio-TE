@@ -49,7 +49,14 @@ def _number(token: str, *, line_no: int, field: str) -> float:
         raise ValueError(f"RepeatMasker .out row {line_no} has bad {field}: {token!r}") from exc
 
 
-def _coordinate(token: str, *, line_no: int, field: str, allow_zero: bool = False) -> int:
+def _coordinate(
+    token: str,
+    *,
+    line_no: int,
+    field: str,
+    allow_zero: bool = False,
+    allow_negative: bool = False,
+) -> int:
     value = token.strip()
     if value.startswith("(") and value.endswith(")"):
         value = value[1:-1]
@@ -57,7 +64,7 @@ def _coordinate(token: str, *, line_no: int, field: str, allow_zero: bool = Fals
         coordinate = int(value)
     except ValueError as exc:
         raise ValueError(f"RepeatMasker .out row {line_no} has bad {field}: {token!r}") from exc
-    if coordinate < 0 or (coordinate == 0 and not allow_zero):
+    if (coordinate < 0 and not allow_negative) or (coordinate == 0 and not allow_zero):
         raise ValueError(f"RepeatMasker .out row {line_no} has non-positive {field}: {token!r}")
     return coordinate
 
@@ -88,13 +95,19 @@ def iter_repeatmasker_hits(path: Path) -> Iterator[dict[str, object]]:
             query_end = _coordinate(columns[6], line_no=line_no, field="query end")
             _coordinate(columns[7], line_no=line_no, field="query left", allow_zero=True)
             if strand in {"C", "-"}:
-                _coordinate(columns[11], line_no=line_no, field="repeat left", allow_zero=True)
+                _coordinate(
+                    columns[11], line_no=line_no, field="repeat left",
+                    allow_zero=True, allow_negative=True,
+                )
                 repeat_end = _coordinate(columns[12], line_no=line_no, field="repeat end")
                 repeat_start = _coordinate(columns[13], line_no=line_no, field="repeat start")
             else:
                 repeat_start = _coordinate(columns[11], line_no=line_no, field="repeat start")
                 repeat_end = _coordinate(columns[12], line_no=line_no, field="repeat end")
-                _coordinate(columns[13], line_no=line_no, field="repeat left", allow_zero=True)
+                _coordinate(
+                    columns[13], line_no=line_no, field="repeat left",
+                    allow_zero=True, allow_negative=True,
+                )
             if query_end < query_start:
                 raise ValueError(f"RepeatMasker .out row {line_no} has reversed query coordinates")
             if strand == "+" and repeat_end < repeat_start:

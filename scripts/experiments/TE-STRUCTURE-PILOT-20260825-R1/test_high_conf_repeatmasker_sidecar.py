@@ -104,6 +104,14 @@ class RepeatMaskerSidecarTests(unittest.TestCase):
             accepted, _ = SIDECAR.high_confidence_hits(source)
         self.assertEqual(len(accepted), 1)
 
+    def test_reverse_row_allows_negative_repeat_left(self):
+        row = out_row(250, 0.0, 0.0, 0.0, "chr1", 1, 64, "(0)", "C", "L1", "LINE/L1", "1", "64", "(-94)")
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "test.out"
+            source.write_text(row, encoding="utf-8")
+            accepted, _ = SIDECAR.high_confidence_hits(source)
+        self.assertEqual(len(accepted), 1)
+
     def test_malformed_numeric_alignment_row_is_not_silently_dropped(self):
         row = "300 10.0 1.0 2.0 chr1 1 64 (0) + L1 LINE/L1 nope 64 (0) 1\n"
         with tempfile.TemporaryDirectory() as tmp:
