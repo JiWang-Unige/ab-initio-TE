@@ -97,7 +97,7 @@ def iter_repeatmasker_hits(path: Path) -> Iterator[dict[str, object]]:
                 _coordinate(columns[13], line_no=line_no, field="repeat left", allow_zero=True)
             if query_end < query_start:
                 raise ValueError(f"RepeatMasker .out row {line_no} has reversed query coordinates")
-            if repeat_end < repeat_start:
+            if strand == "+" and repeat_end < repeat_start:
                 raise ValueError(f"RepeatMasker .out row {line_no} has reversed repeat coordinates")
             yield {
                 "seqid": columns[4],
