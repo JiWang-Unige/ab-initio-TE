@@ -89,7 +89,7 @@ def iter_repeatmasker_hits(path: Path) -> Iterator[dict[str, object]]:
             div = _number(columns[1], line_no=line_no, field="%div")
             deletion = _number(columns[2], line_no=line_no, field="%del")
             insertion = _number(columns[3], line_no=line_no, field="%ins")
-            if sw < 0 or any(value < 0 or value > 100 for value in (div, deletion, insertion)):
+            if sw < 0 or any(value < 0 for value in (div, deletion, insertion)):
                 raise ValueError(f"RepeatMasker .out row {line_no} has invalid alignment percentages")
             query_start = _coordinate(columns[5], line_no=line_no, field="query start")
             query_end = _coordinate(columns[6], line_no=line_no, field="query end")

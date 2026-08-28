@@ -120,6 +120,15 @@ class RepeatMaskerSidecarTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "repeat start"):
                 SIDECAR.high_confidence_hits(source)
 
+    def test_alignment_percentage_over_100_is_parsed_then_rejected_by_threshold(self):
+        row = out_row(425, 23.2, 5.1, 166.5, "chr1", 1, 100, "(0)", "C", "L1", "LINE/L1", "1", "100", "(0)")
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "test.out"
+            source.write_text(row, encoding="utf-8")
+            accepted, counts = SIDECAR.high_confidence_hits(source)
+        self.assertEqual(accepted, [])
+        self.assertEqual(counts["rejected_alignment_threshold"], 1)
+
     def test_writer_outputs_zero_based_half_open_bed(self):
         row = out_row(250, 0.0, 0.0, 0.0, "chr1", 1, 64, "(0)", "+", "L1", "LINE/L1", "1", "64", "(0)")
         with tempfile.TemporaryDirectory() as tmp:
