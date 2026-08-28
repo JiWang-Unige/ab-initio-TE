@@ -56,4 +56,4 @@ python "${SCRIPT_ROOT}/te_unet_segmentation.py" evaluate \
   --weight-mode triangular \
   --max-windows 1200
 
-echo "P3-H completed: ${RUN_ROOT}"
+true
