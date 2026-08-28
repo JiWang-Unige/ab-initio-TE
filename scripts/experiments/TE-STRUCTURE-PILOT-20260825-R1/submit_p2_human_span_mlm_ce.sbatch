@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# P2-H: annotation-conditioned span-MLM, then the matched 800-step CE head.
-# Set ATTEMPT_TAG and P2_CORPUS_ROOT for every submission; the job never reuses an attempt directory.
+# P2-H-R2: frozen-plan span-MLM, then the matched 800-step CE head.
+# Set ATTEMPT_TAG, P2_CORPUS_ROOT and P2_PLAN_JSON for every submission.
 # Create logs/TE-STRUCTURE-PILOT-20260825-R1 before submitting this file.
 #SBATCH --job-name=TE_P2_H
 #SBATCH --partition=private-teodoro-gpu
@@ -16,6 +16,7 @@ set -euo pipefail
 
 : "${ATTEMPT_TAG:?set ATTEMPT_TAG before submitting P2-H}"
 : "${P2_CORPUS_ROOT:?set P2_CORPUS_ROOT before submitting P2-H}"
+: "${P2_PLAN_JSON:?set P2_PLAN_JSON before submitting P2-H-R2}"
 
 ROOT=/home/users/j/jwang/ab-initio-TE
 SCRIPT_ROOT=${ROOT}/scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1
@@ -38,8 +39,8 @@ export HF_HOME=${ROOT}/.cache/huggingface
 CORPUS=${P2_CORPUS_ROOT}/human_reference_run_masks.jsonl.gz
 CORPUS_META=${P2_CORPUS_ROOT}/human_reference_run_masks.meta.json
 
-CORPUS_DECISION=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["decision"])' "${P2_CORPUS_ROOT}/decision.json")
-[[ "${CORPUS_DECISION}" == GO ]] || { echo "P2 corpus decision is ${CORPUS_DECISION}; training blocked" >&2; exit 3; }
+PLAN_DECISION=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["decision"])' "${P2_PLAN_JSON}")
+[[ "${PLAN_DECISION}" == GO ]] || { echo "P2-H-R2 plan decision is ${PLAN_DECISION}; training blocked" >&2; exit 3; }
 RETAINED_RECORDS=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["retained_records"])' "${CORPUS_META}")
 
 python "${SCRIPT_ROOT}/te_span_mlm.py" train \
@@ -48,6 +49,7 @@ python "${SCRIPT_ROOT}/te_span_mlm.py" train \
   --base-checkpoint "${BASE_CHECKPOINT}" \
   --output-dir "${RUN_ROOT}/span_mlm" \
   --status-json "${RUN_ROOT}/span_mlm/status.json" \
+  --plan-json "${P2_PLAN_JSON}" \
   --records "${RETAINED_RECORDS}" \
   --max-steps 800 \
   --target-fraction 0.15 \
@@ -75,7 +77,7 @@ python "${ROOT}/pipelines/PIPE-TEFM-SUPP-20260617/te_token_task.py" train \
   --fixed-final-checkpoint
 
 python "${ROOT}/pipelines/PIPE-TEFM-FINAL-20260623/strict_segment_eval.py" \
-  --exp-id TE-STRUCTURE-PILOT-20260825-R1-P2-H \
+  --exp-id TE-STRUCTURE-PILOT-20260825-R1-P2-H-R2 \
   --model-dir "${RUN_ROOT}/ce" \
   --data-jsonl "${DATA_DIR}/test/data.jsonl.gz" \
   --out-tsv "${RUN_ROOT}/strict_segment/human.tsv" \

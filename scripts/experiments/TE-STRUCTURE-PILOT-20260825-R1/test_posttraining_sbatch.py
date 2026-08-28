@@ -50,6 +50,8 @@ class PosttrainingSbatchContractTest(unittest.TestCase):
     def test_p2_contract(self):
         text = self.check_common_header(ROOT / "submit_p2_human_span_mlm_ce.sbatch", "08:00:00")
         self.assertIn('"${P2_CORPUS_ROOT:?', text)
+        self.assertIn('"${P2_PLAN_JSON:?', text)
+        self.assertIn('--plan-json "${P2_PLAN_JSON}"', text)
         self.assertIn("retained_records", text)
         self.assertIn('"decision"', text)
         self.assertIn('== GO', text)
@@ -98,6 +100,8 @@ class PosttrainingSbatchContractTest(unittest.TestCase):
         self.assertNotIn("strict_segment_eval", text)
         self.assertNotIn("te_token_task.py", text)
         self.assertIn("P2_CORPUS_ROOT", text)
+        self.assertIn("P2_PLAN_JSON", text)
+        self.assertIn('--plan-json "${P2_PLAN_JSON}"', text)
         self.assertIn('"decision"', text)
         for value in (
             "te_span_mlm.py\" train",

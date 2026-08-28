@@ -41,14 +41,16 @@ export HF_HOME=${ROOT}/.cache/huggingface
 
 case "${SLURM_ARRAY_TASK_ID}" in
   0)
-    CORPUS_DECISION=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["decision"])' "${CORPUS_ROOT}/decision.json")
-    [[ "${CORPUS_DECISION}" == GO ]] || { echo "P2 corpus decision is ${CORPUS_DECISION}; smoke blocked" >&2; exit 3; }
+    : "${P2_PLAN_JSON:?set P2_PLAN_JSON before submitting the P2-H-R2 smoke}"
+    PLAN_DECISION=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["decision"])' "${P2_PLAN_JSON}")
+    [[ "${PLAN_DECISION}" == GO ]] || { echo "P2-H-R2 plan decision is ${PLAN_DECISION}; smoke blocked" >&2; exit 3; }
     python "${SCRIPT_ROOT}/te_span_mlm.py" train \
       --data-jsonl "${CORPUS_ROOT}/human_reference_run_masks.jsonl.gz" \
       --metadata "${CORPUS_ROOT}/human_reference_run_masks.meta.json" \
       --base-checkpoint "${BASE_CHECKPOINT}" \
       --output-dir "${TASK_ROOT}/span_mlm" \
       --status-json "${TASK_ROOT}/span_mlm/status.json" \
+      --plan-json "${P2_PLAN_JSON}" \
       --records 2 \
       --max-steps 1 \
       --target-fraction 0.15 \
