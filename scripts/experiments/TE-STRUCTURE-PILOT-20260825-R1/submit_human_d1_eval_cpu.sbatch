@@ -24,7 +24,8 @@ for method in base_ce dapt_ce; do
     --truth "${SOURCE_ROOT}/truth.canonical.tsv" \
     --prediction "${SOURCE_ROOT}/${method}.canonical.tsv" \
     --lengths "${SOURCE_ROOT}/lengths.json" --truth-tier T0 \
-    --out-json "${RUN_ROOT}/${method}.length-stratified.json"
+    --out-json "${RUN_ROOT}/${method}.length-stratified.json" \
+    >/dev/null
 done
 
 printf 'PASS\n' > "${RUN_ROOT}/STATUS"
