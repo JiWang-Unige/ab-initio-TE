@@ -79,12 +79,12 @@ class HiTERunTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "name=/absolute"):
             hite_run.parse_model_prediction(["base.tsv"])
 
-    def test_scratch_workdir_uses_slurm_tmpdir_and_output_job_name(self):
+    def test_scratch_workdir_uses_node_scratch_and_output_job_name(self):
         with tempfile.TemporaryDirectory() as td:
             scratch = Path(td) / "slurm-tmp"
             scratch.mkdir()
             output_root = Path(td) / "outputs" / "hite-chr17-123"
-            with patch.dict(os.environ, {"SLURM_TMPDIR": str(scratch)}, clear=False):
+            with patch.dict(os.environ, {"HITE_NODE_SCRATCH": str(scratch)}, clear=False):
                 self.assertEqual(
                     hite_run.scratch_workdir(output_root),
                     scratch / "hite-chr17-123",

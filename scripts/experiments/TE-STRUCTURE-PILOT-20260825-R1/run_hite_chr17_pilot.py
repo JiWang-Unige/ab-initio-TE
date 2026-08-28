@@ -244,12 +244,12 @@ def parse_model_prediction(items: list[str] | None) -> dict[str, Path]:
 
 
 def scratch_workdir(output_root: Path) -> Path:
-    scratch_text = os.environ.get("SLURM_TMPDIR")
+    scratch_text = os.environ.get("HITE_NODE_SCRATCH")
     if not scratch_text:
-        raise RuntimeError("SLURM_TMPDIR is required for the HiTE pilot")
+        raise RuntimeError("HITE_NODE_SCRATCH is required for the HiTE pilot")
     scratch_root = Path(scratch_text)
     if not scratch_root.is_dir():
-        raise FileNotFoundError(f"SLURM_TMPDIR is not a directory: {scratch_root}")
+        raise FileNotFoundError(f"HITE_NODE_SCRATCH is not a directory: {scratch_root}")
     return scratch_root / output_root.name
 
 
