@@ -187,6 +187,15 @@ class AnnotationOverlayTests(unittest.TestCase):
         self.assertEqual(sum(label >= 0 for label in result["labels"]), BUILDER.WINDOW - 40)
         self.assertEqual(BUILDER._callable_bp(result), BUILDER.WINDOW - 40)
 
+    def test_original_unknown_is_excluded_from_overlay_candidates(self):
+        record = self._record()
+        result = BUILDER.build_record(
+            record,
+            annotation_intervals={"chr1": [(800, 1200)]},
+        )
+        self.assertTrue(result["unknown_mask"][920])
+        self.assertFalse(any(result["candidate_masks"][name][920] for name in ("interior", "boundary", "flank")))
+
     def test_bed_reader_unions_overlapping_and_touching_rows(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "annotation.bed"

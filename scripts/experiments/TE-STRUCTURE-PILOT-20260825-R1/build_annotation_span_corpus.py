@@ -316,12 +316,22 @@ def build_record(
 
     flank_positions.difference_update(boundary_positions)
 
-    output = dict(record)
-    output["candidate_masks"] = {
+    candidate_masks = {
         "interior": _mask(WINDOW, sorted(interior_positions)),
         "boundary": _mask(WINDOW, sorted(boundary_positions)),
         "flank": _mask(WINDOW, sorted(flank_positions)),
     }
+    if annotation_intervals is not None:
+        original_callable = [
+            label >= 0 and base.upper() != "N"
+            for label, base in zip(original_record["labels"], sequence)
+        ]
+        candidate_masks = {
+            name: [candidate and callable_base for candidate, callable_base in zip(mask, original_callable)]
+            for name, mask in candidate_masks.items()
+        }
+    output = dict(record)
+    output["candidate_masks"] = candidate_masks
     output["unknown_mask"] = [value < 0 for value in labels]
     if annotation_intervals is not None:
         output["labels"] = list(original_record["labels"])
