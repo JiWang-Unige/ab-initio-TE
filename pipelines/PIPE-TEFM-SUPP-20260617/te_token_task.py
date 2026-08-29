@@ -474,6 +474,7 @@ def command_train(args) -> None:
         bf16=args.bf16,
         fp16=False,
         gradient_checkpointing=args.gradient_checkpointing,
+        disable_tqdm=True,
         seed=args.seed,
         report_to="none",
         remove_unused_columns=False,
@@ -527,6 +528,7 @@ def command_eval(args) -> None:
     targs = TrainingArguments(
         output_dir=str(Path(args.out_json).parent / "_tmp_eval"),
         per_device_eval_batch_size=args.batch_size,
+        disable_tqdm=True,
         report_to="none",
         remove_unused_columns=False,
     )
