@@ -8,6 +8,7 @@ import gzip
 import json
 import math
 import os
+import random
 import sys
 from pathlib import Path
 
@@ -82,36 +83,36 @@ def _boundary_valid_mask(
     return valid
 
 
-def _boundary_centers(
+def _boundary_positions(
     labels: list[int], sequence: str | None, radius: int,
 ) -> list[tuple[str, int]]:
-    """Return individually legal, fully-known comparator boundary centers.
+    """Return individually legal, fully-known comparator boundary positions.
 
     ``left`` is the first base of a run and ``right`` is its last base, matching
-    the four-state comparator labels.  A center is omitted when its +/- radius
-    support is outside the window or contains unknown bases.  Overlapping
-    centers are retained because the left/right heads are independent and the
+    the four-state comparator labels.  A position is omitted when its +/-
+    radius support is outside the window or contains unknown bases.  Overlapping
+    positions are retained because the left/right heads are independent and the
     target map resolves overlap by taking the larger triangular value.
     """
     if radius <= 0:
         raise ValueError("radius must be positive")
-    candidates = _raw_boundary_centers(labels, sequence)
+    candidates = _raw_boundary_positions(labels, sequence)
     usable: list[tuple[str, int]] = []
-    for side, center in candidates:
-        left, right = center - radius, center + radius + 1
+    for side, position in candidates:
+        left, right = position - radius, position + radius + 1
         if left < 0 or right > len(labels):
             continue
         if not all(_known_label(labels[index], sequence, index) for index in range(left, right)):
             continue
-        usable.append((side, center))
+        usable.append((side, position))
 
-    # Keep every individually legal center.  Overlapping supports are valid
+    # Keep every individually legal position.  Overlapping supports are valid
     # supervision for independent heads; target construction uses the maximum
     # triangular value at a base and the matched control preserves that map.
     return usable
 
 
-def _raw_boundary_centers(
+def _raw_boundary_positions(
     labels: list[int], sequence: str | None,
 ) -> list[tuple[str, int]]:
     """Return all known run transitions before support eligibility filtering."""
@@ -124,98 +125,86 @@ def _raw_boundary_centers(
     return candidates
 
 
-def _shuffle_boundary_centers(
-    centers: list[tuple[str, int]], labels: list[int], sequence: str | None,
-    radius: int, seed: int,
-) -> tuple[list[tuple[str, int]], int]:
-    """Cyclically translate both target maps away from true boundaries.
+def _triangular_maps(
+    positions: list[tuple[str, int]], window: int, radius: int,
+    valid_mask: list[bool],
+) -> tuple[list[float], list[float]]:
+    """Build true left/right maps and clear all invalid boundary positions."""
+    left_target = [0.0] * window
+    right_target = [0.0] * window
+    for side, position in positions:
+        target = left_target if side == "left" else right_target
+        for offset in range(-radius, radius + 1):
+            index = position + offset
+            if 0 <= index < window and valid_mask[index]:
+                target[index] = max(target[index], 1.0 - abs(offset) / radius)
+    return left_target, right_target
 
-    One shared legal shift preserves center count, cyclic spacing, overlap and
-    triangular-map mass across both heads.  Shifts are
-    deterministic and reject edge/unknown support and any change in either raw
-    or valid target-map mass.  Dense TE windows need not permit every shifted
-    center to be isolated from every true center; the non-zero shared shift is
-    the negative-control intervention.
+
+def _matched_spatial_permutation(
+    left_target: list[float], right_target: list[float],
+    valid_mask: list[bool], seed: int,
+) -> tuple[list[float], list[float], dict[str, int | bool]]:
+    """Permute true boundary values jointly over valid positions.
+
+    The same seeded permutation is applied to ``(left, right)`` value pairs,
+    so each head keeps its exact valid-position multiset and the left/right
+    pairing remains intact.  Invalid positions are never destinations and are
+    explicitly zeroed in both maps.
     """
-    if not centers:
-        return [], 0
-    window = len(labels)
-    if window == 0:
-        raise ValueError("cannot shuffle boundary targets in an empty window")
+    if len(left_target) != len(right_target) or len(left_target) != len(valid_mask):
+        raise ValueError("boundary maps and valid mask must have the same length")
+    valid_positions = [index for index, valid in enumerate(valid_mask) if valid]
+    left_target = [value if valid_mask[index] else 0.0 for index, value in enumerate(left_target)]
+    right_target = [value if valid_mask[index] else 0.0 for index, value in enumerate(right_target)]
+    pairs = [(left_target[index], right_target[index]) for index in valid_positions]
+    order = list(range(len(valid_positions)))
+    random.Random(seed).shuffle(order)
+    if len(order) > 1 and all(source == destination for source, destination in enumerate(order)):
+        order[0], order[1] = order[1], order[0]
 
-    # Prefix sums make the fully-known +/- radius support test O(1) per center.
-    unknown_prefix = [0]
-    for index in range(window):
-        unknown_prefix.append(
-            unknown_prefix[-1] + int(not _known_label(labels[index], sequence, index))
-        )
-    boundary_valid = _boundary_valid_mask(labels, sequence, radius)
+    def apply_order(source_order: list[int]) -> tuple[list[float], list[float]]:
+        permuted_left = [0.0] * len(left_target)
+        permuted_right = [0.0] * len(right_target)
+        for destination, source_index in zip(valid_positions, source_order):
+            permuted_left[destination], permuted_right[destination] = pairs[source_index]
+        return permuted_left, permuted_right
 
-    def support_known(center: int) -> bool:
-        left, right = center - radius, center + radius + 1
-        return (
-            left >= 0
-            and right <= window
-            and unknown_prefix[right] == unknown_prefix[left]
-        )
-
-    def map_mass(side_centers: list[int], valid_mask: list[bool] | None = None) -> float:
-        values = [0.0] * window
-        for center in side_centers:
-            for offset in range(-radius, radius + 1):
-                index = center + offset
-                if 0 <= index < window:
-                    values[index] = max(values[index], 1.0 - abs(offset) / radius)
-        if valid_mask is not None:
-            values = [value if valid_mask[index] else 0.0 for index, value in enumerate(values)]
-        return sum(values)
-
-    source_by_side = {
-        side: [center for center_side, center in centers if center_side == side]
-        for side in ("left", "right")
-    }
-    source_masses = {
-        side: map_mass(side_centers)
-        for side, side_centers in source_by_side.items()
-        if side_centers
-    }
-    source_valid_masses = {
-        side: map_mass(side_centers, boundary_valid)
-        for side, side_centers in source_by_side.items()
-        if side_centers
-    }
-    start = seed * 1103515245 + 12345
-    for ordinal in range(window):
-        delta = (start + ordinal) % window
-        if delta == 0:
-            continue
-        shifted_by_side = {
-            side: [(center + delta) % window for center in side_centers]
-            for side, side_centers in source_by_side.items()
-        }
-        shifted = [center for side_centers in shifted_by_side.values() for center in side_centers]
-        if any(not support_known(center) for center in shifted):
-            continue
-        if any(
-            not math.isclose(
-                map_mass(shifted_by_side[side]), source_masses[side],
-                rel_tol=0.0, abs_tol=1e-9,
-            )
-            or not math.isclose(
-                map_mass(shifted_by_side[side], boundary_valid), source_valid_masses[side],
-                rel_tol=0.0, abs_tol=1e-9,
-            )
-            for side in source_masses
-        ):
-            continue
-        return [
-            (side, (center + delta) % window)
-            for side, center in centers
-        ], delta
-    raise ValueError(
-        "cannot place matched cyclically shifted boundary targets "
-        f"in a {window}-bp window with one shared cyclic shift"
+    permuted_left, permuted_right = apply_order(order)
+    changed_positions = sum(
+        (left_target[index], right_target[index]) !=
+        (permuted_left[index], permuted_right[index])
+        for index in valid_positions
     )
+    if changed_positions == 0 and len(order) > 1:
+        # A non-zero profile has distinct zero/non-zero pairs in ordinary
+        # windows; force a deterministic value-level change if the seeded
+        # permutation happened to move only equal pairs.
+        distinct_index = next(
+            (index for index in range(1, len(pairs)) if pairs[index] != pairs[0]),
+            None,
+        )
+        if distinct_index is not None:
+            order = list(range(len(pairs)))
+            order[0], order[distinct_index] = order[distinct_index], order[0]
+            permuted_left, permuted_right = apply_order(order)
+            changed_positions = sum(
+                (left_target[index], right_target[index]) !=
+                (permuted_left[index], permuted_right[index])
+                for index in valid_positions
+            )
+    summary = {
+        "seed": int(seed),
+        "valid_positions": len(valid_positions),
+        "changed_positions": int(changed_positions),
+        "nonzero_pairs_before": sum(left != 0.0 or right != 0.0 for left, right in pairs),
+        "nonzero_pairs_after": sum(
+            permuted_left[index] != 0.0 or permuted_right[index] != 0.0
+            for index in valid_positions
+        ),
+        "identity": changed_positions == 0,
+    }
+    return permuted_left, permuted_right, summary
 
 
 def decoupled_boundary_targets(
@@ -225,16 +214,16 @@ def decoupled_boundary_targets(
     mode: str = "true",
     radius: int = BOUNDARY_RADIUS,
     seed: int = 0,
-) -> dict[str, list[int] | list[float] | list[bool]]:
+) -> dict[str, object]:
     """Build P3-R2 body and independent triangular boundary targets.
 
     The body target is binary on known bases and ``IGNORE`` elsewhere.  Left
     and right targets are zero except for a triangular +/- ``radius`` profile
-    centered at a usable comparator transition.  ``boundary_valid_mask`` also
+    around a usable comparator transition.  ``boundary_valid_mask`` also
     removes unknown/edge neighborhoods from boundary losses.  ``mode='shuffled'``
-    keeps the number and profile of targets but relocates their centers
-    deterministically within the same window using one non-zero shared cyclic
-    shift.
+    keeps the exact valid-position value multiset and left/right pairing by
+    applying one seeded spatial permutation to both target maps within the
+    window.
     """
     if mode not in {"true", "shuffled"}:
         raise ValueError("mode must be 'true' or 'shuffled'")
@@ -250,41 +239,40 @@ def decoupled_boundary_targets(
         for index, value in enumerate(labels)
     ]
     valid = _boundary_valid_mask(labels, sequence, radius)
-    left_target = [0.0] * len(labels)
-    right_target = [0.0] * len(labels)
-    all_centers = _raw_boundary_centers(labels, sequence)
-    centers = _boundary_centers(labels, sequence, radius)
-    target_centers: list[tuple[str, int]]
-    shuffle_delta = 0
-    if mode == "true":
-        target_centers = centers
-    else:
-        target_centers, shuffle_delta = _shuffle_boundary_centers(
-            centers, labels, sequence, radius, seed,
+    all_positions = _raw_boundary_positions(labels, sequence)
+    positions = _boundary_positions(labels, sequence, radius)
+    left_target, right_target = _triangular_maps(
+        positions, len(labels), radius, valid,
+    )
+    true_nonzero_pairs = sum(
+        left != 0.0 or right != 0.0
+        for left, right in zip(left_target, right_target)
+    )
+    permutation_summary: dict[str, object] = {
+        "intervention": "none_true_arm",
+        "seed": int(seed),
+        "valid_positions": sum(valid),
+        "changed_positions": 0,
+        "nonzero_pairs_before": true_nonzero_pairs,
+        "nonzero_pairs_after": true_nonzero_pairs,
+        "identity": True,
+    }
+    if mode == "shuffled":
+        left_target, right_target, permutation_summary = _matched_spatial_permutation(
+            left_target, right_target, valid, seed,
         )
-
-    for side, center in target_centers:
-        target = left_target if side == "left" else right_target
-        for offset in range(-radius, radius + 1):
-            index = center + offset
-            if 0 <= index < len(labels):
-                target[index] = max(target[index], 1.0 - abs(offset) / radius)
+        permutation_summary["intervention"] = "shared_pair_permutation"
     return {
         "body_labels": body,
         "left_boundary_targets": left_target,
         "right_boundary_targets": right_target,
         "boundary_valid_mask": valid,
-        "boundary_centers": [center for _side, center in centers],
-        "all_boundary_centers": [center for _side, center in all_centers],
-        "target_centers": [center for _side, center in target_centers],
-        "shuffle_delta": shuffle_delta,
-        "true_centers_by_side": {
-            "left": [center for side, center in centers if side == "left"],
-            "right": [center for side, center in centers if side == "right"],
-        },
-        "target_centers_by_side": {
-            "left": [center for side, center in target_centers if side == "left"],
-            "right": [center for side, center in target_centers if side == "right"],
+        "true_boundary_positions": [position for _side, position in positions],
+        "all_boundary_positions": [position for _side, position in all_positions],
+        "permutation_summary": permutation_summary,
+        "true_positions_by_side": {
+            "left": [position for side, position in positions if side == "left"],
+            "right": [position for side, position in positions if side == "right"],
         },
     }
 
@@ -562,9 +550,9 @@ def train_decoupled(args) -> None:
         "body_positive_weight": 3.0,
         "boundary_target_mode": args.boundary_target_mode,
         "boundary_radius": BOUNDARY_RADIUS,
-        "boundary_target": "triangular_pm16_bp_center_one_linear_to_zero",
-        "control_shift": "single_shared_cyclic_shift_per_window_recorded_in_preflight",
-        "boundary_overlap": "retain_centers_max_profile",
+        "boundary_target": "triangular_pm16_bp_peak_one_linear_to_zero",
+        "control_intervention": "matched_spatial_permutation_on_shared_valid_positions",
+        "boundary_overlap": "retain_positions_max_profile",
         "boundary_unknown_policy": "mask_unknown_pm16_and_window_edge_pm16_in_boundary_loss",
         "design": "supervised_label_loss_decomposition",
         "width": args.width,
@@ -629,8 +617,8 @@ def preflight_decoupled(args) -> None:
     for split in ("train", "val"):
         path = args.data_dir / split / "data.jsonl.gz"
         rows = 0
-        total_true_centers = 0
-        total_target_centers = 0
+        total_true_positions = 0
+        total_valid_positions = 0
         details: list[dict[str, object]] = []
         limit = None if split == "train" else args.max_eval_samples
         with gzip.open(path, "rt", encoding="utf-8") as handle:
@@ -653,47 +641,107 @@ def preflight_decoupled(args) -> None:
                     raise ValueError(f"{split} row {index} changes body labels across P3-R2 arms")
                 if true["boundary_valid_mask"] != target["boundary_valid_mask"]:
                     raise ValueError(f"{split} row {index} changes boundary-valid negatives across P3-R2 arms")
+                valid_mask = true["boundary_valid_mask"]
+                valid_positions = [
+                    position for position, is_valid in enumerate(valid_mask) if is_valid
+                ]
                 for side in ("left", "right"):
-                    true_centers = true["true_centers_by_side"][side]
-                    target_centers = target["target_centers_by_side"][side]
-                    if len(true_centers) != len(target_centers):
-                        raise ValueError(f"{split} row {index} changes {side} center count in control")
-                    true_mass = sum(true[f"{side}_boundary_targets"])
-                    target_mass = sum(target[f"{side}_boundary_targets"])
+                    invalid_values = [
+                        value for value, is_valid in zip(
+                            target[f"{side}_boundary_targets"], valid_mask
+                        ) if not is_valid and value != 0.0
+                    ]
+                    if invalid_values:
+                        raise ValueError(
+                            f"{split} row {index} writes {side} boundary targets outside the valid mask"
+                        )
+                for side in ("left", "right"):
+                    true_values = [
+                        true[f"{side}_boundary_targets"][position]
+                        for position in valid_positions
+                    ]
+                    target_values = [
+                        target[f"{side}_boundary_targets"][position]
+                        for position in valid_positions
+                    ]
+                    if sorted(true_values) != sorted(target_values):
+                        raise ValueError(
+                            f"{split} row {index} changes the valid {side} target-value multiset"
+                        )
+                    true_nonzero = sum(value != 0.0 for value in true_values)
+                    target_nonzero = sum(value != 0.0 for value in target_values)
+                    if true_nonzero != target_nonzero:
+                        raise ValueError(
+                            f"{split} row {index} changes the valid {side} nonzero-target count"
+                        )
+                    true_mass = sum(true_values)
+                    target_mass = sum(target_values)
                     if not math.isclose(true_mass, target_mass, rel_tol=0.0, abs_tol=1e-9):
                         raise ValueError(f"{split} row {index} changes {side} target mass in control")
-                    valid_mask = true["boundary_valid_mask"]
-                    true_valid_mass = sum(
-                        value for value, valid in zip(true[f"{side}_boundary_targets"], valid_mask) if valid
+                true_pairs = [
+                    (true["left_boundary_targets"][position], true["right_boundary_targets"][position])
+                    for position in valid_positions
+                ]
+                target_pairs = [
+                    (target["left_boundary_targets"][position], target["right_boundary_targets"][position])
+                    for position in valid_positions
+                ]
+                if sorted(true_pairs) != sorted(target_pairs):
+                    raise ValueError(
+                        f"{split} row {index} changes left/right target pairing in control"
                     )
-                    target_valid_mass = sum(
-                        value for value, valid in zip(target[f"{side}_boundary_targets"], valid_mask) if valid
+                permutation_summary = target["permutation_summary"]
+                if permutation_summary["valid_positions"] != len(valid_positions):
+                    raise ValueError(
+                        f"{split} row {index} changes the boundary-valid position count in control"
                     )
-                    if not math.isclose(true_valid_mass, target_valid_mass, rel_tol=0.0, abs_tol=1e-9):
-                        raise ValueError(f"{split} row {index} changes valid {side} target mass in control")
+                true_nonzero_pairs = sum(
+                    left != 0.0 or right != 0.0 for left, right in true_pairs
+                )
+                target_nonzero_pairs = sum(
+                    left != 0.0 or right != 0.0 for left, right in target_pairs
+                )
+                if true_nonzero_pairs != target_nonzero_pairs:
+                    raise ValueError(
+                        f"{split} row {index} changes the nonzero target-pair count in control"
+                    )
+                if (
+                    args.boundary_target_mode == "shuffled"
+                    and true_nonzero_pairs > 0
+                    and permutation_summary["identity"]
+                ):
+                    raise ValueError(
+                        f"{split} row {index} leaves a nonzero shuffled target map unchanged"
+                    )
                 rows += 1
-                total_true_centers += len(true["boundary_centers"])
-                total_target_centers += len(target["target_centers"])
+                total_true_positions += len(true["true_boundary_positions"])
+                total_valid_positions += len(valid_positions)
                 details.append({
                     "index": index,
                     "seqid": row.get("chr"),
                     "start": row.get("start"),
-                    "true_centers_by_side": true["true_centers_by_side"],
-                    "target_centers_by_side": target["target_centers_by_side"],
-                    "shuffle_delta": target["shuffle_delta"],
-                    "true_mass_by_side": {
-                        side: sum(true[f"{side}_boundary_targets"])
+                    "true_boundary_positions": true["true_boundary_positions"],
+                    "true_positions_by_side": true["true_positions_by_side"],
+                    "permutation_summary": permutation_summary,
+                    "true_valid_mass_by_side": {
+                        side: sum(
+                            true[f"{side}_boundary_targets"][position]
+                            for position in valid_positions
+                        )
                         for side in ("left", "right")
                     },
-                    "target_mass_by_side": {
-                        side: sum(target[f"{side}_boundary_targets"])
+                    "target_valid_mass_by_side": {
+                        side: sum(
+                            target[f"{side}_boundary_targets"][position]
+                            for position in valid_positions
+                        )
                         for side in ("left", "right")
                     },
                 })
         split_summaries[split] = {
             "rows": rows,
-            "true_boundary_centers": total_true_centers,
-            "target_boundary_centers": total_target_centers,
+            "true_boundary_positions": total_true_positions,
+            "boundary_valid_positions": total_valid_positions,
             "details": details,
         }
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
@@ -703,7 +751,7 @@ def preflight_decoupled(args) -> None:
         "data_dir": str(args.data_dir),
         "boundary_target_mode": args.boundary_target_mode,
         "boundary_radius": BOUNDARY_RADIUS,
-        "control_shift": "single_shared_cyclic_shift_per_window",
+        "control_intervention": "matched_spatial_permutation_on_shared_valid_positions",
         "seed": args.seed,
         "splits": split_summaries,
     }, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -45,7 +45,7 @@ class DecoupledBoundaryTargetTest(unittest.TestCase):
         targets = te_unet.decoupled_boundary_targets(self.labels, self.sequence)
         self.assertEqual(targets["body_labels"][180], 1)
         self.assertEqual(targets["body_labels"][0], 0)
-        self.assertEqual(targets["boundary_centers"], [180, 259, 500, 579, 800, 859])
+        self.assertEqual(targets["true_boundary_positions"], [180, 259, 500, 579, 800, 859])
         left = targets["left_boundary_targets"]
         right = targets["right_boundary_targets"]
         self.assertEqual(left[180], 1.0)
@@ -71,16 +71,16 @@ class DecoupledBoundaryTargetTest(unittest.TestCase):
         self.assertFalse(valid[416])
         self.assertEqual(targets["body_labels"][400], te_unet.IGNORE)
 
-    def test_overlapping_left_right_centers_are_retained(self):
+    def test_overlapping_left_right_positions_are_retained(self):
         labels = [0] * 1024
         labels[400] = 1
         targets = te_unet.decoupled_boundary_targets(labels, "A" * 1024)
-        self.assertEqual(targets["boundary_centers"], [400, 400])
-        self.assertEqual(targets["true_centers_by_side"], {"left": [400], "right": [400]})
+        self.assertEqual(targets["true_boundary_positions"], [400, 400])
+        self.assertEqual(targets["true_positions_by_side"], {"left": [400], "right": [400]})
         self.assertEqual(targets["left_boundary_targets"][400], 1.0)
         self.assertEqual(targets["right_boundary_targets"][400], 1.0)
 
-    def test_shuffled_control_is_deterministic_shifted_and_mass_matched(self):
+    def test_shuffled_control_is_deterministic_permuted_and_mass_matched(self):
         true = te_unet.decoupled_boundary_targets(self.labels, self.sequence, mode="true")
         shuffled = te_unet.decoupled_boundary_targets(
             self.labels, self.sequence, mode="shuffled", seed=42,
@@ -90,33 +90,83 @@ class DecoupledBoundaryTargetTest(unittest.TestCase):
         )
         self.assertEqual(shuffled, shuffled_again)
         self.assertEqual(true["body_labels"], shuffled["body_labels"])
-        self.assertTrue(all(center not in true["boundary_centers"] for center in shuffled["target_centers"]))
-        self.assertAlmostEqual(
-            sum(true["left_boundary_targets"]),
-            sum(shuffled["left_boundary_targets"]),
-        )
-        self.assertAlmostEqual(
-            sum(true["right_boundary_targets"]),
-            sum(shuffled["right_boundary_targets"]),
-        )
+        self.assertEqual(true["boundary_valid_mask"], shuffled["boundary_valid_mask"])
+        valid_positions = [
+            position for position, valid in enumerate(true["boundary_valid_mask"]) if valid
+        ]
         for side in ("left", "right"):
-            true_centers_for_side = sorted(true["true_centers_by_side"][side])
-            target_centers_for_side = sorted(shuffled["target_centers_by_side"][side])
-            self.assertTrue(all(
-                (target - source) % 1024 == shuffled["shuffle_delta"]
-                for source, target in zip(
-                    true["true_centers_by_side"][side],
-                    shuffled["target_centers_by_side"][side],
-                )
-            ))
-            true_gaps = [
-                right - left for left, right in zip(true_centers_for_side, true_centers_for_side[1:])
-            ] + [1024 + true_centers_for_side[0] - true_centers_for_side[-1]]
-            target_gaps = [
-                right - left for left, right in zip(target_centers_for_side, target_centers_for_side[1:])
-            ] + [1024 + target_centers_for_side[0] - target_centers_for_side[-1]]
-            self.assertEqual(sorted(true_gaps), sorted(target_gaps))
-        self.assertNotEqual(shuffled["shuffle_delta"], 0)
+            true_values = [
+                true[f"{side}_boundary_targets"][position]
+                for position in valid_positions
+            ]
+            shuffled_values = [
+                shuffled[f"{side}_boundary_targets"][position]
+                for position in valid_positions
+            ]
+            self.assertEqual(sorted(true_values), sorted(shuffled_values))
+            self.assertAlmostEqual(sum(true_values), sum(shuffled_values))
+        true_pairs = [
+            (true["left_boundary_targets"][position], true["right_boundary_targets"][position])
+            for position in valid_positions
+        ]
+        shuffled_pairs = [
+            (shuffled["left_boundary_targets"][position], shuffled["right_boundary_targets"][position])
+            for position in valid_positions
+        ]
+        self.assertEqual(sorted(true_pairs), sorted(shuffled_pairs))
+        for position, valid in enumerate(shuffled["boundary_valid_mask"]):
+            if not valid:
+                self.assertEqual(shuffled["left_boundary_targets"][position], 0.0)
+                self.assertEqual(shuffled["right_boundary_targets"][position], 0.0)
+        summary = shuffled["permutation_summary"]
+        self.assertEqual(summary["intervention"], "shared_pair_permutation")
+        self.assertEqual(summary["seed"], 42)
+        self.assertEqual(summary["valid_positions"], len(valid_positions))
+        self.assertEqual(summary["nonzero_pairs_before"], summary["nonzero_pairs_after"])
+        self.assertGreater(summary["changed_positions"], 0)
+        self.assertFalse(summary["identity"])
+
+    def test_shuffled_control_handles_dense_unknown_window(self):
+        labels = [0] * 1024
+        for start in range(64, 960, 40):
+            labels[start:start + 20] = [1] * 20
+        labels[480] = te_unet.IGNORE
+        sequence = "A" * 1024
+        sequence = sequence[:480] + "N" + sequence[481:]
+        true = te_unet.decoupled_boundary_targets(labels, sequence, mode="true")
+        shuffled = te_unet.decoupled_boundary_targets(
+            labels, sequence, mode="shuffled", seed=42,
+        )
+        self.assertEqual(true["body_labels"], shuffled["body_labels"])
+        self.assertEqual(true["boundary_valid_mask"], shuffled["boundary_valid_mask"])
+        self.assertEqual(
+            true["permutation_summary"]["valid_positions"],
+            shuffled["permutation_summary"]["valid_positions"],
+        )
+        if shuffled["permutation_summary"]["nonzero_pairs_before"] > 0:
+            self.assertFalse(shuffled["permutation_summary"]["identity"])
+        for side in ("left", "right"):
+            self.assertEqual(
+                sorted(
+                    value for value, valid in zip(
+                        true[f"{side}_boundary_targets"], true["boundary_valid_mask"]
+                    ) if valid
+                ),
+                sorted(
+                    value for value, valid in zip(
+                        shuffled[f"{side}_boundary_targets"], shuffled["boundary_valid_mask"]
+                    ) if valid
+                ),
+            )
+
+    def test_shuffled_control_all_background_is_allowed_noop(self):
+        targets = te_unet.decoupled_boundary_targets(
+            [0] * 1024, "A" * 1024, mode="shuffled", seed=42,
+        )
+        summary = targets["permutation_summary"]
+        self.assertEqual(summary["nonzero_pairs_before"], 0)
+        self.assertTrue(summary["identity"])
+        self.assertEqual(summary["changed_positions"], 0)
 
     def test_preflight_checks_all_train_and_validation_rows_without_runtime(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -137,10 +187,14 @@ class DecoupledBoundaryTargetTest(unittest.TestCase):
             ))
             result = json.loads(output.read_text(encoding="utf-8"))
             self.assertEqual(result["status"], "PASS")
+            self.assertEqual(
+                result["control_intervention"],
+                "matched_spatial_permutation_on_shared_valid_positions",
+            )
             self.assertEqual(result["splits"]["train"]["rows"], 1)
             self.assertEqual(
-                result["splits"]["train"]["details"][0]["target_centers_by_side"],
-                result["splits"]["val"]["details"][0]["target_centers_by_side"],
+                result["splits"]["train"]["details"][0]["permutation_summary"],
+                result["splits"]["val"]["details"][0]["permutation_summary"],
             )
 
 
