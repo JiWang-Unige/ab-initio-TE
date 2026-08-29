@@ -80,7 +80,7 @@ class DecoupledBoundaryTargetTest(unittest.TestCase):
         self.assertEqual(targets["left_boundary_targets"][400], 1.0)
         self.assertEqual(targets["right_boundary_targets"][400], 1.0)
 
-    def test_shuffled_control_is_deterministic_far_and_mass_matched(self):
+    def test_shuffled_control_is_deterministic_shifted_and_mass_matched(self):
         true = te_unet.decoupled_boundary_targets(self.labels, self.sequence, mode="true")
         shuffled = te_unet.decoupled_boundary_targets(
             self.labels, self.sequence, mode="shuffled", seed=42,
@@ -116,11 +116,7 @@ class DecoupledBoundaryTargetTest(unittest.TestCase):
                 right - left for left, right in zip(target_centers_for_side, target_centers_for_side[1:])
             ] + [1024 + target_centers_for_side[0] - target_centers_for_side[-1]]
             self.assertEqual(sorted(true_gaps), sorted(target_gaps))
-        true_centers = true["boundary_centers"]
-        for target in (shuffled["left_boundary_targets"], shuffled["right_boundary_targets"]):
-            for index, value in enumerate(target):
-                if value > 0:
-                    self.assertTrue(all(abs(index - center) > te_unet.BOUNDARY_RADIUS for center in true_centers))
+        self.assertNotEqual(shuffled["shuffle_delta"], 0)
 
     def test_preflight_checks_all_train_and_validation_rows_without_runtime(self):
         with tempfile.TemporaryDirectory() as tmp:

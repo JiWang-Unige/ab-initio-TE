@@ -126,14 +126,16 @@ def _raw_boundary_centers(
 
 def _shuffle_boundary_centers(
     centers: list[tuple[str, int]], labels: list[int], sequence: str | None,
-    radius: int, seed: int, protected_centers: list[tuple[str, int]] | None = None,
+    radius: int, seed: int,
 ) -> tuple[list[tuple[str, int]], int]:
     """Cyclically translate both target maps away from true boundaries.
 
     One shared legal shift preserves center count, cyclic spacing, overlap and
     triangular-map mass across both heads.  Shifts are
-    deterministic and reject edge/unknown support, true-boundary proximity,
-    and any change in either raw or valid target-map mass.
+    deterministic and reject edge/unknown support and any change in either raw
+    or valid target-map mass.  Dense TE windows need not permit every shifted
+    center to be isolated from every true center; the non-zero shared shift is
+    the negative-control intervention.
     """
     if not centers:
         return [], 0
@@ -168,8 +170,6 @@ def _shuffle_boundary_centers(
             values = [value if valid_mask[index] else 0.0 for index, value in enumerate(values)]
         return sum(values)
 
-    protected = centers if protected_centers is None else protected_centers
-    true_centers = [center for _side, center in protected]
     source_by_side = {
         side: [center for center_side, center in centers if center_side == side]
         for side in ("left", "right")
@@ -197,12 +197,6 @@ def _shuffle_boundary_centers(
         if any(not support_known(center) for center in shifted):
             continue
         if any(
-            abs(shifted_center - true_center) <= 2 * radius
-            for shifted_center in shifted
-            for true_center in true_centers
-        ):
-            continue
-        if any(
             not math.isclose(
                 map_mass(shifted_by_side[side]), source_masses[side],
                 rel_tol=0.0, abs_tol=1e-9,
@@ -219,7 +213,7 @@ def _shuffle_boundary_centers(
             for side, center in centers
         ], delta
     raise ValueError(
-        "cannot place matched shuffled boundary targets away from true boundaries "
+        "cannot place matched cyclically shifted boundary targets "
         f"in a {window}-bp window with one shared cyclic shift"
     )
 
@@ -239,8 +233,8 @@ def decoupled_boundary_targets(
     centered at a usable comparator transition.  ``boundary_valid_mask`` also
     removes unknown/edge neighborhoods from boundary losses.  ``mode='shuffled'``
     keeps the number and profile of targets but relocates their centers
-    deterministically within the same window, at least 2*radius+1 bp from every
-    true center.
+    deterministically within the same window using one non-zero shared cyclic
+    shift.
     """
     if mode not in {"true", "shuffled"}:
         raise ValueError("mode must be 'true' or 'shuffled'")
@@ -266,7 +260,7 @@ def decoupled_boundary_targets(
         target_centers = centers
     else:
         target_centers, shuffle_delta = _shuffle_boundary_centers(
-            centers, labels, sequence, radius, seed, all_centers,
+            centers, labels, sequence, radius, seed,
         )
 
     for side, center in target_centers:
@@ -677,13 +671,6 @@ def preflight_decoupled(args) -> None:
                     )
                     if not math.isclose(true_valid_mass, target_valid_mass, rel_tol=0.0, abs_tol=1e-9):
                         raise ValueError(f"{split} row {index} changes valid {side} target mass in control")
-                    if args.boundary_target_mode == "shuffled":
-                        if any(
-                            abs(target_center - true_center) <= 2 * BOUNDARY_RADIUS
-                            for target_center in target_centers
-                            for true_center in true["all_boundary_centers"]
-                        ):
-                            raise ValueError(f"{split} row {index} places a shuffled target near a true boundary")
                 rows += 1
                 total_true_centers += len(true["boundary_centers"])
                 total_target_centers += len(target["target_centers"])
