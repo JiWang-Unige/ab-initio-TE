@@ -90,6 +90,17 @@ class HiTERunTest(unittest.TestCase):
                     scratch / "hite-chr17-123",
                 )
 
+    def test_native_output_is_persisted_only_when_requested(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            work = root / "work"
+            output = root / "output"
+            (work / "hite").mkdir(parents=True)
+            (work / "hite" / "confident_TE.cons.fa").write_text(">x\nACGT\n")
+            output.mkdir()
+            persisted = hite_run.persist_native_output(work, output)
+            self.assertEqual((persisted / "confident_TE.cons.fa").read_text(), ">x\nACGT\n")
+
     def test_masked_evaluate_reports_boundary_at_5_and_25_bp(self):
         class Adapter:
             def __init__(self):

@@ -253,6 +253,12 @@ def scratch_workdir(output_root: Path) -> Path:
     return scratch_root / output_root.name
 
 
+def persist_native_output(work: Path, output_root: Path) -> Path:
+    destination = output_root / "native"
+    shutil.copytree(work / "hite", destination)
+    return destination
+
+
 def run(args: argparse.Namespace) -> dict[str, Any]:
     root = args.project_root.resolve()
     if not args.assembly.is_file() or not args.strict_bed.is_file() or not args.plus_unknown_bed.is_file() or not args.sif.is_file():
@@ -296,6 +302,9 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         raise FileNotFoundError(f"HiTE did not produce a non-empty expected GFF: {hite_gff}")
     persisted_hite_gff = output_root / "HiTE.gff"
     shutil.copy2(hite_gff, persisted_hite_gff)
+    persisted_native = None
+    if args.persist_native_output:
+        persisted_native = persist_native_output(work, output_root)
     adapter = load_adapter(root)
     truth_canonical = output_root / "truth.canonical.tsv"
     unknown_canonical = output_root / "unknown.canonical.tsv"
@@ -323,6 +332,7 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
             "truth_canonical": str(truth_canonical), "unknown_canonical": str(unknown_canonical),
             "hite_gff": str(persisted_hite_gff), "hite_canonical": str(hite_canonical),
             "command_log": str(persisted_hite_log),
+            "native_output": str(persisted_native) if persisted_native else None,
         },
         "runtime": {
             "scratch_workdir": str(work), "prefix_fasta": str(fasta),
@@ -346,6 +356,7 @@ def main() -> int:
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--threads", type=int, default=int(os.environ.get("SLURM_CPUS_PER_TASK", "40")))
     parser.add_argument("--model-prediction", action="append")
+    parser.add_argument("--persist-native-output", action="store_true")
     args = parser.parse_args()
     result = run(args)
     print(json.dumps(result, indent=2, sort_keys=True))
