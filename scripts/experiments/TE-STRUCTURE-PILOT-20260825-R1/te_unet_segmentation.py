@@ -277,10 +277,12 @@ def decoupled_boundary_targets(
     }
 
 
-def iter_jsonl_rows(path: Path, limit: int):
+def iter_jsonl_rows(path: Path, limit: int, start: int = 0):
     with gzip.open(path, "rt", encoding="utf-8") as handle:
         for index, line in enumerate(handle):
-            if index >= limit:
+            if index < start:
+                continue
+            if index >= start + limit:
                 break
             yield json.loads(line)
 
@@ -799,7 +801,7 @@ def evaluate_decoupled(args) -> None:
     sums: dict[str, np.ndarray] = {}
     weight_sums: dict[str, np.ndarray] = {}
     truths: dict[str, np.ndarray] = {}
-    for row in iter_jsonl_rows(args.data_jsonl, args.max_windows):
+    for row in iter_jsonl_rows(args.data_jsonl, args.max_windows, args.start_window):
         seqid, start, end = row["chr"], int(row["start"]), int(row["end"])
         encoded = tokenizer(
             row["sequence"][:WINDOW], add_special_tokens=False, truncation=True,
@@ -898,7 +900,7 @@ def evaluate(args) -> None:
     sums: dict[str, np.ndarray] = {}
     weight_sums: dict[str, np.ndarray] = {}
     truths: dict[str, np.ndarray] = {}
-    for row in iter_jsonl_rows(args.data_jsonl, args.max_windows):
+    for row in iter_jsonl_rows(args.data_jsonl, args.max_windows, args.start_window):
             seqid, start, end = row["chr"], int(row["start"]), int(row["end"])
             encoded = tokenizer(
                 row["sequence"][:WINDOW], add_special_tokens=False, truncation=True,
@@ -993,6 +995,7 @@ def main() -> None:
     eval_parser.add_argument("--threshold", type=float, default=0.5)
     eval_parser.add_argument("--weight-mode", choices=["flat", "triangular", "cosine"], default="triangular")
     eval_parser.add_argument("--max-windows", type=int, default=1200)
+    eval_parser.add_argument("--start-window", type=int, default=0)
     eval_parser.add_argument("--cpu", action="store_true")
     eval_parser.add_argument("--r2", action="store_true", help="use the decoupled body head for P3-R2")
     preflight_parser = sub.add_parser("preflight")

@@ -32,6 +32,7 @@ class FourStateLabelTest(unittest.TestCase):
                 for index in range(3):
                     handle.write(json.dumps({"index": index}) + "\n")
             self.assertEqual(list(te_unet.iter_jsonl_rows(path, 2)), [{"index": 0}, {"index": 1}])
+            self.assertEqual(list(te_unet.iter_jsonl_rows(path, 2, 1)), [{"index": 1}, {"index": 2}])
 
 
 class DecoupledBoundaryTargetTest(unittest.TestCase):
