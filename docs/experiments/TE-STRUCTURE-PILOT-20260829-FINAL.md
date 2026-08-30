@@ -2,6 +2,12 @@
 
 Date: 2026-08-29
 
+Status update: the subsequent P3-R2 mechanism control and exact Mouse/FlyBase
+diagnostics are closed in
+[`P3-R2-CLOSURE-20260830.md`](P3-R2-CLOSURE-20260830.md). That report is the
+current route decision: pure direct P3 is closed and C5-H is the only next
+scientific experiment.
+
 ## Decision
 
 The frozen Human screen closes the current pure direct-annotation route.
