@@ -107,5 +107,30 @@ class A1PafTest(unittest.TestCase):
             self.assertAlmostEqual(manifest["fraction_seeds_with_at_least_two_copies"], 1.0)
 
 
+class HiTEA0Test(unittest.TestCase):
+    def test_exports_tool_native_full_length_calls_without_truth_filter(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            gff = root / "HiTE.full_length.gff"
+            gff.write_text(
+                "##gff-version 3\n"
+                "chr17\tHiTE\tSINE/Alu\t2\t5\t.\t+\t.\tid=te_intact_1;name=fam1;classification=SINE/Alu\n"
+                "chr17\tHiTE\tLINE/L1\t8\t12\t.\t-\t.\tid=te_intact_2;name=fam2;classification=LINE/L1\n",
+                encoding="utf-8",
+            )
+            assembly = root / "hs1.fa"
+            assembly.write_text(">chr17\nACGTACGTACGTACGT\n", encoding="ascii")
+            out = root / "out"
+            result = MODULE.hite_a0_export(SimpleNamespace(
+                full_length_gff=gff, assembly=assembly, prefix_seqid="chr17",
+                prefix_end=16, out_dir=out,
+            ))
+            self.assertEqual(result["seeds"], 2)
+            with (out / "a0.seeds.tsv").open(encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual((rows[0]["start"], rows[0]["end"]), ("1", "5"))
+            self.assertIn(">te_intact_2\nTACGT\n", (out / "a0.seeds.fa").read_text())
+
+
 if __name__ == "__main__":
     unittest.main()

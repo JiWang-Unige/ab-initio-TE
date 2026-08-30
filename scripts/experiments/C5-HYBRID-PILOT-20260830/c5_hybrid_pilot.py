@@ -32,6 +32,9 @@ EVIDENCE_FIELDS = [
     "query_coverage", "identity", "target_span", "self_hit",
     "copy_evidence", "emitted_to_chr17_prefix",
 ]
+HITE_SEED_FIELDS = [
+    "seed_id", "seqid", "start", "end", "length", "strand", "classification", "family",
+]
 
 
 def _load_module(path: Path, name: str):
@@ -244,6 +247,57 @@ def write_fasta(path: Path, sequence: str, segments: list[dict[str, Any]]) -> No
                 handle.write(piece[offset:offset + 80] + "\n")
 
 
+def parse_hite_full_length(path: Path, prefix_seqid: str, prefix_end: int) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    with path.open(encoding="utf-8") as handle:
+        for raw in handle:
+            if not raw.strip() or raw.startswith("#"):
+                continue
+            fields = raw.rstrip("\n").split("\t")
+            if len(fields) != 9:
+                raise ValueError("HiTE full-length GFF must have nine columns")
+            seqid, source, classification = fields[0], fields[1], fields[2]
+            start, end, strand = int(fields[3]) - 1, int(fields[4]), fields[6]
+            if source != "HiTE" or seqid != prefix_seqid or start < 0 or end > prefix_end:
+                raise ValueError("HiTE full-length GFF is outside the frozen prefix contract")
+            attributes = dict(
+                item.split("=", 1) for item in fields[8].split(";") if "=" in item
+            )
+            rows.append({
+                "seed_id": attributes["id"], "seqid": seqid, "start": start, "end": end,
+                "length": end - start, "strand": strand, "classification": classification,
+                "family": attributes["name"],
+            })
+    return rows
+
+
+def hite_a0_export(args: argparse.Namespace) -> dict[str, Any]:
+    segments = parse_hite_full_length(args.full_length_gff, args.prefix_seqid, args.prefix_end)
+    sequence = fasta_sequence(args.assembly, args.prefix_seqid)
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    with (args.out_dir / "a0.seeds.tsv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=HITE_SEED_FIELDS, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(segments)
+    write_canonical(
+        args.out_dir / "a0.canonical.tsv",
+        [(row["seqid"], row["start"], row["end"]) for row in segments],
+        "C5_HITE_A0",
+    )
+    write_fasta(args.out_dir / "a0.seeds.fa", sequence[:args.prefix_end], segments)
+    result = {
+        "schema": "c5_hite_a0_export_v1", "status": "PASS",
+        "seed_definition": "HiTE.full_length.gff tool-native te_intact calls",
+        "full_length_gff": str(args.full_length_gff), "seeds": len(segments),
+        "prefix_seqid": args.prefix_seqid, "prefix_end": args.prefix_end,
+        "classifications": sorted({row["classification"] for row in segments}),
+    }
+    (args.out_dir / "a0.manifest.json").write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8",
+    )
+    return result
+
+
 def evaluate_rule(probability: np.ndarray, truth: np.ndarray, rule: dict[str, Any]) -> dict[str, Any]:
     import numpy as np
 
@@ -360,8 +414,9 @@ def a0_export(args: argparse.Namespace) -> dict[str, Any]:
 def read_seed_rows(path: Path) -> dict[str, dict[str, Any]]:
     with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle, delimiter="\t")
-        if reader.fieldnames != SEED_FIELDS:
-            raise ValueError(f"seed fields must be {SEED_FIELDS}")
+        required = {"seed_id", "seqid", "start", "end"}
+        if reader.fieldnames is None or not required.issubset(reader.fieldnames):
+            raise ValueError(f"seed fields must include {sorted(required)}")
         rows = {}
         for row in reader:
             seed_id = row["seed_id"]
@@ -532,6 +587,12 @@ def main() -> int:
     a1.add_argument("--prefix-seqid", default=CHROM)
     a1.add_argument("--prefix-end", type=int, required=True)
     a1.add_argument("--out-dir", type=Path, required=True)
+    hite = sub.add_parser("hite-a0")
+    hite.add_argument("--full-length-gff", type=Path, required=True)
+    hite.add_argument("--assembly", type=Path, required=True)
+    hite.add_argument("--prefix-seqid", default=CHROM)
+    hite.add_argument("--prefix-end", type=int, required=True)
+    hite.add_argument("--out-dir", type=Path, required=True)
     evaluate = sub.add_parser("evaluate")
     evaluate.add_argument("--truth", type=Path, required=True)
     evaluate.add_argument("--unknown", type=Path, required=True)
@@ -547,6 +608,8 @@ def main() -> int:
         result = a0_export(args)
     elif args.command == "a1":
         result = a1_run(args)
+    elif args.command == "hite-a0":
+        result = hite_a0_export(args)
     else:
         result = masked_evaluate(args)
     print(json.dumps(result, indent=2, sort_keys=True))
