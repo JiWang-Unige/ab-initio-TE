@@ -16,20 +16,23 @@ ROOT=/home/users/j/jwang/ab-initio-TE
 SCRIPT_ROOT=${ROOT}/scripts/experiments/TE-STRUCTURE-PILOT-20260825-R1
 LEMMI_ATTEMPT=${ROOT}/outputs/LEMMI-TE-BENCH-20260824-R1/attempt-12066076
 RUN_ROOT=${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1/p3-x-flybase-shards-${ATTEMPT_TAG}
+SHARD2_ROOT=${ROOT}/outputs/TE-STRUCTURE-PILOT-20260825-R1/p3-x-flybase-shards-${SHARD2_ATTEMPT_TAG:-${ATTEMPT_TAG}}
 MERGED=${RUN_ROOT}/prediction.tsv
 
 cd "${ROOT}"
-python - "${RUN_ROOT}" "${MERGED}" <<'PY'
+python - "${RUN_ROOT}" "${SHARD2_ROOT}" "${MERGED}" <<'PY'
 import csv
 import sys
 from pathlib import Path
 
 root = Path(sys.argv[1])
-output = Path(sys.argv[2])
+shard2_root = Path(sys.argv[2])
+output = Path(sys.argv[3])
 writer = None
 with output.open("w", newline="", encoding="utf-8") as handle:
     for shard in range(4):
-        path = root / f"shard-{shard}" / "prediction.tsv"
+        shard_root = shard2_root if shard == 2 else root
+        path = shard_root / f"shard-{shard}" / "prediction.tsv"
         with path.open(newline="", encoding="utf-8") as source:
             reader = csv.DictReader(source, delimiter="\t")
             if writer is None:
