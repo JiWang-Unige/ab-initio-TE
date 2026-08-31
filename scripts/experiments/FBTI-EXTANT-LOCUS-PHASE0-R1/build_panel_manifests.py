@@ -282,6 +282,7 @@ def build_sidecars(
     validate_packages(packages, truth_by_id, components)
 
     context_rows: list[dict[str, str]] = []
+    context_owner: dict[str, str] = {}
     truth_sorted = sorted(
         truth_records,
         key=lambda record: (
@@ -305,6 +306,13 @@ def build_sidecars(
         focal_ids = set(str(feature_id) for feature_id in package["feature_ids"])
         if not focal_ids.issubset(hit_ids):
             raise ValueError(f"focal truth feature is absent from package context: {package_id}")
+        for feature_id in hit_ids:
+            previous_owner = context_owner.get(feature_id)
+            if previous_owner is not None and previous_owner != package_id:
+                raise ValueError(
+                    f"truth context feature enters multiple packages: {feature_id}"
+                )
+            context_owner[feature_id] = package_id
         context_rows.extend(
             {"package_id": package_id, **dict(record["source"])} for record in hits
         )

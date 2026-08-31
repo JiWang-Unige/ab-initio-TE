@@ -111,6 +111,22 @@ class BuildPopulationTest(unittest.TestCase):
             handle.write(">2L description\nACGT\n>3R\nAA\nA\n")
         self.assertEqual(build_population.read_fasta_lengths(assembly), {"2L": 4, "3R": 3})
 
+    def test_output_freezes_the_consumed_tabular_inputs(self) -> None:
+        output = self.root / "output"
+        build_population.write_outputs(
+            [],
+            {"status": "PREFLIGHT_PASS"},
+            output,
+            self.truth,
+            self.overlaps,
+            self.atoms,
+            self.lengths,
+        )
+        self.assertEqual((output / "truth_metadata.tsv").read_bytes(), self.truth.read_bytes())
+        self.assertEqual((output / "overlap_pairs.tsv").read_bytes(), self.overlaps.read_bytes())
+        self.assertEqual((output / "p3_atoms.tsv").read_bytes(), self.atoms.read_bytes())
+        self.assertEqual((output / "contig_lengths.json").read_bytes(), self.lengths.read_bytes())
+
     def test_rejects_atom_outside_frozen_assembly(self) -> None:
         with self.atoms.open("a", encoding="utf-8") as handle:
             handle.write("missing-contig\t0\t1\n")

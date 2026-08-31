@@ -27,12 +27,14 @@ if [[ -e "${OUT}" ]]; then
 fi
 
 cd "${ROOT}"
+GIT_COMMIT=$(git rev-parse HEAD)
 python3 "${SCRIPT}" \
   --truth-metadata "${TRUTH}/flybase_r668_curated_positive_instances.tsv" \
   --overlap-pairs "${TRUTH}/flybase_r668_curated_positive_overlap_pairs.tsv" \
   --p3-atoms "${P3}" \
   --contig-lengths "${LENGTHS}" \
   --assembly-fasta "${ASSEMBLY}" \
+  --git-commit "${GIT_COMMIT}" \
   --output-dir "${OUT}"
 
 printf 'PASS\n' > "${OUT}/STATUS"

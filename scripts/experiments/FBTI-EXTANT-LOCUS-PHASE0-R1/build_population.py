@@ -15,6 +15,7 @@ import csv
 import gzip
 import json
 from pathlib import Path
+import shutil
 
 
 FLANK_BP = 10_000
@@ -393,7 +394,15 @@ def build_population(
     return units, summary
 
 
-def write_outputs(units: list[dict[str, object]], summary: dict[str, object], output_dir: Path) -> None:
+def write_outputs(
+    units: list[dict[str, object]],
+    summary: dict[str, object],
+    output_dir: Path,
+    truth_path: Path,
+    overlap_path: Path,
+    atom_path: Path,
+    lengths_path: Path,
+) -> None:
     output_dir.mkdir(parents=True, exist_ok=False)
     columns = [
         "unit_id",
@@ -420,6 +429,13 @@ def write_outputs(units: list[dict[str, object]], summary: dict[str, object], ou
     (output_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+    for source, filename in (
+        (truth_path, "truth_metadata.tsv"),
+        (overlap_path, "overlap_pairs.tsv"),
+        (atom_path, "p3_atoms.tsv"),
+        (lengths_path, "contig_lengths.json"),
+    ):
+        shutil.copyfile(source, output_dir / filename)
 
 
 def main() -> int:
@@ -429,6 +445,7 @@ def main() -> int:
     parser.add_argument("--p3-atoms", type=Path, required=True)
     parser.add_argument("--contig-lengths", type=Path, required=True)
     parser.add_argument("--assembly-fasta", type=Path, required=True)
+    parser.add_argument("--git-commit", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     units, summary = build_population(
@@ -438,7 +455,22 @@ def main() -> int:
         args.contig_lengths,
         args.assembly_fasta,
     )
-    write_outputs(units, summary, args.output_dir)
+    summary["git_commit"] = args.git_commit
+    summary["frozen_inputs"] = {
+        "truth_metadata": "truth_metadata.tsv",
+        "overlap_pairs": "overlap_pairs.tsv",
+        "p3_atoms": "p3_atoms.tsv",
+        "contig_lengths": "contig_lengths.json",
+    }
+    write_outputs(
+        units,
+        summary,
+        args.output_dir,
+        args.truth_metadata,
+        args.overlap_pairs,
+        args.p3_atoms,
+        args.contig_lengths,
+    )
     print(json.dumps(summary, sort_keys=True))
     return 0
 

@@ -76,6 +76,7 @@ PACKAGE_FIELDS = [
     "unit_type",
     "hard_cell",
     "selection_priority",
+    "deep_audit_feature_id",
     "assembly_id",
     "seqid",
     "core_start0",
@@ -235,6 +236,20 @@ def validate_manifest(rows: list[dict[str, str]]) -> None:
     if any(sorted(strata) != ["S0", "S1"] for strata in by_pair_rank.values()):
         raise ValueError("each reserve pair rank must contain one S0 and one S1 package")
 
+    deep_audit = [row for row in rows if row["deep_audit_feature_id"]]
+    if Counter(row["unit_type"] for row in deep_audit) != Counter({"S0": 20, "S1": 20}):
+        raise ValueError("deep audit must contain 20 S0 and 20 S1 main records")
+    if any(row["role"] != "main" for row in deep_audit):
+        raise ValueError("deep audit records must come from main packages")
+    deep_ids = [row["deep_audit_feature_id"] for row in deep_audit]
+    if len(set(deep_ids)) != 40:
+        raise ValueError("deep audit feature IDs must be distinct")
+    if any(
+        row["deep_audit_feature_id"] not in row["feature_ids"].split(",")
+        for row in deep_audit
+    ):
+        raise ValueError("deep audit feature ID must belong to its focal package")
+
 
 def _package_row(row: dict[str, str], role: str, priority: float) -> dict[str, str]:
     cell = row["challenge_cell"]
@@ -246,6 +261,7 @@ def _package_row(row: dict[str, str], role: str, priority: float) -> dict[str, s
         "unit_type": row["unit_type"],
         "hard_cell": cell,
         "selection_priority": format(priority, ".17g"),
+        "deep_audit_feature_id": "",
         "assembly_id": ASSEMBLY_ID,
         "seqid": row["seqid"],
         "core_start0": row["core_start0"],
@@ -263,10 +279,12 @@ def _package_row(row: dict[str, str], role: str, priority: float) -> dict[str, s
 
 
 def make_manifest(
-    rows: list[dict[str, str]], selected_panels: dict[int, str], priorities: list[float]
+    rows: list[dict[str, str]],
+    selected_panels: dict[int, str],
+    selected_priorities: dict[int, float],
 ) -> list[dict[str, str]]:
     selected = [
-        _package_row(rows[index], panel, priorities[index])
+        _package_row(rows[index], panel, selected_priorities[index])
         for index, panel in selected_panels.items()
     ]
     for panel in PANELS:
@@ -288,6 +306,18 @@ def make_manifest(
     for rank, pair in enumerate(zip(by_stratum["S0"], by_stratum["S1"]), start=1):
         for row in pair:
             row["reserve_pair_rank"] = str(rank)
+
+    for stratum in STRATA:
+        main_rows = sorted(
+            (
+                row
+                for row in selected
+                if row["role"] == "main" and row["unit_type"] == stratum
+            ),
+            key=lambda row: (float(row["selection_priority"]), row["package_id"]),
+        )
+        for row in main_rows[:20]:
+            row["deep_audit_feature_id"] = sorted(row["feature_ids"].split(","))[0]
 
     validate_manifest(selected)
     return sorted(selected, key=lambda row: (PANELS.index(row["role"]), int(row["role_rank"])))
@@ -366,43 +396,66 @@ def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]],
     """Solve the fixed joint panel and return its manifest and solver record."""
 
     import numpy as np
+    import scipy
     from scipy.optimize import Bounds, LinearConstraint, milp
 
     rows = sorted(rows, key=lambda row: row["unit_id"])
     variable_count = len(rows) * len(PANELS)
     matrix, lower, upper = _constraint_rows(rows, variable_count)
     rng = np.random.Generator(np.random.PCG64(SEED))
-    candidate_priority = rng.random(len(rows))
-    objective = np.repeat(candidate_priority, len(PANELS))
+    priority = rng.random((len(rows), len(PANELS)), dtype=np.float64)
+    objective = priority.reshape(-1, order="C")
     result = milp(
         c=objective,
         integrality=np.ones(variable_count),
         bounds=Bounds(np.zeros(variable_count), np.ones(variable_count)),
         constraints=LinearConstraint(matrix, lower, upper),
+        options={"mip_rel_gap": 0.0},
     )
     if not result.success:
         message = f"MILP status={result.status}: {result.message}"
         if result.status == 2:
             raise PanelInfeasible(f"INFEASIBLE: {message}")
         raise RuntimeError(message)
+    if result.status != 0 or float(result.mip_gap) != 0.0:
+        raise RuntimeError(
+            f"panel solution is not proven optimal with zero gap: status={result.status} gap={result.mip_gap}"
+        )
 
     selected_panels: dict[int, str] = {}
+    selected_priorities: dict[int, float] = {}
     for index in range(len(rows)):
         selected = [role for role in range(len(PANELS)) if result.x[3 * index + role] > 0.5]
         if len(selected) == 1:
-            selected_panels[index] = PANELS[selected[0]]
-    manifest = make_manifest(rows, selected_panels, candidate_priority.tolist())
+            role = selected[0]
+            selected_panels[index] = PANELS[role]
+            selected_priorities[index] = float(objective[3 * index + role])
+    manifest = make_manifest(rows, selected_panels, selected_priorities)
     return manifest, {
         "solver_status": int(result.status),
         "solver_message": str(result.message),
+        "mip_gap": float(result.mip_gap),
         "objective_value": float(result.fun),
         "constraint_count": int(matrix.shape[0]),
         "variable_count": variable_count,
+        "priority_schema": "pcg64_candidate_role_float64_v1",
+        "priority_shape": [len(rows), len(PANELS)],
+        "candidate_order": "unit_id_lexicographic",
+        "role_order": list(PANELS),
+        "flatten_order": "C",
+        "objective_direction": "minimize",
+        "numpy_version": np.__version__,
+        "scipy_version": scipy.__version__,
     }
 
 
 def panel_summary(
-    population: list[dict[str, str]], manifest: list[dict[str, str]], solver: dict[str, object], input_path: Path
+    population: list[dict[str, str]],
+    manifest: list[dict[str, str]],
+    solver: dict[str, object],
+    input_path: Path,
+    population_summary: dict[str, object],
+    git_commit: str,
 ) -> dict[str, object]:
     selected_counts = Counter((row["unit_type"], row["role"]) for row in manifest)
     cell_counts = Counter((row["unit_type"], row["hard_cell"], row["role"]) for row in manifest)
@@ -415,8 +468,11 @@ def panel_summary(
         "population_representative": False,
         "seed": SEED,
         "rng": "numpy.PCG64",
+        "priority_scope": "candidate_role",
         "solver": "scipy.optimize.milp",
         "assembly_id": ASSEMBLY_ID,
+        "panel_git_commit": git_commit,
+        "population_census_git_commit": population_summary["git_commit"],
         "population_units": len(population),
         "selected_packages": len(manifest),
         "selected_by_stratum_panel": {
@@ -454,12 +510,26 @@ def write_outputs(manifest: list[dict[str, str]], summary: dict[str, object], ou
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--population", type=Path, required=True)
+    parser.add_argument("--population-summary", type=Path, required=True)
+    parser.add_argument("--git-commit", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
     population = read_population(args.population)
+    population_summary = json.loads(args.population_summary.read_text(encoding="utf-8"))
+    if population_summary.get("status") != "PREFLIGHT_PASS":
+        raise ValueError("population census did not pass")
+    if int(population_summary["S0_units"]) + int(population_summary["S1_units"]) != len(population):
+        raise ValueError("population census summary does not match population rows")
     manifest, solver = solve_joint_panel(population)
-    summary = panel_summary(population, manifest, solver, args.population)
+    summary = panel_summary(
+        population,
+        manifest,
+        solver,
+        args.population,
+        population_summary,
+        args.git_commit,
+    )
     write_outputs(manifest, summary, args.output_dir)
     print(json.dumps(summary, sort_keys=True))
     return 0

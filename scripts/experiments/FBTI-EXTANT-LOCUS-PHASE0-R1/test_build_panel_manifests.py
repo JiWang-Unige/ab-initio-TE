@@ -134,6 +134,12 @@ class BuildPanelManifestsTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "selected packages overlap"):
             sidecars.build_sidecars(self.packages, self.truth, self.atoms)
 
+    def test_rejects_truth_context_shared_by_two_packages(self) -> None:
+        with self.truth.open("a", encoding="utf-8") as handle:
+            handle.write("FBti5\t2L\t230\t500\t+\tshared-context\n")
+        with self.assertRaisesRegex(ValueError, "truth context feature enters multiple packages"):
+            sidecars.build_sidecars(self.packages, self.truth, self.atoms)
+
     def test_writes_only_the_two_sidecars(self) -> None:
         output = self.root / "sidecars"
         sidecars.build_panel_manifests(self.packages, self.truth, self.atoms, output)

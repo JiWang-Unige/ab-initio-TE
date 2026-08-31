@@ -37,6 +37,9 @@ def manifest_fixture() -> list[dict[str, str]]:
                             "reserve_pair_rank": "",
                             "unit_type": stratum,
                             "hard_cell": cell,
+                            "selection_priority": str(package_index / 1000),
+                            "deep_audit_feature_id": "",
+                            "feature_ids": f"FBti-{stratum}-{package_index:03d}",
                             "seqid": "2L",
                             "package_start0": str(start),
                             "package_end0": str(start + 10),
@@ -50,6 +53,17 @@ def manifest_fixture() -> list[dict[str, str]]:
     for rank, pair in enumerate(zip(reserve_s0, reserve_s1), start=1):
         for row in pair:
             row["reserve_pair_rank"] = str(rank)
+    for stratum in sample.STRATA:
+        main = sorted(
+            (
+                row
+                for row in rows
+                if row["role"] == "main" and row["unit_type"] == stratum
+            ),
+            key=lambda row: (float(row["selection_priority"]), row["package_id"]),
+        )
+        for row in main[:20]:
+            row["deep_audit_feature_id"] = row["feature_ids"]
     return rows
 
 
@@ -57,6 +71,7 @@ class SampleJointPanelTest(unittest.TestCase):
     def test_package_manifest_is_the_v1_challenge_panel_schema(self) -> None:
         self.assertIn("selection_priority", sample.PACKAGE_FIELDS)
         self.assertIn("hard_cell", sample.PACKAGE_FIELDS)
+        self.assertIn("deep_audit_feature_id", sample.PACKAGE_FIELDS)
         self.assertNotIn("inclusion_probability", sample.PACKAGE_FIELDS)
 
     def test_s0_and_s1_hard_cells(self) -> None:
