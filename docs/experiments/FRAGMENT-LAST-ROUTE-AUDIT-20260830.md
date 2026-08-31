@@ -1,4 +1,4 @@
-# Fragment last-route audit and staged C5 plan
+# Fragment last-route audit and C5 closure
 
 Date: 2026-08-30
 
@@ -10,7 +10,7 @@ or smoothing rule. Those variants continue to use the same local sequence and
 RepeatMasker-style run labels, and therefore do not add the instance-level
 information that the fragment error requires.
 
-The only active scientific route is **C5 hybrid discovery/refinement**:
+The final scientific route was **C5 hybrid discovery/refinement**:
 
 1. use the frozen post-trained P3 model and HiTE only as candidate generators;
 2. search the target genome for independent homologous copies;
@@ -22,11 +22,12 @@ This is a hybrid method, not pure direct annotation. It remains potentially
 publishable because it tests whether the missing information is target-genome
 multi-copy structure rather than another local decision rule.
 
-ChatGPT Pro reviewed the complete Human, Mouse and FlyBase results and the
-closed-route ledger. Its decision was the same: no further standalone
-post-training GPU run is justified now; retrieval- or copy-conditioned learning
-is meaningful only inside C5 and only after a deterministic copy-search pilot
-shows information gain.
+The deterministic copy-search pilot has now completed for P3, HiTE and their
+union. All three failed to establish a usable multi-copy substrate and changed
+the structural endpoints by only about 1e-4. ChatGPT Pro reviewed the final
+result and agreed that C5 must stop at A1. The frozen result and its claim
+boundary are recorded in
+[`C5-HYBRID-CLOSURE-20260831.md`](C5-HYBRID-CLOSURE-20260831.md).
 
 ## Why post-training alone is now closed
 
@@ -67,7 +68,7 @@ reweight the same evidence; it cannot create cross-copy evidence.
 | Synthetic intact-copy augmentation | synthetic boundary ground truth | Diagnostic only | real held-out curated copies also improve |
 | Teacher labels/curriculum/distillation | no independent truth under current assets | Rejected | an independently validated teacher signal |
 | Dfam/Repbase profile-HMM recovery | known-family library information | Allowed comparator only | must be reported as library-assisted, never de novo |
-| C5 target-genome copy search/MSA/flank refinement | independent target-genome multi-copy evidence | **Active** | current next-only route |
+| C5 target-genome copy search/MSA/flank refinement | independent target-genome multi-copy evidence | **Closed at A1 under the frozen contract** | new independent assets would define a different study |
 
 If full-length Human/Mouse annotations are later assembled, their quality alone
 is not sufficient. The experiment must record family/copy identity, exclude
@@ -132,17 +133,14 @@ The boundary mechanism additionally requires A2 to beat A1 by at least 0.02
 in segment F1 or boundary F1@5. Consensus recovery must improve bp or segment
 recall over A2 while worsening fragments/truth by no more than 10%.
 
-## Publication stop rule
+## Publication stop rule: reached
 
-If P3, HiTE and union all fail the frozen C5-H gate, the project stops adding
-post-training objectives, neural decoders and post-processing modules. The
-paper is then framed as a controlled negative benchmark and mechanism study:
+P3, HiTE and union all failed to establish the A1 substrate required for the
+frozen C5-H gate. The project therefore stops adding post-training objectives,
+neural decoders and post-processing modules. The paper is framed as a
+controlled negative benchmark and mechanism study:
 local genome-language-model signal transfers at base level, but noisy run-edge
-supervision and local decoding do not reconstruct intact TE instances; even
-target-genome multi-copy refinement did not cross the prespecified gate.
-
-If C5-H passes, the positive claim is narrower but valuable: a post-trained
-genome model can supply candidate regions, while target-genome multi-copy
-homology supplies the missing instance information. It cannot be called pure
-ab initio annotation, and known-library comparators must remain explicitly
-separate.
+supervision and local decoding do not reconstruct intact TE instances. Under
+the frozen seed ontology and matched minimap2 A1 contract, target-genome copy
+retrieval was too sparse to justify MSA/flank refinement. This is not a claim
+that all multi-copy methods fail.
