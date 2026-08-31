@@ -67,3 +67,16 @@ truth labels for Gate L, an evidence registry, hashes/checksums, or a model.
 - The `r3` parser stops at the standard `##FASTA` directive. It does not skip
   or relax validation of any GFF3 feature. Panel membership, raw feature rows,
   sequence, ontology and all Gate L contracts remain unchanged.
+- Slurm `12122769` (`r3`, Git `7629551`) completed `0:0` in 71 seconds with
+  1 CPU, 8 GB requested RAM and 0 GPU. The frozen output is
+  `/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r3`.
+  It contains 12 packet directories and 12 coordinator-manifest rows. The 133
+  packet-facing context rows have 133 matching raw FlyBase GFF3 rows, and no
+  packet-facing file contains package role, hard-cell, package ID, P3 atom or
+  probability fields. The archive producer reports an expected broken pipe
+  after the parser intentionally stops at `##FASTA`; the builder and Slurm job
+  both completed successfully and all registered output checks passed.
+
+This remains an engineering result. The packets are now the reusable frozen
+calibration input; subsequent annotation must not rescan or reconstruct the
+raw FlyBase release. Gate L is still unevaluated.

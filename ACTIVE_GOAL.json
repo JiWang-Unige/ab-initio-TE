@@ -56,6 +56,10 @@
     "joint_panel_status": "COMPLETED_0_0_ENGINEERING_ONLY",
     "joint_panel_report": "docs/experiments/FBTI-EXTANT-LOCUS-JOINT-PANEL-V1.3-20260831.md",
     "joint_panel_manifest": "docs/experiments/manifests/FBTI-EXTANT-LOCUS-PHASE0-R1-V1.3/packages.tsv",
+    "calibration_packets_job": "12122769",
+    "calibration_packets_status": "COMPLETED_0_0_ENGINEERING_ONLY",
+    "calibration_packets_report": "docs/experiments/FBTI-EXTANT-LOCUS-CALIBRATION-PACKETS-V1.3-20260831.md",
+    "calibration_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r3",
     "gate_l_evaluated": false
   },
   "current_contract_blocks": [
