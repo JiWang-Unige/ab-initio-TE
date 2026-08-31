@@ -70,6 +70,7 @@ class BuildPanelManifestsTest(unittest.TestCase):
                     ["2L", 500, 530, "e"],
                     ["2L", 470, 490, "f"],
                     ["2L", 560, 590, "g"],
+                    ["2L", 230, 500, "crosses-two-packages"],
                     ["2L", 300, 310, "outside"],
                 ]
             )
@@ -107,6 +108,14 @@ class BuildPanelManifestsTest(unittest.TestCase):
         self.assertEqual(atom_by_id["P3:2L:80:260"]["package_censored"], "1")
         self.assertNotIn("P3:2L:300:310", atom_by_id)
 
+        cross_package = [
+            row for row in atom_rows if row["atom_id"] == "P3:2L:230:500"
+        ]
+        self.assertEqual(
+            {(row["package_id"], row["package_censored"]) for row in cross_package},
+            {("P-S1", "1"), ("P-S0", "1")},
+        )
+
     def test_rejects_incomplete_s1_component(self) -> None:
         text = self.packages.read_text(encoding="utf-8").replace("FBti1,FBti2", "FBti1")
         self.packages.write_text(text, encoding="utf-8")
@@ -134,7 +143,7 @@ class BuildPanelManifestsTest(unittest.TestCase):
         )
         with (output / "package_atoms.tsv").open(newline="", encoding="utf-8") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
-        self.assertEqual(len(rows), 7)
+        self.assertEqual(len(rows), 9)
 
 
 if __name__ == "__main__":

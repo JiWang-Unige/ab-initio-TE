@@ -310,7 +310,6 @@ def build_sidecars(
         )
 
     atom_rows: list[dict[str, str]] = []
-    owners: dict[tuple[str, int, int], str] = {}
     atoms_sorted = sorted(
         atoms,
         key=lambda atom: (str(atom["seqid"]), int(atom["start"]), int(atom["end"])),
@@ -327,12 +326,6 @@ def build_sidecars(
             if not _overlap(atom_start, atom_end, package_start, package_end):
                 continue
             key = (str(atom["seqid"]), atom_start, atom_end)
-            previous_owner = owners.get(key)
-            if previous_owner is not None and previous_owner != package_id:
-                raise ValueError(
-                    f"canonical atom assigned to multiple packages: {key[0]}:{key[1]}:{key[2]}"
-                )
-            owners[key] = package_id
             role = _atom_role(atom_start, atom_end, package_start, package_end)
             atom_rows.append(
                 {

@@ -45,6 +45,7 @@
   "active_protocol": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md",
   "annotation_contract_proposal": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V0-20260831.md",
   "annotation_contract_v1_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1-ADDENDUM-20260831.md",
+  "annotation_contract_v1_1_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.1-ADDENDUM-20260831.md",
   "engineering_progress": {
     "population_census_job": "12120604",
     "population_census_status": "COMPLETED_0_0_ENGINEERING_ONLY",
