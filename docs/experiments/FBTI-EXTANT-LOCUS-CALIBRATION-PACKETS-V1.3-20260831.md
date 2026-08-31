@@ -60,5 +60,10 @@ truth labels for Gate L, an evidence registry, hashes/checksums, or a model.
   scientific denominator.
 - The `r2` submission changes only transport: it streams the exact
   `dmel-all-r6.68.gff` member from that archive into the unchanged builder and
-  uses a new output directory. Panel membership, raw feature rows, sequence,
-  ontology and all Gate L contracts remain unchanged.
+  uses a new output directory. Slurm `12122757` then reached the standard
+  `##FASTA` section after all GFF3 features and failed on the first embedded
+  sequence line; it also enters no scientific denominator and created no
+  output directory.
+- The `r3` parser stops at the standard `##FASTA` directive. It does not skip
+  or relax validation of any GFF3 feature. Panel membership, raw feature rows,
+  sequence, ontology and all Gate L contracts remain unchanged.

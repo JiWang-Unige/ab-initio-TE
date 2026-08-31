@@ -15,7 +15,7 @@ set -euo pipefail
 ROOT=/home/users/j/jwang/ab-initio-TE
 PANEL=${ROOT}/docs/experiments/manifests/FBTI-EXTANT-LOCUS-PHASE0-R1-V1.3
 ASSET=${ROOT}/data/raw/benchmark_v1/flybase/FB2026_02/dmel_r6.68
-OUT=${ROOT}/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r2
+OUT=${ROOT}/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r3
 SCRIPT=${ROOT}/scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/build_calibration_packets.py
 
 cd "${ROOT}"

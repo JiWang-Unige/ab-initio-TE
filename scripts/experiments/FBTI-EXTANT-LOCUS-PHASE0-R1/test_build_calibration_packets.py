@@ -330,6 +330,17 @@ class BuildCalibrationPacketsTest(unittest.TestCase):
             (output / "packets" / "CALIB-01" / "raw_flybase_features.gff3").exists()
         )
 
+    def test_stops_at_gff_fasta_section(self) -> None:
+        with self.flybase_gff.open("a", encoding="utf-8") as handle:
+            handle.write("##FASTA\n>2L\nACGT\n")
+        output = self.root / "gff-fasta-packets"
+        packets.build_calibration_packets(
+            self.packages, self.context, self.fasta, self.flybase_gff, output
+        )
+        self.assertTrue(
+            (output / "packets" / "CALIB-01" / "raw_flybase_features.gff3").exists()
+        )
+
     def test_rejects_duplicate_matching_flybase_gff_id(self) -> None:
         text = self.flybase_gff.read_text(encoding="utf-8")
         self.flybase_gff.write_text(text + text.splitlines()[0] + "\n", encoding="utf-8")

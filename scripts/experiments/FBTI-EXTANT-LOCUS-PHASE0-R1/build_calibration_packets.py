@@ -282,6 +282,8 @@ def read_flybase_gff(
     with opener(path, "rt", encoding="utf-8", newline="") as handle:
         for line_number, raw_line in enumerate(handle, start=1):
             line = raw_line.rstrip("\r\n")
+            if line == "##FASTA":
+                break
             if not line or line.startswith("#"):
                 continue
             fields = line.split("\t")
