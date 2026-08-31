@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build P3-blind evidence packets for the frozen calibration packages.
+"""Build P3-blind evidence packets for one frozen panel role.
 
 The coordinator manifest retains the frozen package mapping.  Each packet
 contains only its exact assembly sequence, package coordinates, derived
@@ -180,12 +180,57 @@ def select_calibration(packages: list[dict[str, object]]) -> list[dict[str, obje
     return sorted(calibration, key=lambda package: int(package["role_rank"]))
 
 
+def select_role(packages: list[dict[str, object]], role: str) -> list[dict[str, object]]:
+    if role == "calibration":
+        return select_calibration(packages)
+
+    selected = [package for package in packages if package["role"] == role]
+    expected = 120 if role == "main" else 40
+    if len(selected) != expected:
+        raise ValueError(f"expected {expected} {role} packages, got {len(selected)}")
+    if Counter(str(package["unit_type"]) for package in selected) != Counter(
+        {"S0": expected // 2, "S1": expected // 2}
+    ):
+        raise ValueError(f"{role} packages must be balanced between S0 and S1")
+    ranks = sorted(int(package["role_rank"]) for package in selected)
+    if ranks != list(range(1, expected + 1)):
+        raise ValueError(f"{role} role_rank must be exactly 1..{expected}")
+    if role == "main":
+        s0_counts = Counter(
+            str(package["hard_cell"])
+            for package in selected
+            if package["unit_type"] == "S0"
+        )
+        s1_counts = Counter(
+            str(package["hard_cell"])
+            for package in selected
+            if package["unit_type"] == "S1"
+        )
+        if s0_counts != Counter({cell: 15 for cell in ("S0-L1", "S0-L2", "S0-L3", "S0-L4")}):
+            raise ValueError("main S0 packages must contain 15 packages per hard cell")
+        if s1_counts != Counter({cell: 20 for cell in ("S1-C1", "S1-C2", "S1-C3")}):
+            raise ValueError("main S1 packages must contain 20 packages per hard cell")
+    else:
+        pair_counts = Counter(
+            (str(package["unit_type"]), str(package["source"]["reserve_pair_rank"]))
+            for package in selected
+        )
+        expected_pairs = Counter(
+            (unit_type, str(rank))
+            for unit_type in ("S0", "S1")
+            for rank in range(1, 21)
+        )
+        if pair_counts != expected_pairs:
+            raise ValueError("reserve packages must contain one S0 and one S1 package per pair rank")
+    return sorted(selected, key=lambda package: int(package["role_rank"]))
+
+
 def _overlap(left_start: int, left_end: int, right_start: int, right_end: int) -> bool:
     return left_start < right_end and right_start < left_end
 
 
 def validate_context(
-    calibration_packages: list[dict[str, object]],
+    selected_packages: list[dict[str, object]],
     all_packages: list[dict[str, object]],
     context_by_package: dict[str, list[dict[str, object]]],
 ) -> dict[str, list[dict[str, object]]]:
@@ -219,11 +264,11 @@ def validate_context(
             context_owner[feature_id] = package_id
 
     selected_context: dict[str, list[dict[str, object]]] = {}
-    for package in calibration_packages:
+    for package in selected_packages:
         package_id = str(package["package_id"])
         rows = context_by_package.get(package_id, [])
         if not rows:
-            raise ValueError(f"missing context rows for calibration package: {package_id}")
+            raise ValueError(f"missing context rows for selected package: {package_id}")
         focal_ids = {str(feature_id) for feature_id in package["feature_ids"]}
         observed_ids = {str(record["feature_id"]) for record in rows}
         if not focal_ids.issubset(observed_ids):
@@ -406,12 +451,13 @@ def build_calibration_packets(
     assembly_path: Path,
     flybase_gff_path: Path,
     output_dir: Path,
+    role: str = "calibration",
 ) -> None:
     packages = read_packages(packages_path)
     validate_package_intervals(packages)
-    calibration = select_calibration(packages)
+    selected = select_role(packages, role)
     context_fields, context_by_package = read_context(context_path)
-    selected_context = validate_context(calibration, packages, context_by_package)
+    selected_context = validate_context(selected, packages, context_by_package)
     context_by_feature = {
         str(record["feature_id"]): record
         for rows in selected_context.values()
@@ -426,12 +472,14 @@ def build_calibration_packets(
         flybase_gff_path, context_by_feature, feature_to_package
     )
     sequences = read_fasta(assembly_path)
-    if len(set(str(package["assembly_id"]) for package in calibration)) != 1:
-        raise ValueError("calibration packages use multiple assembly IDs")
+    if len(set(str(package["assembly_id"]) for package in selected)) != 1:
+        raise ValueError(f"{role} packages use multiple assembly IDs")
 
     prepared: list[tuple[str, dict[str, object], list[dict[str, object]], str, list[str]]] = []
-    for package in calibration:
-        packet_id = f"CALIB-{int(package['role_rank']):02d}"
+    prefix = {"calibration": "CALIB", "main": "MAIN", "reserve": "RESERVE"}[role]
+    width = 2 if role == "calibration" else 3
+    for package in selected:
+        packet_id = f"{prefix}-{int(package['role_rank']):0{width}d}"
         seqid = str(package["seqid"])
         if seqid not in sequences:
             raise ValueError(f"package contig missing from assembly: {package['package_id']}/{seqid}")
@@ -498,6 +546,7 @@ def main() -> int:
     parser.add_argument("--assembly-fasta", type=Path, required=True)
     parser.add_argument("--flybase-gff", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--role", choices=("calibration", "main", "reserve"), default="calibration")
     args = parser.parse_args()
     build_calibration_packets(
         args.packages,
@@ -505,6 +554,7 @@ def main() -> int:
         args.assembly_fasta,
         args.flybase_gff,
         args.output_dir,
+        args.role,
     )
     return 0
 

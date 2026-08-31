@@ -249,6 +249,26 @@ class BuildCalibrationPacketsTest(unittest.TestCase):
         self.assertTrue(all(line.split("\t")[1:3] == ["FlyBase", "transposable_element"] for line in raw_lines))
         self.assertFalse(any("sim4" in line for line in raw_lines))
 
+    def test_selects_frozen_main_and_reserve_roles(self) -> None:
+        manifest = (
+            HERE.parent.parent.parent
+            / "docs"
+            / "experiments"
+            / "manifests"
+            / "FBTI-EXTANT-LOCUS-PHASE0-R1-V1.3"
+            / "packages.tsv"
+        )
+        all_packages = packets.read_packages(manifest)
+        main = packets.select_role(all_packages, "main")
+        reserve = packets.select_role(all_packages, "reserve")
+
+        self.assertEqual(len(main), 120)
+        self.assertEqual(main[0]["role_rank"], 1)
+        self.assertEqual(main[-1]["role_rank"], 120)
+        self.assertEqual(len(reserve), 40)
+        self.assertEqual(reserve[0]["role_rank"], 1)
+        self.assertEqual(reserve[-1]["role_rank"], 40)
+
     def test_rejects_missing_focal_feature(self) -> None:
         rows = self._context_records()
         rows = [row for row in rows if row["feature_id"] != "FBti-S0-01"]
