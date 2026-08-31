@@ -2,50 +2,73 @@
 
 Date: 2026-09-01
 
-Status: **operational clarification proposed before calibration; no Gate L result**
+Status: **accepted for calibration on 2026-09-01, before any human answer; operational lock; no Gate L result**
 
-This addendum resolves two implementation ambiguities found before any human
+This addendum resolves implementation ambiguities found before any human
 annotation. It does not change the frozen panel, ontology, thresholds,
-bootstrap, reserve order or gate sequence. It becomes binding only after the
-coordinator and annotators accept it before calibration starts.
+bootstrap, reserve order or gate sequence. It is accepted for calibration on
+2026-09-01, before any human answer.
 
 ## 1. Provenance deep-audit actor
 
-The third adjudicator is also the fixed provenance auditor for the 40
-preselected `deep_audit_feature_id` records. The audit is completed P3-blind
-and before the adjudicator views either A1 or A2 annotation.
+The third adjudicator (`ADJ`) is also the fixed provenance auditor for the 40
+preselected `deep_audit_feature_id` records. ADJ completes and locks this
+audit P3-blind before viewing any A1/A2 answer bundle, Gate L metric or P3
+output/feature. When ADJ later adjudicates, the prior audit category is not
+shown and cannot be used as evidence.
 
-The existing `provenance_audit.tsv` schema remains unchanged because the actor
-is fixed by this contract. This audit is a single provenance judgement, not an
-inter-annotator reproducibility metric and not a three-party consensus. The
-adjudicator may classify only:
+The fixed `provenance_audit.tsv` records the source-identity fields, the
+registered `evidence_codes`, one category and its note. This audit is a single
+anchor-feasibility judgement, not a judgement about material, locus partition,
+topology or boundary; it is not an inter-annotator reproducibility metric and
+not a three-party consensus. The legacy category values mean only:
 
-- `interpretable_extant_locus`;
-- `explicit_uncertain`; or
-- `uninterpretable`.
+- `interpretable_extant_locus`: the anchor is feasible for an extant-locus
+  annotation task; this does not assert one locus or any material, topology or
+  boundary answer;
+- `explicit_uncertain`: the provenance chain is traceable, but a documented
+  provenance or biological ambiguity prevents a stable anchor interpretation;
+  this does not assert one locus; or
+- `uninterpretable`: anchor feasibility for an extant-locus annotation task
+  cannot be established.
 
+Every category records one or more supporting registered `evidence_codes`.
 The required `audit_note` records the direct reason for the last two classes.
 The fixed L-P threshold remains at least 36 of 40 in the first two classes.
 
 ## 2. Boundary uncertainty and atom projection
 
-A locus `boundary_interval` is an epistemic statement about the outer locus
-boundary. It never extends, erodes or fills an `observed_material_segment` and
-therefore is not an alternative TE-positive interval.
+A locus `boundary_interval` and `locus_envelope` are epistemic/display
+statements about the outer locus boundary. Neither changes, extends, erodes
+or fills an `observed_material_segment`, and neither participates in atom
+projection.
 
 Pass-2 projection uses positive-length overlap with the adjudicated material
-rows as follows:
+rows. Assigned and unresolved material rows must not have positive-length
+overlap. For each atom, total supported overlap is the union of overlap with
+both assigned and unresolved material, counting each base once. The existing
+V1 thresholds are then applied to that total support:
 
 1. a package-censored atom is `package_censored` and excluded;
-2. any atom overlapping an adjudicated material row whose
-   `locus_assignment_status=unresolved` is `unresolved`;
-3. otherwise calculate `C` from assigned material only and apply the V1
-   `unassigned`, `unique`, `mixed`, then `unresolved` precedence unchanged.
+2. if total supported overlap is `<50%` of the atom, the atom is
+   `unassigned`;
+3. otherwise, calculate each assigned-locus contribution and the total
+   supported overlap (including unresolved material). An atom is `unique`
+   only when one assigned locus contributes at least 90% of total supported
+   overlap and every second assigned locus contributes at most 10%;
+4. otherwise, an atom is `mixed` when at least two assigned loci each cover
+   `>=20%` of the atom; and
+5. otherwise, the atom is `unresolved`.
+
+There is no absolute precedence for any 1-bp overlap. In particular, a
+positive-length overlap with unresolved material does not by itself force
+`unresolved`; its bases contribute to total support and the existing
+`50%`, `90%/10%` and `20%` rules decide the projection.
 
 Consequently, a point/interval/unidentifiable locus boundary alone never
 changes atom assignment. This prevents an uncertain outer boundary from
-silently becoming material and gives unresolved material an explicit
-abstaining projection rather than a guessed locus ID.
+silently becoming material while retaining unresolved material as support
+without inventing a locus identity.
 
 ## 3. Evidence registry freeze
 
@@ -61,7 +84,30 @@ code. Annotators must record the specific observable used. Empty evidence is
 legal and should lead to an interval or unidentifiable boundary when a point
 cannot be supported.
 
-## 4. Calibration lock
+## 4. Major topology remains the V0 gate, with a non-gating audit
+
+The V0 preregistered topology fields and definitions remain unchanged,
+including `relation_type`, directed immediate-parent `nested_in`, symmetric
+`distinct_locus`, `overlap_unresolved`, and the existing
+`topology_resolution` values. The gating major-topology burden remains
+`count(topology_resolution == "new_topology") / 120`; it is not replaced by a
+new distance estimand. ADJ locks this field package by package before aggregate
+Gate L output is available. A fixed coordinator witnesses the lock, checks the
+frozen category definition and requires a topology-change reason for every
+`new_topology`; the coordinator does not annotate or change the bundle.
+
+After lock, a deterministic consistency audit compares ADJ separately with A1
+and A2, and A1 with A2. It reuses the V1 maximum-cardinality,
+maximum-total-IoU locus matching (`IoU >= 0.50`, genomic-coordinate tie-break),
+then asks whether the match is complete, the locus partition on jointly
+supported assigned material is identical, and the mapped typed relation graph
+is identical, including `nested_in` direction. Actor-local IDs, locus envelopes,
+boundary coordinates, evidence codes and material endpoint edits are not
+topology evidence. The audit reports equivalence flags, field-by-audit
+discordances and unevaluable packages. It never changes the preregistered field
+or Gate L PASS/NO-GO status.
+
+## 5. Calibration lock
 
 The 12 calibration packages remain outside every metric. A1 and A2 complete
 them independently; the adjudicator then reviews disagreements and records

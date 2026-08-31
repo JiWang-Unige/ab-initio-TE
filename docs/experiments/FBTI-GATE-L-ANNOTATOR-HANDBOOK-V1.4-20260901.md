@@ -2,7 +2,7 @@
 
 Date: 2026-09-01
 
-Status: **calibration handbook proposal; P3-blind; no scientific result**
+Status: **accepted for calibration on 2026-09-01, before any human answer; operational lock; P3-blind; no scientific result**
 
 This handbook operationalizes the frozen V0--V1.4 annotation contract. It is
 for calibration first. It does not ask an annotator to reproduce FlyBase
@@ -16,7 +16,10 @@ coordinates, reconstruct an ancestral insertion or repair P3 predictions.
   features other than raw-sequence observations already allowed by the
   evidence registry.
 - `ADJ` receives A1/A2 answers only after both bundles are locked. ADJ also
-  performs the separate 40-record provenance audit before viewing A1/A2.
+  completes and locks the separate 40-record provenance audit before viewing
+  any A1/A2 answer, Gate L metric or P3 output/feature. When ADJ later
+  adjudicates, the prior audit category is not shown and cannot be used as
+  evidence.
 - Calibration answers never enter Gate L metrics.
 
 The distributed response files use an opaque `CALIB-*`, `MAIN-*` or
@@ -76,7 +79,8 @@ Locus status is only `resolved`, `partially_resolved` or `unresolved`.
 
 - Touching material segments assigned to the same locus are one segment and
   must be merged before lock.
-- Assigned material of two resolved or partially resolved loci cannot overlap.
+- Assigned and unresolved material rows cannot have positive-length overlap.
+  Assigned material of two resolved or partially resolved loci cannot overlap.
   Ambiguous material uses unresolved assignment.
 - Relation values are `nested_in`, `distinct_locus` and
   `overlap_unresolved`.
@@ -96,9 +100,26 @@ independent evidence. The specific sequence observation supporting a point
 must be recorded using the registry; otherwise use an interval or
 unidentifiable boundary.
 
-Boundary intervals never extend or trim supported material. If the material
-itself is supported but its locus membership is uncertain, encode that in
+Boundary intervals and locus envelopes never extend or trim supported material
+and do not participate in atom projection. If the material itself is supported
+but its locus membership is uncertain, encode that in
 `material_segments.tsv`, not by widening a locus envelope.
+
+## Frozen-atom projection
+
+For each eligible atom, total supported overlap is the union of positive-length
+overlap with both assigned and unresolved material, counting each base once.
+Apply the existing V1 thresholds to that total support:
+
+- `unassigned` when total supported overlap is `<50%` of the atom;
+- `unique` when one assigned locus contributes at least 90% of total supported
+  overlap and every second assigned locus contributes at most 10%;
+- `mixed` when at least two assigned loci each cover `>=20%` of the atom; and
+- `unresolved` otherwise.
+
+There is no absolute precedence for any 1-bp overlap. Unresolved material
+contributes to total support but does not by itself force `unresolved` or
+invent a locus identity.
 
 ## Independent lock and adjudication
 
@@ -109,6 +130,15 @@ as an annotation-format error and produces no scientific result.
 ADJ returns a complete bundle, not a patch. For each package,
 `topology_resolution` is one of `accept_a1`, `accept_a2`,
 `same_topology_minor_edit` or `new_topology`; the last requires a reason.
+
+The V0 preregistered major-topology fields and definitions remain unchanged.
+The gating burden remains `new_topology / 120`. ADJ locks the package field
+before aggregate Gate L output is available; a coordinator witnesses the lock
+and checks that every `new_topology` has a topology-change reason, but does not
+annotate or edit the bundle. A deterministic post-lock consistency audit may
+compare ADJ with A1/A2 using the frozen locus matching, jointly supported
+material partition and typed relation graph. That audit is reported separately
+and cannot change the field or Gate L status.
 
 After the 12 calibration packages, the team records ambiguous instructions,
 accepts one contract version and repeats calibration if any semantic rule
