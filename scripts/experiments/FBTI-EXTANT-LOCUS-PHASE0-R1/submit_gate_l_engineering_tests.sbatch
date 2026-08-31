@@ -27,6 +27,7 @@ python -m unittest \
   scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/test_assemble_gate_l_delivery.py \
   scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/test_validate_gate_l_pass1.py \
   scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/test_project_gate_l_atoms.py \
+  scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/test_gate_l_end_to_end.py \
   scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/test_evaluate_gate_l_reproducibility.py \
   scripts/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1/test_evaluate_gate_l_lp_ld.py \
   -v > "${OUT}/unittest.log" 2>&1
