@@ -3,9 +3,9 @@
 
 The input is the population TSV produced by ``build_population.py``.  A
 single mixed-integer program chooses calibration, main and reserve packages
-for both strata while enforcing the fixed challenge-cell quotas and global
-expanded-package non-overlap.  P3 multiplicity and nearest-FBti gap are
-retained as diagnostics only.
+for both strata while enforcing the fixed main/calibration challenge cells,
+stratum-level reserve quotas and global expanded-package non-overlap.  P3
+multiplicity and nearest-FBti gap are retained as diagnostics only.
 """
 
 from __future__ import annotations
@@ -28,28 +28,27 @@ PANEL_COUNTS = {"calibration": 6, "main": 60, "reserve": 20}
 S0_CELLS = ("<80", "80-499", "500-999", ">=1000")
 S1_CELLS = ("size2_depth2", "size_ge3_depth2", "depth_ge3")
 
-QUOTAS = {
-    ("S0", "<80", "calibration"): 2,
-    ("S0", "80-499", "calibration"): 2,
-    ("S0", "500-999", "calibration"): 1,
-    ("S0", ">=1000", "calibration"): 1,
+EXACT_QUOTAS = {
     ("S0", "<80", "main"): 15,
     ("S0", "80-499", "main"): 15,
     ("S0", "500-999", "main"): 15,
     ("S0", ">=1000", "main"): 15,
-    ("S0", "<80", "reserve"): 5,
-    ("S0", "80-499", "reserve"): 5,
-    ("S0", "500-999", "reserve"): 5,
-    ("S0", ">=1000", "reserve"): 5,
-    ("S1", "size2_depth2", "calibration"): 3,
+    ("S1", "size2_depth2", "calibration"): 2,
     ("S1", "size_ge3_depth2", "calibration"): 2,
-    ("S1", "depth_ge3", "calibration"): 1,
-    ("S1", "size2_depth2", "main"): 30,
-    ("S1", "size_ge3_depth2", "main"): 18,
-    ("S1", "depth_ge3", "main"): 12,
-    ("S1", "size2_depth2", "reserve"): 10,
-    ("S1", "size_ge3_depth2", "reserve"): 6,
-    ("S1", "depth_ge3", "reserve"): 4,
+    ("S1", "depth_ge3", "calibration"): 2,
+    ("S1", "size2_depth2", "main"): 20,
+    ("S1", "size_ge3_depth2", "main"): 20,
+    ("S1", "depth_ge3", "main"): 20,
+}
+
+# S0 calibration has only a lower bound per length cell.  The two remaining
+# packages and both reserve strata are selected by the seeded label-blind
+# priority objective.
+MIN_QUOTAS = {
+    ("S0", "<80", "calibration"): 1,
+    ("S0", "80-499", "calibration"): 1,
+    ("S0", "500-999", "calibration"): 1,
+    ("S0", ">=1000", "calibration"): 1,
 }
 
 POPULATION_FIELDS = {
@@ -202,12 +201,23 @@ def validate_manifest(rows: list[dict[str, str]]) -> None:
     if len({row["package_id"] for row in rows}) != len(rows):
         raise ValueError("selected packages contain duplicate package_id")
 
-    panel_counts = Counter(row["panel"] for row in rows)
-    if panel_counts != Counter({panel: count * len(STRATA) for panel, count in PANEL_COUNTS.items()}):
-        raise ValueError(f"panel counts do not match contract: {panel_counts}")
+    panel_counts = Counter((row["stratum"], row["panel"]) for row in rows)
+    expected_panel_counts = Counter(
+        {
+            (stratum, panel): count
+            for stratum in STRATA
+            for panel, count in PANEL_COUNTS.items()
+        }
+    )
+    if panel_counts != expected_panel_counts:
+        raise ValueError(f"stratum/panel counts do not match contract: {panel_counts}")
     quota_counts = Counter(_quota_key(row) for row in rows)
-    if quota_counts != Counter(QUOTAS):
-        raise ValueError(f"challenge-cell quotas do not match contract: {quota_counts}")
+    for key, expected in EXACT_QUOTAS.items():
+        if quota_counts[key] != expected:
+            raise ValueError(f"challenge-cell quota does not match contract for {key}: {quota_counts[key]}")
+    for key, minimum in MIN_QUOTAS.items():
+        if quota_counts[key] < minimum:
+            raise ValueError(f"challenge-cell minimum does not match contract for {key}: {quota_counts[key]}")
     if overlapping_pairs(rows):
         raise ValueError("selected expanded packages overlap")
 
@@ -307,16 +317,33 @@ def _constraint_rows(rows: list[dict[str, str]], variable_count: int):
     for index in range(len(rows)):
         add_constraint((3 * index + role for role in range(len(PANELS))), 0.0, 1.0)
 
+    for (stratum, cell, panel), quota in EXACT_QUOTAS.items():
+        panel_index = PANELS.index(panel)
+        columns = (
+            3 * index + panel_index
+            for index, row in enumerate(rows)
+            if row["unit_type"] == stratum and row["challenge_cell"] == cell
+        )
+        add_constraint(columns, quota, quota)
+
+    for (stratum, cell, panel), minimum in MIN_QUOTAS.items():
+        panel_index = PANELS.index(panel)
+        columns = (
+            3 * index + panel_index
+            for index, row in enumerate(rows)
+            if row["unit_type"] == stratum and row["challenge_cell"] == cell
+        )
+        add_constraint(columns, minimum, float("inf"))
+
     for stratum in STRATA:
-        cells = S0_CELLS if stratum == "S0" else S1_CELLS
-        for cell in cells:
-            for panel_index, panel in enumerate(PANELS):
-                columns = (
-                    3 * index + panel_index
-                    for index, row in enumerate(rows)
-                    if row["unit_type"] == stratum and row["challenge_cell"] == cell
-                )
-                add_constraint(columns, QUOTAS[(stratum, cell, panel)], QUOTAS[(stratum, cell, panel)])
+        for panel, quota in PANEL_COUNTS.items():
+            panel_index = PANELS.index(panel)
+            columns = (
+                3 * index + panel_index
+                for index, row in enumerate(rows)
+                if row["unit_type"] == stratum
+            )
+            add_constraint(columns, quota, quota)
 
     for left, right in overlapping_pairs(rows):
         add_constraint(
@@ -343,7 +370,8 @@ def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]],
     variable_count = len(rows) * len(PANELS)
     matrix, lower, upper = _constraint_rows(rows, variable_count)
     rng = np.random.Generator(np.random.PCG64(SEED))
-    objective = rng.random(variable_count)
+    candidate_priority = rng.random(len(rows))
+    objective = np.repeat(candidate_priority, len(PANELS))
     result = milp(
         c=objective,
         integrality=np.ones(variable_count),

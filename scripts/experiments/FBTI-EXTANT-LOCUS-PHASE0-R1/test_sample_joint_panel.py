@@ -20,7 +20,13 @@ def manifest_fixture() -> list[dict[str, str]]:
     for stratum, cells in (("S0", sample.S0_CELLS), ("S1", sample.S1_CELLS)):
         for cell in cells:
             for panel in sample.PANELS:
-                for _ in range(sample.QUOTAS[(stratum, cell, panel)]):
+                if panel == "main":
+                    count = 15 if stratum == "S0" else 20
+                elif panel == "calibration":
+                    count = 2 if stratum == "S1" else (2 if cell in ("<80", "80-499") else 1)
+                else:
+                    count = 20 if cell == cells[0] else 0
+                for _ in range(count):
                     panel_rank[panel] += 1
                     start = package_index * 100
                     rows.append(
