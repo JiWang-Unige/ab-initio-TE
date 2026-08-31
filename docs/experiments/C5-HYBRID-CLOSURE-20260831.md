@@ -22,6 +22,12 @@ clustering and structural stages that are outside the tested A1 contract.
 ChatGPT Pro reviewed the final three-source result and agreed with this stop
 decision and claim boundary.
 
+A subsequent first-principles audit defines a different task: grouping partial
+evidence atoms into biological instances using independent `FBti` identities.
+It does not reopen the frozen C5 whole-seed contract or authorize A2/A3. The
+new no-training decision gate is documented in
+[`TE-INSTANCE-FIRST-PRINCIPLES-RESTART-20260831.md`](TE-INSTANCE-FIRST-PRINCIPLES-RESTART-20260831.md).
+
 ## Frozen contract
 
 - Human evaluation: chr17:0-9,830,400, the unchanged comparator-strict truth,
