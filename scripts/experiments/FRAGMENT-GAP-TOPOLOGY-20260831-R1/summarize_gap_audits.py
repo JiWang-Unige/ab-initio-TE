@@ -221,6 +221,7 @@ def _add_gap(row: dict[str, str], strata: dict[str, dict[str, object]], label: s
                 item["left_terminal_gap_bp"] = int(item["left_terminal_gap_bp"]) + gap_length
             elif event == "right_terminal":
                 item["right_terminal_gap_records"] = int(item["right_terminal_gap_records"]) + 1
+                item["right_terminal_gap_bp"] = int(item["right_terminal_gap_bp"]) + gap_length
         return
     gap_length = _int_field(row, "gap_length", label)
     before = row.get("before_positive_run_length", "")

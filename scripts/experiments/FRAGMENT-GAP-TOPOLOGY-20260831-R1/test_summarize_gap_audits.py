@@ -73,6 +73,10 @@ class GapSummaryTest(unittest.TestCase):
         self.assertEqual(overall["truth_bp"], 90)
         self.assertEqual(overall["observed_internal_gaps"], 3)
         self.assertEqual(overall["terminal_gap_records"], 4)
+        self.assertEqual(
+            overall["left_terminal_gap_bp"] + overall["right_terminal_gap_bp"],
+            overall["terminal_gap_bp"],
+        )
         self.assertEqual(overall["observed_fragments"], 5)
         self.assertAlmostEqual(overall["fragments_per_truth"], 2.5)
         self.assertEqual(overall["internal_gap_length_count"], 3)
