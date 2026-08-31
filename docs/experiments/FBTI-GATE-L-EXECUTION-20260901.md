@@ -1,188 +1,254 @@
-# FBTI Gate L execution and publication route
+# FBTI Gate L machine closure and fastest publication route
 
 Date: 2026-09-01
 
-Status: **machine preparation in progress; human Gate L not evaluated**
+Status: **machine path ready; human Gate L not evaluated; no scientific PASS**
 
-## Decision
+## Outcome
 
-The fastest defensible path is to finish Gate L before any new post-training,
-decoder or post-processing experiment. The frozen project has enough sequence,
-FlyBase provenance, panel and P3-atom assets to run the test, but it does not
-yet have the independent human annotations that define a biological extant
-locus. More GPU work cannot replace that missing observation.
-
-The critical path is therefore:
+The fastest defensible route is now operationally closed on the machine side:
 
 ```text
-V1.4 operational lock
-  -> 12-package A1/A2 calibration
-  -> handbook/evidence-registry lock
-  -> 120-package independent A1/A2 annotation
-  -> P3-blind third-person adjudication and provenance audit
-  -> canonical atom projection
+V1.4 lock
+  -> A1/A2 calibration
+  -> A1/A2 main annotation + P3-blind ADJ provenance audit in parallel
+  -> sealed A1/A2 bundles
+  -> third-person adjudication
   -> automatic Gate L
-  -> Gate O only if L passes
-  -> Gate E only if O passes
+  -> Gate O only after L PASS
+  -> Gate E only after O PASS
+  -> at most one restricted relation model only after E PASS
 ```
 
-Gate O and Gate E interfaces may be documented while annotation runs, but no
-O/E scientific computation, GPU allocation or neural implementation is
-authorized early.
+No additional post-training, decoder, smoothing or gap-filling run is the
+current critical path. The missing observation is biological locus identity,
+not another representation of the existing binary mask. Two independent
+human annotators and one fixed provenance auditor/adjudicator are therefore
+the only remaining prerequisite for Gate L.
 
-## What is already complete
+## Why this route is necessary
 
-| Asset | State | Meaning |
-|---|---|---|
-| V1.3 172-package joint panel | frozen | 12 calibration, 120 main, 40 reserve; challenge-panel estimand |
-| `context_features.tsv` | frozen | every package-local FlyBase feature, package-unique |
-| `package_atoms.tsv` | frozen and hidden in Pass 1 | canonical P3 substrate for later projection |
-| 12 calibration evidence packets | `PASS`, job 12122769 | reusable P3-blind human input |
-| 120 main evidence packets | `PASS`, job 12125398 task 0 | machine-ready, not yet annotated |
-| 40 reserve evidence packets | `PASS`, job 12125398 task 1 | frozen; annotate only by paired prefix after L-D shortfall |
-| A1/A2/ADJ response kits | `PASS`, job 12125409 | calibration and main proposal templates; engineering only |
-| Human annotations and adjudication | absent | Gate L remains unevaluated |
+Four observations survive all completed audits:
 
-The main and reserve packet job was CPU-only, used 1 CPU and 8 GB per task,
-consumed zero GPU, and completed both tasks in about 71 seconds. It produced
-120 and 40 opaque P3-blind packet directories respectively. These are
-engineering outputs and enter no scientific denominator by themselves.
-The calibration and main response-kit array then completed in zero and one
-seconds respectively, also with zero GPU. The generated kits are explicitly
-marked V1.4 proposals until the operational clarification is accepted.
+1. P3 retains high TE-material recovery but does not identify which separated
+   material pieces belong to one extant locus. On Human P3, bp recall is
+   `94.315%` while fragments/truth is `1.292`; on Mouse P3, bp recall is
+   `95.298%` while fragments/truth is `2.144`.
+2. Human comparator labels are binary TE/background/unknown runs. They do not
+   contain biological copy identity, parent insertion identity or nested
+   parent-child topology.
+3. Generic DAPT, TE-aware MLM, P3 U-Net/boundary supervision, thresholding,
+   gap merge, minimum length and local structured smoothing did not introduce
+   that missing variable. P3-R2 failed the frozen Human route and its aligned
+   supervision was worse than the matched spatial-permutation control on the
+   mechanism endpoints.
+4. Gap errors are clustered and heterogeneous. Human P3 has 4,961 internal
+   gaps in 14,253 comparator runs; 64.77% are at most 2 bp, but the p99 is
+   137.4 bp and the maximum is 16,384 bp. Short gaps are common, but distance
+   alone does not tell whether a gap is a model dropout, host material, a
+   nested child, another locus or an unidentifiable interruption.
 
-## The experiment matrix
+The target is therefore hierarchical: retain the observed TE-material mask,
+represent its coherent atoms, then infer typed relations among atoms without
+relabeling the convex hull as TE-positive. This is the defensible version of
+the gene/exon analogy: atoms resemble supported exons, while interruptions
+remain explicitly typed rather than being silently filled as introns.
 
-| Stage | Scientific question | Frozen input | New observation | Primary output | Gate | Resource |
-|---|---|---|---|---|---|---:|
-| L-calibration | Can two people apply one ontology without hidden implementation choices? | 12 opaque packets | independent human decisions and ambiguity log | accepted handbook, evidence registry and schemas | no metric | 12--16 person-hours |
-| L-P | Is FlyBase provenance adequate for the extant-locus anchor claim? | 40 preselected deep-audit anchors | P3-blind provenance judgement | integrity and 36/40 interpretability checks | pass/fail | 12--20 person-hours |
-| L-R | Is the ontology reproducible before adjudication? | fixed 120 main packets | independent A1/A2 material, locus and topology | IoU, count agreement, edge F1, AC1 | pass/fail | 90--120 person-hours in parallel |
-| L-D | Does the asset contain enough relation supervision? | adjudicated main plus frozen reserve prefix | locus topology plus rule-derived atom membership | five registered denominators | pass/incomplete/insufficient | reserve adds at most 30--40 person-hours |
-| O | Are frozen P3 atoms worth grouping? | adjudicated truth and canonical atoms | manual membership oracle | oracle grouping ceiling and fusion safety | pass/fail | CPU only |
-| E | Do non-geometric single-genome relations add information? | fixed eligible pairs and grouped folds | sequence/structure relation features | B3 versus geometry B1/B2 | pass/fail | 220--440 CPU core-hours |
-| restricted model | Can the passed signal be deployed? | unchanged atoms, labels and folds | at most 2M trainable relation parameters | abstaining typed relations | confirmatory only | GPU decided later |
+## Independent Pro review and V1.4 lock
 
-## Parallel work without invalidating the experiment
+ChatGPT Pro reviewed the repository and then reviewed the two final V1.4
+ambiguities. The accepted operational interpretation is:
 
-The two annotators are the main parallel branch. They receive the same packet
-set in independent order and cannot exchange answers. Packet construction,
-return-schema validation, Gate L metric implementation and the coordinator's
-provenance table can proceed in parallel because none exposes P3 to A1/A2.
+- ADJ may also be the fixed provenance auditor, but the 40-anchor audit is
+  completed and locked before ADJ sees A1/A2 answers, disagreement summaries,
+  metrics, projection or P3. It is an anchor-feasibility audit, not a locus or
+  boundary annotation. Its prior category is hidden during adjudication.
+- Boundary intervals and locus envelopes are epistemic annotations only. They
+  never add, remove or fill observed material and never enter atom projection.
+- Assigned and unresolved material may not overlap. Unresolved material enters
+  total supported overlap; the already frozen 50%, 90/10 and 20% rules decide
+  `unassigned`, `unique`, `mixed` or `unresolved`. A 1-bp contact has no special
+  precedence.
+- The preregistered gating burden remains
+  `count(topology_resolution == "new_topology") / 120`. A coordinator witnesses
+  package locks and reasons. A deterministic post-lock audit compares ADJ-A1,
+  ADJ-A2 and A1-A2 topology, but is non-gating and cannot rescue or overturn
+  A1/A2 reproducibility.
 
-The adjudicator cannot begin package adjudication before both annotation
-bundles are locked. Reserve annotation cannot begin before the automatic L-D
-count requests the next frozen pair. Gate O cannot begin before final Gate L
-`PASS`.
+The binding files are:
 
-Agents, repeated passes by one person, or a language model cannot be counted as
-the two independent biological annotators. They may prepare packets, validate
-schemas and calculate registered metrics only.
+- `docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.4-ADDENDUM-20260901.md`;
+- `docs/experiments/FBTI-GATE-L-ANNOTATOR-HANDBOOK-V1.4-20260901.md`;
+- `docs/experiments/manifests/FBTI-EXTANT-LOCUS-GATE-L-V1.4/evidence_registry.tsv`.
 
-## Operational lock required before calibration
+## Frozen experiment matrix
 
-V1.4 proposes only two clarifications:
+| Stage | New information being tested | Frozen input | Output | Go/no-go consequence | Resource |
+|---|---|---|---|---|---:|
+| Calibration | whether two people can apply one ontology | 12 opaque P3-blind packages | locked wording, registry and schemas | semantic change repeats calibration | 12--16 person-hours |
+| L-P | whether source provenance supports anchor review | 40 frozen deep anchors | provenance feasibility | failure closes this FlyBase truth route | 12--20 person-hours |
+| L-R | whether material/locus/topology calls reproduce | 120 main packages | A1/A2 IoU, count, graph and boundary-status agreement | failure closes supervised locus assembly under this ontology | 90--120 person-hours, parallel |
+| L-D | whether relation denominators exist | adjudicated main plus paired reserve prefix | multipart/nested/distinct/pair/ambiguous counts | insufficiency closes relation training on this asset | CPU plus reserve annotation only if requested |
+| O | whether perfect atom membership would help | frozen atoms + adjudicated truth | oracle grouping ceiling and fusion safety | failure closes P3 atoms as an assembly substrate | CPU only |
+| E | whether label-blind relations add information | frozen eligible pairs and grouped folds | B3 versus geometry B1/B2 | failure requires genuinely new observations | 220--440 CPU core-hours |
+| Restricted model | whether passed information can be deployed | unchanged atoms, labels and folds | abstaining typed relation calls | confirmatory only | GPU budget decided after E |
 
-1. the third adjudicator performs the 40-record P3-blind provenance audit
-   before viewing A1/A2 output;
-2. locus boundary intervals never create material, while any canonical atom
-   overlapping unresolved-assignment material abstains as `unresolved`.
+FlyBase is not rebuilt for each step. The exact r6.68 packet and provenance
+assets are reusable. It remains a positive-locus panel: whole-genome
+precision/F1, FPR and population prevalence are forbidden. A positive method
+paper still requires an independent biological-locus panel, preferably Human
+if the final claim is Human annotation.
 
-The initial evidence registry contains one non-independent FlyBase provenance
-code, four specific sequence-derived codes that are also future Gate E
-features, and one assembly-gap code. The generic existence of raw sequence is
-not enough to claim an independently supported point boundary.
+## Machine closure ledger
 
-These clauses must be accepted before calibration. If calibration shows that
-an evidence code or ontology decision is unusable, revise the version and
-repeat calibration. No main answer may span contract versions.
+| Asset or check | Job / commit | Observed result | Classification |
+|---|---|---|---|
+| 120 main + 40 reserve packets | `12125398` | both tasks `COMPLETED 0:0` | engineering |
+| response-schema kits | `12125409` | calibration and main templates complete | engineering |
+| accepted provenance table | `12125437` | 293 rows, 120 packages, 40 deep calls blank, registered evidence code present | engineering |
+| accepted calibration deliveries | `12125438` | A1/A2 each 12 packets and six response TSVs; order differs; no P3/manifest/atoms | engineering |
+| accepted main deliveries | `12125441` | A1/A2 each 120 packets and six response TSVs; order differs; no P3/manifest/atoms | engineering, sealed |
+| earlier module tests | `12125426` | 26 tests passed in `te_benchmark` | engineering |
+| V1.4 full module + synthetic chain | `12125446` | 37 tests passed in 4.921 s, including NumPy bootstrap and full CLI chain | engineering gate passed |
+| V1.4/projection/provenance/topology implementation | commits through `201ab2f` | GitHub and Baobab fast-forwarded | reproducibility |
 
-## Human hand-off
+The current server hand-off paths are:
 
-Each annotator receives:
+```text
+/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-delivery-v1.4-20260901-r2/A1
+/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-delivery-v1.4-20260901-r2/A2
+/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-delivery-v1.4-20260901-r1/A1
+/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-delivery-v1.4-20260901-r1/A2
+/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-provenance-audit-v1.4-20260901-r2/provenance_audit.tsv
+```
 
-- one opaque packet directory tree;
-- their `assignment.tsv`;
-- six blank Pass-1 response TSVs;
-- the V1.4 handbook; and
-- the frozen evidence registry.
+The older `*-proposal-*` deliveries are retained as engineering provenance and
+must not be distributed.
 
-They do not receive `packet_manifest.tsv`, internal package IDs,
-`package_atoms.tsv`, P3 probabilities or the other annotator's files. The
-coordinator keeps the opaque mapping and normalizes returned IDs only after an
-independent bundle is locked.
+## Fastest human execution plan
 
-The calibration exit condition is procedural, not a fitted F1 threshold:
+### Required named roles
 
-- both complete all 12 packages independently;
-- schema validation passes;
-- every instruction ambiguity is resolved in writing;
-- the handbook, registry and projection rule receive one version;
-- semantic changes trigger a new calibration pass.
+- `A1`: independent TE/genome annotator;
+- `A2`: second independent annotator, with no access to A1;
+- `ADJ`: fixed provenance auditor and later adjudicator;
+- coordinator: controls sealing, schema validation and unblinding, but does not
+  create a fourth biological answer.
+
+An agent, repeated passes by one person or an LLM cannot occupy A1/A2. Their
+independence is the scientific observation being measured.
+
+### Critical path
+
+1. **Calibration, elapsed 1--2 working days.** A1/A2 independently complete
+   the 12 calibration deliveries. The coordinator validates both returns.
+   They discuss instruction ambiguity only; calibration answers never enter a
+   metric. Any semantic change increments the contract and repeats all 12.
+2. **Main annotation and provenance audit in parallel, elapsed 5--8 working
+   days at full-time effort.** After calibration lock, A1/A2 receive the sealed
+   120-package deliveries. At the same time ADJ completes the 40 frozen
+   provenance rows without seeing either answer bundle. A1/A2 output remains
+   sealed until the audit is locked.
+3. **Validation and adjudication, elapsed 3--5 working days.** The coordinator
+   validates and normalizes both bundles, then gives their disagreements and
+   underlying evidence—not the provenance categories—to ADJ. ADJ returns a
+   complete bundle and locks `topology_resolution` package by package.
+4. **Automatic closure, minutes of CPU time.** The frozen scripts calculate
+   L-P, L-R, the non-gating topology consistency audit, atom projection and
+   L-D. Only a requested paired reserve prefix is annotated; the reserve may
+   not be cherry-picked.
+
+With three available experts, the realistic fastest elapsed time is roughly
+9--15 working days. Machine-side delay after each human return is minutes, not
+days. The schedule cannot be shortened by adding GPUs because the critical
+path is independent biological judgement.
 
 ## Frozen Gate L decision
 
-### L-P provenance
+### L-P
 
-- assembly, contig, coordinate and feature-ID integrity: 100%;
-- interpretable or explicit-uncertain deep anchors: at least 36/40;
-- unsupported copied point boundaries: at most 0.20.
+- source assembly/contig/coordinate/feature identity integrity: `100%`;
+- at least `36/40` deep anchors are interpretable or explicit-uncertain;
+- unsupported copied point boundaries: `<=0.20`.
 
-### L-R reproducibility on 120 main packages
+L-P is one fixed expert's provenance feasibility judgement, not an
+inter-annotator reproducibility claim.
 
-- median material-union IoU at least 0.80; bootstrap lower bound at least 0.70;
-- exact locus-count agreement at least 0.70;
-- ontology-edge macro-F1 at least 0.75; bootstrap lower bound at least 0.65;
-- boundary-status Gwet AC1 at least 0.60 with its registered denominator;
-- major topology adjudication at most 0.35;
-- resolved plus partially resolved packages at least 0.65.
+### L-R on the 120 main packages
 
-### L-D denominator
+- median material-union IoU `>=0.80`, bootstrap lower bound `>=0.70`;
+- exact locus-count agreement `>=0.70`;
+- ontology-edge macro-F1 `>=0.75`, bootstrap lower bound `>=0.65`;
+- boundary-status Gwet AC1 `>=0.60`, with at least 40 matched loci from 20
+  packages;
+- major topology adjudication `<=0.35`;
+- resolved + partially resolved packages `>=0.65`.
 
-- at least 30 resolved multipart loci from 20 packages;
-- 20 eligible nested relations from 10 packages;
-- 30 eligible distinct-locus pairs from 15 packages;
-- 50 positive co-locus atom pairs from 25 packages;
-- 15 mixed/unresolved atoms from 10 packages.
+The automatic topology audit is reported alongside the field-based major
+burden. Discordance is visible and publishable, but it does not change the
+pre-registered gate or rescue failed A1/A2 agreement.
 
-Final status precedence remains `CONTRACT_INVALID`, `NO_GO_LP`, `NO_GO_LR`,
-explicit metric-denominator insufficiency, `INCOMPLETE`,
+### L-D
+
+- 30 resolved multipart loci from at least 20 packages;
+- 20 nested relations from at least 10 packages;
+- 30 distinct-locus pairs from at least 15 packages;
+- 50 positive co-locus atom pairs from at least 25 packages;
+- 15 mixed/unresolved atoms from at least 10 packages.
+
+Final status precedence is `CONTRACT_INVALID`, `NO_GO_LP`, `NO_GO_LR`, explicit
+boundary-denominator insufficiency, `INCOMPLETE`,
 `LABEL_DENOMINATOR_INSUFFICIENT`, then `PASS`.
 
-## What each outcome changes
+## What happens after Gate L
 
-| Outcome | Scientific meaning | Next-only | Closed |
+| Gate outcome | Meaning | Next only | Closed immediately |
 |---|---|---|---|
-| `NO_GO_LP` | this FlyBase asset cannot support the intended locus semantics | independent truth source | relation modelling on this asset |
-| `NO_GO_LR` | the ontology is not reproducible | redesign the object or publish ambiguity | model capacity as a substitute for truth |
-| denominator insufficient | this panel lacks trainable relation events | another truth asset, if justified | sequence-only impossibility claim |
-| O fail | P3 is a poor atom substrate even with an oracle | diagnose/new atom source | more heads/losses on P3 atoms |
-| E fail | tested single-genome relations add insufficient safe information | comparative empty-site evidence | larger encoder, LoRA, graph decoder |
-| L/O/E pass | truth, oracle value and incremental signal exist | one restricted relation head, then an independent species panel | simultaneous atomizer/assembler redesign |
+| `NO_GO_LP` | the current source cannot support the intended anchor semantics | construct an independent locus truth source | relation learning on this asset |
+| `NO_GO_LR` | the ontology is not reproducible | redesign the biological object or publish ambiguity | model capacity as a replacement for truth |
+| L-D insufficient after reserve | the panel lacks relation supervision | another independently justified truth asset | sequence-only impossibility claim |
+| L `PASS`, O fail | even oracle membership cannot rescue frozen atoms safely | diagnose/change atom source | new heads/losses on P3 atoms |
+| L/O `PASS`, E fail | tested single-genome relations add insufficient safe information | comparative empty-site or other new evidence | larger encoder, LoRA, graph decoder |
+| L/O/E `PASS` | truth, oracle value and incremental signal exist | one <=2M-parameter abstaining relation head, then independent-species confirmation | simultaneous atomizer/assembler redesign |
+
+The one remaining mechanism-distinct form of post-training is therefore
+conditional and relational: train same-locus/distinct/nested/unresolved atom
+relations with instance-labelled positives and same-family different-instance
+hard negatives. It is authorized only after L/O/E establish that the labels,
+oracle value and non-geometric information exist. It is not TE-aware MLM and
+does not fill gaps as material.
 
 ## Publication boundary
 
-A passed Phase 0 can support a route-selection result on a double-annotated,
-adjudicated FlyBase-derived positive-locus panel. It cannot support FlyBase
-whole-genome precision/F1, ancestral insertion recovery, population prevalence
-or cross-species generality. A positive method paper still needs a second
-independent biological-locus panel, preferably Human if the final claim is
-Human annotation.
+Already supportable:
 
-The strongest honest question is whether explicit cross-atom relation evidence
-can organize discontinuous observed TE-derived material into uncertainty-aware
-extant loci while preserving nested children and abstaining on unidentifiable
-cases. This is more informative than lowering flat-run `fragments/truth` by
-filling short gaps.
+- high bp recovery is insufficient for logical TE-instance annotation;
+- tested local post-training/segmentation/post-processing objectives do not
+  supply instance identity;
+- gap errors are clustered and heterogeneous rather than IID;
+- a positive-only FlyBase-derived panel can be used for a bounded ontology and
+  route-selection test.
 
-## Immediate next actions
+Not yet supportable:
 
-1. Accept or revise the two V1.4 clarifications.
-2. Name two independent annotators and one adjudicator/provenance auditor.
-3. Materialize the 12 calibration response kits and distribute them with the
-   handbook and evidence registry.
-4. Finish the Pass-1 validator and Gate L calculator on synthetic fixtures
-   while the people annotate.
-5. Lock calibration before distributing the already-built 120 main packets.
+- that Gate L has passed;
+- that every FBti record is one independently verified biological insertion;
+- whole-genome Fly precision/F1 or FPR;
+- Human or cross-species instance generalization;
+- recovery of deleted ancestral boundaries from one extant sequence;
+- superiority of a post-trained instance assembler.
 
-No new GPU run is part of these actions.
+The strongest honest final question remains:
+
+> Can explicit, label-blind cross-atom evidence organize discontinuous
+> observed TE-derived material into uncertainty-aware extant loci while
+> preserving nested children and abstaining where locus identity is not
+> identifiable?
+
+## Immediate next-only dependency
+
+Machine preparation no longer blocks the experiment. Before any distribution,
+the coordinator must record the real people assigned to `A1`, `A2` and `ADJ`.
+Once named, distribute only the two accepted calibration paths above. Main
+deliveries stay sealed until the calibration semantics are locked. No new GPU
+job is authorized while this human dependency is unresolved.
