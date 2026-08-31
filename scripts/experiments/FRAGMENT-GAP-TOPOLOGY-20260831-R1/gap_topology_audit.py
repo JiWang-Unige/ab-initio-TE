@@ -324,6 +324,17 @@ def _merge(intervals: list[Interval]) -> dict[str, list[Interval]]:
     return merged
 
 
+def _load_truth(path: Path, union_truth: bool) -> list[Interval]:
+    if not union_truth:
+        return _intervals(path, truth=True)
+    merged = _merge(_intervals(path))
+    output: list[Interval] = []
+    for seqid in sorted(merged):
+        for interval in merged[seqid]:
+            output.append(Interval(seqid, interval.start, interval.end, f"truth_{len(output) + 1:06d}"))
+    return output
+
+
 WindowIndexEntry = tuple[list[Interval], list[Interval], list[int], list[int], list[int]]
 
 
@@ -623,8 +634,9 @@ def audit(
     windows_path: Path | None,
     output_dir: Path,
     exclude_path: Path | None = None,
+    union_truth: bool = False,
 ) -> None:
-    truth_all = _intervals(truth_path, truth=True)
+    truth_all = _load_truth(truth_path, union_truth)
     truth, excluded_truth = _exclude_truth(truth_all, exclude_path)
     prediction = _intervals(prediction_path)
     calibration = _calibration(calibration_path)
@@ -663,6 +675,7 @@ def audit(
         "truth_input": str(truth_path), "prediction_input": str(prediction_path),
         "calibration_input": str(calibration_path), "windows_input": str(windows_path) if windows_path else None,
         "exclude_input": str(exclude_path) if exclude_path else None,
+        "truth_union_applied": union_truth,
         "prediction_union": "overlapping_or_touching_prediction_intervals_form_one_positive_run",
         "gap_definition": "internal rows are maximal uncovered intervals bounded by two observed positive runs; terminal rows are uncovered truth prefixes/suffixes with one observed anchor",
         "fully_missed_truth_policy": "no gap row is emitted when a truth interval has no observed positive run; missed remains in truth_summary",
@@ -686,8 +699,12 @@ def main() -> int:
     parser.add_argument("--windows", type=Path, help="optional zero-based evaluator/window intervals")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--exclude-intervals", type=Path, help="truth intervals overlapping these rows are excluded wholesale")
+    parser.add_argument("--union-truth", action="store_true", help="union overlapping or touching truth rows before analysis")
     args = parser.parse_args()
-    audit(args.truth, args.prediction, args.calibration, args.windows, args.output_dir, args.exclude_intervals)
+    audit(
+        args.truth, args.prediction, args.calibration, args.windows,
+        args.output_dir, args.exclude_intervals, args.union_truth,
+    )
     return 0
 
 

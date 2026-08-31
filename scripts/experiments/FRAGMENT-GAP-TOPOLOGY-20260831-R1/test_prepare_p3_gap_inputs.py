@@ -123,6 +123,24 @@ class PrepareP3GapInputsTest(unittest.TestCase):
         self.assertEqual([(row["source_start"], row["source_end"]) for row in manifest], [("0", "5"), ("10", "15")])
         self.assertEqual(json.loads((output / "in_sample.manifest.json").read_text())["diagnostic_scope"], "in-sample diagnostic only")
 
+    def test_projected_canonical_can_union_overlapping_positive_truth(self) -> None:
+        truth = self.root / "overlap.tsv"
+        truth.write_text(
+            "seqid\tstart\tend\nchrA\t0\t5\nchrA\t4\t8\nchrA\t10\t12\n",
+            encoding="utf-8",
+        )
+        prediction = self.root / "overlap_prediction.tsv"
+        prediction.write_text("seqid\tstart\tend\nchrA\t1\t7\n", encoding="utf-8")
+        output = self.root / "union"
+        result = prepare.project_canonical(truth, prediction, output, union_truth=True)
+        self.assertTrue(result["truth_union_applied"])
+        self.assertEqual(result["truth_runs"], 2)
+        manifest = self._rows(output / "in_sample.truth_runs.tsv")
+        self.assertEqual(
+            [(row["source_start"], row["source_end"]) for row in manifest],
+            [("0", "8"), ("10", "12")],
+        )
+
     def test_chr11_validation_writes_runs_without_cross_instance_transition(self) -> None:
         jsonl = self.root / "validation.jsonl.gz"
         self._write_jsonl(jsonl, 800)

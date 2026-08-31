@@ -16,7 +16,8 @@ source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
 conda activate te_benchmark
 
 ROOT=/home/users/j/jwang/ab-initio-TE
-RUN_ROOT=${ROOT}/outputs/FRAGMENT-GAP-TOPOLOGY-20260831-R1/frozen-binary-r1
+: "${ATTEMPT_TAG:?set ATTEMPT_TAG to a unique output-directory name}"
+RUN_ROOT=${ROOT}/outputs/FRAGMENT-GAP-TOPOLOGY-20260831-R1/${ATTEMPT_TAG}
 SCRIPT_ROOT=${ROOT}/scripts/experiments/FRAGMENT-GAP-TOPOLOGY-20260831-R1
 PREP=${SCRIPT_ROOT}/prepare_p3_gap_inputs.py
 AUDIT=${SCRIPT_ROOT}/gap_topology_audit.py
@@ -72,16 +73,19 @@ TASK_ROOT=${RUN_ROOT}/${NAME}
 mkdir "${TASK_ROOT}"
 
 EXCLUDE_ARGS=()
+TRUTH_ARGS=()
 if [[ ${SLURM_ARRAY_TASK_ID} -eq 4 ]]; then
   EXCLUDE=${TASK_ROOT}/fbti_frozen_packages.bed
   awk -F '\t' 'NR > 1 {print $10 "\t" $13 "\t" $14}' "${PACKAGES}" > "${EXCLUDE}"
   EXCLUDE_ARGS=(--exclude-intervals "${EXCLUDE}")
+  TRUTH_ARGS=(--union-truth)
 fi
 
 python "${PREP}" project-canonical \
   --truth "${TRUTH}" \
   --prediction "${PREDICTION}" \
   --output-dir "${TASK_ROOT}/prep" \
+  "${TRUTH_ARGS[@]}" \
   "${EXCLUDE_ARGS[@]}"
 
 WINDOW_ARGS=()
@@ -99,6 +103,7 @@ python "${AUDIT}" \
   --calibration "${TASK_ROOT}/prep/in_sample.calibration.tsv" \
   --windows "${TASK_ROOT}/windows.tsv" \
   --output-dir "${TASK_ROOT}/audit" \
+  "${TRUTH_ARGS[@]}" \
   "${EXCLUDE_ARGS[@]}"
 
 printf 'PASS\n' > "${TASK_ROOT}/STATUS"

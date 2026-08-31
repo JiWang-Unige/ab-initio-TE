@@ -148,10 +148,10 @@ def _write_run_manifest(path: Path, rows: Iterable[dict[str, Any]]) -> None:
 
 
 def _truth_intervals(
-    truth_path: Path, exclude_path: Path | None,
+    truth_path: Path, exclude_path: Path | None, union_truth: bool,
 ) -> tuple[list[Any], list[Any]]:
     gap = _gap_module()
-    truth_all = gap._intervals(truth_path, truth=True)
+    truth_all = gap._load_truth(truth_path, union_truth)
     if exclude_path is None:
         return truth_all, []
     exclusions = gap._intervals(exclude_path)
@@ -169,8 +169,9 @@ def _truth_intervals(
 
 def _track_from_prediction_intervals(
     truth_path: Path, prediction_path: Path, exclude_path: Path | None,
+    union_truth: bool,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], list[Any]]:
-    truth, excluded = _truth_intervals(truth_path, exclude_path)
+    truth, excluded = _truth_intervals(truth_path, exclude_path, union_truth)
     gap = _gap_module()
     prediction_runs = gap._merge(gap._intervals(prediction_path))
     starts = {
@@ -204,10 +205,10 @@ def _track_from_prediction_intervals(
 
 def project_canonical(
     truth_path: Path, prediction_path: Path, output_dir: Path,
-    exclude_path: Path | None = None,
+    exclude_path: Path | None = None, union_truth: bool = False,
 ) -> dict[str, Any]:
     calibration, manifest, truth_rows, excluded = _track_from_prediction_intervals(
-        truth_path, prediction_path, exclude_path,
+        truth_path, prediction_path, exclude_path, union_truth,
     )
     output_dir.mkdir(parents=True, exist_ok=False)
     calibration_path = output_dir / "in_sample.calibration.tsv"
@@ -221,6 +222,7 @@ def project_canonical(
         "calibration_role": "exploratory null parameters from the same frozen truth/prediction inputs",
         "truth_input": str(truth_path), "prediction_input": str(prediction_path),
         "exclude_input": str(exclude_path) if exclude_path else None,
+        "truth_union_applied": union_truth,
         "calibration": str(calibration_path), "truth_runs": len(truth_rows),
         "excluded_truth_runs": len(excluded),
         "excluded_truth_bp": sum(item.end - item.start for item in excluded),
@@ -319,6 +321,7 @@ def main() -> int:
     project.add_argument("--prediction", type=Path, required=True)
     project.add_argument("--output-dir", type=Path, required=True)
     project.add_argument("--exclude-intervals", type=Path)
+    project.add_argument("--union-truth", action="store_true")
     windows = sub.add_parser("windows")
     windows.add_argument("--data-jsonl", type=Path, required=True)
     windows.add_argument("--output", type=Path, required=True)
@@ -327,7 +330,10 @@ def main() -> int:
     if args.command == "chr11-validation":
         result = chr11_validation(args.data_jsonl, args.model_dir, args.output_dir)
     elif args.command == "project-canonical":
-        result = project_canonical(args.truth, args.prediction, args.output_dir, args.exclude_intervals)
+        result = project_canonical(
+            args.truth, args.prediction, args.output_dir,
+            args.exclude_intervals, args.union_truth,
+        )
     else:
         result = windows_only(args.data_jsonl, args.output, args.max_windows)
     print(json.dumps(result, sort_keys=True))

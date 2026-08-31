@@ -2,7 +2,7 @@
 
 Date: 2026-08-31
 
-Status: **frozen CPU-only descriptive protocol; results pending**
+Status: **CPU-only descriptive audit executing; Human/Mouse complete, Fly recovery pending**
 
 ## Decision being tested
 
@@ -105,6 +105,31 @@ eligibility screen. The current FBTI ontology is already the defensible part
 of the gene analogy: observed material, locus identity and typed interruption
 are separate layers. Tiberius/Helixer-style gene-specific splice, frame and
 codon grammar cannot be copied into a universal TE decoder.
+
+## Execution ledger
+
+Slurm array `12124904` used the frozen inputs above and made no model or
+threshold change.
+
+| Task | Arm | State | Scientific denominator |
+|---|---|---|---|
+| `12124904_0` | Human Base | `COMPLETED` | included |
+| `12124904_1` | Human DAPT | `COMPLETED` | included |
+| `12124904_2` | Human P3 | `COMPLETED` | included |
+| `12124904_3` | Mouse P3 | `COMPLETED` | included as a descriptive transfer diagnostic |
+| `12124904_4` | Fly P3 | `FAILED` | excluded |
+
+The Fly task failed before producing a calibration track or metrics because
+the frozen canonical truth retains overlapping FBti records. The historical
+evaluator flat-unions those rows at evaluation time; the first audit version
+incorrectly assumed that union had already been materialized. The exact error
+was `ValueError: truth intervals overlap: FBti0059713 and FBti0019760`.
+
+The minimal recovery explicitly unions overlapping or touching Fly truth rows
+before excluding the 172 frozen-package spans. It does not alter Human or
+Mouse inputs, read raw FlyBase, or recover FBti instance identity. The failed
+directory and error remain retained, and the recovery uses a new output
+directory.
 
 ## Claim status before execution
 

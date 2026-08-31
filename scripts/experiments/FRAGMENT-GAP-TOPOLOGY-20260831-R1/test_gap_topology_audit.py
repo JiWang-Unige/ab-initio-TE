@@ -158,6 +158,8 @@ class GapTopologyAuditTest(unittest.TestCase):
         overlap.write_text("seqid\tstart\tend\nchrA\t0\t5\nchrA\t4\t8\n", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "truth intervals overlap"):
             gap._intervals(overlap, truth=True)
+        union = gap._load_truth(overlap, True)
+        self.assertEqual([(row.start, row.end) for row in union], [(0, 8)])
         incomplete = self.root / "incomplete.tsv"
         incomplete.write_text("seqid\tstart\tend\tstate\ncal\t1\t3\t0\n", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "does not start at zero"):
