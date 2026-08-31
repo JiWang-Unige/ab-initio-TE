@@ -1,140 +1,125 @@
 {
-  "_comment": "Active milestone goal for supervised autonomy ($pursue). This is a non-claim publication-validation support goal, not a terminal SOTA goal.",
-  "program": "TEFM_publication_validation_support",
-  "goal_id": "TEFM_PUBLICATION_SUPPORT_DECAY_STRUCTDEC",
+  "_comment": "Active route-selection goal. This is an ontology/provenance and identifiability audit, not a model-training or SOTA goal.",
+  "program": "TE_extant_locus_annotation",
+  "goal_id": "FBTI_EXTANT_LOCUS_PHASE0_R1",
   "status": "active",
-  "scope": "milestone",
-  "goal": "Iteratively improve two publication-validation support components for the TE foundation-model project: (A) turn the genome-derived anchor selector into a conservative trust router, and (B) improve TE fragmentation handling via joint structured / interval-aware decoder objectives.",
-  "objective": "Sustain bounded, single-seed iterations for selector trust routing and structured decoder fragmentation reduction. All outputs are support evidence only; no SOTA claim is allowed from this goal.",
-  "primary_metric": "selector_top2_contains_best",
+  "scope": "route_selection",
+  "goal": "Determine whether uncertainty-aware extant TE loci can be annotated reproducibly and whether frozen P3 atoms contain non-geometric single-genome relation information sufficient for safe multipart locus grouping.",
+  "objective": "Execute the serial L/O/E gates in docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md. Stop at the first failed gate and preserve its distinct scientific interpretation.",
+  "primary_metric": "phase0_gate_count",
   "direction": "higher",
   "success_criteria": [
     {
-      "metric": "selector_top2_contains_best",
-      "op": ">=",
-      "threshold": 0.85
+      "metric": "phase0_gate_count",
+      "op": "==",
+      "threshold": 3
     },
     {
-      "metric": "selector_mean_regret",
-      "op": "<=",
-      "threshold": 0.03
+      "metric": "gate_l_pass",
+      "op": "==",
+      "threshold": 1
     },
     {
-      "metric": "selector_leave_clade_abstention_rate",
-      "op": ">=",
-      "threshold": 0.95
+      "metric": "gate_o_pass",
+      "op": "==",
+      "threshold": 1
     },
     {
-      "metric": "decoder_segment_f1_delta_vs_ce",
-      "op": ">",
-      "threshold": 0.0
-    },
-    {
-      "metric": "decoder_boundary_f1_delta_vs_ce",
-      "op": ">",
-      "threshold": 0.0
-    },
-    {
-      "metric": "decoder_missed_true_rate_delta_vs_ce",
-      "op": "<=",
-      "threshold": 0.03
+      "metric": "gate_e_pass",
+      "op": "==",
+      "threshold": 1
     }
   ],
   "guardrails": [
     {
-      "metric": "selector_confidently_wrong_single_anchor_rate",
-      "op": "<=",
-      "threshold": 0.0
+      "metric": "gpu_hours",
+      "op": "==",
+      "threshold": 0
     },
     {
-      "metric": "decoder_deleted_true_backed_fraction",
-      "op": "<=",
-      "threshold": 0.15
+      "metric": "prohibited_neural_runs",
+      "op": "==",
+      "threshold": 0
+    },
+    {
+      "metric": "truth_aware_atom_changes",
+      "op": "==",
+      "threshold": 0
+    },
+    {
+      "metric": "whole_genome_precision_claimed",
+      "op": "==",
+      "threshold": 0
+    },
+    {
+      "metric": "historical_insertion_claimed",
+      "op": "==",
+      "threshold": 0
     }
   ],
-  "screen_anchor": {
-    "_note": "This goal is non-claim. Screen comparisons are against these internal safety gates only; screen profile can never claim SOTA.",
-    "metric": "selector_top2_contains_best",
-    "value": 0.85,
-    "direction": "higher",
-    "source": "user-defined conservative router gate for bounded publication-validation support"
-  },
-  "sota_benchmark": {
-    "_note": "Not applicable for this support milestone. This placeholder intentionally prevents SOTA interpretation.",
-    "metric": "selector_top2_contains_best",
-    "value": 0.95,
-    "direction": "higher",
-    "strict_exceed": true,
-    "source": "no published SOTA claim target for this milestone"
-  },
+  "active_protocol": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md",
+  "ordered_gates": [
+    {
+      "id": "L",
+      "name": "label_and_provenance_feasibility",
+      "authorization_on_pass": "run_gate_O_only",
+      "stop_on_fail": true
+    },
+    {
+      "id": "O",
+      "name": "oracle_substrate_value",
+      "authorization_on_pass": "run_gate_E_only",
+      "stop_on_fail": true
+    },
+    {
+      "id": "E",
+      "name": "incremental_single_genome_relation_information",
+      "authorization_on_pass": "one_frozen_encoder_shallow_relation_head_at_most_2M_trainable_parameters",
+      "stop_on_fail": true
+    }
+  ],
+  "authorized_work": [
+    "freeze exact r6.68 provenance, sequence and P3 canonical-atom inputs",
+    "prepare 12 annotator-calibration packages",
+    "prepare the pre-sampled 120 main and 40 reserve non-overlapping packages",
+    "run double-blind Pass-1 annotation and third-person adjudication",
+    "project frozen P3 atoms only after Pass-1 is version-locked",
+    "run CPU-only Gate L, Gate O and Gate E analyses in order"
+  ],
+  "closed_work": [
+    "generic or TE-aware masking-only MLM",
+    "LoRA or full-backbone post-training",
+    "new U-Net, boundary-loss, HMM, CRF, semi-Markov or graph-decoder rescue",
+    "threshold, gap-merge or minimum-length rescue",
+    "near-full-seed C5 rescue",
+    "consensus-coordinate-only grouping",
+    "historical deletion or ancestral-boundary labels from one extant sequence",
+    "FlyBase positive-only whole-genome precision or F1 claims"
+  ],
   "claim_policy": {
     "sota_claim_allowed": false,
     "screen_profile_can_claim": false,
-    "publication_use": "supporting evidence only",
-    "required_wording": {
-      "selector": "conservative trust router / triage policy, not an exact F1 predictor",
-      "decoder": "prototype or limitation unless segment-F1 and boundary-F1 improve while true-retention guardrails pass"
-    }
+    "publication_use": "route-selection and mechanism evidence only",
+    "positive_scope": "FlyBase-derived positive-locus extant-locus identifiability only",
+    "negative_scope": "the first failed L/O/E gate and its explicitly bounded mechanism"
   },
-  "milestone_success_criteria": {
-    "selector": {
-      "top2_contains_best_min": 0.85,
-      "mean_regret_max": 0.03,
-      "leave_clade_requires_abstention": true,
-      "single_anchor_confident_wrong_allowed": false,
-      "deployable_features_only": true,
-      "forbidden_target_annotation_features": [
-        "target_te_coverage",
-        "target_label_concordance",
-        "target_class_composition"
-      ]
-    },
-    "structured_decoder": {
-      "segment_f1_must_improve_vs_ce": true,
-      "boundary_f1_must_improve_vs_ce": true,
-      "missed_true_rate_delta_max": 0.03,
-      "deleted_true_backed_fraction_monitor": true,
-      "no_scale_if_true_retention_fails": true
-    }
-  },
-  "next_iteration_candidates": [
-    {
-      "id": "selector_claimgrade_minhash",
-      "type": "selector",
-      "description": "Add genome-wide MinHash/Mash/sourmash or equivalent k-mer distance to anchor prototypes, then rerun leave-species-out and leave-clade-out router validation with abstention/top-k regret gates."
-    },
-    {
-      "id": "interval_true_retention_decoder",
-      "type": "structured_decoder",
-      "description": "Replace weak token-level retention with interval-level true-retention / fragment-survival objective or segment-aware decoder that penalizes deleting true-backed fragments."
-    }
-  ],
-  "guardrail_policy": {
-    "seed": 42,
-    "max_parallel_directions": 2,
-    "no_threshold_gap_posthoc_main_route": true,
-    "real_training_requires_smart_sbatch": true,
-    "code_review_gate_required": true,
-    "result_chain_required": [
-      "result-log",
-      "note-gate",
-      "tri-review",
-      "pivot",
-      "docs/04",
-      "docs/05",
-      "docs/06",
-      "docs/10",
-      "docs/11",
-      "docs/15"
-    ]
+  "resource_policy": {
+    "gpu_hours": 0,
+    "peak_ram_gb": 64,
+    "main_panel_packages": 120,
+    "reserve_packages": 40,
+    "annotator_calibration_packages": 12,
+    "independent_annotators": 2,
+    "third_adjudicator_required": true
   },
   "stop_rules": {
-    "selector": "If two consecutive iterations still cannot form a leave-clade abstention/top2 router beyond triage, stop the formula direction and write it as a limitation.",
-    "structured_decoder": "If two consecutive iterations cannot simultaneously improve segment-F1 and boundary-F1 while controlling missed_true_rate, stop the decoder direction and write it as future work."
+    "L_P": "If FBti provenance cannot support extant-locus anchors, stop relation modelling and construct an independent locus truth source.",
+    "L_R": "If the extant-locus ontology is not reproducible, stop supervised modelling and report ambiguity rather than asking a model to replace absent truth.",
+    "L_D": "If the frozen 160-package maximum lacks the required denominator, close relation training on this asset without claiming sequence-only impossibility.",
+    "O": "If oracle grouping has insufficient value, close P3-as-atom grouping and do not change losses or heads on the same atoms.",
+    "E": "If sequence/structure evidence does not safely exceed geometry, allow only a genuinely new observation such as comparative empty-site evidence."
   },
-  "tuning_gap_threshold": 0.05,
-  "max_parallel_directions": 2,
-  "max_internal_iterations": 4,
+  "max_parallel_directions": 1,
   "on_failed_run": "stop_and_notify",
   "validate_command": "python3 scripts/validate_goal.py --goal ACTIVE_GOAL.json --metrics <metrics.json> --run-status <status_file> --profile screen",
   "human_gate_before_claim": true

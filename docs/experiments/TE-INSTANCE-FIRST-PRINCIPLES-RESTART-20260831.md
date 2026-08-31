@@ -2,6 +2,17 @@
 
 Date: 2026-08-31
 
+> **Superseded protocol notice.** The numerical results and closed-route
+> evidence in this report remain part of the audit trail, but its biological
+> interpretation of FlyBase `fragments/truth` and its Phase 0 A0--A3 protocol
+> are not authorized. The FlyBase metric was computed after flat-union into
+> 4,972 truth runs, not against 5,734 `FBti` identities. A1/A2 also assumed
+> atom-membership and identifiable biological-boundary truth that the current
+> assets do not contain. The current frozen decision is
+> [`FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md`](FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md):
+> first validate a P3-blind extant-locus ontology, then test oracle substrate
+> value and label-blind relation information.
+
 ## Decision
 
 The fragment problem is not currently supported as a semantic-segmentation

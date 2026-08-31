@@ -1,5 +1,12 @@
 # Master Plan / TE-FM 总路线合同
 
+> **Current route override (2026-08-31).** Older selector/structured-decoder
+> actions below are historical and must not restart closed experiments. The
+> only active route-selection experiment is the zero-GPU, ontology-first
+> [`FBTI-EXTANT-LOCUS-PHASE0-R1`](experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md).
+> Neural relation training, LoRA and full-backbone post-training remain frozen
+> until its label, oracle-substrate and evidence-sufficiency gates all pass.
+
 > 由 `$master-plan` 维护。最后更新：2026-08-12（保留 2026-07-01 主线历史，新增 bounded cohort）。
 >
 > 本文件现在是项目唯一中文主入口：既是导航图，也是 TE foundation model 研究路线合同。`docs/23_te_refinement_publication_route.md` 已并入本文件，之后仅作英文旧版参考，不再作为主路线维护。
