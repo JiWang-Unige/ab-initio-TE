@@ -36,6 +36,7 @@ GIT_COMMIT=$(git rev-parse HEAD)
 python3 "${SCRIPT}" \
   --population "${POPULATION}" \
   --population-summary "${CENSUS}/summary.json" \
+  --truth-metadata "${TRUTH}" \
   --git-commit "${GIT_COMMIT}" \
   --output-dir "${OUT}"
 python3 "${MANIFEST_SCRIPT}" \

@@ -186,6 +186,44 @@ def overlapping_pairs(rows: Iterable[dict[str, str]]) -> list[tuple[int, int]]:
     return pairs
 
 
+def context_conflict_pairs(
+    rows: list[dict[str, str]], truth_path: Path
+) -> list[tuple[int, int]]:
+    with truth_path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        required = {"feature_id", "seqid", "start0", "end0"}
+        if not required.issubset(reader.fieldnames or ()):
+            raise ValueError(f"truth fields must include {sorted(required)}")
+        truth = list(reader)
+
+    by_seqid: dict[str, list[tuple[int, dict[str, str]]]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        by_seqid[row["seqid"]].append((index, row))
+    for packages in by_seqid.values():
+        packages.sort(key=lambda item: (int(item[1]["package_start0"]), item[0]))
+
+    conflicts: set[tuple[int, int]] = set()
+    seen_features: set[str] = set()
+    for feature in truth:
+        feature_id = feature["feature_id"]
+        if feature_id in seen_features:
+            raise ValueError(f"duplicate truth feature_id: {feature_id}")
+        seen_features.add(feature_id)
+        start = int(feature["start0"])
+        end = int(feature["end0"])
+        if start < 0 or end <= start:
+            raise ValueError(f"invalid truth interval: {feature_id}")
+        hits = [
+            index
+            for index, row in by_seqid.get(feature["seqid"], ())
+            if int(row["package_start0"]) < end and start < int(row["package_end0"])
+        ]
+        for offset, left in enumerate(hits):
+            for right in hits[offset + 1 :]:
+                conflicts.add(tuple(sorted((left, right))))
+    return sorted(conflicts)
+
+
 def _quota_key(row: dict[str, str]) -> tuple[str, str, str]:
     return row["unit_type"], row["hard_cell"], row["role"]
 
@@ -323,7 +361,11 @@ def make_manifest(
     return sorted(selected, key=lambda row: (PANELS.index(row["role"]), int(row["role_rank"])))
 
 
-def _constraint_rows(rows: list[dict[str, str]], variable_count: int):
+def _constraint_rows(
+    rows: list[dict[str, str]],
+    variable_count: int,
+    context_conflicts: list[tuple[int, int]],
+):
     """Construct sparse MILP rows; scipy is imported only on the solver path."""
 
     import numpy as np
@@ -377,7 +419,7 @@ def _constraint_rows(rows: list[dict[str, str]], variable_count: int):
             )
             add_constraint(columns, quota, quota)
 
-    for left, right in overlapping_pairs(rows):
+    for left, right in sorted(set(overlapping_pairs(rows)) | set(context_conflicts)):
         add_constraint(
             tuple(3 * left + role for role in range(len(PANELS)))
             + tuple(3 * right + role for role in range(len(PANELS))),
@@ -392,7 +434,9 @@ def _constraint_rows(rows: list[dict[str, str]], variable_count: int):
     return matrix, np.asarray(lower), np.asarray(upper)
 
 
-def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]], dict[str, object]]:
+def solve_joint_panel(
+    rows: list[dict[str, str]], truth_path: Path
+) -> tuple[list[dict[str, str]], dict[str, object]]:
     """Solve the fixed joint panel and return its manifest and solver record."""
 
     import numpy as np
@@ -401,7 +445,8 @@ def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]],
 
     rows = sorted(rows, key=lambda row: row["unit_id"])
     variable_count = len(rows) * len(PANELS)
-    matrix, lower, upper = _constraint_rows(rows, variable_count)
+    context_conflicts = context_conflict_pairs(rows, truth_path)
+    matrix, lower, upper = _constraint_rows(rows, variable_count, context_conflicts)
     rng = np.random.Generator(np.random.PCG64(SEED))
     priority = rng.random((len(rows), len(PANELS)), dtype=np.float64)
     objective = priority.reshape(-1, order="C")
@@ -437,6 +482,7 @@ def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]],
         "mip_gap": float(result.mip_gap),
         "objective_value": float(result.fun),
         "constraint_count": int(matrix.shape[0]),
+        "context_conflict_pairs": len(context_conflicts),
         "variable_count": variable_count,
         "priority_schema": "pcg64_candidate_role_float64_v1",
         "priority_shape": [len(rows), len(PANELS)],
@@ -511,6 +557,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--population", type=Path, required=True)
     parser.add_argument("--population-summary", type=Path, required=True)
+    parser.add_argument("--truth-metadata", type=Path, required=True)
     parser.add_argument("--git-commit", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
@@ -521,7 +568,7 @@ def main() -> int:
         raise ValueError("population census did not pass")
     if int(population_summary["S0_units"]) + int(population_summary["S1_units"]) != len(population):
         raise ValueError("population census summary does not match population rows")
-    manifest, solver = solve_joint_panel(population)
+    manifest, solver = solve_joint_panel(population, args.truth_metadata)
     summary = panel_summary(
         population,
         manifest,

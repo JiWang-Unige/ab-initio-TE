@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import csv
 import importlib.util
 from pathlib import Path
+import tempfile
 import unittest
 
 
@@ -100,6 +102,20 @@ class SampleJointPanelTest(unittest.TestCase):
             {"unit_id": "d", "seqid": "3R", "package_start0": "0", "package_end0": "100"},
         ]
         self.assertEqual(sample.overlapping_pairs(rows), [(1, 2)])
+
+    def test_truth_context_overlap_adds_package_conflict(self) -> None:
+        rows = [
+            {"unit_id": "a", "seqid": "2L", "package_start0": "0", "package_end0": "10"},
+            {"unit_id": "b", "seqid": "2L", "package_start0": "20", "package_end0": "30"},
+            {"unit_id": "c", "seqid": "2L", "package_start0": "40", "package_end0": "50"},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            truth = Path(directory) / "truth.tsv"
+            with truth.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+                writer.writerow(["feature_id", "seqid", "start0", "end0"])
+                writer.writerow(["FBti-shared", "2L", 5, 25])
+            self.assertEqual(sample.context_conflict_pairs(rows, truth), [(0, 1)])
 
     def test_fixture_has_exact_quotas_and_global_nonoverlap(self) -> None:
         sample.validate_manifest(manifest_fixture())

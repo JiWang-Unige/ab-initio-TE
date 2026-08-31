@@ -9,7 +9,8 @@ Reviewed repository state: `097c8c8bc9d2c8edae8a76051358e07dd9df8989`
 Implementation note: the frozen scientific gate order remains unchanged, but
 `FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1-ADDENDUM-20260831.md` and its V1.1
 atom-ownership and V1.2 role-priority corrections override the V0 sampling,
-manifest, annotation and metric clauses where they conflict.
+manifest, annotation and metric clauses where they conflict. The V1.3
+context-independence correction also applies to the package conflict graph.
 
 ## Technical summary
 
