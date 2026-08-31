@@ -2,7 +2,7 @@
 # CPU-only descriptive audit of already-frozen binary prediction tracks.
 # Null parameters are fitted in-sample and cannot select a rescue rule.
 #SBATCH --job-name=TE_gap_topology
-#SBATCH --partition=public-short-cpu
+#SBATCH --partition=private-teodoro-gpu
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
 #SBATCH --time=00:45:00

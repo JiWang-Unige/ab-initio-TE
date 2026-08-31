@@ -83,6 +83,7 @@ class GapSummaryTest(unittest.TestCase):
         self.assertAlmostEqual(overall["internal_gap_length_p50"], 5)
         self.assertAlmostEqual(overall["internal_gap_length_p90"], 33)
         self.assertEqual(overall["internal_gap_length_max"], 40)
+        self.assertAlmostEqual(overall["internal_gap_length_le_5_fraction"], 2 / 3)
         self.assertEqual(overall["between_gap_spacing_count"], 1)
         self.assertEqual(overall["between_gap_spacing_p50"], 5)
         self.assertEqual(overall["seam_observed_count"], 0)

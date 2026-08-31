@@ -29,6 +29,7 @@ RELATIVE_BINS = (
     ("ge_0_90", 0.90, 1.0000000001),
 )
 SEAM_LIMITS = (0, 5, 25, 100)
+GAP_LENGTH_LIMITS = (1, 2, 5, 10, 25, 100)
 QUANTILES = ("p50", "p90", "p95", "p99", "max")
 
 
@@ -311,6 +312,10 @@ def _row(label: str, path: Path, interpretation: str, stratum: str, value: dict[
     ):
         for quantile, quantile_value in _quantiles(values).items():
             row[f"{prefix}_{quantile}"] = quantile_value
+    for limit in GAP_LENGTH_LIMITS:
+        row[f"internal_gap_length_le_{limit}_fraction"] = _ratio(
+            sum(length <= limit for length in gap_lengths), len(gap_lengths),
+        )
     relative_counts = value["relative_position_counts"]
     relative_total = sum(relative_counts.values())
     for name, _, _ in RELATIVE_BINS:
@@ -380,6 +385,7 @@ FIELDS = [
 ]
 for _prefix in ("internal_gap_length", "before_run_length", "after_run_length", "between_gap_spacing"):
     FIELDS.extend(f"{_prefix}_{quantile}" for quantile in QUANTILES)
+FIELDS.extend(f"internal_gap_length_le_{limit}_fraction" for limit in GAP_LENGTH_LIMITS)
 for _name, _, _ in RELATIVE_BINS:
     FIELDS.extend((f"relative_{_name}_count", f"relative_{_name}_fraction"))
 FIELDS.extend(f"seam_le_{limit}_fraction" for limit in SEAM_LIMITS)
@@ -441,6 +447,7 @@ def main() -> int:
             "schema": "fragment_gap_topology_summary_v1",
             "interpretation_policy": "unspecified unless supplied; positive-only never permits precision/F1",
             "relative_position_bins": [name for name, _, _ in RELATIVE_BINS],
+            "gap_length_limits_bp": list(GAP_LENGTH_LIMITS),
             "seam_limits_bp": list(SEAM_LIMITS),
             "rows": all_rows,
         }
