@@ -6,28 +6,13 @@
   "scope": "route_selection",
   "goal": "Determine whether uncertainty-aware extant TE loci can be annotated reproducibly and whether frozen P3 atoms contain non-geometric single-genome relation information sufficient for safe multipart locus grouping.",
   "objective": "Execute the serial L/O/E gates in docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md. Stop at the first failed gate and preserve its distinct scientific interpretation.",
-  "primary_metric": "phase0_gate_count",
-  "direction": "higher",
+  "primary_metric": "route_decision_pending",
+  "direction": "lower",
   "success_criteria": [
     {
-      "metric": "phase0_gate_count",
+      "metric": "route_decision_pending",
       "op": "==",
-      "threshold": 3
-    },
-    {
-      "metric": "gate_l_pass",
-      "op": "==",
-      "threshold": 1
-    },
-    {
-      "metric": "gate_o_pass",
-      "op": "==",
-      "threshold": 1
-    },
-    {
-      "metric": "gate_e_pass",
-      "op": "==",
-      "threshold": 1
+      "threshold": 0
     }
   ],
   "guardrails": [
@@ -58,6 +43,19 @@
     }
   ],
   "active_protocol": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md",
+  "annotation_contract_proposal": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V0-20260831.md",
+  "annotation_contract_v1_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1-ADDENDUM-20260831.md",
+  "engineering_progress": {
+    "population_census_job": "12120604",
+    "population_census_status": "COMPLETED_0_0_ENGINEERING_ONLY",
+    "population_census_report": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-CENSUS-20260831.md",
+    "gate_l_evaluated": false
+  },
+  "current_contract_blocks": [
+    "exact FlyBase name frequency is degenerate and exact-name-matched FPR has no denominator",
+    "joint challenge-panel feasibility and the fixed 172-package manifest are not yet complete",
+    "P3 probabilities are unavailable; Gate E input/resource contract must be revised after Gates L and O before any export"
+  ],
   "ordered_gates": [
     {
       "id": "L",

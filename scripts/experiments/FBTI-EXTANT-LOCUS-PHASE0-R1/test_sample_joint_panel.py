@@ -23,7 +23,7 @@ def manifest_fixture() -> list[dict[str, str]]:
                 if panel == "main":
                     count = 15 if stratum == "S0" else 20
                 elif panel == "calibration":
-                    count = 2 if stratum == "S1" else (2 if cell in ("<80", "80-499") else 1)
+                    count = 2 if stratum == "S1" else (2 if cell in ("S0-L1", "S0-L2") else 1)
                 else:
                     count = 20 if cell == cells[0] else 0
                 for _ in range(count):
@@ -32,21 +32,21 @@ def manifest_fixture() -> list[dict[str, str]]:
                     rows.append(
                         {
                             "package_id": f"{stratum}-{package_index:03d}",
-                            "panel": panel,
-                            "panel_rank": str(panel_rank[panel]),
+                            "role": panel,
+                            "role_rank": str(panel_rank[panel]),
                             "reserve_pair_rank": "",
-                            "stratum": stratum,
-                            "challenge_cell": cell,
+                            "unit_type": stratum,
+                            "hard_cell": cell,
                             "seqid": "2L",
-                            "package_start": str(start),
-                            "package_end": str(start + 10),
+                            "package_start0": str(start),
+                            "package_end0": str(start + 10),
                         }
                     )
                     package_index += 1
 
-    reserve = [row for row in rows if row["panel"] == "reserve"]
-    reserve_s0 = [row for row in reserve if row["stratum"] == "S0"]
-    reserve_s1 = [row for row in reserve if row["stratum"] == "S1"]
+    reserve = [row for row in rows if row["role"] == "reserve"]
+    reserve_s0 = [row for row in reserve if row["unit_type"] == "S0"]
+    reserve_s1 = [row for row in reserve if row["unit_type"] == "S1"]
     for rank, pair in enumerate(zip(reserve_s0, reserve_s1), start=1):
         for row in pair:
             row["reserve_pair_rank"] = str(rank)
@@ -54,30 +54,35 @@ def manifest_fixture() -> list[dict[str, str]]:
 
 
 class SampleJointPanelTest(unittest.TestCase):
+    def test_package_manifest_is_the_v1_challenge_panel_schema(self) -> None:
+        self.assertIn("selection_priority", sample.PACKAGE_FIELDS)
+        self.assertIn("hard_cell", sample.PACKAGE_FIELDS)
+        self.assertNotIn("inclusion_probability", sample.PACKAGE_FIELDS)
+
     def test_s0_and_s1_hard_cells(self) -> None:
-        self.assertEqual(sample.challenge_cell({"unit_id": "a", "unit_type": "S0", "core_length": "79"}), "<80")
-        self.assertEqual(sample.challenge_cell({"unit_id": "b", "unit_type": "S0", "core_length": "499"}), "80-499")
-        self.assertEqual(sample.challenge_cell({"unit_id": "c", "unit_type": "S0", "core_length": "999"}), "500-999")
-        self.assertEqual(sample.challenge_cell({"unit_id": "d", "unit_type": "S0", "core_length": "1000"}), ">=1000")
+        self.assertEqual(sample.challenge_cell({"unit_id": "a", "unit_type": "S0", "core_length": "79"}), "S0-L1")
+        self.assertEqual(sample.challenge_cell({"unit_id": "b", "unit_type": "S0", "core_length": "499"}), "S0-L2")
+        self.assertEqual(sample.challenge_cell({"unit_id": "c", "unit_type": "S0", "core_length": "999"}), "S0-L3")
+        self.assertEqual(sample.challenge_cell({"unit_id": "d", "unit_type": "S0", "core_length": "1000"}), "S0-L4")
         self.assertEqual(
             sample.challenge_cell({"unit_id": "e", "unit_type": "S1", "feature_count": "2", "max_overlap_depth": "2"}),
-            "size2_depth2",
+            "S1-C1",
         )
         self.assertEqual(
             sample.challenge_cell({"unit_id": "f", "unit_type": "S1", "feature_count": "3", "max_overlap_depth": "2"}),
-            "size_ge3_depth2",
+            "S1-C2",
         )
         self.assertEqual(
             sample.challenge_cell({"unit_id": "g", "unit_type": "S1", "feature_count": "2", "max_overlap_depth": "3"}),
-            "depth_ge3",
+            "S1-C3",
         )
 
     def test_touching_intervals_do_not_conflict_but_overlap_does(self) -> None:
         rows = [
-            {"unit_id": "a", "seqid": "2L", "package_start": "0", "package_end": "10"},
-            {"unit_id": "b", "seqid": "2L", "package_start": "10", "package_end": "20"},
-            {"unit_id": "c", "seqid": "2L", "package_start": "19", "package_end": "30"},
-            {"unit_id": "d", "seqid": "3R", "package_start": "0", "package_end": "100"},
+            {"unit_id": "a", "seqid": "2L", "package_start0": "0", "package_end0": "10"},
+            {"unit_id": "b", "seqid": "2L", "package_start0": "10", "package_end0": "20"},
+            {"unit_id": "c", "seqid": "2L", "package_start0": "19", "package_end0": "30"},
+            {"unit_id": "d", "seqid": "3R", "package_start0": "0", "package_end0": "100"},
         ]
         self.assertEqual(sample.overlapping_pairs(rows), [(1, 2)])
 
@@ -86,7 +91,7 @@ class SampleJointPanelTest(unittest.TestCase):
 
     def test_validation_rejects_selected_overlap(self) -> None:
         rows = manifest_fixture()
-        rows[1]["package_start"] = rows[0]["package_start"]
+        rows[1]["package_start0"] = rows[0]["package_start0"]
         with self.assertRaisesRegex(ValueError, "expanded packages overlap"):
             sample.validate_manifest(rows)
 

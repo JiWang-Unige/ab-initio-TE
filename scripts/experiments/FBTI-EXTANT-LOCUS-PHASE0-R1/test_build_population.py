@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import csv
+import gzip
 import importlib.util
 import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 
 HERE = Path(__file__).resolve().parent
@@ -60,9 +62,12 @@ class BuildPopulationTest(unittest.TestCase):
         self.tempdir.cleanup()
 
     def test_builds_s0_and_complete_s1_component(self) -> None:
-        units, summary = build_population.build_population(
-            self.truth, self.overlaps, self.atoms, self.lengths
-        )
+        with mock.patch.object(
+            build_population, "read_fasta_lengths", return_value=build_population.read_lengths(self.lengths)
+        ):
+            units, summary = build_population.build_population(
+                self.truth, self.overlaps, self.atoms, self.lengths, self.root / "assembly.fa.gz"
+            )
         by_type = {str(unit["unit_type"]): unit for unit in units}
         self.assertEqual(summary["S0_units"], 1)
         self.assertEqual(summary["S1_units"], 1)
@@ -76,18 +81,46 @@ class BuildPopulationTest(unittest.TestCase):
         text = self.overlaps.read_text(encoding="utf-8").replace("\t150\t180\t", "\t151\t180\t")
         self.overlaps.write_text(text, encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "overlap coordinate mismatch"):
-            build_population.build_population(self.truth, self.overlaps, self.atoms, self.lengths)
+            with mock.patch.object(
+                build_population, "read_fasta_lengths", return_value=build_population.read_lengths(self.lengths)
+            ):
+                build_population.build_population(
+                    self.truth, self.overlaps, self.atoms, self.lengths, self.root / "assembly.fa.gz"
+                )
 
     def test_rejects_non_frozen_assembly_lengths(self) -> None:
         self.lengths.write_text(json.dumps({"2L": 1000}), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "frozen exact r6.68 assembly"):
-            build_population.build_population(self.truth, self.overlaps, self.atoms, self.lengths)
+            build_population.build_population(
+                self.truth, self.overlaps, self.atoms, self.lengths, self.root / "assembly.fa.gz"
+            )
+
+    def test_rejects_length_mapping_that_does_not_match_fasta(self) -> None:
+        fasta_lengths = build_population.read_lengths(self.lengths)
+        fasta_lengths["2L"] -= 1
+        fasta_lengths["aux-0"] += 1
+        with mock.patch.object(build_population, "read_fasta_lengths", return_value=fasta_lengths):
+            with self.assertRaisesRegex(ValueError, "does not match the exact r6.68 FASTA"):
+                build_population.build_population(
+                    self.truth, self.overlaps, self.atoms, self.lengths, self.root / "assembly.fa.gz"
+                )
+
+    def test_reads_fasta_contig_length_mapping(self) -> None:
+        assembly = self.root / "assembly.fa.gz"
+        with gzip.open(assembly, "wt", encoding="utf-8") as handle:
+            handle.write(">2L description\nACGT\n>3R\nAA\nA\n")
+        self.assertEqual(build_population.read_fasta_lengths(assembly), {"2L": 4, "3R": 3})
 
     def test_rejects_atom_outside_frozen_assembly(self) -> None:
         with self.atoms.open("a", encoding="utf-8") as handle:
             handle.write("missing-contig\t0\t1\n")
         with self.assertRaisesRegex(ValueError, "invalid P3 atom interval"):
-            build_population.build_population(self.truth, self.overlaps, self.atoms, self.lengths)
+            with mock.patch.object(
+                build_population, "read_fasta_lengths", return_value=build_population.read_lengths(self.lengths)
+            ):
+                build_population.build_population(
+                    self.truth, self.overlaps, self.atoms, self.lengths, self.root / "assembly.fa.gz"
+                )
 
     def test_census_sbatch_is_cpu_only_and_attempt_scoped(self) -> None:
         text = (HERE / "submit_population_census.sbatch").read_text(encoding="utf-8")

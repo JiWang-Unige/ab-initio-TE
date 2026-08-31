@@ -25,30 +25,30 @@ PANELS = ("calibration", "main", "reserve")
 STRATA = ("S0", "S1")
 PANEL_COUNTS = {"calibration": 6, "main": 60, "reserve": 20}
 
-S0_CELLS = ("<80", "80-499", "500-999", ">=1000")
-S1_CELLS = ("size2_depth2", "size_ge3_depth2", "depth_ge3")
+S0_CELLS = ("S0-L1", "S0-L2", "S0-L3", "S0-L4")
+S1_CELLS = ("S1-C1", "S1-C2", "S1-C3")
 
 EXACT_QUOTAS = {
-    ("S0", "<80", "main"): 15,
-    ("S0", "80-499", "main"): 15,
-    ("S0", "500-999", "main"): 15,
-    ("S0", ">=1000", "main"): 15,
-    ("S1", "size2_depth2", "calibration"): 2,
-    ("S1", "size_ge3_depth2", "calibration"): 2,
-    ("S1", "depth_ge3", "calibration"): 2,
-    ("S1", "size2_depth2", "main"): 20,
-    ("S1", "size_ge3_depth2", "main"): 20,
-    ("S1", "depth_ge3", "main"): 20,
+    ("S0", "S0-L1", "main"): 15,
+    ("S0", "S0-L2", "main"): 15,
+    ("S0", "S0-L3", "main"): 15,
+    ("S0", "S0-L4", "main"): 15,
+    ("S1", "S1-C1", "calibration"): 2,
+    ("S1", "S1-C2", "calibration"): 2,
+    ("S1", "S1-C3", "calibration"): 2,
+    ("S1", "S1-C1", "main"): 20,
+    ("S1", "S1-C2", "main"): 20,
+    ("S1", "S1-C3", "main"): 20,
 }
 
 # S0 calibration has only a lower bound per length cell.  The two remaining
 # packages and both reserve strata are selected by the seeded label-blind
 # priority objective.
 MIN_QUOTAS = {
-    ("S0", "<80", "calibration"): 1,
-    ("S0", "80-499", "calibration"): 1,
-    ("S0", "500-999", "calibration"): 1,
-    ("S0", ">=1000", "calibration"): 1,
+    ("S0", "S0-L1", "calibration"): 1,
+    ("S0", "S0-L2", "calibration"): 1,
+    ("S0", "S0-L3", "calibration"): 1,
+    ("S0", "S0-L4", "calibration"): 1,
 }
 
 POPULATION_FIELDS = {
@@ -70,22 +70,19 @@ POPULATION_FIELDS = {
 
 PACKAGE_FIELDS = [
     "package_id",
-    "panel",
-    "panel_rank",
+    "role",
+    "role_rank",
     "reserve_pair_rank",
-    "stratum",
+    "unit_type",
+    "hard_cell",
+    "selection_priority",
     "assembly_id",
     "seqid",
-    "package_start",
-    "package_end",
-    "focal_start",
-    "focal_end",
-    "overlap_component_id",
-    "anchor_feature_ids",
-    "sampling_stratum_id",
-    "inclusion_probability",
-    "deep_audit_feature_id",
-    "challenge_cell",
+    "core_start0",
+    "core_end0",
+    "package_start0",
+    "package_end0",
+    "feature_ids",
     "core_length",
     "feature_count",
     "max_overlap_depth",
@@ -106,21 +103,21 @@ def challenge_cell(row: dict[str, str]) -> str:
     if unit_type == "S0":
         length = int(row["core_length"])
         if length < 80:
-            return "<80"
+            return "S0-L1"
         if length < 500:
-            return "80-499"
+            return "S0-L2"
         if length < 1000:
-            return "500-999"
-        return ">=1000"
+            return "S0-L3"
+        return "S0-L4"
     if unit_type == "S1":
         size = int(row["feature_count"])
         depth = int(row["max_overlap_depth"])
         if size == 2 and depth == 2:
-            return "size2_depth2"
+            return "S1-C1"
         if size >= 3 and depth == 2:
-            return "size_ge3_depth2"
+            return "S1-C2"
         if depth >= 3:
-            return "depth_ge3"
+            return "S1-C3"
     raise ValueError(f"row does not fit a hard challenge cell: {row['unit_id']}")
 
 
@@ -148,10 +145,10 @@ def read_population(path: Path) -> list[dict[str, str]]:
 
 
 def intervals_overlap(left: dict[str, str], right: dict[str, str]) -> bool:
-    left_start = int(left.get("package_start0", left.get("package_start", "")))
-    left_end = int(left.get("package_end0", left.get("package_end", "")))
-    right_start = int(right.get("package_start0", right.get("package_start", "")))
-    right_end = int(right.get("package_end0", right.get("package_end", "")))
+    left_start = int(left["package_start0"])
+    left_end = int(left["package_end0"])
+    right_start = int(right["package_start0"])
+    right_end = int(right["package_end0"])
     return (
         left["seqid"] == right["seqid"]
         and left_start < right_end
@@ -166,8 +163,8 @@ def overlapping_pairs(rows: Iterable[dict[str, str]]) -> list[tuple[int, int]]:
         enumerate(rows),
         key=lambda item: (
             item[1]["seqid"],
-            int(item[1].get("package_start0", item[1].get("package_start", ""))),
-            int(item[1].get("package_end0", item[1].get("package_end", ""))),
+            int(item[1]["package_start0"]),
+            int(item[1]["package_end0"]),
             item[1].get("unit_id", item[1].get("package_id", "")),
         ),
     )
@@ -175,11 +172,11 @@ def overlapping_pairs(rows: Iterable[dict[str, str]]) -> list[tuple[int, int]]:
     active_by_seqid: dict[str, list[tuple[int, dict[str, str]]]] = defaultdict(list)
     for original_index, row in ordered:
         active = active_by_seqid[row["seqid"]]
-        start = int(row.get("package_start0", row.get("package_start", "")))
+        start = int(row["package_start0"])
         active[:] = [
             item
             for item in active
-            if int(item[1].get("package_end0", item[1].get("package_end", ""))) > start
+            if int(item[1]["package_end0"]) > start
         ]
         for prior_index, prior in active:
             if intervals_overlap(prior, row):
@@ -189,7 +186,7 @@ def overlapping_pairs(rows: Iterable[dict[str, str]]) -> list[tuple[int, int]]:
 
 
 def _quota_key(row: dict[str, str]) -> tuple[str, str, str]:
-    return row["stratum"], row["challenge_cell"], row["panel"]
+    return row["unit_type"], row["hard_cell"], row["role"]
 
 
 def validate_manifest(rows: list[dict[str, str]]) -> None:
@@ -201,7 +198,7 @@ def validate_manifest(rows: list[dict[str, str]]) -> None:
     if len({row["package_id"] for row in rows}) != len(rows):
         raise ValueError("selected packages contain duplicate package_id")
 
-    panel_counts = Counter((row["stratum"], row["panel"]) for row in rows)
+    panel_counts = Counter((row["unit_type"], row["role"]) for row in rows)
     expected_panel_counts = Counter(
         {
             (stratum, panel): count
@@ -223,42 +220,39 @@ def validate_manifest(rows: list[dict[str, str]]) -> None:
 
     panel_ranks = defaultdict(list)
     for row in rows:
-        panel_ranks[row["panel"]].append(int(row["panel_rank"]))
+        panel_ranks[row["role"]].append(int(row["role_rank"]))
     for panel, ranks in panel_ranks.items():
         expected = list(range(1, len(ranks) + 1))
         if sorted(ranks) != expected:
             raise ValueError(f"panel ranks are not 1..N for {panel}")
 
-    reserve = [row for row in rows if row["panel"] == "reserve"]
+    reserve = [row for row in rows if row["role"] == "reserve"]
     by_pair_rank = defaultdict(list)
     for row in reserve:
-        by_pair_rank[int(row["reserve_pair_rank"])].append(row["stratum"])
+        by_pair_rank[int(row["reserve_pair_rank"])].append(row["unit_type"])
     if sorted(by_pair_rank) != list(range(1, PANEL_COUNTS["reserve"] + 1)):
         raise ValueError("reserve pair ranks are not the fixed 1..20 prefix")
     if any(sorted(strata) != ["S0", "S1"] for strata in by_pair_rank.values()):
         raise ValueError("each reserve pair rank must contain one S0 and one S1 package")
 
 
-def _package_row(row: dict[str, str], panel: str) -> dict[str, str]:
+def _package_row(row: dict[str, str], role: str, priority: float) -> dict[str, str]:
     cell = row["challenge_cell"]
     return {
         "package_id": row["unit_id"],
-        "panel": panel,
-        "panel_rank": "",
+        "role": role,
+        "role_rank": "",
         "reserve_pair_rank": "",
-        "stratum": row["unit_type"],
+        "unit_type": row["unit_type"],
+        "hard_cell": cell,
+        "selection_priority": format(priority, ".17g"),
         "assembly_id": ASSEMBLY_ID,
         "seqid": row["seqid"],
-        "package_start": row["package_start0"],
-        "package_end": row["package_end0"],
-        "focal_start": row["core_start0"],
-        "focal_end": row["core_end0"],
-        "overlap_component_id": row["unit_id"] if row["unit_type"] == "S1" else "",
-        "anchor_feature_ids": row["feature_ids"],
-        "sampling_stratum_id": f"{row['unit_type']}:{cell}",
-        "inclusion_probability": "",
-        "deep_audit_feature_id": "",
-        "challenge_cell": cell,
+        "core_start0": row["core_start0"],
+        "core_end0": row["core_end0"],
+        "package_start0": row["package_start0"],
+        "package_end0": row["package_end0"],
+        "feature_ids": row["feature_ids"],
         "core_length": row["core_length"],
         "feature_count": row["feature_count"],
         "max_overlap_depth": row["max_overlap_depth"],
@@ -268,19 +262,27 @@ def _package_row(row: dict[str, str], panel: str) -> dict[str, str]:
     }
 
 
-def make_manifest(rows: list[dict[str, str]], selected_panels: dict[int, str]) -> list[dict[str, str]]:
-    selected = [_package_row(rows[index], panel) for index, panel in selected_panels.items()]
+def make_manifest(
+    rows: list[dict[str, str]], selected_panels: dict[int, str], priorities: list[float]
+) -> list[dict[str, str]]:
+    selected = [
+        _package_row(rows[index], panel, priorities[index])
+        for index, panel in selected_panels.items()
+    ]
     for panel in PANELS:
         panel_rows = sorted(
-            (row for row in selected if row["panel"] == panel),
-            key=lambda row: (row["stratum"], row["challenge_cell"], row["package_id"]),
+            (row for row in selected if row["role"] == panel),
+            key=lambda row: (row["unit_type"], row["hard_cell"], row["package_id"]),
         )
         for rank, row in enumerate(panel_rows, start=1):
-            row["panel_rank"] = str(rank)
+            row["role_rank"] = str(rank)
 
-    reserve = [row for row in selected if row["panel"] == "reserve"]
+    reserve = [row for row in selected if row["role"] == "reserve"]
     by_stratum = {
-        stratum: sorted((row for row in reserve if row["stratum"] == stratum), key=lambda row: row["package_id"])
+        stratum: sorted(
+            (row for row in reserve if row["unit_type"] == stratum),
+            key=lambda row: row["package_id"],
+        )
         for stratum in STRATA
     }
     for rank, pair in enumerate(zip(by_stratum["S0"], by_stratum["S1"]), start=1):
@@ -288,7 +290,7 @@ def make_manifest(rows: list[dict[str, str]], selected_panels: dict[int, str]) -
             row["reserve_pair_rank"] = str(rank)
 
     validate_manifest(selected)
-    return sorted(selected, key=lambda row: (PANELS.index(row["panel"]), int(row["panel_rank"])))
+    return sorted(selected, key=lambda row: (PANELS.index(row["role"]), int(row["role_rank"])))
 
 
 def _constraint_rows(rows: list[dict[str, str]], variable_count: int):
@@ -389,7 +391,7 @@ def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]],
         selected = [role for role in range(len(PANELS)) if result.x[3 * index + role] > 0.5]
         if len(selected) == 1:
             selected_panels[index] = PANELS[selected[0]]
-    manifest = make_manifest(rows, selected_panels)
+    manifest = make_manifest(rows, selected_panels, candidate_priority.tolist())
     return manifest, {
         "solver_status": int(result.status),
         "solver_message": str(result.message),
@@ -402,13 +404,15 @@ def solve_joint_panel(rows: list[dict[str, str]]) -> tuple[list[dict[str, str]],
 def panel_summary(
     population: list[dict[str, str]], manifest: list[dict[str, str]], solver: dict[str, object], input_path: Path
 ) -> dict[str, object]:
-    selected_counts = Counter((row["stratum"], row["panel"]) for row in manifest)
-    cell_counts = Counter((row["stratum"], row["challenge_cell"], row["panel"]) for row in manifest)
+    selected_counts = Counter((row["unit_type"], row["role"]) for row in manifest)
+    cell_counts = Counter((row["unit_type"], row["hard_cell"], row["role"]) for row in manifest)
     population_cells = Counter((row["unit_type"], row["challenge_cell"]) for row in population)
     return {
         "schema": "fbti_extant_locus_joint_panel_v1",
         "status": "PANEL_FREEZE_PASS",
         "claim_scope": "label-blind joint challenge panel selection; no annotation packet or inclusion-probability estimate",
+        "estimand_scope": "conditional_challenge_panel",
+        "population_representative": False,
         "seed": SEED,
         "rng": "numpy.PCG64",
         "solver": "scipy.optimize.milp",
@@ -433,7 +437,6 @@ def panel_summary(
         },
         "expanded_packages_pairwise_nonoverlap": True,
         "p3_multiplicity_and_nearest_gap": "diagnostic columns only; no hard cross-quota",
-        "inclusion_probability_status": "NOT_COMPUTED",
         "inputs": {"population": str(input_path)},
         **solver,
     }

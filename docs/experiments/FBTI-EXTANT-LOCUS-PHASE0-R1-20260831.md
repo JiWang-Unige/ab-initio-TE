@@ -6,6 +6,10 @@ Status: **protocol frozen; no experiment result yet**
 
 Reviewed repository state: `097c8c8bc9d2c8edae8a76051358e07dd9df8989`
 
+Implementation note: the frozen scientific gate order remains unchanged, but
+`FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1-ADDENDUM-20260831.md` overrides the
+V0 sampling, manifest, annotation and metric clauses where they conflict.
+
 ## Technical summary
 
 The current fragment problem cannot be interpreted as a biological-instance

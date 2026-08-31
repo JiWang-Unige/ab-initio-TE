@@ -12,6 +12,7 @@ import argparse
 from bisect import bisect_left, bisect_right
 from collections import Counter, defaultdict
 import csv
+import gzip
 import json
 from pathlib import Path
 
@@ -183,6 +184,31 @@ def read_lengths(path: Path) -> dict[str, int]:
     return {str(key): int(value) for key, value in payload.items()}
 
 
+def read_fasta_lengths(path: Path) -> dict[str, int]:
+    opener = gzip.open if path.suffix == ".gz" else path.open
+    lengths: dict[str, int] = {}
+    name: str | None = None
+    length = 0
+    with opener(path, "rt", encoding="utf-8") if path.suffix == ".gz" else opener(
+        "r", encoding="utf-8"
+    ) as handle:
+        for line in handle:
+            if line.startswith(">"):
+                if name is not None:
+                    lengths[name] = length
+                name = line[1:].split()[0]
+                if not name or name in lengths:
+                    raise ValueError("invalid or duplicate FASTA contig name")
+                length = 0
+            else:
+                if name is None:
+                    raise ValueError("FASTA sequence before first header")
+                length += len(line.strip())
+    if name is not None:
+        lengths[name] = length
+    return lengths
+
+
 def read_atom_index(
     path: Path, lengths: dict[str, int]
 ) -> dict[str, tuple[list[int], list[int]]]:
@@ -273,12 +299,15 @@ def build_population(
     overlap_path: Path,
     atom_path: Path,
     lengths_path: Path,
+    assembly_path: Path,
 ) -> tuple[list[dict[str, object]], dict[str, object]]:
     records = read_truth(truth_path)
     pairs = read_overlap_pairs(overlap_path, records)
     lengths = read_lengths(lengths_path)
     if len(lengths) != 1870 or sum(lengths.values()) != 143_726_002:
         raise ValueError("contig lengths are not the frozen exact r6.68 assembly")
+    if lengths != read_fasta_lengths(assembly_path):
+        raise ValueError("contig length mapping does not match the exact r6.68 FASTA")
     for record in records.values():
         seqid = str(record["seqid"])
         if seqid not in lengths or int(record["end"]) > lengths[seqid]:
@@ -358,6 +387,7 @@ def build_population(
             "overlap_pairs": str(overlap_path),
             "p3_atoms": str(atom_path),
             "contig_lengths": str(lengths_path),
+            "assembly_fasta": str(assembly_path),
         },
     }
     return units, summary
@@ -398,6 +428,7 @@ def main() -> int:
     parser.add_argument("--overlap-pairs", type=Path, required=True)
     parser.add_argument("--p3-atoms", type=Path, required=True)
     parser.add_argument("--contig-lengths", type=Path, required=True)
+    parser.add_argument("--assembly-fasta", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     units, summary = build_population(
@@ -405,6 +436,7 @@ def main() -> int:
         args.overlap_pairs,
         args.p3_atoms,
         args.contig_lengths,
+        args.assembly_fasta,
     )
     write_outputs(units, summary, args.output_dir)
     print(json.dumps(summary, sort_keys=True))
