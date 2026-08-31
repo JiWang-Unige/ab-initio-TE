@@ -60,6 +60,11 @@
     "calibration_packets_status": "COMPLETED_0_0_ENGINEERING_ONLY",
     "calibration_packets_report": "docs/experiments/FBTI-EXTANT-LOCUS-CALIBRATION-PACKETS-V1.3-20260831.md",
     "calibration_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r3",
+    "fragment_gap_audit_job": "12124904",
+    "fragment_gap_fly_recovery_job": "12124968",
+    "fragment_gap_audit_status": "COMPLETED_DESCRIPTIVE_ONLY_NO_RESCUE_SELECTED",
+    "fragment_gap_audit_report": "docs/experiments/FRAGMENT-GAP-TOPOLOGY-20260831-R1.md",
+    "fragment_gap_summary_output": "/home/users/j/jwang/ab-initio-TE/outputs/FRAGMENT-GAP-TOPOLOGY-20260831-R1/summary-r1",
     "gate_l_evaluated": false
   },
   "current_contract_blocks": [
