@@ -40,13 +40,16 @@ authorized early.
 | 12 calibration evidence packets | `PASS`, job 12122769 | reusable P3-blind human input |
 | 120 main evidence packets | `PASS`, job 12125398 task 0 | machine-ready, not yet annotated |
 | 40 reserve evidence packets | `PASS`, job 12125398 task 1 | frozen; annotate only by paired prefix after L-D shortfall |
-| A1/A2/ADJ response-kit generator | implemented, targeted tests pass | engineering only |
+| A1/A2/ADJ response kits | `PASS`, job 12125409 | calibration and main proposal templates; engineering only |
 | Human annotations and adjudication | absent | Gate L remains unevaluated |
 
 The main and reserve packet job was CPU-only, used 1 CPU and 8 GB per task,
 consumed zero GPU, and completed both tasks in about 71 seconds. It produced
 120 and 40 opaque P3-blind packet directories respectively. These are
 engineering outputs and enter no scientific denominator by themselves.
+The calibration and main response-kit array then completed in zero and one
+seconds respectively, also with zero GPU. The generated kits are explicitly
+marked V1.4 proposals until the operational clarification is accepted.
 
 ## The experiment matrix
 

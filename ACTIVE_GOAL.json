@@ -48,6 +48,9 @@
   "annotation_contract_v1_1_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.1-ADDENDUM-20260831.md",
   "annotation_contract_v1_2_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.2-ADDENDUM-20260831.md",
   "annotation_contract_v1_3_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.3-ADDENDUM-20260831.md",
+  "annotation_contract_v1_4_proposal": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.4-ADDENDUM-20260901.md",
+  "annotation_handbook_v1_4_proposal": "docs/experiments/FBTI-GATE-L-ANNOTATOR-HANDBOOK-V1.4-20260901.md",
+  "gate_l_execution_report": "docs/experiments/FBTI-GATE-L-EXECUTION-20260901.md",
   "engineering_progress": {
     "population_census_job": "12121962",
     "population_census_status": "COMPLETED_0_0_ENGINEERING_ONLY",
@@ -60,6 +63,14 @@
     "calibration_packets_status": "COMPLETED_0_0_ENGINEERING_ONLY",
     "calibration_packets_report": "docs/experiments/FBTI-EXTANT-LOCUS-CALIBRATION-PACKETS-V1.3-20260831.md",
     "calibration_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r3",
+    "annotation_packets_job": "12125398",
+    "annotation_packets_status": "COMPLETED_0_0_ENGINEERING_ONLY",
+    "main_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-packets-v1.3-20260901-r1",
+    "reserve_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/reserve-packets-v1.3-20260901-r1",
+    "annotation_kits_job": "12125409",
+    "annotation_kits_status": "COMPLETED_0_0_ENGINEERING_ONLY_V1_4_PROPOSAL",
+    "calibration_annotation_kits_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-annotation-kits-v1.4-proposal-20260901-r1",
+    "main_annotation_kits_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-annotation-kits-v1.4-proposal-20260901-r1",
     "fragment_gap_audit_job": "12124904",
     "fragment_gap_fly_recovery_job": "12124968",
     "fragment_gap_audit_status": "COMPLETED_DESCRIPTIVE_ONLY_NO_RESCUE_SELECTED",
@@ -68,6 +79,7 @@
     "gate_l_evaluated": false
   },
   "current_contract_blocks": [
+    "V1.4 projection and provenance-actor clarifications remain proposals until accepted before calibration",
     "exact FlyBase name frequency is degenerate and exact-name-matched FPR has no denominator",
     "manual calibration, double annotation and adjudication have not yet been performed",
     "P3 probabilities are unavailable; Gate E input/resource contract must be revised after Gates L and O before any export"
