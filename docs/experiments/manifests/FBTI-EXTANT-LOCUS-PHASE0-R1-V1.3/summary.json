@@ -1,0 +1,83 @@
+{
+  "assembly_id": "dmel_r6.68",
+  "candidate_by_challenge_cell": {
+    "S0:S0-L1": 903,
+    "S0:S0-L2": 2247,
+    "S0:S0-L3": 431,
+    "S0:S0-L4": 1341,
+    "S1:S1-C1": 207,
+    "S1:S1-C2": 62,
+    "S1:S1-C3": 35
+  },
+  "candidate_order": "unit_id_lexicographic",
+  "claim_scope": "label-blind joint challenge panel selection; no annotation packet or inclusion-probability estimate",
+  "constraint_count": 37141,
+  "context_conflict_pairs": 30098,
+  "estimand_scope": "conditional_challenge_panel",
+  "expanded_packages_pairwise_nonoverlap": true,
+  "flatten_order": "C",
+  "inputs": {
+    "population": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/population-census-v1-2-input-freeze-20260831-r2/population.tsv"
+  },
+  "mip_gap": 0.0,
+  "numpy_version": "1.26.4",
+  "objective_direction": "minimize",
+  "objective_value": 13.694345059328334,
+  "p3_multiplicity_and_nearest_gap": "diagnostic columns only; no hard cross-quota",
+  "panel_git_commit": "0b88bae7821c01cf4de77b1754abb3e745358ad5",
+  "population_census_git_commit": "85098de9fb305c57ed90a937df375cbba91793bc",
+  "population_representative": false,
+  "population_units": 5226,
+  "priority_schema": "pcg64_candidate_role_float64_v1",
+  "priority_scope": "candidate_role",
+  "priority_shape": [
+    5226,
+    3
+  ],
+  "rng": "numpy.PCG64",
+  "role_order": [
+    "calibration",
+    "main",
+    "reserve"
+  ],
+  "schema": "fbti_extant_locus_joint_panel_v1",
+  "scipy_version": "1.13.1",
+  "seed": 20260831,
+  "selected_by_challenge_cell": {
+    "S0:S0-L1:calibration": 1,
+    "S0:S0-L1:main": 15,
+    "S0:S0-L1:reserve": 3,
+    "S0:S0-L2:calibration": 2,
+    "S0:S0-L2:main": 15,
+    "S0:S0-L2:reserve": 6,
+    "S0:S0-L3:calibration": 1,
+    "S0:S0-L3:main": 15,
+    "S0:S0-L3:reserve": 3,
+    "S0:S0-L4:calibration": 2,
+    "S0:S0-L4:main": 15,
+    "S0:S0-L4:reserve": 8,
+    "S1:S1-C1:calibration": 2,
+    "S1:S1-C1:main": 20,
+    "S1:S1-C1:reserve": 17,
+    "S1:S1-C2:calibration": 2,
+    "S1:S1-C2:main": 20,
+    "S1:S1-C2:reserve": 1,
+    "S1:S1-C3:calibration": 2,
+    "S1:S1-C3:main": 20,
+    "S1:S1-C3:reserve": 2
+  },
+  "selected_by_stratum_panel": {
+    "S0:calibration": 6,
+    "S0:main": 60,
+    "S0:reserve": 20,
+    "S1:calibration": 6,
+    "S1:main": 60,
+    "S1:reserve": 20
+  },
+  "selected_packages": 172,
+  "solver": "scipy.optimize.milp",
+  "solver_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "solver_status": 0,
+  "status": "PANEL_FREEZE_PASS",
+  "variable_count": 15678
+}

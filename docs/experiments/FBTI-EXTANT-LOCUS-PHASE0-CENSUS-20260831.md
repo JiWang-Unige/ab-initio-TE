@@ -4,6 +4,13 @@ Date: 2026-08-31
 
 Status: **engineering census passed; Gate L has not been evaluated**
 
+Latest frozen input census: commit
+`85098de9fb305c57ed90a937df375cbba91793bc`, Slurm job `12121962`,
+`COMPLETED 0:0`, 4 CPU, 32 GB, 0 GPU, 10 seconds. This run additionally
+required exact equality of the complete FASTA contig-name/length mapping and
+retained direct remote snapshots of the consumed truth, overlap, P3 and length
+tables. The earlier job `12120604` below remains the preliminary census record.
+
 Git implementation: `9d2cd9e83b09cc657cb4efcad92244ca9e47d747`
 
 Slurm job: `12120604`, `COMPLETED 0:0`, 4 CPU, 32 GB requested,
@@ -128,7 +135,7 @@ evaluated and no relation feature was tested.
 
 ### Next-only
 
-Run the V1 fixed-seed joint challenge-panel freeze and then build the selected
-context/atom manifests. Stop if the exact role/cell quotas and joint 86 S0 + 86
-S1 non-overlap requirement are infeasible. This panel supports only conditional
-challenge-panel conclusions, not FlyBase-population estimates.
+The V1.3 joint challenge panel and context/atom manifests are now frozen; see
+`FBTI-EXTANT-LOCUS-JOINT-PANEL-V1.3-20260831.md`. The next-only action is to
+build and annotate the 12 calibration evidence packets. The panel supports only
+conditional challenge-panel conclusions, not FlyBase-population estimates.

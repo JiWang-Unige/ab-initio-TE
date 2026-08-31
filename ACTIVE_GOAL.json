@@ -49,14 +49,18 @@
   "annotation_contract_v1_2_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.2-ADDENDUM-20260831.md",
   "annotation_contract_v1_3_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.3-ADDENDUM-20260831.md",
   "engineering_progress": {
-    "population_census_job": "12120604",
+    "population_census_job": "12121962",
     "population_census_status": "COMPLETED_0_0_ENGINEERING_ONLY",
     "population_census_report": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-CENSUS-20260831.md",
+    "joint_panel_job": "12121966",
+    "joint_panel_status": "COMPLETED_0_0_ENGINEERING_ONLY",
+    "joint_panel_report": "docs/experiments/FBTI-EXTANT-LOCUS-JOINT-PANEL-V1.3-20260831.md",
+    "joint_panel_manifest": "docs/experiments/manifests/FBTI-EXTANT-LOCUS-PHASE0-R1-V1.3/packages.tsv",
     "gate_l_evaluated": false
   },
   "current_contract_blocks": [
     "exact FlyBase name frequency is degenerate and exact-name-matched FPR has no denominator",
-    "joint challenge-panel feasibility and the fixed 172-package manifest are not yet complete",
+    "manual calibration, double annotation and adjudication have not yet been performed",
     "P3 probabilities are unavailable; Gate E input/resource contract must be revised after Gates L and O before any export"
   ],
   "ordered_gates": [
