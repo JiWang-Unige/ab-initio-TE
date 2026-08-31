@@ -12,6 +12,9 @@
 
 set -euo pipefail
 
+source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
+conda activate te_benchmark
+
 ROOT=/home/users/j/jwang/ab-initio-TE
 RUN_ROOT=${ROOT}/outputs/FRAGMENT-GAP-TOPOLOGY-20260831-R1/frozen-binary-r1
 SCRIPT_ROOT=${ROOT}/scripts/experiments/FRAGMENT-GAP-TOPOLOGY-20260831-R1
