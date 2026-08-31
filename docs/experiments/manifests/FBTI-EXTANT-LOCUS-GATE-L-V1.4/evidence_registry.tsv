@@ -1,0 +1,7 @@
+evidence_code	evidence_class	source_version	independent_of_fbti_endpoint	used_by_gate_e
+FLYBASE_FEATURE_RECORD	curated_feature_provenance	FlyBase FB2026_02 r6.68	0	0
+SEQUENCE_TERMINAL_REPEAT	sequence_structure	dmel r6.68 assembly	1	1
+SEQUENCE_TSD_COMPATIBILITY	sequence_structure	dmel r6.68 assembly	1	1
+SEQUENCE_FLANK_TRANSITION	sequence_structure	dmel r6.68 assembly	1	1
+SEQUENCE_INTERNAL_HOMOLOGY	sequence_similarity	dmel r6.68 assembly	1	1
+ASSEMBLY_N_GAP	assembly_observation	dmel r6.68 assembly	1	0
