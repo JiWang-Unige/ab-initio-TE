@@ -346,6 +346,8 @@ def _validate_package_tables(
 
         segment_ids: set[str] = set()
         assigned_segments: list[tuple[str, str, int, int]] = []
+        assigned_material_intervals: list[tuple[str, int, int]] = []
+        unresolved_material_intervals: list[tuple[str, int, int]] = []
         assigned_loci: set[str] = set()
         assigned_by_locus: dict[str, list[tuple[int, int]]] = {
             locus_id: [] for locus_id in locus_ids
@@ -374,7 +376,18 @@ def _validate_package_tables(
             if row["locus_assignment_status"] == "assigned":
                 assigned_segments.append((row["seqid"], locus_id, start, end))
                 assigned_by_locus[locus_id].append((start, end))
+                assigned_material_intervals.append((segment_id, start, end))
+            else:
+                unresolved_material_intervals.append((segment_id, start, end))
             segment_ids.add(segment_id)
+
+        for assigned_id, assigned_start, assigned_end in assigned_material_intervals:
+            for unresolved_id, unresolved_start, unresolved_end in unresolved_material_intervals:
+                if max(assigned_start, unresolved_start) < min(assigned_end, unresolved_end):
+                    raise ValueError(
+                        f"assigned and unresolved material overlap: "
+                        f"{packet_id}/{assigned_id}/{unresolved_id}"
+                    )
 
         for row in locus_rows:
             locus_id = row["locus_id"]

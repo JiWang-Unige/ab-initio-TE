@@ -222,6 +222,25 @@ class ValidateGateLPass1Test(unittest.TestCase):
                 self.root / "out-of-bounds",
             )
 
+    def test_rejects_assigned_and_unresolved_material_overlap(self) -> None:
+        self._write_response(
+            package_status="partially_resolved",
+            loci=[self._locus("L1", "partially_resolved", 120, 220)],
+            materials=[
+                self._material("M1", "L1", 120, 180, "assigned"),
+                self._material("U1", "", 150, 200, "unresolved"),
+            ],
+            boundaries=self._boundaries("L1", 120, 220),
+        )
+        with self.assertRaisesRegex(ValueError, "assigned and unresolved material overlap"):
+            validator.validate_and_normalize(
+                self.manifest,
+                self.evidence_registry,
+                self.responses,
+                "A1",
+                self.root / "overlapping-assignment-status",
+            )
+
     def test_rejects_nested_interruption_without_matching_edge(self) -> None:
         self._write_response(
             package_status="resolved",

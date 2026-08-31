@@ -68,11 +68,22 @@ class ProjectGateLAtomsTest(unittest.TestCase):
         self.assertEqual(row["assignment"], "")
         self.assertEqual(row["assigned_segment_ids"], "")
 
-    def test_unresolved_material_overlap_has_precedence(self) -> None:
+    def test_one_percent_unresolved_support_keeps_unique_assignment(self) -> None:
         row = self.project(
             [
-                self.material("u1", "", "120", "150", "unresolved"),
-                self.material("s1", "L1", "150", "200"),
+                self.material("s1", "L1", "100", "199"),
+                self.material("u1", "", "199", "200", "unresolved"),
+            ]
+        )
+        self.assertEqual(row["assignment"], "unique")
+        self.assertEqual(row["assigned_locus_id"], "L1")
+        self.assertEqual(row["assigned_segment_ids"], "s1")
+
+    def test_fifteen_percent_unresolved_support_blocks_unique_assignment(self) -> None:
+        row = self.project(
+            [
+                self.material("s1", "L1", "100", "160"),
+                self.material("u1", "", "160", "175", "unresolved"),
             ]
         )
         self.assertEqual(row["assignment"], "unresolved")
@@ -101,11 +112,11 @@ class ProjectGateLAtomsTest(unittest.TestCase):
         self.assertEqual(row["assigned_locus_id"], "")
         self.assertEqual(row["assigned_segment_ids"], "s1,s2")
 
-    def test_unassigned_is_below_half_atom_coverage(self) -> None:
-        row = self.project([self.material("s1", "L1", "100", "149")])
+    def test_one_percent_unresolved_support_is_unassigned(self) -> None:
+        row = self.project([self.material("u1", "", "100", "101", "unresolved")])
         self.assertEqual(row["assignment"], "unassigned")
         self.assertEqual(row["assigned_locus_id"], "")
-        self.assertEqual(row["assigned_segment_ids"], "s1")
+        self.assertEqual(row["assigned_segment_ids"], "")
 
 
 if __name__ == "__main__":

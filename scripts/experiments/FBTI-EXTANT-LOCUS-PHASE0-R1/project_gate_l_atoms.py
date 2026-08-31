@@ -118,19 +118,6 @@ def _project_eligible_atom(
     if atom_end <= atom_start:
         raise ValueError(f"non-positive atom interval: {atom['atom_id']}")
 
-    unresolved_overlap = any(
-        row["locus_assignment_status"] == "unresolved"
-        and row["seqid"] == atom["seqid"]
-        and _overlap(
-            atom_start,
-            atom_end,
-            int(row["_start"]),
-            int(row["_end"]),
-        )
-        > 0
-        for row in materials
-    )
-
     assigned_rows = [
         row
         for row in materials
@@ -144,11 +131,45 @@ def _project_eligible_atom(
         )
         > 0
     ]
+    unresolved_rows = [
+        row
+        for row in materials
+        if row["locus_assignment_status"] == "unresolved"
+        and row["seqid"] == atom["seqid"]
+        and _overlap(
+            atom_start,
+            atom_end,
+            int(row["_start"]),
+            int(row["_end"]),
+        )
+        > 0
+    ]
     segment_ids = ",".join(sorted(row["segment_id"] for row in assigned_rows))
+
+    atom_length = atom_end - atom_start
+    assigned_intervals = [
+        (
+            max(atom_start, int(row["_start"])),
+            min(atom_end, int(row["_end"])),
+        )
+        for row in assigned_rows
+    ]
+    unresolved_intervals = [
+        (
+            max(atom_start, int(row["_start"])),
+            min(atom_end, int(row["_end"])),
+        )
+        for row in unresolved_rows
+    ]
+    assigned_support = _union_length(assigned_intervals)
+    unresolved_support = _union_length(unresolved_intervals)
+    total_support = assigned_support + unresolved_support
 
     assignment = "unresolved"
     assigned_locus_id = ""
-    if not unresolved_overlap:
+    if total_support * 2 < atom_length:
+        assignment = "unassigned"
+    elif assigned_rows:
         intervals_by_locus: dict[str, list[tuple[int, int]]] = defaultdict(list)
         for row in assigned_rows:
             start = max(atom_start, int(row["_start"]))
@@ -159,25 +180,20 @@ def _project_eligible_atom(
             locus_id: _union_length(intervals)
             for locus_id, intervals in intervals_by_locus.items()
         }
-        total_coverage = sum(coverage_by_locus.values())
-        atom_length = atom_end - atom_start
-        if total_coverage * 2 < atom_length:
-            assignment = "unassigned"
-        elif coverage_by_locus:
-            ranked = sorted(
-                coverage_by_locus.items(),
-                key=lambda item: (-item[1], item[0]),
-            )
-            top_locus, top_coverage = ranked[0]
-            second_coverage = ranked[1][1] if len(ranked) > 1 else 0
-            if (
-                top_coverage * 10 >= total_coverage * 9
-                and second_coverage * 10 <= total_coverage
-            ):
-                assignment = "unique"
-                assigned_locus_id = top_locus
-            elif sum(coverage >= atom_length * 0.2 for coverage in coverage_by_locus.values()) >= 2:
-                assignment = "mixed"
+        ranked = sorted(
+            coverage_by_locus.items(),
+            key=lambda item: (-item[1], item[0]),
+        )
+        top_locus, top_coverage = ranked[0]
+        second_coverage = ranked[1][1] if len(ranked) > 1 else 0
+        if (
+            top_coverage * 10 >= total_support * 9
+            and second_coverage * 10 <= total_support
+        ):
+            assignment = "unique"
+            assigned_locus_id = top_locus
+        elif sum(coverage >= atom_length * 0.2 for coverage in coverage_by_locus.values()) >= 2:
+            assignment = "mixed"
 
     return {
         "package_id": atom["package_id"],
