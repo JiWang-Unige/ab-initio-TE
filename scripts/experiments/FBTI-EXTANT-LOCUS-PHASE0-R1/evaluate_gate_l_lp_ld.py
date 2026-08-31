@@ -44,7 +44,7 @@ PROVENANCE_FIELDS = {
     "package_id", "feature_id", "manifest_assembly_id", "source_assembly_id",
     "manifest_seqid", "source_seqid", "manifest_start", "manifest_end",
     "source_start", "source_end", "source_feature_id", "evidence_packet_id",
-    "deep_audit", "anchor_interpretability", "audit_note",
+    "evidence_codes", "deep_audit", "anchor_interpretability", "audit_note",
 }
 REVIEW_FIELDS = {"package_id", "actor_id", "package_status"}
 LOCUS_FIELDS = {"package_id", "actor_id", "locus_id", "locus_status"}
@@ -295,6 +295,9 @@ def evaluate_lp(
             deep_expected.add(key)
         if row["deep_audit"] != ("1" if expected_deep else "0"):
             raise ContractError(f"deep_audit flag disagrees with manifest: {key}")
+        evidence_codes = _evidence_codes(row["evidence_codes"], registry)
+        if expected_deep and not evidence_codes:
+            raise ContractError(f"deep anchor requires evidence_codes: {key}")
         interpretation = row["anchor_interpretability"]
         if expected_deep:
             if interpretation not in {

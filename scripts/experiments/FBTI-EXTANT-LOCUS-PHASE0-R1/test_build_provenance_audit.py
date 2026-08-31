@@ -55,6 +55,7 @@ class BuildProvenanceAuditTest(unittest.TestCase):
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0]["manifest_start"], "100")
             self.assertEqual(rows[0]["source_start"], "100")
+            self.assertEqual(rows[0]["evidence_codes"], "FLYBASE_FEATURE_RECORD")
             self.assertEqual(rows[0]["deep_audit"], "1")
             self.assertEqual(rows[0]["anchor_interpretability"], "")
 

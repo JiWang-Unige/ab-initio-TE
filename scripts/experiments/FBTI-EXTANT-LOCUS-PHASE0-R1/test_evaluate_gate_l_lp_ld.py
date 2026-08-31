@@ -88,6 +88,7 @@ def active_inputs(reserve_ranks: tuple[int, ...] = ()) -> dict[str, object]:
                 "source_end": str(end),
                 "source_feature_id": feature_id,
                 "evidence_packet_id": f"PACKET-{row['package_id']}",
+                "evidence_codes": "FLYBASE_FEATURE_RECORD",
                 "deep_audit": "1" if deep else "0",
                 "anchor_interpretability": "interpretable_extant_locus" if deep else "",
                 "audit_note": "",
@@ -246,6 +247,36 @@ class GateLLpLdTest(unittest.TestCase):
         metric = supported["checks"]["unsupported_copied_point_fraction"]
         self.assertEqual((metric["numerator"], metric["denominator"]), (0, 1))
         self.assertEqual(supported["status"], "PASS")
+
+    def test_deep_audit_requires_registered_evidence_code(self) -> None:
+        inputs = active_inputs()
+        packages = gate._index_packages(inputs["package_rows"])
+        active = {row["package_id"] for row in inputs["reviews"]}
+        context = gate._context_index(inputs["context_rows"])
+        registry = gate._registry(inputs["registry_rows"])
+
+        inputs["provenance_rows"][0]["evidence_codes"] = ""
+        with self.assertRaisesRegex(gate.ContractError, "deep anchor requires evidence_codes"):
+            gate.evaluate_lp(
+                packages, active, context, registry,
+                inputs["provenance_rows"], inputs["boundaries"],
+            )
+
+        inputs["provenance_rows"][0]["evidence_codes"] = "UNREGISTERED"
+        with self.assertRaisesRegex(gate.ContractError, "unknown evidence_code"):
+            gate.evaluate_lp(
+                packages, active, context, registry,
+                inputs["provenance_rows"], inputs["boundaries"],
+            )
+
+    def test_deep_evidence_code_does_not_change_interpretation_category(self) -> None:
+        inputs = active_inputs()
+        inputs["provenance_rows"][0]["evidence_codes"] = (
+            "FLYBASE_FEATURE_RECORD,SEQUENCE_TSD_COMPATIBILITY"
+        )
+        result = gate.evaluate_gate_l(**inputs)
+        metric = result["lp"]["checks"]["deep_anchor_interpretability"]
+        self.assertEqual((metric["numerator"], metric["denominator"]), (40, 40))
 
     def test_incomplete_emits_only_next_frozen_pair(self) -> None:
         result = gate.evaluate_gate_l(**active_inputs((1,)))
