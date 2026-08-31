@@ -50,3 +50,15 @@ and intermediate adjudication are absent.
 
 The output is a calibration aid only. It does not create annotation bundles,
 truth labels for Gate L, an evidence registry, hashes/checksums, or a model.
+
+## Engineering execution
+
+- Slurm `12122748` (`r1`) failed before creating an output directory. The
+  FlyBase asset named `dmel-all-r6.68.gff.gz` is a gzip-compressed tar archive,
+  so reading it as a directly gzipped GFF produced an invalid field count at
+  the tar header. It is retained as an engineering failure and enters no
+  scientific denominator.
+- The `r2` submission changes only transport: it streams the exact
+  `dmel-all-r6.68.gff` member from that archive into the unchanged builder and
+  uses a new output directory. Panel membership, raw feature rows, sequence,
+  ontology and all Gate L contracts remain unchanged.
