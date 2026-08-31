@@ -390,6 +390,14 @@ def _locus_material(bundle: Bundle, package_id: str, locus: Locus) -> list[tuple
     ]
 
 
+def _eligible_loci(bundle: Bundle, package_id: str, seqid: str) -> list[Locus]:
+    return [
+        Locus(locus.locus_id, locus.status, seqid, locus.envelope_start, locus.envelope_end)
+        for locus in bundle.loci.get(package_id, ())
+        if locus.status in {"resolved", "partially_resolved"}
+    ]
+
+
 def _locus_matches(
     package_id: str,
     left_bundle: Bundle,
@@ -397,16 +405,8 @@ def _locus_matches(
     left_seqid: str,
     right_seqid: str,
 ) -> tuple[list[tuple[Locus, Locus]], dict[str, str], dict[str, str]]:
-    left_loci = [
-        Locus(locus.locus_id, locus.status, left_seqid, locus.envelope_start, locus.envelope_end)
-        for locus in left_bundle.loci.get(package_id, ())
-        if locus.status in {"resolved", "partially_resolved"}
-    ]
-    right_loci = [
-        Locus(locus.locus_id, locus.status, right_seqid, locus.envelope_start, locus.envelope_end)
-        for locus in right_bundle.loci.get(package_id, ())
-        if locus.status in {"resolved", "partially_resolved"}
-    ]
+    left_loci = _eligible_loci(left_bundle, package_id, left_seqid)
+    right_loci = _eligible_loci(right_bundle, package_id, right_seqid)
     score: dict[tuple[int, int], float] = {}
     for left_index, left in enumerate(left_loci):
         for right_index, right in enumerate(right_loci):
@@ -421,6 +421,317 @@ def _locus_matches(
     left_to_pair = {left.locus_id: str(index) for index, (left, _) in enumerate(matched)}
     right_to_pair = {right.locus_id: str(index) for index, (_, right) in enumerate(matched)}
     return matched, left_to_pair, right_to_pair
+
+
+def _common_material_partition(
+    package_id: str,
+    left_bundle: Bundle,
+    right_bundle: Bundle,
+    left_map: Mapping[str, str],
+    right_map: Mapping[str, str],
+) -> tuple[bool | None, int, int]:
+    """Compare locus partitions only on jointly assigned material support.
+
+    The returned partition flag is intentionally independent of material
+    endpoints outside the intersection.  Event boundaries from both actors
+    form atomic intervals, and each interval is compared after converting
+    actor-local locus IDs to the frozen matching indices.
+    """
+
+    left_segments = [
+        segment
+        for segment in left_bundle.materials.get(package_id, ())
+        if segment.assignment_status == "assigned" and segment.locus_id is not None
+    ]
+    right_segments = [
+        segment
+        for segment in right_bundle.materials.get(package_id, ())
+        if segment.assignment_status == "assigned" and segment.locus_id is not None
+    ]
+    seqids = {segment.seqid for segment in left_segments} & {
+        segment.seqid for segment in right_segments
+    }
+    common_support_bp = 0
+    atomic_interval_count = 0
+    partition_equal = True
+    for seqid in sorted(seqids):
+        left = [segment for segment in left_segments if segment.seqid == seqid]
+        right = [segment for segment in right_segments if segment.seqid == seqid]
+        endpoints = sorted(
+            {
+                endpoint
+                for segment in (*left, *right)
+                for endpoint in (segment.start, segment.end)
+            }
+        )
+        for start, end in zip(endpoints, endpoints[1:]):
+            if end <= start:
+                continue
+            left_ids = {
+                segment.locus_id
+                for segment in left
+                if segment.start < end and segment.end > start
+            }
+            right_ids = {
+                segment.locus_id
+                for segment in right
+                if segment.start < end and segment.end > start
+            }
+            if not left_ids or not right_ids:
+                continue
+            common_support_bp += end - start
+            atomic_interval_count += 1
+            if (
+                any(locus_id not in left_map for locus_id in left_ids)
+                or any(locus_id not in right_map for locus_id in right_ids)
+                or {left_map[locus_id] for locus_id in left_ids if locus_id in left_map}
+                != {right_map[locus_id] for locus_id in right_ids if locus_id in right_map}
+            ):
+                partition_equal = False
+    if common_support_bp == 0:
+        return None, 0, 0
+    return partition_equal, common_support_bp, atomic_interval_count
+
+
+def _mapped_relation_graph(
+    package_id: str, bundle: Bundle, pair_map: Mapping[str, str]
+) -> tuple[set[tuple[str, str, str]], bool]:
+    graph: set[tuple[str, str, str]] = set()
+    has_unmapped_endpoint = False
+    for relation in bundle.relations.get(package_id, ()):
+        relation_type, subject, object_ = relation
+        if subject not in pair_map or object_ not in pair_map:
+            has_unmapped_endpoint = True
+            continue
+        key = _relation_key(relation, pair_map)
+        if key is not None:
+            graph.add(key)
+    return graph, has_unmapped_endpoint
+
+
+def _audit_topology_pair(
+    package_id: str,
+    left_bundle: Bundle,
+    right_bundle: Bundle,
+    left_seqid: str,
+    right_seqid: str,
+) -> dict[str, object]:
+    """Audit topology equivalence using only frozen matching observables."""
+
+    left_loci = _eligible_loci(left_bundle, package_id, left_seqid)
+    right_loci = _eligible_loci(right_bundle, package_id, right_seqid)
+    matched, left_map, right_map = _locus_matches(
+        package_id, left_bundle, right_bundle, left_seqid, right_seqid
+    )
+    complete = (
+        bool(left_loci or right_loci)
+        and len(matched) == len(left_loci)
+        and len(matched) == len(right_loci)
+    )
+    partition_equal, common_support_bp, atomic_interval_count = _common_material_partition(
+        package_id, left_bundle, right_bundle, left_map, right_map
+    )
+    left_graph, left_unmapped = _mapped_relation_graph(package_id, left_bundle, left_map)
+    right_graph, right_unmapped = _mapped_relation_graph(package_id, right_bundle, right_map)
+    relation_equal = not left_unmapped and not right_unmapped and left_graph == right_graph
+    if partition_equal is None:
+        equivalent: bool | None = None
+    else:
+        equivalent = bool(complete and partition_equal and relation_equal)
+    return {
+        "equivalent": equivalent,
+        "equivalence_evaluable": partition_equal is not None,
+        "locus_matching_complete": complete,
+        "left_locus_count": len(left_loci),
+        "right_locus_count": len(right_loci),
+        "matched_locus_count": len(matched),
+        "common_assigned_support_bp": common_support_bp,
+        "common_support_atomic_interval_count": atomic_interval_count,
+        "common_material_partition_equal": partition_equal,
+        "mapped_relation_graph_equal": relation_equal,
+        "left_relation_edge_count": len(left_graph),
+        "right_relation_edge_count": len(right_graph),
+    }
+
+
+def _topology_audit_status(
+    resolution: str,
+    adj_a1: bool | None,
+    adj_a2: bool | None,
+    a1_a2: bool | None,
+) -> str:
+    if adj_a1 is None or adj_a2 is None or not resolution:
+        return "AUDIT_UNEVALUABLE"
+    if resolution == "accept_a1":
+        if adj_a1 and not adj_a2:
+            return "consistent"
+        if adj_a1 and adj_a2:
+            return "source_choice_nonunique"
+        return "AUDIT_DISCORDANT"
+    if resolution == "accept_a2":
+        if adj_a2 and not adj_a1:
+            return "consistent"
+        if adj_a1 and adj_a2:
+            return "source_choice_nonunique"
+        return "AUDIT_DISCORDANT"
+    if resolution == "same_topology_minor_edit":
+        if a1_a2 is None:
+            return "AUDIT_UNEVALUABLE"
+        return "consistent" if adj_a1 and adj_a2 and a1_a2 else "AUDIT_DISCORDANT"
+    if resolution == "new_topology":
+        return "consistent" if not adj_a1 and not adj_a2 else "AUDIT_DISCORDANT"
+    return "AUDIT_UNEVALUABLE"
+
+
+def _automatic_source_choice(adj_a1: bool | None, adj_a2: bool | None) -> str:
+    if adj_a1 is None or adj_a2 is None:
+        return "unevaluable"
+    if adj_a1 and adj_a2:
+        return "both"
+    if adj_a1:
+        return "A1"
+    if adj_a2:
+        return "A2"
+    return "neither"
+
+
+def _topology_consistency_audit(
+    package_ids: Iterable[str],
+    a1: Bundle,
+    a2: Bundle,
+    adj: Bundle,
+) -> dict[str, object]:
+    package_results: list[dict[str, object]] = []
+    status_counts = Counter()
+    pair_counts = {
+        pair: {"equivalent": 0, "not_equivalent": 0, "unevaluable": 0}
+        for pair in ("ADJ-A1", "ADJ-A2", "A1-A2")
+    }
+    resolution_status = {
+        resolution: Counter()
+        for resolution in (
+            "accept_a1",
+            "accept_a2",
+            "same_topology_minor_edit",
+            "new_topology",
+            "",
+        )
+    }
+    resolution_source = {
+        resolution: Counter()
+        for resolution in (
+            "accept_a1",
+            "accept_a2",
+            "same_topology_minor_edit",
+            "new_topology",
+            "",
+        )
+    }
+    for package_id in package_ids:
+        bundles = {"A1": a1, "A2": a2, "ADJ": adj}
+        seqids = {
+            actor: next(
+                (
+                    segment.seqid
+                    for segment in bundle.materials.get(package_id, ())
+                    if segment.assignment_status == "assigned"
+                ),
+                "",
+            )
+            for actor, bundle in bundles.items()
+        }
+        pairwise = {
+            "ADJ-A1": _audit_topology_pair(
+                package_id, adj, a1, seqids["ADJ"], seqids["A1"]
+            ),
+            "ADJ-A2": _audit_topology_pair(
+                package_id, adj, a2, seqids["ADJ"], seqids["A2"]
+            ),
+            "A1-A2": _audit_topology_pair(
+                package_id, a1, a2, seqids["A1"], seqids["A2"]
+            ),
+        }
+        for pair, result in pairwise.items():
+            if result["equivalent"] is True:
+                pair_counts[pair]["equivalent"] += 1
+            elif result["equivalent"] is False:
+                pair_counts[pair]["not_equivalent"] += 1
+            else:
+                pair_counts[pair]["unevaluable"] += 1
+        resolution = adj.reviews[package_id].topology_resolution
+        status = _topology_audit_status(
+            resolution,
+            pairwise["ADJ-A1"]["equivalent"],
+            pairwise["ADJ-A2"]["equivalent"],
+            pairwise["A1-A2"]["equivalent"],
+        )
+        source_choice = _automatic_source_choice(
+            pairwise["ADJ-A1"]["equivalent"], pairwise["ADJ-A2"]["equivalent"]
+        )
+        if status == "AUDIT_UNEVALUABLE":
+            audit_reason = "pairwise_equivalence_unevaluable"
+        elif status == "AUDIT_DISCORDANT":
+            audit_reason = f"field_{resolution}_inconsistent_with_pairwise_equivalence"
+        elif status == "source_choice_nonunique":
+            audit_reason = "adjudication_equivalent_to_both_sources"
+        else:
+            audit_reason = "field_matches_pairwise_equivalence"
+        status_counts[status] += 1
+        resolution_status.setdefault(resolution, Counter())[status] += 1
+        resolution_source.setdefault(resolution, Counter())[source_choice] += 1
+        package_results.append(
+            {
+                "package_id": package_id,
+                "topology_resolution": resolution,
+                "status": status,
+                "audit_reason": audit_reason,
+                "automatic_source_choice": source_choice,
+                "field_audit_discordant": status == "AUDIT_DISCORDANT",
+                "pairwise": pairwise,
+            }
+        )
+    aggregate_status = (
+        "AUDIT_UNEVALUABLE"
+        if status_counts["AUDIT_UNEVALUABLE"]
+        else "AUDIT_DISCORDANT"
+        if status_counts["AUDIT_DISCORDANT"]
+        else "source_choice_nonunique"
+        if status_counts["source_choice_nonunique"]
+        else "consistent"
+    )
+    evaluable_packages = sum(
+        result["automatic_source_choice"] != "unevaluable"
+        for result in package_results
+    )
+    algorithmic_nonequivalence_packages = sum(
+        result["automatic_source_choice"] == "neither" for result in package_results
+    )
+    return {
+        "schema": "gate_l_topology_consistency_audit_v1",
+        "scope": "non_gating",
+        "status": aggregate_status,
+        "status_counts": dict(status_counts),
+        "field_audit_discordance_count": status_counts["AUDIT_DISCORDANT"],
+        "algorithmic_nonequivalence": {
+            "count": algorithmic_nonequivalence_packages,
+            "denominator": evaluable_packages,
+            "fraction": (
+                algorithmic_nonequivalence_packages / evaluable_packages
+                if evaluable_packages
+                else None
+            ),
+        },
+        "contingency": {
+            "pair_equivalence": pair_counts,
+            "topology_resolution_by_status": {
+                resolution: dict(counts) for resolution, counts in resolution_status.items()
+            },
+            "topology_resolution_by_automatic_source": {
+                resolution: dict(counts) for resolution, counts in resolution_source.items()
+            },
+        },
+        "packages": package_results,
+    }
 
 
 def _segment_matches(
@@ -776,6 +1087,7 @@ def evaluate_gate_l_reproducibility(
             "direction": "ge",
         },
     }
+    topology_consistency_audit = _topology_consistency_audit(package_ids, a1, a2, adj)
 
     failed = [
         metrics["median_material_union_iou"]["value"] < 0.80,
@@ -803,6 +1115,7 @@ def evaluate_gate_l_reproducibility(
         "bootstrap": bootstrap,
         "boundary_status": boundary["status"],
         "metrics": metrics,
+        "topology_consistency_audit": topology_consistency_audit,
     }
 
 
