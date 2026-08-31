@@ -131,6 +131,26 @@ class HiTEA0Test(unittest.TestCase):
             self.assertEqual((rows[0]["start"], rows[0]["end"]), ("1", "5"))
             self.assertIn(">te_intact_2\nTACGT\n", (out / "a0.seeds.fa").read_text())
 
+    def test_union_combines_seed_queries_and_merges_a0_intervals(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            p3 = root / "p3.tsv"
+            hite = root / "hite.tsv"
+            p3.write_text("seed_id\tseqid\tstart\tend\np3\tchr17\t10\t20\n")
+            hite.write_text("seed_id\tseqid\tstart\tend\nhite\tchr17\t15\t25\n")
+            p3_fa = root / "p3.fa"
+            hite_fa = root / "hite.fa"
+            p3_fa.write_text(">p3\nAAAAAAAAAA\n")
+            hite_fa.write_text(">hite\nCCCCCCCCCC\n")
+            out = root / "out"
+            result = MODULE.union_a0_export(SimpleNamespace(
+                p3_seeds_tsv=p3, p3_seeds_fasta=p3_fa,
+                hite_seeds_tsv=hite, hite_seeds_fasta=hite_fa, out_dir=out,
+            ))
+            self.assertEqual(result["union_queries"], 2)
+            self.assertEqual(result["canonical_intervals"], 1)
+            self.assertIn(">hite\nCCCCCCCCCC\n", (out / "a0.seeds.fa").read_text())
+
 
 if __name__ == "__main__":
     unittest.main()

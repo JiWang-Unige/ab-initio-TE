@@ -35,6 +35,7 @@ EVIDENCE_FIELDS = [
 HITE_SEED_FIELDS = [
     "seed_id", "seqid", "start", "end", "length", "strand", "classification", "family",
 ]
+UNION_SEED_FIELDS = ["seed_id", "seqid", "start", "end"]
 
 
 def _load_module(path: Path, name: str):
@@ -291,6 +292,35 @@ def hite_a0_export(args: argparse.Namespace) -> dict[str, Any]:
         "full_length_gff": str(args.full_length_gff), "seeds": len(segments),
         "prefix_seqid": args.prefix_seqid, "prefix_end": args.prefix_end,
         "classifications": sorted({row["classification"] for row in segments}),
+    }
+    (args.out_dir / "a0.manifest.json").write_text(
+        json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8",
+    )
+    return result
+
+
+def union_a0_export(args: argparse.Namespace) -> dict[str, Any]:
+    p3 = read_seed_rows(args.p3_seeds_tsv)
+    hite = read_seed_rows(args.hite_seeds_tsv)
+    if set(p3).intersection(hite):
+        raise ValueError("P3 and HiTE seed identifiers overlap")
+    seeds = {**p3, **hite}
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    with (args.out_dir / "a0.seeds.tsv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=UNION_SEED_FIELDS, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(seeds.values())
+    with (args.out_dir / "a0.seeds.fa").open("w", encoding="ascii") as handle:
+        handle.write(args.p3_seeds_fasta.read_text(encoding="ascii"))
+        handle.write(args.hite_seeds_fasta.read_text(encoding="ascii"))
+    intervals = union_intervals([
+        (row["seqid"], row["start"], row["end"]) for row in seeds.values()
+    ])
+    write_canonical(args.out_dir / "a0.canonical.tsv", intervals, "C5_UNION_A0")
+    result = {
+        "schema": "c5_union_a0_export_v1", "status": "PASS",
+        "p3_seeds": len(p3), "hite_seeds": len(hite), "union_queries": len(seeds),
+        "canonical_intervals": len(intervals),
     }
     (args.out_dir / "a0.manifest.json").write_text(
         json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8",
@@ -593,6 +623,12 @@ def main() -> int:
     hite.add_argument("--prefix-seqid", default=CHROM)
     hite.add_argument("--prefix-end", type=int, required=True)
     hite.add_argument("--out-dir", type=Path, required=True)
+    union = sub.add_parser("union-a0")
+    union.add_argument("--p3-seeds-tsv", type=Path, required=True)
+    union.add_argument("--p3-seeds-fasta", type=Path, required=True)
+    union.add_argument("--hite-seeds-tsv", type=Path, required=True)
+    union.add_argument("--hite-seeds-fasta", type=Path, required=True)
+    union.add_argument("--out-dir", type=Path, required=True)
     evaluate = sub.add_parser("evaluate")
     evaluate.add_argument("--truth", type=Path, required=True)
     evaluate.add_argument("--unknown", type=Path, required=True)
@@ -610,6 +646,8 @@ def main() -> int:
         result = a1_run(args)
     elif args.command == "hite-a0":
         result = hite_a0_export(args)
+    elif args.command == "union-a0":
+        result = union_a0_export(args)
     else:
         result = masked_evaluate(args)
     print(json.dumps(result, indent=2, sort_keys=True))
