@@ -27,12 +27,16 @@ Status: **E0 engineering PASS; chunked full Phase 0 authorized; no new scientifi
   chr3 candidates; chr3-only retry `12128695_0` then completed. Both failures
   remain in the engineering ledger.
 
-| Region | Coverage contract | P3 intervals | Candidates | Eligible main | Bridge | Separation | Ambiguous | Terminal source |
+| Region | Coverage contract | P3 intervals | Candidates | Eligible main | Bridge (all) | Separation (all) | Ambiguous (all) | Terminal source |
 |---|---|---:|---:|---:|---:|---:|---:|---|
 | chr3:0-50M | 50,000,000 bp; 6,104 windows; 0 missing/overlap; one tail | 121,796 | 121,795 | 106,859 | 25,268 | 2,344 | 94,183 | export `20260901-r2`; finalize `20260901-r2` |
 | chr5:0-50M | 50,000,000 bp; 6,104 windows; 0 missing/overlap; one tail | 99,631 | 99,630 | 85,017 | 23,915 | 1,699 | 74,016 | export `20260901-r2`; finalize `20260901-r1` |
 
 Candidate and labeled tables have identical row counts on both chromosomes.
+The three relation columns above are the original all-candidate engineering
+census and do not share the `Eligible main` denominator. Census schema v2
+emits both `relations_all` and `relations_eligible_main`; only the latter may
+be used for a scientific denominator gate.
 All three comparator relations are represented, so E0 establishes that the
 frozen split, coordinate, export and label machinery is executable. These are
 candidate censuses, not classifier performance, fragment improvement or a
@@ -47,11 +51,13 @@ and two preflight attempts have already consumed approximately 11.3
 GPU-hours, including the retained infrastructure failures. Therefore the full
 screen did not fit the former cohort limit of 24 new GPU-hours. The observed
 E0 spend plus one complete full-screen export is approximately 46.8
-GPU-hours, which fits the user-approved 64-GPU-hour rebase below.
+GPU-hours, which fits the user-approved rebase below.
 
 Decision: `E0_ENGINEERING_PASS`. On 2026-09-01 the user explicitly approved
 private-node execution beyond the old 24-GPU-hour planning cap; the project
-cap is rebased to 64 GPU-hours. Full Phase 0 is therefore
+cap was first rebased to 64 GPU-hours and, on 2026-09-02, to 128 GPU-hours so
+the retained I/O failures and missing-shard recovery cannot become a false
+scientific stop. Full Phase 0 is therefore
 `AUTHORIZED_CHUNKED_PRIVATE`.
 
 The four chromosomes are partitioned into 13 shards whose internal boundaries
@@ -232,6 +238,11 @@ carry seam distance as a feature. Gaps longer than 512 bp automatically
 abstain and their count and bp mass are reported separately. The 512-bp cap is
 an inherited re-entry contract, not a biological boundary.
 
+Candidate export remains label blind, so comparator-unknown status is applied
+only after projection. The primary threshold and test universe is the subset
+of `eligible_main` candidates with `gap_comparator_unknown_bp == 0`; unknown bp
+is never silently removed from an added-bp precision denominator.
+
 After candidate generation, the comparator assigns exactly one evaluation
 label:
 
@@ -333,6 +344,15 @@ best on validation. Its operating threshold is the most permissive chr13
 threshold with added-bp precision at least 0.98. Coefficients, imputation,
 standardization, C and threshold are serialized as JSON before chr19 labels
 may be projected.
+
+The exact simple baseline is also locked before test: fill candidates with
+`gap_length <= k`, where the most permissive chr13 `k` satisfying the same
+0.98 added-bp precision rule is stored. A0 is prospectively recorded as
+`ASSET_BLOCKED_PRETEST` because the frozen table has no per-candidate family or
+consensus-alignment evidence; this pilot therefore cannot claim superiority
+to an A0 library-assisted method. The homology-purge identity, reciprocal-
+coverage and aligned-length rules are locked in the same JSON, and label-blind
+purge membership must be materialized before chr19 comparator projection.
 
 The only statistical probe is L2-regularized logistic regression on scalar
 features. Feature scaling, regularization and operating threshold are chosen

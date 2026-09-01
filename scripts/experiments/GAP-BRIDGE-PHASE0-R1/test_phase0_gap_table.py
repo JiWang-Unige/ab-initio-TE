@@ -146,8 +146,13 @@ class Phase0GapTableTest(unittest.TestCase):
 
         census = gap.write_census(labeled, self.root / "census.json")
         self.assertEqual(census["candidates"], len(self.runs) - 1)
-        self.assertEqual(census["relations"][gap.BRIDGE], 1)
-        self.assertGreaterEqual(census["relations"][gap.SEPARATION], 1)
+        self.assertEqual(census["relations_all"][gap.BRIDGE], 1)
+        self.assertGreaterEqual(census["relations_all"][gap.SEPARATION], 1)
+        self.assertLess(census["eligible_main"], census["candidates"])
+        self.assertLess(
+            census["relations_eligible_main"][gap.AMBIGUOUS],
+            census["relations_all"][gap.AMBIGUOUS],
+        )
         self.assertFalse(census["scientific_metrics_computed"])
 
     def test_reads_actual_gzipped_headerless_comparator_contract(self) -> None:

@@ -54,6 +54,17 @@ class ThresholdContractTest(unittest.TestCase):
         )
         self.assertEqual(result["status"], "NO_NONEMPTY_THRESHOLD")
         self.assertEqual(result["selected_candidates"], 0)
+        self.assertIsNone(result["threshold"])
+
+    def test_length_cutoff_uses_the_same_tie_aware_precision_rule(self):
+        result = probe.choose_length_cutoff(
+            np.asarray([1, 2, 2, 3]),
+            np.asarray([10, 9, 0, 10]),
+            np.asarray([0, 0, 1, 5]),
+            0.95,
+        )
+        self.assertEqual(result["maximum_gap_length"], 2)
+        self.assertEqual(result["selected_candidates"], 3)
 
 
 if __name__ == "__main__":

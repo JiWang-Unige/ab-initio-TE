@@ -104,6 +104,15 @@ def choose_added_bp_threshold(
     negative_bp: np.ndarray,
     target_precision: float,
 ) -> dict[str, float | int | str | None]:
+    if scores.size == 0:
+        return {
+            "status": "NO_NONEMPTY_THRESHOLD",
+            "threshold": None,
+            "selected_candidates": 0,
+            "added_positive_bp": 0,
+            "added_negative_bp": 0,
+            "added_bp_precision": None,
+        }
     order = np.argsort(-scores, kind="mergesort")
     ordered_scores = scores[order]
     cumulative_positive = np.cumsum(positive_bp[order])
@@ -118,7 +127,7 @@ def choose_added_bp_threshold(
     if chosen is None:
         return {
             "status": "NO_NONEMPTY_THRESHOLD",
-            "threshold": 1.0,
+            "threshold": None,
             "selected_candidates": 0,
             "added_positive_bp": 0,
             "added_negative_bp": 0,
@@ -133,6 +142,21 @@ def choose_added_bp_threshold(
         "added_negative_bp": int(cumulative_negative[chosen]),
         "added_bp_precision": float(cumulative_positive[chosen] / denominator),
     }
+
+
+def choose_length_cutoff(
+    gap_length: np.ndarray,
+    positive_bp: np.ndarray,
+    negative_bp: np.ndarray,
+    target_precision: float,
+) -> dict[str, float | int | str | None]:
+    result = choose_added_bp_threshold(
+        -gap_length.astype(np.float64), positive_bp, negative_bp, target_precision,
+    )
+    result["maximum_gap_length"] = (
+        int(-float(result["threshold"])) if result["threshold"] is not None else None
+    )
+    return result
 
 
 def expected_calibration_error(target: np.ndarray, scores: np.ndarray, bins: int = 10) -> float:
@@ -169,6 +193,7 @@ def fit_and_lock(
     validation = load_table([validation_path])
     train_clean = train["target"] >= 0
     validation_clean = validation["target"] >= 0
+    validation_primary = validation["unknown_bp"] == 0
     if set(train["target"][train_clean].tolist()) != {0, 1}:
         raise ValueError("training clean denominator must contain both relations")
     if set(validation["target"][validation_clean].tolist()) != {0, 1}:
@@ -199,7 +224,9 @@ def fit_and_lock(
         ap, negative_c, model, scores = best
         clean_scores = scores[validation_clean]
         threshold = choose_added_bp_threshold(
-            scores, validation["positive_bp"], validation["negative_bp"],
+            scores[validation_primary],
+            validation["positive_bp"][validation_primary],
+            validation["negative_bp"][validation_primary],
             TARGET_VALIDATION_ADDED_BP_PRECISION,
         )
         groups[group_name] = {
@@ -212,6 +239,8 @@ def fit_and_lock(
             "intercept": float(model.intercept_[0]),
             "validation": {
                 "clean_candidates": int(validation_clean.sum()),
+                "primary_candidates": int(validation_primary.sum()),
+                "unknown_candidates_excluded": int((~validation_primary).sum()),
                 "bridge_prevalence": float(validation_y.mean()),
                 "average_precision": ap,
                 "ap_over_prevalence": float(ap / validation_y.mean()),
@@ -221,11 +250,30 @@ def fit_and_lock(
             },
         }
 
+    length_baseline = choose_length_cutoff(
+        validation["gap_length"][validation_primary],
+        validation["positive_bp"][validation_primary],
+        validation["negative_bp"][validation_primary],
+        TARGET_VALIDATION_ADDED_BP_PRECISION,
+    )
+    length_baseline["validation_average_precision"] = float(
+        average_precision_score(
+            validation["target"][validation_clean],
+            -validation["gap_length"][validation_clean].astype(np.float64),
+        )
+    )
+    deployment_threshold = groups["G2_FULL_LIBRARY_FREE"]["validation"]["operating_threshold"]
+    route_status = (
+        "PASS_TO_TEST"
+        if deployment_threshold["status"] == "PASS"
+        else "NO_VALIDATION_OPERATING_POINT"
+    )
     result: dict[str, object] = {
         "schema": "gap_bridge_phase0_feature_lock_v1",
-        "status": "PASS",
+        "status": route_status,
         "selection_locked": True,
         "test_labels_read": False,
+        "test_label_release_allowed": route_status == "PASS_TO_TEST",
         "train_paths": [str(path) for path in train_paths],
         "validation_path": str(validation_path),
         "regularization_grid": REGULARIZATION_GRID,
@@ -233,6 +281,22 @@ def fit_and_lock(
         "selected_deployment_group": "G2_FULL_LIBRARY_FREE",
         "train_clean_candidates": int(train_clean.sum()),
         "validation_eligible_candidates": int(validation["target"].size),
+        "validation_primary_candidates": int(validation_primary.sum()),
+        "baselines": {
+            "simple_gap_length_cutoff": length_baseline,
+            "A0_consensus_alignment": {
+                "status": "ASSET_BLOCKED_PRETEST",
+                "reason": "no per-candidate family or consensus-alignment evidence in the frozen Phase-0 table",
+            },
+        },
+        "homology_purged_challenge": {
+            "status": "MEMBERSHIP_REQUIRED_BEFORE_TEST_LABEL_PROJECTION",
+            "sequence": "fixed 256-bp left and right candidate flanks",
+            "identity_at_least": 0.80,
+            "reciprocal_coverage_at_least": 0.50,
+            "aligned_bp_at_least": 100,
+            "test_candidates_connected_to": ["chr3", "chr5", "chr13"],
+        },
         "groups": groups,
     }
     output.parent.mkdir(parents=True, exist_ok=True)

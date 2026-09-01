@@ -54,5 +54,6 @@ python3 "${PROBE}" fit-lock \
   --validation "${SOURCE_ROOT}/chr13/labeled.tsv" \
   --output "${RUN_ROOT}/feature_lock.json" >/dev/null
 
+LOCK_STATUS=$(python3 -c 'import json, sys; print(json.load(open(sys.argv[1]))["status"])' "${RUN_ROOT}/feature_lock.json")
 printf '%s\n' "${SLURM_JOB_ID}" > "${RUN_ROOT}/JOBID"
-printf 'PASS\n' > "${RUN_ROOT}/STATUS"
+printf '%s\n' "${LOCK_STATUS}" > "${RUN_ROOT}/STATUS"

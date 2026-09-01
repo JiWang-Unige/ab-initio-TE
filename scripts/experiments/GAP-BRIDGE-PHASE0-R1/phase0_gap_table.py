@@ -384,13 +384,20 @@ def project_labels(
 def write_census(labeled: Path, output: Path) -> dict[str, object]:
     with labeled.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle, delimiter="\t"))
-    relations = Counter(row["comparator_relation"] for row in rows)
+    relations_all = Counter(row["comparator_relation"] for row in rows)
+    eligible_rows = [row for row in rows if row["eligible_main"] == "1"]
+    relations_eligible = Counter(row["comparator_relation"] for row in eligible_rows)
     result: dict[str, object] = {
-        "schema": "gap_bridge_e0_candidate_census_v1",
+        "schema": "gap_bridge_e0_candidate_census_v2",
         "status": "PASS",
         "candidates": len(rows),
-        "eligible_main": sum(row["eligible_main"] == "1" for row in rows),
-        "relations": {label: relations[label] for label in (BRIDGE, SEPARATION, AMBIGUOUS)},
+        "eligible_main": len(eligible_rows),
+        "relations_all": {
+            label: relations_all[label] for label in (BRIDGE, SEPARATION, AMBIGUOUS)
+        },
+        "relations_eligible_main": {
+            label: relations_eligible[label] for label in (BRIDGE, SEPARATION, AMBIGUOUS)
+        },
         "gap_bp": sum(int(row["gap_length"]) for row in rows),
         "scientific_metrics_computed": False,
     }
