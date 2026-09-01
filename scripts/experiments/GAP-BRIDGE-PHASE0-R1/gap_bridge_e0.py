@@ -7,6 +7,7 @@ import csv
 import gzip
 import importlib.util
 import json
+import shutil
 from pathlib import Path
 from typing import Callable, Iterable, Iterator
 
@@ -160,9 +161,11 @@ def stitch_track(
     rows: Iterable[dict[str, object]],
     infer_state_probability: Callable[[str], np.ndarray],
     weights: np.ndarray,
-) -> tuple[str, np.ndarray, np.ndarray, np.ndarray, int]:
+) -> tuple[str, int, np.ndarray, np.ndarray, np.ndarray, int]:
     """Stitch four states in float32, then derive P_TE and the known mask."""
     seqid: str | None = None
+    region_start: int | None = None
+    next_start: int | None = None
     state_sums = np.zeros((0, 4), dtype=np.float32)
     weight_sums = np.zeros(0, dtype=np.float32)
     known = np.zeros(0, dtype=bool)
@@ -180,27 +183,35 @@ def stitch_track(
         length = end - start
         if start < 0 or length != len(sequence) or labels.shape != (length,):
             raise ValueError(f"row {index} sequence/label coordinates disagree")
+        if region_start is None:
+            region_start = start
+            next_start = start
+        if start != next_start:
+            raise ValueError(f"{row_seqid} export input has missing or overlapping coordinates")
+        relative_start = start - region_start
+        relative_end = end - region_start
         state_probability = np.asarray(infer_state_probability(sequence), dtype=np.float32)
         if state_probability.shape != (length, 4):
             raise ValueError(f"row {index} state-probability shape disagrees with coordinates")
-        if state_sums.shape[0] < end:
-            extension = end - state_sums.shape[0]
+        if state_sums.shape[0] < relative_end:
+            extension = relative_end - state_sums.shape[0]
             state_sums = np.pad(state_sums, ((0, extension), (0, 0)))
             weight_sums = np.pad(weight_sums, (0, extension))
             known = np.pad(known, (0, extension))
             coverage = np.pad(coverage, (0, extension))
-        state_sums[start:end] += state_probability * weights[:length, None]
-        weight_sums[start:end] += weights[:length]
-        known[start:end] = labels >= 0
-        coverage[start:end] += 1
+        state_sums[relative_start:relative_end] += state_probability * weights[:length, None]
+        weight_sums[relative_start:relative_end] += weights[:length]
+        known[relative_start:relative_end] = labels >= 0
+        coverage[relative_start:relative_end] += 1
+        next_start = end
         windows += 1
-    if seqid is None:
+    if seqid is None or region_start is None:
         raise ValueError("no inference rows")
     if not np.all(coverage == 1):
         raise ValueError(f"{seqid} export input has missing or overlapping coordinates")
     stitched_states = state_sums / weight_sums[:, None]
     p_te = np.sum(stitched_states[:, 1:4], axis=1, dtype=np.float32)
-    return seqid, stitched_states, p_te, known, windows
+    return seqid, region_start, stitched_states, p_te, known, windows
 
 
 def _load_module(path: Path, name: str):
@@ -282,13 +293,16 @@ def export_frozen_p3(
             state_probability = torch.softmax(logits, dim=-1)[0].detach().cpu().numpy()
         return state_probability[:len(sequence)]
 
-    seqid, state_probability, probability, known, windows = stitch_track(
+    seqid, region_start, state_probability, probability, known, windows = stitch_track(
         iter_jsonl(data_jsonl, max_windows), infer, weights,
     )
     prediction = (probability >= THRESHOLD) & known
     runs = strict.runs_from_bool(prediction)
     write_probability_tracks(output_pte, output_states, probability, state_probability)
-    interval_count = write_canonical(output_canonical, seqid, runs)
+    interval_count = write_canonical(
+        output_canonical, seqid,
+        ((start + region_start, end + region_start) for start, end in runs),
+    )
     result: dict[str, object] = {
         "schema": "gap_bridge_e0_p3_export_v1",
         "status": "PASS",
@@ -296,6 +310,8 @@ def export_frozen_p3(
         "model_schema": metadata["schema"],
         "data_jsonl": str(data_jsonl),
         "seqid": seqid,
+        "region_start": region_start,
+        "region_end": region_start + int(probability.size),
         "length": int(probability.size),
         "windows": windows,
         "window": WINDOW,
@@ -317,6 +333,148 @@ def export_frozen_p3(
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return result
+
+
+def stitch_chunk_exports(
+    chunk_root: Path,
+    seqid: str,
+    expected_length: int,
+    output_region_jsonl: Path,
+    output_region_manifest: Path,
+    output_pte: Path,
+    output_states: Path,
+    output_canonical: Path,
+    output_export_manifest: Path,
+) -> dict[str, object]:
+    """Join aligned shard exports without changing whole-chromosome geometry."""
+    chunks: list[tuple[int, int, Path, dict[str, object], dict[str, object]]] = []
+    for path in chunk_root.iterdir():
+        if not path.is_dir():
+            continue
+        region = json.loads((path / "region.manifest.json").read_text(encoding="utf-8"))
+        export = json.loads((path / "export.manifest.json").read_text(encoding="utf-8"))
+        chunks.append((int(region["region_start"]), int(region["region_end"]), path, region, export))
+    chunks.sort(key=lambda item: item[0])
+    if not chunks:
+        raise ValueError(f"no chunk exports under {chunk_root}")
+
+    next_start = 0
+    total_windows = 0
+    tail_windows = 0
+    known_bp = 0
+    model_schema = None
+    for start, end, path, region, export in chunks:
+        if start != next_start or end <= start:
+            raise ValueError(f"{seqid} chunks have missing or overlapping coordinates")
+        if region["status"] != "PASS" or export["status"] != "PASS":
+            raise ValueError(f"non-PASS chunk: {path}")
+        if region["seqid"] != seqid or export["seqid"] != seqid:
+            raise ValueError(f"wrong seqid in chunk: {path}")
+        if int(export["region_start"]) != start or int(export["region_end"]) != end:
+            raise ValueError(f"region/export coordinate mismatch: {path}")
+        if end < expected_length and end % WINDOW != 0:
+            raise ValueError(f"internal chunk boundary is not {WINDOW}-bp aligned: {end}")
+        if int(export["length"]) != end - start:
+            raise ValueError(f"track length mismatch: {path}")
+        schema = str(export["model_schema"])
+        if model_schema is None:
+            model_schema = schema
+        elif model_schema != schema:
+            raise ValueError("chunk model schemas differ")
+        next_start = end
+        total_windows += int(region["windows"])
+        tail_windows += int(region["tail_windows"])
+        known_bp += int(export["known_bp"])
+    if next_start != expected_length:
+        raise ValueError(f"{seqid} chunks end at {next_start}, expected {expected_length}")
+    expected_windows = (expected_length + WINDOW - 1) // WINDOW
+    if total_windows != expected_windows or tail_windows != 1:
+        raise ValueError("chunk windows do not reproduce whole-chromosome geometry")
+
+    output_pte.parent.mkdir(parents=True, exist_ok=True)
+    pte = np.lib.format.open_memmap(
+        output_pte, mode="w+", dtype=np.float32, shape=(expected_length,),
+    )
+    states = np.lib.format.open_memmap(
+        output_states, mode="w+", dtype=np.float16, shape=(expected_length, 4),
+    )
+    runs: list[tuple[int, int]] = []
+    output_region_jsonl.parent.mkdir(parents=True, exist_ok=True)
+    with output_region_jsonl.open("wb") as region_handle:
+        for start, end, path, _region, _export in chunks:
+            source_pte = np.load(path / "p_te.npy", mmap_mode="r", allow_pickle=False)
+            source_states = np.load(path / "states.npy", mmap_mode="r", allow_pickle=False)
+            if source_pte.shape != (end - start,) or source_states.shape != (end - start, 4):
+                raise ValueError(f"saved track shape mismatch: {path}")
+            pte[start:end] = source_pte
+            states[start:end] = source_states
+            with (path / "region.jsonl.gz").open("rb") as source_region:
+                shutil.copyfileobj(source_region, region_handle)
+            for row_seqid, left, right in canonical_tuples(path / "prediction.canonical.tsv"):
+                if row_seqid != seqid or left < start or right > end or right <= left:
+                    raise ValueError(f"canonical interval outside chunk: {path}")
+                if runs and left < runs[-1][1]:
+                    raise ValueError("chunk canonical intervals overlap")
+                if runs and left == runs[-1][1]:
+                    runs[-1] = (runs[-1][0], right)
+                else:
+                    runs.append((left, right))
+    pte.flush()
+    states.flush()
+    del pte, states
+
+    interval_count = write_canonical(output_canonical, seqid, runs)
+    region_result: dict[str, object] = {
+        "schema": "gap_bridge_phase0_whole_region_v1",
+        "status": "PASS",
+        "seqid": seqid,
+        "region_start": 0,
+        "region_end": expected_length,
+        "window": WINDOW,
+        "stride": STRIDE,
+        "windows": total_windows,
+        "expected_windows": expected_windows,
+        "total_bp": expected_length,
+        "missing_bp": 0,
+        "overlap_bp": 0,
+        "tail_windows": tail_windows,
+        "coverage_complete": True,
+        "label_mode": "all_zero_inference_only",
+        "truth_read": False,
+        "chunks": [str(path) for _, _, path, _, _ in chunks],
+        "output_jsonl": str(output_region_jsonl),
+    }
+    export_result: dict[str, object] = {
+        "schema": "gap_bridge_phase0_whole_export_v1",
+        "status": "PASS",
+        "seqid": seqid,
+        "region_start": 0,
+        "region_end": expected_length,
+        "length": expected_length,
+        "windows": total_windows,
+        "window": WINDOW,
+        "stride": STRIDE,
+        "threshold": THRESHOLD,
+        "model_schema": model_schema,
+        "probability_dtype": "float32",
+        "state_probability_dtype": "float16",
+        "state_probability_shape": [expected_length, 4],
+        "state_order": ["background", "interior", "left_boundary", "right_boundary"],
+        "known_bp": known_bp,
+        "unknown_bp": expected_length - known_bp,
+        "prediction_intervals": interval_count,
+        "scientific_metrics_computed": False,
+        "output_pte": str(output_pte),
+        "output_states": str(output_states),
+        "output_canonical": str(output_canonical),
+    }
+    output_region_manifest.write_text(
+        json.dumps(region_result, indent=2, sort_keys=True) + "\n", encoding="utf-8",
+    )
+    output_export_manifest.write_text(
+        json.dumps(export_result, indent=2, sort_keys=True) + "\n", encoding="utf-8",
+    )
+    return export_result
 
 
 def canonical_tuples(path: Path) -> list[tuple[str, int, int]]:
@@ -411,6 +569,16 @@ def main() -> int:
     identity.add_argument("--expected-lengths-json", type=Path, required=True)
     identity.add_argument("--observed-export-manifest", type=Path, required=True)
     identity.add_argument("--output-json", type=Path, required=True)
+    stitch = sub.add_parser("stitch-chunks")
+    stitch.add_argument("--chunk-root", type=Path, required=True)
+    stitch.add_argument("--seqid", required=True)
+    stitch.add_argument("--expected-length", type=int, required=True)
+    stitch.add_argument("--output-region-jsonl", type=Path, required=True)
+    stitch.add_argument("--output-region-manifest", type=Path, required=True)
+    stitch.add_argument("--output-pte", type=Path, required=True)
+    stitch.add_argument("--output-states", type=Path, required=True)
+    stitch.add_argument("--output-canonical", type=Path, required=True)
+    stitch.add_argument("--output-export-manifest", type=Path, required=True)
     args = parser.parse_args()
     if args.command == "materialize-region":
         result = write_region_jsonl(
@@ -422,11 +590,18 @@ def main() -> int:
             args.model_dir, args.data_jsonl, args.output_pte, args.output_states,
             args.output_canonical, args.manifest, args.max_windows,
         )
-    else:
+    elif args.command == "identity":
         result = compare_identity(
             args.expected_canonical, args.observed_canonical,
             args.expected_lengths_json, args.observed_export_manifest,
             args.output_json,
+        )
+    else:
+        result = stitch_chunk_exports(
+            args.chunk_root, args.seqid, args.expected_length,
+            args.output_region_jsonl, args.output_region_manifest,
+            args.output_pte, args.output_states, args.output_canonical,
+            args.output_export_manifest,
         )
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0 if result["status"] == "PASS" else 1

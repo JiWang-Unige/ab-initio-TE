@@ -29,8 +29,8 @@
   各 50 Mb 均完成 6,104 windows、四状态/P_TE/canonical export 和三类
   comparator candidate census。BeeGFS exit-120 失败按真实工程失败保留，
   不进入科学分母。按实测吞吐量，完整 chr3/5/13/19 约需 35.5 GPU-hours，
-  超出当前 cohort 的 24 GPU-hour 上限，因此 full Phase 0 状态为
-  `PENDING_RESOURCE_REBASE`；当前仍无新科学结果。
+  原 24 GPU-hour 上限已由用户明确批准重置为 64；full Phase 0 改为
+  8192-bp 对齐的私有节点分片执行。当前仍无新科学结果。
 
 ## last_result_summary
 - exp_id: FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1

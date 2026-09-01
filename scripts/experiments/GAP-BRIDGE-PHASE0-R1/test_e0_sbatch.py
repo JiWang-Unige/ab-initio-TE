@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import csv
 from pathlib import Path
 import subprocess
 import unittest
@@ -87,6 +88,47 @@ class E0SbatchContractTest(unittest.TestCase):
         self.assertIn('python3 "${GAP_SCRIPT}" census', text)
         self.assertIn("candidate_census.json", text)
         self.assertNotIn("export-p3", text)
+        self.assertNotRegex(text, r"--metrics(?:\s|=)")
+        subprocess.run(["bash", "-n", str(path)], check=True)
+
+    def test_full_chunk_plan_is_complete_and_window_aligned(self):
+        with (ROOT / "full_phase0_chunks.tsv").open(newline="", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+        self.assertEqual([int(row["task_id"]) for row in rows], list(range(13)))
+        lengths = {"chr3": 198295559, "chr5": 181538259, "chr13": 114364328, "chr19": 58617616}
+        for seqid, length in lengths.items():
+            chunks = [row for row in rows if row["seqid"] == seqid]
+            next_start = 0
+            for index, row in enumerate(chunks):
+                start, end = int(row["start"]), int(row["end"])
+                self.assertEqual(start, next_start)
+                if index < len(chunks) - 1:
+                    self.assertEqual(end % 8192, 0)
+                next_start = end
+            self.assertEqual(next_start, length)
+
+    def test_full_gpu_chunk_sbatch_contract(self):
+        text = self.read_and_check_common("submit_full_phase0_chunks.sbatch", "05:00:00")
+        self.assertIn("#SBATCH --array=0-12%8", text)
+        self.assertIn("full_phase0_chunks.tsv", text)
+        self.assertIn("materialize-region", text)
+        self.assertIn("export-p3", text)
+        self.assertNotIn("rmsk_te_strict", text)
+        self.assertIn(">/dev/null", text)
+
+    def test_full_cpu_stitch_sbatch_contract(self):
+        path = ROOT / "submit_full_phase0_stitch.sbatch"
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("#SBATCH --partition=private-teodoro-gpu", text)
+        self.assertNotIn("#SBATCH --gres=", text)
+        self.assertIn("#SBATCH --array=0-3%4", text)
+        self.assertIn("#SBATCH --time=04:00:00", text)
+        self.assertIn(": \"${SOURCE_TAG:?", text)
+        self.assertIn(": \"${ATTEMPT_TAG:?", text)
+        self.assertIn("stitch-chunks", text)
+        self.assertIn('python3 "${GAP_SCRIPT}" candidates', text)
+        self.assertIn('python3 "${GAP_SCRIPT}" project-labels', text)
+        self.assertIn('python3 "${GAP_SCRIPT}" census', text)
         self.assertNotRegex(text, r"--metrics(?:\s|=)")
         subprocess.run(["bash", "-n", str(path)], check=True)
 

@@ -72,10 +72,11 @@ class FrozenStitchTest(unittest.TestCase):
                 [0.8, 0.2, 0.0, 0.0],
             ], dtype=np.float32),
         ])
-        seqid, states, probability, known, windows = e0.stitch_track(
+        seqid, region_start, states, probability, known, windows = e0.stitch_track(
             rows, lambda _sequence: next(values), np.ones(e0.WINDOW, dtype=np.float32),
         )
         self.assertEqual(seqid, "chr17")
+        self.assertEqual(region_start, 0)
         self.assertEqual(windows, 2)
         np.testing.assert_allclose(
             probability, np.asarray([0.4, 0.6, 0.5, 0.9, 0.7, 0.2], dtype=np.float32),
@@ -98,6 +99,23 @@ class FrozenStitchTest(unittest.TestCase):
                 lambda sequence: np.zeros((len(sequence), 4), dtype=np.float32),
                 np.ones(e0.WINDOW, dtype=np.float32),
             )
+
+    def test_stitch_supports_nonzero_aligned_region_start(self):
+        rows = [
+            {"chr": "chr3", "start": 8192, "end": 8194, "sequence": "AA", "labels": [0, 0]},
+            {"chr": "chr3", "start": 8194, "end": 8195, "sequence": "C", "labels": [0]},
+        ]
+        values = iter([
+            np.asarray([[0.8, 0.2, 0.0, 0.0], [0.4, 0.6, 0.0, 0.0]], dtype=np.float32),
+            np.asarray([[0.3, 0.7, 0.0, 0.0]], dtype=np.float32),
+        ])
+        seqid, region_start, states, probability, known, windows = e0.stitch_track(
+            rows, lambda _sequence: next(values), np.ones(e0.WINDOW, dtype=np.float32),
+        )
+        self.assertEqual((seqid, region_start, windows), ("chr3", 8192, 2))
+        self.assertEqual(states.shape, (3, 4))
+        np.testing.assert_allclose(probability, [0.2, 0.6, 0.7])
+        np.testing.assert_array_equal(known, [True, True, True])
 
     def test_saved_state_track_is_float16_with_frozen_shape(self):
         states = np.asarray([
@@ -126,6 +144,65 @@ class IdentityTest(unittest.TestCase):
         self.assertEqual(failed["status"], "FAIL")
         self.assertEqual(failed["first_difference"]["index"], 1)
         self.assertFalse(failed["scientific_metrics_computed"])
+
+
+class WholeChromosomeStitchTest(unittest.TestCase):
+    def write_chunk(
+        self, root: Path, start: int, end: int, sequence: str,
+        probability: np.ndarray, runs: list[tuple[int, int]], tail: int,
+    ) -> None:
+        root.mkdir(parents=True)
+        with gzip.open(root / "region.jsonl.gz", "wt", encoding="utf-8") as handle:
+            handle.write(json.dumps({
+                "chr": "chr3", "start": start, "end": end,
+                "sequence": sequence, "labels": [0] * (end - start),
+            }) + "\n")
+        region = {
+            "status": "PASS", "seqid": "chr3", "region_start": start,
+            "region_end": end, "windows": 1, "tail_windows": tail,
+        }
+        export = {
+            "status": "PASS", "seqid": "chr3", "region_start": start,
+            "region_end": end, "length": end - start, "windows": 1,
+            "known_bp": end - start, "model_schema": "test_schema",
+        }
+        (root / "region.manifest.json").write_text(json.dumps(region), encoding="utf-8")
+        (root / "export.manifest.json").write_text(json.dumps(export), encoding="utf-8")
+        np.save(root / "p_te.npy", probability.astype(np.float32), allow_pickle=False)
+        states = np.zeros((end - start, 4), dtype=np.float16)
+        states[:, 0] = 1 - probability
+        states[:, 1] = probability
+        np.save(root / "states.npy", states, allow_pickle=False)
+        e0.write_canonical(root / "prediction.canonical.tsv", "chr3", runs)
+
+    def test_chunk_stitch_merges_a_positive_run_across_an_aligned_seam(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            chunks = root / "chunks"
+            self.write_chunk(
+                chunks / "0-8192", 0, 8192, "A" * 8192,
+                np.full(8192, 0.8), [(8189, 8192)], 0,
+            )
+            self.write_chunk(
+                chunks / "8192-8195", 8192, 8195, "CCC",
+                np.asarray([0.8, 0.8, 0.2]), [(8192, 8194)], 1,
+            )
+            whole = root / "whole"
+            whole.mkdir()
+            result = e0.stitch_chunk_exports(
+                chunks, "chr3", 8195,
+                whole / "region.jsonl.gz", whole / "region.manifest.json",
+                whole / "p_te.npy", whole / "states.npy",
+                whole / "prediction.canonical.tsv", whole / "export.manifest.json",
+            )
+            self.assertEqual(result["status"], "PASS")
+            self.assertEqual(result["windows"], 2)
+            self.assertEqual(e0.canonical_tuples(whole / "prediction.canonical.tsv"), [("chr3", 8189, 8194)])
+            self.assertEqual(np.load(whole / "p_te.npy", allow_pickle=False).shape, (8195,))
+            self.assertEqual(np.load(whole / "states.npy", allow_pickle=False).shape, (8195, 4))
+            with gzip.open(whole / "region.jsonl.gz", "rt", encoding="utf-8") as handle:
+                rows = [json.loads(line) for line in handle]
+            self.assertEqual([(row["start"], row["end"]) for row in rows], [(0, 8192), (8192, 8195)])
 
 
 def _runs(mask: np.ndarray):

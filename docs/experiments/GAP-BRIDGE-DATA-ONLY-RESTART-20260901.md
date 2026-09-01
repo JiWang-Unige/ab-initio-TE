@@ -2,7 +2,7 @@
 
 Date: 2026-09-01
 
-Status: **E0 engineering PASS; full Phase 0 pending resource rebase; no new scientific result**
+Status: **E0 engineering PASS; chunked full Phase 0 authorized; no new scientific result**
 
 ## E0 engineering result
 
@@ -45,16 +45,23 @@ rate, the frozen full chr3/chr5/chr13/chr19 set contains 552,815,762 bp and
 requires approximately 35.5 GPU-hours for P3 export alone. The identity run
 and two preflight attempts have already consumed approximately 11.3
 GPU-hours, including the retained infrastructure failures. Therefore the full
-screen cannot be submitted under the current cohort limit of 24 new
-GPU-hours.
+screen did not fit the former cohort limit of 24 new GPU-hours. The observed
+E0 spend plus one complete full-screen export is approximately 46.8
+GPU-hours, which fits the user-approved 64-GPU-hour rebase below.
 
-Decision: `E0_ENGINEERING_PASS`; full scientific Phase 0 is
-`PENDING_RESOURCE_REBASE`, not scientifically blocked. Before submission it
-needs an explicit GPU-hour rebase and a chunk/stitch implementation because a
-single chr3 export is projected slightly above the cohort's 12-hour per-job
-limit. The scientific chromosomes, labels, feature arms, test seal and gates
-remain unchanged. No reduced-chromosome substitute is allowed to enter the
-scientific denominator.
+Decision: `E0_ENGINEERING_PASS`. On 2026-09-01 the user explicitly approved
+private-node execution beyond the old 24-GPU-hour planning cap; the project
+cap is rebased to 64 GPU-hours. Full Phase 0 is therefore
+`AUTHORIZED_CHUNKED_PRIVATE`.
+
+The four chromosomes are partitioned into 13 shards whose internal boundaries
+are exact multiples of 8,192 bp. This preserves the original non-overlapping
+P3 window geometry; only the last shard of each chromosome contains a tail
+window. A dependent CPU stage must losslessly concatenate tracks and region
+rows, merge a positive run crossing a shard boundary, and only then generate
+whole-chromosome candidates. The scientific chromosomes, labels, feature
+arms, test seal and gates remain unchanged. No reduced-chromosome substitute
+is allowed to enter the scientific denominator.
 
 ## Outcome
 
