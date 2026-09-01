@@ -70,6 +70,26 @@ class E0SbatchContractTest(unittest.TestCase):
         self.assertIn("candidate_census.json", text)
         self.assertNotRegex(text, r"--metrics(?:\s|=)")
 
+    def test_cpu_finalization_reuses_complete_export_without_gpu(self):
+        path = ROOT / "submit_e0_finalize_from_export.sbatch"
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("#SBATCH --partition=private-teodoro-gpu", text)
+        self.assertNotIn("#SBATCH --gres=", text)
+        self.assertNotIn("#SBATCH --exclude=", text)
+        self.assertIn("#SBATCH --cpus-per-task=8", text)
+        self.assertIn("#SBATCH --mem=32G", text)
+        self.assertIn("#SBATCH --time=02:00:00", text)
+        self.assertIn("#SBATCH --array=0-1%2", text)
+        self.assertIn("e0-preflight-20260901-r2", text)
+        self.assertIn(": \"${ATTEMPT_TAG:?", text)
+        self.assertIn('python3 "${GAP_SCRIPT}" candidates', text)
+        self.assertIn('python3 "${GAP_SCRIPT}" project-labels', text)
+        self.assertIn('python3 "${GAP_SCRIPT}" census', text)
+        self.assertIn("candidate_census.json", text)
+        self.assertNotIn("export-p3", text)
+        self.assertNotRegex(text, r"--metrics(?:\s|=)")
+        subprocess.run(["bash", "-n", str(path)], check=True)
+
 
 if __name__ == "__main__":
     unittest.main()
