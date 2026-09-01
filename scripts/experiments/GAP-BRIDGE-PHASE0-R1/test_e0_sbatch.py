@@ -109,7 +109,7 @@ class E0SbatchContractTest(unittest.TestCase):
 
     def test_full_gpu_chunk_sbatch_contract(self):
         text = self.read_and_check_common("submit_full_phase0_chunks.sbatch", "05:00:00")
-        self.assertIn("#SBATCH --array=0-12%8", text)
+        self.assertIn("#SBATCH --array=0-12%7", text)
         self.assertIn("full_phase0_chunks.tsv", text)
         self.assertIn("materialize-region", text)
         self.assertIn("export-p3", text)

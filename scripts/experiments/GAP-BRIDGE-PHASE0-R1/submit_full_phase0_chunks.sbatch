@@ -10,7 +10,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=96G
 #SBATCH --time=05:00:00
-#SBATCH --array=0-12%8
+#SBATCH --array=0-12%7
 #SBATCH --output=/home/users/j/jwang/ab-initio-TE/logs/GAP-BRIDGE-PHASE0-R1/full-chunk-%A_%a.out
 #SBATCH --error=/home/users/j/jwang/ab-initio-TE/logs/GAP-BRIDGE-PHASE0-R1/full-chunk-%A_%a.err
 
