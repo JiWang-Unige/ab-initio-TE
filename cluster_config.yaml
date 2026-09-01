@@ -40,7 +40,7 @@ hard_limits:
 cohort_limits:
   cohort_id: TEFM-NEW-DIRECTIONS-PILOTS-20260811
   max_job_walltime_hours: 12
-  max_new_gpu_hours: 64
+  max_new_gpu_hours: 128
   cpu_smoke_gpus: 0
   claim_allowed: false
 
