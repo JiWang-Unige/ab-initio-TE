@@ -33,7 +33,7 @@ esac
 
 CHUNK_ROOT=${ROOT}/outputs/GAP-BRIDGE-PHASE0-R1/full-chunks-${SOURCE_TAG}/${SEQID}
 RUN_ROOT=${ROOT}/outputs/GAP-BRIDGE-PHASE0-R1/full-whole-${ATTEMPT_TAG}
-TASK_ROOT=${RUN_ROOT}/${SEQID}
+FINAL_TASK_ROOT=${RUN_ROOT}/${SEQID}
 
 for required_path in \
   "${E0_SCRIPT}" \
@@ -47,13 +47,14 @@ for required_path in \
   fi
 done
 
-if [[ -e "${TASK_ROOT}" ]]; then
-  echo "refusing to reuse full Phase-0 whole output: ${TASK_ROOT}" >&2
+if [[ -e "${FINAL_TASK_ROOT}" ]]; then
+  echo "refusing to reuse full Phase-0 whole output: ${FINAL_TASK_ROOT}" >&2
   exit 2
 fi
 
-mkdir -p "${RUN_ROOT}"
-mkdir "${TASK_ROOT}"
+LOCAL_SCRATCH=${SLURM_TMPDIR:-/tmp}
+TASK_ROOT=$(mktemp -d "${LOCAL_SCRATCH}/te-gap-stitch-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}-XXXXXX")
+trap 'rm -rf "${TASK_ROOT}"' EXIT
 
 cd "${ROOT}"
 source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
@@ -93,3 +94,9 @@ fi
 
 printf '%s_%s\n' "${SLURM_ARRAY_JOB_ID}" "${SLURM_ARRAY_TASK_ID}" > "${TASK_ROOT}/JOBID"
 printf 'PASS\n' > "${TASK_ROOT}/STATUS"
+
+mkdir -p "${RUN_ROOT}"
+TRANSFER_ROOT=${RUN_ROOT}/.transfer-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}
+mkdir "${TRANSFER_ROOT}"
+cp -a "${TASK_ROOT}/." "${TRANSFER_ROOT}/"
+mv "${TRANSFER_ROOT}" "${FINAL_TASK_ROOT}"
