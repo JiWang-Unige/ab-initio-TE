@@ -25,6 +25,10 @@
   重新提案。
 - Mouse 仅在人类 gate 后做一次 unchanged transfer；Fly 不进入这条
   comparator-continuity 路线的常规开发。
+- E0 最小实现已在 commit `e33b2ae9426a426ae2f5932b623455f0360edc74`
+  完成并通过 11 项针对性测试；chr17 identity job `12126691` 正在运行，
+  chr3/chr5 preflight array `12126692_[0-1]` 等待其成功依赖。当前仍无新
+  科学结果。
 
 ## last_result_summary
 - exp_id: FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1

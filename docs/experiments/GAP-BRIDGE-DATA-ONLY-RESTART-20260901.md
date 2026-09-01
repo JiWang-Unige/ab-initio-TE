@@ -2,7 +2,20 @@
 
 Date: 2026-09-01
 
-Status: **route frozen; implementation not started; no new scientific result**
+Status: **route frozen; E0 implementation running; no new scientific result**
+
+## Execution status
+
+- The frozen E0 contract is implemented at commit
+  `e33b2ae9426a426ae2f5932b623455f0360edc74`.
+- Eleven targeted unit tests pass, including explicit-region tail coverage,
+  comparator projection, ambiguity retention and Slurm contract checks.
+- The chr17 ordered-tuple and length-only identity regression is running as
+  Slurm job `12126691` on `gpu034`.
+- The chr3/chr5 50 Mb preflight array is submitted as `12126692_[0-1]` and is
+  dependency-blocked until the chr17 identity job succeeds.
+- These jobs are engineering gates. They have produced no admissible
+  discriminability, mask-improvement or publication result yet.
 
 ## Outcome
 
