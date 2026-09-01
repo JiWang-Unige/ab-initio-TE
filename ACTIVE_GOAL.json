@@ -143,7 +143,8 @@
     "full_phase0_gpu_hours_projected": 35.5,
     "full_phase0_cpu_core_hours_estimate": "200-940",
     "full_phase0_storage_gb_estimate": "10-25",
-    "cohort_gpu_hour_limit": 64,
+    "private_gpu_hours_planning_ceiling": 128,
+    "resource_ceiling_is_not_a_scientific_stop": true,
     "resource_rebase_authorized_by_user": true,
     "full_phase0_execution_status": "AUTHORIZED_CHUNKED_PRIVATE",
     "max_parallel_directions": 1

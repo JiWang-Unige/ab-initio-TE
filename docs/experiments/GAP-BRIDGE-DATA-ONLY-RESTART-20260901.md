@@ -320,6 +320,23 @@ size and resource request, but not the scientific contract.
 Comparator coordinates, family labels derived from the comparator, gene
 annotations and test labels are prohibited as predictive features.
 
+The gene-safety asset is frozen before chr19 label release as the UCSC hg38
+`ncbiRefSeqCurated` table last modified 2025-08-13, copied to
+`data/raw/ucsc/human/hg38/genes/ncbiRefSeqCurated-20250813.txt.gz` from
+`https://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/ncbiRefSeqCurated.txt.gz`.
+It is evaluated on `chr19` only and never supplied to a predictive feature.
+All curated transcript records are retained; no post-test canonical transcript
+selection is allowed. For each record, CDS is the exon-clipped
+`[cdsStart, cdsEnd)`, a coding exon is any exon intersecting CDS, all exons are
+the listed half-open exon intervals, splice safety is the four-base
+`[boundary-2, boundary+2)` interval around every internal exon boundary, and
+promoter safety is TSS +/-200 bp using `txStart` on `+` and `txEnd` on `-`.
+Unioned bases define feature denominators; raw transcript/gene/exon identifiers
+define affected-record counts. Callable CDS is the CDS union after subtracting
+the comparator-unknown track. Gene-overlap added-bp precision is computed over
+whole selected gaps whose interval intersects the union of these gene
+features.
+
 ### Feature-only models and baselines
 
 The first round uses no learned sequence encoder. It compares:
@@ -393,6 +410,16 @@ Added-bp and whole-mask:
 - split rate, fragments/truth, internal-gap count and mass;
 - missed and terminal-omission rates.
 
+Terminal omission is reported both as terminal omitted bp divided by truth bp
+and as truth intervals with at least one terminal omission divided by truth
+intervals; neither name is silently collapsed into a different denominator.
+The added-bp precision 95% interval uses 1,000 fixed-seed (`20260901`) 1-Mb
+block bootstrap replicates. Each replicate resamples chr19 blocks with
+replacement, pools selected comparator-positive and comparator-negative gap
+bases, and recomputes precision; the prospective lower bound is its 2.5th
+percentile. Replicates with no selected callable bp are not assigned a
+precision, and an empty valid set is not evaluable.
+
 Because Phase 0 only adds bases inside frozen internal candidates, a change in
 fully missed truth rate means the output contract was violated.
 
@@ -437,13 +464,17 @@ required:
 8. no comparator-negative filled base intersects an annotated canonical
    splice donor/acceptor core +/-2 bp,
    comparator-negative added mask divided by callable CDS is `<=1e-5`, and
-   gene-overlap added-bp precision is `>=0.995`; at matched recall the method
-   is no worse than the best simple baseline in CDS/exon negative fills, and
-   no single annotated CDS receives more than 20 comparator-negative bp.
+   gene-overlap added-bp precision is `>=0.995`, and no single annotated CDS
+   receives more than 20 comparator-negative bp.
 
-At matched added-bp precision, the combined model must also deliver at least
+Exact test-side precision or recall matching is prohibited because it would
+select a new operating point after chr19 labels are visible. The comparison is
+therefore precision-floor matched prospectively: G2 and the best available
+simple/G0/G1 baseline each use their own chr13-frozen, added-bp-precision
+`>=0.98` operating point. At those fixed points, G2 must also deliver at least
 one of: 20% more positive gap bp recovered, 20% fewer negative bp filled, or
-10% greater relative split reduction than the best simple/A0 baseline.
+10% greater relative split reduction. A0 remains excluded while its frozen
+per-candidate alignment asset is blocked.
 
 ### Decisions
 
