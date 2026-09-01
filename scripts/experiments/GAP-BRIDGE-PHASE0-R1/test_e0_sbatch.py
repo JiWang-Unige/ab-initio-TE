@@ -111,6 +111,10 @@ class E0SbatchContractTest(unittest.TestCase):
         text = self.read_and_check_common("submit_full_phase0_chunks.sbatch", "05:00:00")
         self.assertIn("#SBATCH --array=0-12%7", text)
         self.assertIn("full_phase0_chunks.tsv", text)
+        self.assertIn("LOCAL_SCRATCH=${SLURM_TMPDIR:-/tmp}", text)
+        self.assertIn("TASK_ROOT=$(mktemp -d", text)
+        self.assertIn('cp -a "${TASK_ROOT}/." "${TRANSFER_ROOT}/"', text)
+        self.assertIn('mv "${TRANSFER_ROOT}" "${FINAL_TASK_ROOT}"', text)
         self.assertIn("materialize-region", text)
         self.assertIn("export-p3", text)
         self.assertNotIn("rmsk_te_strict", text)
@@ -131,6 +135,21 @@ class E0SbatchContractTest(unittest.TestCase):
         self.assertIn('python3 "${GAP_SCRIPT}" census', text)
         self.assertIn('if [[ "${SEQID}" != "chr19" ]]', text)
         self.assertIn("SEALED_UNTIL_CHR13_SELECTION_LOCK", text)
+        self.assertNotRegex(text, r"--metrics(?:\s|=)")
+        subprocess.run(["bash", "-n", str(path)], check=True)
+
+    def test_fit_lock_is_cpu_only_and_enforces_chr19_seal(self):
+        path = ROOT / "submit_phase0_fit_lock.sbatch"
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("#SBATCH --partition=private-teodoro-gpu", text)
+        self.assertNotIn("#SBATCH --gres=", text)
+        self.assertIn("#SBATCH --time=04:00:00", text)
+        self.assertIn("chr3/labeled.tsv", text)
+        self.assertIn("chr5/labeled.tsv", text)
+        self.assertIn("chr13/labeled.tsv", text)
+        self.assertIn("chr19/TEST_LABELS_SEALED", text)
+        self.assertIn('if [[ -e "${SOURCE_ROOT}/chr19/labeled.tsv" ]]', text)
+        self.assertIn("fit-lock", text)
         self.assertNotRegex(text, r"--metrics(?:\s|=)")
         subprocess.run(["bash", "-n", str(path)], check=True)
 

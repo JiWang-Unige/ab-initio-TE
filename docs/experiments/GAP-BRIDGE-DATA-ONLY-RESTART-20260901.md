@@ -324,6 +324,16 @@ The first round uses no learned sequence encoder. It compares:
 8. `FULL_LIBRARY_FREE = geometry + P3 logits + fixed raw-sequence summaries`;
 9. `FULL_LIBRARY_ASSISTED = FULL_LIBRARY_FREE + family/alignment evidence`.
 
+The pre-test implementation freezes three strictly nested library-free feature
+groups: `G0_LENGTH`, `G1_GEOMETRY_LOGITS` and `G2_FULL_LIBRARY_FREE`. For each
+group, L2 logistic regression selects `C` from `{0.01,0.1,1,10}` by chr13
+average precision, with unweighted natural-prevalence training. The deployment
+group remains the prospectively specified G2 rather than whichever group looks
+best on validation. Its operating threshold is the most permissive chr13
+threshold with added-bp precision at least 0.98. Coefficients, imputation,
+standardization, C and threshold are serialized as JSON before chr19 labels
+may be projected.
+
 The only statistical probe is L2-regularized logistic regression on scalar
 features. Feature scaling, regularization and operating threshold are chosen
 on chr13. Raw-sequence summaries may include GC, entropy, homopolymer/low-

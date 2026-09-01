@@ -31,7 +31,7 @@ if [[ -z "${PLAN_ROW}" ]]; then
   exit 2
 fi
 IFS=$'\t' read -r TASK_ID SEQID START END <<< "${PLAN_ROW}"
-TASK_ROOT=${RUN_ROOT}/${SEQID}/${START}-${END}
+FINAL_TASK_ROOT=${RUN_ROOT}/${SEQID}/${START}-${END}
 
 for required_path in \
   "${PLAN}" \
@@ -46,13 +46,14 @@ for required_path in \
   fi
 done
 
-if [[ -e "${TASK_ROOT}" ]]; then
-  echo "refusing to reuse full Phase-0 chunk output: ${TASK_ROOT}" >&2
+if [[ -e "${FINAL_TASK_ROOT}" ]]; then
+  echo "refusing to reuse full Phase-0 chunk output: ${FINAL_TASK_ROOT}" >&2
   exit 2
 fi
 
-mkdir -p "${RUN_ROOT}/${SEQID}"
-mkdir "${TASK_ROOT}"
+LOCAL_SCRATCH=${SLURM_TMPDIR:-/tmp}
+TASK_ROOT=$(mktemp -d "${LOCAL_SCRATCH}/te-gap-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}-XXXXXX")
+trap 'rm -rf "${TASK_ROOT}"' EXIT
 
 cd "${ROOT}"
 source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
@@ -80,3 +81,9 @@ python3 "${E0_SCRIPT}" export-p3 \
 
 printf '%s_%s\n' "${SLURM_ARRAY_JOB_ID}" "${SLURM_ARRAY_TASK_ID}" > "${TASK_ROOT}/JOBID"
 printf 'PASS\n' > "${TASK_ROOT}/STATUS"
+
+mkdir -p "${RUN_ROOT}/${SEQID}"
+TRANSFER_ROOT=${RUN_ROOT}/${SEQID}/.transfer-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}
+mkdir "${TRANSFER_ROOT}"
+cp -a "${TASK_ROOT}/." "${TRANSFER_ROOT}/"
+mv "${TRANSFER_ROOT}" "${FINAL_TASK_ROOT}"
