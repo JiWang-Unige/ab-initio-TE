@@ -157,6 +157,33 @@ class E0SbatchContractTest(unittest.TestCase):
         self.assertNotRegex(text, r"--metrics(?:\s|=)")
         subprocess.run(["bash", "-n", str(path)], check=True)
 
+    def test_homology_purge_is_cpu_only_label_blind_and_uses_frozen_alignment(self):
+        path = ROOT / "submit_phase0_homology_purge.sbatch"
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("#SBATCH --partition=private-teodoro-gpu", text)
+        self.assertNotIn("#SBATCH --gres=", text)
+        self.assertIn("#SBATCH --time=04:00:00", text)
+        self.assertIn("phase0_homology_purge.py", text)
+        self.assertIn("minimap2", text)
+        self.assertIn("-x sr --secondary=no", text)
+        self.assertIn("chr19/TEST_LABELS_SEALED", text)
+        self.assertNotIn('chr19/labeled.tsv" \\\n', text)
+        self.assertNotIn("rmsk_te_strict", text)
+        self.assertIn("purge_membership.tsv", text)
+        subprocess.run(["bash", "-n", str(path)], check=True)
+
+    def test_chr19_candidate_eval_requires_lock_and_consumes_labels_once(self):
+        path = ROOT / "submit_phase0_chr19_candidate_eval.sbatch"
+        text = path.read_text(encoding="utf-8")
+        self.assertIn("#SBATCH --partition=private-teodoro-gpu", text)
+        self.assertNotIn("#SBATCH --gres=", text)
+        self.assertIn("PASS_TO_TEST True", text)
+        self.assertIn("purge_membership.tsv", text)
+        self.assertIn("project-labels", text)
+        self.assertIn("TEST_LABELS_CONSUMED", text)
+        self.assertIn("phase0_chr19_evaluate.py", text)
+        subprocess.run(["bash", "-n", str(path)], check=True)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -354,6 +354,17 @@ to an A0 library-assisted method. The homology-purge identity, reciprocal-
 coverage and aligned-length rules are locked in the same JSON, and label-blind
 purge membership must be materialized before chr19 comparator projection.
 
+The frozen purge implementation uses 256-bp left and right candidate flanks,
+`minimap2 2.30-r1287 -x sr --secondary=no`, and marks a chr19 candidate as
+purged when either flank has a primary chr3/5/13 hit with at least 100 aligned
+bp, 80% alignment identity, and 50% query and target coverage. It reads no
+chr19 comparator label or relation column. The first chr19 evaluator is
+deliberately candidate-level only: it reports the untouched and unpurged
+ranking/threshold results and the frozen 1-Mb block bootstrap, but returns a
+partial status until whole-mask, fragmentation and gene-feature safety assets
+are evaluated. A candidate-level result alone cannot satisfy the prospective
+gate below.
+
 The only statistical probe is L2-regularized logistic regression on scalar
 features. Feature scaling, regularization and operating threshold are chosen
 on chr13. Raw-sequence summaries may include GC, entropy, homopolymer/low-
