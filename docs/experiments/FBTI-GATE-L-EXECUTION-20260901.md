@@ -2,7 +2,15 @@
 
 Date: 2026-09-01
 
-Status: **machine path ready; human Gate L not evaluated; no scientific PASS**
+Status: **retired unexecuted after a resource change; human Gate L was not evaluated; no scientific PASS or biological NO-GO**
+
+> Superseded for active-route decisions by
+> `docs/experiments/GAP-BRIDGE-DATA-ONLY-RESTART-20260901.md`. The user
+> confirmed that the independent TE-locus expertise required by this protocol
+> is not realistically available. The frozen machine path remains an archived
+> engineering result, with terminal status
+> `RETIRED_UNEXECUTED_RESOURCE_INFEASIBLE`; it is not converted into an
+> automatic biological gate.
 
 ## Outcome
 

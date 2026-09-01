@@ -2,6 +2,30 @@
 
 > /research-interview 写到这里。此后整个工作流的"研究意图源头"——/research-synthesize 和后续 skill 都会回读。
 
+## current_route_2026-09-01_gap_bridge_data_only
+
+- Gate L 因缺少可执行的独立 TE-locus 专家投入而退役，状态为
+  `RETIRED_UNEXECUTED_RESOURCE_INFEASIBLE`；它没有 PASS，也不是生物学
+  NO-GO。
+- 当前目标改为 **comparator-consistent repeat-mask continuity**：冻结
+  P3-R1，只判断 prediction-defined internal gap 中哪些 bases 可以在高
+  added-bp precision 下加入第二层 softmask。不声称恢复 biological
+  insertion、nested topology 或 ancestral boundary。
+- 唯一下一步是
+  `docs/experiments/GAP-BRIDGE-DATA-ONLY-RESTART-20260901.md` 中冻结的
+  `GAP-BRIDGE-PHASE0-R1`：先做 chr17 bit-exact logit-export engineering
+  regression 和 chr3/chr5 各 50 Mb 的双染色体 preflight，再用完整 chr3/5
+  train、完整 chr13 validation、完整 chr19 one-use test 做 feature-only
+  discriminability screen；chr20-22 保留。
+- 历史 FRAGGRAPH 已证明旧 CE + 小样本 learned linker 无效，因此本轮是
+  一次 re-entry falsification。Phase 0 FAIL 时关闭新 neural gap model 和
+  continual learning；library-free sequence signal 在 chr19 与
+  homology-purged challenge 上成立时，至多允许一个后续小 CNN 比较；持续
+  学习还必须等 chr20-22 复现和 unchanged Mouse direction-of-effect 后才能
+  重新提案。
+- Mouse 仅在人类 gate 后做一次 unchanged transfer；Fly 不进入这条
+  comparator-continuity 路线的常规开发。
+
 ## last_result_summary
 - exp_id: FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1
 - date: 2026-08-12 CEST

@@ -1,163 +1,142 @@
 {
-  "_comment": "Active route-selection goal. This is an ontology/provenance and identifiability audit, not a model-training or SOTA goal.",
-  "program": "TE_extant_locus_annotation",
-  "goal_id": "FBTI_EXTANT_LOCUS_PHASE0_R1",
+  "_comment": "Active data-only route. Gate L is archived as unexecuted because the required independent TE-locus experts are unavailable.",
+  "program": "TE_gap_bridge_refinement",
+  "goal_id": "GAP_BRIDGE_PHASE0_R1",
   "status": "active",
   "scope": "route_selection",
-  "goal": "Determine whether uncertainty-aware extant TE loci can be annotated reproducibly and whether frozen P3 atoms contain non-geometric single-genome relation information sufficient for safe multipart locus grouping.",
-  "objective": "Execute the serial L/O/E gates in docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md. Stop at the first failed gate and preserve its distinct scientific interpretation.",
-  "primary_metric": "route_decision_pending",
-  "direction": "lower",
+  "goal": "Determine whether prediction-defined internal gaps from frozen P3-R1 contain enough non-geometric information for high-precision Human comparator-consistent repeat-mask refinement.",
+  "objective": "Run the sequential E0 engineering preflight and feature-only GAP-BRIDGE-DATA-GATE-V0 defined in docs/experiments/GAP-BRIDGE-DATA-ONLY-RESTART-20260901.md. Do not train a new neural sequence encoder or continue P3 unless the feature-only gate passes.",
+  "primary_metric": "gap_bridge_phase0_gate_pass",
+  "direction": "higher",
   "success_criteria": [
     {
-      "metric": "route_decision_pending",
+      "metric": "gap_bridge_phase0_gate_pass",
       "op": "==",
-      "threshold": 0
+      "threshold": 1
     }
   ],
   "guardrails": [
     {
-      "metric": "gpu_hours",
+      "metric": "test_added_bp_precision",
+      "op": ">=",
+      "threshold": 0.97
+    },
+    {
+      "metric": "test_added_bp_precision_ci95_lower",
+      "op": ">=",
+      "threshold": 0.95
+    },
+    {
+      "metric": "whole_mask_bp_precision_drop",
+      "op": "<=",
+      "threshold": 0.001
+    },
+    {
+      "metric": "missed_rate_increase",
+      "op": "<=",
+      "threshold": 0.0
+    },
+    {
+      "metric": "newly_masked_canonical_splice_dinucleotides",
       "op": "==",
       "threshold": 0
     },
     {
-      "metric": "prohibited_neural_runs",
-      "op": "==",
-      "threshold": 0
-    },
-    {
-      "metric": "truth_aware_atom_changes",
-      "op": "==",
-      "threshold": 0
-    },
-    {
-      "metric": "whole_genome_precision_claimed",
-      "op": "==",
-      "threshold": 0
-    },
-    {
-      "metric": "historical_insertion_claimed",
+      "metric": "biological_instance_claimed",
       "op": "==",
       "threshold": 0
     }
   ],
-  "active_protocol": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-R1-20260831.md",
-  "annotation_contract_proposal": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V0-20260831.md",
-  "annotation_contract_v1_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1-ADDENDUM-20260831.md",
-  "annotation_contract_v1_1_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.1-ADDENDUM-20260831.md",
-  "annotation_contract_v1_2_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.2-ADDENDUM-20260831.md",
-  "annotation_contract_v1_3_addendum": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.3-ADDENDUM-20260831.md",
-  "annotation_contract_v1_4": "docs/experiments/FBTI-EXTANT-LOCUS-ANNOTATION-CONTRACT-V1.4-ADDENDUM-20260901.md",
-  "annotation_handbook_v1_4": "docs/experiments/FBTI-GATE-L-ANNOTATOR-HANDBOOK-V1.4-20260901.md",
-  "gate_l_execution_report": "docs/experiments/FBTI-GATE-L-EXECUTION-20260901.md",
-  "engineering_progress": {
-    "population_census_job": "12121962",
-    "population_census_status": "COMPLETED_0_0_ENGINEERING_ONLY",
-    "population_census_report": "docs/experiments/FBTI-EXTANT-LOCUS-PHASE0-CENSUS-20260831.md",
-    "joint_panel_job": "12121966",
-    "joint_panel_status": "COMPLETED_0_0_ENGINEERING_ONLY",
-    "joint_panel_report": "docs/experiments/FBTI-EXTANT-LOCUS-JOINT-PANEL-V1.3-20260831.md",
-    "joint_panel_manifest": "docs/experiments/manifests/FBTI-EXTANT-LOCUS-PHASE0-R1-V1.3/packages.tsv",
-    "calibration_packets_job": "12122769",
-    "calibration_packets_status": "COMPLETED_0_0_ENGINEERING_ONLY",
-    "calibration_packets_report": "docs/experiments/FBTI-EXTANT-LOCUS-CALIBRATION-PACKETS-V1.3-20260831.md",
-    "calibration_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-packets-v1.3-20260831-r3",
-    "annotation_packets_job": "12125398",
-    "annotation_packets_status": "COMPLETED_0_0_ENGINEERING_ONLY",
-    "main_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-packets-v1.3-20260901-r1",
-    "reserve_packets_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/reserve-packets-v1.3-20260901-r1",
-    "annotation_kits_job": "12125409",
-    "annotation_kits_status": "COMPLETED_0_0_ENGINEERING_ONLY_V1_4_PROPOSAL",
-    "calibration_annotation_kits_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-annotation-kits-v1.4-proposal-20260901-r1",
-    "main_annotation_kits_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-annotation-kits-v1.4-proposal-20260901-r1",
-    "provenance_audit_job": "12125437",
-    "provenance_audit_status": "COMPLETED_0_0_ENGINEERING_ONLY_HUMAN_CALLS_BLANK",
-    "provenance_audit_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-provenance-audit-v1.4-20260901-r2/provenance_audit.tsv",
-    "calibration_delivery_job": "12125438",
-    "calibration_delivery_status": "COMPLETED_0_0_ENGINEERING_ONLY_ACCEPTED_V1_4",
-    "calibration_delivery_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/calibration-delivery-v1.4-20260901-r2",
-    "main_delivery_job": "12125441",
-    "main_delivery_status": "COMPLETED_0_0_ENGINEERING_ONLY_SEALED_UNTIL_CALIBRATION_LOCK",
-    "main_delivery_output": "/home/users/j/jwang/ab-initio-TE/outputs/FBTI-EXTANT-LOCUS-PHASE0-R1/main-delivery-v1.4-20260901-r1",
-    "gate_l_engineering_test_job": "12125446",
-    "gate_l_engineering_test_status": "COMPLETED_0_0_37_TESTS_PASS",
-    "gate_l_machine_ready": true,
-    "fragment_gap_audit_job": "12124904",
-    "fragment_gap_fly_recovery_job": "12124968",
-    "fragment_gap_audit_status": "COMPLETED_DESCRIPTIVE_ONLY_NO_RESCUE_SELECTED",
-    "fragment_gap_audit_report": "docs/experiments/FRAGMENT-GAP-TOPOLOGY-20260831-R1.md",
-    "fragment_gap_summary_output": "/home/users/j/jwang/ab-initio-TE/outputs/FRAGMENT-GAP-TOPOLOGY-20260831-R1/summary-r1",
-    "gate_l_evaluated": false
+  "active_protocol": "docs/experiments/GAP-BRIDGE-DATA-ONLY-RESTART-20260901.md",
+  "retired_route": {
+    "id": "FBTI_GATE_L",
+    "status": "RETIRED_UNEXECUTED_RESOURCE_INFEASIBLE",
+    "scientific_pass": false,
+    "scientific_no_go": false,
+    "archive": "docs/experiments/FBTI-GATE-L-EXECUTION-20260901.md"
   },
-  "current_contract_blocks": [
-    "exact FlyBase name frequency is degenerate and exact-name-matched FPR has no denominator",
-    "real A1, A2 and ADJ people have not yet been named; manual calibration, double annotation and adjudication have not yet been performed",
-    "P3 probabilities are unavailable; Gate E input/resource contract must be revised after Gates L and O before any export"
-  ],
-  "ordered_gates": [
-    {
-      "id": "L",
-      "name": "label_and_provenance_feasibility",
-      "authorization_on_pass": "run_gate_O_only",
-      "stop_on_fail": true
-    },
-    {
-      "id": "O",
-      "name": "oracle_substrate_value",
-      "authorization_on_pass": "run_gate_E_only",
-      "stop_on_fail": true
-    },
-    {
-      "id": "E",
-      "name": "incremental_single_genome_relation_information",
-      "authorization_on_pass": "one_frozen_encoder_shallow_relation_head_at_most_2M_trainable_parameters",
-      "stop_on_fail": true
-    }
-  ],
+  "frozen_stage1": {
+    "model": "P3-R1 comparator_run_four_state_unet",
+    "context_bp": 8192,
+    "training_chromosome": "chr1:0-24576000",
+    "validation_chromosome": "chr11:0-24576000",
+    "consumed_test_chromosome": "chr17:0-24576000",
+    "current_probability_track_available": false
+  },
+  "phase0_split": {
+    "engineering_preflight": [
+      "chr3:0-50000000",
+      "chr5:0-50000000"
+    ],
+    "train": [
+      "chr3:full",
+      "chr5:full"
+    ],
+    "validation": [
+      "chr13:full"
+    ],
+    "primary_test": [
+      "chr19:full"
+    ],
+    "final_reserve": [
+      "chr20",
+      "chr21",
+      "chr22"
+    ]
+  },
+  "candidate_contract": {
+    "source": "adjacent maximal frozen-P3 positive runs",
+    "gap_length_bp": "1-512",
+    "action": "fill-only",
+    "labels": [
+      "COMPARATOR_BRIDGE_SUPPORTED",
+      "COMPARATOR_SEPARATION_SUPPORTED",
+      "COMPARATOR_RELATION_AMBIGUOUS"
+    ],
+    "model": "deterministic baselines plus one L2-regularized logistic regression probe"
+  },
   "authorized_work": [
-    "freeze exact r6.68 provenance, sequence and P3 canonical-atom inputs",
-    "prepare 12 annotator-calibration packages",
-    "prepare the pre-sampled 120 main and 40 reserve non-overlapping packages",
-    "run double-blind Pass-1 annotation and third-person adjudication",
-    "project frozen P3 atoms only after Pass-1 is version-locked",
-    "run CPU-only Gate L, Gate O and Gate E analyses in order"
+    "run the chr17 frozen-logit export identity regression without reading a new scientific metric",
+    "materialize the 100-Mb chr3/chr5 engineering preflight and then the frozen full-chromosome Human Phase-0 split",
+    "export frozen P3-R1 four-state logits and canonical binary predictions",
+    "generate callable prediction-defined internal gap candidates of 1-512 bp before comparator projection",
+    "project COMPARATOR_BRIDGE_SUPPORTED, COMPARATOR_SEPARATION_SUPPORTED and COMPARATOR_RELATION_AMBIGUOUS labels",
+    "run distance, frozen-logit, raw-sequence summary, deterministic alignment baselines and one L2 logistic probe",
+    "run the prospective added-bp and gene-feature safety evaluation"
   ],
   "closed_work": [
-    "generic or TE-aware masking-only MLM",
-    "LoRA or full-backbone post-training",
-    "new U-Net, boundary-loss, HMM, CRF, semi-Markov or graph-decoder rescue",
-    "threshold, gap-merge or minimum-length rescue",
-    "near-full-seed C5 rescue",
-    "consensus-coordinate-only grouping",
-    "historical deletion or ancestral-boundary labels from one extant sequence",
-    "FlyBase positive-only whole-genome precision or F1 claims"
+    "manual Gate L annotation under the current resource constraint",
+    "biological insertion or nested-topology claims from the Human comparator",
+    "new Transformer, CNN or backbone update before Phase-0 PASS",
+    "continual or hard-example learning before library-free signal survives chr19, the homology-purged challenge, chr20-22 confirmation and unchanged Mouse transfer",
+    "deleting any existing P3-positive base",
+    "generic or TE-aware masking-only MLM rescue",
+    "threshold, minimum-length, HMM, CRF or renamed smoothing rescue",
+    "Mouse or Fly development before the Human gate",
+    "hardmask as the default output"
   ],
   "claim_policy": {
     "sota_claim_allowed": false,
     "screen_profile_can_claim": false,
-    "publication_use": "route-selection and mechanism evidence only",
-    "positive_scope": "FlyBase-derived positive-locus extant-locus identifiability only",
-    "negative_scope": "the first failed L/O/E gate and its explicitly bounded mechanism"
+    "publication_use": "route-selection and comparator-refinement mechanism evidence only",
+    "positive_scope": "Human comparator-consistent internal-gap fill on frozen regions",
+    "prohibited_scope": "biological insertion identity, nested topology, ancestral boundary, de novo discovery with a library, or gene-prediction improvement without rerunning a predictor"
   },
   "resource_policy": {
-    "gpu_hours": 0,
-    "peak_ram_gb": 64,
-    "main_panel_packages": 120,
-    "reserve_packages": 40,
-    "annotator_calibration_packages": 12,
-    "independent_annotators": 2,
-    "third_adjudicator_required": true
+    "preflight_gpu_hours_estimate": "2-8",
+    "preflight_cpu_core_hours_estimate": "20-70",
+    "full_phase0_gpu_hours_estimate": "10-40",
+    "full_phase0_cpu_core_hours_estimate": "200-940",
+    "full_phase0_storage_gb_estimate": "10-25",
+    "max_parallel_directions": 1
   },
   "stop_rules": {
-    "L_P": "If FBti provenance cannot support extant-locus anchors, stop relation modelling and construct an independent locus truth source.",
-    "L_R": "If the extant-locus ontology is not reproducible, stop supervised modelling and report ambiguity rather than asking a model to replace absent truth.",
-    "L_D": "If the frozen 160-package maximum lacks the required denominator, close relation training on this asset without claiming sequence-only impossibility.",
-    "O": "If oracle grouping has insufficient value, close P3-as-atom grouping and do not change losses or heads on the same atoms.",
-    "E": "If sequence/structure evidence does not safely exceed geometry, allow only a genuinely new observation such as comparative empty-site evidence."
+    "E0": "If new-region materialization, coordinate stitching or frozen-logit export fails, fix only the minimal engineering defect; do not infer a scientific result.",
+    "PHASE0": "If the combined feature model fails the frozen information, added-bp, whole-mask or gene-feature gate, close the neural gap-classifier and continual-learning route.",
+    "A0": "If deterministic alignment evidence matches the combined model, select the deterministic method and stop neural development.",
+    "CONTINUAL": "A new continual-learning proposal is eligible only after library-free raw-sequence gain persists on chr19 and the homology-purged challenge, reproduces on chr20-22, and is directionally consistent under unchanged Mouse transfer."
   },
-  "max_parallel_directions": 1,
   "on_failed_run": "stop_and_notify",
-  "validate_command": "python3 scripts/validate_goal.py --goal ACTIVE_GOAL.json --metrics <metrics.json> --run-status <status_file> --profile screen",
-  "human_gate_before_claim": true
+  "human_gate_before_claim": false,
+  "human_species_phase0_before_transfer": true
 }
