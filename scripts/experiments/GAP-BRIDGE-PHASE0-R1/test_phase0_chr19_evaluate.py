@@ -148,7 +148,8 @@ class Chr19EvaluatorContractTest(unittest.TestCase):
     def test_applies_locked_parameters_without_refit_and_reports_unavailable_full_gate(self) -> None:
         result = evaluate.evaluate_chr19(self.lock, self.labeled, self.purge, self.output)
         self.assertEqual(result["status"], "PARTIAL_EVALUATION_UNAVAILABLE_ASSETS")
-        self.assertEqual(result["comparison"]["best_baseline"], "SIMPLE_LENGTH")
+        self.assertEqual(result["comparison"]["best_ranking_baseline"], "SIMPLE_LENGTH")
+        self.assertEqual(result["comparison"]["best_operating_baseline"], "SIMPLE_LENGTH")
         self.assertEqual(result["prospective_gate"]["status"], "NOT_EVALUATED")
         self.assertIn("fragments_per_truth", result["prospective_gate"]["unavailable_metrics"])
         self.assertEqual(result["bootstrap_ap_difference"]["unit"], "1Mb block")

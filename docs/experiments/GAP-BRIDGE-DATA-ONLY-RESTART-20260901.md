@@ -54,10 +54,12 @@ E0 spend plus one complete full-screen export is approximately 46.8
 GPU-hours, which fits the user-approved rebase below.
 
 Decision: `E0_ENGINEERING_PASS`. On 2026-09-01 the user explicitly approved
-private-node execution beyond the old 24-GPU-hour planning cap; the project
-cap was first rebased to 64 GPU-hours and, on 2026-09-02, to 128 GPU-hours so
-the retained I/O failures and missing-shard recovery cannot become a false
-scientific stop. Full Phase 0 is therefore
+private-node execution beyond the old 24-GPU-hour planning cap. The project
+planning envelope was first rebased to 64 GPU-hours and, on 2026-09-02, to
+128 GPU-hours. This is a scheduling estimate, not a scientific stop or a hard
+experiment limit: if a valid shard requires a longer private-node wall time or
+finer retry partitioning, the resource plan is updated without changing the
+frozen scientific contract. Full Phase 0 is therefore
 `AUTHORIZED_CHUNKED_PRIVATE`.
 
 The four chromosomes are partitioned into 13 shards whose internal boundaries
@@ -390,6 +392,21 @@ alignment, and microhomology; they cannot include a trainable encoder. A
 Transformer, CNN, graph model or trainable embedding would confound
 separability with optimization and is explicitly deferred.
 
+### One-use chr19 implementation readiness (2026-09-02)
+
+The locked test path is now implemented end to end but has not been executed.
+`phase0_chr19_evaluate.py` reports candidate ranking and the frozen operating
+points; `phase0_mask_fragment_gate.py` constructs the G2-refined mask and the
+matched frozen baseline mask; `phase0_gene_safety.py` recomputes exact
+comparator-negative coordinates against the fixed gene annotation; and
+`phase0_gate_decision.py` applies the eight prospective gates plus the
+independent operating-point comparison. The Slurm wrapper projects chr19
+labels only after both the chr13 feature lock and label-blind homology purge
+are PASS, then runs those four stages from node-local scratch and preserves a
+failed stage without admitting it to the scientific denominator. Fifty-two
+targeted tests, Python compilation and shell syntax checks pass. This is
+engineering readiness, not a chr19 result.
+
 ### Metrics
 
 Candidate-level:
@@ -397,7 +414,6 @@ Candidate-level:
 - AUPRC and normalized AP under natural prevalence;
 - calibration (Brier score and ECE);
 - precision/recall/F1 at a validation-frozen threshold;
-- distance-matched AUPRC;
 - performance by gap length `1-2`, `3-5`, `6-20`, `21-100`, `101-512` bp;
 - comparator-negative fill rate for adjacent same-family/consensus runs when
   that stratum is available.
@@ -474,7 +490,12 @@ simple/G0/G1 baseline each use their own chr13-frozen, added-bp-precision
 `>=0.98` operating point. At those fixed points, G2 must also deliver at least
 one of: 20% more positive gap bp recovered, 20% fewer negative bp filled, or
 10% greater relative split reduction. A0 remains excluded while its frozen
-per-candidate alignment asset is blocked.
+per-candidate alignment asset is blocked. The AP comparison independently uses
+the highest-chr13-AP ranking baseline even if that method has no safe operating
+point. The operating comparison uses the highest-chr13-AP baseline with a
+nonempty frozen threshold; if no baseline reaches the validation precision
+floor, this is recorded as `G2_ONLY_SAFE_OPERATING_POINT` rather than selecting
+a chr19 threshold.
 
 ### Decisions
 
@@ -575,7 +596,7 @@ Prohibited conclusions:
 
 ## Open uncertainties exposed before implementation
 
-- exact assembly identity among genome, comparator and gene annotation;
+- exact assembly identity outside the frozen hg38 chr19 gene-safety audit;
 - the canonical unknown/callable projection on new chromosomes;
 - whether consensus/family features derive from the same library that created
   the comparator;

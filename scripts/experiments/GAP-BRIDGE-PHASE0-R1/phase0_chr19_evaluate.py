@@ -497,34 +497,45 @@ def evaluate_chr19(
                 rows, scores[group_name], threshold, display_threshold, threshold_kind,
             ),
         }
-    best_baseline = max(
+    best_ranking_baseline = max(
         ("SIMPLE_LENGTH", "G0_LENGTH", "G1_GEOMETRY_LOGITS"),
         key=lambda name: (validation_aps[name], name),
     )
+    operating_baselines = [
+        name for name in ("SIMPLE_LENGTH", "G0_LENGTH", "G1_GEOMETRY_LOGITS")
+        if threshold_spec(lock, name)[0] == "PASS" and threshold_spec(lock, name)[1] is not None
+    ]
+    best_operating_baseline = (
+        max(operating_baselines, key=lambda name: (validation_aps[name], name))
+        if operating_baselines else None
+    )
     clean = targets >= 0
     g2_ap = group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["average_precision"]
-    baseline_ap = group_metrics[best_baseline]["candidate_metrics"]["average_precision"]
+    baseline_ap = group_metrics[best_ranking_baseline]["candidate_metrics"]["average_precision"]
     comparison = {
-        "best_baseline": best_baseline,
-        "selection_basis": "locked chr13 validation average_precision among SIMPLE_LENGTH, G0 and G1",
+        "best_ranking_baseline": best_ranking_baseline,
+        "best_operating_baseline": best_operating_baseline,
+        "ranking_selection_basis": "locked chr13 validation average_precision among SIMPLE_LENGTH, G0 and G1",
+        "operating_selection_basis": "highest locked chr13 validation average_precision among SIMPLE_LENGTH, G0 and G1 with a nonempty PASS threshold",
+        "operating_comparison_status": "PASS" if best_operating_baseline is not None else "G2_ONLY_SAFE_OPERATING_POINT",
         "g2_minus_best_baseline_average_precision": None if g2_ap is None or baseline_ap is None else g2_ap - baseline_ap,
         "g2_minus_best_baseline_normalized_average_precision": (
             group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["normalized_average_precision"]
-            - group_metrics[best_baseline]["candidate_metrics"]["normalized_average_precision"]
+            - group_metrics[best_ranking_baseline]["candidate_metrics"]["normalized_average_precision"]
             if group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["normalized_average_precision"] is not None
-            and group_metrics[best_baseline]["candidate_metrics"]["normalized_average_precision"] is not None else None
+            and group_metrics[best_ranking_baseline]["candidate_metrics"]["normalized_average_precision"] is not None else None
         ),
         "g2_minus_best_baseline_brier": (
             group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["brier"]
-            - group_metrics[best_baseline]["candidate_metrics"]["brier"]
+            - group_metrics[best_ranking_baseline]["candidate_metrics"]["brier"]
             if group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["brier"] is not None
-            and group_metrics[best_baseline]["candidate_metrics"]["brier"] is not None else None
+            and group_metrics[best_ranking_baseline]["candidate_metrics"]["brier"] is not None else None
         ),
         "g2_minus_best_baseline_ece_10bin": (
             group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["ece_10bin"]
-            - group_metrics[best_baseline]["candidate_metrics"]["ece_10bin"]
+            - group_metrics[best_ranking_baseline]["candidate_metrics"]["ece_10bin"]
             if group_metrics["G2_FULL_LIBRARY_FREE"]["candidate_metrics"]["ece_10bin"] is not None
-            and group_metrics[best_baseline]["candidate_metrics"]["ece_10bin"] is not None else None
+            and group_metrics[best_ranking_baseline]["candidate_metrics"]["ece_10bin"] is not None else None
         ),
     }
     blocks = _block_indices(rows)
@@ -572,7 +583,7 @@ def evaluate_chr19(
             ),
         }
     challenge_g2_ap = challenge_metrics["G2_FULL_LIBRARY_FREE"]["average_precision"]
-    challenge_baseline_ap = challenge_metrics[best_baseline]["average_precision"]
+    challenge_baseline_ap = challenge_metrics[best_ranking_baseline]["average_precision"]
     a0 = lock["baselines"]["A0_consensus_alignment"]
     assert isinstance(a0, dict)
     a0_result = dict(a0)
@@ -596,7 +607,7 @@ def evaluate_chr19(
         "prospective_denominator": denominator,
         "block_size_bp": BLOCK_SIZE,
         "block_summaries": block_rows,
-        "bootstrap_ap_difference": bootstrap_ap_difference(blocks, targets, scores["G2_FULL_LIBRARY_FREE"], scores[best_baseline]),
+        "bootstrap_ap_difference": bootstrap_ap_difference(blocks, targets, scores["G2_FULL_LIBRARY_FREE"], scores[best_ranking_baseline]),
         "purged_challenge": {
             "status": challenge_status,
             "membership_column": "purged",
