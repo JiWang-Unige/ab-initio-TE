@@ -2,20 +2,59 @@
 
 Date: 2026-09-01
 
-Status: **route frozen; E0 implementation running; no new scientific result**
+Status: **E0 engineering PASS; full Phase 0 pending resource rebase; no new scientific result**
 
-## Execution status
+## E0 engineering result
 
-- The frozen E0 contract is implemented at commit
-  `e33b2ae9426a426ae2f5932b623455f0360edc74`.
-- Eleven targeted unit tests pass, including explicit-region tail coverage,
-  comparator projection, ambiguity retention and Slurm contract checks.
-- The chr17 ordered-tuple and length-only identity regression is running as
-  Slurm job `12126691` on `gpu034`.
-- The chr3/chr5 50 Mb preflight array is submitted as `12126692_[0-1]` and is
-  dependency-blocked until the chr17 identity job succeeds.
-- These jobs are engineering gates. They have produced no admissible
-  discriminability, mask-improvement or publication result yet.
+- The frozen E0 contract was implemented at commit
+  `e33b2ae9426a426ae2f5932b623455f0360edc74`; the CPU-only finalizer was added
+  at `b887fa5`. Twelve targeted tests now pass, including explicit-region tail
+  coverage, comparator projection, ambiguity retention and Slurm contracts.
+- Job `12126691` passed the chr17 identity regression: all 25,543 ordered
+  `(seqid,start,end)` tuples and the declared 9,830,400-bp length were exactly
+  equal. No scientific metric was computed.
+- The first chr3/chr5 array, `12126692_[0-1]`, completed each 50-Mb/6,104-window
+  materialization before both tasks failed with exit 120 during a simultaneous
+  BeeGFS `Communication error on send`. The failure is retained and excluded
+  from every scientific denominator.
+- The unchanged retry, `12127337_[0-1]`, wrote complete PASS export manifests,
+  four-state `(50,000,000,4)` float16 tracks, float32 P_TE tracks and canonical
+  masks for both chromosomes. Each task then failed only while flushing its
+  final JSON to the long-idle Slurm/BeeGFS stdout stream. The valid exports
+  were reused rather than spending another six GPU-hours.
+- CPU finalization job `12128518_1` completed chr5. Task `12128518_0` failed
+  with an explicit BeeGFS `OSError: [Errno 121] Remote I/O error` while writing
+  chr3 candidates; chr3-only retry `12128695_0` then completed. Both failures
+  remain in the engineering ledger.
+
+| Region | Coverage contract | P3 intervals | Candidates | Eligible main | Bridge | Separation | Ambiguous | Terminal source |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| chr3:0-50M | 50,000,000 bp; 6,104 windows; 0 missing/overlap; one tail | 121,796 | 121,795 | 106,859 | 25,268 | 2,344 | 94,183 | export `20260901-r2`; finalize `20260901-r2` |
+| chr5:0-50M | 50,000,000 bp; 6,104 windows; 0 missing/overlap; one tail | 99,631 | 99,630 | 85,017 | 23,915 | 1,699 | 74,016 | export `20260901-r2`; finalize `20260901-r1` |
+
+Candidate and labeled tables have identical row counts on both chromosomes.
+All three comparator relations are represented, so E0 establishes that the
+frozen split, coordinate, export and label machinery is executable. These are
+candidate censuses, not classifier performance, fragment improvement or a
+publication result.
+
+## Full Phase 0 resource decision
+
+The valid 50-Mb exports required 3:12:15 and 3:13:13 per GPU. At that observed
+rate, the frozen full chr3/chr5/chr13/chr19 set contains 552,815,762 bp and
+requires approximately 35.5 GPU-hours for P3 export alone. The identity run
+and two preflight attempts have already consumed approximately 11.3
+GPU-hours, including the retained infrastructure failures. Therefore the full
+screen cannot be submitted under the current cohort limit of 24 new
+GPU-hours.
+
+Decision: `E0_ENGINEERING_PASS`; full scientific Phase 0 is
+`PENDING_RESOURCE_REBASE`, not scientifically blocked. Before submission it
+needs an explicit GPU-hour rebase and a chunk/stitch implementation because a
+single chr3 export is projected slightly above the cohort's 12-hour per-job
+limit. The scientific chromosomes, labels, feature arms, test seal and gates
+remain unchanged. No reduced-chromosome substitute is allowed to enter the
+scientific denominator.
 
 ## Outcome
 

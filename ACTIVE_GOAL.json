@@ -84,6 +84,21 @@
       "chr22"
     ]
   },
+  "e0_engineering": {
+    "status": "PASS",
+    "scientific_metrics_computed": false,
+    "identity_job": "12126691",
+    "preflight_export_source": "outputs/GAP-BRIDGE-PHASE0-R1/e0-preflight-20260901-r2",
+    "chr3_finalization": "outputs/GAP-BRIDGE-PHASE0-R1/e0-finalize-20260901-r2/chr3",
+    "chr5_finalization": "outputs/GAP-BRIDGE-PHASE0-R1/e0-finalize-20260901-r1/chr5",
+    "retained_failed_jobs": [
+      "12126692_0",
+      "12126692_1",
+      "12127337_0",
+      "12127337_1",
+      "12128518_0"
+    ]
+  },
   "candidate_contract": {
     "source": "adjacent maximal frozen-P3 positive runs",
     "gap_length_bp": "1-512",
@@ -123,11 +138,13 @@
     "prohibited_scope": "biological insertion identity, nested topology, ancestral boundary, de novo discovery with a library, or gene-prediction improvement without rerunning a predictor"
   },
   "resource_policy": {
-    "preflight_gpu_hours_estimate": "2-8",
+    "preflight_gpu_hours_observed_including_failed_infrastructure_runs": 11.3,
     "preflight_cpu_core_hours_estimate": "20-70",
-    "full_phase0_gpu_hours_estimate": "10-40",
+    "full_phase0_gpu_hours_projected": 35.5,
     "full_phase0_cpu_core_hours_estimate": "200-940",
     "full_phase0_storage_gb_estimate": "10-25",
+    "cohort_gpu_hour_limit": 24,
+    "full_phase0_execution_status": "PENDING_RESOURCE_REBASE",
     "max_parallel_directions": 1
   },
   "stop_rules": {
