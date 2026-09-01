@@ -129,6 +129,8 @@ class E0SbatchContractTest(unittest.TestCase):
         self.assertIn('python3 "${GAP_SCRIPT}" candidates', text)
         self.assertIn('python3 "${GAP_SCRIPT}" project-labels', text)
         self.assertIn('python3 "${GAP_SCRIPT}" census', text)
+        self.assertIn('if [[ "${SEQID}" != "chr19" ]]', text)
+        self.assertIn("SEALED_UNTIL_CHR13_SELECTION_LOCK", text)
         self.assertNotRegex(text, r"--metrics(?:\s|=)")
         subprocess.run(["bash", "-n", str(path)], check=True)
 

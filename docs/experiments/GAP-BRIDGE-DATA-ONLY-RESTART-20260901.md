@@ -63,6 +63,11 @@ whole-chromosome candidates. The scientific chromosomes, labels, feature
 arms, test seal and gates remain unchanged. No reduced-chromosome substitute
 is allowed to enter the scientific denominator.
 
+The stitch stage projects comparator labels for chr3/chr5 training and chr13
+validation only. It emits label-blind chr19 candidates plus an explicit seal;
+chr19 comparator projection and every test metric remain forbidden until all
+chr13 feature, regularization and operating-threshold choices are locked.
+
 ## Outcome
 
 Gate L is retired from the active publication route because the required

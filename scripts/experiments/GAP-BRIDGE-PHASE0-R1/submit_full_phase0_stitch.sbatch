@@ -77,15 +77,19 @@ python3 "${GAP_SCRIPT}" candidates \
   --state-probabilities-npy "${TASK_ROOT}/states.npy" \
   --output "${TASK_ROOT}/candidates.tsv" >/dev/null
 
-python3 "${GAP_SCRIPT}" project-labels \
-  --candidates "${TASK_ROOT}/candidates.tsv" \
-  --comparator-positive "${COMPARATOR_POSITIVE}" \
-  --comparator-unknown "${COMPARATOR_UNKNOWN}" \
-  --output "${TASK_ROOT}/labeled.tsv" >/dev/null
+if [[ "${SEQID}" != "chr19" ]]; then
+  python3 "${GAP_SCRIPT}" project-labels \
+    --candidates "${TASK_ROOT}/candidates.tsv" \
+    --comparator-positive "${COMPARATOR_POSITIVE}" \
+    --comparator-unknown "${COMPARATOR_UNKNOWN}" \
+    --output "${TASK_ROOT}/labeled.tsv" >/dev/null
 
-python3 "${GAP_SCRIPT}" census \
-  --labeled "${TASK_ROOT}/labeled.tsv" \
-  --output "${TASK_ROOT}/candidate_census.json" >/dev/null
+  python3 "${GAP_SCRIPT}" census \
+    --labeled "${TASK_ROOT}/labeled.tsv" \
+    --output "${TASK_ROOT}/candidate_census.json" >/dev/null
+else
+  printf 'SEALED_UNTIL_CHR13_SELECTION_LOCK\n' > "${TASK_ROOT}/TEST_LABELS_SEALED"
+fi
 
 printf '%s_%s\n' "${SLURM_ARRAY_JOB_ID}" "${SLURM_ARRAY_TASK_ID}" > "${TASK_ROOT}/JOBID"
 printf 'PASS\n' > "${TASK_ROOT}/STATUS"
