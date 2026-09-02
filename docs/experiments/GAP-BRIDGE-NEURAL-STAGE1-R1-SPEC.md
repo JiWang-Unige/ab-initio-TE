@@ -206,6 +206,16 @@ Per-base channels are three P3 logits relative to background, the frozen P3
 binary mask, three left/gap/right tags, two clipped relative distances to the
 gap boundaries, one validity mask, five raw-DNA slots and 128 latent slots.
 
+Implementation encoding is frozen as follows. Channel order is relative logits
+`interior-background`, `left_boundary-background`,
+`right_boundary-background`; P3 mask; left/gap/right tags; left and right
+distance; validity; raw `A,C,G,T,PAD`; then the 128 decoded channels. For a real
+base at genomic coordinate `x`, the two distance channels are
+`clip((x-gap_start)/512,-1,1)` and
+`clip((x-gap_end)/512,-1,1)`. Right padding has validity zero, `PAD=1`, and all
+other channels zero. Every real crop position is A/C/G/T and has validity one;
+exactly one of its left/gap/right tags is one.
+
 | Arm | Active information |
 |---|---|
 | `G_GEOMETRY_LOGITS` | P3 logits/mask, tags, positions and geometry; raw and latent slots zeroed |
@@ -222,6 +232,17 @@ Each arm also receives seven train-standardized scalars: log gap, left-run,
 right-run and span lengths, seam indicator, log absolute seam distance and
 signed seam direction. GC, entropy, k-mer and microhomology summaries are not
 added because the raw arm must learn sequence information itself.
+
+The four length scalars are `log1p(gap_end-gap_start)`,
+`log1p(gap_start-left_run_start)`, `log1p(right_run_end-gap_end)` and
+`log1p(right_run_end-left_run_start)`. A seam is an 8192-bp window-grid
+boundary. The indicator is one when the unpadded crop crosses a grid boundary.
+For gap midpoint `m=(gap_start+gap_end)/2`, the final two scalars are
+`log1p(abs(b-m))` and `sign(b-m)`, where `b` is the closest 8192-bp grid
+boundary and an exact tie selects the lower boundary. Means and population
+standard deviations are computed once from comparator-known chr3+chr5 TRAIN
+candidates, stored, and then frozen. A zero standard deviation is an
+engineering failure because it leaves this registered encoding undefined.
 
 The fixed readout is a 143-to-32 1x1 convolution, GELU/LayerNorm, four
 32-channel residual depthwise-separable convolution blocks with kernel 5 and
