@@ -115,21 +115,36 @@ class GapHead(nn.Module):
             nn.Linear(64, 1),
         )
 
-    def forward(self, features: Tensor, geometry: Tensor) -> Tensor:
-        """Return one negative-fraction risk logit per candidate."""
-        x = build_arm_input(features, self.arm)
+    @staticmethod
+    def _validate_inputs(features: Tensor, geometry: Tensor) -> None:
         if geometry.ndim != 2 or geometry.size(1) != GEOMETRY_SCALARS:
             raise ValueError(f"geometry must have shape (B,{GEOMETRY_SCALARS})")
-        valid = (x[:, 9:10, :] > 0).to(dtype=x.dtype)
-        h = self.readout(x)
+        if features.ndim != 3 or features.size(1) != CHANNELS:
+            raise ValueError(f"features must have shape (B,{CHANNELS},L)")
+        if features.size(0) != geometry.size(0):
+            raise ValueError("features and geometry batch dimensions must match")
+
+    def forward_prepared(self, features: Tensor, geometry: Tensor) -> Tensor:
+        """Run an already arm-masked ``(B,143,L)`` tensor through the head.
+
+        Callers must prepare the tensor once with :func:`build_arm_input` for
+        this head's arm.  This path intentionally does not clone or remask it.
+        """
+        self._validate_inputs(features, geometry)
+        valid = (features[:, 9:10, :] > 0).to(dtype=features.dtype)
+        h = self.readout(features)
         h = self.readout_activation(h)
         h = self.readout_norm(h.transpose(1, 2)).transpose(1, 2)
         h = h * valid
         for block in self.blocks:
             h = block(h) * valid
-        pooled = masked_region_pool(h, x[:, 4:7, :], valid)
+        pooled = masked_region_pool(h, features[:, 4:7, :], valid)
         summary = torch.cat((pooled, geometry), dim=1)
         return self.mlp(summary).squeeze(-1)
+
+    def forward(self, features: Tensor, geometry: Tensor) -> Tensor:
+        """Return one negative-fraction risk logit per candidate."""
+        return self.forward_prepared(build_arm_input(features, self.arm), geometry)
 
 
 def _stratum_name(value: object) -> str:
@@ -190,4 +205,3 @@ def soft_target_bce(logits: Tensor, targets: Tensor, weights: Tensor) -> Tensor:
     ):
         raise ValueError("sample weights must be normalized to mean one")
     return F.binary_cross_entropy_with_logits(logits, targets, weight=weights, reduction="mean")
-

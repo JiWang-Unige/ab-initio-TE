@@ -44,6 +44,17 @@ class Stage1ModelTest(unittest.TestCase):
         self.assertTrue(torch.equal(r[:, 15:], torch.zeros_like(r[:, 15:])))
         self.assertTrue(torch.equal(h, x))
 
+    def test_forward_prepared_matches_forward_without_second_mask(self):
+        torch.manual_seed(20260902)
+        head = self.module.GapHead(self.module.ARMS[1]).eval()
+        features = torch.randn(3, 143, 17)
+        geometry = torch.randn(3, 7)
+        prepared = self.module.build_arm_input(features, self.module.ARMS[1])
+        with torch.no_grad():
+            direct = head(features, geometry)
+            prepared_output = head.forward_prepared(prepared, geometry)
+        self.assertTrue(torch.equal(direct, prepared_output))
+
     def test_padding_is_excluded_from_region_pool_and_model_output(self):
         hidden = torch.arange(32 * 6, dtype=torch.float32).reshape(1, 32, 6)
         tags = torch.zeros(1, 3, 6)
