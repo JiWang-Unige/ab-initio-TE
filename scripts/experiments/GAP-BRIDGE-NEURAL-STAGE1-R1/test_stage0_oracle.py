@@ -66,6 +66,38 @@ class Stage0OracleTest(unittest.TestCase):
         self.assertEqual(refined["fragments"], 1)
         self.assertEqual(refined["missed_truth_runs"], 0)
 
+    def test_distinct_comparator_run_fusion_counts_mixed_gap(self) -> None:
+        candidate = oracle.Candidate(
+            oracle.BaseCandidate("chr3:10-20", "chr3", 0, 10, 10, 20, 20, 30),
+            "AMBIGUOUS", 4, 6, 0,
+        )
+        chromosome = oracle.ChromData(
+            "chr3", 100, [(0, 100)], [(0, 100)], [(0, 100)],
+            [(0, 14), (16, 30)], [], [(0, 10), (20, 30)], [candidate],
+        )
+        diagnostics = oracle.selection_diagnostics([chromosome], {candidate.base.candidate_id})
+        self.assertEqual(diagnostics["selected_distinct_comparator_run_fusions"], 1)
+        self.assertEqual(diagnostics["selected_comparator_separation_supported_candidates"], 0)
+
+    def test_candidate_label_census_reports_unknown_eligibility(self) -> None:
+        known = oracle.Candidate(
+            oracle.BaseCandidate("chr3:10-11", "chr3", 0, 10, 10, 11, 11, 20),
+            oracle.BRIDGE, 1, 0, 0,
+        )
+        unknown = oracle.Candidate(
+            oracle.BaseCandidate("chr3:30-32", "chr3", 20, 30, 30, 32, 32, 40),
+            "UNKNOWN", 0, 0, 2,
+        )
+        chromosome = oracle.ChromData(
+            "chr3", 100, [(0, 100)], [(0, 100)], [(0, 100)],
+            [], [], [], [known, unknown],
+        )
+        census = oracle.candidate_label_census([chromosome])
+        self.assertEqual(census["model_eligible_candidates"], 2)
+        self.assertEqual(census["comparator_known_gap_bp"], 1)
+        self.assertEqual(census["comparator_unknown_candidate_gap_bp"], 2)
+        self.assertEqual(census["effective_comparator_unknown_bp"], 2)
+
     def test_small_pipeline_keeps_chr19_out_of_the_contract(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

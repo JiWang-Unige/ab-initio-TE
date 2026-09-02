@@ -844,11 +844,27 @@ def zero_risk_topology(data: list[ChromData]) -> dict[str, object]:
 
 
 def selection_diagnostics(data: list[ChromData], selected_ids: set[str]) -> dict[str, int]:
-    selected = [
-        candidate
-        for chromosome in data for candidate in chromosome.candidates
-        if candidate.base.candidate_id in selected_ids
-    ]
+    selected: list[Candidate] = []
+    distinct_run_fusions = 0
+    for chromosome in data:
+        positive_starts = [start for start, _ in chromosome.positive]
+        for candidate in chromosome.candidates:
+            if candidate.base.candidate_id not in selected_ids:
+                continue
+            selected.append(candidate)
+            left_index = bisect.bisect_right(positive_starts, candidate.base.gap_start - 1) - 1
+            right_index = bisect.bisect_right(positive_starts, candidate.base.gap_end) - 1
+            left_inside = (
+                left_index >= 0
+                and candidate.base.gap_start - 1 < chromosome.positive[left_index][1]
+            )
+            right_inside = (
+                right_index >= 0
+                and candidate.base.gap_end < chromosome.positive[right_index][1]
+            )
+            distinct_run_fusions += int(
+                left_inside and right_inside and left_index != right_index
+            )
     return {
         "selected_candidates": len(selected),
         "selected_gap_bp": sum(candidate.base.length for candidate in selected),
@@ -861,6 +877,23 @@ def selection_diagnostics(data: list[ChromData], selected_ids: set[str]) -> dict
         "selected_comparator_separation_supported_candidates": sum(
             candidate.relation == "COMPARATOR_SEPARATION_SUPPORTED" for candidate in selected
         ),
+        "selected_distinct_comparator_run_fusions": distinct_run_fusions,
+    }
+
+
+def candidate_label_census(data: list[ChromData]) -> dict[str, int]:
+    candidates = [candidate for chromosome in data for candidate in chromosome.candidates]
+    unknown = [candidate for candidate in candidates if candidate.unknown_bp > 0]
+    return {
+        "model_eligible_candidates": len(candidates),
+        "model_eligible_gap_bp": sum(candidate.base.length for candidate in candidates),
+        "comparator_known_candidates": len(candidates) - len(unknown),
+        "comparator_known_gap_bp": sum(
+            candidate.base.length for candidate in candidates if candidate.unknown_bp == 0
+        ),
+        "comparator_unknown_candidates": len(unknown),
+        "comparator_unknown_candidate_gap_bp": sum(candidate.base.length for candidate in unknown),
+        "effective_comparator_unknown_bp": sum(candidate.unknown_bp for candidate in unknown),
     }
 
 
@@ -1094,6 +1127,10 @@ def run_oracle(
             "whole_mask": "ACGT bp excluding effective comparator-unknown intervals",
         },
         "label_blind_excluded_candidates": exclusions,
+        "candidate_label_census": {
+            "train": candidate_label_census(train),
+            "chr13_dev": candidate_label_census(dev),
+        },
         "chr13_split": split_manifest,
         "train": train_result,
         "dev": dev_result,
