@@ -279,13 +279,58 @@ The calibrator is frozen before CAL-GATE and never refit on chr19.
 
 ## Metrics and action selection
 
-The primary threshold-independent endpoint is bp-weighted action AUPRC. Each
-candidate score contributes `N_i+` positive weight and `N_i-` negative weight.
-Also report normalized AUPRC, AUROC, bp-weighted log loss/Brier, six-stratum
-macro Brier, natural Brier, and risk--coverage/continuity Pareto curves.
+The primary threshold-independent endpoint is bp-weighted action AUPRC. The
+action score is `1 - predicted_negative_fraction`; each candidate contributes
+`N_i+` positive weight and `N_i-` negative weight. Normalized AUPRC is frozen
+as `AUPRC / positive-bp prevalence` and is descriptive only; every mechanism
+gate uses the unnormalized paired AUPRC difference. Also report AUROC,
+bp-weighted log loss/Brier, six-stratum macro Brier, natural Brier, and
+risk--coverage/continuity Pareto curves.
 
 Calibration gates on CAL-GATE and chr19 are equal-bp-mass 10-bin ECE at most
 0.025 and calibration-in-the-large absolute error at most 0.01.
+
+The remaining metric details are fixed before any Stage 1 score is produced:
+
+- bp-weighted Brier is the literal pseudo-base Bernoulli score
+  `sum(N-*(1-p)^2 + N+*p^2) / sum(N-+N+)`, where `p` is predicted negative
+  fraction. This conservative denominator is used for the 5% mechanism gate.
+  Natural Brier is the unweighted candidate mean `(p-r)^2`; six-stratum macro
+  Brier is the unweighted mean of the six within-stratum pseudo-base Briers.
+- For each arm, average the three raw risk logits first. Fit one Platt map
+  `p=sigmoid(intercept+slope*z)` with `slope >= 0`, no regularization, on
+  comparator-known CAL-FIT rows by minimizing `sum(L*BCE(r,p))`. A boundary
+  solution with slope zero is legal. Freeze that map before evaluating DEV or
+  CAL-GATE.
+- Equal-bp-mass ECE uses comparator-known bp only. A candidate or equal-score
+  tie group crossing a bin boundary has its total bp, observed-negative bp and
+  predicted-negative mass split proportionally, so results do not depend on
+  row order. Calibration-in-the-large is
+  `abs(sum(L*p)-sum(N-))/sum(L)`.
+- Uncalibrated per-seed action ranking uses `-raw_risk_logit`; calibrated
+  ranking uses `1-p`. A deployed threshold selects the complete equal-score
+  group with `p <= threshold`; ties are never partially selected.
+- Bootstrap units are absolute Human genomic bins
+  `[k*1,000,000,(k+1)*1,000,000)`, intersected with the evaluated role regions.
+  Candidate actions are assigned by gap midpoint. Every intersecting bin,
+  including bins with zero candidates, remains in genome-rate resampling.
+  Fragment outcomes are computed on the complete role mask first; each whole
+  clipped truth run is then assigned by midpoint, never clipped again at a
+  bootstrap boundary. Use 1,000 paired replicates, seed 20260902 and linear
+  2.5/97.5 percentiles.
+- At the common `1e-5` mechanism budget, selected comparator-unknown bp counts
+  as negative. Within each arm, use the largest complete score-tie threshold
+  satisfying that budget; cumulative recovered positive bp and resolved split
+  edges are monotone. The registered utility bullet is an OR: either positive
+  gap bp improves by at least 10% and 1,000 bp, or resolved split edges improve
+  by at least 10% and 100 edges.
+
+Comparator family remains evaluation-only. It is projected from the frozen
+strict RepeatMasker BED onto the two bases immediately outside each gap. A
+candidate receives a family stratum only when both flanks have one unique,
+identical class/family label; distinct labels, absent support and multiple
+labels are reported separately. This field is never read by the scorer,
+calibrator or threshold selector and is not a mechanism gate.
 
 CAL-GATE enumerates calibrated risk thresholds. Admissibility uses the Stage
 0 genome/gene/whole-mask safety limits, plus worst-case negative/unknown bp at
