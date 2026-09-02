@@ -2,7 +2,7 @@
 
 Date: 2026-09-01
 
-Status: **E0 engineering PASS; chunked full Phase 0 authorized; no new scientific result**
+Status: **Full Phase 0 validation NO-GO; chr19 remained sealed; feature-only gap filling and continual learning closed**
 
 ## E0 engineering result
 
@@ -406,6 +406,52 @@ are PASS, then runs those four stages from node-local scratch and preserves a
 failed stage without admitting it to the scientific denominator. Fifty-two
 targeted tests, Python compilation and shell syntax checks pass. This is
 engineering readiness, not a chr19 result.
+
+### Full Phase 0 observed result (2026-09-02)
+
+The complete private-node run covered all 13 frozen shards across chr3, chr5,
+chr13 and chr19. Jobs `12129049` and recovery array `12129066` produced 13
+PASS shard manifests covering 552,815,762 bp; the recovery changed only node-
+local staging after real BeeGFS I/O failures. CPU stitch array `12129730`
+reconstructed all four chromosomes. The audit confirmed exact chromosome
+lengths, complete non-overlapping coverage, `(chromosome_length, 4)` state
+tracks, no scientific metric in the export stage, matched candidate/labeled
+row counts on chr3/5/13, and a still-unlabeled chr19 with
+`TEST_LABELS_SEALED`.
+
+Feature-lock job `12129744` returned
+`NO_VALIDATION_OPERATING_POINT`, with `test_label_release_allowed=false`.
+The frozen chr13 results were:
+
+| Arm | chr13 clean-candidate AP | Frozen added-bp operating point |
+|---|---:|---|
+| simple length / G0 | 0.996954606 | no nonempty threshold at precision >=0.98 |
+| G1 geometry + logits | 0.999898844 | PASS, but only 1 candidate / 30 positive bp / 0 negative bp |
+| G2 full library-free | 0.999895032 | no nonempty threshold at precision >=0.98 |
+
+A direct audit of the frozen G2 ordering found that its best nonempty prefix
+added only 2 comparator-positive bp and 1 comparator-negative bp across three
+candidates (`precision=0.666667`); the highest-scoring primary candidate was
+itself one comparator-negative bp. Thus the missing G2 threshold is not a
+serialization or search error. The apparently near-perfect AP applies only to
+clean all-positive versus all-negative candidate relations, whereas the
+deployment precision constraint also includes the many mixed primary gaps.
+This is direct evidence that clean-gap ranking did not yield a usable high-
+precision base-filling action.
+
+Label-blind purge job `12129745` independently passed: 127,076 eligible chr19
+candidates were evaluated, 855 were purged (0.006728), and 126,221 remained.
+It cannot rescue a model for which the validation operating point does not
+exist. Per the prospective contract, chr19 comparator labels were not
+projected, the complete chr19 evaluator was not submitted, and there is no
+chr19 performance result to report.
+
+Decision: `VALIDATION_NO_GO_TEST_REMAINS_SEALED`. This is a scientific stop for
+the current feature-only G2 route, not a compute-budget stop. Switching to G1,
+lowering the 0.98 precision floor, or choosing a chr19 threshold after this
+result would change the frozen question. The route therefore closes the new
+gap classifier, its neural escalation and continual/hard-example post-
+training. Original P3 remains the primary mask; no refined mask is promoted.
 
 ### Metrics
 
