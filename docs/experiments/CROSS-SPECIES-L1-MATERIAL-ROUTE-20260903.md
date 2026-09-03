@@ -2,7 +2,7 @@
 
 ## Status
 
-`X0-R2 PASS; B1/B2 ENGINEERING COMPONENTS IN PROGRESS; NO GPU OR MOE SUBMITTED`
+`X0-R2 AND TRAIN MATERIALIZATION PASS; H0 IDENTITY GATE PENDING; NO GPU OR MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -17,6 +17,13 @@ the route advances to B1/B2 engineering. The full coordinate manifest remains
 outside Git at
 `outputs/CROSS-SPECIES-L1-MATERIAL-X0-R2/12175761/tiles.tsv`; the compact
 readiness result is versioned under the matching experiment manifest directory.
+
+TRAIN/CAL/DEV materialization job `12176202` then completed in 10:39 with exit
+code 0, empty stderr and peak RSS 1,567,440 KiB. It produced exactly 18 files:
+for each of Human, Mouse, Chicken, Zebrafish, Pig and *C. elegans*, TRAIN has
+1,500 unique 8192-bp tiles / 3,000 halves and CAL and DEV each have 500 tiles /
+1,000 halves. No primary or replication species were materialized. This passes
+the data hand-off gate for model engineering.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
@@ -259,8 +266,8 @@ existing multi-species training evidence:
   checkpoint, loading model weights only;
 - native 4096-bp binary token head;
 - 2,000 update steps;
-- effective batch 12, exactly two model windows per training species per
-  update;
+- effective batch 12: B1/B2 use one 8192-bp tile, or two model windows, per
+  species per update; the matched H1 control uses six Human tiles per update;
 - label-blind uniform sampling within species;
 - per-window callable-bp loss followed by equal species aggregation;
 - no post-processing;
@@ -295,7 +302,8 @@ species would make a first-round gain uninterpretable.
 |---|---|---|---|---|---|---|---|
 | `X0-LABEL-SPLIT` | A comparable animal denominator exists | none; audit/materialization only | all listed exact assemblies; frozen coordinates | no inference; exposes source/split failure | all X0 gates pass or stop | CPU; no model job | whether this study is executable |
 | `I0-H0-INIT` | Continued training changes cross-species behavior relative to its actual start | zero weight updates | six-species CAL/DEV; external only when E1 opens | one existing seed42 reference; no external feedback | attribution reference only | calibration/inference | seed42 before/after change |
-| `B1-BALANCED-ERM` | Equal-species sampling is sufficient for one shared model | Human-only fitting -> frozen six-species balanced fitting | TRAIN/CAL/DEV only | external species sealed; family/homology unproved | internal shared-model gate | one 2,000-step GPU arm per seed | shared-model engineering evidence |
+| `H1-HUMAN-MATCHED-CONTINUE` | Any B1 change is not explained only by continued optimization and the new target projection | training composition only: six Human tiles per step | Human TRAIN; six-species CAL/DEV | Human coordinates exclude H0-supervised chromosomes; external sealed | attribution control only | one 2,000-step GPU arm for seed 42 | separates the multispecies distribution effect from the matched continuation recipe |
+| `B1-BALANCED-ERM` | Equal-species sampling is sufficient for one shared model | H1 Human-only composition -> one tile from each of six species | TRAIN/CAL/DEV only | external species sealed; family/homology unproved | internal shared-model gate | one 2,000-step GPU arm per seed | shared-model engineering evidence |
 | `B2-GROUPDRO` | Worst-species optimization reduces negative transfer | loss aggregation only: ERM -> frozen GroupDRO | identical to B1 | identical to B1 | B2 replacement gate | one 2,000-step GPU arm per seed | whether loss balancing is useful |
 | `B0-FAILURE-SPECIALIST` | A shared-model failure is recoverable by target capacity | training distribution only; same NT model and budget | only failing TRAIN species; chromosome-disjoint | target-supervised diagnostic, never external evidence | specialist negative-transfer gate | one arm per failing training species | whether routing has a recoverable gap |
 | `A1-CLADE-ADAPTER` | Small known-clade modules resolve structured negative transfer | <=0.5% adapter parameters only | same TRAIN/CAL/DEV | taxonomy route; no external labels | adapter admission/pass gates | conditional GPU arm | low-capacity clade conditioning value |
@@ -305,10 +313,12 @@ species would make a first-round gain uninterpretable.
 | `E2-CATTLE-REPLICATION` | Mammalian transfer replicates once | evaluation only | cattle; 1,200 tiles | locked until E1 passes | cattle gate | inference only | mammalian replication |
 | `E3-FULL-ASSEMBLY` | Panel result survives exhaustive denominator | panel -> all callable bases only | unchanged horse, opossum, dm6, cattle assemblies | no refit or threshold change | full-assembly claim gate | whole-assembly inference | claim on these assemblies only |
 
-The only currently released arm is X0. After X0 passes, B1 and B2 may run in
-parallel on seed 42 because they use the same frozen data and differ only in
-loss aggregation. Exact wall time is not assumed: a short throughput run must
-measure it before requesting the three-seed budget.
+X0 and TRAIN materialization have passed. The next released units are the H0
+loader identity gate, I0 and a two-step H1/B1/B2 engineering smoke. H1, B1 and
+B2 use the same initialization, update count, optimizer, target projection and
+compute; H1 versus B1 changes only training-species composition, while B1
+versus B2 changes only loss aggregation. Exact wall time is not assumed: the
+smoke must measure it before any 2,000-step budget is requested.
 
 ## Training, calibration and internal selection
 
@@ -328,7 +338,23 @@ checkpoint under the same calibration contract. It cannot establish
 initialization-seed robustness or isolate the causal effect of multispecies data
 from the effect of additional optimization.
 
-### B1 and B2
+Before I0 or any continuation arm is consumed, a loader identity gate compares
+the checkpoint-native H0 loader with the B1/B2 loader on the first 16 fixed
+Human CAL halves in CPU FP32 evaluation mode. Token IDs and attention masks
+must be exactly equal; token-logit and bp-projected margin maximum absolute
+differences must be at most `1e-6`; token-margin signs must agree exactly. A
+failure permits only a loader correction and blocks training. The gate records
+the observed differences directly; it does not add unused checksums.
+
+### H1, B1 and B2
+
+H1 starts from the same H0 step-800 state and applies the same reset optimizer,
+200 warmup updates, 2,000 total updates, bp-mass target/loss and final-step
+selection as B1. Each update draws six Human TRAIN tiles, so total model-window
+compute is matched to B1. Therefore `I0 -> H1` measures the combined effect of
+continued optimization plus the new Label-A/bp-mass recipe, and `H1 -> B1`
+isolates the change from Human-only to six-species training composition. H1 is
+an attribution control, not a deployment candidate.
 
 B1 uses equal-species ERM. B2 uses the preregistered GroupDRO update on the six
 per-species losses. Each optimizer update observes the species in the frozen
@@ -354,9 +380,13 @@ Seed 42 is an engineering comparison on CAL/DEV only. B2 replaces B1 only if:
   than 0.005;
 - the topology guardrails below pass.
 
-Otherwise B1 remains the shared arm. The selected rule is then run at seeds
-17, 42 and 20260903. If the direction is inconsistent across seeds, B1 is
-retained.
+Otherwise B1 remains the shared arm and only B1 is added at seeds 17 and
+20260903. If B2 passes the seed-42 replacement gate, both B1 and B2 are run at
+seeds 17 and 20260903. B2 replaces B1 only if the same replacement conditions
+pass on the three-seed mean, B2 has positive minimum-species F1 change at every
+seed, no seed contains a species loss greater than 0.01 and topology guardrails
+pass at every seed. Otherwise B1 is retained. H1 accompanies the seed-42
+cohort; additional H1 seeds are unnecessary for selecting B1 versus B2.
 
 ### Global calibration
 
@@ -405,9 +435,10 @@ all three seeds to show:
 - the same direction on topology guardrails.
 
 If the specialist remains below 0.80, the problem is label/data/backbone
-capacity; routing and MoE are no-go. Conditional modeling is admitted only if
-recoverable negative transfer occurs in at least two species from at least two
-independent clades.
+capacity; routing and MoE are no-go. One recoverable species does not admit
+conditional modeling. A deterministic adapter for a clade is admitted only
+when at least two training species in that same identifiable clade independently
+pass the complete specialist recovery gate. MoE remains closed at this point.
 
 ## Adapter and MoE gates
 
@@ -433,9 +464,11 @@ reach 0.80, stop at adapters.
 
 M1 is authorized only when all conditions hold:
 
-1. B1/B2 leave at least two clades below 0.80;
-2. B0 proves recoverable and complementary specialists in those clades;
-3. A1 improves both clades but leaves a residual gap of at least 0.03;
+1. at least two separately identifiable clades each contain at least two
+   species with recoverable specialist gaps;
+2. a deterministic adapter independently passes its gate in both clades;
+3. each passing adapter leaves a residual specialist gap of at least 0.03 and
+   at least one species remains below 0.80;
 4. the comparison includes a parameter-matched dense model and an
    active-FLOP-matched dense model within 5%;
 5. external species remain sealed.
@@ -528,11 +561,15 @@ phylogenetic or evolutionary-relation inference.
 ## Decision tree
 
 ```text
-X0 harmonized Label-A + split + denominator audit
+X0 harmonized Label-A + split + denominator audit and materialization
 |
 +-- FAIL -> repair/exclude invalid data; submit no GPU job
 |
-`-- PASS -> B1 balanced ERM and B2 GroupDRO on seed 42
+`-- PASS -> H0 loader identity gate
+    |
+    +-- FAIL -> repair loader only; submit no continuation job
+    |
+    `-- PASS -> lock I0; smoke then run H1, B1 and B2 on seed 42
     |
     `-- select by frozen internal rule -> confirm seeds 17/42/20260903
         |
@@ -540,17 +577,17 @@ X0 harmonized Label-A + split + denominator audit
         |
         `-- one or more TRAIN species fail -> B0 specialists on failures
             |
-            +-- specialist also fails -> MoE NO-GO; fix label/data/backbone
+            +-- specialist also fails -> conditional route NO-GO; fix label/data/backbone
             |
-            +-- only one clade recoverable -> no MoE; shared fallback
+            +-- fewer than two species in one clade recover -> no adapter or MoE
             |
-            `-- >=2 species and >=2 clades recover -> A1 clade adapters
+            `-- >=2 species in one clade recover -> A1 deterministic adapter
                 |
                 +-- all pass -> stop at adapters -> E1
                 |
                 +-- no useful adapter gain -> close conditional route
                 |
-                `-- useful gain but residual >=0.03 -> M1 + matched dense
+                `-- >=2 clades pass adapters, residual >=0.03 -> M1 + matched dense
                     |
                     +-- M1 fails matched controls -> close MoE
                     `-- M1 passes -> freeze -> E1
@@ -576,21 +613,17 @@ they are not assumed valid in plants.
 
 ## Immediate executable decision
 
-Do not submit a GPU training job from existing mixed JSONL. It would answer the
-wrong question because its source, coordinate and prevalence confounding are
-unresolved. ChatGPT Pro and the live asset audit selected the X0-R2 amendment:
-replace invalid `xenTro10` with `susScr11`, retain horse/opossum/`dm6` as sealed
-external species and keep cattle locked. This preserves the strongest external
-coverage but means the first route contains no amphibian or reptile claim.
+Do not submit a full 2,000-step job until the H0 loader identity gate and the
+H1/B1/B2 two-step smoke pass. Materialization job `12176202` is now the frozen
+training data root. I0 may run alongside the smoke after identity passes, but
+its CAL/DEV result must be recorded before viewing continuation-arm DEV
+results. The first full cohort is H1/B1/B2 seed 42; H1 closes the otherwise
+unresolved attribution between multispecies composition and the changed
+continuation recipe.
 
-The next and only released unit is `X0-LABEL-SPLIT`, a CPU/data audit and
-materialization step. Its output must be a compact manifest and decision report,
-while FASTA, labels and large JSONL remain outside Git. If pig fails X0, there
-is no automatic second substitution and no GPU run; the panel contract reopens.
-
-After X0 passes, run B1 and B2 seed 42 in parallel. Complex MoE, a learned
-router, plant training, boundary loss and architecture search remain closed
-unless their explicit upstream gate opens.
+Complex MoE, learned routing, plant training, boundary loss and architecture
+search remain closed unless their explicit upstream gate opens. Horse, opossum,
+`dm6` and cattle remain unread by training, calibration and internal selection.
 
 ## Evidence files
 

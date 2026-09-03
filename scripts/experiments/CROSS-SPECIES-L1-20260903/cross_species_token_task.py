@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Frozen B1/B2 cross-species NTv2 training pilot."""
+"""Frozen B1/B2/H1 cross-species NTv2 training pilot."""
 
 from __future__ import annotations
 
@@ -65,21 +65,26 @@ class SpeciesTileDataset:
 
 
 class SpeciesTileSampler:
-    """Draw one tile per species in the fixed order for every optimizer step."""
+    """Draw one tile per species, or six Human tiles for H1, per optimizer step."""
 
-    def __init__(self, tile_ids: dict[str, list[str]], seed: int):
-        self.orders = {species: list(tile_ids[species]) for species in SPECIES}
-        self.positions = {species: 0 for species in SPECIES}
+    def __init__(self, tile_ids: dict[str, list[str]], seed: int, arm: str = "B1"):
+        self.arm = arm
+        self.active_species = ("human",) if arm == "H1" else SPECIES
+        self.orders = {
+            species: list(tile_ids[species]) for species in self.active_species
+        }
+        self.positions = {species: 0 for species in self.active_species}
         self.random = {
             species: random.Random(seed + index)
-            for index, species in enumerate(SPECIES)
+            for index, species in enumerate(self.active_species)
         }
-        for species in SPECIES:
+        for species in self.active_species:
             self.random[species].shuffle(self.orders[species])
 
     def next_step(self) -> list[tuple[str, str]]:
         selected = []
-        for species in SPECIES:
+        species_order = ("human",) * len(SPECIES) if self.arm == "H1" else SPECIES
+        for species in species_order:
             if self.positions[species] == len(self.orders[species]):
                 self.random[species].shuffle(self.orders[species])
                 self.positions[species] = 0
@@ -163,7 +168,7 @@ def bp_weighted_pair_loss(
 
 
 def arm_weights(arm: str, log_q: torch.Tensor) -> torch.Tensor:
-    if arm == "B1":
+    if arm in {"B1", "H1"}:
         return torch.full_like(log_q, 1.0 / len(SPECIES))
     return torch.exp(log_q)
 
@@ -237,7 +242,9 @@ def train(args) -> None:
         for species in SPECIES
     }
     sampler = SpeciesTileSampler(
-        {species: dataset.tile_ids for species, dataset in datasets.items()}, args.seed
+        {species: dataset.tile_ids for species, dataset in datasets.items()},
+        args.seed,
+        args.arm,
     )
     model, tokenizer = load_model_and_tokenizer()
     model.gradient_checkpointing_enable()
@@ -254,6 +261,11 @@ def train(args) -> None:
     log_q = torch.full(
         (len(SPECIES),), -math.log(len(SPECIES)), dtype=torch.float64
     )
+    step_keys = (
+        [f"human_pair_{index}" for index in range(len(SPECIES))]
+        if args.arm == "H1"
+        else list(SPECIES)
+    )
 
     metadata = {
         "arm": args.arm,
@@ -263,16 +275,25 @@ def train(args) -> None:
             else "engineering_throughput_smoke"
         ),
         "seed": args.seed,
-        "species": list(SPECIES),
+        "species": ["human"] if args.arm == "H1" else list(SPECIES),
         "tiles_per_species": {
-            species: len(dataset.tile_ids) for species, dataset in datasets.items()
+            species: len(datasets[species].tile_ids)
+            for species in (("human",) if args.arm == "H1" else SPECIES)
         },
         "data_root": str(Path(args.data_root)),
         "base_model": str(BASE_MODEL),
         "initial_weights": str(H0_CHECKPOINT / "pytorch_model.bin"),
         "window_bp": WINDOW_BP,
-        "model_windows_per_species_per_step": 2,
-        "species_per_step": len(SPECIES),
+        "model_windows_per_species_per_step": (
+            2 * len(SPECIES) if args.arm == "H1" else 2
+        ),
+        "species_per_step": 1 if args.arm == "H1" else len(SPECIES),
+        "tiles_per_step": len(SPECIES),
+        "training_sampling": (
+            "six Human TRAIN tiles per step"
+            if args.arm == "H1"
+            else "one TRAIN tile per species per step"
+        ),
         "max_steps": args.max_steps,
         "warmup_steps": args.warmup_steps,
         "learning_rate": LEARNING_RATE,
@@ -293,7 +314,8 @@ def train(args) -> None:
             q_before = arm_weights(args.arm, log_q)
             raw_losses = []
             learning_rate = optimizer.param_groups[0]["lr"]
-            for species_index, (species, tile_id) in enumerate(sampler.next_step()):
+            sampled_tiles = sampler.next_step()
+            for species_index, (species, tile_id) in enumerate(sampled_tiles):
                 batch = encode_pair(tokenizer, datasets[species].pair(tile_id))
                 input_ids = batch["input_ids"].to(device)
                 attention_mask = batch["attention_mask"].to(device)
@@ -324,9 +346,9 @@ def train(args) -> None:
                     {
                         "step": step,
                         "learning_rate": learning_rate,
-                        "loss": dict(zip(SPECIES, raw_losses)),
-                        "q_before": dict(zip(SPECIES, q_before.tolist())),
-                        "q_after": dict(zip(SPECIES, q_after.tolist())),
+                        "loss": dict(zip(step_keys, raw_losses)),
+                        "q_before": dict(zip(step_keys, q_before.tolist())),
+                        "q_after": dict(zip(step_keys, q_after.tolist())),
                     }
                 )
                 + "\n"
@@ -340,8 +362,8 @@ def train(args) -> None:
             {
                 "arm": args.arm,
                 "eta": GROUPDRO_ETA if args.arm == "B2" else None,
-                "log_q": dict(zip(SPECIES, log_q.tolist())),
-                "q": dict(zip(SPECIES, arm_weights(args.arm, log_q).tolist())),
+                "log_q": dict(zip(step_keys, log_q.tolist())),
+                "q": dict(zip(step_keys, arm_weights(args.arm, log_q).tolist())),
             },
             indent=2,
         )
@@ -353,7 +375,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", required=True)
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--arm", choices=("B1", "B2"), required=True)
+    parser.add_argument("--arm", choices=("B1", "B2", "H1"), required=True)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max-steps", type=int, default=MAX_STEPS)
     parser.add_argument("--warmup-steps", type=int, default=WARMUP_STEPS)

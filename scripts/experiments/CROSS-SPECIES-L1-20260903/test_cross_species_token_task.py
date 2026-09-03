@@ -25,18 +25,37 @@ class CrossSpeciesTokenTaskTest(unittest.TestCase):
             species: [f"{species}:0", f"{species}:1"]
             for species in task.SPECIES
         }
-        sampler = task.SpeciesTileSampler(tile_ids, seed=17)
+        for arm in ("B1", "B2"):
+            sampler = task.SpeciesTileSampler(tile_ids, seed=17, arm=arm)
+            first = sampler.next_step()
+            second = sampler.next_step()
+            self.assertEqual([species for species, _ in first], list(task.SPECIES))
+            self.assertEqual([species for species, _ in second], list(task.SPECIES))
+            for species in task.SPECIES:
+                observed = {
+                    tile_id
+                    for emitted_species, tile_id in first + second
+                    if emitted_species == species
+                }
+                self.assertEqual(observed, set(tile_ids[species]))
+
+    def test_h1_sampler_emits_six_human_tiles_per_step(self) -> None:
+        human_tiles = [f"human:{index}" for index in range(12)]
+        sampler = task.SpeciesTileSampler(
+            {"human": human_tiles}, seed=17, arm="H1"
+        )
         first = sampler.next_step()
         second = sampler.next_step()
-        self.assertEqual([species for species, _ in first], list(task.SPECIES))
-        self.assertEqual([species for species, _ in second], list(task.SPECIES))
-        for species in task.SPECIES:
-            observed = {
-                tile_id
-                for emitted_species, tile_id in first + second
-                if emitted_species == species
-            }
-            self.assertEqual(observed, set(tile_ids[species]))
+        for step in (first, second):
+            self.assertEqual(len(step), len(task.SPECIES))
+            self.assertEqual(
+                [species for species, _ in step], ["human"] * len(task.SPECIES)
+            )
+            self.assertEqual(len({tile_id for _, tile_id in step}), len(task.SPECIES))
+            self.assertTrue({tile_id for _, tile_id in step} <= set(human_tiles))
+        self.assertEqual(
+            {tile_id for _, tile_id in first + second}, set(human_tiles)
+        )
 
     def test_bp_loss_counts_p_n_ignores_question_and_treats_h_as_n(self) -> None:
         positive, negative = task.label_chunk_masses("10?H11", width=3)
@@ -62,8 +81,10 @@ class CrossSpeciesTokenTaskTest(unittest.TestCase):
         )
         b1 = task.arm_weights("B1", initial)
         b2 = task.arm_weights("B2", initial)
+        h1 = task.arm_weights("H1", initial)
         torch.testing.assert_close(b1, torch.full_like(initial, 1.0 / 6.0))
         torch.testing.assert_close(b2, torch.full_like(initial, 1.0 / 6.0))
+        torch.testing.assert_close(h1, torch.full_like(initial, 1.0 / 6.0))
 
         current_losses = torch.tensor([2.0, 1.0, 1.0, 1.0, 1.0, 1.0])
         updated = task.update_groupdro_log_q(initial, current_losses, eta=0.01)
