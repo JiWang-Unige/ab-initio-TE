@@ -294,6 +294,7 @@ species would make a first-round gain uninterpretable.
 | ID | Hypothesis | Only changed variable | Data and split | Leakage status | Decision gate | Compute unit | Allowed conclusion |
 |---|---|---|---|---|---|---|---|
 | `X0-LABEL-SPLIT` | A comparable animal denominator exists | none; audit/materialization only | all listed exact assemblies; frozen coordinates | no inference; exposes source/split failure | all X0 gates pass or stop | CPU; no model job | whether this study is executable |
+| `I0-H0-INIT` | Continued training changes cross-species behavior relative to its actual start | zero weight updates | six-species CAL/DEV; external only when E1 opens | one existing seed42 reference; no external feedback | attribution reference only | calibration/inference | seed42 before/after change |
 | `B1-BALANCED-ERM` | Equal-species sampling is sufficient for one shared model | Human-only fitting -> frozen six-species balanced fitting | TRAIN/CAL/DEV only | external species sealed; family/homology unproved | internal shared-model gate | one 2,000-step GPU arm per seed | shared-model engineering evidence |
 | `B2-GROUPDRO` | Worst-species optimization reduces negative transfer | loss aggregation only: ERM -> frozen GroupDRO | identical to B1 | identical to B1 | B2 replacement gate | one 2,000-step GPU arm per seed | whether loss balancing is useful |
 | `B0-FAILURE-SPECIALIST` | A shared-model failure is recoverable by target capacity | training distribution only; same NT model and budget | only failing TRAIN species; chromosome-disjoint | target-supervised diagnostic, never external evidence | specialist negative-transfer gate | one arm per failing training species | whether routing has a recoverable gap |
@@ -310,6 +311,22 @@ loss aggregation. Exact wall time is not assumed: a short throughput run must
 measure it before requesting the three-seed budget.
 
 ## Training, calibration and internal selection
+
+### I0 initialization reference
+
+`I0-H0-INIT` applies zero weight updates to the frozen H0 step-800 seed42
+checkpoint. It fits its own six-species CAL global Platt map and threshold and
+reports the same six-species DEV metrics as B1/B2. It is mandatory for the
+seed42 before/after comparison, but it is not a training arm and does not enter
+the B1-versus-B2 replacement gate, three-seed mean, no-seed-below-0.77 gate,
+architecture admission or deployment selection. Its external predictions are
+released only when E1 is released for the already-frozen trained pipelines and
+cannot feed back into training or arm selection.
+
+I0 can show how much 2,000 further updates changed this particular H0
+checkpoint under the same calibration contract. It cannot establish
+initialization-seed robustness or isolate the causal effect of multispecies data
+from the effect of additional optimization.
 
 ### B1 and B2
 
