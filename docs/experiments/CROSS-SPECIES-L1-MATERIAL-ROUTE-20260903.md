@@ -2,14 +2,21 @@
 
 ## Status
 
-`X0-R2 IMPLEMENTED; CPU AUDIT NOT YET COMPLETE; NO GPU OR MOE AUTHORIZED`
+`X0-R2 PASS; B1/B2 ENGINEERING COMPONENTS IN PROGRESS; NO GPU OR MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
 could overlap chromosomes already supervised in H0. It is an excluded
 engineering attempt, not part of the X0 scientific denominator. The corrected
 manifest below restricts Human to previously unexposed chromosomes before the
-replacement CPU audit is submitted.
+replacement CPU audit was submitted.
+
+Replacement CPU job `12175761` completed in 6:07 with exit code 0 and empty
+stderr. All 22 TRAIN/CAL/DEV/TEST panel rows passed their frozen X0 gates, so
+the route advances to B1/B2 engineering. The full coordinate manifest remains
+outside Git at
+`outputs/CROSS-SPECIES-L1-MATERIAL-X0-R2/12175761/tiles.tsv`; the compact
+readiness result is versioned under the matching experiment manifest directory.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
@@ -307,8 +314,18 @@ measure it before requesting the three-seed budget.
 ### B1 and B2
 
 B1 uses equal-species ERM. B2 uses the preregistered GroupDRO update on the six
-per-species losses; its exact learning-rate and smoothing constants are frozen
-in the run config before seed 42.
+per-species losses. Each optimizer update observes the species in the frozen
+order Human, Mouse, Chicken, Zebrafish, Pig and *C. elegans*. A species
+microbatch is the two 4096-bp halves of one 8192-bp tile; each half is first
+normalized by its weighted callable-bp mass and the two half losses are then
+averaged.
+
+B1 gives every species weight `1/6`. B2 starts from uniform `q`, uses
+`eta=0.01`, and applies the exponentiated update from the detached current six
+species losses to the next optimizer step. The update is maintained in
+float64 log space. There is no EMA, uniform smoothing or min/max clamp. With
+six accumulated microbatches, B2 scales each backward loss by `6*q_s`; B1's
+corresponding scale is one. Thus aggregation is the only arm difference.
 
 Seed 42 is an engineering comparison on CAL/DEV only. B2 replaces B1 only if:
 
@@ -324,11 +341,20 @@ retained.
 
 ### Global calibration
 
-Each arm fits one global Platt map and one threshold from the six CAL species,
-weighted equally by species. The threshold maximizes minimum-species CAL F1;
-ties prefer higher macro F1, then proximity to 0.5, then the higher threshold.
-The same frozen map and threshold are applied to DEV and every external
-species.
+Each seed fits its own global Platt map and threshold from the six CAL species;
+there is no across-seed logit or mask ensemble. Within a seed, species receive
+equal total weight and callable bp receive equal weight within species. The
+input is the bp-projected TE-minus-background logit margin. Platt fitting uses
+no class weight or regularization and constrains the slope to be nonnegative.
+
+Threshold candidates are the unique calibrated probabilities plus the two
+all-positive/all-negative endpoints; tied probabilities are never split. First
+maximize minimum-species CAL F1, retain candidates within `0.001` of that
+maximum, then maximize macro-species F1. Remaining ties within `1e-12` choose
+the threshold closest to 0.5, then the higher threshold. The resulting map and
+threshold are shared across species for that seed and applied unchanged to DEV
+and every released external panel. This per-seed definition is required for
+the three-seed mean and no-seed-below-0.77 gates.
 
 A label-optimized per-species threshold may be reported only as
 `TEST_LABEL_ORACLE_THRESHOLD`. It is diagnostic of ranking versus calibration

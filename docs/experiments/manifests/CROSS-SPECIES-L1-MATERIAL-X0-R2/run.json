@@ -1,0 +1,18 @@
+{
+  "protocol": "CROSS-SPECIES-L1-MATERIAL-X0-R2",
+  "git_commit": "ed7c04556a22e4db75d0be788843b80845bccfb2",
+  "slurm_job_id": 12175761,
+  "state": "COMPLETED",
+  "elapsed": "00:06:07",
+  "exit_code": "0:0",
+  "stderr_bytes": 0,
+  "decision": "X0_PASS_TO_TRAIN",
+  "failed_panels": [],
+  "remote_coordinate_manifest": "outputs/CROSS-SPECIES-L1-MATERIAL-X0-R2/12175761/tiles.tsv",
+  "excluded_attempt": {
+    "slurm_job_id": 12175737,
+    "state": "CANCELLED",
+    "elapsed": "00:03:08",
+    "reason": "Human X0 pool could overlap H0-supervised chromosomes; no scientific output was produced"
+  }
+}
