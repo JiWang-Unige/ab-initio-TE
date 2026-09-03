@@ -2,7 +2,7 @@
 
 ## Status
 
-`X0-R2 AND TRAIN MATERIALIZATION PASS; H0 IDENTITY GATE PENDING; NO GPU OR MOE SUBMITTED`
+`X0-R2, TRAIN MATERIALIZATION AND H0 IDENTITY PASS; I0/SMOKE PENDING; NO MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -24,6 +24,19 @@ for each of Human, Mouse, Chicken, Zebrafish, Pig and *C. elegans*, TRAIN has
 1,500 unique 8192-bp tiles / 3,000 halves and CAL and DEV each have 500 tiles /
 1,000 halves. No primary or replication species were materialized. This passes
 the data hand-off gate for model engineering.
+
+The H0 identity gate passed in CPU job `12176342` in 1:37 with exit code 0.
+Across the first 16 Human CAL halves (65,536 bp), input IDs, attention masks and
+special-token masks were exactly equal; token-logit and bp-margin maximum
+absolute differences were both 0, with no token-margin sign mismatch. Three
+earlier engineering attempts are excluded from every scientific denominator:
+`12176294` failed because the checkpoint directory did not contain
+`modeling_esm.py`; `12176301` failed because Transformers 4.57 rejects a model
+directory together with an external `state_dict`; `12176315` reached inference
+but the identity script had not yet matched the existing NTv2 689-to-688
+special-mask projection. The final reference uses checkpoint config and
+weights, original NTv2 implementation code and tokenizer, without changing the
+candidate loader or checkpoint.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
