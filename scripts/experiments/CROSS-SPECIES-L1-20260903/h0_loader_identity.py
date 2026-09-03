@@ -153,7 +153,8 @@ def compare(
 
 def run(cal_jsonl: Path) -> dict:
     import torch
-    from transformers import AutoConfig, AutoModelForTokenClassification, AutoTokenizer
+    from transformers import AutoConfig, AutoTokenizer
+    from transformers.dynamic_module_utils import get_class_from_dynamic_module
 
     task = load_module(
         Path(__file__).with_name("cross_species_token_task.py"), "cross_species_task"
@@ -167,13 +168,13 @@ def run(cal_jsonl: Path) -> dict:
     reference_state = torch.load(
         task.H0_CHECKPOINT / "pytorch_model.bin", map_location="cpu"
     )
-    reference_model = AutoModelForTokenClassification.from_pretrained(
+    model_class = get_class_from_dynamic_module(
+        reference_config.auto_map["AutoModelForTokenClassification"],
         task.BASE_MODEL,
-        config=reference_config,
-        state_dict=reference_state,
-        trust_remote_code=True,
         local_files_only=True,
     )
+    reference_model = model_class._from_config(reference_config)
+    reference_model.load_state_dict(reference_state, strict=True)
     reference_tokenizer = AutoTokenizer.from_pretrained(
         task.BASE_MODEL, trust_remote_code=True, local_files_only=True
     )
