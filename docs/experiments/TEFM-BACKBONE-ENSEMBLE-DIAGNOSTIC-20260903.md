@@ -26,6 +26,9 @@ This is a retrospective engineering screen on a previously consumed test region.
 
 Slurm job `12171265` completed successfully. The immutable output is
 `outputs/TEFM-BACKBONE-ENSEMBLE-DIAGNOSTIC-20260903/chr17-1200-r1`.
+The 1,200 input records form one contiguous, non-overlapping interval,
+`chr17:0-4,915,200`; there is no skipped-window boundary for the run-level
+segment, fragmentation or fusion metrics to concatenate.
 
 | Strategy | bp precision | bp recall | bp F1 | segment F1 | boundary F1 | fragments/truth | split rate | missed rate | short rate | multi-truth fusions |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
