@@ -2,7 +2,7 @@
 
 ## Status
 
-`X0-R2, TRAIN MATERIALIZATION AND H0 IDENTITY PASS; I0/SMOKE PENDING; NO MOE SUBMITTED`
+`X0-R2, TRAIN MATERIALIZATION, H0 IDENTITY AND SEED42 SMOKE PASS; I0 LOCKED; FULL SEED42 COHORT RUNNING; NO MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -37,6 +37,41 @@ but the identity script had not yet matched the existing NTv2 689-to-688
 special-mask projection. The final reference uses checkpoint config and
 weights, original NTv2 implementation code and tokenizer, without changing the
 candidate loader or checkpoint.
+
+The first I0 attempt (`12176354`) failed before inference because the H0
+checkpoint does not carry its remote model implementation. The first smoke
+array (`12176356`, `12176368`, `12176355`) failed before any update because the
+NTv2 token-classification implementation does not support the requested
+Transformers gradient-checkpointing method. Both are excluded engineering
+failures. The minimum repairs load I0 with the frozen base-model implementation
+and remove the unsupported checkpointing call; neither changes model weights or
+the frozen experiment contrast.
+
+I0-R2 (`12177274`) then exposed a real input-path error and is also excluded:
+an internal `N` in two zebrafish CAL halves caused the slow ESM tokenizer to
+restart its greedy 6-mer segmentation, producing 687 rather than 686 sequence
+tokens and truncating the end of a 4096-bp half. Training and evaluation now
+submit the same explicit non-overlapping 6-bp tokens, mapping a chunk containing
+non-ACGT sequence to the model-native `<unk>` token. An all-ACGT half retains
+exactly the previous token IDs and masks; the observed N-containing half now
+has exactly 686 aligned sequence tokens. I0-R3 job `12177414` completed in
+12:44 with exit code 0. Its frozen DEV macro bp F1 is `0.669433` and its
+minimum-species bp F1 is `0.390486`; Human, Mouse, Chicken, Zebrafish, Pig and
+*C. elegans* respectively score `0.858956`, `0.813319`, `0.421986`, `0.868514`,
+`0.663336` and `0.390486`. I0 is a locked zero-update attribution reference,
+not a candidate in the B1-versus-B2 replacement decision.
+
+The corrected two-step seed42 smoke array `12177275` passed for H1, B1 and B2
+with exit code 0. All losses and weights were finite, all three final-model
+artifacts were complete, B1 and B2 had identical first-step raw per-species
+losses, B1 remained uniform, and B2 updated and carried its GroupDRO weights to
+the next step. This proves the engineering paths only. A 20-step B1 throughput
+run (`12177415`) completed in 49 seconds, versus 29 seconds for its two-step
+smoke. Removing the shared load/save overhead gives approximately 1.11 seconds
+per update and a 37.5-minute estimate for 2,000 steps. The frozen seed42
+H1/B1/B2 cohort was therefore released as array job `12177426` with a two-hour
+per-task limit; model performance remains unknown until I0 is locked and the
+frozen CAL/DEV evaluation is complete.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
@@ -170,6 +205,12 @@ The data denominator is an 8192-bp genomic tile. For the selected native
 4096-bp model, every tile is deterministically divided into its left and right
 contiguous halves. Metrics aggregate the two halves back to the original tile
 and genomic coordinate space.
+
+Each half is tokenized as fixed, non-overlapping 6-bp chunks plus its one-base
+tail tokens. A chunk containing a non-ACGT assembly base is represented by the
+native `<unk>` token, while the bp label retains its original P/N/U states.
+This keeps training loss and inference margins on the same genomic coordinates
+without letting the tokenizer re-segment or truncate an ambiguous sequence.
 
 - No FASTA-order prefix is allowed.
 - Training species contribute equal expected gradient mass.
