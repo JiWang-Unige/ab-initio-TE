@@ -57,7 +57,7 @@ class NumericGateTest(unittest.TestCase):
             batch = len(sequences)
             ids = torch.arange(688).repeat(batch, 1)
             attention = torch.ones_like(ids)
-            special = torch.zeros_like(ids)
+            special = torch.zeros((batch, 689), dtype=ids.dtype)
             special[:, (0, 687)] = 1
             return {
                 "input_ids": ids,

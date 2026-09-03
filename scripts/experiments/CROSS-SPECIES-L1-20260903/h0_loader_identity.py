@@ -107,9 +107,10 @@ def compare(
     logit_diff = float((reference_logits - candidate_logits).abs().max())
     reference_margin = reference_logits[:, :, 1] - reference_logits[:, :, 0]
     candidate_margin = candidate_logits[:, :, 1] - candidate_logits[:, :, 0]
+    input_length = reference["attention_mask"].shape[1]
     active = reference["attention_mask"].bool() & ~reference[
         "special_tokens_mask"
-    ].bool()
+    ][:, :input_length].bool()
     sign_mismatches = int(
         torch.count_nonzero(
             torch.sign(reference_margin[active]) != torch.sign(candidate_margin[active])
