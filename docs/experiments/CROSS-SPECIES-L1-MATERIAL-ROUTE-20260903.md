@@ -2,7 +2,7 @@
 
 ## Status
 
-`PLAN FROZEN THROUGH X0; NO GPU TRAINING OR MOE AUTHORIZED YET`
+`X0-R2 IMPLEMENTED; CPU AUDIT NOT YET COMPLETE; NO GPU OR MOE AUTHORIZED`
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
@@ -109,10 +109,21 @@ one project-owned RepeatMasker+Dfam Label-A route with the same:
 - positive, reliable-negative, unknown and hard-negative definitions;
 - callable-background and assembly-N rule.
 
-The recorded version, command, source path and resulting manifest are the
-consumed provenance. No unused checksum assets are added. UCSC, Ensembl,
-FlyBase and other native annotations remain secondary comparators and are not
-mixed into T0 truth.
+The recorded version, semantic command, source path and resulting manifest are
+the consumed provenance. The non-semantic RepeatMasker `-pa` worker count may
+differ and is recorded but does not change the label contract. No unused
+checksum assets are added. UCSC, Ensembl, FlyBase and other native annotations
+remain secondary comparators and are not mixed into T0 truth, calibration or
+unknown masks.
+
+The Label-A state mapping is now explicit:
+
+- `LINE`, `SINE`, `LTR`, `DNA`, `RC` and `Retroposon` top-level classes are P;
+- Label-A `Unknown`/`Unclassified` intervals and non-ACGT assembly bases are U;
+- all other callable ACGT bases are N;
+- simple repeat, low complexity, satellite, tandem and RNA intervals are the
+  `hardN` subset of N;
+- priority is P over U over N.
 
 Raw RepeatMasker output contains repeat names and classes, but current JSONL
 does not retain stable copy, superfamily or homology-component identities.
@@ -137,10 +148,15 @@ and genomic coordinate space.
 - Every row records assembly, chromosome, coordinates, callable bp,
   positive/negative/unknown bp and prevalence.
 
-Each training species contributes 1,500 train tiles and 300 validation tiles.
-The 300 validation tiles are frozen before training as 150 `CAL` and 150 `DEV`
-tiles. Across six species this is 73,728,000 training bp, or 18,000 native
-4096-bp model windows.
+Each training species contributes 1,500 train tiles and 1,000 validation
+tiles. The validation tiles are frozen before training as 500 `CAL` and 500
+`DEV` tiles. Across six species this is still 73,728,000 training bp, or
+18,000 native 4096-bp model windows; the larger validation denominator does
+not change training exposure. The original 150/150 split was infeasible for
+chicken at its approximately 3.8% natural Label-A prevalence: it supplied only
+about 47,000 expected positive bp per panel against the frozen 100,000-bp
+gate. The 500/500 amendment preserves label-blind sampling, natural prevalence
+and the original mass gate.
 
 For genomes with enough chromosomes, train tiles span at least five
 chromosomes and CAL+DEV tiles at least three disjoint chromosomes. For
@@ -178,7 +194,7 @@ job is submitted for an invalid denominator.
 | Mouse | `mm39` | mammal anchor |
 | Chicken | `galGal6` | avian vertebrate |
 | Zebrafish | `danRer11` | teleost vertebrate |
-| *X. tropicalis* | `xenTro10` | amphibian vertebrate |
+| Pig | `susScr11` | replacement mammal |
 | *C. elegans* | `ce11` | invertebrate exposure |
 
 All Drosophila sequence is excluded so that `dm6` remains a true species
@@ -189,7 +205,6 @@ holdout.
 | Layer | Species | Assembly/truth | Use |
 |---|---|---|---|
 | sealed primary T0 | Horse | `equCab3` Label-A | placental mammal |
-| sealed primary T0 | Pig | `susScr11` Label-A | placental mammal |
 | sealed primary T0 | Opossum | `monDom5` Label-A | marsupial |
 | sealed primary T0 | Fruit fly | exact `dm6` Label-A | distant invertebrate |
 | locked replication T0 | Cattle | `bosTau9` Label-A | mammalian replication |
@@ -200,21 +215,24 @@ holdout.
 | external T1 | FlyBase FB2026_02 | exact r6.68 positives | recall only; never F1 |
 
 X0 may inspect label/source and coordinate metadata for every species, but it
-must not run model inference. Horse, pig, opossum and `dm6` remain sealed until
-the model arm, all three checkpoints, calibration and global threshold are
-frozen. Cattle opens only after the primary panel passes. Pig and cattle do
-not count as two independent evolutionary levels.
+must not run model inference. Horse, opossum and `dm6` remain sealed until the
+model arm, all three checkpoints, calibration and global threshold are frozen.
+Cattle opens only after the primary panel passes. Pig and cattle do not count
+as two independent evolutionary levels because pig is now a training species.
 
-Lizard, *X. laevis*, honeybee and beetle remain diagnostic until their labels
-and training representation can support an interpretable gate. Rat and dog do
-not enter until current Baobab assets are verified.
+`xenTro10` is removed from the decision-bearing route: its whole-genome
+Label-A strict-TE mass is only 84,583 bp, less than even one CAL or DEV minimum,
+so no label-blind split can pass. Lizard, *X. laevis*, honeybee and beetle remain
+diagnostic until their labels and training representation can support an
+interpretable gate. Rat and dog are legacy, non-fullpartition assets and do not
+enter X0-R2.
 
 ## First model contract
 
 The first cross-species route uses the representation with the strongest
 existing multi-species training evidence:
 
-- frozen Human H0 NTv2-500M 4096-bp initialization;
+- NTv2-500M 4096-bp initialization from the existing H0 run;
 - native 4096-bp binary token head;
 - 2,000 update steps;
 - effective batch 12, exactly two model windows per training species per
@@ -225,9 +243,13 @@ existing multi-species training evidence:
 - one shared calibration and threshold for every species;
 - final-step checkpoint, not target-selected best checkpoint.
 
-The exact initialization, optimizer and schedule must be recoverable from the
-existing H0 run metadata. If they are not reproducible, training stops rather
-than silently substituting a new recipe.
+The existing loader resolves the H0 run root to the step-600 `best_model`, while
+the same run also contains a step-800 final checkpoint. Before any GPU job, the
+protocol must freeze one of these rather than silently mixing them. The H0
+metadata otherwise recovers AdamW, linear decay, learning rate `2e-5`, weight
+decay `0.01`, warmup ratio `0.1`, TE class weight `3`, batch `1` and gradient
+accumulation `8`. The 2,000-step run must also freeze whether the inherited
+warmup is the ratio-derived 200 updates or an absolute 80-update carryover.
 
 This does not discard P3. P3 supplies topology guardrails and motivates a
 later controlled multiscale-head comparison. It is not the first cross-species
@@ -246,9 +268,9 @@ species would make a first-round gain uninterpretable.
 | `A1-CLADE-ADAPTER` | Small known-clade modules resolve structured negative transfer | <=0.5% adapter parameters only | same TRAIN/CAL/DEV | taxonomy route; no external labels | adapter admission/pass gates | conditional GPU arm | low-capacity clade conditioning value |
 | `M1-SOFT-MOE` | Conditional computation beats adapters and larger dense controls | soft/top-2 experts only | same TRAIN/CAL/DEV | route learned without external labels | strict MoE gate and matched controls | conditional; not currently authorized | MoE value on this comparator |
 | `R1-FASTA-ROUTER` | Unlabeled assembly sequence can select a validated path | taxonomy route -> frozen assembly-sketch route | nested LOSO and LOCO; model frozen | no labels or predicted TE fraction | retains route gain or abstains | CPU routing audit | sequence-domain routing, not phylogeny inference |
-| `E1-PRIMARY-PANEL` | Frozen shared arm transfers to unseen animal species | evaluation only | horse, pig, opossum, dm6; 1,200 tiles each | species held out; threshold frozen | engineering external gate | inference only | panel-level species transfer |
+| `E1-PRIMARY-PANEL` | Frozen shared arm transfers to unseen animal species | evaluation only | horse, opossum, dm6; 1,200 tiles each | species held out; threshold frozen | engineering external gate | inference only | panel-level species transfer |
 | `E2-CATTLE-REPLICATION` | Mammalian transfer replicates once | evaluation only | cattle; 1,200 tiles | locked until E1 passes | cattle gate | inference only | mammalian replication |
-| `E3-FULL-ASSEMBLY` | Panel result survives exhaustive denominator | panel -> all callable bases only | unchanged horse, pig, opossum, dm6, cattle assemblies | no refit or threshold change | full-assembly claim gate | whole-assembly inference | claim on these assemblies only |
+| `E3-FULL-ASSEMBLY` | Panel result survives exhaustive denominator | panel -> all callable bases only | unchanged horse, opossum, dm6, cattle assemblies | no refit or threshold change | full-assembly claim gate | whole-assembly inference | claim on these assemblies only |
 
 The only currently released arm is X0. After X0 passes, B1 and B2 may run in
 parallel on seed 42 because they use the same frozen data and differ only in
@@ -323,8 +345,8 @@ independent clades.
 
 The initially identifiable taxonomy groups are:
 
-- Mammalia: Human and Mouse;
-- non-mammalian vertebrates: Chicken, Zebrafish and *X. tropicalis*.
+- Mammalia: Human, Mouse and Pig;
+- non-mammalian vertebrates: Chicken and Zebrafish.
 
 *C. elegans* alone cannot identify an Ecdysozoa or invertebrate adapter. A
 proposal to route unseen `dm6` to a one-species *C. elegans* adapter is therefore
@@ -363,7 +385,7 @@ MoE.
 ### E1 engineering panel
 
 The model arm, three checkpoints, global calibration and threshold are frozen
-before E1. On each of horse, pig, opossum and `dm6`:
+before E1. On each of horse, opossum and `dm6`:
 
 - three-seed mean bp F1 >=0.80;
 - no seed bp F1 <0.77;
@@ -378,13 +400,13 @@ Passing supports `ANIMAL_L1_ENGINEERING_GO`, not a whole-genome claim.
 ### E2 cattle replication
 
 Cattle opens only after E1 passes. It must meet the same mean F1 and
-precision/recall gates and may be no more than 0.05 below the horse/pig/opossum
+precision/recall gates and may be no more than 0.05 below the horse/opossum
 mean. This is one mammalian replication, not a second evolutionary level.
 
 ### E3 full-assembly claim
 
 The unchanged three checkpoints and global threshold are then scored on all
-callable bases of horse, pig, opossum, `dm6` and cattle. Use 1-Mb paired blocks
+callable bases of horse, opossum, `dm6` and cattle. Use 1-Mb paired blocks
 and 1,000 bootstrap resamples. Claim-grade success requires:
 
 - every species three-seed mean bp F1 >=0.80;
@@ -463,7 +485,7 @@ X0 harmonized Label-A + split + denominator audit
                     +-- M1 fails matched controls -> close MoE
                     `-- M1 passes -> freeze -> E1
 
-E1 horse/pig/opossum/dm6
+E1 horse/opossum/dm6
 |
 +-- FAIL -> report failed species transfer; do not tune on E1
 `-- PASS -> E2 cattle
@@ -486,9 +508,15 @@ they are not assumed valid in plants.
 
 Do not submit a GPU training job from existing mixed JSONL. It would answer the
 wrong question because its source, coordinate and prevalence confounding are
-unresolved. The next and only released unit is `X0-LABEL-SPLIT`, a CPU/data
-audit and materialization step. Its output must be a compact manifest and
-decision report, while FASTA, labels and large JSONL remain outside Git.
+unresolved. ChatGPT Pro and the live asset audit selected the X0-R2 amendment:
+replace invalid `xenTro10` with `susScr11`, retain horse/opossum/`dm6` as sealed
+external species and keep cattle locked. This preserves the strongest external
+coverage but means the first route contains no amphibian or reptile claim.
+
+The next and only released unit is `X0-LABEL-SPLIT`, a CPU/data audit and
+materialization step. Its output must be a compact manifest and decision report,
+while FASTA, labels and large JSONL remain outside Git. If pig fails X0, there
+is no automatic second substitution and no GPU run; the panel contract reopens.
 
 After X0 passes, run B1 and B2 seed 42 in parallel. Complex MoE, a learned
 router, plant training, boundary loss and architecture search remain closed
