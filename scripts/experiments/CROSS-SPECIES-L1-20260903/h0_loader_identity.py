@@ -152,7 +152,8 @@ def compare(
 
 
 def run(cal_jsonl: Path) -> dict:
-    from transformers import AutoModelForTokenClassification, AutoTokenizer
+    import torch
+    from transformers import AutoConfig, AutoModelForTokenClassification, AutoTokenizer
 
     task = load_module(
         Path(__file__).with_name("cross_species_token_task.py"), "cross_species_task"
@@ -160,8 +161,18 @@ def run(cal_jsonl: Path) -> dict:
     evaluator = load_module(
         Path(__file__).with_name("calibrate_evaluate_x0.py"), "cross_species_eval"
     )
-    reference_model = AutoModelForTokenClassification.from_pretrained(
+    reference_config = AutoConfig.from_pretrained(
         task.H0_CHECKPOINT, trust_remote_code=True, local_files_only=True
+    )
+    reference_state = torch.load(
+        task.H0_CHECKPOINT / "pytorch_model.bin", map_location="cpu"
+    )
+    reference_model = AutoModelForTokenClassification.from_pretrained(
+        task.BASE_MODEL,
+        config=reference_config,
+        state_dict=reference_state,
+        trust_remote_code=True,
+        local_files_only=True,
     )
     reference_tokenizer = AutoTokenizer.from_pretrained(
         task.BASE_MODEL, trust_remote_code=True, local_files_only=True
