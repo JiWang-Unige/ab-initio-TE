@@ -2,7 +2,7 @@
 
 ## Status
 
-`X0-R2, TRAIN MATERIALIZATION, H0 IDENTITY AND SEED42 SMOKE PASS; I0 LOCKED; FULL SEED42 COHORT RUNNING WITH DEPENDENT EVALUATION QUEUED; NO MOE SUBMITTED`
+`SEED42 SELECTS B1; B1 SEEDS 17/20260903 RUNNING WITH DEPENDENT CAL/DEV; EXTERNAL SEALED; NO MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -68,16 +68,73 @@ losses, B1 remained uniform, and B2 updated and carried its GroupDRO weights to
 the next step. This proves the engineering paths only. A 20-step B1 throughput
 run (`12177415`) completed in 49 seconds, versus 29 seconds for its two-step
 smoke. Removing the shared load/save overhead gives approximately 1.11 seconds
-per update and a 37.5-minute estimate for 2,000 steps. The frozen seed42
-H1/B1/B2 cohort was therefore released as array job `12177426` with a two-hour
-per-task limit; model performance remains unknown until the frozen CAL/DEV
-evaluation is complete. Evaluation array `12178443` has an
-`afterok:12177426` dependency and applies the same six-species CAL/DEV protocol
-to all three arms. It cannot run after a failed training task. The resulting
-four DEV artifacts will be consumed once by
-`scripts/experiments/CROSS-SPECIES-L1-20260903/summarize_seed42.py`, which emits
-the preregistered B2-versus-B1 checks and attribution deltas without replacing
-the required three-seed confirmation.
+per update and a 37.5-minute estimate for 2,000 steps.
+
+The frozen seed42 H1/B1/B2 cohort array `12177426` and dependent CAL/DEV array
+`12178443` subsequently completed with exit code 0 for all six tasks. Each
+training arm has exactly 2,000 finite logged updates, the registered metadata
+and a complete final model. H1, B1 and B2 respectively achieved DEV macro bp
+F1 `0.695536`, `0.881910` and `0.878113`, with minimum-species bp F1
+`0.385577`, `0.756506` and `0.760940`. B1's species bp F1 values were Human
+`0.940576`, Mouse `0.940036`, Chicken `0.832984`, Zebrafish `0.927926`, Pig
+`0.893431` and *C. elegans* `0.756506`.
+
+The preregistered seed42 comparison selected B1. B2 passed six of nine checks
+but failed the three decision-changing checks: its minimum-species gain was
+only `+0.004434` rather than `>=+0.02`; Chicken bp F1 changed by `-0.024434`,
+exceeding the allowed `-0.01`; and Chicken segment F1 at IoU 0.8 changed by
+`-0.070191`, exceeding the allowed `-0.05`. B2 is therefore closed rather than
+retuned. This is an engineering arm selection, not three-seed scientific
+evidence.
+
+B2's final weights were Human `0.089670`, Mouse `0.081935`, Chicken `0.021288`,
+Zebrafish `0.253596`, Pig `0.291206` and *C. elegans* `0.262305`, with effective
+group count `4.2896`. The weights did not collapse, but loss-based upweighting
+did not identify a useful worst-F1 correction: the smallest-weight group,
+Chicken, supplied both material and topology regressions that rejected B2.
+This closes the registered GroupDRO formulation without implying that group
+losses encode phylogeny or annotation quality.
+
+Only B1 was consequently released for confirmation at seeds 17 and 20260903.
+Training array `12181383` uses the same 2,000-step contract; dependent CAL/DEV
+array `12181384` fits an independent global calibrator and threshold for each
+seed. Horse, opossum, `dm6` and cattle remain sealed until all three B1 seeds
+are complete and the frozen internal gate is adjudicated.
+
+| seed42 arm | DEV macro bp F1 | minimum-species bp F1 | macro precision | macro recall | segment F1@0.8 | boundary F1@5 | fragments/truth | missed rate | hardN FP rate |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| I0 | 0.669433 | 0.390486 | 0.634537 | 0.844213 | 0.134291 | 0.034866 | 0.978873 | 0.150002 | 0.198052 |
+| H1 | 0.695536 | 0.385577 | 0.676956 | 0.838136 | 0.189711 | 0.027554 | 0.954422 | 0.152586 | 0.156370 |
+| B1 | 0.881910 | 0.756506 | 0.891791 | 0.872688 | 0.425078 | 0.181923 | 1.067802 | 0.144751 | 0.050034 |
+| B2 | 0.878113 | 0.760940 | 0.881819 | 0.874907 | 0.414682 | 0.178059 | 1.078524 | 0.140888 | 0.050775 |
+
+On this one engineering seed, I0 to H1 changed macro bp F1 by `+0.026103`
+but minimum-species bp F1 by `-0.004909`. H1 to B1 changed them by
+`+0.186374` and `+0.370929`, respectively. Because H1 and B1 share the
+continuation target, initialization, update count, optimizer and model-window
+budget, this contrast is evidence that six-species supervised exposure, rather
+than Human-only continuation, produced the large internal cross-species gain.
+It remains one-seed evidence and does not isolate all elements of the broader
+I0-to-B1 recipe.
+
+A result-driven ChatGPT Pro review independently upheld this branch. It noted
+three interpretation limits that remain active. First, H1 draws repeatedly
+from 1,500 Human tiles whereas B1 draws from 9,000 tiles across six species, so
+H1-to-B1 cannot separate phylogenetic diversity, independent-sequence
+diversity and TE-family-composition diversity. Second, each arm owns its
+CAL-fitted global map and threshold, so the F1 gain describes the complete
+calibrated system; without a ranking metric it is not solely a representation
+claim. Third, H1 remains a single-seed attribution control even if B1 later
+passes three-seed confirmation.
+
+Seed42 *C. elegans* is below both its F1 and recall gates but is not yet a
+formal internal failure. To make the registered three-seed mean pass, seeds 17
+and 20260903 together must average at least `0.821747` F1 and `0.762584` recall
+for *C. elegans*; their precision need only average `0.729463`. No internal
+single-seed floor is added after seeing this result. If the frozen three-seed
+mean fails, only then does B0 open for the failing B1 species. A lone
+*C. elegans* specialist, even if recoverable, cannot identify a transferable
+invertebrate adapter or authorize MoE.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
@@ -673,13 +730,22 @@ they are not assumed valid in plants.
 
 ## Immediate executable decision
 
-Do not submit a full 2,000-step job until the H0 loader identity gate and the
-H1/B1/B2 two-step smoke pass. Materialization job `12176202` is now the frozen
-training data root. I0 may run alongside the smoke after identity passes, but
-its CAL/DEV result must be recorded before viewing continuation-arm DEV
-results. The first full cohort is H1/B1/B2 seed 42; H1 closes the otherwise
-unresolved attribution between multispecies composition and the changed
-continuation recipe.
+Seed42 closed the B1-versus-B2 engineering choice in favor of B1. The only
+active model work is the registered B1 confirmation at seeds 17 and 20260903
+plus their per-seed global CAL/DEV evaluation. No additional H1 or B2 seed is
+needed. The three B1 seeds are then judged once against the frozen internal
+shared-model gate; no best-seed selection or across-seed ensemble is allowed.
+
+If the internal gate passes, freeze the three checkpoints, calibrators and
+thresholds before opening E1. If it fails, keep E1 sealed and run B0 only for
+the failing species of selected B1. Do not change the global-threshold contract
+or use a test-species threshold to rescue a failure.
+
+The current evaluator does not emit AUPRC, although the registered B0 recovery
+gate requires a paired AUPRC gain of at least `0.03`. Add callable-bp average
+precision only if B0 is actually triggered, before running the specialist; it
+does not block the active B1 confirmation and is not a reason to expand the
+current code path.
 
 Complex MoE, learned routing, plant training, boundary loss and architecture
 search remain closed unless their explicit upstream gate opens. Horse, opossum,
