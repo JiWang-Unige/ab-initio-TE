@@ -108,12 +108,26 @@ def label_chunk_masses(labels: str, width: int = KMER_BP) -> tuple[list[int], li
     return positive, negative
 
 
+def sequence_tokens(sequence: str, width: int = KMER_BP) -> list[str]:
+    full_length = len(sequence) // width * width
+    tokens = [
+        sequence[start : start + width] for start in range(0, full_length, width)
+    ]
+    tokens.extend(sequence[full_length:])
+    return [
+        token if set(token) <= {"A", "C", "G", "T"} else "<unk>"
+        for token in tokens
+    ]
+
+
 def encode_record(tokenizer, record: dict) -> dict[str, torch.Tensor]:
     sequence = record["sequence"]
     positive, negative = label_chunk_masses(record["labels"])
+    tokens = sequence_tokens(sequence)
     tensor_tokens = ((len(positive) + 2 + 7) // 8) * 8
     encoded = tokenizer(
-        sequence,
+        tokens,
+        is_split_into_words=True,
         truncation=True,
         max_length=tensor_tokens,
         padding="max_length",

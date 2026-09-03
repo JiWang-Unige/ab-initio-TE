@@ -30,6 +30,12 @@ def tile(tile_id: str, labels: str, margins: list[float], split: str = "DEV") ->
 
 
 class CalibrateEvaluateX0Test(unittest.TestCase):
+    def test_sequence_tokens_keep_fixed_six_bp_alignment_across_n(self):
+        self.assertEqual(
+            MODULE.sequence_tokens("ACGTACAAANTTGTAC"),
+            ["ACGTAC", "<unk>", "G", "T", "A", "C"],
+        )
+
     def test_token_margin_projection_matches_training_chunks(self):
         projected = MODULE.project_token_margins(
             np.asarray([99.0, -2.0, 3.0, 4.0, 5.0, 6.0, 99.0]),

@@ -43,6 +43,19 @@ def read_jsonl(path: Path) -> list[dict]:
         return [json.loads(line) for line in handle]
 
 
+def sequence_tokens(sequence: str) -> list[str]:
+    full_length = len(sequence) // KMER_BP * KMER_BP
+    tokens = [
+        sequence[start : start + KMER_BP]
+        for start in range(0, full_length, KMER_BP)
+    ]
+    tokens.extend(sequence[full_length:])
+    return [
+        token if set(token) <= {"A", "C", "G", "T"} else "<unk>"
+        for token in tokens
+    ]
+
+
 def project_token_margins(
     token_margins: np.ndarray, token_positions: list[int], bp_length: int
 ) -> np.ndarray:
@@ -110,7 +123,8 @@ def infer_half_margins(
     for offset in range(0, len(sequences), batch_size):
         batch = sequences[offset : offset + batch_size]
         encoded = tokenizer(
-            batch,
+            [sequence_tokens(sequence) for sequence in batch],
+            is_split_into_words=True,
             truncation=True,
             max_length=max_length,
             padding="max_length",

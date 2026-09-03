@@ -75,6 +75,12 @@ class CrossSpeciesTokenTaskTest(unittest.TestCase):
         expected = (math.log(2.0) - math.log(0.8)) / 2.0
         self.assertAlmostEqual(float(loss), expected, places=6)
 
+    def test_sequence_tokens_keep_fixed_six_bp_alignment_across_n(self) -> None:
+        self.assertEqual(
+            task.sequence_tokens("ACGTACAAANTTGTAC"),
+            ["ACGTAC", "<unk>", "G", "T", "A", "C"],
+        )
+
     def test_b1_b2_weights_and_groupdro_update(self) -> None:
         initial = torch.full(
             (len(task.SPECIES),), -math.log(len(task.SPECIES)), dtype=torch.float64
