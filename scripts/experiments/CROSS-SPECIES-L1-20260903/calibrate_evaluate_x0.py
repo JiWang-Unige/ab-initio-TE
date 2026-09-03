@@ -61,7 +61,7 @@ def project_token_margins(
     return projected
 
 
-def load_final_model(model_dir: Path, cpu: bool):
+def load_final_model(model_dir: Path, tokenizer_dir: Path | None, cpu: bool):
     import torch
     from transformers import AutoModelForTokenClassification, AutoTokenizer
 
@@ -69,7 +69,7 @@ def load_final_model(model_dir: Path, cpu: bool):
         str(model_dir), trust_remote_code=True, local_files_only=True
     )
     tokenizer = AutoTokenizer.from_pretrained(
-        str(model_dir), trust_remote_code=True, local_files_only=True
+        str(tokenizer_dir or model_dir), trust_remote_code=True, local_files_only=True
     )
     device = torch.device("cpu" if cpu or not torch.cuda.is_available() else "cuda")
     model.to(device)
@@ -463,7 +463,9 @@ def run_fit(args) -> dict:
     observed_species = {species for species, _ in data_specs}
     if len(data_specs) != len(CAL_SPECIES) or observed_species != set(CAL_SPECIES):
         raise ValueError(f"fit requires the six CAL species, observed {sorted(observed_species)}")
-    model, tokenizer, device = load_final_model(args.model_dir, args.cpu)
+    model, tokenizer, device = load_final_model(
+        args.model_dir, args.tokenizer_dir, args.cpu
+    )
     tiles_by_species = infer_inputs(
         model, tokenizer, device, data_specs, args.batch_size
     )
@@ -479,6 +481,7 @@ def run_fit(args) -> dict:
         "protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
         "seed": args.seed,
         "model_dir": str(args.model_dir.resolve()),
+        "tokenizer_dir": str((args.tokenizer_dir or args.model_dir).resolve()),
         "fit_split": "CAL",
         "species": sorted(callable_data),
         "platt_slope": slope,
@@ -507,8 +510,14 @@ def run_apply(args) -> dict:
     calibration = json.loads(args.calibration_json.read_text())
     if calibration["model_dir"] != str(args.model_dir.resolve()):
         raise ValueError("calibration artifact belongs to a different final_model")
+    if calibration["tokenizer_dir"] != str(
+        (args.tokenizer_dir or args.model_dir).resolve()
+    ):
+        raise ValueError("calibration artifact belongs to a different tokenizer")
     data_specs = parse_data_specs(args.data)
-    model, tokenizer, device = load_final_model(args.model_dir, args.cpu)
+    model, tokenizer, device = load_final_model(
+        args.model_dir, args.tokenizer_dir, args.cpu
+    )
     tiles_by_species = infer_inputs(
         model, tokenizer, device, data_specs, args.batch_size
     )
@@ -540,6 +549,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     fit = subparsers.add_parser("fit-cal")
     fit.add_argument("--model-dir", type=Path, required=True)
+    fit.add_argument("--tokenizer-dir", type=Path)
     fit.add_argument("--data", action="append", required=True, metavar="SPECIES=JSONL.GZ")
     fit.add_argument("--seed", type=int, required=True)
     fit.add_argument("--calibration-json", type=Path, required=True)
@@ -550,6 +560,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     apply = subparsers.add_parser("apply-only")
     apply.add_argument("--model-dir", type=Path, required=True)
+    apply.add_argument("--tokenizer-dir", type=Path)
     apply.add_argument("--data", action="append", required=True, metavar="SPECIES=JSONL.GZ")
     apply.add_argument("--calibration-json", type=Path, required=True)
     apply.add_argument("--metrics-json", type=Path, required=True)

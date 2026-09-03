@@ -95,6 +95,7 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
                     {
                         "seed": 42,
                         "model_dir": str((root / "final_model").resolve()),
+                        "tokenizer_dir": str((root / "final_model").resolve()),
                         "platt_slope": 1.0,
                         "platt_intercept": 0.0,
                         "threshold": 0.5,
@@ -103,6 +104,7 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
             )
             args = SimpleNamespace(
                 model_dir=root / "final_model",
+                tokenizer_dir=None,
                 data=["human=fake.jsonl.gz"],
                 calibration_json=calibration,
                 metrics_json=metrics,
