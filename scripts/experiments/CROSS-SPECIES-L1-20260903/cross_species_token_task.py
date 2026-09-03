@@ -247,7 +247,6 @@ def train(args) -> None:
         args.arm,
     )
     model, tokenizer = load_model_and_tokenizer()
-    model.gradient_checkpointing_enable()
     model.config.use_cache = False
     device = torch.device("cuda")
     model.to(device)
