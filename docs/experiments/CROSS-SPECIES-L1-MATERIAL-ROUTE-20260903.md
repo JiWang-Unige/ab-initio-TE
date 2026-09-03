@@ -340,16 +340,18 @@ averaged.
 B1 gives every species weight `1/6`. B2 starts from uniform `q`, uses
 `eta=0.01`, and applies the exponentiated update from the detached current six
 species losses to the next optimizer step. The update is maintained in
-float64 log space. There is no EMA, uniform smoothing or min/max clamp. With
-six accumulated microbatches, B2 scales each backward loss by `6*q_s`; B1's
-corresponding scale is one. Thus aggregation is the only arm difference.
+float64 log space. There is no EMA, uniform smoothing or min/max clamp. The
+manual PyTorch loop directly backpropagates `q_s*L_s`; at initialization this
+is `L_s/6`, so the six species losses sum to the equal-species mean. Thus
+aggregation is the only arm difference.
 
 Seed 42 is an engineering comparison on CAL/DEV only. B2 replaces B1 only if:
 
 - minimum-species DEV bp F1 improves by at least 0.02;
 - macro DEV F1 falls by no more than 0.005;
 - no species loses more than 0.01 bp F1;
-- hard-negative false-positive rate rises by no more than 0.005;
+- the equal-species macro hard-negative false-positive rate rises by no more
+  than 0.005;
 - the topology guardrails below pass.
 
 Otherwise B1 remains the shared arm. The selected rule is then run at seeds
