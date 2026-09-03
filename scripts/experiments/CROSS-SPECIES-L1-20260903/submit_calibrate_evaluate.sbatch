@@ -2,6 +2,7 @@
 # Fit the frozen six-species CAL calibration and apply it to six-species DEV.
 # ARM=I0 uses the frozen H0 step-800 checkpoint and the original NTv2 tokenizer.
 # ARM=B1, ARM=B2, or ARM=H1 requires MODEL_DIR and TOKENIZER_DIR for that final model.
+# All arms resolve the frozen NTv2 implementation from BASE_MODEL.
 # Set X0_MATERIALIZATION_ROOT to the completed TRAIN materialization directory.
 # Set EVAL_OUTPUT_DIR to override the job-id-scoped result directory.
 #SBATCH --job-name=te_l1_cal_dev
@@ -40,6 +41,7 @@ case "${ARM}" in
     LABEL="${ARM}"
     : "${MODEL_DIR:?set MODEL_DIR to the completed ${ARM} final_model directory}"
     : "${TOKENIZER_DIR:?set TOKENIZER_DIR to the tokenizer directory for ${ARM}}"
+    MODEL_CODE_ARGS=(--model-code-dir "${BASE_MODEL}")
     ;;
   *)
     echo "unsupported ARM=${ARM}; expected I0, B1, B2, or H1" >&2
