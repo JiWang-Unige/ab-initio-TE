@@ -26,12 +26,14 @@ DATA_ROOT="${X0_MATERIALIZATION_ROOT:?set X0_MATERIALIZATION_ROOT to the complet
 ARM="${ARM:-I0}"
 SEED="${SEED:-42}"
 BATCH_SIZE="${BATCH_SIZE:-12}"
+MODEL_CODE_ARGS=()
 
 case "${ARM}" in
   I0)
     LABEL=I0-H0-INIT
     MODEL_DIR="${H0_CHECKPOINT}"
     TOKENIZER_DIR="${BASE_MODEL}"
+    MODEL_CODE_ARGS=(--model-code-dir "${BASE_MODEL}")
     SEED=42
     ;;
   B1|B2|H1)
@@ -74,6 +76,7 @@ cd "${ROOT}"
 python3 "${SCRIPT}" fit-cal \
   --model-dir "${MODEL_DIR}" \
   --tokenizer-dir "${TOKENIZER_DIR}" \
+  "${MODEL_CODE_ARGS[@]}" \
   "${CAL_DATA[@]}" \
   --seed "${SEED}" \
   --calibration-json "${CALIBRATION_JSON}" \
@@ -83,6 +86,7 @@ python3 "${SCRIPT}" fit-cal \
 python3 "${SCRIPT}" apply-only \
   --model-dir "${MODEL_DIR}" \
   --tokenizer-dir "${TOKENIZER_DIR}" \
+  "${MODEL_CODE_ARGS[@]}" \
   "${DEV_DATA[@]}" \
   --calibration-json "${CALIBRATION_JSON}" \
   --metrics-json "${DEV_METRICS_JSON}" \

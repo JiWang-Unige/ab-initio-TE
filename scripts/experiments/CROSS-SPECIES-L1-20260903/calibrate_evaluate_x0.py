@@ -61,13 +61,36 @@ def project_token_margins(
     return projected
 
 
-def load_final_model(model_dir: Path, tokenizer_dir: Path | None, cpu: bool):
+def load_final_model(
+    model_dir: Path,
+    tokenizer_dir: Path | None,
+    cpu: bool,
+    model_code_dir: Path | None = None,
+):
     import torch
-    from transformers import AutoModelForTokenClassification, AutoTokenizer
+    from transformers import AutoTokenizer
 
-    model = AutoModelForTokenClassification.from_pretrained(
-        str(model_dir), trust_remote_code=True, local_files_only=True
-    )
+    if model_code_dir is None:
+        from transformers import AutoModelForTokenClassification
+
+        model = AutoModelForTokenClassification.from_pretrained(
+            str(model_dir), trust_remote_code=True, local_files_only=True
+        )
+    else:
+        from transformers import AutoConfig
+        from transformers.dynamic_module_utils import get_class_from_dynamic_module
+
+        config = AutoConfig.from_pretrained(
+            str(model_dir), trust_remote_code=True, local_files_only=True
+        )
+        state = torch.load(model_dir / "pytorch_model.bin", map_location="cpu")
+        model_class = get_class_from_dynamic_module(
+            config.auto_map["AutoModelForTokenClassification"],
+            model_code_dir,
+            local_files_only=True,
+        )
+        model = model_class._from_config(config)
+        model.load_state_dict(state, strict=True)
     tokenizer = AutoTokenizer.from_pretrained(
         str(tokenizer_dir or model_dir), trust_remote_code=True, local_files_only=True
     )
@@ -464,7 +487,7 @@ def run_fit(args) -> dict:
     if len(data_specs) != len(CAL_SPECIES) or observed_species != set(CAL_SPECIES):
         raise ValueError(f"fit requires the six CAL species, observed {sorted(observed_species)}")
     model, tokenizer, device = load_final_model(
-        args.model_dir, args.tokenizer_dir, args.cpu
+        args.model_dir, args.tokenizer_dir, args.cpu, args.model_code_dir
     )
     tiles_by_species = infer_inputs(
         model, tokenizer, device, data_specs, args.batch_size
@@ -482,6 +505,9 @@ def run_fit(args) -> dict:
         "seed": args.seed,
         "model_dir": str(args.model_dir.resolve()),
         "tokenizer_dir": str((args.tokenizer_dir or args.model_dir).resolve()),
+        "model_code_dir": (
+            str(args.model_code_dir.resolve()) if args.model_code_dir else None
+        ),
         "fit_split": "CAL",
         "species": sorted(callable_data),
         "platt_slope": slope,
@@ -514,9 +540,14 @@ def run_apply(args) -> dict:
         (args.tokenizer_dir or args.model_dir).resolve()
     ):
         raise ValueError("calibration artifact belongs to a different tokenizer")
+    expected_model_code_dir = (
+        str(args.model_code_dir.resolve()) if args.model_code_dir else None
+    )
+    if calibration["model_code_dir"] != expected_model_code_dir:
+        raise ValueError("calibration artifact belongs to a different model code directory")
     data_specs = parse_data_specs(args.data)
     model, tokenizer, device = load_final_model(
-        args.model_dir, args.tokenizer_dir, args.cpu
+        args.model_dir, args.tokenizer_dir, args.cpu, args.model_code_dir
     )
     tiles_by_species = infer_inputs(
         model, tokenizer, device, data_specs, args.batch_size
@@ -550,6 +581,7 @@ def build_parser() -> argparse.ArgumentParser:
     fit = subparsers.add_parser("fit-cal")
     fit.add_argument("--model-dir", type=Path, required=True)
     fit.add_argument("--tokenizer-dir", type=Path)
+    fit.add_argument("--model-code-dir", type=Path)
     fit.add_argument("--data", action="append", required=True, metavar="SPECIES=JSONL.GZ")
     fit.add_argument("--seed", type=int, required=True)
     fit.add_argument("--calibration-json", type=Path, required=True)
@@ -561,6 +593,7 @@ def build_parser() -> argparse.ArgumentParser:
     apply = subparsers.add_parser("apply-only")
     apply.add_argument("--model-dir", type=Path, required=True)
     apply.add_argument("--tokenizer-dir", type=Path)
+    apply.add_argument("--model-code-dir", type=Path)
     apply.add_argument("--data", action="append", required=True, metavar="SPECIES=JSONL.GZ")
     apply.add_argument("--calibration-json", type=Path, required=True)
     apply.add_argument("--metrics-json", type=Path, required=True)

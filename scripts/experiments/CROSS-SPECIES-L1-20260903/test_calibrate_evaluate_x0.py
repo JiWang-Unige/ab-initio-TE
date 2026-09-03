@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -96,6 +97,7 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
                         "seed": 42,
                         "model_dir": str((root / "final_model").resolve()),
                         "tokenizer_dir": str((root / "final_model").resolve()),
+                        "model_code_dir": None,
                         "platt_slope": 1.0,
                         "platt_intercept": 0.0,
                         "threshold": 0.5,
@@ -105,6 +107,7 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
             args = SimpleNamespace(
                 model_dir=root / "final_model",
                 tokenizer_dir=None,
+                model_code_dir=None,
                 data=["human=fake.jsonl.gz"],
                 calibration_json=calibration,
                 metrics_json=metrics,
@@ -115,7 +118,9 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
                 "human": [tile("one", "01H?", [-1.0, 1.0, -1.0, 5.0])]
             }
             with (
-                mock.patch.object(MODULE, "load_final_model", return_value=(None, None, None)),
+                mock.patch.object(
+                    MODULE, "load_final_model", return_value=(None, None, None)
+                ) as load_model,
                 mock.patch.object(MODULE, "infer_inputs", return_value=inferred),
                 mock.patch.object(
                     MODULE, "fit_platt", side_effect=AssertionError("apply fitted CAL")
@@ -124,6 +129,58 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
                 output = MODULE.run_apply(args)
             self.assertEqual(output["mode"], "apply-only")
             self.assertEqual(json.loads(metrics.read_text())["mode"], "apply-only")
+            load_model.assert_called_once_with(
+                root / "final_model", None, True, None
+            )
+
+    def test_i0_loader_uses_checkpoint_state_and_model_code(self):
+        import types
+
+        model = mock.Mock()
+        model_class = mock.Mock()
+        model_class._from_config.return_value = model
+        config = types.SimpleNamespace(
+            auto_map={"AutoModelForTokenClassification": "modeling_esm.Fake"}
+        )
+        auto_config = mock.Mock(return_value=config)
+        auto_tokenizer = mock.Mock(return_value=object())
+        transformers = types.ModuleType("transformers")
+        transformers.AutoConfig = types.SimpleNamespace(from_pretrained=auto_config)
+        transformers.AutoTokenizer = types.SimpleNamespace(
+            from_pretrained=auto_tokenizer
+        )
+        dynamic = types.ModuleType("transformers.dynamic_module_utils")
+        dynamic_loader = mock.Mock(return_value=model_class)
+        dynamic.get_class_from_dynamic_module = dynamic_loader
+        torch = types.ModuleType("torch")
+        torch.load = mock.Mock(return_value={"weight": 1})
+        torch.device = mock.Mock(return_value="cpu")
+        torch.cuda = types.SimpleNamespace(is_available=lambda: False)
+
+        with mock.patch.dict(
+            sys.modules,
+            {
+                "torch": torch,
+                "transformers": transformers,
+                "transformers.dynamic_module_utils": dynamic,
+            },
+        ):
+            loaded, tokenizer, device = MODULE.load_final_model(
+                Path("checkpoint"), Path("tokenizer"), True, Path("base-model")
+            )
+
+        self.assertIs(loaded, model)
+        auto_config.assert_called_once_with(
+            "checkpoint", trust_remote_code=True, local_files_only=True
+        )
+        torch.load.assert_called_once_with(
+            Path("checkpoint") / "pytorch_model.bin", map_location="cpu"
+        )
+        dynamic_loader.assert_called_once_with(
+            "modeling_esm.Fake", Path("base-model"), local_files_only=True
+        )
+        model_class._from_config.assert_called_once_with(config)
+        model.load_state_dict.assert_called_once_with({"weight": 1}, strict=True)
 
 
 if __name__ == "__main__":
