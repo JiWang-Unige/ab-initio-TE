@@ -2,7 +2,7 @@
 
 ## Status
 
-`X0-R2, TRAIN MATERIALIZATION, H0 IDENTITY AND SEED42 SMOKE PASS; I0 LOCKED; FULL SEED42 COHORT RUNNING; NO MOE SUBMITTED`
+`X0-R2, TRAIN MATERIALIZATION, H0 IDENTITY AND SEED42 SMOKE PASS; I0 LOCKED; FULL SEED42 COHORT RUNNING WITH DEPENDENT EVALUATION QUEUED; NO MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -70,8 +70,14 @@ run (`12177415`) completed in 49 seconds, versus 29 seconds for its two-step
 smoke. Removing the shared load/save overhead gives approximately 1.11 seconds
 per update and a 37.5-minute estimate for 2,000 steps. The frozen seed42
 H1/B1/B2 cohort was therefore released as array job `12177426` with a two-hour
-per-task limit; model performance remains unknown until I0 is locked and the
-frozen CAL/DEV evaluation is complete.
+per-task limit; model performance remains unknown until the frozen CAL/DEV
+evaluation is complete. Evaluation array `12178443` has an
+`afterok:12177426` dependency and applies the same six-species CAL/DEV protocol
+to all three arms. It cannot run after a failed training task. The resulting
+four DEV artifacts will be consumed once by
+`scripts/experiments/CROSS-SPECIES-L1-20260903/summarize_seed42.py`, which emits
+the preregistered B2-versus-B1 checks and attribution deltas without replacing
+the required three-seed confirmation.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
