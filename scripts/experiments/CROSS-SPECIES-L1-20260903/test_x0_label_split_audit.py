@@ -1,3 +1,4 @@
+import csv
 import importlib.util
 import tempfile
 import unittest
@@ -12,6 +13,16 @@ SPEC.loader.exec_module(MODULE)
 
 
 class X0AuditTest(unittest.TestCase):
+    def test_human_panel_excludes_h0_exposed_chromosomes(self):
+        table = SCRIPT.with_name("species_x0_r2.tsv")
+        with table.open(newline="") as handle:
+            human = next(row for row in csv.DictReader(handle, delimiter="\t") if row["species_code"] == "human")
+        pattern = MODULE.re.compile(human["primary_regex"])
+        selected_pool = {f"chr{number}" for number in range(1, 23) if pattern.fullmatch(f"chr{number}")}
+        h0_exposed = {"chr1", "chr3", "chr5", "chr7", "chr9", "chr11", "chr13", "chr15", "chr17", "chr19", "chr20", "chr21", "chr22"}
+        self.assertEqual(selected_pool, {"chr2", "chr4", "chr6", "chr8", "chr10", "chr12", "chr14", "chr16", "chr18"})
+        self.assertFalse(selected_pool & h0_exposed)
+
     def test_repeatmasker_classes_and_coordinates(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "tiny.out"

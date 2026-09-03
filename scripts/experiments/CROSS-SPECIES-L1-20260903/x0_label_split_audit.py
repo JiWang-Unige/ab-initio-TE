@@ -284,7 +284,7 @@ def select_chromosomes(row: dict[str, str], lengths: dict[str, int], non_acgt: d
         if pattern.fullmatch(chrom) and length >= TILE_BP and non_acgt[chrom] < length
     ]
     primary.sort(key=lambda chrom: (-lengths[chrom], chrom))
-    explicit = [value for value in row["explicit_contigs"].split(",") if value]
+    explicit = [] if row["explicit_contigs"] == "." else row["explicit_contigs"].split(",")
     if explicit:
         missing = set(explicit) - set(primary)
         if missing:

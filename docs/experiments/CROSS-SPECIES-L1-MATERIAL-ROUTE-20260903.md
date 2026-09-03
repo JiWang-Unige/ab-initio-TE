@@ -4,6 +4,13 @@
 
 `X0-R2 IMPLEMENTED; CPU AUDIT NOT YET COMPLETE; NO GPU OR MOE AUTHORIZED`
 
+Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
+with no scientific output when a concurrent audit found that its Human pool
+could overlap chromosomes already supervised in H0. It is an excluded
+engineering attempt, not part of the X0 scientific denominator. The corrected
+manifest below restricts Human to previously unexposed chromosomes before the
+replacement CPU audit is submitted.
+
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
 the same decision:
@@ -164,6 +171,13 @@ chromosomes and CAL+DEV tiles at least three disjoint chromosomes. For
 nuclear chromosome unused. External panels use 1,200 tiles across at least
 four chromosomes or chromosome arms.
 
+Human uses a stricter exposure rule because the selected initialization is a
+Human-supervised H0 model. H0 used chr1/3/5/7/9 for fitting, chr11/13/15 for
+validation and chr17/19/20/21/22 for reported testing. X0-R2 therefore draws
+the new Human TRAIN/CAL/DEV panels only from the previously unexposed
+chr2/4/6/8/10/12/14/16/18 pool. Five train chromosomes and three validation
+chromosomes are selected label-blind from that pool and one is retained unused.
+
 ### X0 numerical readiness gates
 
 X0 passes only when all decision-bearing panels satisfy:
@@ -219,6 +233,8 @@ must not run model inference. Horse, opossum and `dm6` remain sealed until the
 model arm, all three checkpoints, calibration and global threshold are frozen.
 Cattle opens only after the primary panel passes. Pig and cattle do not count
 as two independent evolutionary levels because pig is now a training species.
+The seal is prospective for this route: these species appeared in older screens,
+so E1 is a frozen external re-evaluation, not a first-ever blind experiment.
 
 `xenTro10` is removed from the decision-bearing route: its whole-genome
 Label-A strict-TE mass is only 84,583 bp, less than even one CAL or DEV minimum,
@@ -232,7 +248,8 @@ enter X0-R2.
 The first cross-species route uses the representation with the strongest
 existing multi-species training evidence:
 
-- NTv2-500M 4096-bp initialization from the existing H0 run;
+- NTv2-500M 4096-bp initialization from the existing H0 step-800 final
+  checkpoint, loading model weights only;
 - native 4096-bp binary token head;
 - 2,000 update steps;
 - effective batch 12, exactly two model windows per training species per
@@ -243,13 +260,21 @@ existing multi-species training evidence:
 - one shared calibration and threshold for every species;
 - final-step checkpoint, not target-selected best checkpoint.
 
-The existing loader resolves the H0 run root to the step-600 `best_model`, while
-the same run also contains a step-800 final checkpoint. Before any GPU job, the
-protocol must freeze one of these rather than silently mixing them. The H0
-metadata otherwise recovers AdamW, linear decay, learning rate `2e-5`, weight
-decay `0.01`, warmup ratio `0.1`, TE class weight `3`, batch `1` and gradient
-accumulation `8`. The 2,000-step run must also freeze whether the inherited
-warmup is the ratio-derived 200 updates or an absolute 80-update carryover.
+The existing run-root loader resolves H0 to the Human-validation-selected
+step-600 `best_model`; B1/B2 must not use that implicit selection. Their frozen
+initialization is the explicit
+`TFSUPP_ntv2_500m_H0_w4096_seed42/checkpoints/checkpoint-800` model state. The
+tokenizer comes from the original NTv2-500M model, because the checkpoint stores
+weights/config but no tokenizer files. Optimizer and scheduler state are reset.
+This choice does not assert that step 800 is better than step 600; it makes the
+initialization time point deterministic and removes a Human-validation model
+selection event.
+
+The H0 metadata recovers AdamW, linear decay, learning rate `2e-5`, weight decay
+`0.01`, warmup ratio `0.1`, TE class weight `3`, batch `1` and gradient
+accumulation `8`. B1/B2 retain the schedule meaning rather than the old absolute
+warmup duration: 2,000 updates therefore use exactly 200 warmup updates. An
+80-update warmup would silently change the ratio from 10% to 4%.
 
 This does not discard P3. P3 supplies topology guardrails and motivates a
 later controlled multiscale-head comparison. It is not the first cross-species
