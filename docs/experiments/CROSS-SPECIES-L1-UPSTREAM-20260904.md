@@ -170,6 +170,25 @@ is not a scientific failure and did not launch a model run.
 
 ## Publication gaps
 
+### Continuing authorization
+
+The user explicitly requested continued autonomous, parallel progression toward
+a usable multi-species model after this pilot. Routine engineering repairs,
+registered conditional releases, replication and unsealed asset/interface
+preparation do not need per-node approval. Existing scientific stop gates stay
+unchanged: stopping a failed branch is not stopping the overall research. A
+subsequent hypothesis must be evidence-backed, discussed with Pro, and registered
+as a bounded experiment before execution; no post-hoc gate relaxation or repeated
+sweeps. The existing heartbeat now continues beyond the pilot on this basis.
+
+User review is reserved for opening the final reserved/external test panels,
+changing the core scientific goal or substantially expanding resource scale,
+changing data/repository visibility, and public weight/service release. The
+already-registered conditional D2 CONF opening does not need a new approval.
+Per-species BP-F1>=0.8 remains a research target, not a guarantee. Release also
+requires generalization evidence, usable reproducible inference, license/source
+review and explicit limitations; internal DEV success alone cannot authorize it.
+
 The next required evidence remains frozen species-held-out/full-assembly
 performance, TE-family/homology exposure analysis, and independent utility or
 curated validation beyond agreement with Label-A. A higher internal bp F1
