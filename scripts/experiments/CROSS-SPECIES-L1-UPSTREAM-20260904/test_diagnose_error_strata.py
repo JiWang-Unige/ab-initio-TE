@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import unittest
 from pathlib import Path
 
@@ -13,6 +14,15 @@ SPEC.loader.exec_module(MODULE)
 
 
 class ErrorStrataTest(unittest.TestCase):
+    def test_complete_panel_report_serializes(self):
+        truth = np.zeros(8192, dtype=bool)
+        truth[1:100] = True
+        tile = {"truth": truth, "callable": np.ones(8192, dtype=bool),
+                "margin": np.where(truth, 1.0, -1.0), "sequence": "A" * 8192,
+                "chrom": "chr1", "start": 0}
+        report = MODULE.panel_report([tile], {"platt_slope": 1, "platt_intercept": 0, "threshold": 0.5}, {})
+        self.assertEqual(json.loads(json.dumps(report))["natural_metrics"]["f1"], 1.0)
+
     def test_nested_interval_starting_before_tile_is_retained(self):
         intervals = {"chr1": (((0, 100, 1), (2, 4, 4), (6, 8, 2)), (0, 2, 6))}
         mask = MODULE.class_mask_for_tile("chr1", 5, intervals, length=5)

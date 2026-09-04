@@ -114,6 +114,21 @@ nested RepeatMasker intervals are a supported input, not an exceptional case.
 Two focused regression tests cover both defects; local strata tests pass 5/5.
 Training remains held until the CPU continuation succeeds.
 
+CPU continuation job `12307362` uses
+`outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/strata_repair/12307362` and keeps
+the original failed job/cache paths unchanged. It requests zero GPU, 2 CPU,
+16 GB and 15 minutes on private-teodoro-gpu; 5/5 regression tests pass remotely.
+Phase 1: three jobs including existing work <=8, three directions <=3, no
+array/checkpoint/Track-A claim, unique job-id output/logs, 215 TB free and no
+reservation. No GPU retraining or inference is authorized by this repair.
+
+CPU continuation `12307362` also failed 1:0 after 1:03, at final JSON output:
+`TypeError: Object of type int64 is not JSON serializable`. Truth-run lengths
+from NumPy had propagated into the length-bin integer counters. The fix casts
+run length to a Python integer at its source, without a generic serialization
+wrapper. A complete synthetic panel-to-JSON regression test covers this path;
+both failed attempts remain recorded and excluded as completed scientific runs.
+
 The completed diagnostic stage selects `COVERAGE_PAIR_HIGH_TRAIN_GAP`:
 B0 TRAIN F1 0.987190 and CAL-prevalence AP 0.999172 contrast with SCREEN
 F1 0.793738 and standardized AP 0.872318 (CAL AP 0.883178).

@@ -149,7 +149,7 @@ def truth_length_strata(tiles, predictions):
     for tile, predicted in zip(tiles, predictions):
         truth = np.asarray(tile["truth"], bool) & np.asarray(tile["callable"], bool)
         for left, right in ev.runs_from_bool(truth):
-            length = right - left
+            length = int(right - left)
             name = "<80" if length < 80 else "80-499" if length < 500 else "500-999" if length < 1000 else ">=1000"
             row = result[name]
             row["positive_bp"] += length
