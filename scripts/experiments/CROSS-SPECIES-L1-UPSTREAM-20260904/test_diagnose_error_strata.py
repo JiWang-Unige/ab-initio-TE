@@ -13,6 +13,21 @@ SPEC.loader.exec_module(MODULE)
 
 
 class ErrorStrataTest(unittest.TestCase):
+    def test_nested_interval_starting_before_tile_is_retained(self):
+        intervals = {"chr1": (((0, 100, 1), (2, 4, 4), (6, 8, 2)), (0, 2, 6))}
+        mask = MODULE.class_mask_for_tile("chr1", 5, intervals, length=5)
+        np.testing.assert_array_equal(mask, [1, 3, 3, 1, 1])
+
+    def test_location_counts_include_positive_mass(self):
+        truth = np.zeros(8192, dtype=bool)
+        truth[1:4] = True
+        tile = {"truth": truth, "callable": np.ones(8192, dtype=bool)}
+        predicted = np.zeros(8192, dtype=bool)
+        predicted[2:5] = True
+        result = MODULE.error_location_strata([tile], [predicted])
+        row = result["buckets"]["mixed_6bp_token"]
+        self.assertEqual((row["positive_bp"], row["tp_bp"], row["fp_bp"], row["fn_bp"]), (3, 2, 1, 1))
+
     def test_raw_class_overlap_is_retained_as_mixed_bitmask(self):
         intervals = {
             "chr1": (

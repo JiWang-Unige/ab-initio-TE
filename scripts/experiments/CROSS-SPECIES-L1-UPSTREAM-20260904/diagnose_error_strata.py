@@ -89,17 +89,11 @@ def read_raw_classes(path: Path, desired_chroms: set[str]):
 
 def class_mask_for_tile(chrom, start, intervals, length=TILE_BP):
     mask = np.zeros(length, dtype=np.uint8)
-    entry = intervals.get(chrom, ((), ()))
-    if entry and entry[0] and isinstance(entry[0][0], (int, np.integer)):
-        rows = tuple(entry)
-        starts = tuple(row[0] for row in rows)
-    else:
-        rows, starts = entry
-    index = max(0, bisect.bisect_right(starts, start) - 1)
+    rows, starts = intervals.get(chrom, ((), ()))
     end = start + length
-    for row_start, row_end, bit in rows[index:]:
-        if row_start >= end:
-            break
+    for row_start, row_end, bit in rows[:bisect.bisect_left(starts, end)]:
+        if row_end <= start:
+            continue
         left, right = max(start, row_start) - start, min(end, row_end) - start
         if right > left:
             mask[left:right] |= np.uint8(bit)
@@ -195,7 +189,7 @@ def _conf(truth, callable_mask, predicted, selected=None):
 
 
 def error_location_strata(tiles, predictions):
-    counts = {name: {key: 0 for key in ("callable_bp", "tp_bp", "fp_bp", "fn_bp")} for name in LOCATION_BUCKETS}
+    counts = {name: {key: 0 for key in ("callable_bp", "positive_bp", "tp_bp", "fp_bp", "fn_bp")} for name in LOCATION_BUCKETS}
     global_counts = {key: 0 for key in ("tp_bp", "fp_bp", "fn_bp")}
     memberships, pairs = defaultdict(int), defaultdict(int)
     for tile, predicted in zip(tiles, predictions):
@@ -272,6 +266,7 @@ def main():
     parser.add_argument("--diagnostic-root", type=Path, required=True)
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--upstream-root", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     diagnostic_path = args.diagnostic_root / "diagnostic.json"
     diagnostic = json.loads(diagnostic_path.read_text())
@@ -288,8 +283,8 @@ def main():
         for split in SPLITS:
             cache = load_cache(args.diagnostic_root / f"{arm}_{split}_margins.npz")
             output["arms"][arm]["splits"][split] = panel_report(attach_records(cache, records[split]), calibration, raw_classes)
-    ev.write_json(args.diagnostic_root / "error_strata.json", output)
-    print(json.dumps({"output": str(args.diagnostic_root / "error_strata.json")}, sort_keys=True))
+    ev.write_json(args.output_dir / "error_strata.json", output)
+    print(json.dumps({"output": str(args.output_dir / "error_strata.json")}, sort_keys=True))
 
 
 if __name__ == "__main__":

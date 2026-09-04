@@ -20,4 +20,5 @@ python3 scripts/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/diagnose_worm_gen
 python3 scripts/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/diagnose_error_strata.py \
   --root /home/users/j/jwang/ab-initio-TE \
   --upstream-root "${UPSTREAM_ROOT}" \
-  --diagnostic-root "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/generalization/${SLURM_JOB_ID}"
+  --diagnostic-root "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/generalization/${SLURM_JOB_ID}" \
+  --output-dir "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/generalization/${SLURM_JOB_ID}"

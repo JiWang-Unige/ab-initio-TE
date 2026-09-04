@@ -101,6 +101,26 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+D0 job `12306016` ended FAILED 1:0 after 23:15 because the downstream CPU
+strata accumulator omitted `positive_bp` and raised `KeyError: positive_bp`.
+This failed attempt is not a completed scientific run. GPU inference and the
+final diagnostic JSON had already finished, including both additional B1 seeds;
+all numeric values are finite, and seed42 frozen DEV maximum reproduction
+deltas are 2.68e-9 (B0) and 2.01e-9 (B1), below 1e-6.
+The repair reuses these explicit inference caches, without another GPU run,
+and writes strata into a new job-specific directory. It also fixes raw-class
+overlap lookup to retain long enclosing TE records that start before a tile;
+nested RepeatMasker intervals are a supported input, not an exceptional case.
+Two focused regression tests cover both defects; local strata tests pass 5/5.
+Training remains held until the CPU continuation succeeds.
+
+The completed diagnostic stage selects `COVERAGE_PAIR_HIGH_TRAIN_GAP`:
+B0 TRAIN F1 0.987190 and CAL-prevalence AP 0.999172 contrast with SCREEN
+F1 0.793738 and standardized AP 0.872318 (CAL AP 0.883178).
+This is a substantial observed training/generalization gap, not proof that
+more independent data will fix it. The registered L/D comparison tests that
+hypothesis at matched compute; no initialization-pair branch is released.
+
 D0-M CPU job `12306000` completed 0:0 in 24 seconds; its three focused tests
 passed. SCREEN512, nested TRAIN3000 and coordinate-only CONF256 are feasible
 without relaxing the frozen buffers or sequence eligibility. TRAIN uses
