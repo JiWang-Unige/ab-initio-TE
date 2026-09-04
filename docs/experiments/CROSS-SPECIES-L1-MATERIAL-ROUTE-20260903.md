@@ -2,7 +2,7 @@
 
 ## Status
 
-`B1 THREE-SEED GATE FAILS ON C. ELEGANS F1/RECALL; B0 JOBS 12261865/12261866 SUBMITTED; EXTERNAL SEALED; NO MOE`
+`B0 C. ELEGANS THREE-SEED RECOVERY GATE FAIL; CONDITIONAL ROUTE CLOSED; EXTERNAL SEALED; NO MOE`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -755,50 +755,77 @@ soybean/Arabidopsis specialist failures, and define unseen monocot and eudicot
 holdouts. The animal threshold and router are tested as transfer hypotheses;
 they are not assumed valid in plants.
 
-## Immediate executable decision
+## B0 *C. elegans* specialist closure
 
-Seed42 closed the B1-versus-B2 engineering choice in favor of B1. The B1
-confirmation at seeds 17, 42 and 20260903 and their per-seed global CAL/DEV
-evaluations are complete; no additional H1 or B2 seed is needed. The frozen
-three-seed internal gate failed for *C. elegans* mean F1 and mean recall, so E1
-stays sealed and the only active model work is B0 for *C. elegans*. No best-seed
-selection or across-seed ensemble is allowed. Do not change the global-
-threshold contract or use a test-species threshold to rescue the failure.
+Training array `12261865` and its `afterok` evaluation array `12261866`
+completed all three seeds with exit code 0. Each training task contains exactly
+2,000 sequential updates, 12,000 finite tile-pair losses, the frozen B0
+metadata, six uniformly weighted *C. elegans* tiles / 12 native model windows
+per update, and a complete final model. The evaluation fitted the registered
+`CROSS-SPECIES-L1-B0-SINGLE-SPECIES-PLATT-V1` calibration on the
+*C. elegans*-only CAL panel and applied it unchanged to the same DEV coordinates
+used by the matched B1 reference. These runs are admissible for the registered
+internal diagnostic; no failed task enters the denominator.
 
-The evaluator now emits callable-bp average precision from the raw projected
-margin and has an explicit single-species CAL mode for B0; its default remains
-the frozen six-species shared calibration. The B0 scripts train three matched
-specialists, retain each B1 global calibration for the paired baseline, and
-write new job-scoped outputs rather than replacing the original B1 evidence.
-This diagnostic is limited to the failing species and does not authorize
-adapters or MoE.
+| seed | B1 shared bp F1 | B0 specialist bp F1 | F1 gain | B1 AP | B0 AP | AP gain | segment F1@0.8 delta | boundary F1@5 delta |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 17 | 0.759242 | 0.792126 | +0.032884 | 0.835225 | 0.856098 | +0.020873 | +0.065050 | +0.023808 |
+| 42 | 0.756506 | 0.794382 | +0.037876 | 0.836637 | 0.858375 | +0.021738 | +0.068852 | +0.030001 |
+| 20260903 | 0.757204 | 0.790435 | +0.033231 | 0.832668 | 0.852703 | +0.020035 | +0.039156 | +0.020555 |
 
-The smart-sbatch Phase 1 guard passed before submission. One existing user job
-plus the three training and three dependent evaluation tasks totals 7, within
-the limit of 8; each array has size 3 within the limit of 16. RTX 3090 provides
-24 GB versus the 20-GB minimum; requested walltimes are 2 hours for training
-and 1 hour for evaluation, both within the cohort and partition limits. Both
-output roots and both log patterns were absent, 216 TB remained on BeeGFS, the
-default RTX 3080 exclusions are present, and no private-node maintenance
-reservation was active. Track-A orthogonality is not applicable to a
-three-seed matched diagnostic, and this cohort cannot support a claim.
+| three-seed mean | B1 shared | B0 specialist | delta |
+|---|---:|---:|---:|
+| bp precision | 0.792224 | 0.815324 | +0.023100 |
+| bp recall | 0.726013 | 0.770593 | +0.044580 |
+| bp F1 | 0.757651 | 0.792314 | +0.034664 |
+| callable-bp average precision | 0.834843 | 0.855725 | +0.020882 |
+| segment F1@0.8 | 0.264384 | 0.322070 | +0.057686 |
+| boundary F1@5 | 0.110960 | 0.135748 | +0.024788 |
+| boundary F1@25 | 0.224506 | 0.282750 | +0.058245 |
+| fragments/truth | 0.996101 | 0.974009 | -0.022092 |
+| split rate | 0.126706 | 0.117609 | -0.009097 |
+| missed rate | 0.288066 | 0.212042 | -0.076023 |
+| short-prediction rate | 0.538540 | 0.440748 | -0.097793 |
+| hardN FP rate | 0.058428 | 0.056370 | -0.002058 |
 
-Phase 2 found two allocation-free RTX 3090 GPUs on `gpu034`, none on `gpu035`,
-no private pending job ahead, and a much longer shared-queue backlog. The
-scheduler estimated private start at `2026-09-04T11:43:00`, so private remained
-the earliest eligible route. B0 training array `12261865` was submitted with
-seeds 17, 42 and 20260903; afterok evaluation array `12261866` will fit each
-specialist's *C. elegans*-only CAL map, apply it to DEV, and re-apply the
-unchanged matched B1 global calibration to the same DEV coordinates for the
-AUPRC comparison.
+B0 improves every reported mean and all topology guardrails pass, but every
+seed independently fails all three decision-bearing recovery requirements:
+specialist bp F1 is below `0.85`, F1 gain is below `0.05`, and raw-margin AP
+gain is below `0.03`. The frozen result is therefore
+`B0_RECOVERY_GATE_FAIL`. The improvement is real within this internal matched
+DEV diagnostic, but it is too small to establish a recoverable shared-model
+negative-transfer gap.
 
-Complex MoE, learned routing, plant training, boundary loss and architecture
-search remain closed unless their explicit upstream gate opens. A single
-failing *C. elegans* species cannot authorize an adapter or MoE. Horse, opossum,
-`dm6` and cattle remain unread by training, calibration and internal selection.
+This result supports only the statement that target-supervised training with
+the current NTv2 backbone, Label-A comparator, data volume and training
+contract modestly improves *C. elegans* material ranking, recall and topology.
+It does not identify whether the remaining limit comes from the comparator,
+training data, backbone or objective, and it does not authorize an adapter,
+router or MoE. It cannot support zero-shot deployment, biological TE truth,
+complete-copy reconstruction or cross-species generalization claims.
+
+## Final route decision
+
+- **Engineering complete:** X0 materialization, H0 identity, B1/B2 selection,
+  B1 three-seed confirmation and B0 three-seed specialist execution all have
+  valid artifacts and closed job ledgers.
+- **Scientific internal result:** B1 clears the six-species macro gate, but
+  fails *C. elegans* F1/recall; B0 produces consistent positive target-specific
+  deltas but fails every primary recovery threshold at every seed.
+- **Closed:** the registered B2 GroupDRO arm, the B0 conditional-specialist
+  route, adapters, MoE, learned routing and post-hoc threshold/seed selection.
+- **Next-only:** stop model selection under this frozen L1 contract. Any new
+  work must begin as a separately preregistered upstream label/data/backbone
+  study that can distinguish those explanations; it must not reopen B0 by
+  retuning this DEV panel.
+
+Horse, opossum, `dm6` and cattle remain sealed and were not read by training,
+calibration or internal selection. Because B0 failed, no second invertebrate X0
+audit and no external E1 panel is opened.
 
 ## Evidence files
 
+- `outputs/CROSS-SPECIES-L1-B0-C-ELEGANS-EVAL-20260903/summary.json`
 - `docs/experiments/P3-R2-DECISION-20260829.md`
 - `docs/experiments/P3-R2-CLOSURE-20260830.md`
 - `docs/experiments/C5-HYBRID-CLOSURE-20260831.md`
