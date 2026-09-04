@@ -146,6 +146,19 @@ configured exclusions retained. Not a Track-A architecture batch; no claim
 is allowed from this development pilot. Evaluation follows only successful
 training and its frozen metadata/exposure checks.
 
+D1 seed42 L/D training array `12307410` was submitted after that validation,
+task0=L and task1=D, using the registered private3090 script. Evaluation has
+not yet been submitted: successful training and exposure checks must precede
+it. The heartbeat now monitors this array rather than rerunning the failed
+upstream attempts. Model roots are
+`outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_{0,1}`.
+
+Exploratory B0 SCREEN positive-run length strata give bp recall 0.4830
+(<80 bp), 0.7634 (80-499), 0.8692 (500-999), and 0.7593 (>=1000).
+These are material-run bp recall, not biological-copy/segment F1. They do
+not support a blanket monotonic "longer is easier" claim and do not change
+the frozen sampling design.
+
 For the conditional D1 pair, live Slurm tests at approximately 23:35 cluster
 time estimated starts on Sep 5: private3090 10:35, shared3090 14:13,
 sharedA5000 14:41, sharedA5500 14:08, sharedA6000 22:56, sharedA100-40GB 18:01.
