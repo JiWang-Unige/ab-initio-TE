@@ -2,7 +2,7 @@
 
 ## Status
 
-`B1 THREE-SEED GATE FAILS ON C. ELEGANS F1/RECALL; B0 C. ELEGANS ONLY; EXTERNAL SEALED; NO MOE SUBMITTED`
+`B1 THREE-SEED GATE FAILS ON C. ELEGANS F1/RECALL; B0 JOBS 12261865/12261866 SUBMITTED; EXTERNAL SEALED; NO MOE`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -772,6 +772,25 @@ specialists, retain each B1 global calibration for the paired baseline, and
 write new job-scoped outputs rather than replacing the original B1 evidence.
 This diagnostic is limited to the failing species and does not authorize
 adapters or MoE.
+
+The smart-sbatch Phase 1 guard passed before submission. One existing user job
+plus the three training and three dependent evaluation tasks totals 7, within
+the limit of 8; each array has size 3 within the limit of 16. RTX 3090 provides
+24 GB versus the 20-GB minimum; requested walltimes are 2 hours for training
+and 1 hour for evaluation, both within the cohort and partition limits. Both
+output roots and both log patterns were absent, 216 TB remained on BeeGFS, the
+default RTX 3080 exclusions are present, and no private-node maintenance
+reservation was active. Track-A orthogonality is not applicable to a
+three-seed matched diagnostic, and this cohort cannot support a claim.
+
+Phase 2 found two allocation-free RTX 3090 GPUs on `gpu034`, none on `gpu035`,
+no private pending job ahead, and a much longer shared-queue backlog. The
+scheduler estimated private start at `2026-09-04T11:43:00`, so private remained
+the earliest eligible route. B0 training array `12261865` was submitted with
+seeds 17, 42 and 20260903; afterok evaluation array `12261866` will fit each
+specialist's *C. elegans*-only CAL map, apply it to DEV, and re-apply the
+unchanged matched B1 global calibration to the same DEV coordinates for the
+AUPRC comparison.
 
 Complex MoE, learned routing, plant training, boundary loss and architecture
 search remain closed unless their explicit upstream gate opens. A single
