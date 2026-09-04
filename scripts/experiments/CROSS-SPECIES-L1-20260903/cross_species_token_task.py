@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import gzip
 import json
 import math
 import random
+from collections import Counter
 from pathlib import Path
 
 import torch
@@ -33,6 +35,8 @@ WEIGHT_DECAY = 0.01
 TE_BP_WEIGHT = 3.0
 MAX_GRAD_NORM = 1.0
 GROUPDRO_ETA = 0.01
+UPSTREAM_COVERAGE_RUN_ROLE = "upstream_coverage_pilot"
+UPSTREAM_COVERAGE_PROTOCOL = "CROSS-SPECIES-L1-UPSTREAM-20260904-V1"
 
 
 class SpeciesTileDataset:
@@ -262,6 +266,15 @@ def train(args) -> None:
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=False)
 
+    species_data: dict[str, Path] = {}
+    for value in getattr(args, "species_data", []) or []:
+        species, path = value.split("=", 1)
+        if species not in SPECIES:
+            raise ValueError(f"unsupported species_data species: {species}")
+        if species in species_data:
+            raise ValueError(f"duplicate species_data override: {species}")
+        species_data[species] = Path(path)
+
     if args.arm == "B0" and args.species is None:
         raise ValueError("B0 requires --species")
     single_species = (
@@ -270,7 +283,11 @@ def train(args) -> None:
     training_species = (single_species,) if single_species is not None else SPECIES
     datasets = {
         species: SpeciesTileDataset(
-            Path(args.data_root) / "TRAIN" / f"{species}.jsonl.gz", species
+            species_data.get(
+                species,
+                Path(args.data_root) / "TRAIN" / f"{species}.jsonl.gz",
+            ),
+            species,
         )
         for species in training_species
     }
@@ -300,9 +317,10 @@ def train(args) -> None:
         else list(SPECIES)
     )
 
+    requested_run_role = getattr(args, "run_role", None)
     metadata = {
-        "arm": args.arm,
-        "run_role": (
+        "arm": getattr(args, "experiment_arm", None) or args.arm,
+        "run_role": requested_run_role or (
             "frozen_training"
             if (args.max_steps, args.warmup_steps) == (MAX_STEPS, WARMUP_STEPS)
             else "engineering_throughput_smoke"
@@ -339,7 +357,24 @@ def train(args) -> None:
         "label_mapping": {"1": "P", "0": "N", "?": "ignore", "H": "N"},
         "checkpoint_policy": "final-step-only",
     }
+    if getattr(args, "protocol", None) is not None:
+        metadata["protocol"] = args.protocol
+    if species_data:
+        metadata["train_data_by_species"] = {
+            species: str(path) for species, path in sorted(species_data.items())
+        }
     (output_dir / "training_meta.json").write_text(json.dumps(metadata, indent=2) + "\n")
+
+    collect_exposure = (
+        requested_run_role == UPSTREAM_COVERAGE_RUN_ROLE
+        and getattr(args, "protocol", None) == UPSTREAM_COVERAGE_PROTOCOL
+    )
+    exposure_presentations: Counter[str] = Counter()
+    exposure_tiles: dict[str, set[str]] = {
+        species: set() for species in training_species
+    }
+    exposure_positive_bp: Counter[str] = Counter()
+    exposure_callable_bp: Counter[str] = Counter()
 
     optimizer.zero_grad(set_to_none=True)
     with (output_dir / "train_log.jsonl").open("w", buffering=1) as log_handle:
@@ -348,6 +383,19 @@ def train(args) -> None:
             raw_losses = []
             learning_rate = optimizer.param_groups[0]["lr"]
             sampled_tiles = sampler.next_step()
+            if collect_exposure:
+                for species, tile_id in sampled_tiles:
+                    exposure_presentations[species] += 1
+                    tile_id = str(tile_id)
+                    if tile_id in exposure_tiles[species]:
+                        continue
+                    exposure_tiles[species].add(tile_id)
+                    for record in datasets[species].pair(tile_id):
+                        labels = str(record["labels"])
+                        exposure_positive_bp[species] += labels.count("1")
+                        exposure_callable_bp[species] += sum(
+                            symbol != "?" for symbol in labels
+                        )
             for species_index, (species, tile_id) in enumerate(sampled_tiles):
                 batch = encode_pair(tokenizer, datasets[species].pair(tile_id))
                 input_ids = batch["input_ids"].to(device)
@@ -390,6 +438,33 @@ def train(args) -> None:
     final_model = output_dir / "final_model"
     model.save_pretrained(final_model, safe_serialization=False)
     tokenizer.save_pretrained(final_model)
+    if collect_exposure:
+        with (output_dir / "exposure.tsv").open(
+            "w", newline="", encoding="utf-8"
+        ) as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=(
+                    "species",
+                    "presentations",
+                    "unique_tiles",
+                    "unique_positive_bp",
+                    "unique_callable_bp",
+                ),
+                delimiter="\t",
+                lineterminator="\n",
+            )
+            writer.writeheader()
+            for species in SPECIES:
+                writer.writerow(
+                    {
+                        "species": species,
+                        "presentations": exposure_presentations[species],
+                        "unique_tiles": len(exposure_tiles.get(species, set())),
+                        "unique_positive_bp": exposure_positive_bp[species],
+                        "unique_callable_bp": exposure_callable_bp[species],
+                    }
+                )
     (output_dir / "q.json").write_text(
         json.dumps(
             {
@@ -413,6 +488,10 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max-steps", type=int, default=MAX_STEPS)
     parser.add_argument("--warmup-steps", type=int, default=WARMUP_STEPS)
+    parser.add_argument("--run-role")
+    parser.add_argument("--protocol")
+    parser.add_argument("--experiment-arm", choices=("B1", "B2", "H1", "B0", "L", "D"))
+    parser.add_argument("--species-data", action="append", default=[])
     train(parser.parse_args())
 
 

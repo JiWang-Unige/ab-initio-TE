@@ -101,6 +101,20 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+D0-M CPU job `12306000` completed 0:0 in 24 seconds; its three focused tests
+passed. SCREEN512, nested TRAIN3000 and coordinate-only CONF256 are feasible
+without relaxing the frozen buffers or sequence eligibility. TRAIN uses
+chrI/chrII/chrV/chrX; CONF uses chrIV, with 321 eligible coordinates before
+selecting 256. All prescribed gap/non-overlap checks passed. TRAIN positive
+mass increases from 1,291,106 to 2,532,606 bp; SCREEN has 407,508 positive bp.
+CONF labels, sequence exports and predictions remain unopened.
+Materialization root: `outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/materialization/12306000`.
+
+D0-G plus its CPU cache-strata consumer was submitted as job `12306016`
+on shared A5000 and actually started on gpu044 at cluster time
+2026-09-04 22:56:55, earlier than the scheduler estimate. Results are pending;
+no D1 model has been trained under this new protocol yet.
+
 CPU job `12305384` completed 0:0 in 34 seconds. Remote exact-ceiling tests
 passed 2/2 and unchanged evaluator tests passed 11/11. Exact token-constant
 worm F1 ceilings are TRAIN `0.9946146323`, CAL `0.9944918641`, DEV
