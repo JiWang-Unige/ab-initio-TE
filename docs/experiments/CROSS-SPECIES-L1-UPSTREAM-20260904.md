@@ -115,6 +115,24 @@ on shared A5000 and actually started on gpu044 at cluster time
 2026-09-04 22:56:55, earlier than the scheduler estimate. Results are pending;
 no D1 model has been trained under this new protocol yet.
 
+Focused upstream tests ran on CPU job `12306034`: COMPLETED 0:0, 7 seconds,
+17/17 passed with no skips in `te_benchmark`. This includes unchanged nonworm
+sampler streams when the worm pool doubles, correct CAL/DEV/SCREEN input
+selection excluding CONF, and independent fragment/split gate failures.
+Local bundled Python passed 14 tests but skipped three because torch is
+absent; the remote run resolves that engineering test gap.
+Reproduction command (inside the established conda environment):
+`python3 -m unittest discover -s scripts/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904 -p 'test_*.py'`.
+The test job used private-teodoro-gpu with zero GPU, 2 CPU, 16 GB, 5-minute
+walltime and `logs/te_l1_upstream_tests_12306034.{out,err}`. Together with D0-G
+and the two existing user jobs this was 4/8 jobs within three directions.
+
+The existing `te-cross-species-seed42-pilot` heartbeat has been updated (not
+duplicated) to this upstream protocol and resumed at 15-minute intervals.
+It monitors D0 before conditionally releasing D1 and D2, preserves sealed
+panels and the old B0 no-go, and stays quiet on unchanged state. No training
+result or unseen-species claim is implied by submitting the diagnostics.
+
 CPU job `12305384` completed 0:0 in 34 seconds. Remote exact-ceiling tests
 passed 2/2 and unchanged evaluator tests passed 11/11. Exact token-constant
 worm F1 ceilings are TRAIN `0.9946146323`, CAL `0.9944918641`, DEV
