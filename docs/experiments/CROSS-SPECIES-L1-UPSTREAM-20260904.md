@@ -98,6 +98,17 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+CPU job `12305384` completed 0:0 in 34 seconds. Remote exact-ceiling tests
+passed 2/2 and unchanged evaluator tests passed 11/11. Exact token-constant
+worm F1 ceilings are TRAIN `0.9946146323`, CAL `0.9944918641`, DEV
+`0.9944981991`, consistent with the mathematical lower bound. DEV has 2,405
+mixed tokens containing 14,429 callable bp. The bp-optimal oracle's legacy
+joint boundary5 F1 is `0.9681654086`; it is not a separately optimized boundary
+ceiling. Other species DEV ceilings: human `0.9965179173`, mouse
+`0.9962433514`, chicken `0.9944088523`, zebrafish `0.9967663562`, pig
+`0.9950065662`. Output quantization alone does not explain current worm F1.
+Raw diagnostic evidence: `outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/ceiling/12305384/ceiling.json`.
+
 CPU ceiling Phase 1 passed: 2 existing user jobs +1=3/8, no array/GPU,
 30-minute walltime below 12-hour cohort and 168-hour private limits, no active
 reservation, unique job-id outputs/logs, 215 TB free, no checkpoints. The
