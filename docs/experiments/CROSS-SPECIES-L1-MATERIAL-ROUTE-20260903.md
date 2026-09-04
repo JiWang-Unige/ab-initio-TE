@@ -4,6 +4,10 @@
 
 `B0 C. ELEGANS THREE-SEED RECOVERY GATE FAIL; CONDITIONAL ROUTE CLOSED; EXTERNAL SEALED; NO MOE`
 
+The user subsequently authorized the separately registered
+[upstream coverage pilot](CROSS-SPECIES-L1-UPSTREAM-20260904.md). It preserves
+the decisions in this report and tests a new matched data-coverage hypothesis.
+
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
 could overlap chromosomes already supervised in H0. It is an excluded

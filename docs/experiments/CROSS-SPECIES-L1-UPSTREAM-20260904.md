@@ -48,13 +48,16 @@ metric is independent endpoint F1. No family or homology-clean split is claimed.
 SCREEN512 is label-blind, on the four existing TRAIN chromosomes, at least
 8192 bp from old TRAIN intervals. TRAIN3000 contains the original 1500 tiles
 and 1500 new coordinates from those same chromosomes, excluding SCREEN plus
-8192-bp flanks. Existing chromosome proportions are retained by proportional
-quotas and deterministic seed 20260904 sampling. Coordinates are 8192 aligned.
-The original eligible-grid rule is retained; no TE mass or model-error filtering.
+8192-bp flanks. Quotas are proportional to eligible candidate counts with the
+original 10%-30% chromosome contribution bounds on each four-chromosome pool.
+Sampling uses deterministic seed 20260904. Coordinates are 8192 aligned and
+retain the original <=1% nonACGT eligibility filter. No TE mass or model-error
+filtering is permitted. Quota infeasibility blocks the affected panel.
 
 CONF256 is selected on the existing validation chromosome, at least 8192 bp
-from old CAL/DEV. Only its coordinates are prepared now; sequence, labels and
-model predictions are not materialized or inspected before D2 model freeze.
+from old CAL/DEV. Only its coordinates are prepared now; sequence is used only
+for the same label-blind eligibility QC, with no CONF sequence export, label
+painting or model prediction before D2 model freeze.
 If CONF is infeasible at the requested buffer, results remain an engineering
 pilot; the reserved chromosome is not used to rescue confirmation.
 
@@ -114,6 +117,17 @@ CPU ceiling Phase 1 passed: 2 existing user jobs +1=3/8, no array/GPU,
 reservation, unique job-id outputs/logs, 215 TB free, no checkpoints. The
 CPU-only fast path selects private-teodoro-gpu without Phase 2. One upstream
 diagnostic direction fits the three-direction limit; this is not Track A.
+
+D0-M/G Phase 1 passed with at most 4/8 active or queued user jobs and three
+directions including existing work, independent job-id output/log paths, no
+checkpoint writes, 215 TB free and no maintenance. CPU materialization requests
+30 minutes, inference one hour; both fit cohort and partition limits. GPU
+inference uses the configured >=20GB filter and default RTX3080 exclusions.
+Phase 2 scheduler tests estimated private RTX3090 start at 2026-09-05 07:47:48,
+shared RTX3090 at 02:23:56, shared A5000 at 01:53:17 and shared A5500 at
+01:53:18 (cluster local time). Choose shared A5000 (configured 25GB); these are
+queue estimates, not guaranteed starts. Existing DEV reproduction within 1e-6
+remains mandatory when using a different eligible GPU type.
 
 Local exact-ceiling unit tests passed (exhaustive token
 assignment comparison and unknown/tail handling). Local evaluator tests ran
