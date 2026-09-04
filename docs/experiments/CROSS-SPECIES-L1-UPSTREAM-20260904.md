@@ -129,6 +129,32 @@ run length to a Python integer at its source, without a generic serialization
 wrapper. A complete synthetic panel-to-JSON regression test covers this path;
 both failed attempts remain recorded and excluded as completed scientific runs.
 
+The second CPU continuation is `12307404` under the same bounded resource
+request and fresh job-id output directory; it includes six focused tests.
+It completed 0:0 in 1:02, with 6/6 tests passed. All eight B0/B1 x
+TRAIN/CAL/DEV/SCREEN strata panels are finite; their TP/FP/FN/positive counts
+and F1 agree with the frozen diagnostic, and length/class positive mass
+reproduces each panel's denominator. The successful GPU diagnostic stage
+plus this successful CPU continuation now form the validated D0 chain;
+the two failed Slurm attempts are not relabeled as successes. D1 L/D is released.
+
+D1 Phase 1 passed: existing two jobs plus two training tasks =4/8, three
+directions, array2<=16, RTX3090 24GB>=20, 2h/task below 12h cohort and 168h
+partition limits, <=4 additional GPU hours, job/task-specific model/output/log
+paths, expected checkpoint storage <10GB versus 215TB free, no reservation,
+configured exclusions retained. Not a Track-A architecture batch; no claim
+is allowed from this development pilot. Evaluation follows only successful
+training and its frozen metadata/exposure checks.
+
+For the conditional D1 pair, live Slurm tests at approximately 23:35 cluster
+time estimated starts on Sep 5: private3090 10:35, shared3090 14:13,
+sharedA5000 14:41, sharedA5500 14:08, sharedA6000 22:56, sharedA100-40GB 18:01.
+Private has no unallocated GPU now. Choose private3090 for both matched arms:
+among these eligible candidates it has the earliest estimated finish and no
+shared billing. The generic long-private-wait heuristic would suggest shared,
+but the tested shared routes are later, not an acceleration. Estimates may
+change; actual start/finish must be recorded separately.
+
 The completed diagnostic stage selects `COVERAGE_PAIR_HIGH_TRAIN_GAP`:
 B0 TRAIN F1 0.987190 and CAL-prevalence AP 0.999172 contrast with SCREEN
 F1 0.793738 and standardized AP 0.872318 (CAL AP 0.883178).
