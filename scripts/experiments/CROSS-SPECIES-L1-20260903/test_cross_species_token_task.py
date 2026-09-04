@@ -57,6 +57,26 @@ class CrossSpeciesTokenTaskTest(unittest.TestCase):
             {tile_id for _, tile_id in first + second}, set(human_tiles)
         )
 
+    def test_b0_sampler_emits_six_target_species_tiles_per_step(self) -> None:
+        worm_tiles = [f"c_elegans:{index}" for index in range(12)]
+        sampler = task.SpeciesTileSampler(
+            {"c_elegans": worm_tiles},
+            seed=42,
+            arm="B0",
+            target_species="c_elegans",
+        )
+        first = sampler.next_step()
+        second = sampler.next_step()
+        for step in (first, second):
+            self.assertEqual(
+                [species for species, _ in step],
+                ["c_elegans"] * len(task.SPECIES),
+            )
+            self.assertEqual(len({tile_id for _, tile_id in step}), len(task.SPECIES))
+        self.assertEqual(
+            {tile_id for _, tile_id in first + second}, set(worm_tiles)
+        )
+
     def test_bp_loss_counts_p_n_ignores_question_and_treats_h_as_n(self) -> None:
         positive, negative = task.label_chunk_masses("10?H11", width=3)
         self.assertEqual(positive, [1, 2])
@@ -88,9 +108,11 @@ class CrossSpeciesTokenTaskTest(unittest.TestCase):
         b1 = task.arm_weights("B1", initial)
         b2 = task.arm_weights("B2", initial)
         h1 = task.arm_weights("H1", initial)
+        b0 = task.arm_weights("B0", initial)
         torch.testing.assert_close(b1, torch.full_like(initial, 1.0 / 6.0))
         torch.testing.assert_close(b2, torch.full_like(initial, 1.0 / 6.0))
         torch.testing.assert_close(h1, torch.full_like(initial, 1.0 / 6.0))
+        torch.testing.assert_close(b0, torch.full_like(initial, 1.0 / 6.0))
 
         current_losses = torch.tensor([2.0, 1.0, 1.0, 1.0, 1.0, 1.0])
         updated = task.update_groupdro_log_q(initial, current_losses, eta=0.01)

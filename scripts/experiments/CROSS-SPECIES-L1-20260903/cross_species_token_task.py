@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Frozen B1/B2/H1 cross-species NTv2 training pilot."""
+"""Frozen B1/B2/H1 and matched B0 specialist NTv2 training."""
 
 from __future__ import annotations
 
@@ -65,11 +65,20 @@ class SpeciesTileDataset:
 
 
 class SpeciesTileSampler:
-    """Draw one tile per species, or six Human tiles for H1, per optimizer step."""
+    """Draw one tile per species, or six tiles from one species, per step."""
 
-    def __init__(self, tile_ids: dict[str, list[str]], seed: int, arm: str = "B1"):
+    def __init__(
+        self,
+        tile_ids: dict[str, list[str]],
+        seed: int,
+        arm: str = "B1",
+        target_species: str | None = None,
+    ):
         self.arm = arm
-        self.active_species = ("human",) if arm == "H1" else SPECIES
+        self.single_species = "human" if arm == "H1" else target_species
+        self.active_species = (
+            (self.single_species,) if self.single_species is not None else SPECIES
+        )
         self.orders = {
             species: list(tile_ids[species]) for species in self.active_species
         }
@@ -83,7 +92,11 @@ class SpeciesTileSampler:
 
     def next_step(self) -> list[tuple[str, str]]:
         selected = []
-        species_order = ("human",) * len(SPECIES) if self.arm == "H1" else SPECIES
+        species_order = (
+            (self.single_species,) * len(SPECIES)
+            if self.single_species is not None
+            else SPECIES
+        )
         for species in species_order:
             if self.positions[species] == len(self.orders[species]):
                 self.random[species].shuffle(self.orders[species])
@@ -182,7 +195,7 @@ def bp_weighted_pair_loss(
 
 
 def arm_weights(arm: str, log_q: torch.Tensor) -> torch.Tensor:
-    if arm in {"B1", "H1"}:
+    if arm in {"B1", "H1", "B0"}:
         return torch.full_like(log_q, 1.0 / len(SPECIES))
     return torch.exp(log_q)
 
@@ -249,16 +262,23 @@ def train(args) -> None:
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=False)
 
+    if args.arm == "B0" and args.species is None:
+        raise ValueError("B0 requires --species")
+    single_species = (
+        "human" if args.arm == "H1" else args.species if args.arm == "B0" else None
+    )
+    training_species = (single_species,) if single_species is not None else SPECIES
     datasets = {
         species: SpeciesTileDataset(
             Path(args.data_root) / "TRAIN" / f"{species}.jsonl.gz", species
         )
-        for species in SPECIES
+        for species in training_species
     }
     sampler = SpeciesTileSampler(
         {species: dataset.tile_ids for species, dataset in datasets.items()},
         args.seed,
         args.arm,
+        args.species,
     )
     model, tokenizer = load_model_and_tokenizer()
     model.config.use_cache = False
@@ -275,8 +295,8 @@ def train(args) -> None:
         (len(SPECIES),), -math.log(len(SPECIES)), dtype=torch.float64
     )
     step_keys = (
-        [f"human_pair_{index}" for index in range(len(SPECIES))]
-        if args.arm == "H1"
+        [f"{single_species}_pair_{index}" for index in range(len(SPECIES))]
+        if single_species is not None
         else list(SPECIES)
     )
 
@@ -288,23 +308,23 @@ def train(args) -> None:
             else "engineering_throughput_smoke"
         ),
         "seed": args.seed,
-        "species": ["human"] if args.arm == "H1" else list(SPECIES),
+        "species": list(training_species),
         "tiles_per_species": {
             species: len(datasets[species].tile_ids)
-            for species in (("human",) if args.arm == "H1" else SPECIES)
+            for species in training_species
         },
         "data_root": str(Path(args.data_root)),
         "base_model": str(BASE_MODEL),
         "initial_weights": str(H0_CHECKPOINT / "pytorch_model.bin"),
         "window_bp": WINDOW_BP,
         "model_windows_per_species_per_step": (
-            2 * len(SPECIES) if args.arm == "H1" else 2
+            2 * len(SPECIES) if single_species is not None else 2
         ),
-        "species_per_step": 1 if args.arm == "H1" else len(SPECIES),
+        "species_per_step": 1 if single_species is not None else len(SPECIES),
         "tiles_per_step": len(SPECIES),
         "training_sampling": (
-            "six Human TRAIN tiles per step"
-            if args.arm == "H1"
+            f"six {single_species} TRAIN tiles per step"
+            if single_species is not None
             else "one TRAIN tile per species per step"
         ),
         "max_steps": args.max_steps,
@@ -388,7 +408,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-root", required=True)
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--arm", choices=("B1", "B2", "H1"), required=True)
+    parser.add_argument("--arm", choices=("B1", "B2", "H1", "B0"), required=True)
+    parser.add_argument("--species", choices=SPECIES)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--max-steps", type=int, default=MAX_STEPS)
     parser.add_argument("--warmup-steps", type=int, default=WARMUP_STEPS)

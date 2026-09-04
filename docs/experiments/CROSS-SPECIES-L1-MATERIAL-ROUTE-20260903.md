@@ -2,7 +2,7 @@
 
 ## Status
 
-`SEED42 SELECTS B1; B1 SEEDS 17/20260903 RUNNING WITH DEPENDENT CAL/DEV; EXTERNAL SEALED; NO MOE SUBMITTED`
+`B1 THREE-SEED GATE FAILS ON C. ELEGANS F1/RECALL; B0 C. ELEGANS ONLY; EXTERNAL SEALED; NO MOE SUBMITTED`
 
 Execution ledger: CPU job `12175737` was intentionally cancelled after 3:08
 with no scientific output when a concurrent audit found that its Human pool
@@ -96,10 +96,23 @@ This closes the registered GroupDRO formulation without implying that group
 losses encode phylogeny or annotation quality.
 
 Only B1 was consequently released for confirmation at seeds 17 and 20260903.
-Training array `12181383` uses the same 2,000-step contract; dependent CAL/DEV
-array `12181384` fits an independent global calibrator and threshold for each
-seed. Horse, opossum, `dm6` and cattle remain sealed until all three B1 seeds
-are complete and the frozen internal gate is adjudicated.
+Training array `12181383` and dependent CAL/DEV array `12181384` both completed
+all tasks with exit code 0. The three B1 seeds use the same 2,000-step contract,
+with an independent global calibrator and threshold per seed. Their three-seed
+macro-species bp F1 mean is `0.8828109951`, passing the `>=0.83` gate. The
+per-species mean bp F1 values are Human `0.941015`, Mouse `0.939546`, Chicken
+`0.836538`, Zebrafish `0.929022`, Pig `0.893094` and *C. elegans* `0.757651`.
+The first five species pass all three frozen means (bp F1 `>=0.80`, precision
+`>=0.75`, recall `>=0.75`). *C. elegans* mean precision is `0.792224` and
+passes, but mean recall is `0.726013` and fails. The frozen internal decision
+is therefore `RUN_B0_FOR_FAILED_SPECIES`: only *C. elegans* may enter the B0
+specialist diagnostic. Horse, opossum, `dm6` and cattle remain sealed.
+
+The three-seed B1 result is a reference-arm continuation-robustness result,
+not a candidate comparison. Segment, boundary, fragments/truth, split, missed,
+short-prediction and hardN metrics are retained as descriptive three-seed
+summaries only; no new cross-seed topology gate is applied. Future external or
+conditional candidates must be evaluated relative to this frozen B1 reference.
 
 | seed42 arm | DEV macro bp F1 | minimum-species bp F1 | macro precision | macro recall | segment F1@0.8 | boundary F1@5 | fragments/truth | missed rate | hardN FP rate |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -127,14 +140,12 @@ calibrated system; without a ranking metric it is not solely a representation
 claim. Third, H1 remains a single-seed attribution control even if B1 later
 passes three-seed confirmation.
 
-Seed42 *C. elegans* is below both its F1 and recall gates but is not yet a
-formal internal failure. To make the registered three-seed mean pass, seeds 17
-and 20260903 together must average at least `0.821747` F1 and `0.762584` recall
-for *C. elegans*; their precision need only average `0.729463`. No internal
-single-seed floor is added after seeing this result. If the frozen three-seed
-mean fails, only then does B0 open for the failing B1 species. A lone
-*C. elegans* specialist, even if recoverable, cannot identify a transferable
-invertebrate adapter or authorize MoE.
+The frozen three-seed B1 gate now makes *C. elegans* a formal internal failure:
+its mean F1 is `0.757651` and mean recall is `0.726013`, despite mean precision
+`0.792224` passing. The other five species pass all three primary means, and
+the macro-species bp F1 mean passes. B0 therefore opens only for *C. elegans*.
+A lone *C. elegans* specialist, even if recoverable, cannot identify a
+transferable invertebrate adapter or authorize MoE.
 
 This report consolidates the repository audit, three parallel independent
 reviews, and a full-context ChatGPT Pro review. All four routes converged on
@@ -534,7 +545,8 @@ of the six DEV species:
 - mean bp F1 >=0.80;
 - mean bp precision and recall each >=0.75;
 - macro-species bp F1 >=0.83;
-- no topology guardrail violation.
+- topology metrics are reported for later candidate-relative regression checks;
+  no new cross-seed topology gate is applied to the B1 reference arm.
 
 If this passes, stop architecture expansion and open E1. Adapters and MoE are
 not rewards for a successful shared model.
@@ -543,13 +555,28 @@ not rewards for a successful shared model.
 
 If any TRAIN species fails the internal gate, B0 trains the identical NT model
 on that species with chromosome-disjoint TRAIN/CAL/DEV and a diagnostic
-species-specific CAL threshold. A recoverable negative-transfer case requires
-all three seeds to show:
+species-specific CAL threshold. For the triggered *C. elegans* B0, each update
+uses six *C. elegans* TRAIN tiles (12 model windows), so initialization,
+optimizer, update count and total model-window compute match B1; only the
+training-species distribution changes. Seeds remain 17, 42 and 20260903.
+
+The matched B1 comparator keeps its already-frozen six-species global
+calibrator and threshold. B0 fits only *C. elegans* CAL and applies that map
+unchanged to the same *C. elegans* DEV coordinates. Callable-bp average
+precision is computed from the raw projected TE-minus-background margin, so
+the ranking comparison is not changed by the different calibration scopes. A
+recoverable negative-transfer case requires every seed to show:
 
 - specialist DEV bp F1 >=0.85;
 - at least +0.05 bp F1 over the shared arm;
 - at least +0.03 AUPRC over the shared arm;
-- the same direction on topology guardrails.
+- segment F1@IoU 0.8 and boundary F1@5 no worse than `-0.05` absolute;
+- fragments/truth and split rate no more than 25% above matched B1;
+- missed rate no more than `+0.03` above matched B1.
+
+Boundary F1@25, short-prediction rate and hardN false-positive rate remain
+reported diagnostics. These are the already-defined mandatory candidate
+guardrails, fixed before B0 execution; no stricter post-result gate is added.
 
 If the specialist remains below 0.80, the problem is label/data/backbone
 capacity; routing and MoE are no-go. One recoverable species does not admit
@@ -730,25 +757,25 @@ they are not assumed valid in plants.
 
 ## Immediate executable decision
 
-Seed42 closed the B1-versus-B2 engineering choice in favor of B1. The only
-active model work is the registered B1 confirmation at seeds 17 and 20260903
-plus their per-seed global CAL/DEV evaluation. No additional H1 or B2 seed is
-needed. The three B1 seeds are then judged once against the frozen internal
-shared-model gate; no best-seed selection or across-seed ensemble is allowed.
+Seed42 closed the B1-versus-B2 engineering choice in favor of B1. The B1
+confirmation at seeds 17, 42 and 20260903 and their per-seed global CAL/DEV
+evaluations are complete; no additional H1 or B2 seed is needed. The frozen
+three-seed internal gate failed for *C. elegans* mean F1 and mean recall, so E1
+stays sealed and the only active model work is B0 for *C. elegans*. No best-seed
+selection or across-seed ensemble is allowed. Do not change the global-
+threshold contract or use a test-species threshold to rescue the failure.
 
-If the internal gate passes, freeze the three checkpoints, calibrators and
-thresholds before opening E1. If it fails, keep E1 sealed and run B0 only for
-the failing species of selected B1. Do not change the global-threshold contract
-or use a test-species threshold to rescue a failure.
-
-The current evaluator does not emit AUPRC, although the registered B0 recovery
-gate requires a paired AUPRC gain of at least `0.03`. Add callable-bp average
-precision only if B0 is actually triggered, before running the specialist; it
-does not block the active B1 confirmation and is not a reason to expand the
-current code path.
+The evaluator now emits callable-bp average precision from the raw projected
+margin and has an explicit single-species CAL mode for B0; its default remains
+the frozen six-species shared calibration. The B0 scripts train three matched
+specialists, retain each B1 global calibration for the paired baseline, and
+write new job-scoped outputs rather than replacing the original B1 evidence.
+This diagnostic is limited to the failing species and does not authorize
+adapters or MoE.
 
 Complex MoE, learned routing, plant training, boundary loss and architecture
-search remain closed unless their explicit upstream gate opens. Horse, opossum,
+search remain closed unless their explicit upstream gate opens. A single
+failing *C. elegans* species cannot authorize an adapter or MoE. Horse, opossum,
 `dm6` and cattle remain unread by training, calibration and internal selection.
 
 ## Evidence files

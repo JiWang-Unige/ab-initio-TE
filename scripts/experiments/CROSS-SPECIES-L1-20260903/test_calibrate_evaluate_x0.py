@@ -81,6 +81,94 @@ class CalibrateEvaluateX0Test(unittest.TestCase):
         )
         self.assertEqual(index, 1)
 
+    def test_callable_bp_average_precision_is_tie_grouped(self):
+        self.assertAlmostEqual(
+            MODULE.average_precision_binary(
+                np.asarray([1, 0, 1, 0]),
+                np.asarray([0.9, 0.8, 0.7, 0.1]),
+            ),
+            5 / 6,
+        )
+        self.assertAlmostEqual(
+            MODULE.average_precision_binary(
+                np.asarray([1, 0, 1]),
+                np.asarray([0.5, 0.5, 0.1]),
+            ),
+            7 / 12,
+        )
+        self.assertAlmostEqual(
+            MODULE.average_precision_binary(
+                np.asarray([0, 1, 1]),
+                np.asarray([0.5, 0.5, 0.1]),
+            ),
+            7 / 12,
+        )
+
+    def test_evaluate_adds_callable_bp_average_precision_without_removing_old_metrics(self):
+        tiles = [tile("one", "101?", [3.0, 2.0, 1.0, 4.0])]
+        metrics = MODULE.evaluate_species_tiles(tiles, 0.0, 0.0, 0.5)
+        self.assertAlmostEqual(metrics["bp_average_precision"], 5 / 6)
+        self.assertIn("bp_f1", metrics)
+        _, summary = MODULE.evaluate({"human": tiles}, 0.0, 0.0, 0.5)
+        self.assertAlmostEqual(summary["macro_bp_average_precision"], 5 / 6)
+        self.assertIn("macro_bp_f1", summary)
+
+    def test_single_species_fit_is_explicit_and_records_b0_scope(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            calibration = root / "calibration.json"
+            metrics = root / "metrics.json"
+            args = SimpleNamespace(
+                model_dir=root / "final_model",
+                tokenizer_dir=None,
+                model_code_dir=None,
+                data=["human=fake.jsonl.gz"],
+                seed=42,
+                calibration_json=calibration,
+                metrics_json=metrics,
+                batch_size=12,
+                cpu=True,
+                single_species=True,
+            )
+            inferred = {"human": [tile("one", "10", [1.0, -1.0], split="CAL")]}
+            with (
+                mock.patch.object(
+                    MODULE, "load_final_model", return_value=(None, None, None)
+                ),
+                mock.patch.object(MODULE, "infer_inputs", return_value=inferred),
+                mock.patch.object(MODULE, "fit_platt", return_value=(1.0, 0.0, 0.0)),
+            ):
+                output = MODULE.run_fit(args)
+            calibration_output = json.loads(calibration.read_text())
+            self.assertEqual(
+                calibration_output["protocol"],
+                "CROSS-SPECIES-L1-B0-SINGLE-SPECIES-PLATT-V1",
+            )
+            self.assertEqual(
+                calibration_output["calibration_scope"], "B0-species-specific"
+            )
+            self.assertEqual(output["calibration_scope"], "B0-species-specific")
+            self.assertEqual(set(output["per_species"]), {"human"})
+            self.assertIn("bp_average_precision", output["per_species"]["human"])
+
+    def test_fit_remains_six_species_by_default(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            args = SimpleNamespace(
+                model_dir=root / "final_model",
+                tokenizer_dir=None,
+                model_code_dir=None,
+                data=["human=fake.jsonl.gz"],
+                seed=42,
+                calibration_json=root / "calibration.json",
+                metrics_json=root / "metrics.json",
+                batch_size=12,
+                cpu=True,
+                single_species=False,
+            )
+            with self.assertRaisesRegex(ValueError, "six CAL species"):
+                MODULE.run_fit(args)
+
     def test_adjacent_positive_edges_do_not_fuse_across_tiles(self):
         tiles = [
             tile("left", "0011", [-1.0, -1.0, 1.0, 1.0]),

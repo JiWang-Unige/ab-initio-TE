@@ -368,10 +368,38 @@ def _f1(true_positive: int, false_positive: int, false_negative: int) -> float:
     return 2 * true_positive / denominator if denominator else 0.0
 
 
+def average_precision_binary(
+    truth: np.ndarray, scores: np.ndarray
+) -> float:
+    """Return tie-grouped average precision over callable base pairs."""
+    truth = np.asarray(truth).astype(bool)
+    scores = np.asarray(scores, dtype=np.float64)
+    if truth.ndim != 1 or scores.ndim != 1 or truth.shape != scores.shape:
+        raise ValueError("average-precision inputs must be one-dimensional arrays of equal length")
+    if not np.all(np.isfinite(scores)):
+        raise ValueError("average-precision scores must be finite")
+    positive_count = int(np.sum(truth))
+    if positive_count == 0:
+        return 0.0
+    order = np.argsort(-scores, kind="mergesort")
+    ordered_scores = scores[order]
+    ordered_truth = truth[order].astype(np.int64)
+    ends = np.flatnonzero(
+        np.r_[ordered_scores[1:] != ordered_scores[:-1], True]
+    )
+    cumulative_positive = np.cumsum(ordered_truth)
+    cumulative_count = np.arange(1, truth.size + 1)
+    group_positive = np.diff(np.r_[0, cumulative_positive[ends]])
+    precision = cumulative_positive[ends] / cumulative_count[ends]
+    return float(np.sum(precision * group_positive) / positive_count)
+
+
 def evaluate_species_tiles(
     tiles: list[dict], slope: float, intercept: float, threshold: float
 ) -> dict[str, object]:
     counts = defaultdict(int)
+    callable_scores = []
+    callable_truth = []
     for tile in tiles:
         probability = sigmoid(slope * tile["margin"] + intercept)
         truth = tile["truth"].astype(bool)
@@ -379,6 +407,8 @@ def evaluate_species_tiles(
         hard_negative = tile["hard_negative"].astype(bool)
         predicted = (probability >= threshold) & callable_mask
 
+        callable_scores.append(tile["margin"][callable_mask])
+        callable_truth.append(truth[callable_mask])
         counts["callable_bp"] += int(np.sum(callable_mask))
         counts["positive_bp"] += int(np.sum(truth & callable_mask))
         counts["bp_tp"] += int(np.sum(predicted & truth & callable_mask))
@@ -416,6 +446,9 @@ def evaluate_species_tiles(
 
     segment_fp = counts["predicted_segments"] - counts["segment_tp"]
     segment_fn = counts["truth_segments"] - counts["segment_tp"]
+    bp_average_precision = average_precision_binary(
+        np.concatenate(callable_truth), np.concatenate(callable_scores)
+    )
     result = {
         "tiles": len(tiles),
         "callable_bp": counts["callable_bp"],
@@ -426,6 +459,7 @@ def evaluate_species_tiles(
         "bp_precision": _ratio(counts["bp_tp"], counts["bp_tp"] + counts["bp_fp"]),
         "bp_recall": _ratio(counts["bp_tp"], counts["bp_tp"] + counts["bp_fn"]),
         "bp_f1": _f1(counts["bp_tp"], counts["bp_fp"], counts["bp_fn"]),
+        "bp_average_precision": bp_average_precision,
         "truth_segments": counts["truth_segments"],
         "predicted_segments": counts["predicted_segments"],
         "segment_f1_iou_0_8": _f1(counts["segment_tp"], segment_fp, segment_fn),
@@ -465,6 +499,7 @@ def evaluate(
         "bp_precision",
         "bp_recall",
         "bp_f1",
+        "bp_average_precision",
         "segment_f1_iou_0_8",
         "boundary_f1_5bp",
         "boundary_f1_25bp",
@@ -498,7 +533,13 @@ def write_json(path: Path, value: dict) -> None:
 def run_fit(args) -> dict:
     data_specs = parse_data_specs(args.data)
     observed_species = {species for species, _ in data_specs}
-    if len(data_specs) != len(CAL_SPECIES) or observed_species != set(CAL_SPECIES):
+    if args.single_species:
+        if len(data_specs) != 1 or not observed_species.issubset(set(CAL_SPECIES)):
+            raise ValueError(
+                "single-species fit requires exactly one CAL species, "
+                f"observed {sorted(observed_species)}"
+            )
+    elif len(data_specs) != len(CAL_SPECIES) or observed_species != set(CAL_SPECIES):
         raise ValueError(f"fit requires the six CAL species, observed {sorted(observed_species)}")
     model, tokenizer, device = load_final_model(
         args.model_dir, args.tokenizer_dir, args.cpu, args.model_code_dir
@@ -515,7 +556,14 @@ def run_fit(args) -> dict:
     }
     selection = select_global_threshold(calibrated)
     calibration = {
-        "protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
+        "protocol": (
+            "CROSS-SPECIES-L1-B0-SINGLE-SPECIES-PLATT-V1"
+            if args.single_species
+            else "CROSS-SPECIES-L1-X0-PLATT-V1"
+        ),
+        "calibration_scope": (
+            "B0-species-specific" if args.single_species else "six-species-shared"
+        ),
         "seed": args.seed,
         "model_dir": str(args.model_dir.resolve()),
         "tokenizer_dir": str((args.tokenizer_dir or args.model_dir).resolve()),
@@ -537,6 +585,7 @@ def run_fit(args) -> dict:
     output = {
         "mode": "fit-cal-only",
         "seed": args.seed,
+        "calibration_scope": calibration["calibration_scope"],
         "model_dir": str(args.model_dir),
         "calibration_json": str(args.calibration_json),
         "per_species": per_species,
@@ -602,6 +651,7 @@ def build_parser() -> argparse.ArgumentParser:
     fit.add_argument("--metrics-json", type=Path, required=True)
     fit.add_argument("--batch-size", type=int, default=12)
     fit.add_argument("--cpu", action="store_true")
+    fit.add_argument("--single-species", action="store_true")
     fit.set_defaults(func=run_fit)
 
     apply = subparsers.add_parser("apply-only")
