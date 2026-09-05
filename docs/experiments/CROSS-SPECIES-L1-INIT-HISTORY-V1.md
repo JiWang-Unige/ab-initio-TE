@@ -282,3 +282,18 @@ ample disk, default3080 exclusions. Not TrackA and no external-success claim.
 After complete training, verify4000 finite loss rows, arm/seed/source identity
 and actual D-pool exposure before submitting once-only evaluation. The eval
 script exists but is not auto-queued ahead of this engineering check.
+
+Source `d0f7ed9` was pushed and fast-forwarded before submitting matched
+scientific seed42 array `12385770`:task0=H0R,task1=P0R. Both are RUNNING on
+private gpu034; the first observed logs reached37/36 finite-loss steps.
+Outputs are `outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/train/seed42/12385770_{0,1}`;
+logs `logs/te_l1_init_train_12385770_{0,1}.{out,err}`. No evaluation, gate result
+or seed17 release is implied by these initial logs. The existing heartbeat
+continues completion validation, then evaluation and the registered decision.
+
+`assess_init_uncertainty.py` and9/9 passing synthetic tests are prepared for
+the two focal worm panels. It reuses the existing exact weighted AP/pooled-bp
+numerical core, not the old CONF loader or decisions. It consumes complete
+same-seed P0R/H0R eval directories and D-anchor J0 recovery directories;
+both-seed mode reports arithmetic mean effects, never an ensemble. These
+tests establish consumer behavior, not real confidence intervals for J1.
