@@ -65,6 +65,7 @@ class PartitionTests(unittest.TestCase):
         self.assertEqual(result["terminal_missing_bp"], 4)
         self.assertEqual(result["fn_bp"], 10)
         self.assertEqual(result["fully_hit_runs"], 1)
+        self.assertEqual(json.loads(json.dumps(result)), result)
 
     def test_unknown_break_is_evaluation_boundary(self):
         result = diag.fn_partition([tile([1] * 7, [1, 1, 1, 0, 1, 1, 1])], [np.array([1, 0, 0, 0, 0, 0, 1], bool)])

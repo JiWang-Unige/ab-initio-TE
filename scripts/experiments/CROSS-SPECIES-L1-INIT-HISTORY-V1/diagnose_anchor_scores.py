@@ -70,7 +70,7 @@ def fn_partition(tiles, predictions):
         result["fn_bp"] += int(np.sum(truth & ~prediction))
         for left, right in ev.runs_from_bool(truth):
             hit = np.flatnonzero(prediction[left:right])
-            length = right - left
+            length = int(right - left)
             result["truth_runs"] += 1
             if not hit.size:
                 result["complete_miss_bp"] += length

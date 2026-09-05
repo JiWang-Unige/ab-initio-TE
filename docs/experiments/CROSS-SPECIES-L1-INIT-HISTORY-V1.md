@@ -4,7 +4,8 @@
 
 Registered 2026-09-05 after the completed Pro follow-up on source commit
 `48867e0a73f8f8b5991ee6270273a3795beddcc6`. Status: **protocol registered;
-J0 implemented, awaiting real loading/inference validation; no J1 released**.
+J0 loading passed; score caches valid, diagnostic JSON recovery pending;
+no scientific J1 released**.
 Advisory source: [completed Pro discussion](https://chatgpt.com/g/g-p-6a29d586630481918525796032225f68-ji-wangke-ti/c/6a9b26e0-59c0-83eb-bc94-a5c5d683de9a).
 
 Accept one new question: under the same finite supervised budget, does encoder
@@ -206,3 +207,35 @@ Not TrackA; no smoke/screen scientific claim. Phase2 selected private with
 six Slurm-unallocated eligible GPUs across gpu034/035 and no queued GPU claim
 ahead in that partition. CPU follows the private0GPU fast path.
 These are routing observations, not guaranteed start times or training release.
+
+Code commit `fa5c50c` was pushed locally and fast-forwarded remotely before
+submitting CPU contract `12385291` and score-inference array `12385292`
+(task0=seed42 D, task1=seed17 D). Outputs:
+`outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_contract/12385291/init_contract.json`
+and `j0_scores/12385292_{0,1}/`. Jobs pending validation; no scientific
+training has yet been submitted. Logs use `te_l1_j0_contract_12385291` and
+`te_l1_j0_scores_12385292_{0,1}` under `logs/`.
+
+CPU `12385291` completed0:0 in89sec: old trainer tests6/6, loading tests5/5,
+decision/evaluation tests12/12. Both seeds' loading contracts passed:441
+encoder tensors/493084113 encoder parameters per arm, direct source equality,
+identical fresh heads/tokenizers/inputs/loss masses/sampling traces and restored
+construction RNG. No model forward was performed in that CPU check.
+
+GPU `12385292_0/1` failed1:0 after179/180sec at final diagnostic JSON writing:
+`numpy.int64` in completely-missed-run bp totals was not JSON serializable.
+Both SCREEN and DEV point metrics had already reproduced within1e-6 for both
+seeds; all four float32 caches were written and retained. Keep these job IDs as
+engineering failures, not scientific no-go or successful complete reports.
+GPU consumed359sec=0.099722h; no repeated GPU inference is needed.
+The minimal repair casts run length to Python int at its calculation and
+adds a JSON roundtrip regression assertion (11/11 score tests passed).
+CPU recovery reuses all four caches with new job-specific outputs.
+
+With J0 loading valid and frozen score reproduction observed, engineering-only
+4-step H0R/P0R smoke may run alongside CPU report recovery. This is not release
+of scientific J1. Routing remains private: one old job +one recovery CPU +two
+smoke tasks=4/8, same direction and VRAM/exclusion/path constraints, each10min,
+no maintenance, small outputs versus215TB free. Recovery0GPU follows fast path;
+smoke has eligible unallocated private RTX3090 capacity. The eventual scientific
+release requires complete recovered J0 reports and successful paired smoke.
