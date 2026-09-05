@@ -44,3 +44,26 @@
 单独协议与用户审阅。公开代码/权重/服务、改变可见性与随包素材的选择
 不由本接口自动授权。来源与许可现有记录及缺口仍见
 `CROSS-SPECIES-L1-RELEASE-READINESS-20260905.md`，本次不作法律结论。
+
+## 工程实施与审查
+
+`infer_fasta.py` 和9项合成单测已完成。覆盖4096/8192窗口边界及1–5bp
+终端窗口、跨批次连通、阈值相等、plain/gzip多contig、大小写/IUPAC、
+完整概率roundtrip、校准身份及失败无成功summary。原推理helper未修改。
+独立只读subagent审查PASS，主代理自审未发现未解决问题。
+已修正第一条contig在迭代其余序列时被额外保留的引用；无需迁移层。
+这里只是合成接口验证，不能代替真实模型smoke。
+
+命令入口接受 `--fasta --model-dir --tokenizer-dir --model-code-dir
+--calibration-json --output-dir`，可选 `--batch-size`（默认12）及`--cpu`。
+不提供标签、阈值、gap或长度过滤参数。成功目录包含
+`material_probability.bedGraph.gz`、`material_runs.bed`、`ambiguity_qc.bed`
+及最终`summary.json`。已有同名产物拒绝覆盖；失败可能留下部分轨道，
+应使用新的输出目录，并以可解析、状态COMPLETED的summary判定完成。
+
+真实smoke脚本 `smoke_fasta.py` 仅构造8206bp合成序列：两个contig，
+实际窗口长度4096/4096/9/5，使用冻结D seed42及其原CAL。
+捕获同一次helper推理的margin来比对输出，不再执行第二遍模型推理。
+`sbatch/CROSS-SPECIES-L1-FASTA-INFERENCE-V1.sbatch` 使用CPU-only
+private分区、4CPU/16GB/30min、显式te_benchmark环境与srun。
+没有labels或split数据读取、训练、checkpoint写入或GPU请求。
