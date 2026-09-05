@@ -1,0 +1,59 @@
+{
+  "arm": "D",
+  "cache_npz": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_3/CONF_margins.npz",
+  "calibration_fit_split": "CAL",
+  "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed17/12366939_1/calibration.json",
+  "calibration_scope": "six-species-shared",
+  "conf_evaluated": true,
+  "data_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_materialization/12375907",
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed17/12361196_1/final_model",
+  "per_species": {
+    "c_elegans": {
+      "boundary_f1_25bp": 0.27348643006263046,
+      "boundary_f1_5bp": 0.1304801670146138,
+      "bp_average_precision": 0.876104437162979,
+      "bp_f1": 0.8038199520306756,
+      "bp_fn": 42988,
+      "bp_fp": 32835,
+      "bp_precision": 0.825505388686946,
+      "bp_recall": 0.7832446741459725,
+      "bp_tp": 155337,
+      "callable_bp": 2087374,
+      "fragments_per_truth": 0.9355971896955504,
+      "hardN_bp": 39612,
+      "hardN_fp_bp": 2353,
+      "hardN_fp_rate": 0.0594011915581137,
+      "missed_rate": 0.2224824355971897,
+      "positive_bp": 198325,
+      "predicted_segments": 1062,
+      "segment_f1_iou_0_8": 0.3246346555323591,
+      "short_prediction_rate": 0.455743879472693,
+      "split_rate": 0.09484777517564402,
+      "tiles": 256,
+      "truth_segments": 854
+    }
+  },
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "run_role": "upstream_coverage_pilot",
+  "seed": 17,
+  "species": [
+    "c_elegans"
+  ],
+  "split": "CONF",
+  "summary": {
+    "macro_boundary_f1_25bp": 0.27348643006263046,
+    "macro_boundary_f1_5bp": 0.1304801670146138,
+    "macro_bp_average_precision": 0.876104437162979,
+    "macro_bp_f1": 0.8038199520306756,
+    "macro_bp_precision": 0.825505388686946,
+    "macro_bp_recall": 0.7832446741459725,
+    "macro_fragments_per_truth": 0.9355971896955504,
+    "macro_hardN_fp_rate": 0.0594011915581137,
+    "macro_missed_rate": 0.2224824355971897,
+    "macro_segment_f1_iou_0_8": 0.3246346555323591,
+    "macro_short_prediction_rate": 0.455743879472693,
+    "macro_split_rate": 0.09484777517564402,
+    "minimum_species_bp_f1": 0.8038199520306756
+  }
+}

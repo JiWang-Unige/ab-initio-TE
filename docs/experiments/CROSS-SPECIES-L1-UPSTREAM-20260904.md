@@ -101,6 +101,17 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+### CONF point results: positive effect, absolute target still unstable
+
+The once-only CONF pipeline now has valid materialization `12375907` and
+four completed inference tasks `12376016`. See the pre-opening contract and
+ledger in `CROSS-SPECIES-L1-UPSTREAM-20260904-CONF.md`; exact metrics are
+archived in `conf/`. D CONF F1 is 0.794878 (seed42) and 0.803820 (seed17),
+versus L 0.786766 and 0.780510. Both AP/F1 effects retain positive direction,
+but seed42 fails the absolute0.8 target. No robust all-species usability or
+fragment-solution claim. CPU paired uncertainty job `12376069` is pending
+completion; no additional training, resampling or threshold sweep is released.
+
 ### Seed17 evaluation complete: internal signal replicated
 
 Evaluation `12366939_0` and `_1` completed 0:0 in 14:29 and 14:30.

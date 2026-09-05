@@ -135,3 +135,31 @@ undefined. It accepts only the actual 256x8192 CONF cache and metric schema,
 without alternate-format compatibility. Cache point metrics must reproduce
 the authoritative GPU-output metrics within 1e-6 before bootstrapping;
 a mismatch blocks interpretation and triggers a minimal engineering fix.
+
+All four `12376016` inference tasks completed 0:0 in 1:47 each. Four finite
+metric JSONs confirm the correct seed/arm, CONF256, old CAL-only shared
+calibration and identical callable/positive denominators; each has its
+nonempty job-specific cache. Exact JSONs are archived under the parent
+experiment's `conf/seed42_L`, `conf/seed42_D`, `conf/seed17_L`, `conf/seed17_D`.
+
+| Seed | L CONF F1 | D CONF F1 | L AP | D AP | D precision | D recall |
+|---|---:|---:|---:|---:|---:|---:|
+| 42 | 0.786766 | 0.794878 | 0.865011 | 0.871452 | 0.839529 | 0.754736 |
+| 17 | 0.780510 | 0.803820 | 0.856010 | 0.876104 | 0.825505 | 0.783245 |
+
+Both point-effect directions are positive. Seed42 D fails the absolute
+F1>=0.8 target while seed17 passes; do not select the successful seed or call
+this robust multi-species usability. CONF segment F1 declines for D in both
+seeds (42:0.327273->0.302781; 17:0.327568->0.324635), and fragments/truth
+increase (42:0.901639->0.929742; 17:0.898126->0.935597). The frozen guardrails
+will be reported separately from improvements; lower missed rate alone
+does not mean fragment reconstruction is solved.
+
+Paired CPU assessment `12376069` is submitted with 2 CPU,16GB,2h,zero GPU.
+Inputs are exactly the four completed `12376016` task outputs. It runs
+the five focused tests, verifies cached point metric reproduction, then
+executes the preregistered1000 shared block draws. Output:
+`outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_assessment/12376069/assessment.json`;
+logs:`logs/te_l1_conf_assess_12376069.{out,err}`. Phase1 passes2/8 jobs,
+2/3 directions,noarray/GPU,2h below12h cohort/168h private,unique paths,
+no new weights,215TB available and no reservation. CI results are pending.
