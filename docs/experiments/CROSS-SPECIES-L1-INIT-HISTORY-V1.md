@@ -3,8 +3,8 @@
 ## Decision and status
 
 Registered 2026-09-05 after the completed Pro follow-up on source commit
-`48867e0a73f8f8b5991ee6270273a3795beddcc6`. Status: **protocol registered;
-J0 and paired engineering smoke passed; scientific J1 seed42 released**.
+`48867e0a73f8f8b5991ee6270273a3795beddcc6`. Status: **engineering PASS;
+seed42 scientific NO-GO; seed17 not released; descriptive spatial CI pending**.
 Advisory source: [completed Pro discussion](https://chatgpt.com/g/g-p-6a29d586630481918525796032225f68-ji-wangke-ti/c/6a9b26e0-59c0-83eb-bc94-a5c5d683de9a).
 
 Accept one new question: under the same finite supervised budget, does encoder
@@ -333,3 +333,49 @@ logs `logs/te_l1_init_eval_12398639_{0,1}.{out,err}`. It fits existing CAL
 once per model and evaluates the registered SCREEN/DEV panels only. Await
 complete metrics before applying `assess_init.py --seed 42` against both
 H0R and the fixed D anchor. No new model is evaluated on CONF or sealed data.
+
+### Seed42 scientific closure (2026-09-05)
+
+Evaluation `12398639_0/1` completed0:0 in821/824sec. Both produced CAL,
+six-species DEV, worm SCREEN and raw-margin caches. The registered decision
+consumer validated both new-arm and frozen D metric identities and returned
+`STOP_INIT_HISTORY_SCIENTIFIC_NO_GO`, `release_seed17=false`,
+`freeze_ready=false`. No further scientific training is released.
+
+| Worm endpoint | P0R | H0R | D anchor | P0R minus H0R | P0R minus D |
+|---|---:|---:|---:|---:|---:|
+| SCREEN F1 | 0.800304 | 0.799900 | 0.802736 | +0.000404 | -0.002431 |
+| DEV F1 | 0.791441 | 0.803254 | 0.797565 | -0.011813 | -0.006124 |
+| SCREEN raw AP | 0.881692 | 0.881368 | 0.884389 | +0.000323 | -0.002697 |
+| DEV raw AP | 0.871219 | 0.873872 | 0.873532 | -0.002653 | -0.002313 |
+
+The SCREEN gain fails the+0.010 requirement against both references; worm
+DEV F1 decreases against both. DEV AP exceeds the allowed loss against both,
+and SCREEN AP exceeds it against D. Macro DEV hardN FP increases by0.007833
+against H0R and0.005441 against D, exceeding0.005. All five nonworm F1
+guards and all registered topology guards pass against both references;
+those passes do not override the failed gates. P0R macro DEV F1 is0.888624,
+but worm DEV F1<0.8 prevents absolute readiness even for this single seed.
+Full P/R/AP/F1 effects and each gate are retained in
+`CROSS-SPECIES-L1-INIT-HISTORY-V1/seed42/decision.json` alongside original
+new-arm metrics/calibrators. D references remain the registered old artifacts.
+
+Interpretation is bounded to this seed, fixed supervised budget and reused
+development panels: native initialization did not earn continuation. This
+does not prove a general causal benefit of Human history. Do not replace D,
+promote H0R, add a head-reset branch, try another seed or retune thresholds.
+No new model has accessed CONF or sealed data.
+
+Final GPU expenditure for this closed training extension is11095sec
+=(9450+821+824)/3600=3.081944GPUh, including failed engineering GPU work.
+Unused budget is not permission to rescue the result. Complete the registered
+seed42 three-arm spatial uncertainty from caches on CPU; its intervals are
+descriptive and cannot reverse the stop decision. Then continue only the
+already authorized sequence-only FASTA interface and provenance/utility scope
+work, with synthetic/existing TRAIN smoke and no sealed-panel opening.
+
+CPU uncertainty routing Phase1 passes:3 existing user jobs +1=4/8, at most3
+directions, one non-array task,0GPU (VRAM/exclusions not applicable),2h below
+12h/168h,16GB memory,215TB free, no maintenance, job-specific report/logs,
+no checkpoint writes, no TrackA or external claim. Use the private0GPU fast
+path. The existing1000-draw exact pooled/tie-group consumer is unchanged.

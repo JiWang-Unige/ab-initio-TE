@@ -1,0 +1,64 @@
+{
+  "arm": "P0R",
+  "calibration_loss": 0.13011627725826294,
+  "calibration_protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
+  "calibration_scope": "six-species-shared",
+  "conf_evaluated": false,
+  "conf_status": "historical_closure_only_new_inference_forbidden",
+  "evaluation_contract": {
+    "conf_status": "historical_closure_only_new_inference_forbidden",
+    "dev_split": "DEV",
+    "development_panels": "previously_used_not_independent_holdouts",
+    "forbidden_split": "CONF",
+    "screen_species": [
+      "c_elegans"
+    ],
+    "screen_split": "SCREEN"
+  },
+  "experiment": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "fit_split": "CAL",
+  "margin_caches": {
+    "DEV": {
+      "c_elegans": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/c_elegans.npz",
+      "chicken": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/chicken.npz",
+      "human": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/human.npz",
+      "mouse": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/mouse.npz",
+      "pig": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/pig.npz",
+      "zebrafish": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/zebrafish.npz"
+    },
+    "SCREEN": {
+      "c_elegans": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/SCREEN/c_elegans.npz"
+    }
+  },
+  "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/train/seed42/12385770_1/final_model",
+  "platt_intercept": -0.8254744596696119,
+  "platt_slope": 0.7074171827847415,
+  "protocol": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "run_role": "initialization_history_comparison",
+  "seed": 42,
+  "species": [
+    "human",
+    "mouse",
+    "chicken",
+    "zebrafish",
+    "pig",
+    "c_elegans"
+  ],
+  "threshold": 0.3968612934574771,
+  "threshold_selection": {
+    "candidate_count": 3708915,
+    "macro_species_f1": 0.8871516804203827,
+    "minimum_species_f1": 0.8088905057071585,
+    "species_f1": {
+      "c_elegans": 0.8088905057071585,
+      "chicken": 0.8174497264812389,
+      "human": 0.9376110432689219,
+      "mouse": 0.939047102274267,
+      "pig": 0.8926366949306406,
+      "zebrafish": 0.9272750098600703
+    },
+    "threshold": 0.3968612934574771
+  },
+  "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/train/seed42/12385770_1/final_model"
+}

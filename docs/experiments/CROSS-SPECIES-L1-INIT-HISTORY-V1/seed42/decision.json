@@ -1,0 +1,993 @@
+{
+  "absolute_readiness": {
+    "macro_dev_f1": 0.8886241606271131,
+    "minimum_macro_dev_f1": 0.83,
+    "panels": {
+      "DEV": {
+        "c_elegans": {
+          "bp_f1": false,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": false
+        },
+        "chicken": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "human": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "mouse": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "pig": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "zebrafish": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        }
+      },
+      "SCREEN": {
+        "c_elegans": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        }
+      }
+    },
+    "pass": false
+  },
+  "ci_is_descriptive_not_release_gate": true,
+  "claim_scope": "checkpoint initialization choice; reused internal development panels",
+  "conf_opening_authorized": false,
+  "conf_status": "historical_closure_only_new_inference_forbidden",
+  "contrasts": {
+    "P0R_minus_D_anchor": {
+      "effects": {
+        "DEV": {
+          "c_elegans": {
+            "bp_average_precision": -0.0023134489832834,
+            "bp_f1": -0.0061240852294876,
+            "bp_precision": -0.027003436988481,
+            "bp_recall": 0.0122705524698881
+          },
+          "chicken": {
+            "bp_average_precision": 0.006143020476001,
+            "bp_f1": 0.0090095327020957,
+            "bp_precision": 0.003200548505639,
+            "bp_recall": 0.0145593869731802
+          },
+          "human": {
+            "bp_average_precision": -0.0001466390070856,
+            "bp_f1": -0.0005970769965887,
+            "bp_precision": -0.0041960129603754,
+            "bp_recall": 0.002858048191906
+          },
+          "mouse": {
+            "bp_average_precision": -0.0003067954443485,
+            "bp_f1": -0.0014964418993372,
+            "bp_precision": -0.0056783750519549,
+            "bp_recall": 0.002739468993339
+          },
+          "pig": {
+            "bp_average_precision": -0.0012839482991056,
+            "bp_f1": -0.0026411301165313,
+            "bp_precision": -0.0108799610255014,
+            "bp_recall": 0.0052597108255001
+          },
+          "zebrafish": {
+            "bp_average_precision": 0.0005286179180806,
+            "bp_f1": 0.0010266900546779,
+            "bp_precision": -0.0034570715953728,
+            "bp_recall": 0.0056103075974717
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "bp_average_precision": -0.0026972216889246,
+            "bp_f1": -0.0024311706124374,
+            "bp_precision": -0.0105578992543924,
+            "bp_recall": 0.0047876360709483
+          }
+        }
+      },
+      "gates": {
+        "macro_dev_hardN": {
+          "bound": 0.005,
+          "candidate": 0.05155791189126644,
+          "delta": 0.005440848633553436,
+          "direction": "maximum",
+          "pass": false,
+          "reference": 0.046117063257713004,
+          "strict": false
+        },
+        "nonworm_dev_f1/chicken": {
+          "bound": -0.01,
+          "candidate": 0.8407292873395947,
+          "delta": 0.0090095327020957,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.831719754637499,
+          "strict": false
+        },
+        "nonworm_dev_f1/human": {
+          "bound": -0.01,
+          "candidate": 0.9397128739778664,
+          "delta": -0.0005970769965887,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.9403099509744551,
+          "strict": false
+        },
+        "nonworm_dev_f1/mouse": {
+          "bound": -0.01,
+          "candidate": 0.9405014055104469,
+          "delta": -0.0014964418993372,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.9419978474097841,
+          "strict": false
+        },
+        "nonworm_dev_f1/pig": {
+          "bound": -0.01,
+          "candidate": 0.8904970814392236,
+          "delta": -0.0026411301165313,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.8931382115557549,
+          "strict": false
+        },
+        "nonworm_dev_f1/zebrafish": {
+          "bound": -0.01,
+          "candidate": 0.9288629830428432,
+          "delta": 0.0010266900546779,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.9278362929881653,
+          "strict": false
+        },
+        "screen_ap": {
+          "bound": -0.002,
+          "candidate": 0.8816916109787926,
+          "delta": -0.0026972216889246,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.8843888326677172,
+          "strict": false
+        },
+        "screen_f1": {
+          "bound": 0.01,
+          "candidate": 0.8003043546612167,
+          "delta": -0.0024311706124374,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.8027355252736541,
+          "strict": false
+        },
+        "worm_dev_ap": {
+          "bound": -0.002,
+          "candidate": 0.8712188388625381,
+          "delta": -0.0023134489832834,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.8735322878458215,
+          "strict": false
+        },
+        "worm_dev_f1": {
+          "bound": 0.0,
+          "candidate": 0.7914413324527043,
+          "delta": -0.0061240852294876,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.7975654176821919,
+          "strict": false
+        }
+      },
+      "pass": false,
+      "topology": {
+        "DEV": {
+          "c_elegans": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.11809112968455109,
+                "delta": -0.01868017076387941,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.1367713004484305,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0110461338531513,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.0019493177387915
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.23196881091617932,
+                "delta": 0.0,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.23196881091617932,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.2906443785386897,
+                "delta": -0.01428835688731926,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.30493273542600896,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.1189083820662768,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.12605588044184535
+              }
+            },
+            "pass": true
+          },
+          "chicken": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.12773951158422042,
+                "delta": -0.02283963899493016,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.15057915057915058,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.065466448445172,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.067103109656301
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.18330605564648117,
+                "delta": -0.03273322422258593,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.2160392798690671,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.3794614902943018,
+                "delta": 0.0010831119159234,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.3783783783783784,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.14238952536824878,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.14729950900163666
+              }
+            },
+            "pass": true
+          },
+          "human": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.2644970414201183,
+                "delta": -0.0243108921965585,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.2888079336166768,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0782993054093875,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.0534624289623238
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.08019364344348558,
+                "delta": -0.0044201220795622,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.08461376552304778,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.5084812623274162,
+                "delta": -0.035740555118445,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.5442218174458612,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.09745316775415702,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.08692906756472321
+              }
+            },
+            "pass": true
+          },
+          "mouse": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.27885117493472583,
+                "delta": -0.01886280698978243,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.29771398192450826,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0352112676056338,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.0279418446160835
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.07973648341662881,
+                "delta": -0.00613357564743299,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.0858700590640618,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.5451697127937337,
+                "delta": -0.0209121585512955,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.5660818713450292,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.07723761926397092,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.07746478873239436
+              }
+            },
+            "pass": true
+          },
+          "pig": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.1951005163133033,
+                "delta": -0.0201107512923305,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.2152112676056338,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0090067550662998,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.994996247185389
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.13660245183887915,
+                "delta": -0.00325243932949715,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.1398548911683763,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.48335713501043615,
+                "delta": -0.01714990724308505,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.5005070422535212,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.10382787090317738,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.09582186639979985
+              }
+            },
+            "pass": true
+          },
+          "zebrafish": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.12516345974220064,
+                "delta": -0.01192141110650786,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.1370848708487085,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0855300587900625,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.0959605537644606
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.07813388962639864,
+                "delta": -0.00531007016878436,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.083443959795183,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.36409490005604334,
+                "delta": -0.01708591175207476,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.3811808118081181,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.08970225677982173,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.10392565901763702
+              }
+            },
+            "pass": true
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.14850948509485096,
+                "delta": 0.00687399605155861,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.14163548904329235,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 0.9862241703193487,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.9949906073888541
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.21603005635566688,
+                "delta": -0.00313087038196619,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.21916092673763307,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.33387533875338754,
+                "delta": 0.00463963592067779,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.32923570283270975,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.09079524107701942,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.10457107075767064
+              }
+            },
+            "pass": true
+          }
+        }
+      }
+    },
+    "P0R_minus_H0R": {
+      "effects": {
+        "DEV": {
+          "c_elegans": {
+            "bp_average_precision": -0.0026533464176392,
+            "bp_f1": -0.011813020270835,
+            "bp_precision": -0.0325600829709666,
+            "bp_recall": 0.0064905912081992
+          },
+          "chicken": {
+            "bp_average_precision": 0.000834410309032,
+            "bp_f1": 0.0017117243821755,
+            "bp_precision": -0.0115210648274667,
+            "bp_recall": 0.0141477470631077
+          },
+          "human": {
+            "bp_average_precision": -0.0001018940564021,
+            "bp_f1": -0.0010662446468548,
+            "bp_precision": -0.0045022176136019,
+            "bp_recall": 0.002233679389742
+          },
+          "mouse": {
+            "bp_average_precision": -0.0002906035676272,
+            "bp_f1": -0.0017682404960076,
+            "bp_precision": -0.0052798496154458,
+            "bp_recall": 0.0017937892860494
+          },
+          "pig": {
+            "bp_average_precision": -0.001240270068442,
+            "bp_f1": -0.002820034539966,
+            "bp_precision": -0.0126178485039534,
+            "bp_recall": 0.0065441709620824
+          },
+          "zebrafish": {
+            "bp_average_precision": -9.75713658247e-05,
+            "bp_f1": -0.0017032552399746,
+            "bp_precision": -0.0069551340142667,
+            "bp_recall": 0.0036567064057883
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "bp_average_precision": 0.0003231392944649,
+            "bp_f1": 0.0004038599271267,
+            "bp_precision": -0.0075743332998624,
+            "bp_recall": 0.0074869695809653
+          }
+        }
+      },
+      "gates": {
+        "macro_dev_hardN": {
+          "bound": 0.005,
+          "candidate": 0.05155791189126644,
+          "delta": 0.00783307918705914,
+          "direction": "maximum",
+          "pass": false,
+          "reference": 0.0437248327042073,
+          "strict": false
+        },
+        "nonworm_dev_f1/chicken": {
+          "bound": -0.01,
+          "candidate": 0.8407292873395947,
+          "delta": 0.0017117243821755,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.8390175629574192,
+          "strict": false
+        },
+        "nonworm_dev_f1/human": {
+          "bound": -0.01,
+          "candidate": 0.9397128739778664,
+          "delta": -0.0010662446468548,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.9407791186247212,
+          "strict": false
+        },
+        "nonworm_dev_f1/mouse": {
+          "bound": -0.01,
+          "candidate": 0.9405014055104469,
+          "delta": -0.0017682404960076,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.9422696460064545,
+          "strict": false
+        },
+        "nonworm_dev_f1/pig": {
+          "bound": -0.01,
+          "candidate": 0.8904970814392236,
+          "delta": -0.002820034539966,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.8933171159791896,
+          "strict": false
+        },
+        "nonworm_dev_f1/zebrafish": {
+          "bound": -0.01,
+          "candidate": 0.9288629830428432,
+          "delta": -0.0017032552399746,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.9305662382828178,
+          "strict": false
+        },
+        "screen_ap": {
+          "bound": -0.002,
+          "candidate": 0.8816916109787926,
+          "delta": 0.0003231392944649,
+          "direction": "minimum",
+          "pass": true,
+          "reference": 0.8813684716843277,
+          "strict": false
+        },
+        "screen_f1": {
+          "bound": 0.01,
+          "candidate": 0.8003043546612167,
+          "delta": 0.0004038599271267,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.79990049473409,
+          "strict": false
+        },
+        "worm_dev_ap": {
+          "bound": -0.002,
+          "candidate": 0.8712188388625381,
+          "delta": -0.0026533464176392,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.8738721852801773,
+          "strict": false
+        },
+        "worm_dev_f1": {
+          "bound": 0.0,
+          "candidate": 0.7914413324527043,
+          "delta": -0.011813020270835,
+          "direction": "minimum",
+          "pass": false,
+          "reference": 0.8032543527235393,
+          "strict": false
+        }
+      },
+      "pass": false,
+      "topology": {
+        "DEV": {
+          "c_elegans": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.11809112968455109,
+                "delta": -0.02226996524847161,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.1403610949330227,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0110461338531513,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.9655620532813515
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.23196881091617932,
+                "delta": -0.0077972709551657,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.23976608187134502,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.2906443785386897,
+                "delta": -0.04249481773387874,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.33313919627256844,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.1189083820662768,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.10656270305393112
+              }
+            },
+            "pass": true
+          },
+          "chicken": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.12773951158422042,
+                "delta": -0.01682282263328622,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.14456233421750664,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.065466448445172,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.0147299509001637
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.18330605564648117,
+                "delta": -0.03273322422258593,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.2160392798690671,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.3794614902943018,
+                "delta": -0.0356578731009237,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.4151193633952255,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.14238952536824878,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.1407528641571195
+              }
+            },
+            "pass": true
+          },
+          "human": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.2644970414201183,
+                "delta": -0.02182385636574765,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.28632089778586595,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0782993054093875,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.047358450852452
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.08019364344348558,
+                "delta": -0.00547253209850558,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.08566617554199116,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.5084812623274162,
+                "delta": -0.0374696020947858,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.545950864422202,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.09745316775415702,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.08566617554199116
+              }
+            },
+            "pass": true
+          },
+          "mouse": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.27885117493472583,
+                "delta": -0.02257405374002427,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.3014252286747501,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0352112676056338,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.0195365742844162
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.07973648341662881,
+                "delta": -0.00681508405270331,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.08655156746933212,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.5451697127937337,
+                "delta": -0.0310906573402803,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.576260370134014,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.07723761926397092,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.07383007723761927
+              }
+            },
+            "pass": true
+          },
+          "pig": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.1951005163133033,
+                "delta": -0.02046429954433832,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.21556481585764162,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0090067550662998,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.9977483112334251
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.13660245183887915,
+                "delta": -0.0067550662997248,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.14335751813860395,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.48335713501043615,
+                "delta": -0.01962743532406105,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.5029845703344972,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.10382787090317738,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.09682261696272204
+              }
+            },
+            "pass": true
+          },
+          "zebrafish": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.12516345974220064,
+                "delta": -0.01314527505776222,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.13830873479996286,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0855300587900625,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 1.1029774322017827
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.07813388962639864,
+                "delta": -0.00644794234780958,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.08458183197420822,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.36409490005604334,
+                "delta": -0.02019916844855146,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.3842940685045948,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.08970225677982173,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.10639104873885834
+              }
+            },
+            "pass": true
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "checks": {
+              "boundary_f1_5bp": {
+                "bound": -0.05,
+                "candidate": 0.14850948509485096,
+                "delta": -0.00521087467620382,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.15372035977105478,
+                "strict": false
+              },
+              "fragments_per_truth": {
+                "candidate": 0.9862241703193487,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.9855979962429555
+              },
+              "missed_rate": {
+                "bound": 0.03,
+                "candidate": 0.21603005635566688,
+                "delta": -0.00500939261114589,
+                "direction": "maximum",
+                "pass": true,
+                "reference": 0.22103944896681277,
+                "strict": false
+              },
+              "segment_f1_iou_0_8": {
+                "bound": -0.05,
+                "candidate": 0.33387533875338754,
+                "delta": -0.00627184031447836,
+                "direction": "minimum",
+                "pass": true,
+                "reference": 0.3401471790678659,
+                "strict": false
+              },
+              "split_rate": {
+                "candidate": 0.09079524107701942,
+                "maximum_multiplier": 1.25,
+                "pass": true,
+                "reference": 0.10895428929242329
+              }
+            },
+            "pass": true
+          }
+        }
+      }
+    }
+  },
+  "decision": "STOP_INIT_HISTORY_SCIENTIFIC_NO_GO",
+  "experiment": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "external_success_claim": false,
+  "freeze_ready": false,
+  "inputs": {
+    "d_anchor_DEV": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/dev_metrics.json",
+    "d_anchor_SCREEN": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/screen_metrics.json",
+    "h0r_DEV": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/dev_metrics.json",
+    "h0r_SCREEN": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/screen_metrics.json",
+    "p0r_DEV": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/dev_metrics.json",
+    "p0r_SCREEN": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/screen_metrics.json"
+  },
+  "protocol": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "release_seed17": false,
+  "run_role": "initialization_history_comparison",
+  "scientific_gate_pass": false,
+  "seed": 42,
+  "two_seed_readiness_assessed": false
+}
