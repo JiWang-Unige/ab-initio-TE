@@ -120,8 +120,24 @@ ledger in `CROSS-SPECIES-L1-UPSTREAM-20260904-CONF.md`; exact metrics are
 archived in `conf/`. D CONF F1 is 0.794878 (seed42) and 0.803820 (seed17),
 versus L 0.786766 and 0.780510. Both AP/F1 effects retain positive direction,
 but seed42 fails the absolute0.8 target. No robust all-species usability or
-fragment-solution claim. CPU paired uncertainty job `12376069` is pending
-completion; no additional training, resampling or threshold sweep is released.
+fragment-solution claim. CPU paired uncertainty job `12376069` subsequently
+completed 0:0; the final CIs and closure are recorded in the CONF report.
+No additional coverage training, resampling or threshold sweep is released.
+
+### Post-closure Pro consultation, 2026-09-05
+
+The complete closure at `48867e0` was sent to the linked Pro conversation.
+Its completed reply recommends one separate initialization-history comparison,
+not reopening the old TRAIN-underfit branch. Codex accepts a bounded H0-encoder
+versus native-encoder comparison with an identical fresh head and the existing
+D pool, subject to an explicit loading contract. The new preregistration is
+`CROSS-SPECIES-L1-INIT-HISTORY-V1.md`. No new model may evaluate CONF; no new
+holdout is created. Pro advice is not experimental evidence.
+
+B0's high full-TRAIN fit is evidence about that specialist, not a measured
+full-TRAIN result for D. Likewise, fragments/truth alone mixes missed runs and
+multiple hits; its increase does not by itself establish worsening fragmentation.
+The measured segment-F1 decreases and unresolved instance claim remain visible.
 
 ### Seed17 evaluation complete: internal signal replicated
 
