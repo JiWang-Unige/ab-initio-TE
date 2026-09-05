@@ -2,12 +2,13 @@
 
 Date: 2026-09-02
 
-Status: **Stage 0 and all Stage 1 pretraining gates passed; frozen G/R/H training is running; no chr19 release**
+Status (updated 2026-09-05): **Stage 1 engineering completed; scientific NO_ACTIONABLE_ARM; route closed; no chr19 release**
 
 Protocol: [`GAP-BRIDGE-NEURAL-STAGE1-R1-SPEC.md`](GAP-BRIDGE-NEURAL-STAGE1-R1-SPEC.md)
 
 This ledger distinguishes engineering identity checks and evaluation assets
-from scientific model results. No Stage 1 model score exists yet.
+from scientific model results. The final results and decision are recorded in
+[`GAP-BRIDGE-NEURAL-STAGE1-R1-CLOSURE-20260905.md`](GAP-BRIDGE-NEURAL-STAGE1-R1-CLOSURE-20260905.md).
 
 ## Completed decisions
 
@@ -86,9 +87,9 @@ pseudo-base log loss. Expanded integer-mass comparisons against scikit-learn
 now pass. Fourteen targeted scorer/metric/family tests pass in the Baobab
 `te_benchmark` environment.
 
-## Active experiment
+## Training attempt (historical launch record)
 
-Slurm job `12156002` is the single frozen Stage 1 training attempt
+Slurm job `12156002` was the single frozen Stage 1 training attempt
 `train-20260902-r1`. It trains all three nested information arms and three
 registered seeds together on comparator-known chr3+chr5 candidates for two
 complete passes:
@@ -103,7 +104,7 @@ not itself a scientific result: chr13 label-blind scoring, CAL-FIT-only
 calibration, DEV mechanism tests and CAL-GATE actionability still have to
 pass before any arm can be locked for chr19.
 
-## Current decision boundary
+## Frozen decision boundary (recorded before results)
 
 Do not start continual backbone training, partial-gap prediction, HMM/CRF,
 cross-species work or chr19 evaluation while `12156002` is unresolved. If R
@@ -111,3 +112,18 @@ does not increment G, raw local sequence has not supplied registered action
 information. If H does not increment R, the frozen P3 latent has not supplied
 registered incremental information. If no arm has an admissible CAL-GATE
 point, retain the original P3 mask and close this whole-gap Stage 1 route.
+
+## Completed execution and decision, 2026-09-05
+
+Training `12156002`, chr13 blind scoring `12293475` and chr13 evaluation
+`12331422` completed successfully. Scoring covered all 184,584 chr13
+candidates with nine head columns; evaluation used the frozen CAL-FIT, DEV
+and CAL-GATE roles. All three calibrators passed, but R-over-G and H-over-R
+failed their complete mechanism gates, and all three arms had zero admissible
+CAL-GATE points. The resulting pretest lock is `NO_ACTIONABLE_ARM` with no
+selected arm or threshold and `chr19_release_authorized=false`.
+
+Retain P3 and close this Stage 1 whole-gap route. The conditional NT protocol
+now meets its scientific-failure trigger, but is not authorized for execution.
+No chr19/chr20 evaluation, continual backbone training or parameter rescue
+was submitted. `ACTIVE_GOAL.json` was not changed.
