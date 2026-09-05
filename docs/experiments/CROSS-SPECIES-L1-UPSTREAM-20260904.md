@@ -101,6 +101,32 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+### Seed17 training complete; paired evaluation running
+
+Training `12361196_0` (L) and `_1` (D) completed 0:0 in 1:15:38 and
+1:15:54. Both full logs contain steps 1..4000, finite six-species losses and
+uniform ERM weights. Metadata confirms seed17, corresponding arm and 4000/400
+schedule; final model/config/tokenizer files are present. Exposure is 4000
+presentations per species, with 1500 unique tiles for L and all nonworm D
+species, and 3000 for worm D. This establishes engineering completion only.
+
+Paired evaluation array `12366939` is running on gpu034, task0=L/task1=D.
+Outputs are `outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed17/12366939_{0,1}`;
+logs are `logs/te_l1_coverage_eval_12366939_{0,1}.{out,err}`. The existing
+script uses the unchanged CAL/DEV/SCREEN contract; CONF remains unopened.
+
+Smart-sbatch Phase 1: one unrelated existing job plus two tasks =3/8 jobs,
+2/3 directions, array2<=16, RTX3090 24GB>=20GB, 1h/task within limits,
+unique seed/job/task outputs, no new checkpoints, 215TB available and no
+reservations. Configured exclusions are unchanged; claim_allowed=false.
+Private3090 and sharedA5000 test-only estimates were respectively Sep 5
+12:56:06 and 13:11:06 cluster time; available private GPUs select private3090.
+The completed training array was already absent from Slurm's active table
+(`Invalid job id specified`). Following successful sacct and artifact checks,
+evaluation was submitted without an unresolvable afterok dependency. No
+training or evaluation was duplicated. No seed17 performance is inferred
+before both evaluations and their output checks complete.
+
 ### Seed42 evaluation: paired seed17 released
 
 Both `12353905` evaluation tasks completed 0:0 in 14:46. Six JSON artifacts
