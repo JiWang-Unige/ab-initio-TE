@@ -67,3 +67,10 @@
 `sbatch/CROSS-SPECIES-L1-FASTA-INFERENCE-V1.sbatch` 使用CPU-only
 private分区、4CPU/16GB/30min、显式te_benchmark环境与srun。
 没有labels或split数据读取、训练、checkpoint写入或GPU请求。
+
+smoke脚本与sbatch另经独立只读审查PASS。`smart-sbatch` Phase1：
+3个现有任务+1=4/8、至多3个方向、单任务；CPU-only显存/排除项不适用；
+30min小于12h/168h、214TB可用、无维护、独立job-ID日志和输出。
+源码 `8ad7ba7` 双端同步后提交CPU smoke `12402018`。
+产物目录 `outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/`，
+日志 `logs/te_l1_fasta_smoke_12402018.{out,err}`；真实smoke结果待验。
