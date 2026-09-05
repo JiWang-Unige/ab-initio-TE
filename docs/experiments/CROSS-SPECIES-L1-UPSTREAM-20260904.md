@@ -101,6 +101,44 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+### Seed42 evaluation: paired seed17 released
+
+Both `12353905` evaluation tasks completed 0:0 in 14:46. Six JSON artifacts
+passed finite-number, arm/seed/protocol, CAL-only shared-calibration and
+DEV/SCREEN species/split checks; CONF was not evaluated. Exact compact
+artifacts and the unchanged gate output are archived under
+`docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed42/`.
+Running `decide_upstream.py` returned `RELEASE_PAIRED_LD_SEED17`.
+
+| Species / panel | L bp F1 | D bp F1 |
+|---|---:|---:|
+| human DEV | 0.940291 | 0.940310 |
+| mouse DEV | 0.940945 | 0.941998 |
+| chicken DEV | 0.836716 | 0.831720 |
+| zebrafish DEV | 0.929668 | 0.927836 |
+| pig DEV | 0.891351 | 0.893138 |
+| c_elegans DEV | 0.783315 | 0.797565 |
+| c_elegans SCREEN | 0.789994 | 0.802736 |
+
+SCREEN AP rises 0.865557 -> 0.884389 (+0.018832); bp F1 rises by
+0.012742. All registered nonworm, topology and macro hardN guards pass.
+Macro DEV F1 is 0.887048 -> 0.888761, but worm DEV remains below 0.8.
+This is a single-seed internal coverage signal, not a deployment result.
+It does not establish fragment/boundary recovery: worm DEV segment F1
+changes by -0.016620 and boundary5 by -0.004596; fragments/truth increases
+0.933073 -> 1.001949 and split rate 0.108512 -> 0.126056, all within the
+predeclared *noninferiority guards*, not improvements. SCREEN boundary5
+also declines slightly. No gates were changed after inspection.
+
+Seed17 L/D replication is released with the identical recipe and fixed pools.
+Smart-sbatch Phase 1 passes: 3/8 jobs including existing work, 2/3 directions,
+array2<=16, 24GB GPU>=20GB, 2h/task below cohort/partition limits, <=4 GPUh
+for this registered replication, unique seed/job/task output/checkpoint/log
+paths, <10GB expected new weights with 215TB available, no reservations,
+and unchanged exclusions. Not a Track-A architecture screen, claim_allowed=false.
+Live private3090/sharedA5000/sharedA5500 estimates all gave Sep 5 10:17:30;
+private has available allocation and is retained to avoid unnecessary billing.
+
 D1 training `12307410_0` (L) and `_1` (D) completed 0:0 in 1:15:43 and
 1:15:25 respectively, starting Sep 5 at 02:01:29 and 02:02:15 cluster time.
 Both logs contain exactly steps 1..4000 with finite six-species losses and

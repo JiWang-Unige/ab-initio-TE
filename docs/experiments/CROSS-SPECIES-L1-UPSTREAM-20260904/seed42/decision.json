@@ -1,0 +1,219 @@
+{
+  "L_internal_target": {
+    "macro_dev_bp_f1": 0.8870476678613798,
+    "minimum_macro_dev_bp_f1": 0.83,
+    "pass": false,
+    "targets": {
+      "DEV": {
+        "c_elegans": {
+          "bp_f1": false,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": false
+        },
+        "chicken": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "human": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "mouse": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "pig": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "zebrafish": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        }
+      },
+      "SCREEN": {
+        "c_elegans": {
+          "bp_f1": false,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": false
+        }
+      }
+    }
+  },
+  "comparison_seed": 42,
+  "conf_status": "sealed_not_evaluated",
+  "d2_policy": "If D is released, seed17 paired L/D must preserve the same signs on new CONF.",
+  "decision": "RELEASE_PAIRED_LD_SEED17",
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "historical_B1": "descriptive_only_not_used",
+  "inputs": {
+    "d_dev": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed42/D/dev_metrics.json",
+    "d_screen": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed42/D/screen_metrics.json",
+    "l_dev": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed42/L/dev_metrics.json",
+    "l_screen": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed42/L/screen_metrics.json"
+  },
+  "macro_dev_hardN_gate": {
+    "delta_macro_hardN_fp_rate": 0.0011835294089521178,
+    "maximum_increase": 0.005,
+    "pass": true
+  },
+  "nonworm_dev_f1_gate": {
+    "deltas": {
+      "chicken": -0.00499618687750103,
+      "human": 1.894352715248182e-05,
+      "mouse": 0.0010531204764637758,
+      "pig": 0.0017869847838453135,
+      "zebrafish": -0.0018315323417347207
+    },
+    "maximum_drop": 0.01,
+    "pass": true
+  },
+  "paired_gate_pass": true,
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "release": {
+    "arms": [
+      "L",
+      "D"
+    ],
+    "no_extra_training_or_new_pool_on_stop": false,
+    "seed17": true
+  },
+  "run_role": "upstream_coverage_pilot",
+  "science_scope": "Label-A comparator; internal pilot",
+  "screen_gain_gate": {
+    "delta_bp_average_precision": 0.018831931996004414,
+    "delta_bp_f1": 0.012741522282870954,
+    "minimum_delta_bp_average_precision": 0.01,
+    "minimum_delta_bp_f1": 0.01,
+    "pass": true
+  },
+  "topology_guardrails": {
+    "fragments_and_split_multiplier": 1.25,
+    "missed_rate_increase": 0.03,
+    "panels": {
+      "DEV": {
+        "c_elegans": {
+          "boundary_f1_5bp_delta": -0.004596022842415393,
+          "fragments_per_truth_D": 1.0019493177387915,
+          "fragments_per_truth_L": 0.9330734243014944,
+          "missed_rate_delta": -0.018193632228719947,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": -0.016619987633087197,
+          "split_rate_D": 0.12605588044184535,
+          "split_rate_L": 0.10851202079272254
+        },
+        "chicken": {
+          "boundary_f1_5bp_delta": 0.004799099428255432,
+          "fragments_per_truth_D": 1.067103109656301,
+          "fragments_per_truth_L": 1.060556464811784,
+          "missed_rate_delta": 0.021276595744680854,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": -0.025713693232874812,
+          "split_rate_D": 0.14729950900163666,
+          "split_rate_L": 0.13584288052373159
+        },
+        "human": {
+          "boundary_f1_5bp_delta": 0.0006211757177031485,
+          "fragments_per_truth_D": 1.0534624289623238,
+          "fragments_per_truth_L": 1.0644074931593348,
+          "missed_rate_delta": -0.0016838560303094052,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": -0.00035455606993672895,
+          "split_rate_D": 0.08692906756472321,
+          "split_rate_L": 0.09029677962534204
+        },
+        "mouse": {
+          "boundary_f1_5bp_delta": -0.00953548502645124,
+          "fragments_per_truth_D": 1.0279418446160835,
+          "fragments_per_truth_L": 1.0227169468423445,
+          "missed_rate_delta": -0.004997728305315766,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": -0.007692115861793858,
+          "split_rate_D": 0.07746478873239436,
+          "split_rate_L": 0.0724670604270786
+        },
+        "pig": {
+          "boundary_f1_5bp_delta": 0.00663470721048337,
+          "fragments_per_truth_D": 0.994996247185389,
+          "fragments_per_truth_L": 0.9982486865148862,
+          "missed_rate_delta": -0.004003002251688759,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": 0.003201249707495135,
+          "split_rate_D": 0.09582186639979985,
+          "split_rate_L": 0.09632224168126094
+        },
+        "zebrafish": {
+          "boundary_f1_5bp_delta": -0.006575802272545533,
+          "fragments_per_truth_D": 1.0959605537644606,
+          "fragments_per_truth_L": 1.1092357291864214,
+          "missed_rate_delta": -0.002086098994879576,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": -0.007200930930471139,
+          "split_rate_D": 0.10392565901763702,
+          "split_rate_L": 0.10411530438080789
+        }
+      },
+      "SCREEN": {
+        "c_elegans": {
+          "boundary_f1_5bp_delta": -0.0031807479287317975,
+          "fragments_per_truth_D": 0.9949906073888541,
+          "fragments_per_truth_L": 0.9881026925485284,
+          "missed_rate_delta": 0.00062617407639326,
+          "pass": true,
+          "pass_boundary_f1_5bp": true,
+          "pass_fragments_per_truth": true,
+          "pass_missed_rate": true,
+          "pass_segment_f1_iou_0_8": true,
+          "pass_split_rate": true,
+          "segment_f1_iou_0_8_delta": -0.003731932932512394,
+          "split_rate_D": 0.10457107075767064,
+          "split_rate_L": 0.11271133375078271
+        }
+      }
+    },
+    "pass": true,
+    "segment_and_boundary_drop": 0.05
+  }
+}

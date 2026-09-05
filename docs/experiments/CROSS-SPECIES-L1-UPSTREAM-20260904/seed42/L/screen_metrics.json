@@ -1,0 +1,56 @@
+{
+  "arm": "L",
+  "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_0/calibration.json",
+  "calibration_scope": "six-species-shared",
+  "conf_evaluated": false,
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_0/final_model",
+  "per_species": {
+    "c_elegans": {
+      "boundary_f1_25bp": 0.29292375205704885,
+      "boundary_f1_5bp": 0.14481623697202414,
+      "bp_average_precision": 0.8655569006717128,
+      "bp_f1": 0.7899940029907832,
+      "bp_fn": 100574,
+      "bp_fp": 62612,
+      "bp_precision": 0.8305704837828037,
+      "bp_recall": 0.7531974832395928,
+      "bp_tp": 306934,
+      "callable_bp": 4163080,
+      "fragments_per_truth": 0.9881026925485284,
+      "hardN_bp": 85414,
+      "hardN_fp_bp": 3983,
+      "hardN_fp_rate": 0.04663169972135715,
+      "missed_rate": 0.2185347526612398,
+      "positive_bp": 407508,
+      "predicted_segments": 2049,
+      "segment_f1_iou_0_8": 0.33296763576522215,
+      "short_prediction_rate": 0.45290385553928747,
+      "split_rate": 0.11271133375078271,
+      "tiles": 512,
+      "truth_segments": 1597
+    }
+  },
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "run_role": "upstream_coverage_pilot",
+  "seed": 42,
+  "species": [
+    "c_elegans"
+  ],
+  "split": "SCREEN",
+  "summary": {
+    "macro_boundary_f1_25bp": 0.29292375205704885,
+    "macro_boundary_f1_5bp": 0.14481623697202414,
+    "macro_bp_average_precision": 0.8655569006717128,
+    "macro_bp_f1": 0.7899940029907832,
+    "macro_bp_precision": 0.8305704837828037,
+    "macro_bp_recall": 0.7531974832395928,
+    "macro_fragments_per_truth": 0.9881026925485284,
+    "macro_hardN_fp_rate": 0.04663169972135715,
+    "macro_missed_rate": 0.2185347526612398,
+    "macro_segment_f1_iou_0_8": 0.33296763576522215,
+    "macro_short_prediction_rate": 0.45290385553928747,
+    "macro_split_rate": 0.11271133375078271,
+    "minimum_species_bp_f1": 0.7899940029907832
+  }
+}
