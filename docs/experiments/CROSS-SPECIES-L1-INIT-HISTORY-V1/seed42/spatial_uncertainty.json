@@ -1,0 +1,541 @@
+{
+  "bootstrap": {
+    "ap": "exact raw float32 tie-group weighted AP",
+    "block_bp": 524288,
+    "ci": "percentile 2.5/97.5; numpy quantile method=linear",
+    "draws": "B occupied blocks with replacement; shared across all arms/seeds within each panel",
+    "estimand": "pooled callable bp with sampled block multiplicities, not mean window metrics",
+    "replicates": 1000,
+    "rng": "numpy default_rng",
+    "seed": 20260905,
+    "seed_resampling": false,
+    "undefined_draw_policy": "retain undefined count; any undefined draw makes affected CI null"
+  },
+  "claim_boundary": {
+    "ci_sign_gate": false,
+    "conf_opening_authorized": false,
+    "ensemble": false,
+    "external_success_claim": false,
+    "release_authorized": false
+  },
+  "conf_status": "historical_closure_only_new_inference_forbidden",
+  "experiment": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "panels": {
+    "DEV": {
+      "absolute": {
+        "seed42_D": {
+          "bp_average_precision": {
+            "ci95": [
+              0.8414726937718298,
+              0.8951351306580517
+            ],
+            "point": 0.8735322878458215,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_f1": {
+            "ci95": [
+              0.7674444998297916,
+              0.819607560301196
+            ],
+            "point": 0.7975654176821919,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_precision": {
+            "ci95": [
+              0.7985581375809697,
+              0.8602971505114032
+            ],
+            "point": 0.8342657832439171,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_recall": {
+            "ci95": [
+              0.7261045083303233,
+              0.7985731382304957
+            ],
+            "point": 0.7639579779114662,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          }
+        },
+        "seed42_H0R": {
+          "bp_average_precision": {
+            "ci95": [
+              0.8389298268797274,
+              0.8947304295244225
+            ],
+            "point": 0.8738721852801773,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_f1": {
+            "ci95": [
+              0.7660934367967684,
+              0.8256004602932204
+            ],
+            "point": 0.8032543527235393,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_precision": {
+            "ci95": [
+              0.8020206477510092,
+              0.8678449847608161
+            ],
+            "point": 0.8398224292264027,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_recall": {
+            "ci95": [
+              0.7281007629741887,
+              0.8010894911322065
+            ],
+            "point": 0.7697379391731551,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          }
+        },
+        "seed42_P0R": {
+          "bp_average_precision": {
+            "ci95": [
+              0.8376702255724973,
+              0.8934912162379266
+            ],
+            "point": 0.8712188388625381,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_f1": {
+            "ci95": [
+              0.7538907185832716,
+              0.8154648664058343
+            ],
+            "point": 0.7914413324527043,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_precision": {
+            "ci95": [
+              0.7656232906941388,
+              0.8344111668407683
+            ],
+            "point": 0.8072623462554361,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_recall": {
+            "ci95": [
+              0.7357152503532477,
+              0.8111568349598494
+            ],
+            "point": 0.7762285303813543,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          }
+        }
+      },
+      "alignment": {
+        "block_bp": 524288,
+        "bp_per_tile": 8192,
+        "identical_coordinates_truth_callable_hardN": true,
+        "occupied_blocks": 17,
+        "tiles": 500
+      },
+      "inputs": {
+        "seed42_D": {
+          "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+          "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_recover/12385502/seed42",
+          "j0_report": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_recover/12385502/seed42/diagnostic.json",
+          "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_recover/12385502/seed42/margins/DEV/c_elegans.npz",
+          "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/dev_metrics.json"
+        },
+        "seed42_H0R": {
+          "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/calibration.json",
+          "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0",
+          "j0_report": null,
+          "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/margins/DEV/c_elegans.npz",
+          "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/dev_metrics.json"
+        },
+        "seed42_P0R": {
+          "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/calibration.json",
+          "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1",
+          "j0_report": null,
+          "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/DEV/c_elegans.npz",
+          "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/dev_metrics.json"
+        }
+      },
+      "paired": {
+        "P0R_minus_D_anchor": {
+          "seed42": {
+            "bp_average_precision": {
+              "ci95": [
+                -0.007504534756889633,
+                0.0030469801588766444
+              ],
+              "point": -0.0023134489832833394,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_f1": {
+              "ci95": [
+                -0.017767288691574394,
+                0.0026239315962708876
+              ],
+              "point": -0.006124085229487597,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_precision": {
+              "ci95": [
+                -0.041198610390134296,
+                -0.017109530364180753
+              ],
+              "point": -0.027003436988480956,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_recall": {
+              "ci95": [
+                4.367544331705405e-05,
+                0.023776967895620366
+              ],
+              "point": 0.012270552469888063,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            }
+          }
+        },
+        "P0R_minus_H0R": {
+          "seed42": {
+            "bp_average_precision": {
+              "ci95": [
+                -0.009151185693998466,
+                0.004589874489817086
+              ],
+              "point": -0.0026533464176391464,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_f1": {
+              "ci95": [
+                -0.021123473078630214,
+                -0.0038246717672374944
+              ],
+              "point": -0.011813020270834973,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_precision": {
+              "ci95": [
+                -0.0464125527650921,
+                -0.02228770839101196
+              ],
+              "point": -0.032560082970966575,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_recall": {
+              "ci95": [
+                -0.0026207594743662883,
+                0.015425308791915376
+              ],
+              "point": 0.00649059120819917,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            }
+          }
+        }
+      },
+      "point_counts": {
+        "seed42_D": {
+          "fn_bp": 92008,
+          "fp_bp": 59158,
+          "positive_bp": 389795,
+          "tp_bp": 297787
+        },
+        "seed42_H0R": {
+          "fn_bp": 89755,
+          "fp_bp": 57226,
+          "positive_bp": 389795,
+          "tp_bp": 300040
+        },
+        "seed42_P0R": {
+          "fn_bp": 87225,
+          "fp_bp": 72240,
+          "positive_bp": 389795,
+          "tp_bp": 302570
+        }
+      },
+      "point_reproduction": {
+        "all_metrics_within": 1e-06,
+        "pass": true
+      },
+      "two_seed_arithmetic_mean_effects": null
+    },
+    "SCREEN": {
+      "absolute": {
+        "seed42_D": {
+          "bp_average_precision": {
+            "ci95": [
+              0.859744242047452,
+              0.9054417227654754
+            ],
+            "point": 0.8843888326677172,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_f1": {
+            "ci95": [
+              0.7798627209474783,
+              0.8228004155533398
+            ],
+            "point": 0.8027355252736541,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_precision": {
+            "ci95": [
+              0.8046424510291549,
+              0.8547709862844619
+            ],
+            "point": 0.8313965105640098,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_recall": {
+            "ci95": [
+              0.7392132075787311,
+              0.8099540191182187
+            ],
+            "point": 0.7759847659432453,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          }
+        },
+        "seed42_H0R": {
+          "bp_average_precision": {
+            "ci95": [
+              0.8559721450870601,
+              0.9028838869052316
+            ],
+            "point": 0.8813684716843277,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_f1": {
+            "ci95": [
+              0.775519600315846,
+              0.8214269481026358
+            ],
+            "point": 0.79990049473409,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_precision": {
+            "ci95": [
+              0.8003964433934465,
+              0.8508172432678585
+            ],
+            "point": 0.8284129446094798,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_recall": {
+            "ci95": [
+              0.7347621839340482,
+              0.8077303526335311
+            ],
+            "point": 0.7732854324332283,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          }
+        },
+        "seed42_P0R": {
+          "bp_average_precision": {
+            "ci95": [
+              0.858183212951878,
+              0.9027703151093956
+            ],
+            "point": 0.8816916109787926,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_f1": {
+            "ci95": [
+              0.778680356389823,
+              0.8204833772011129
+            ],
+            "point": 0.8003043546612167,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_precision": {
+            "ci95": [
+              0.794288646439282,
+              0.8419561316330608
+            ],
+            "point": 0.8208386113096174,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          },
+          "bp_recall": {
+            "ci95": [
+              0.7466423327064032,
+              0.8121575263685168
+            ],
+            "point": 0.7807724020141936,
+            "undefined_replicates": 0,
+            "valid_replicates": 1000
+          }
+        }
+      },
+      "alignment": {
+        "block_bp": 524288,
+        "bp_per_tile": 8192,
+        "identical_coordinates_truth_callable_hardN": true,
+        "occupied_blocks": 131,
+        "tiles": 512
+      },
+      "inputs": {
+        "seed42_D": {
+          "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+          "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_recover/12385502/seed42",
+          "j0_report": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_recover/12385502/seed42/diagnostic.json",
+          "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_recover/12385502/seed42/margins/SCREEN/c_elegans.npz",
+          "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/screen_metrics.json"
+        },
+        "seed42_H0R": {
+          "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/calibration.json",
+          "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0",
+          "j0_report": null,
+          "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/margins/SCREEN/c_elegans.npz",
+          "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_0/screen_metrics.json"
+        },
+        "seed42_P0R": {
+          "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/calibration.json",
+          "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1",
+          "j0_report": null,
+          "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/margins/SCREEN/c_elegans.npz",
+          "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_1/screen_metrics.json"
+        }
+      },
+      "paired": {
+        "P0R_minus_D_anchor": {
+          "seed42": {
+            "bp_average_precision": {
+              "ci95": [
+                -0.006409337595262443,
+                0.0009194523496937667
+              ],
+              "point": -0.0026972216889246114,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_f1": {
+              "ci95": [
+                -0.00905714848849784,
+                0.004019179343565845
+              ],
+              "point": -0.002431170612437361,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_precision": {
+              "ci95": [
+                -0.01895160856540104,
+                -0.0026067571323377895
+              ],
+              "point": -0.010557899254392322,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_recall": {
+              "ci95": [
+                -0.004813923514180363,
+                0.014046775142881046
+              ],
+              "point": 0.004787636070948342,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            }
+          }
+        },
+        "P0R_minus_H0R": {
+          "seed42": {
+            "bp_average_precision": {
+              "ci95": [
+                -0.004896445836418304,
+                0.0057184523368015395
+              ],
+              "point": 0.0003231392944648137,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_f1": {
+              "ci95": [
+                -0.005580052357646875,
+                0.00701929865619584
+              ],
+              "point": 0.00040385992712677066,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_precision": {
+              "ci95": [
+                -0.016324972408883524,
+                0.0013482804943196986
+              ],
+              "point": -0.007574333299862346,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            },
+            "bp_recall": {
+              "ci95": [
+                -0.0009306351855151912,
+                0.017656459072550645
+              ],
+              "point": 0.007486969580965286,
+              "undefined_replicates": 0,
+              "valid_replicates": 1000
+            }
+          }
+        }
+      },
+      "point_counts": {
+        "seed42_D": {
+          "fn_bp": 91288,
+          "fp_bp": 64128,
+          "positive_bp": 407508,
+          "tp_bp": 316220
+        },
+        "seed42_H0R": {
+          "fn_bp": 92388,
+          "fp_bp": 65270,
+          "positive_bp": 407508,
+          "tp_bp": 315120
+        },
+        "seed42_P0R": {
+          "fn_bp": 89337,
+          "fp_bp": 69446,
+          "positive_bp": 407508,
+          "tp_bp": 318171
+        }
+      },
+      "point_reproduction": {
+        "all_metrics_within": 1e-06,
+        "pass": true
+      },
+      "two_seed_arithmetic_mean_effects": null
+    }
+  },
+  "protocol": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "scope": "reused internal worm SCREEN/DEV; conditional spatial uncertainty, not seed-population CI",
+  "seeds": [
+    42
+  ],
+  "species": "c_elegans"
+}

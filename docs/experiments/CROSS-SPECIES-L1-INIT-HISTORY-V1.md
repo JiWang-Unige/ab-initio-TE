@@ -4,7 +4,7 @@
 
 Registered 2026-09-05 after the completed Pro follow-up on source commit
 `48867e0a73f8f8b5991ee6270273a3795beddcc6`. Status: **engineering PASS;
-seed42 scientific NO-GO; seed17 not released; descriptive spatial CI pending**.
+seed42 scientific NO-GO; seed17 not released; descriptive spatial CI complete**.
 Advisory source: [completed Pro discussion](https://chatgpt.com/g/g-p-6a29d586630481918525796032225f68-ji-wangke-ti/c/6a9b26e0-59c0-83eb-bc94-a5c5d683de9a).
 
 Accept one new question: under the same finite supervised budget, does encoder
@@ -385,3 +385,23 @@ job `12399232` was submitted. Output:
 `outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/uncertainty/12399232/seed42.json`;
 logs `logs/te_l1_init_ci_12399232.{out,err}`. Completion and real intervals
 are pending; do not describe synthetic-test coverage as empirical CI results.
+
+### 空间不确定性归档：初始化扩展正式闭合
+
+CPU `12399232` 完成0:0，用时21分20秒，无新增GPU耗用。三臂同面板的
+坐标、truth、callable、hardN完全对齐，原始点指标在1e-6内复现。
+SCREEN有512个tile/131个占用512KiB块；DEV有500个tile/17个块。
+两面板各1000次配对抽样，所有报告的指标均为1000个有效draw、0个未定义draw。
+完整结果见同名目录 `seed42/spatial_uncertainty.json`。
+
+| 差值 | SCREEN F1：点估计 [95%空间区间] | DEV F1：点估计 [95%空间区间] |
+|---|---|---|
+| P0R − H0R | +0.000404 [−0.005580, +0.007019] | −0.011813 [−0.021123, −0.003825] |
+| P0R − D | −0.002431 [−0.009057, +0.004019] | −0.006124 [−0.017767, +0.002624] |
+
+四个AP差值的区间均包含0。P0R相对H0R的DEV F1空间区间全负；
+相对D的DEV F1区间包含0，不能据此宣称其总体显著更差或等效。
+这些区间以当前seed和复用开发面板为条件，不代表seed总体，DEV仅17个
+空间块也不是新的独立验证集。原有点值门槛已经失败，CI既不是新增门槛，
+也不能重新释放seed17。初始化训练扩展现已完全闭合；GPU账本仍为
+3.081944小时，无任何待提交训练或评估。
