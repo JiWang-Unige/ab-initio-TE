@@ -139,6 +139,17 @@ and unchanged exclusions. Not a Track-A architecture screen, claim_allowed=false
 Live private3090/sharedA5000/sharedA5500 estimates all gave Sep 5 10:17:30;
 private has available allocation and is retained to avoid unnecessary billing.
 
+Seed17 paired training array `12361196` has been submitted: task0=L, task1=D,
+with `PILOT_SEED=17` and the unchanged materialization root `12306000`.
+Outputs: `outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed17/12361196_{0,1}`.
+Evaluation follows successful 4000-step training and exposure checks. This
+is the predeclared replication, not a new model-selection sweep. Do not run
+the seed42-only release script on seed17 by relabeling its metadata; assess
+the registered D2 consistency/guardrails explicitly. CONF generation and
+inference remain blocked until the applicable models and calibrations are
+frozen; resampling implementation details must be registered before opening
+that panel, without changing the existing success criteria.
+
 D1 training `12307410_0` (L) and `_1` (D) completed 0:0 in 1:15:43 and
 1:15:25 respectively, starting Sep 5 at 02:01:29 and 02:02:15 cluster time.
 Both logs contain exactly steps 1..4000 with finite six-species losses and
