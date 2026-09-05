@@ -297,3 +297,39 @@ numerical core, not the old CONF loader or decisions. It consumes complete
 same-seed P0R/H0R eval directories and D-anchor J0 recovery directories;
 both-seed mode reports arithmetic mean effects, never an ensemble. These
 tests establish consumer behavior, not real confidence intervals for J1.
+
+### Seed42 training completion and evaluation release (2026-09-05)
+
+Training `12385770_0` H0R and `12385770_1` P0R both completed0:0,
+in4502 and4509 seconds respectively. Each has exactly4000 sequential steps
+with finite six-species losses and learning rates, uniform1/6 ERM weights
+throughout and at completion, and a saved final model with config/tokenizer
+files (each weight file1972500022 bytes). Training metadata confirms seed42,
+4000steps/400warmup, correct H0/native encoder sources, fresh head seed42,
+and the registered D worm TRAIN override. Shared optimizer/loss/sampling
+metadata and the full exposure tables agree across arms. Each species has
+4000 presentations; worm has3000 unique tiles, the other five1500 each.
+This is engineering PASS, not a scientific comparison result.
+
+GPU accounting:439 prior engineering seconds +4502+4509 training seconds
+=9450sec=2.625GPUh spent,5.375GPUh remaining under the8h hard cap.
+The seed42 evaluation pair reserves at most2400sec; conditional seed17
+training/evaluation reserves at most13200sec. Total including both future
+stages would be6.958333GPUh at their time limits, leaving1.041667GPUh
+uncommitted. No seed17 release is implied.
+
+Smart-sbatch ModeB Phase1 passed:2 existing user jobs +2 eval tasks=4/8,
+at most3 directions, array2/16, private typed RTX3090 24GB>=20GB with all
+default3080 exclusions;20min below12h cohort/168h partition limits;215TB
+free, no maintenance reservation; job-ID-specific output and log paths,
+read-only final checkpoints. Not TrackA; no external-success claim.
+Six Slurm-unallocated eligible private GPUs and no pending private GPU
+claims were observed. Existing script retained without a Phase2 rewrite.
+
+Evaluation array `12398639` was submitted once from code `0c6a9b1`, with
+`INIT_SEED=42,TRAIN_ARRAY_ID=12385770`:task0 H0R,task1 P0R. Outputs:
+`outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/evaluate/seed42/12398639_{0,1}`;
+logs `logs/te_l1_init_eval_12398639_{0,1}.{out,err}`. It fits existing CAL
+once per model and evaluates the registered SCREEN/DEV panels only. Await
+complete metrics before applying `assess_init.py --seed 42` against both
+H0R and the fixed D anchor. No new model is evaluated on CONF or sealed data.
