@@ -379,3 +379,9 @@ directions, one non-array task,0GPU (VRAM/exclusions not applicable),2h below
 12h/168h,16GB memory,215TB free, no maintenance, job-specific report/logs,
 no checkpoint writes, no TrackA or external claim. Use the private0GPU fast
 path. The existing1000-draw exact pooled/tie-group consumer is unchanged.
+
+After source `7f12a9d` was pushed and remotely fast-forwarded, CPU uncertainty
+job `12399232` was submitted. Output:
+`outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/uncertainty/12399232/seed42.json`;
+logs `logs/te_l1_init_ci_12399232.{out,err}`. Completion and real intervals
+are pending; do not describe synthetic-test coverage as empirical CI results.
