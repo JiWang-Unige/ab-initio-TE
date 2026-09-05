@@ -94,3 +94,44 @@ publication/public-release authorization. Reserved worm chromosome and
 horse/opossum/dm6/cattle stay sealed. No family/homology-clean split is assumed.
 After this one evaluation, close the bounded pilot honestly and consult Pro
 for the next independent experiment; no CONF-driven threshold/sample sweep.
+
+## Execution ledger
+
+The pre-opening contract and seed17 evidence were committed as `779daf4`
+and synchronized to the cluster before any CONF-label job. Materialization
+and apply-only inference code plus synthetic tests were added in `be3bcae`.
+CPU job `12375907` is submitted to private-teodoro-gpu with zero GPU, 2 CPU,
+16GB and 30min. It runs three materialization and three inference-contract
+tests in the established cluster environment before painting CONF labels.
+Output: `outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_materialization/12375907`.
+Logs: `logs/te_l1_conf_material_12375907.{out,err}`.
+
+Phase 1 passed: CPU phase 2/8 jobs, later evaluation at most5/8 with array4,
+2/3 directions, evaluation24GB>=20GB, all walltimes<=30min (CI separately
+bounded2h), unique job-id outputs/logs and no checkpoint writes, 215TB free,
+no reservations, GPU exclusions retained. Not a Track-A architecture screen;
+claim_allowed=false. CPU takes the private zero-GPU fast path. GPU routing
+will be checked again before submission rather than assuming availability.
+
+CONF-M `12375907` completed 0:0 in 9 seconds; six focused tests passed.
+The exact256 tiles/512 halves contain 2,087,374 callable bp and 198,325
+positive bp with zero out-of-bounds annotation records. The output summary
+confirms chrIV/ce11, original manifest path and no resampling/new coordinates.
+This is successful materialization, not a model result.
+
+CONF-E array `12376016` is submitted, task0=42L, task1=42D, task2=17L,
+task3=17D. Each consumes the successful `conf_materialization/12375907`;
+outputs are `conf_evaluate/12376016_{0,1,2,3}` under the experiment output root.
+Logs: `logs/te_l1_conf_eval_12376016_{0,1,2,3}.{out,err}`. CPU success was
+verified before submission. Private3090 and sharedA5500 test-only start
+estimates both gave Sep5 17:08:23 cluster time; private had six available
+allocations and was selected, with unchanged Phase1 constraints.
+
+The paired uncertainty consumer has five passing synthetic tests: weighted
+tie AP equals explicit pooled replication, zero-weight score groups do not
+corrupt AP, identical paired models cancel under shared draws, absolute
+targets are separate from directional improvement, and degenerate AP stays
+undefined. It accepts only the actual 256x8192 CONF cache and metric schema,
+without alternate-format compatibility. Cache point metrics must reproduce
+the authoritative GPU-output metrics within 1e-6 before bootstrapping;
+a mismatch blocks interpretation and triggers a minimal engineering fix.
