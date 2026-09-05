@@ -163,3 +163,39 @@ executes the preregistered1000 shared block draws. Output:
 logs:`logs/te_l1_conf_assess_12376069.{out,err}`. Phase1 passes2/8 jobs,
 2/3 directions,noarray/GPU,2h below12h cohort/168h private,unique paths,
 no new weights,215TB available and no reservation. CI results are pending.
+
+## Final closure: coverage signal, not stable usability
+
+CPU `12376069` completed 0:0 in 7:32. Five tests passed. Successful execution
+includes cache-to-authoritative point reproduction within1e-6. The result
+confirms identical256x8192 coordinates/truth/masks,34 occupied512kb blocks,
+1000 shared draws with seed20260905, and zero undefined replicates. All
+numeric outputs are finite. Exact output: parent experiment `conf/assessment.json`.
+
+| Seed | D CONF F1 (95% spatial CI) | D-L F1 (95% CI) | D-L AP (95% CI) |
+|---|---|---|---|
+| 42 | 0.794878 [0.765384,0.825194] | +0.008111 [-0.003386,+0.023086] | +0.006441 [-0.001218,+0.016564] |
+| 17 | 0.803820 [0.775099,0.833059] | +0.023310 [+0.011590,+0.036264] | +0.020094 [+0.011664,+0.028731] |
+
+Two-seed arithmetic mean D-L F1 is +0.015711 [0.005760,0.028434] and AP
++0.013268 [0.006521,0.020591]. These intervals resample spatial blocks only,
+not seeds, and the mean is not a prediction ensemble. Seed42 effect intervals
+include zero. Neither D model's absolute F1 interval lies wholly above0.8.
+No CI-sign requirement was added after results; point-direction and all
+registered topology guards pass for both seeds, while seed42 absolute F1
+fails. The distinct conclusions must remain separate.
+
+- Engineering: D0, matched L/D training, replication, one-time CONF and
+  uncertainty pipeline are complete; the earlier failed D0 CPU attempts
+  remain failures in their ledger, not successful scientific runs.
+- Scientific scope: conditional internal evidence that additional independent
+  worm training-coordinate coverage improves this unified model at fixed
+  compute. It does not establish an across-seed/held-out-species guarantee,
+  resolve fragments, or validate biological insertion boundaries.
+- Closed: this bounded coverage pilot and its automatic training releases.
+  No extra duration/pool-size/threshold sweep or best-seed selection. Old
+  B0/B2/conditional no-go results remain unchanged.
+- Next-only: consult Pro on one new independent bounded hypothesis using
+  the complete evidence; in parallel, metadata/source/inference readiness
+  may be prepared without opening reserved data. Final external tests and
+  public release still require the separate frozen protocol and user review.

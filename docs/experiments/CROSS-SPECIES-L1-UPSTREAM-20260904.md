@@ -2,6 +2,17 @@
 
 ## Decision and evidence boundary
 
+**Current status: bounded D0-D2 coverage pilot closed.** CPU uncertainty
+job12376069 completed0:0. CONF D-L point AP/F1 directions and original guards
+pass for both seeds, but D CONF F1=0.794878/0.803820 for seeds42/17; stable
+absolute usability is not achieved. Seed42 effect intervals include zero.
+Full closure and frozen spatial CIs are in
+`CROSS-SPECIES-L1-UPSTREAM-20260904-CONF.md`; exact evidence is in `conf/`.
+The original preregistration and chronological ledger below are retained.
+No additional training/sweep or external-panel opening is released by this
+pilot. Next independent hypothesis requires evidence-backed Pro discussion
+and a new bounded protocol, not changing these gates.
+
 Proceed with a bounded upstream diagnostic and a matched shared-model coverage
 experiment, conditional on diagnostic and coordinate feasibility. The previous
 B0 recovery failure, B2 rejection and conditional-model closure remain valid.

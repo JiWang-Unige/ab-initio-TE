@@ -1,0 +1,376 @@
+{
+  "absolute": {
+    "seed17_D": {
+      "bp_average_precision": {
+        "ci95": [
+          0.8426252720704537,
+          0.9068425020457764
+        ],
+        "point": 0.876104437162979,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_f1": {
+        "ci95": [
+          0.7750988614020904,
+          0.8330590286949717
+        ],
+        "point": 0.8038199520306756,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_precision": {
+        "ci95": [
+          0.799067993290018,
+          0.8508988788749206
+        ],
+        "point": 0.825505388686946,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_recall": {
+        "ci95": [
+          0.7356617755413876,
+          0.8298205909236699
+        ],
+        "point": 0.7832446741459725,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      }
+    },
+    "seed17_L": {
+      "bp_average_precision": {
+        "ci95": [
+          0.8161673567615055,
+          0.8921512905222512
+        ],
+        "point": 0.8560100340886314,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_f1": {
+        "ci95": [
+          0.7435478282596071,
+          0.8151469655978137
+        ],
+        "point": 0.7805097644108127,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_precision": {
+        "ci95": [
+          0.8037680776754123,
+          0.8613568881533707
+        ],
+        "point": 0.8328615462036862,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_recall": {
+        "ci95": [
+          0.6860552995305653,
+          0.7819030455904338
+        ],
+        "point": 0.7343501827807891,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      }
+    },
+    "seed42_D": {
+      "bp_average_precision": {
+        "ci95": [
+          0.8390530550975104,
+          0.9018853995270425
+        ],
+        "point": 0.8714517446408533,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_f1": {
+        "ci95": [
+          0.765383959115201,
+          0.8251941576169197
+        ],
+        "point": 0.7948775818532787,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_precision": {
+        "ci95": [
+          0.8122470095685022,
+          0.8648519849472514
+        ],
+        "point": 0.8395290923979495,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_recall": {
+        "ci95": [
+          0.7093077580941728,
+          0.8015175534199054
+        ],
+        "point": 0.754735913273667,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      }
+    },
+    "seed42_L": {
+      "bp_average_precision": {
+        "ci95": [
+          0.8323129292396526,
+          0.8945806751423638
+        ],
+        "point": 0.8650109629286845,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_f1": {
+        "ci95": [
+          0.7549055730831052,
+          0.8163340062283655
+        ],
+        "point": 0.786766128284287,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_precision": {
+        "ci95": [
+          0.8043372160335676,
+          0.8514352293308147
+        ],
+        "point": 0.8291387399463807,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_recall": {
+        "ci95": [
+          0.7039533120208933,
+          0.7923354575361244
+        ],
+        "point": 0.7485138031009706,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      }
+    }
+  },
+  "alignment": {
+    "block_bp": 524288,
+    "bp_per_tile": 8192,
+    "identical_sorted_coordinates_truth_callable_hard_negative": true,
+    "occupied_blocks": 34,
+    "tiles": 256
+  },
+  "bootstrap": {
+    "ap": "raw float32 margins, descending stable sort and exact tie-group cumulative counts",
+    "ci": "percentile 2.5/97.5, numpy quantile method=linear",
+    "draws": "occupied blocks, B draws with replacement; same draws for all four models",
+    "estimand": "pooled callable bp with sampled block multiplicities",
+    "replicates": 1000,
+    "seed": 20260905,
+    "seed_resampling": false,
+    "undefined_draw_policy": "record undefined; no redraw or silent omission; affected CI is null"
+  },
+  "claim_boundary": {
+    "ci_sign_gate": false,
+    "ensemble": false,
+    "release_claim": false,
+    "unseen_species_or_genome_claim": false
+  },
+  "decisions": {
+    "17": {
+      "d_conf_absolute_targets": {
+        "bp_f1": true,
+        "bp_precision": true,
+        "bp_recall": true,
+        "pass": true
+      },
+      "direction": {
+        "criterion": "positive point direction only; no CI-sign gate",
+        "delta_bp_average_precision": 0.020094403074347622,
+        "delta_bp_f1": 0.02331018761986292,
+        "pass": true
+      },
+      "original_topology_guards": {
+        "boundary_f1_5bp_delta": -0.011141454607007828,
+        "fragments_per_truth_D": 0.9355971896955504,
+        "fragments_per_truth_L": 0.8981264637002342,
+        "missed_rate_delta": -0.038641686182669804,
+        "pass": true,
+        "pass_boundary_f1_5bp": true,
+        "pass_fragments_per_truth": true,
+        "pass_missed_rate": true,
+        "pass_segment_f1_iou_0_8": true,
+        "pass_split_rate": true,
+        "segment_f1_iou_0_8_delta": -0.002932912035208457,
+        "split_rate_D": 0.09484777517564402,
+        "split_rate_L": 0.08899297423887588
+      }
+    },
+    "42": {
+      "d_conf_absolute_targets": {
+        "bp_f1": false,
+        "bp_precision": true,
+        "bp_recall": true,
+        "pass": false
+      },
+      "direction": {
+        "criterion": "positive point direction only; no CI-sign gate",
+        "delta_bp_average_precision": 0.006440781712168775,
+        "delta_bp_f1": 0.008111453568991678,
+        "pass": true
+      },
+      "original_topology_guards": {
+        "boundary_f1_5bp_delta": 0.0038374904310568003,
+        "fragments_per_truth_D": 0.9297423887587822,
+        "fragments_per_truth_L": 0.9016393442622951,
+        "missed_rate_delta": -0.016393442622950838,
+        "pass": true,
+        "pass_boundary_f1_5bp": true,
+        "pass_fragments_per_truth": true,
+        "pass_missed_rate": true,
+        "pass_segment_f1_iou_0_8": true,
+        "pass_split_rate": true,
+        "segment_f1_iou_0_8_delta": -0.024492088755734498,
+        "split_rate_D": 0.0936768149882904,
+        "split_rate_L": 0.08899297423887588
+      }
+    }
+  },
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "inputs": {
+    "seed17_D": {
+      "calibration": {
+        "platt_intercept": -0.8453810468304979,
+        "platt_slope": 0.6961029993535062,
+        "threshold": 0.4117663438252757
+      },
+      "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed17/12366939_1/calibration.json",
+      "conf_metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_3/conf_metrics.json",
+      "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_3",
+      "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_3/CONF_margins.npz"
+    },
+    "seed17_L": {
+      "calibration": {
+        "platt_intercept": -0.7859557480688136,
+        "platt_slope": 0.6681605196861854,
+        "threshold": 0.43609524919283243
+      },
+      "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed17/12366939_0/calibration.json",
+      "conf_metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_2/conf_metrics.json",
+      "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_2",
+      "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_2/CONF_margins.npz"
+    },
+    "seed42_D": {
+      "calibration": {
+        "platt_intercept": -0.8050313412075021,
+        "platt_slope": 0.6984053956932976,
+        "threshold": 0.42330056285498807
+      },
+      "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "conf_metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_1/conf_metrics.json",
+      "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_1",
+      "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_1/CONF_margins.npz"
+    },
+    "seed42_L": {
+      "calibration": {
+        "platt_intercept": -0.7728241824175831,
+        "platt_slope": 0.677802238212863,
+        "threshold": 0.4435084784035275
+      },
+      "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_0/calibration.json",
+      "conf_metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_0/conf_metrics.json",
+      "directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_0",
+      "margins": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/conf_evaluate/12376016_0/CONF_margins.npz"
+    }
+  },
+  "paired_d_minus_l": {
+    "seed17": {
+      "bp_average_precision": {
+        "ci95": [
+          0.011664471365773518,
+          0.028730940566288648
+        ],
+        "point": 0.020094403074347622,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_f1": {
+        "ci95": [
+          0.011589654000496158,
+          0.03626447789707421
+        ],
+        "point": 0.02331018761986292,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      }
+    },
+    "seed42": {
+      "bp_average_precision": {
+        "ci95": [
+          -0.0012182461999915768,
+          0.016564080525506508
+        ],
+        "point": 0.006440781712168775,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      },
+      "bp_f1": {
+        "ci95": [
+          -0.003385854042921621,
+          0.023086001771709483
+        ],
+        "point": 0.008111453568991678,
+        "undefined_replicates": 0,
+        "valid_replicates": 1000
+      }
+    }
+  },
+  "point_counts": {
+    "seed17_D": {
+      "fn_bp": 42988,
+      "fp_bp": 32835,
+      "positive_bp": 198325,
+      "tp_bp": 155337
+    },
+    "seed17_L": {
+      "fn_bp": 52685,
+      "fp_bp": 29227,
+      "positive_bp": 198325,
+      "tp_bp": 145640
+    },
+    "seed42_D": {
+      "fn_bp": 48642,
+      "fp_bp": 28611,
+      "positive_bp": 198325,
+      "tp_bp": 149683
+    },
+    "seed42_L": {
+      "fn_bp": 49876,
+      "fp_bp": 30591,
+      "positive_bp": 198325,
+      "tp_bp": 148449
+    }
+  },
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "scope": "prospective internal CONF; conditional spatial uncertainty",
+  "two_seed_arithmetic_mean_delta_d_minus_l": {
+    "bp_average_precision": {
+      "ci95": [
+        0.006521411650041516,
+        0.020591367627024244
+      ],
+      "point": 0.013267592393258199,
+      "undefined_replicates": 0,
+      "valid_replicates": 1000
+    },
+    "bp_f1": {
+      "ci95": [
+        0.005759954770359198,
+        0.028433506185787674
+      ],
+      "point": 0.0157108205944273,
+      "undefined_replicates": 0,
+      "valid_replicates": 1000
+    }
+  }
+}
