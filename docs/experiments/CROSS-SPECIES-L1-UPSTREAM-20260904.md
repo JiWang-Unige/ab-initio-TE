@@ -127,6 +127,13 @@ evaluation was submitted without an unresolvable afterok dependency. No
 training or evaluation was duplicated. No seed17 performance is inferred
 before both evaluations and their output checks complete.
 
+The seed17-only `assess_replication.py` implements the registered D2 SCREEN
+direction check and unchanged nonworm/topology/hardN guardrails, without
+relabeling seed17 as seed42 or imposing the seed42 +0.01 release threshold.
+Its positive decision only supports the conditional CONF step; the frozen
+model/calibration list and concrete paired-block CI protocol must still be
+registered before opening CONF. It never establishes a public-release claim.
+
 ### Seed42 evaluation: paired seed17 released
 
 Both `12353905` evaluation tasks completed 0:0 in 14:46. Six JSON artifacts
