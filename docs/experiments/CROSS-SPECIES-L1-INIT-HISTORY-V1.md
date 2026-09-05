@@ -4,7 +4,7 @@
 
 Registered 2026-09-05 after the completed Pro follow-up on source commit
 `48867e0a73f8f8b5991ee6270273a3795beddcc6`. Status: **protocol registered;
-J0 implementation/loading contract pending; no J0 or J1 job submitted**.
+J0 implemented, awaiting real loading/inference validation; no J1 released**.
 Advisory source: [completed Pro discussion](https://chatgpt.com/g/g-p-6a29d586630481918525796032225f68-ji-wangke-ti/c/6a9b26e0-59c0-83eb-bc94-a5c5d683de9a).
 
 Accept one new question: under the same finite supervised budget, does encoder
@@ -178,3 +178,31 @@ IDs. Synthetic and existing TRAIN sequence smoke only; final generalization,
 family/homology exposure and independent utility evidence remain unproven.
 Public weights/service, changed visibility and final sealed-panel opening
 require user review. Routine engineering and registered releases do not.
+
+## Execution ledger, 2026-09-05
+
+Implemented J0 score diagnostics, strict initialization loading, fixed-budget
+training wrapper, new evaluation and dual-reference decision consumer in
+`scripts/experiments/CROSS-SPECIES-L1-INIT-HISTORY-V1/`. Three independent
+implementation assignments were combined. J0 score tests passed11/11 locally;
+evaluation/decision tests passed12/12. Torch-dependent loading tests and old
+trainer regression tests run in the CPU allocation before real loading.
+An archived-metrics schema mismatch was caught and fixed before submission;
+this is not an experimental failure or new model result.
+
+Existing D evaluation directories contain only calibration/DEV/SCREEN JSON,
+not raw-margin caches. J0 therefore uses once-only apply inference per seed.
+Source cache metadata now identifies native config and PyTorch weights at
+revision `06615c1660c892fc199840c18123f8385b3542a8`; this is an existing source
+revision, not a newly generated checksum. Exact historical H0 ancestry still
+has the stated qualification.
+
+Smart-sbatch Phase1 passed for one CPU loading task and two GPU score tasks:
+1 current user job +3=4/8; array2<=16; two total research directions<=3;
+GPU RTX3090 24GB>=20GB with default3080 exclusions; CPU30min/GPU20min below
+cohort12h and partition168h; no maintenance reservation; 215TB free against
+small report/cache needs; job-ID-specific outputs/logs, no training checkpoints.
+Not TrackA; no smoke/screen scientific claim. Phase2 selected private with
+six Slurm-unallocated eligible GPUs across gpu034/035 and no queued GPU claim
+ahead in that partition. CPU follows the private0GPU fast path.
+These are routing observations, not guaranteed start times or training release.

@@ -257,7 +257,7 @@ def build_optimizer(model):
     return torch.optim.AdamW(groups, lr=LEARNING_RATE)
 
 
-def train(args) -> None:
+def train(args, model_loader=None) -> None:
     from transformers import get_linear_schedule_with_warmup
 
     random.seed(args.seed)
@@ -297,7 +297,9 @@ def train(args) -> None:
         args.arm,
         args.species,
     )
-    model, tokenizer = load_model_and_tokenizer()
+    loaded = (model_loader or load_model_and_tokenizer)()
+    model, tokenizer = loaded[:2]
+    initialization_metadata = loaded[2] if len(loaded) == 3 else None
     model.config.use_cache = False
     device = torch.device("cuda")
     model.to(device)
@@ -359,13 +361,17 @@ def train(args) -> None:
     }
     if getattr(args, "protocol", None) is not None:
         metadata["protocol"] = args.protocol
+    if initialization_metadata is not None:
+        metadata["initialization"] = initialization_metadata
+        metadata["base_model"] = initialization_metadata["base_model"]
+        metadata["initial_weights"] = initialization_metadata["encoder_source"]
     if species_data:
         metadata["train_data_by_species"] = {
             species: str(path) for species, path in sorted(species_data.items())
         }
     (output_dir / "training_meta.json").write_text(json.dumps(metadata, indent=2) + "\n")
 
-    collect_exposure = (
+    collect_exposure = getattr(args, "collect_exposure", False) or (
         requested_run_role == UPSTREAM_COVERAGE_RUN_ROLE
         and getattr(args, "protocol", None) == UPSTREAM_COVERAGE_PROTOCOL
     )
