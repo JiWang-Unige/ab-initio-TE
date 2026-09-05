@@ -101,6 +101,36 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+D1 training `12307410_0` (L) and `_1` (D) completed 0:0 in 1:15:43 and
+1:15:25 respectively, starting Sep 5 at 02:01:29 and 02:02:15 cluster time.
+Both logs contain exactly steps 1..4000 with finite six-species losses and
+uniform ERM weights. Metadata confirms seed42, 4000/400 schedule, complete H0
+initialization and the registered run role. Final weights/config/tokenizer
+files exist. Actual exposure is 4000 presentations per species in both arms;
+L has 1500 unique tiles/species, while D has 3000 worm tiles and 1500 for each
+other species. This releases evaluation, not a scientific performance claim.
+
+Evaluation Phase 1 passes: one existing user job plus two evaluation tasks
+=3/8, two directions<=3, array2<=16, RTX3090 24GB>=20GB, one hour/task below
+cohort/partition limits, unique job/task outputs/logs, no checkpoint writes,
+215TB free, no reservation and configured GPU exclusions retained. This is
+Mode B review of the existing script, not a new architecture batch. Live
+estimates gave private3090 and sharedA5000 the same Sep 5 05:02:44 start,
+so private3090 is retained. SharedA5500 was later (14:12:16).
+
+The requested `--dependency=afterok:12307410` submission was rejected with
+`Batch job submission failed: Job dependency problem`; no evaluation job
+was created. The completed training array is absent from the active job
+table (`Invalid job id specified`) but remains verified in sacct. Therefore
+the same evaluation is submitted after the explicit completed-training and
+artifact gate, without the unavailable scheduler dependency. This scheduling
+repair changes no scientific inputs and is not a failed model experiment.
+
+Evaluation array `12353905` was successfully submitted: task0=L, task1=D;
+roots `outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_{0,1}`.
+Only old six-species CAL/DEV and worm SCREEN are evaluated; CONF and external
+panels remain sealed. No evaluation score is yet available at submission.
+
 D0 job `12306016` ended FAILED 1:0 after 23:15 because the downstream CPU
 strata accumulator omitted `positive_bp` and raised `KeyError: positive_bp`.
 This failed attempt is not a completed scientific run. GPU inference and the
