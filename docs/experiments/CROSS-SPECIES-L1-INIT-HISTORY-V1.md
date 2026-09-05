@@ -4,8 +4,7 @@
 
 Registered 2026-09-05 after the completed Pro follow-up on source commit
 `48867e0a73f8f8b5991ee6270273a3795beddcc6`. Status: **protocol registered;
-J0 loading passed; score caches valid, diagnostic JSON recovery pending;
-no scientific J1 released**.
+J0 and paired engineering smoke passed; scientific J1 seed42 released**.
 Advisory source: [completed Pro discussion](https://chatgpt.com/g/g-p-6a29d586630481918525796032225f68-ji-wangke-ti/c/6a9b26e0-59c0-83eb-bc94-a5c5d683de9a).
 
 Accept one new question: under the same finite supervised budget, does encoder
@@ -144,7 +143,10 @@ protocol and user review, not automatic release here.
 
 Report all per-seed contrasts including AP, not only F1. F1 improvement with
 near-constant AP may be calibrated system/score-alignment benefit; do not claim
-ranking improvement. For spatial uncertainty reuse occupied512kb blocks,
+ranking improvement. Spatial uncertainty concerns the two primary worm panels,
+SCREEN and DEV, for which J0 retains the D-anchor scores; other-species DEV
+point guardrails remain mandatory without additional D-anchor inference.
+For spatial uncertainty reuse occupied512kb blocks,
 1000 paired draws with numpy default_rng20260905 and percentile2.5/97.5
 linear intervals. Each panel uses shared draws across three arms; pool callable
 bp exactly, use raw float32 tie-group AP, no seed resampling, no undefined-draw
@@ -239,3 +241,44 @@ smoke tasks=4/8, same direction and VRAM/exclusion/path constraints, each10min,
 no maintenance, small outputs versus215TB free. Recovery0GPU follows fast path;
 smoke has eligible unallocated private RTX3090 capacity. The eventual scientific
 release requires complete recovered J0 reports and successful paired smoke.
+
+CPU recovery `12385502` completed0:0 in8sec, score tests11/11. All four
+reproduced point F1/P/R/AP differences are exactly0 against archived metrics.
+Compact reports and the loading contract are archived in this document's
+same-name `j0/` directory. Only compatible frozen caches were consumed.
+
+| Seed / worm panel | Deployed F1 | Label-oracle constrained F1 | Extra F1 headroom | Completely missed FN bp / all FN bp |
+|---|---:|---:|---:|---:|
+| 42 SCREEN | 0.802736 | 0.803131 | 0.000396 | 49,668 / 91,288 |
+| 42 DEV | 0.797565 | 0.799613 | 0.002048 | 44,594 / 92,008 |
+| 17 SCREEN | 0.807310 | 0.807319 | 0.000009 | 46,513 / 85,403 |
+| 17 DEV | 0.807216 | 0.807667 | 0.000451 | 37,903 / 78,552 |
+
+No panel has the preregistered0.02 threshold-alignment headroom; seed42 DEV
+cannot reach0.8 by any scalar raw-margin threshold satisfying P,R>=0.75.
+Completely missed runs account for roughly48–55% of FN bp; internal gaps
+account for roughly11–18%, with the remainder terminal misses. These are
+Label-A/tile/callable units, not biological-copy conclusions. This does not
+identify initialization as the cause, but excludes a threshold-only rescue
+for that panel and does not support assuming that most FN are small holes.
+Keep the registered initialization comparison, without threshold or gap sweeps.
+
+Paired engineering smoke `12385503_0/1` both completed0:0 in40sec per arm;
+4/4 steps, finite six-species losses, uniform ERM weights and complete1.9GB
+saved models. No smoke metric is a scientific endpoint. Total GPU expenditure
+so far:359sec(J0, including failed report serialization)+80sec(smoke)=439sec
+or0.121944h. Historical matched4000-step RTX3090 runs took75–76min; the new
+smoke exercises the unchanged update loop with new initialization and adds no
+per-step model operation. Use90min training and20min evaluation limits per
+arm. With all four potential scientific trains/evaluations reaching these
+limits, cumulative expenditure is at most7.455278 GPU-hours, below8h; any
+later engineering expenditure must be debited before a conditional release.
+
+Smart-sbatch Phase1/2 passed for seed42 matched training:1 existing job+2=3/8,
+array2/16, directions<=3, private RTX3090 24GB>=20GB and six unallocated
+eligible GPUs in the current Slurm snapshot, no pending private GPU claims,
+no maintenance,90min below12h/168h limits, unique job-specific checkpoints/logs,
+ample disk, default3080 exclusions. Not TrackA and no external-success claim.
+After complete training, verify4000 finite loss rows, arm/seed/source identity
+and actual D-pool exposure before submitting once-only evaluation. The eval
+script exists but is not auto-queued ahead of this engineering check.

@@ -1,0 +1,116 @@
+{
+  "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+  "mode": "apply-only",
+  "model_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "panels": {
+    "DEV": {
+      "cache_source": "existing_compatible_cache",
+      "expected_metrics_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/dev_metrics.json",
+      "fn_partition": {
+        "boundary_interpretation": "Callable U breaks and tile edges are evaluation boundaries, not biological insertion ends.",
+        "complete_miss_bp": 44594,
+        "complete_miss_runs": 357,
+        "exhaustive": true,
+        "fn_bp": 92008,
+        "fully_hit_runs": 431,
+        "internal_gap_bp": 12158,
+        "partially_hit_runs": 751,
+        "terminal_missing_bp": 35256,
+        "truth_runs": 1539
+      },
+      "label_oracle": {
+        "constrained_max_f1": {
+          "f1": 0.7996130230638254,
+          "precision": 0.8041251021546524,
+          "recall": 0.7951512974768788
+        },
+        "constrained_reason": null,
+        "interpretation": "scalar_threshold_cannot_meet_panel_goal",
+        "oracle_minus_deployed_f1": 0.0020476053816335105,
+        "recall_at_precision_0_80": 0.7983247604510063,
+        "recall_reason": null,
+        "scalar_threshold_goal_unreachable": true,
+        "substantial_score_alignment_headroom": false,
+        "tie_groups": 665546
+      },
+      "panel_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/DEV/c_elegans.jsonl.gz",
+      "point_metrics": {
+        "bp_average_precision": 0.8735322878458215,
+        "bp_f1": 0.7975654176821919,
+        "bp_fn": 92008,
+        "bp_fp": 59158,
+        "bp_precision": 0.8342657832439171,
+        "bp_recall": 0.7639579779114662,
+        "bp_tp": 297787
+      },
+      "reproduction": {
+        "absolute_differences": {
+          "bp_average_precision": 0.0,
+          "bp_f1": 0.0,
+          "bp_precision": 0.0,
+          "bp_recall": 0.0
+        },
+        "absolute_tolerance": 1e-06,
+        "status": "PASS"
+      },
+      "reused_cache_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_scores/12385292_0/margins/DEV/c_elegans.npz"
+    },
+    "SCREEN": {
+      "cache_source": "existing_compatible_cache",
+      "expected_metrics_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/screen_metrics.json",
+      "fn_partition": {
+        "boundary_interpretation": "Callable U breaks and tile edges are evaluation boundaries, not biological insertion ends.",
+        "complete_miss_bp": 49668,
+        "complete_miss_runs": 350,
+        "exhaustive": true,
+        "fn_bp": 91288,
+        "fully_hit_runs": 484,
+        "internal_gap_bp": 11762,
+        "partially_hit_runs": 763,
+        "terminal_missing_bp": 29858,
+        "truth_runs": 1597
+      },
+      "label_oracle": {
+        "constrained_max_f1": {
+          "f1": 0.8031311683340714,
+          "precision": 0.8190836305742235,
+          "recall": 0.7877882152006832
+        },
+        "constrained_reason": null,
+        "interpretation": "mixed_limitations",
+        "oracle_minus_deployed_f1": 0.00039564306041728337,
+        "recall_at_precision_0_80": 0.8050590417856828,
+        "recall_reason": null,
+        "scalar_threshold_goal_unreachable": false,
+        "substantial_score_alignment_headroom": false,
+        "tie_groups": 675433
+      },
+      "panel_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/materialization/12306000/SCREEN/c_elegans.jsonl.gz",
+      "point_metrics": {
+        "bp_average_precision": 0.8843888326677172,
+        "bp_f1": 0.8027355252736541,
+        "bp_fn": 91288,
+        "bp_fp": 64128,
+        "bp_precision": 0.8313965105640098,
+        "bp_recall": 0.7759847659432453,
+        "bp_tp": 316220
+      },
+      "reproduction": {
+        "absolute_differences": {
+          "bp_average_precision": 0.0,
+          "bp_f1": 0.0,
+          "bp_precision": 0.0,
+          "bp_recall": 0.0
+        },
+        "absolute_tolerance": 1e-06,
+        "status": "PASS"
+      },
+      "reused_cache_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-INIT-HISTORY-V1/j0_scores/12385292_0/margins/SCREEN/c_elegans.npz"
+    }
+  },
+  "protocol": "CROSS-SPECIES-L1-INIT-HISTORY-V1",
+  "scope": "D-anchor worm SCREEN/DEV only; label-oracle diagnosis, not a deployment threshold or training release",
+  "seed": 42,
+  "stage": "J0-A",
+  "status": "COMPLETED"
+}
