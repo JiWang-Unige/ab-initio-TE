@@ -10,6 +10,23 @@
 
 ## Review Entries
 
+### 2026-09-06 C runtime container path repair
+- Separate fresh Codex CLI (configured model gpt-5.6-luna), PASS; source `/tmp/c_path_fix_review_20260906.md`.
+- Previous `12398977` FAILED before inference: host `/home/users/j/jwang/ab-initio-TE` alias not resolvable inside container; input existed on host. Container `12398482` COMPLETED0:0; no rebuild.
+- Only runtime script changed: resolve host root with `pwd -P`, bind to `/work/te`, explicit container CWD, use `/work/te` data/output paths throughout; same mount for input/GPU preflight and inference. Fresh `runtime-20260906-r2`, old failed output preserved.
+- Same input selection/model/weights/masks/400050bp/batch1/1GPU/2h. `bash -n` PASS. No training/data-split/metric changes; dataset-leakage refit check N/A for path-only repair. Scientific/paired metric approval unchanged.
+
+### 2026-09-05 GAP-BRIDGE A/C preparation (separate_codex)
+- C reference-only denominator review PASS (`/tmp/gap_c_reference_review_20260905.md`): genePredExtended optionalbin/column indices, CDS clipping, complete statuses/frame values, exactchain dedup, symmetric minCDSstart ownership and halo exclusion confirmed. Only `--reference-only` job approved; provisional paired GTF branch/stop-codon exporter remain unapproved for scientific scoring. Seven synthetic tests reportedPASS and scheduled in allocation before real denominator.
+- C mask repair + runtime review PASS (`/tmp/gap_c_r2_runtime_review_20260905.md`): original Stage0 all9 DEV cores including empty cores; sorted linear positive-projection sweep; firstDEVcandidate fixed400050bp same-letter 3-mode extraction; bounded official Tiberius CLI. New fourth regression expected masses5,1,0 verified statically and scheduled before real build. Gate excludes scientific CDS evaluation. Duplicate identical `--stage0-json` is harmless; no parameter disagreement.
+- A targeted re-review PASS (`/tmp/gap_a_fix_review_20260905.md`): actual offset/fallback token coverage follows the production forward; every crop must be fully covered before PASS. Production-adapter regression with 800 leading Ns rejects an uncovered all-ACGT crop. Original cap/grid/checkpoint unchanged. Eight tests reported PASS. First GPU smoke still pending at review closure.
+- C real mask job `12398578` failed before output: original candidate table contains 6 candidate-bearing DEV blocks, not all 9 frozen DEV blocks. Fix must preserve the 3 empty DEV cores using original split definition, not reduce evaluation scope. Mask re-review required; container job `12398482` remains independent.
+- C mask preparation second independent review: PASS (`/tmp/gap_c_masks_review_20260905.md`), full 9 DEV cores and per-record own-core additions preserve M0 halos including adjacent DEV cores. Scope excludes downstream evaluation/inference.
+- Independent fresh CLI process, review output: `/tmp/gap_ac_smoke_review_20260905.md`.
+- C `submit_container.sbatch`: PASS for CPU-only Tiberius 2.0.7 container preparation only; not authorization of mask/evaluator or inference code. Machine gate under `outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/`.
+- A `prepare_pair.py`: BLOCKED. Reused NT adapter truncates at 688 tokens; an N-containing 4096 context can leave unpredicted bp as zero while shape remains 4096. Crop ACGT eligibility does not prevent this context-level failure. Add actual token-to-bp prediction coverage and fail an uncovered crop before PASS; no silent grid/token-capacity change. Fix underway; no A GPU job submitted at this review.
+- No scientific claims or changes to Stage1 FAIL/chr19 seal.
+
 ### Code Review Gate: PIPE-TEFM-EXTEND-20260620 2026-06-20
 - Reviewer mode: separate Codex attempted, blocked by `bwrap: Creating new namespace failed: No space left on device`; host_self fallback review.
 - Scope: GENERanno 4096 screen-only supplement pipeline for stricter family-level embeddings, base-pretrained SF5, animal-to-plant transfer, plant/cross-kingdom PU fine-tuning, PU fragmentation checks, stress anchor fine-tuning, and decay formula fitting.

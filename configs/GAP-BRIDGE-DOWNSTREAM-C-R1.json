@@ -1,0 +1,107 @@
+{
+  "experiment_id": "GAP-BRIDGE-DOWNSTREAM-C-R1",
+  "protocol": "docs/experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md",
+  "status": "PREPARE_AND_BOUNDED_SMOKE_ONLY",
+  "scientific_claim": false,
+  "full_nine_core_inference_authorized_by_this_config": false,
+  "scientific_scoring_authorized": false,
+  "sealed_test_release_authorized": false,
+  "project_root_remote": "/home/users/j/jwang/ab-initio-TE",
+  "resources": {
+    "max_job_hours": 12,
+    "shared_ac_new_gpu_hours_limit": 24,
+    "shared_cohort": "GAP-BRIDGE-A-C-PARALLEL-20260905",
+    "budget_includes_failed_and_smoke_runs": true,
+    "full_inference_cost_basis": "measured bounded smoke before scheduling remaining cores"
+  },
+  "assets": {
+    "assembly": "data/raw/ucsc/human/hg38/hg38.fa.gz",
+    "chr13_region": "outputs/GAP-BRIDGE-PHASE0-R1/full-whole-20260901-r1/chr13/region.jsonl.gz",
+    "p3_mask": "outputs/GAP-BRIDGE-PHASE0-R1/full-whole-20260901-r1/chr13/prediction.canonical.tsv",
+    "candidate_manifest": "outputs/GAP-BRIDGE-NEURAL-STAGE1-R1/candidate-manifest-20260902-r1/candidate_manifest.tsv",
+    "frozen_split_json": "outputs/GAP-BRIDGE-NEURAL-STAGE1-R1/stage0-oracle-20260902-r1/stage0_oracle.json",
+    "refseq": "data/raw/ucsc/human/hg38/genes/ncbiRefSeqCurated-20250813.txt.gz",
+    "refseq_schema": "data/raw/ucsc/human/hg38/genes/ncbiRefSeqCurated-20250813.sql"
+  },
+  "scope": {
+    "assembly": "hg38",
+    "seqid": "chr13",
+    "chromosome_length_bp": 114364328,
+    "role": "DEV",
+    "core_source": "unchanged Stage 1 chr13 DEV superblocks",
+    "expected_core_count": 9,
+    "frozen_dev_core_indices": [0, 1, 2, 6, 10, 14, 15, 18, 20],
+    "keep_cores_without_candidates": true,
+    "superblock_bp": 5242880,
+    "halo_each_side_bp": 100000,
+    "halo_boundary": "clip_to_chromosome",
+    "one_fasta_record_per_core": true,
+    "coordinates": "zero_based_half_open",
+    "halo_mask": "M0 in every mode, including overlaps with another DEV core",
+    "sealed_chromosomes": ["chr19", "chr20", "chr21", "chr22"]
+  },
+  "mask_modes": {
+    "M0": "original P3 positive intervals lowercase; remaining reference sequence uppercase",
+    "MW": "M0 plus every known all-positive complete original candidate gap in this record's own DEV core",
+    "MP": "M0 plus comparator-positive bp inside all original candidate gaps in this record's own DEV core; unknown bp unchanged",
+    "keep_identical_sequence_letters_lengths_context_and_partition": true,
+    "select_positions_with_gene_annotation": false,
+    "use_selected_grh_tail": false,
+    "oracle_modes_deployable": false,
+    "oracle_modes_are_monotone_gene_utility_upper_bounds": false
+  },
+  "predictor": {
+    "name": "Tiberius",
+    "version": "2.0.7",
+    "source_commit": "4d657012a3ed4e923f5d0ac5cef65fecae8109bd",
+    "model_config": "mammalia_softmasking_v2",
+    "softmask": true,
+    "weights": "exact assets referenced by the pinned mammalia_softmasking_v2 configuration; record resolved local paths before inference",
+    "successful_runtime_verified_by_this_config": false,
+    "same_predictor_and_options_for_all_modes": true
+  },
+  "runtime_smoke": {
+    "selection": "first original DEV candidate sorted by gap_start and ID, no gene selection",
+    "extract_bp": 400050,
+    "extract_context": "center on candidate gap midpoint, shift only to remain within owner halo",
+    "seq_len": 400050,
+    "batch_size": 1,
+    "modes": ["M0", "MW", "MP"],
+    "max_gpu_hours": 2,
+    "scientific_scoring": false
+  },
+  "cds_chain_evaluation": {
+    "primary_metric": "complete_CDS_chain_micro_F1",
+    "primary_formula": "2*sum(TP)/(2*sum(TP)+sum(FP)+sum(FN)) over nine DEV cores",
+    "zero_denominator": "undefined",
+    "truth_completeness": "cdsStartStat=cmpl and cdsEndStat=cmpl; preserve exonFrames",
+    "identity": "seqid, strand, ordered exact CDS interval chain",
+    "deduplicate_identical_chains": true,
+    "owner_and_boundary_policy_status": "FROZEN",
+    "owner_and_boundary_policy": {
+      "coordinate_conversion": "convert record-relative predicted CDS coordinates to genomic coordinates first",
+      "owner": "the DEV core containing the minimum genomic CDS start of the distinct chain",
+      "truth_and_prediction_use_identical_rule": true,
+      "complete_chain_requirement": "all CDS intervals must be contained in the owner record's halo",
+      "boundary_incomplete": "report separately and exclude from primary chain denominator",
+      "outside_core_owner": "exclude from primary denominator",
+      "halo_duplicates": "retain only the record whose core owns the chain; deduplicate identical chains there"
+    },
+    "stop_codon_convention_status": "PENDING_EVALUATOR_IMPLEMENTATION_BEFORE_SCIENTIFIC_SCORING",
+    "secondary_reports": [
+      "chain_precision",
+      "chain_recall",
+      "gained_correct_chains_and_gene_mapping_vs_M0",
+      "lost_correct_chains_and_gene_mapping_vs_M0",
+      "new_unmatched_predictions_vs_M0",
+      "all_added_mask_bp_on_CDS_exon_splice_including_comparator_positive_bp"
+    ],
+    "mp_minus_mw_interpretation": "joint change in added material coverage and action resolution, not resolution alone"
+  },
+  "decision": {
+    "engineering_pass": "valid mask coordinates and ownership, identical sequence letters, active softmask input and successful bounded inference",
+    "scientific_pass_thresholds_locked": false,
+    "old_draft_F1_gain_0_005_and_loss_0_001": "not_PASS_criteria",
+    "no_automatic_partial_fill_training_or_confirmatory_release": true
+  }
+}

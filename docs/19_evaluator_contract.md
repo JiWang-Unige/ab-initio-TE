@@ -1,5 +1,18 @@
 # Evaluator Contract / 评估器与可比性合约
 
+## 2026-09-05 Human gap A/C 局部合约
+
+仅适用于 `GAP-BRIDGE-P3-NT-R2` 与 `GAP-BRIDGE-DOWNSTREAM-C-R1`；
+不替换以下历史路由合约。细则和固定资产见
+`experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md`。
+A 当前无训练/评分，仅输出 label-blind 配对坐标、finite、H0 新槽为零和原输入一致性；
+不产生模型性能 primary metric。C 容器准备同样不产生科学指标。
+C 下游拟采用 chr13 全部 9 DEV core 的 distinct complete CDS-chain exact-match
+micro precision/recall/F1（零容差，方向及所有 CDS 区间一致），另报 M0-correct
+保留/丢失及分母；不是 gene-level F1。CDS stop-codon 与 core 归属细则必须在预测前冻结。
+无外部 SOTA 可比性或 confirmatory claim；无 CAL-GATE/chr19 评价；不使用旧 draft
+`F1 +0.005` / `lost-correct <=0.1%` 自动判通过。
+
 > 由 `/benchmark-roadmap`、`/reproduce-baselines`、`/code-review-gate`、`/result-log` 共同维护。本文档是“我们的指标到底怎么算、什么结果可 claim”的中央真相源。
 
 ## 0. Contract Status

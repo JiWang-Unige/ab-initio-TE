@@ -7,6 +7,63 @@
 
 ---
 
+## Result: GAP-BRIDGE-P3-NT-R2 / smoke-20260905-r1
+
+- 2026-09-05 UTC; engineering smoke only, no scientific claim. Slurm `12398722`
+  COMPLETED 0:0 in 62s, 1 RTX3090; independent pre-submit review PASS after token
+  coverage fix (`docs/21`). Config `configs/GAP-BRIDGE-P3-NT-R2.json`.
+- Real chr3 first8 coordinate-sorted original candidates: all8 crop token coverage,
+  finite inputs, original 143/7 paired equality and zero H0 new slots PASS.
+  Original known TRAIN geometry fit count=741503; old seven stats reused unchanged.
+- One P3 window, two NT windows. NT windows coverage=686/4096 and4096/4096;
+  first8 crops lie in fully covered positions. Partial NT context coverage is real,
+  not a full-population failure/coverage estimate; no zero-filled unpredicted bp are
+  accepted as evidence by this smoke.
+- `outputs/GAP-BRIDGE-P3-NT-R2/smoke-20260905-r1/inference/alignment_smoke.json`
+  exists, parses and contains finite runtime/input diagnostics; stats JSON also fetched.
+  Total Python runtime48.002s, NT/P3 inference0.291/4.545s. No OOM/NaN failure;
+  actual saved models loaded and forwarded. No training loss or new checkpoint exists
+  by design; primary performance metric/range/loss-trend checks are N/A, not invented.
+- Command: `sbatch scripts/experiments/GAP-BRIDGE-P3-NT-R2/submit_smoke.sbatch`.
+  Logs `logs/gap-a-r2-smoke_12398722.{out,err}` on Baobab; no calibration/test metrics.
+- Next: full-population native coverage/readiness and explicit trainer/gates/cost design
+  remain before a full A comparison. This is not evidence of HN scientific gain.
+
+## Result: GAP-BRIDGE-DOWNSTREAM-C-R1 / masks-20260905-r1
+
+- Slurm `12398578` FAILED1:0 in12s before output creation. Real candidate table has
+  only6 candidate-bearing DEV cores; frozen split has9. No FASTA/scientific result.
+- Fix: take all9 from original Stage0 `chr13_split`, including3 empty cores; retain
+  M0/MW/MP equality in empty cores. No scope reduction or new split generation.
+  Isolated mask retry requires targeted re-review; independent container job unaffected.
+
+## Result: GAP-BRIDGE-DOWNSTREAM-C-R1 / masks-20260905-r2
+
+- `12398970` COMPLETED0:0 in26s; CPUonly,4/4 allocated testsPASS; independent
+  targeted review PASS (all9cores, linear sweep, same-letter runtime preparation).
+- Real full9DEV cores [0,1,2,6,10,14,15,18,20];60574candidates/60569known;
+  17660all-positive whole-gap candidates. MW新增143476bp; MP新增461752bp;
+  candidateN2988795bp/U475bp not added. Emptycores remain identical across modes.
+- JSON `outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/masks-20260905-r2/masksummary.json`
+  onBaobab (compact local copy under experiment root) parses, finite interval counts;
+  fullFASTA paths andgeometry retained. Noprimaryperformance/loss/checkpoint applies
+  to mask preparation; none fabricated. Exact positive-projection agreement passed.
+- This is engineering input readiness, not gene prediction or scientific efficacy.
+  Runtime job`12398977` depends on successful container`12398482` and mask`12398970`.
+
+## Result: GAP-BRIDGE-DOWNSTREAM-C-R1 / reference-20260905-r1
+
+- `12399185` COMPLETED0:0 in1s；7/7 allocated testsPASS。独立review仅批准
+  reference-only；配置`GAP-BRIDGE-DOWNSTREAM-C-R1.json`，无预测输入。
+- RefSeq1764chr13转录本：595noncoding、830outsideDEV、9boundary-incomplete；
+  330eligible rows，去重87，得到243 distinct完整CDS链，不是243genes。
+  每core分母=0,0,0,79,19,42,9,74,20（按IDs0,1,2,6,10,14,15,18,20）。
+- JSON存在、已解析、计数相加1764且finite，`scientific_scoring_enabled=false`。
+  无训练loss/newcheckpoint/预测F1适用；不把参考统计包装成科学效果。
+- 已取回`outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/reference-20260905-r1/reference_chains.json`。
+  M0-correct≤243，旧草案0.1%loss tolerance意味着最多0条允许损失；门槛仍未采用。
+  下步需真实Tiberius输出核对stop-codon/exporter，再冻结科学配对评价。
+
 ## Result: SF-DFAM-P3-IDENTITY-RECOVERY-20260812-R1
 
 ### Meta

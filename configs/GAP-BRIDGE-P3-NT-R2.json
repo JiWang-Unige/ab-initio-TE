@@ -1,0 +1,110 @@
+{
+  "experiment_id": "GAP-BRIDGE-P3-NT-R2",
+  "protocol": "docs/experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md",
+  "status": "PREPARE_AND_BOUNDED_SMOKE_ONLY",
+  "scientific_claim": false,
+  "full_training_implemented": false,
+  "full_training_authorized": false,
+  "sealed_test_release_authorized": false,
+  "project_root_remote": "/home/users/j/jwang/ab-initio-TE",
+  "resources": {
+    "max_job_hours": 12,
+    "shared_ac_new_gpu_hours_limit": 24,
+    "shared_cohort": "GAP-BRIDGE-A-C-PARALLEL-20260905",
+    "budget_includes_failed_and_smoke_runs": true
+  },
+  "assets": {
+    "p3_model": "outputs/TE-STRUCTURE-PILOT-20260825-R1/p3-human-20260828-r2-12097867/unet",
+    "nt_model": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv2_250m_H0_w4096_seed42",
+    "candidate_manifest": "outputs/GAP-BRIDGE-NEURAL-STAGE1-R1/candidate-manifest-20260902-r1/candidate_manifest.tsv",
+    "region_root": "outputs/GAP-BRIDGE-PHASE0-R1/full-whole-20260901-r1",
+    "p3_scalar_stats": "outputs/GAP-BRIDGE-NEURAL-STAGE1-R1/train-20260902-r1/scalar_stats.json"
+  },
+  "scope": {
+    "assembly": "hg38",
+    "training_chromosomes": ["chr3", "chr5"],
+    "development_chromosome": "chr13",
+    "development_split": "existing Stage 1 DEV/CAL_FIT/CAL_GATE assignment, unchanged",
+    "smoke_roles": ["TRAIN", "DEV"],
+    "smoke_forbidden_roles": ["CAL_FIT", "CAL_GATE", "TEST"],
+    "sealed_chromosomes": ["chr19", "chr20", "chr21", "chr22"]
+  },
+  "candidate": {
+    "anchor": "P3_ORIGINAL",
+    "gap_length_min_bp": 1,
+    "gap_length_max_bp": 512,
+    "flank_bp_each_side": 256,
+    "padded_crop_length": 1024,
+    "padding": "right_only",
+    "action": "complete_gap_fill_or_abstain",
+    "retain_all_original_p3_positive_bp": true
+  },
+  "paired_input": {
+    "arms": ["H0_P3_FULL", "HN_P3_PLUS_NT"],
+    "channels": 144,
+    "scalars": 10,
+    "shared_original_channels": 143,
+    "shared_original_scalars": 7,
+    "h0_extra_slots": "zero_after_normalization",
+    "nt_channel": "clip(log(p_TE/(1-p_TE)), -12, 12)",
+    "nt_scalar_fields": ["crop_crosses_4096_seam", "log1p_nearest_nt_seam_distance", "direction_from_nt_seam_to_gap_midpoint"],
+    "new_scalar_fit_roles": ["TRAIN"],
+    "new_scalar_fit_chromosomes": ["chr3", "chr5"],
+    "new_scalar_fit_eligibility": "comparator_known=1; no target values used",
+    "new_scalar_fit_expected_count": 741503,
+    "new_scalar_constant_scale": 1.0,
+    "original_seven_scalar_stats": "reuse_frozen_file_without_refit",
+    "same_readout_capacity_initialization_and_training_stream": true,
+    "planned_seeds": [17, 42, 20260902],
+    "backbones_frozen": true
+  },
+  "native_geometry": {
+    "p3_window_bp": 8192,
+    "p3_stride_bp": 8192,
+    "nt_window_bp": 4096,
+    "nt_stride_bp": 4096,
+    "origin_bp": 0,
+    "phase_shift_bp": 0,
+    "nearest_nt_seam_tie": "left",
+    "nt_direction": "sign(gap_midpoint - nearest_seam)",
+    "tail": "tokenizer_padding_then_trim_to_real_length",
+    "preserve_all_genomic_coordinates_including_N": true,
+    "crop_token_to_bp_coverage": "every real crop position must have an actual NT prediction",
+    "uncovered_or_truncated_crop_position": "SMOKE_FAIL; never treat default zero as a probability"
+  },
+  "fixed_donor": {
+    "anchor": "P3_ORIGINAL",
+    "probability_threshold": 0.5,
+    "support": "every_base_in_complete_legal_gap",
+    "gap_length_max_bp": 512,
+    "apply_all_eligible_gaps": true,
+    "over_budget": "report_infeasible_without_truncation_or_retuning"
+  },
+  "first_smoke": {
+    "seqid": "chr3",
+    "max_candidates": 8,
+    "selection": "first original candidates sorted by gap_start and candidate_id, without label or risk selection",
+    "train_heads": false,
+    "compute_scientific_metrics": false,
+    "expected_outputs": ["alignment_smoke.json"],
+    "pass_means": "native coordinate pairing, finite tensors, identical original slots, zero H0 extra slots"
+  },
+  "future_scientific_gates": {
+    "status": "NOT_LOCKED_FOR_FULL_EXPERIMENT",
+    "primary_comparison": "HN versus paired H0; deployment safety relative to immutable P3",
+    "nt_single_model": "fixed_0.5_descriptive_comparator",
+    "old_min_p3_nt_topology_gate": "not_adopted",
+    "draft_thresholds_are_pass_criteria": false
+  },
+  "ancestry": {
+    "p3_initialization": "GENERanno-eukaryote-0.5b-base directly, not H0/DAPT/P2",
+    "p3_task_supervision": "3000 chr1-prefix windows at 8192 bp; 800 steps; final state",
+    "p3_validation": "800 chr11-prefix windows; periodic validation, no best-checkpoint selection",
+    "p3_reported_test": "1200 chr17 windows, chr17:0-9830400",
+    "nt_task_supervision": "3000 H0 windows at 4096 bp; chr1 prefix supported by source order and historical H0 records",
+    "nt_model_selection": "1200 validation windows, chr11 prefix supported by source order; best step 1000 selected by validation TE F1",
+    "nt_reported_test": "first 1200 H0 test windows; historical matching output only chr17:0-4915200",
+    "pretraining_overlap": "unknown",
+    "whole_project_confirmatory_nonexposure_proven": false
+  }
+}

@@ -1,5 +1,19 @@
 # TODO / Run Tracker
 
+## 2026-09-05 Human gap A/C bounded preparation
+
+- [x] A independent code review and real8-candidate input smoke: `12398722` COMPLETED0:0,
+  engineeringPASS; no head training, full-population coverage or scientific comparison.
+- [ ] C container `12398482` prepared in isolated environment; runtime completion pending.
+- [x] C mask `12398578` failed on6 candidate-bearing versus9 frozen DEV cores; preserve
+  empty cores via originalsplit. Reviewed retry `12398970` COMPLETED0:0 in26s,
+  4/4 testsPASS, all9cores60574candidates; output`masks-20260905-r2`.
+- [ ] C fixed400050bp M0/MW/MP runtime `12398977`, afterok container+mask dependencies;
+  complete-CDS-chain evaluator readiness remains separate.
+- [x] C reference-only `12399185` COMPLETED0:0，7/7testsPASS；243 distinct完整CDS链。
+  GTF stop-codon convention尚未验证，不执行科学配对评分。
+- [ ] No automatic fulltrain/claim/chr19 release. Protocol `experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md`.
+
 ## 2026-08-11 TEFM new-directions bounded cohort
 
 - [ ] Continuation Wave-1 remains stopped before scientific execution: F registry completed; B Job `11522405` failed semantic audit and is being narrowed to an independently reviewed RM+HiTE validity smoke; S0 repair Job `11523252` passed the CSV fix but exposed `DFAM_FAMILY_IDENTITY_UNRESOLVED`. No GPU S0/S1 or further S data submission before result-chain review and an approved leakage-safe identity repair.

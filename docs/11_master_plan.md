@@ -1,5 +1,12 @@
 # Master Plan / TE-FM 总路线合同
 
+> **2026-09-05 用户指定 A/C 并行推进。** 当前 Human gap 新工作为
+> `GAP-BRIDGE-P3-NT-R2` 的原生窗口配对准备/有界 smoke，与
+> `GAP-BRIDGE-DOWNSTREAM-C-R1` 的固定三种 softmask 下游诊断准备。
+> 协议见 `docs/experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md`。
+> 旧 G/R/H Stage 1 的 `NO_ACTIONABLE_ARM` 不变；chr19 保持封存，
+> 不启动 full-backbone training，也不把工程 smoke 作为科学通过。
+
 > **Current route override (2026-08-31).** Older selector/structured-decoder
 > actions below are historical and must not restart closed experiments. The
 > only active route-selection experiment is the zero-GPU, ontology-first

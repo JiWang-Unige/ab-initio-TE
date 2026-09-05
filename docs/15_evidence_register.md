@@ -11,6 +11,7 @@
 ## Register
 | Evidence ID | Date | Type | Summary | Source | Routed to | Status | Owner |
 |---|---|---|---|---|---|---|---|
+| E139 | 2026-09-05 | discussion_decision / engineering_result | 用户指定 Human gap A/C并行；A12398722真实8crop smokePASS，C12398970全9core maskPASS、12399185参考243CDS链，runtime12398977依赖container12398482；修复NT截断覆盖、emptycore遗漏和重复扫描；旧Stage1FAIL/chr19封存不变，无fulltrain/科学claim | docs/experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md; outputs/GAP-BRIDGE-P3-NT-R2; outputs/GAP-BRIDGE-DOWNSTREAM-C-R1 | docs/06; docs/11; docs/19; docs/21 | recorded; runtime pending | codex |
 | E001 | 2026-06-10 | decision | 主 claim 从 hs1 in-domain superiority 改为 zero-human transfer；human 仅作 fidelity floor | grill + revise-goal | docs/00, ACTIVE_GOAL, docs/11 | captured | agent |
 | E002 | 2026-06-10 | literature/sota | 无 published hs1 TE F1 SOTA；需要本地 anchor | docs/01/02 | docs/03, docs/12 | captured | agent |
 | E003 | 2026-06-11 | result | M1 PU vs binary 原始 +0.03 被 2x2 controlled eval 推翻，in-domain 不可裁 objective | docs/06 | docs/14 | captured | agent |
