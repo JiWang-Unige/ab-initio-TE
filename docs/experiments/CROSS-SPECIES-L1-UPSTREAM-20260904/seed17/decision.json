@@ -1,0 +1,167 @@
+{
+  "arms": [
+    "L",
+    "D"
+  ],
+  "comparison_seed": 17,
+  "conf_opening_note": "Conditional readiness only: freeze the model/calibration list and register paired spatial-block confidence intervals before opening CONF.",
+  "conf_status": "sealed_not_evaluated",
+  "consistent_positive_screen_signal": true,
+  "decision": "PROCEED_TO_PREREGISTERED_CONF",
+  "direction": {
+    "delta_bp_average_precision": 0.012965464300545793,
+    "delta_bp_f1": 0.012729255236440529,
+    "pass": true,
+    "required_screen_direction": "positive",
+    "seed": 17
+  },
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "guardrails": {
+    "macro_dev_hardN": {
+      "delta_macro_hardN_fp_rate": 0.002243151918961274,
+      "maximum_increase": 0.005,
+      "pass": true
+    },
+    "nonworm_dev_f1": {
+      "deltas": {
+        "chicken": -0.0038815148069706318,
+        "human": 0.0003607663069473688,
+        "mouse": -0.0005920439771666119,
+        "pig": 0.0002620371166534019,
+        "zebrafish": -0.00021992212387755838
+      },
+      "maximum_drop": 0.01,
+      "pass": true
+    },
+    "pass": true,
+    "topology": {
+      "fragments_and_split_multiplier": 1.25,
+      "missed_rate_increase": 0.03,
+      "panels": {
+        "DEV": {
+          "c_elegans": {
+            "boundary_f1_5bp_delta": 0.0029662588060808126,
+            "fragments_per_truth_D": 0.9753086419753086,
+            "fragments_per_truth_L": 0.9506172839506173,
+            "missed_rate_delta": -0.0396361273554256,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": 0.017482387838338886,
+            "split_rate_D": 0.10331384015594541,
+            "split_rate_L": 0.11500974658869395
+          },
+          "chicken": {
+            "boundary_f1_5bp_delta": 0.0002829863674393418,
+            "fragments_per_truth_D": 1.0736497545008183,
+            "fragments_per_truth_L": 1.0474631751227497,
+            "missed_rate_delta": 0.011456628477905073,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": -0.00565234509572321,
+            "split_rate_D": 0.15220949263502456,
+            "split_rate_L": 0.14238952536824878
+          },
+          "human": {
+            "boundary_f1_5bp_delta": -0.004771075680630288,
+            "fragments_per_truth_D": 1.0646179751631235,
+            "fragments_per_truth_L": 1.058513997053252,
+            "missed_rate_delta": -0.004630604083350878,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": -0.002685577354998858,
+            "split_rate_D": 0.09198063565565144,
+            "split_rate_L": 0.09050726162913071
+          },
+          "mouse": {
+            "boundary_f1_5bp_delta": -0.002968180983752622,
+            "fragments_per_truth_D": 1.0247614720581555,
+            "fragments_per_truth_L": 1.0268059972739665,
+            "missed_rate_delta": -0.0006815084052703285,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": -0.001685816948835961,
+            "split_rate_D": 0.07155838255338483,
+            "split_rate_L": 0.08064516129032258
+          },
+          "pig": {
+            "boundary_f1_5bp_delta": -0.004895417471002611,
+            "fragments_per_truth_D": 0.994996247185389,
+            "fragments_per_truth_L": 0.9909932449337002,
+            "missed_rate_delta": -0.005003752814610962,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": -0.001126019394560529,
+            "split_rate_D": 0.09457092819614711,
+            "split_rate_L": 0.09382036527395547
+          },
+          "zebrafish": {
+            "boundary_f1_5bp_delta": -0.007466584966412226,
+            "fragments_per_truth_D": 1.1128389910866678,
+            "fragments_per_truth_L": 1.1151147354447184,
+            "missed_rate_delta": -0.004741134079271764,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": -0.008832762437474828,
+            "split_rate_D": 0.10563246728617486,
+            "split_rate_L": 0.10506353119666224
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "boundary_f1_5bp_delta": 0.003333285742585207,
+            "fragments_per_truth_D": 1.018785222291797,
+            "fragments_per_truth_L": 0.971195992485911,
+            "missed_rate_delta": -0.03130870381966189,
+            "pass": true,
+            "pass_boundary_f1_5bp": true,
+            "pass_fragments_per_truth": true,
+            "pass_missed_rate": true,
+            "pass_segment_f1_iou_0_8": true,
+            "pass_split_rate": true,
+            "segment_f1_iou_0_8_delta": -0.012125825178956107,
+            "split_rate_D": 0.09705698184095178,
+            "split_rate_L": 0.10269254852849093
+          }
+        }
+      },
+      "pass": true,
+      "segment_and_boundary_drop": 0.05
+    }
+  },
+  "inputs": {
+    "d_dev": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed17/D/dev_metrics.json",
+    "d_screen": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed17/D/screen_metrics.json",
+    "l_dev": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed17/L/dev_metrics.json",
+    "l_screen": "/Users/jiwang/Desktop/TE/ab-initio-TE/docs/experiments/CROSS-SPECIES-L1-UPSTREAM-20260904/seed17/L/screen_metrics.json"
+  },
+  "proceed_to_conf": true,
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "release_claim": false,
+  "run_role": "upstream_coverage_pilot",
+  "science_scope": "Label-A comparator; internal paired replication",
+  "seed": 17
+}

@@ -101,6 +101,39 @@ loading contract to be recorded before submission.
 
 ## Execution ledger
 
+### Seed17 evaluation complete: internal signal replicated
+
+Evaluation `12366939_0` and `_1` completed 0:0 in 14:29 and 14:30.
+All six JSON artifacts are finite and consistent with seed17 L/D,
+six-species CAL-only calibration, model paths and DEV/SCREEN scopes.
+Exact compact artifacts and `assess_replication.py` output are in `seed17/`.
+Decision: `PROCEED_TO_PREREGISTERED_CONF`, not public release.
+
+| Species / panel | L bp F1 | D bp F1 |
+|---|---:|---:|
+| human DEV | 0.940738 | 0.941099 |
+| mouse DEV | 0.940696 | 0.940104 |
+| chicken DEV | 0.840266 | 0.836385 |
+| zebrafish DEV | 0.929808 | 0.929588 |
+| pig DEV | 0.893931 | 0.894193 |
+| c_elegans DEV | 0.788782 | 0.807216 |
+| c_elegans SCREEN | 0.794581 | 0.807310 |
+
+Seed17 SCREEN AP improves 0.871961 -> 0.884926 (+0.012965), and F1
+improves +0.012729. All original guards pass, including macro DEV hardN
+FP increase 0.002243 <=0.005. D reaches all six DEV F1 targets for this
+seed, but seed42 worm DEV remains 0.797565: no across-seed all-species
+success claim. SCREEN fragment/truth rises 0.971196 -> 1.018785 and segment
+F1 declines 0.340151 -> 0.328025 despite higher bp recall; this is not a
+fragment solution. The matched coverage signal has replicated on internal
+coordinates and is eligible for the already-registered one-time CONF step.
+
+The concrete pre-opening contract is recorded in
+`CROSS-SPECIES-L1-UPSTREAM-20260904-CONF.md`. All four models and calibrations
+are final; no best-seed selection, recalibration or additional training.
+Attempted Pro follow-up was blocked by the local Mac lock screen. No new
+Pro advice is claimed; the existing authorized CONF protocol continues.
+
 ### Seed17 training complete; paired evaluation running
 
 Training `12361196_0` (L) and `_1` (D) completed 0:0 in 1:15:38 and

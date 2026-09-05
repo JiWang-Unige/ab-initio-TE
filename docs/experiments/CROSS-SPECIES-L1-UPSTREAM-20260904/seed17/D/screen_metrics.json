@@ -1,0 +1,56 @@
+{
+  "arm": "D",
+  "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed17/12366939_1/calibration.json",
+  "calibration_scope": "six-species-shared",
+  "conf_evaluated": false,
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed17/12361196_1/final_model",
+  "per_species": {
+    "c_elegans": {
+      "boundary_f1_25bp": 0.28503184713375795,
+      "boundary_f1_5bp": 0.15127388535031847,
+      "bp_average_precision": 0.8849260771424827,
+      "bp_f1": 0.8073100400891762,
+      "bp_fn": 85403,
+      "bp_fp": 68358,
+      "bp_precision": 0.8249309153492136,
+      "bp_recall": 0.7904262002218362,
+      "bp_tp": 322105,
+      "callable_bp": 4163080,
+      "fragments_per_truth": 1.018785222291797,
+      "hardN_bp": 85414,
+      "hardN_fp_bp": 5209,
+      "hardN_fp_rate": 0.060985318566043036,
+      "missed_rate": 0.2016280525986224,
+      "positive_bp": 407508,
+      "predicted_segments": 2171,
+      "segment_f1_iou_0_8": 0.32802547770700635,
+      "short_prediction_rate": 0.46936895439889453,
+      "split_rate": 0.09705698184095178,
+      "tiles": 512,
+      "truth_segments": 1597
+    }
+  },
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "run_role": "upstream_coverage_pilot",
+  "seed": 17,
+  "species": [
+    "c_elegans"
+  ],
+  "split": "SCREEN",
+  "summary": {
+    "macro_boundary_f1_25bp": 0.28503184713375795,
+    "macro_boundary_f1_5bp": 0.15127388535031847,
+    "macro_bp_average_precision": 0.8849260771424827,
+    "macro_bp_f1": 0.8073100400891762,
+    "macro_bp_precision": 0.8249309153492136,
+    "macro_bp_recall": 0.7904262002218362,
+    "macro_fragments_per_truth": 1.018785222291797,
+    "macro_hardN_fp_rate": 0.060985318566043036,
+    "macro_missed_rate": 0.2016280525986224,
+    "macro_segment_f1_iou_0_8": 0.32802547770700635,
+    "macro_short_prediction_rate": 0.46936895439889453,
+    "macro_split_rate": 0.09705698184095178,
+    "minimum_species_bp_f1": 0.8073100400891762
+  }
+}

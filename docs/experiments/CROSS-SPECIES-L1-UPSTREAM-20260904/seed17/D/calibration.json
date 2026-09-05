@@ -1,0 +1,48 @@
+{
+  "arm": "D",
+  "calibration_loss": 0.12794181338226449,
+  "calibration_protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
+  "calibration_scope": "six-species-shared",
+  "evaluation_contract": {
+    "conf_status": "sealed_not_evaluated",
+    "dev_split": "DEV",
+    "forbidden_split": "CONF",
+    "screen_species": [
+      "c_elegans"
+    ],
+    "screen_split": "SCREEN"
+  },
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "fit_split": "CAL",
+  "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed17/12361196_1/final_model",
+  "platt_intercept": -0.8453810468304979,
+  "platt_slope": 0.6961029993535062,
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "run_role": "upstream_coverage_pilot",
+  "seed": 17,
+  "species": [
+    "human",
+    "mouse",
+    "chicken",
+    "zebrafish",
+    "pig",
+    "c_elegans"
+  ],
+  "threshold": 0.4117663438252757,
+  "threshold_selection": {
+    "candidate_count": 3703178,
+    "macro_species_f1": 0.8916939339898661,
+    "minimum_species_f1": 0.8237586885368633,
+    "species_f1": {
+      "c_elegans": 0.8237586885368633,
+      "chicken": 0.8244773273282692,
+      "human": 0.939316673803514,
+      "mouse": 0.9396313516296587,
+      "pig": 0.8940176125687638,
+      "zebrafish": 0.9289619500721276
+    },
+    "threshold": 0.4117663438252757
+  },
+  "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed17/12361196_1/final_model"
+}
