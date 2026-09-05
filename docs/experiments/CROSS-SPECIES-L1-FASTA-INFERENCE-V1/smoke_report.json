@@ -1,0 +1,21 @@
+{
+  "ambiguity_qc_matches_input_only": true,
+  "complete_half_open_coordinates": true,
+  "conf_or_sealed_data_read": false,
+  "gpu_requested": false,
+  "inference_summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/prediction/summary.json",
+  "input_bp": 8206,
+  "labels_read": false,
+  "material_runs_match_frozen_threshold": true,
+  "probabilities_exactly_match_captured_legacy_helper": true,
+  "protocol": "CROSS-SPECIES-L1-FASTA-INFERENCE-V1",
+  "real_model_forward_passes": "one pass over four windows; no second inference",
+  "scope": "synthetic sequence-only engineering; no accuracy or generalization endpoint",
+  "status": "PASS",
+  "window_lengths_bp": [
+    4096,
+    4096,
+    9,
+    5
+  ]
+}

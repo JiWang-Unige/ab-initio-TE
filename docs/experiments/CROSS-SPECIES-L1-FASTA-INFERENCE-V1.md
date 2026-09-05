@@ -2,7 +2,8 @@
 
 2026-09-05：初始化训练扩展科学NO-GO后的已授权有界工程。
 不训练、不改变冻结校准/阈值/原评估器、不释放任何保留面板。
-实现与验证进行中，不将接口就绪等同模型有效性或公开发布。
+实现与有界验证已完成：9项合成测试和一次冻结D模型CPU smoke通过。
+不将接口工程就绪等同模型有效性或公开发布。
 
 ## 输入与输出契约
 
@@ -74,3 +75,35 @@ smoke脚本与sbatch另经独立只读审查PASS。`smart-sbatch` Phase1：
 源码 `8ad7ba7` 双端同步后提交CPU smoke `12402018`。
 产物目录 `outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/`，
 日志 `logs/te_l1_fasta_smoke_12402018.{out,err}`；真实smoke结果待验。
+
+## 工程闭合与使用
+
+`12402018` COMPLETED0:0，用时45秒，`smoke_report.json` 为PASS，
+推理summary为COMPLETED/device=cpu/total_bp=8206。四窗口
+4096/4096/9/5均完成；全部概率逐值等于捕获的原helper输出，BED与冻结
+阈值匹配，QC仅对应输入4个歧义碱基。人工序列没有阈值阳性；这不能验证
+真实阳性检测效果，跨窗阳性合并的功能证据来自合成margin单测。
+本次无标签、真实基因组面板或GPU读取/请求；模型权重本身为原冻结D。
+完整紧凑报告与summary归档在本文同名目录。GPU总账仍为3.081944h。
+
+接口在已获授权的FASTA上、项目Slurm分配内调用，例如：
+
+```bash
+python3 scripts/experiments/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/infer_fasta.py \
+  --fasta /path/to/authorized-input.fa.gz \
+  --model-dir /path/to/frozen/final_model \
+  --tokenizer-dir /path/to/frozen/final_model \
+  --model-code-dir /path/to/native/ntv2-code \
+  --calibration-json /path/to/that-model/calibration.json \
+  --output-dir /path/to/new-run-output \
+  --batch-size 12
+```
+
+路径必须与现有CAL身份一致，不能把另一个模型的校准套用过来；CPU运行
+加`--cpu`。Baobab不可在登录节点直接运行此命令，须在既有`srun`分配内
+或经`smart-sbatch`提交。示例只是接口用法，不授权开放额外数据。
+复现本次人工输入工程验证可查看对应sbatch，但已完成者不需再提交。
+
+有界接口、来源历史/许可缺口说明和效用范围准备现已交付。本轮不自动
+追加TRAIN/全染色体/保留面板推理，不发布权重或服务，不新开训练路线。
+本轮heartbeat在归档同步后关闭，后续科学或发布选择留给用户审阅。

@@ -1,0 +1,53 @@
+{
+  "ambiguity_policy": "uppercase IUPAC; existing <unk> tokenization; no prediction censoring",
+  "batch_size": 2,
+  "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+  "calibration_scope": "six-species-shared",
+  "contigs": [
+    {
+      "ambiguity_runs": 1,
+      "ambiguous_bp": 1,
+      "length_bp": 8201,
+      "material_runs": 0,
+      "name": "synthetic_long",
+      "threshold_positive_bp": 0,
+      "windows": 3
+    },
+    {
+      "ambiguity_runs": 1,
+      "ambiguous_bp": 3,
+      "length_bp": 5,
+      "material_runs": 0,
+      "name": "synthetic_short",
+      "threshold_positive_bp": 0,
+      "windows": 1
+    }
+  ],
+  "coordinates": "0-based half-open",
+  "device": "cpu",
+  "fit_split": "CAL",
+  "input_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/synthetic.fa",
+  "interpretation": "TE material connected runs, not insertion IDs; no scientific evaluation",
+  "labels_used": false,
+  "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "outputs": {
+    "ambiguity_qc_bed": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/prediction/ambiguity_qc.bed",
+    "material_bed": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/prediction/material_runs.bed",
+    "probability_bedgraph_gz": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/prediction/material_probability.bedGraph.gz",
+    "summary_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/12402018/prediction/summary.json"
+  },
+  "platt_intercept": -0.8050313412075021,
+  "platt_slope": 0.6984053956932976,
+  "protocol": "CROSS-SPECIES-L1-FASTA-INFERENCE-V1",
+  "scientific_metrics_computed": false,
+  "seed": 42,
+  "status": "COMPLETED",
+  "tail_policy": "actual sequence length; existing NTv2 tokenizer padding only",
+  "threshold": 0.42330056285498807,
+  "threshold_rule": "probability >= frozen CAL threshold",
+  "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "total_bp": 8206,
+  "window_alignment": "nonoverlapping, contig origin 0",
+  "window_bp": 4096
+}
