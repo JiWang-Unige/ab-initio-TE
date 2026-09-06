@@ -343,12 +343,16 @@ def average_precision_binary(y_true, y_score) -> float:
     y_true = np.asarray(y_true).astype(int)
     if y_true.size == 0 or int((y_true == 1).sum()) == 0:
         return float("nan")
-    order = np.argsort(-np.asarray(y_score))
+    scores = np.asarray(y_score)
+    order = np.argsort(-scores, kind="mergesort")
     y = y_true[order]
     tp = np.cumsum(y == 1)
-    fp = np.cumsum(y == 0)
-    precision = tp / np.maximum(tp + fp, 1)
-    return float((precision * (y == 1)).sum() / max(1, int((y_true == 1).sum())))
+    # A threshold admits an entire tied-score group, not an arbitrary row order.
+    sorted_scores = scores[order]
+    ends = np.flatnonzero(np.r_[sorted_scores[1:] != sorted_scores[:-1], True])
+    group_positive = np.diff(np.r_[0, tp[ends]])
+    precision = tp[ends] / (ends + 1)
+    return float(np.sum(precision * group_positive) / int((y_true == 1).sum()))
 
 
 def load_tokenizer(model_path: str):

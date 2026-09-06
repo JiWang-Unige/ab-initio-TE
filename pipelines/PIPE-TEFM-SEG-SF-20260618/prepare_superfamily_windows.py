@@ -7,6 +7,7 @@ import bisect
 import collections
 import csv
 import gzip
+import itertools
 import json
 from pathlib import Path
 
@@ -69,7 +70,8 @@ def load_class_intervals(bed: str):
     packed = {}
     for chrom, rows in vals.items():
         rows.sort()
-        packed[chrom] = (rows, [x[1] for x in rows])
+        # Preserve sorted overwrite priority; only the search index is cumulative.
+        packed[chrom] = (rows, list(itertools.accumulate((x[1] for x in rows), max)))
     return packed
 
 
@@ -77,8 +79,8 @@ def paint(labels: list[int], chrom: str, start: int, end: int, intervals) -> Non
     item = intervals.get(chrom)
     if not item:
         return
-    vals, ends = item
-    idx = max(0, bisect.bisect_left(ends, start) - 1)
+    vals, prefix_ends = item
+    idx = bisect.bisect_right(prefix_ends, start)
     for te_start, te_end, cls in vals[idx:]:
         if te_start >= end:
             break

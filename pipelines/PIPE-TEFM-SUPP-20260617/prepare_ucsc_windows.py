@@ -7,6 +7,7 @@ import bisect
 import collections
 import csv
 import gzip
+import itertools
 import json
 import random
 from pathlib import Path
@@ -43,7 +44,8 @@ def load_intervals(bed: str) -> dict[str, tuple[list[tuple[int, int]], list[int]
     packed = {}
     for chrom, vals in intervals.items():
         vals = sorted(vals)
-        packed[chrom] = (vals, [end for _, end in vals])
+        # Starts are sorted; raw ends need not be sorted for nested TE hits.
+        packed[chrom] = (vals, list(itertools.accumulate((end for _, end in vals), max)))
     return packed
 
 
@@ -74,8 +76,8 @@ def paint(labels: list[int], chrom: str, start: int, end: int, intervals, value:
     item = intervals.get(chrom)
     if not item:
         return
-    vals, ends = item
-    idx = max(0, bisect.bisect_left(ends, start) - 1)
+    vals, prefix_ends = item
+    idx = bisect.bisect_right(prefix_ends, start)
     for te_start, te_end in vals[idx:]:
         if te_start >= end:
             break

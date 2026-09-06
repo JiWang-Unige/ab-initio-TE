@@ -1648,3 +1648,11 @@ Runtime result:
 - Closed blockers: complete bundle revalidation immediately before pointer switch; state/bundle/entry no-symlink and containment; wrapper preserves an existing specific terminal; full formal PASS/typed control-flow scope fixed and tested.
 - Warnings: `/usr/bin/timeout` not content-hash pinned; no explicit parent-directory fsync; narrow fail-closed stale owner-lock possibility.
 - Exact authorization: one unmodified 1CPU/4GiB/10m/0GPU submission of `sbatch/SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1.sbatch`. No RepeatMasker, representative/full annotation, catalog, homology, DATA, training, GPU direct S0, S1 or claim.
+# 2026-09-06 全仓审阅后有限修复与CPU覆盖审计
+
+- Scope：`docs/experiments/REPOSITORY-SYSTEM-REVIEW-20260906.md`所列五个历史Python修复及定向测试；另审过一份A覆盖审计草稿，后发现协作任务已提交同范围作业，已移除未提交的重复草稿。
+- Reviewer：独立只读Codex子任务，两次限定审查；不是Pro报告代替代码门。
+- Verdict：两次均PASS，无阻断。历史7测试及额外无缺口/分母检查通过；A 3测试与bash -n通过。
+- 未改变冻结数据、旧指标、阈值或训练；CPU覆盖审计不加载权重，gap/crop按原坐标分别统计，不筛donor/known。
+- 未提交审计草稿；实际复用协作任务`GAP-BRIDGE-A-COVERAGE-20260906-R1`的独立审查与作业。此门不允许A训练、C完整科学运行或sealed release；实际覆盖结果待作业。按最新用户约束不新增指纹框架。
+- H0标签归因审计追加独立只读PASS：`audit_h0_labels.py`加载送审commit的旧paint与当前修复paint，对同一BED、实际TRAIN/VAL前缀比较；只有旧重画与缓存逐bp全匹配才允许归因。本机临时副本计算，未读取TEST缓存，不改数据、不输出科学分数。范围不包括token训练target或checkpoint性能影响。

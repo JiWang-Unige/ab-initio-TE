@@ -269,6 +269,14 @@ def infer_probs_for_label_mode(
     return infer_segment_probs(model, tokenizer, seq, window, device)
 
 
+def transform_covered(prob: np.ndarray, covered: np.ndarray, transform) -> np.ndarray:
+    """Apply a postprocessor within real contiguous coverage, never across gaps."""
+    mask = np.zeros(prob.shape, dtype=bool)
+    for start, end in runs_from_bool(covered):
+        mask[start:end] = transform(prob[start:end])
+    return mask
+
+
 def run(args) -> None:
     model, tokenizer, meta = load_trained_model(args.model_dir)
     label_mode = str(meta.get("token_label_mode", ""))
@@ -325,18 +333,20 @@ def run(args) -> None:
             continue
         prob = np.zeros_like(chrom_sum[chrom])
         prob[valid] = chrom_sum[chrom][valid] / chrom_w[chrom][valid]
-        truth = chrom_truth[chrom][valid]
-        prob = prob[valid]
+        truth = chrom_truth[chrom]
         for variant, transform in transforms:
-            known = truth >= 0
-            truth_binary = (truth == 1)
-            mask = transform(prob).astype(bool)
+            known = valid & (truth >= 0)
+            truth_binary = valid & (truth == 1)
+            mask = transform_covered(prob, valid, transform)
             mask[~known] = False
             for iou in args.iou_thresholds:
                 for tol in args.boundary_tolerances:
                     row = dict(base)
                     row.update({"chrom": chrom, "variant": variant, "threshold": args.threshold, "iou_threshold": iou, "boundary_tol_bp": tol})
-                    row["ignored_bp"] = int((~known).sum())
+                    row["ignored_bp"] = int((valid & ~known).sum())
+                    row["covered_bp"] = int(valid.sum())
+                    row["uncovered_bp"] = int((~valid).sum())
+                    row["coordinate_policy"] = "genomic; transforms restricted to contiguous coverage"
                     row.update(binary_metrics(truth_binary[known], mask[known].astype(np.float32), 0.5))
                     row.update(strict_segment_metrics(truth_binary, mask, iou, tol))
                     row.update(fragmentation_truth_diagnostics(truth_binary, mask))

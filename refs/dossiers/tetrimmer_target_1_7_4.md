@@ -1,11 +1,11 @@
-# Dossier: TEtrimmer target 1.7.4 (official max 1.7.2)
+# Dossier: TEtrimmer 1.7.4 source identity (dependency image is 1.7.2)
 
 - slug: `tetrimmer_target_1_7_4` · type: sota · added: 2026-08-11
 - Links:  repo:https://github.com/qjiangzhao/TEtrimmer.git
 - PDF: refs/pdfs/tetrimmer_target_1_7_4.pdf (downloaded)
 - Repo: refs/repos/tetrimmer_target_1_7_4/ (cloned @ 8954274)
 - Supplementary: refs/supp/tetrimmer_target_1_7_4/ (downloaded(1))
-- Why relevant: conditional fifth workflow；目标 1.7.4 当前不存在，记录 typed block，1.7.2 仅用于身份审计不得替代
+- Why relevant: conditional fifth workflow；已归档的官方1.7.4 source commit存在，1.7.2依赖镜像不能替代1.7.4源码身份；实际source-binding/runtime结果仍须分别核实。
 
 ## Dataset source
 - Official repository provides `tests/test_input.fa` and `tests/test_genome.fa`; these are the only minimum-input smoke assets.
@@ -23,8 +23,8 @@
 - Available dependency SIF is tagged 1.7.2, SHA-256 `38c0c325731cd40eb234056b981ef9ed940bc381ac703ab13fa867a086d5b612`. It may host dependencies only when exact 1.7.4 source is bind-mounted and its source hash is recorded; it cannot be reported as a native 1.7.4 image.
 
 ## Reproducibility notes
-- GitHub releases/tags currently stop at v1.7.2 even though official commit `61456873f...` is labeled “released 1.7.4”. This is an explicit provenance warning, not permission to substitute versions or use later mutable main.
+- At the recorded identity audit, GitHub releases/tags stopped at v1.7.2 even though official commit `61456873f...` was labeled “released 1.7.4”. This is an archived provenance warning, not a claim about today's tags or permission to substitute versions/use mutable main.
 - If source-binding fails version/help/min-input validation, record `FOUNDATIONAL_TYPED_BLOCK` and retain evidence.
 
 ## Relevance to our project
-- conditional fifth workflow；目标 1.7.4 当前不存在，记录 typed block，1.7.2 仅用于身份审计不得替代
+- conditional fifth workflow；源码身份、依赖镜像身份与实际执行成功是不同证据。不得因旧标题声称“1.7.4不存在”，也不得把1.7.2镜像当作原生1.7.4运行证明。

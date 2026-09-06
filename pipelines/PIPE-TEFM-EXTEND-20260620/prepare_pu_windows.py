@@ -16,6 +16,7 @@ import bisect
 import collections
 import csv
 import gzip
+import itertools
 import json
 import random
 import sys
@@ -42,7 +43,8 @@ def load_intervals(bed: str) -> dict[str, tuple[list[tuple[int, int]], list[int]
     packed = {}
     for chrom, items in vals.items():
         items = sorted(items)
-        packed[chrom] = (items, [end for _, end in items])
+        # Keep original hits (also used for sampling), but index nested ends safely.
+        packed[chrom] = (items, list(itertools.accumulate((end for _, end in items), max)))
     return packed
 
 
@@ -67,8 +69,8 @@ def paint_positive(labels: list[int], chrom: str, start: int, end: int, interval
     item = intervals.get(chrom)
     if not item:
         return 0
-    vals, ends = item
-    idx = max(0, bisect.bisect_left(ends, start) - 1)
+    vals, prefix_ends = item
+    idx = bisect.bisect_right(prefix_ends, start)
     painted = 0
     for te_start, te_end in vals[idx:]:
         if te_start >= end:

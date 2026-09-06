@@ -206,3 +206,9 @@ Rules:
 | 2026-06-15 | Added species/sampling contract, context-trap diagnostics, and UHC evidence-tier claim rules | Second `$council` compared current route against GENERANNO execution plan and approved embedding gaps into existing gates without expanding scope | user approved with “落” | Produce `species_manifest.tsv`, sampling audit schema, and minimal context-trap/UHC reports |
 | 2026-06-15 | Added Label-A/B/C source hierarchy and Label-B U-shield rule | `$council` on RepeatMasker+Dfam vs de novo+Dfam label sources; user confirmed de novo diagnostics may be run when model performance is poor | user confirmed | Implement label-source manifest, Label-A/B concordance, U-shield BED, and poor-performance diagnostic trigger |
 | 2026-08-11 | Added bounded B/F/S evaluator and split contract | direct-pilot protocol requires versioned evaluators, finite metrics and fail-closed data gates before submission | user authorized bounded cohort | Fill exact per-exp paths/hashes during implementation; this does not make the contract claim-ready |
+# 2026-09-06 历史实现修复口径补记
+
+全仓审阅后修复旧SUPP AP并列分数组计算，以及FINAL strict evaluator对未覆盖坐标的压缩。
+新运行保留原基因组坐标，transform只在连续coverage内执行；missing与Unknown均不进bp分母，
+结构指标不把missing两端连接。现有Unknown处理及无缺口结果口径不变，增加covered/uncovered计数。
+旧冻结报告不重写；当前L1、P3和Stage1冻结门不改。详见`experiments/REPOSITORY-SYSTEM-REVIEW-20260906.md`。
