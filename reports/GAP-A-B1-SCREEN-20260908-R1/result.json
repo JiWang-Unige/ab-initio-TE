@@ -1,0 +1,300 @@
+{
+  "experiment_id": "GAP-A-B1-SCREEN-20260908-R1",
+  "status": "RESULTS_COMPLETE",
+  "training_rows": 90081,
+  "dev_rows": 60574,
+  "known_dev": 60569,
+  "unknown_dev": 5,
+  "results": {
+    "H0-O": {
+      "known_DEV": {
+        "rows": 60569,
+        "bp": 3449084,
+        "fraction_mse": 0.061489171982897536,
+        "irreducible": 0.044137955219909104,
+        "pseudo_base_brier": 0.10562712720280663,
+        "action_ap": 0.30359897233851457
+      },
+      "length_1": {
+        "rows": 21589,
+        "bp": 21589,
+        "fraction_mse": 0.23399645820648907,
+        "irreducible": 0.0,
+        "pseudo_base_brier": 0.23399645820648907,
+        "action_ap": 0.47204091828662853
+      },
+      "length_2": {
+        "rows": 7329,
+        "bp": 14658,
+        "fraction_mse": 0.2321453201283577,
+        "irreducible": 0.0014326647564469914,
+        "pseudo_base_brier": 0.23357798488480472,
+        "action_ap": 0.47043971673371543
+      },
+      "length_3-5": {
+        "rows": 7633,
+        "bp": 28600,
+        "fraction_mse": 0.23029212459301632,
+        "irreducible": 0.004445221445221445,
+        "pseudo_base_brier": 0.23473734603823776,
+        "action_ap": 0.47552496781646886
+      },
+      "length_6-20": {
+        "rows": 5985,
+        "bp": 62349,
+        "fraction_mse": 0.20613374325899614,
+        "irreducible": 0.012026798433943236,
+        "pseudo_base_brier": 0.21816054169293936,
+        "action_ap": 0.4556466902473153
+      },
+      "length_21-100": {
+        "rows": 6573,
+        "bp": 357105,
+        "fraction_mse": 0.1106669364170657,
+        "irreducible": 0.040899647520985453,
+        "pseudo_base_brier": 0.15156658393805114,
+        "action_ap": 0.3812709214696819
+      },
+      "length_101-512": {
+        "rows": 11460,
+        "bp": 2964783,
+        "fraction_mse": 0.048795638591346197,
+        "irreducible": 0.046118739322517775,
+        "pseudo_base_brier": 0.09491437791386395,
+        "action_ap": 0.24065842409993077
+      },
+      "original_homology_purged_DEV": {
+        "rows": 60323,
+        "bp": 3431710,
+        "fraction_mse": 0.06154637925857701,
+        "irreducible": 0.04409010387203267,
+        "pseudo_base_brier": 0.10563648313060965,
+        "action_ap": 0.3037218937519917
+      },
+      "per_seed_known_DEV": {
+        "17": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.06170153184076018,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10583948706066929,
+          "action_ap": 0.2997564906794088
+        },
+        "42": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.06149106225103167,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10562901747094076,
+          "action_ap": 0.30428884945551465
+        },
+        "20260902": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.06163475256870821,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.1057727077886173,
+          "action_ap": 0.30135812834036746
+        }
+      }
+    },
+    "HN-O": {
+      "known_DEV": {
+        "rows": 60569,
+        "bp": 3449084,
+        "fraction_mse": 0.056206927144975376,
+        "irreducible": 0.044137955219909104,
+        "pseudo_base_brier": 0.1003448823648845,
+        "action_ap": 0.38721621958254465
+      },
+      "length_1": {
+        "rows": 21589,
+        "bp": 21589,
+        "fraction_mse": 0.21558458439891917,
+        "irreducible": 0.0,
+        "pseudo_base_brier": 0.21558458439891917,
+        "action_ap": 0.5984305455403219
+      },
+      "length_2": {
+        "rows": 7329,
+        "bp": 14658,
+        "fraction_mse": 0.21326965075180307,
+        "irreducible": 0.0014326647564469914,
+        "pseudo_base_brier": 0.21470231550825006,
+        "action_ap": 0.5929322099494332
+      },
+      "length_3-5": {
+        "rows": 7633,
+        "bp": 28600,
+        "fraction_mse": 0.21155776221421846,
+        "irreducible": 0.004445221445221445,
+        "pseudo_base_brier": 0.2160029836594399,
+        "action_ap": 0.6076779148742105
+      },
+      "length_6-20": {
+        "rows": 5985,
+        "bp": 62349,
+        "fraction_mse": 0.1880366106128276,
+        "irreducible": 0.012026798433943236,
+        "pseudo_base_brier": 0.2000634090467708,
+        "action_ap": 0.5935206450272665
+      },
+      "length_21-100": {
+        "rows": 6573,
+        "bp": 357105,
+        "fraction_mse": 0.1027562955662692,
+        "irreducible": 0.040899647520985453,
+        "pseudo_base_brier": 0.14365594308725463,
+        "action_ap": 0.47389591478095827
+      },
+      "length_101-512": {
+        "rows": 11460,
+        "bp": 2964783,
+        "fraction_mse": 0.044392057499308954,
+        "irreducible": 0.046118739322517775,
+        "pseudo_base_brier": 0.09051079682182674,
+        "action_ap": 0.323874940976115
+      },
+      "original_homology_purged_DEV": {
+        "rows": 60323,
+        "bp": 3431710,
+        "fraction_mse": 0.05625481424714363,
+        "irreducible": 0.04409010387203267,
+        "pseudo_base_brier": 0.1003449181191763,
+        "action_ap": 0.387606211063043
+      },
+      "per_seed_known_DEV": {
+        "17": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.05681972185499502,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10095767707490412,
+          "action_ap": 0.38476970957308176
+        },
+        "42": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.05597545768926037,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10011341290916947,
+          "action_ap": 0.3887485148103612
+        },
+        "20260902": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.056233004058910734,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10037095927881982,
+          "action_ap": 0.38295330327518406
+        }
+      }
+    },
+    "H0-S": {
+      "known_DEV": {
+        "rows": 60569,
+        "bp": 3449084,
+        "fraction_mse": 0.06125725458806361,
+        "irreducible": 0.044137955219909104,
+        "pseudo_base_brier": 0.1053952098079727,
+        "action_ap": 0.30524766849386525
+      },
+      "length_1": {
+        "rows": 21589,
+        "bp": 21589,
+        "fraction_mse": 0.23356338734367868,
+        "irreducible": 0.0,
+        "pseudo_base_brier": 0.23356338734367868,
+        "action_ap": 0.47400945039058895
+      },
+      "length_2": {
+        "rows": 7329,
+        "bp": 14658,
+        "fraction_mse": 0.23130602929704216,
+        "irreducible": 0.0014326647564469914,
+        "pseudo_base_brier": 0.23273869405348915,
+        "action_ap": 0.4774094932148285
+      },
+      "length_3-5": {
+        "rows": 7633,
+        "bp": 28600,
+        "fraction_mse": 0.22935736041699178,
+        "irreducible": 0.004445221445221445,
+        "pseudo_base_brier": 0.23380258186221323,
+        "action_ap": 0.4800361804310946
+      },
+      "length_6-20": {
+        "rows": 5985,
+        "bp": 62349,
+        "fraction_mse": 0.2059021748030363,
+        "irreducible": 0.012026798433943236,
+        "pseudo_base_brier": 0.21792897323697955,
+        "action_ap": 0.45694536660309815
+      },
+      "length_21-100": {
+        "rows": 6573,
+        "bp": 357105,
+        "fraction_mse": 0.11023037463640768,
+        "irreducible": 0.040899647520985453,
+        "pseudo_base_brier": 0.15113002215739316,
+        "action_ap": 0.3857275146506879
+      },
+      "length_101-512": {
+        "rows": 11460,
+        "bp": 2964783,
+        "fraction_mse": 0.04859961076327111,
+        "irreducible": 0.046118739322517775,
+        "pseudo_base_brier": 0.09471835008578887,
+        "action_ap": 0.2415422627875719
+      },
+      "original_homology_purged_DEV": {
+        "rows": 60323,
+        "bp": 3431710,
+        "fraction_mse": 0.061315054560804,
+        "irreducible": 0.04409010387203267,
+        "pseudo_base_brier": 0.10540515843283667,
+        "action_ap": 0.3053756511485201
+      },
+      "per_seed_known_DEV": {
+        "17": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.06201284940787122,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10615080462778032,
+          "action_ap": 0.30097446487846924
+        },
+        "42": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.061239444044337975,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10537739926424708,
+          "action_ap": 0.30539370395970467
+        },
+        "20260902": {
+          "rows": 60569,
+          "bp": 3449084,
+          "fraction_mse": 0.061359192454275485,
+          "irreducible": 0.044137955219909104,
+          "pseudo_base_brier": 0.10549714767418458,
+          "action_ap": 0.30239693984660293
+        }
+      }
+    }
+  },
+  "gates": {
+    "HN-O": {
+      "status": "SCREEN_POSITIVE",
+      "relative_mse_decrease": 0.08590528490758263,
+      "action_ap_delta": 0.08361724724403008
+    },
+    "H0-S": {
+      "status": "SCREEN_GATE_FAIL",
+      "relative_mse_decrease": 0.0037716786119421576,
+      "action_ap_delta": 0.0016486961553506818
+    }
+  },
+  "claims": "exploratory bounded-screen only; no deployment or full-route falsification",
+  "cal_or_sealed_scored": false
+}

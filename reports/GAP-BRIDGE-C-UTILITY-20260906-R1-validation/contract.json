@@ -1,0 +1,16 @@
+{
+  "name": "Fixed C per-arm exploratory gate; not the platform terminal goal",
+  "primary_metric": "micro_f1",
+  "direction": "higher",
+  "screen_anchor": {"metric": "micro_f1", "value": 0.32335329341317365},
+  "success_criteria": [
+    {"metric": "delta", "op": ">", "threshold": 0},
+    {"metric": "gained", "op": ">=", "threshold": 1},
+    {"metric": "lost", "op": "==", "threshold": 0}
+  ],
+  "guardrails": [
+    {"metric": "completed_cells", "op": "==", "threshold": 27},
+    {"metric": "reference_chains", "op": "==", "threshold": 243},
+    {"metric": "reference_rows", "op": "==", "threshold": 330}
+  ]
+}

@@ -1,0 +1,2971 @@
+{
+  "experiment_id": "GAP-BRIDGE-C-UTILITY-20260906-R1",
+  "status": "COMPLETED",
+  "decision": "NO_MASK_ARM_PASSES_EXPLORATORY_UTILITY_GATE",
+  "primary_metric_name": "MW_minus_M0_micro_complete_CDS_chain_F1",
+  "primary_metric": 0.0,
+  "scientific_scoring_enabled": true,
+  "claim_eligible": false,
+  "scope": "fixed chr13 DEV exploratory intervention; no independent confirmation",
+  "core_count": 9,
+  "completed_cells": 27,
+  "reference_distinct_chains": 243,
+  "reference_source_rows": 330,
+  "gate": {
+    "micro_f1_delta_strictly_positive": true,
+    "min_gained_correct_chains": 1,
+    "max_lost_correct_chains": 0
+  },
+  "modes": {
+    "M0": {
+      "metrics": {
+        "tp": 54,
+        "fp": 37,
+        "fn": 189,
+        "precision": 0.5934065934065934,
+        "recall": 0.2222222222222222,
+        "micro_f1": 0.32335329341317365
+      },
+      "per_core": {
+        "0": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "1": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "2": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "6": {
+          "tp": 12,
+          "fp": 8,
+          "fn": 67,
+          "precision": 0.6,
+          "recall": 0.1518987341772152,
+          "micro_f1": 0.24242424242424243
+        },
+        "10": {
+          "tp": 8,
+          "fp": 7,
+          "fn": 11,
+          "precision": 0.5333333333333333,
+          "recall": 0.42105263157894735,
+          "micro_f1": 0.47058823529411764
+        },
+        "14": {
+          "tp": 12,
+          "fp": 4,
+          "fn": 30,
+          "precision": 0.75,
+          "recall": 0.2857142857142857,
+          "micro_f1": 0.41379310344827586
+        },
+        "15": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 7,
+          "precision": 0.4,
+          "recall": 0.2222222222222222,
+          "micro_f1": 0.2857142857142857
+        },
+        "18": {
+          "tp": 15,
+          "fp": 9,
+          "fn": 59,
+          "precision": 0.625,
+          "recall": 0.20270270270270271,
+          "micro_f1": 0.30612244897959184
+        },
+        "20": {
+          "tp": 5,
+          "fp": 6,
+          "fn": 15,
+          "precision": 0.45454545454545453,
+          "recall": 0.25,
+          "micro_f1": 0.3225806451612903
+        }
+      }
+    },
+    "MW": {
+      "metrics": {
+        "tp": 54,
+        "fp": 37,
+        "fn": 189,
+        "precision": 0.5934065934065934,
+        "recall": 0.2222222222222222,
+        "micro_f1": 0.32335329341317365
+      },
+      "per_core": {
+        "0": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "1": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "2": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "6": {
+          "tp": 12,
+          "fp": 8,
+          "fn": 67,
+          "precision": 0.6,
+          "recall": 0.1518987341772152,
+          "micro_f1": 0.24242424242424243
+        },
+        "10": {
+          "tp": 8,
+          "fp": 7,
+          "fn": 11,
+          "precision": 0.5333333333333333,
+          "recall": 0.42105263157894735,
+          "micro_f1": 0.47058823529411764
+        },
+        "14": {
+          "tp": 12,
+          "fp": 4,
+          "fn": 30,
+          "precision": 0.75,
+          "recall": 0.2857142857142857,
+          "micro_f1": 0.41379310344827586
+        },
+        "15": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 7,
+          "precision": 0.4,
+          "recall": 0.2222222222222222,
+          "micro_f1": 0.2857142857142857
+        },
+        "18": {
+          "tp": 15,
+          "fp": 9,
+          "fn": 59,
+          "precision": 0.625,
+          "recall": 0.20270270270270271,
+          "micro_f1": 0.30612244897959184
+        },
+        "20": {
+          "tp": 5,
+          "fp": 6,
+          "fn": 15,
+          "precision": 0.45454545454545453,
+          "recall": 0.25,
+          "micro_f1": 0.3225806451612903
+        }
+      }
+    },
+    "MP": {
+      "metrics": {
+        "tp": 54,
+        "fp": 36,
+        "fn": 189,
+        "precision": 0.6,
+        "recall": 0.2222222222222222,
+        "micro_f1": 0.32432432432432434
+      },
+      "per_core": {
+        "0": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "1": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "2": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 0,
+          "precision": null,
+          "recall": null,
+          "micro_f1": null
+        },
+        "6": {
+          "tp": 12,
+          "fp": 8,
+          "fn": 67,
+          "precision": 0.6,
+          "recall": 0.1518987341772152,
+          "micro_f1": 0.24242424242424243
+        },
+        "10": {
+          "tp": 8,
+          "fp": 7,
+          "fn": 11,
+          "precision": 0.5333333333333333,
+          "recall": 0.42105263157894735,
+          "micro_f1": 0.47058823529411764
+        },
+        "14": {
+          "tp": 12,
+          "fp": 4,
+          "fn": 30,
+          "precision": 0.75,
+          "recall": 0.2857142857142857,
+          "micro_f1": 0.41379310344827586
+        },
+        "15": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 7,
+          "precision": 0.4,
+          "recall": 0.2222222222222222,
+          "micro_f1": 0.2857142857142857
+        },
+        "18": {
+          "tp": 15,
+          "fp": 9,
+          "fn": 59,
+          "precision": 0.625,
+          "recall": 0.20270270270270271,
+          "micro_f1": 0.30612244897959184
+        },
+        "20": {
+          "tp": 5,
+          "fp": 5,
+          "fn": 15,
+          "precision": 0.5,
+          "recall": 0.25,
+          "micro_f1": 0.3333333333333333
+        }
+      }
+    }
+  },
+  "paired_vs_m0": {
+    "MW": {
+      "micro_f1_delta_vs_m0": 0.0,
+      "gained_correct_chains": 0,
+      "lost_correct_chains": 0,
+      "m0_correct_chains": 54,
+      "gained": [],
+      "lost": [],
+      "new_unmatched_predictions": 0,
+      "new_unmatched": [],
+      "exploratory_gate_pass": false
+    },
+    "MP": {
+      "micro_f1_delta_vs_m0": 0.0009710309111506943,
+      "gained_correct_chains": 0,
+      "lost_correct_chains": 0,
+      "m0_correct_chains": 54,
+      "gained": [],
+      "lost": [],
+      "new_unmatched_predictions": 2,
+      "new_unmatched": [
+        {
+          "seqid": "chr13",
+          "strand": "+",
+          "cds_intervals": [
+            [
+              52489085,
+              52489343
+            ],
+            [
+              52499235,
+              52499381
+            ],
+            [
+              52503319,
+              52503373
+            ],
+            [
+              52504280,
+              52504334
+            ],
+            [
+              52514787,
+              52514850
+            ],
+            [
+              52521058,
+              52521109
+            ],
+            [
+              52522633,
+              52522795
+            ],
+            [
+              52529302,
+              52529336
+            ]
+          ],
+          "owner_block_index": 10
+        },
+        {
+          "seqid": "chr13",
+          "strand": "+",
+          "cds_intervals": [
+            [
+              108599617,
+              108599630
+            ],
+            [
+              108665885,
+              108666149
+            ],
+            [
+              108712660,
+              108712731
+            ],
+            [
+              108727439,
+              108727583
+            ],
+            [
+              108785634,
+              108785743
+            ],
+            [
+              108793515,
+              108793640
+            ],
+            [
+              108806678,
+              108806804
+            ],
+            [
+              108820336,
+              108820412
+            ],
+            [
+              108823124,
+              108823278
+            ],
+            [
+              108844342,
+              108844493
+            ],
+            [
+              108855442,
+              108855553
+            ],
+            [
+              108866176,
+              108866242
+            ],
+            [
+              108883058,
+              108883186
+            ],
+            [
+              108888371,
+              108888477
+            ],
+            [
+              108898015,
+              108898133
+            ],
+            [
+              108910002,
+              108910150
+            ],
+            [
+              108957687,
+              108957799
+            ],
+            [
+              108961538,
+              108961656
+            ],
+            [
+              108962423,
+              108962495
+            ],
+            [
+              108964760,
+              108964902
+            ],
+            [
+              108992375,
+              108992448
+            ],
+            [
+              109008896,
+              109009049
+            ],
+            [
+              109019710,
+              109019911
+            ],
+            [
+              109027884,
+              109027953
+            ],
+            [
+              109046915,
+              109046991
+            ],
+            [
+              109052299,
+              109052475
+            ],
+            [
+              109055045,
+              109055126
+            ],
+            [
+              109055389,
+              109055595
+            ],
+            [
+              109100784,
+              109100887
+            ],
+            [
+              109120369,
+              109120466
+            ],
+            [
+              109125111,
+              109125358
+            ],
+            [
+              109127281,
+              109127550
+            ],
+            [
+              109140263,
+              109141376
+            ],
+            [
+              109164900,
+              109165059
+            ],
+            [
+              109179541,
+              109179633
+            ],
+            [
+              109206608,
+              109206836
+            ]
+          ],
+          "owner_block_index": 20
+        }
+      ],
+      "exploratory_gate_pass": false
+    }
+  },
+  "prediction_audits": {
+    "M0": {
+      "0": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "1": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "2": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "6": {
+        "cds_rows": 303,
+        "transcript_records": 20,
+        "distinct_chains": 20,
+        "counts": {
+          "eligible_transcript_records": 20
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 3,
+          "passed": true,
+          "masked_positions": 5550731,
+          "positions": 12001500,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 20,
+          "start_codon_counts": {
+            "ATG": 20
+          },
+          "terminal_codon_counts": {
+            "TAG": 5,
+            "TGA": 11,
+            "TAA": 4
+          },
+          "length_mod3_counts": {
+            "0": 20
+          },
+          "atg_start_records": 20,
+          "terminal_stop_records": 20,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "10": {
+        "cds_rows": 93,
+        "transcript_records": 17,
+        "distinct_chains": 15,
+        "counts": {
+          "eligible_transcript_records": 15,
+          "outside_dev_core": 2
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                52377410,
+                52378789
+              ],
+              [
+                52386027,
+                52386186
+              ],
+              [
+                52397231,
+                52398194
+              ],
+              [
+                52402542,
+                52402600
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=10|core=52428800-57671680|halo=52328800-57771680"
+          },
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                52415829,
+                52415923
+              ],
+              [
+                52416016,
+                52416093
+              ],
+              [
+                52417056,
+                52417141
+              ],
+              [
+                52417991,
+                52418056
+              ],
+              [
+                52423573,
+                52423639
+              ],
+              [
+                52425931,
+                52426066
+              ],
+              [
+                52426988,
+                52427066
+              ],
+              [
+                52427186,
+                52427219
+              ],
+              [
+                52433661,
+                52433748
+              ],
+              [
+                52434792,
+                52434882
+              ],
+              [
+                52436289,
+                52436404
+              ],
+              [
+                52439097,
+                52439168
+              ],
+              [
+                52442376,
+                52442445
+              ],
+              [
+                52450498,
+                52450594
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=10|core=52428800-57671680|halo=52328800-57771680"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5304072,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 17,
+          "start_codon_counts": {
+            "ATG": 17
+          },
+          "terminal_codon_counts": {
+            "TAA": 7,
+            "TAG": 3,
+            "TGA": 7
+          },
+          "length_mod3_counts": {
+            "0": 17
+          },
+          "atg_start_records": 17,
+          "terminal_stop_records": 17,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "14": {
+        "cds_rows": 231,
+        "transcript_records": 16,
+        "distinct_chains": 16,
+        "counts": {
+          "eligible_transcript_records": 16
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 4917402,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 16,
+          "start_codon_counts": {
+            "ATG": 16
+          },
+          "terminal_codon_counts": {
+            "TAG": 2,
+            "TGA": 8,
+            "TAA": 6
+          },
+          "length_mod3_counts": {
+            "0": 16
+          },
+          "atg_start_records": 16,
+          "terminal_stop_records": 16,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "15": {
+        "cds_rows": 40,
+        "transcript_records": 7,
+        "distinct_chains": 5,
+        "counts": {
+          "nonowner_halo_copy": 2,
+          "eligible_transcript_records": 5
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                78601414,
+                78602551
+              ],
+              [
+                78603203,
+                78603326
+              ]
+            ],
+            "owner_block_index": 14,
+            "reason": "nonowner_halo_copy",
+            "record_id": "chr13|dev_block=15|core=78643200-83886080|halo=78543200-83986080"
+          },
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                78615579,
+                78617122
+              ],
+              [
+                78635109,
+                78635198
+              ],
+              [
+                78638822,
+                78639071
+              ],
+              [
+                78642121,
+                78642213
+              ],
+              [
+                78644861,
+                78644997
+              ],
+              [
+                78659048,
+                78659120
+              ]
+            ],
+            "owner_block_index": 14,
+            "reason": "nonowner_halo_copy",
+            "record_id": "chr13|dev_block=15|core=78643200-83886080|halo=78543200-83986080"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5470288,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 7,
+          "start_codon_counts": {
+            "ATG": 7
+          },
+          "terminal_codon_counts": {
+            "TAA": 2,
+            "TAG": 2,
+            "TGA": 3
+          },
+          "length_mod3_counts": {
+            "0": 7
+          },
+          "atg_start_records": 7,
+          "terminal_stop_records": 7,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "18": {
+        "cds_rows": 324,
+        "transcript_records": 24,
+        "distinct_chains": 24,
+        "counts": {
+          "eligible_transcript_records": 24
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 4,
+          "passed": true,
+          "masked_positions": 6363358,
+          "positions": 13601700,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 24,
+          "start_codon_counts": {
+            "ATG": 24
+          },
+          "terminal_codon_counts": {
+            "TGA": 14,
+            "TAA": 6,
+            "TAG": 4
+          },
+          "length_mod3_counts": {
+            "0": 24
+          },
+          "atg_start_records": 24,
+          "terminal_stop_records": 24,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "20": {
+        "cds_rows": 95,
+        "transcript_records": 12,
+        "distinct_chains": 11,
+        "counts": {
+          "eligible_transcript_records": 11,
+          "outside_dev_core": 1
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                110150362,
+                110150444
+              ],
+              [
+                110152333,
+                110152506
+              ],
+              [
+                110155282,
+                110155397
+              ],
+              [
+                110161191,
+                110161369
+              ],
+              [
+                110162229,
+                110162442
+              ],
+              [
+                110163462,
+                110163561
+              ],
+              [
+                110164861,
+                110164990
+              ],
+              [
+                110166231,
+                110166303
+              ],
+              [
+                110167157,
+                110167230
+              ],
+              [
+                110169628,
+                110169762
+              ],
+              [
+                110170546,
+                110170732
+              ],
+              [
+                110172719,
+                110172770
+              ],
+              [
+                110173899,
+                110173998
+              ],
+              [
+                110174445,
+                110174526
+              ],
+              [
+                110174622,
+                110174749
+              ],
+              [
+                110175217,
+                110175357
+              ],
+              [
+                110176423,
+                110176513
+              ],
+              [
+                110176625,
+                110176724
+              ],
+              [
+                110176884,
+                110177037
+              ],
+              [
+                110177841,
+                110177931
+              ],
+              [
+                110178063,
+                110178231
+              ],
+              [
+                110178922,
+                110179036
+              ],
+              [
+                110179270,
+                110179421
+              ],
+              [
+                110181291,
+                110181389
+              ],
+              [
+                110182992,
+                110183097
+              ],
+              [
+                110183183,
+                110183276
+              ],
+              [
+                110186384,
+                110186553
+              ],
+              [
+                110187137,
+                110187329
+              ],
+              [
+                110192213,
+                110192284
+              ],
+              [
+                110192829,
+                110192913
+              ],
+              [
+                110195022,
+                110195118
+              ],
+              [
+                110198466,
+                110198631
+              ],
+              [
+                110198851,
+                110198855
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=20|core=104857600-110100480|halo=104757600-110200480"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 3,
+          "passed": true,
+          "masked_positions": 4411696,
+          "positions": 11601450,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 12,
+          "start_codon_counts": {
+            "ATG": 12
+          },
+          "terminal_codon_counts": {
+            "TGA": 5,
+            "TAA": 7
+          },
+          "length_mod3_counts": {
+            "0": 12
+          },
+          "atg_start_records": 12,
+          "terminal_stop_records": 12,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      }
+    },
+    "MW": {
+      "0": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "1": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "2": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "6": {
+        "cds_rows": 303,
+        "transcript_records": 20,
+        "distinct_chains": 20,
+        "counts": {
+          "eligible_transcript_records": 20
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 3,
+          "passed": true,
+          "masked_positions": 5598887,
+          "positions": 12001500,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 20,
+          "start_codon_counts": {
+            "ATG": 20
+          },
+          "terminal_codon_counts": {
+            "TAG": 5,
+            "TGA": 11,
+            "TAA": 4
+          },
+          "length_mod3_counts": {
+            "0": 20
+          },
+          "atg_start_records": 20,
+          "terminal_stop_records": 20,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "10": {
+        "cds_rows": 93,
+        "transcript_records": 17,
+        "distinct_chains": 15,
+        "counts": {
+          "eligible_transcript_records": 15,
+          "outside_dev_core": 2
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                52377410,
+                52378789
+              ],
+              [
+                52386027,
+                52386186
+              ],
+              [
+                52397231,
+                52398194
+              ],
+              [
+                52402542,
+                52402600
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=10|core=52428800-57671680|halo=52328800-57771680"
+          },
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                52415829,
+                52415923
+              ],
+              [
+                52416016,
+                52416093
+              ],
+              [
+                52417056,
+                52417141
+              ],
+              [
+                52417991,
+                52418056
+              ],
+              [
+                52423573,
+                52423639
+              ],
+              [
+                52425931,
+                52426066
+              ],
+              [
+                52426988,
+                52427066
+              ],
+              [
+                52427186,
+                52427219
+              ],
+              [
+                52433661,
+                52433748
+              ],
+              [
+                52434792,
+                52434882
+              ],
+              [
+                52436289,
+                52436404
+              ],
+              [
+                52439097,
+                52439168
+              ],
+              [
+                52442376,
+                52442445
+              ],
+              [
+                52450498,
+                52450594
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=10|core=52428800-57671680|halo=52328800-57771680"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5361196,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 17,
+          "start_codon_counts": {
+            "ATG": 17
+          },
+          "terminal_codon_counts": {
+            "TAA": 7,
+            "TAG": 3,
+            "TGA": 7
+          },
+          "length_mod3_counts": {
+            "0": 17
+          },
+          "atg_start_records": 17,
+          "terminal_stop_records": 17,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "14": {
+        "cds_rows": 231,
+        "transcript_records": 16,
+        "distinct_chains": 16,
+        "counts": {
+          "eligible_transcript_records": 16
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 4962562,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 16,
+          "start_codon_counts": {
+            "ATG": 16
+          },
+          "terminal_codon_counts": {
+            "TAG": 2,
+            "TGA": 8,
+            "TAA": 6
+          },
+          "length_mod3_counts": {
+            "0": 16
+          },
+          "atg_start_records": 16,
+          "terminal_stop_records": 16,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "15": {
+        "cds_rows": 40,
+        "transcript_records": 7,
+        "distinct_chains": 5,
+        "counts": {
+          "nonowner_halo_copy": 2,
+          "eligible_transcript_records": 5
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                78601414,
+                78602551
+              ],
+              [
+                78603203,
+                78603326
+              ]
+            ],
+            "owner_block_index": 14,
+            "reason": "nonowner_halo_copy",
+            "record_id": "chr13|dev_block=15|core=78643200-83886080|halo=78543200-83986080"
+          },
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                78615579,
+                78617122
+              ],
+              [
+                78635109,
+                78635198
+              ],
+              [
+                78638822,
+                78639071
+              ],
+              [
+                78642121,
+                78642213
+              ],
+              [
+                78644861,
+                78644997
+              ],
+              [
+                78659048,
+                78659120
+              ]
+            ],
+            "owner_block_index": 14,
+            "reason": "nonowner_halo_copy",
+            "record_id": "chr13|dev_block=15|core=78643200-83886080|halo=78543200-83986080"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5524178,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 7,
+          "start_codon_counts": {
+            "ATG": 7
+          },
+          "terminal_codon_counts": {
+            "TAA": 2,
+            "TAG": 2,
+            "TGA": 3
+          },
+          "length_mod3_counts": {
+            "0": 7
+          },
+          "atg_start_records": 7,
+          "terminal_stop_records": 7,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "18": {
+        "cds_rows": 324,
+        "transcript_records": 24,
+        "distinct_chains": 24,
+        "counts": {
+          "eligible_transcript_records": 24
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 4,
+          "passed": true,
+          "masked_positions": 6418930,
+          "positions": 13601700,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 24,
+          "start_codon_counts": {
+            "ATG": 24
+          },
+          "terminal_codon_counts": {
+            "TGA": 14,
+            "TAA": 6,
+            "TAG": 4
+          },
+          "length_mod3_counts": {
+            "0": 24
+          },
+          "atg_start_records": 24,
+          "terminal_stop_records": 24,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "20": {
+        "cds_rows": 95,
+        "transcript_records": 12,
+        "distinct_chains": 11,
+        "counts": {
+          "eligible_transcript_records": 11,
+          "outside_dev_core": 1
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                110150362,
+                110150444
+              ],
+              [
+                110152333,
+                110152506
+              ],
+              [
+                110155282,
+                110155397
+              ],
+              [
+                110161191,
+                110161369
+              ],
+              [
+                110162229,
+                110162442
+              ],
+              [
+                110163462,
+                110163561
+              ],
+              [
+                110164861,
+                110164990
+              ],
+              [
+                110166231,
+                110166303
+              ],
+              [
+                110167157,
+                110167230
+              ],
+              [
+                110169628,
+                110169762
+              ],
+              [
+                110170546,
+                110170732
+              ],
+              [
+                110172719,
+                110172770
+              ],
+              [
+                110173899,
+                110173998
+              ],
+              [
+                110174445,
+                110174526
+              ],
+              [
+                110174622,
+                110174749
+              ],
+              [
+                110175217,
+                110175357
+              ],
+              [
+                110176423,
+                110176513
+              ],
+              [
+                110176625,
+                110176724
+              ],
+              [
+                110176884,
+                110177037
+              ],
+              [
+                110177841,
+                110177931
+              ],
+              [
+                110178063,
+                110178231
+              ],
+              [
+                110178922,
+                110179036
+              ],
+              [
+                110179270,
+                110179421
+              ],
+              [
+                110181291,
+                110181389
+              ],
+              [
+                110182992,
+                110183097
+              ],
+              [
+                110183183,
+                110183276
+              ],
+              [
+                110186384,
+                110186553
+              ],
+              [
+                110187137,
+                110187329
+              ],
+              [
+                110192213,
+                110192284
+              ],
+              [
+                110192829,
+                110192913
+              ],
+              [
+                110195022,
+                110195118
+              ],
+              [
+                110198466,
+                110198631
+              ],
+              [
+                110198851,
+                110198855
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=20|core=104857600-110100480|halo=104757600-110200480"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 3,
+          "passed": true,
+          "masked_positions": 4453260,
+          "positions": 11601450,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 12,
+          "start_codon_counts": {
+            "ATG": 12
+          },
+          "terminal_codon_counts": {
+            "TGA": 5,
+            "TAA": 7
+          },
+          "length_mod3_counts": {
+            "0": 12
+          },
+          "atg_start_records": 12,
+          "terminal_stop_records": 12,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      }
+    },
+    "MP": {
+      "0": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "1": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "2": {
+        "cds_rows": 0,
+        "transcript_records": 0,
+        "distinct_chains": 0,
+        "counts": {},
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 0,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 0,
+          "start_codon_counts": {},
+          "terminal_codon_counts": {},
+          "length_mod3_counts": {},
+          "atg_start_records": 0,
+          "terminal_stop_records": 0,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": false,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "6": {
+        "cds_rows": 303,
+        "transcript_records": 20,
+        "distinct_chains": 20,
+        "counts": {
+          "eligible_transcript_records": 20
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 3,
+          "passed": true,
+          "masked_positions": 5725883,
+          "positions": 12001500,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 20,
+          "start_codon_counts": {
+            "ATG": 20
+          },
+          "terminal_codon_counts": {
+            "TAG": 5,
+            "TGA": 11,
+            "TAA": 4
+          },
+          "length_mod3_counts": {
+            "0": 20
+          },
+          "atg_start_records": 20,
+          "terminal_stop_records": 20,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "10": {
+        "cds_rows": 92,
+        "transcript_records": 17,
+        "distinct_chains": 15,
+        "counts": {
+          "eligible_transcript_records": 15,
+          "outside_dev_core": 2
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                52377410,
+                52378789
+              ],
+              [
+                52386027,
+                52386186
+              ],
+              [
+                52397231,
+                52398194
+              ],
+              [
+                52402542,
+                52402600
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=10|core=52428800-57671680|halo=52328800-57771680"
+          },
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                52415829,
+                52415923
+              ],
+              [
+                52416016,
+                52416093
+              ],
+              [
+                52417056,
+                52417141
+              ],
+              [
+                52417991,
+                52418056
+              ],
+              [
+                52423573,
+                52423639
+              ],
+              [
+                52425931,
+                52426066
+              ],
+              [
+                52426988,
+                52427066
+              ],
+              [
+                52427186,
+                52427219
+              ],
+              [
+                52433661,
+                52433748
+              ],
+              [
+                52434792,
+                52434882
+              ],
+              [
+                52436289,
+                52436404
+              ],
+              [
+                52439097,
+                52439168
+              ],
+              [
+                52442376,
+                52442445
+              ],
+              [
+                52450498,
+                52450594
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=10|core=52428800-57671680|halo=52328800-57771680"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5461444,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 17,
+          "start_codon_counts": {
+            "ATG": 17
+          },
+          "terminal_codon_counts": {
+            "TAA": 6,
+            "TGA": 8,
+            "TAG": 3
+          },
+          "length_mod3_counts": {
+            "0": 17
+          },
+          "atg_start_records": 17,
+          "terminal_stop_records": 17,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "14": {
+        "cds_rows": 231,
+        "transcript_records": 16,
+        "distinct_chains": 16,
+        "counts": {
+          "eligible_transcript_records": 16
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5074950,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 16,
+          "start_codon_counts": {
+            "ATG": 16
+          },
+          "terminal_codon_counts": {
+            "TAG": 2,
+            "TGA": 8,
+            "TAA": 6
+          },
+          "length_mod3_counts": {
+            "0": 16
+          },
+          "atg_start_records": 16,
+          "terminal_stop_records": 16,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "15": {
+        "cds_rows": 40,
+        "transcript_records": 7,
+        "distinct_chains": 5,
+        "counts": {
+          "nonowner_halo_copy": 2,
+          "eligible_transcript_records": 5
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                78601414,
+                78602551
+              ],
+              [
+                78603203,
+                78603326
+              ]
+            ],
+            "owner_block_index": 14,
+            "reason": "nonowner_halo_copy",
+            "record_id": "chr13|dev_block=15|core=78643200-83886080|halo=78543200-83986080"
+          },
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                78615579,
+                78617122
+              ],
+              [
+                78635109,
+                78635198
+              ],
+              [
+                78638822,
+                78639071
+              ],
+              [
+                78642121,
+                78642213
+              ],
+              [
+                78644861,
+                78644997
+              ],
+              [
+                78659048,
+                78659120
+              ]
+            ],
+            "owner_block_index": 14,
+            "reason": "nonowner_halo_copy",
+            "record_id": "chr13|dev_block=15|core=78643200-83886080|halo=78543200-83986080"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 2,
+          "passed": true,
+          "masked_positions": 5627548,
+          "positions": 11201400,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 7,
+          "start_codon_counts": {
+            "ATG": 7
+          },
+          "terminal_codon_counts": {
+            "TAA": 2,
+            "TAG": 2,
+            "TGA": 3
+          },
+          "length_mod3_counts": {
+            "0": 7
+          },
+          "atg_start_records": 7,
+          "terminal_stop_records": 7,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "18": {
+        "cds_rows": 324,
+        "transcript_records": 24,
+        "distinct_chains": 24,
+        "counts": {
+          "eligible_transcript_records": 24
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 4,
+          "passed": true,
+          "masked_positions": 6551714,
+          "positions": 13601700,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 24,
+          "start_codon_counts": {
+            "ATG": 24
+          },
+          "terminal_codon_counts": {
+            "TGA": 14,
+            "TAA": 6,
+            "TAG": 4
+          },
+          "length_mod3_counts": {
+            "0": 24
+          },
+          "atg_start_records": 24,
+          "terminal_stop_records": 24,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      },
+      "20": {
+        "cds_rows": 95,
+        "transcript_records": 11,
+        "distinct_chains": 10,
+        "counts": {
+          "eligible_transcript_records": 10,
+          "outside_dev_core": 1
+        },
+        "duplicate_eligible_transcript_records": 0,
+        "excluded_records": [
+          {
+            "seqid": "chr13",
+            "strand": "-",
+            "cds_intervals": [
+              [
+                110150362,
+                110150444
+              ],
+              [
+                110152333,
+                110152506
+              ],
+              [
+                110155282,
+                110155397
+              ],
+              [
+                110161191,
+                110161369
+              ],
+              [
+                110162229,
+                110162442
+              ],
+              [
+                110163462,
+                110163561
+              ],
+              [
+                110164861,
+                110164990
+              ],
+              [
+                110166231,
+                110166303
+              ],
+              [
+                110167157,
+                110167230
+              ],
+              [
+                110169628,
+                110169762
+              ],
+              [
+                110170546,
+                110170732
+              ],
+              [
+                110172719,
+                110172770
+              ],
+              [
+                110173899,
+                110173998
+              ],
+              [
+                110174445,
+                110174526
+              ],
+              [
+                110174622,
+                110174749
+              ],
+              [
+                110175217,
+                110175357
+              ],
+              [
+                110176423,
+                110176513
+              ],
+              [
+                110176625,
+                110176724
+              ],
+              [
+                110176884,
+                110177037
+              ],
+              [
+                110177841,
+                110177931
+              ],
+              [
+                110178063,
+                110178231
+              ],
+              [
+                110178922,
+                110179036
+              ],
+              [
+                110179270,
+                110179421
+              ],
+              [
+                110181291,
+                110181389
+              ],
+              [
+                110182992,
+                110183097
+              ],
+              [
+                110183183,
+                110183276
+              ],
+              [
+                110186384,
+                110186553
+              ],
+              [
+                110187137,
+                110187329
+              ],
+              [
+                110192213,
+                110192284
+              ],
+              [
+                110192829,
+                110192913
+              ],
+              [
+                110195022,
+                110195118
+              ],
+              [
+                110198466,
+                110198631
+              ],
+              [
+                110198851,
+                110198855
+              ]
+            ],
+            "owner_block_index": null,
+            "reason": "outside_dev_core",
+            "record_id": "chr13|dev_block=20|core=104857600-110100480|halo=104757600-110200480"
+          }
+        ],
+        "halo_edge_touching_records": 0,
+        "observation": {
+          "calls": 3,
+          "passed": true,
+          "masked_positions": 4548945,
+          "positions": 11601450,
+          "semantics": "first five tracks ACGTN; sixth lowercase acgt; padding N"
+        },
+        "coding_sequence_audit": {
+          "transcript_records": 11,
+          "start_codon_counts": {
+            "ATG": 11
+          },
+          "terminal_codon_counts": {
+            "TAA": 7,
+            "TGA": 4
+          },
+          "length_mod3_counts": {
+            "0": 11
+          },
+          "atg_start_records": 11,
+          "terminal_stop_records": 11,
+          "internal_inframe_stop_records": 0,
+          "all_native_cds_include_terminal_stop": true,
+          "filter_applied": false,
+          "phase_progression_audit": "not performed"
+        }
+      }
+    }
+  },
+  "mask_gene_risk": {
+    "reference_scope": "all chr13 RefSeq transcripts, including scoring-ineligible transcripts",
+    "splice_definition": "two intronic bp at each intron end; union per feature class",
+    "per_core": {
+      "0": {
+        "MW": {
+          "added_mask_bp": 0,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 0,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        }
+      },
+      "1": {
+        "MW": {
+          "added_mask_bp": 0,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 0,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        }
+      },
+      "2": {
+        "MW": {
+          "added_mask_bp": 0,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 0,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        }
+      },
+      "6": {
+        "MW": {
+          "added_mask_bp": 22384,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 1,
+              "genes": [
+                "N4BP2L1"
+              ],
+              "gene_count": 1
+            },
+            "exon": {
+              "added_mask_overlap_bp": 30,
+              "genes": [
+                "CCDC169",
+                "MICOS10P1",
+                "N4BP2L1",
+                "RFC3",
+                "SOHLH2"
+              ],
+              "gene_count": 5
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 81686,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 22,
+              "genes": [
+                "N4BP2L1"
+              ],
+              "gene_count": 1
+            },
+            "exon": {
+              "added_mask_overlap_bp": 76,
+              "genes": [
+                "CCDC169",
+                "MICOS10P1",
+                "N4BP2L1",
+                "N4BP2L2",
+                "RFC3",
+                "SOHLH2"
+              ],
+              "gene_count": 6
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        }
+      },
+      "10": {
+        "MW": {
+          "added_mask_bp": 28562,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 197,
+              "genes": [
+                "LINC00458",
+                "LINC00558",
+                "LINC02335",
+                "PRR20A",
+                "PRR20C",
+                "PRR20D",
+                "PRR20E",
+                "SUGT1"
+              ],
+              "gene_count": 8
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 1,
+              "genes": [
+                "HNRNPA1L2"
+              ],
+              "gene_count": 1
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 78686,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 441,
+              "genes": [
+                "HNRNPA1L2",
+                "LINC00458",
+                "LINC00558",
+                "LINC02335",
+                "PCDH8",
+                "PRR20A",
+                "PRR20C",
+                "PRR20D",
+                "PRR20E",
+                "SUGT1"
+              ],
+              "gene_count": 10
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 1,
+              "genes": [
+                "HNRNPA1L2"
+              ],
+              "gene_count": 1
+            }
+          }
+        }
+      },
+      "14": {
+        "MW": {
+          "added_mask_bp": 22580,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 1,
+              "genes": [
+                "KLF12"
+              ],
+              "gene_count": 1
+            },
+            "exon": {
+              "added_mask_overlap_bp": 281,
+              "genes": [
+                "COMMD6",
+                "EDNRB",
+                "KLF12",
+                "LINC00402",
+                "LINC00561",
+                "LINC01078",
+                "LMO7",
+                "OBI1-AS1"
+              ],
+              "gene_count": 8
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 2,
+              "genes": [
+                "OBI1-AS1"
+              ],
+              "gene_count": 1
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 78774,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 51,
+              "genes": [
+                "KLF12"
+              ],
+              "gene_count": 1
+            },
+            "exon": {
+              "added_mask_overlap_bp": 667,
+              "genes": [
+                "ACOD1",
+                "CLN5",
+                "COMMD6",
+                "EDNRB",
+                "EDNRB-AS1",
+                "KLF12",
+                "LINC00381",
+                "LINC00402",
+                "LINC00561",
+                "LINC01078",
+                "LMO7",
+                "OBI1-AS1"
+              ],
+              "gene_count": 12
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 4,
+              "genes": [
+                "KLF12",
+                "OBI1-AS1"
+              ],
+              "gene_count": 2
+            }
+          }
+        }
+      },
+      "15": {
+        "MW": {
+          "added_mask_bp": 26945,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 10,
+              "genes": [
+                "LINC00564",
+                "RBM26-AS1"
+              ],
+              "gene_count": 2
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 78630,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 71,
+              "genes": [
+                "LINC00382",
+                "LINC00564",
+                "LINC01080",
+                "RBM26-AS1"
+              ],
+              "gene_count": 4
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 2,
+              "genes": [
+                "LINC00382"
+              ],
+              "gene_count": 1
+            }
+          }
+        }
+      },
+      "18": {
+        "MW": {
+          "added_mask_bp": 22990,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 4,
+              "genes": [
+                "FARP1"
+              ],
+              "gene_count": 1
+            },
+            "exon": {
+              "added_mask_overlap_bp": 223,
+              "genes": [
+                "ABCC4",
+                "CLDN10",
+                "CLDN10-AS1",
+                "DNAJC3-DT",
+                "DOCK9-AS1",
+                "DZIP1",
+                "FARP1",
+                "GPR180",
+                "IPO5",
+                "LINC01039",
+                "LOC101927284"
+              ],
+              "gene_count": 11
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 2,
+              "genes": [
+                "CLDN10-AS1",
+                "DCT"
+              ],
+              "gene_count": 2
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 77099,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 7,
+              "genes": [
+                "FARP1"
+              ],
+              "gene_count": 1
+            },
+            "exon": {
+              "added_mask_overlap_bp": 633,
+              "genes": [
+                "ABCC4",
+                "CLDN10",
+                "CLDN10-AS1",
+                "DNAJC3-DT",
+                "DOCK9-AS1",
+                "DZIP1",
+                "FARP1",
+                "GPR180",
+                "IPO5",
+                "LINC00391",
+                "LINC01039",
+                "LNCARGI",
+                "LOC101927284",
+                "STK24",
+                "UBAC2-AS1"
+              ],
+              "gene_count": 15
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 6,
+              "genes": [
+                "CLDN10-AS1",
+                "DCT",
+                "DNAJC3-DT",
+                "LNCARGI"
+              ],
+              "gene_count": 4
+            }
+          }
+        }
+      },
+      "20": {
+        "MW": {
+          "added_mask_bp": 20015,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 32,
+              "genes": [
+                "IRS2",
+                "LINC00343",
+                "LINC00443",
+                "LINC03082",
+                "MYO16-AS1"
+              ],
+              "gene_count": 5
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        },
+        "MP": {
+          "added_mask_bp": 66877,
+          "features": {
+            "CDS": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            },
+            "exon": {
+              "added_mask_overlap_bp": 122,
+              "genes": [
+                "IRS2",
+                "LINC00343",
+                "LINC00443",
+                "LINC00460",
+                "LINC03082",
+                "LOC130494219",
+                "MYO16-AS1"
+              ],
+              "gene_count": 7
+            },
+            "splice_dinucleotide": {
+              "added_mask_overlap_bp": 0,
+              "genes": [],
+              "gene_count": 0
+            }
+          }
+        }
+      }
+    },
+    "modes": {
+      "MW": {
+        "added_mask_bp": 143476,
+        "features": {
+          "CDS": {
+            "added_mask_overlap_bp": 6,
+            "genes": [
+              "FARP1",
+              "KLF12",
+              "N4BP2L1"
+            ],
+            "gene_count": 3
+          },
+          "exon": {
+            "added_mask_overlap_bp": 773,
+            "genes": [
+              "ABCC4",
+              "CCDC169",
+              "CLDN10",
+              "CLDN10-AS1",
+              "COMMD6",
+              "DNAJC3-DT",
+              "DOCK9-AS1",
+              "DZIP1",
+              "EDNRB",
+              "FARP1",
+              "GPR180",
+              "IPO5",
+              "IRS2",
+              "KLF12",
+              "LINC00343",
+              "LINC00402",
+              "LINC00443",
+              "LINC00458",
+              "LINC00558",
+              "LINC00561",
+              "LINC00564",
+              "LINC01039",
+              "LINC01078",
+              "LINC02335",
+              "LINC03082",
+              "LMO7",
+              "LOC101927284",
+              "MICOS10P1",
+              "MYO16-AS1",
+              "N4BP2L1",
+              "OBI1-AS1",
+              "PRR20A",
+              "PRR20C",
+              "PRR20D",
+              "PRR20E",
+              "RBM26-AS1",
+              "RFC3",
+              "SOHLH2",
+              "SUGT1"
+            ],
+            "gene_count": 39
+          },
+          "splice_dinucleotide": {
+            "added_mask_overlap_bp": 5,
+            "genes": [
+              "CLDN10-AS1",
+              "DCT",
+              "HNRNPA1L2",
+              "OBI1-AS1"
+            ],
+            "gene_count": 4
+          }
+        }
+      },
+      "MP": {
+        "added_mask_bp": 461752,
+        "features": {
+          "CDS": {
+            "added_mask_overlap_bp": 80,
+            "genes": [
+              "FARP1",
+              "KLF12",
+              "N4BP2L1"
+            ],
+            "gene_count": 3
+          },
+          "exon": {
+            "added_mask_overlap_bp": 2010,
+            "genes": [
+              "ABCC4",
+              "ACOD1",
+              "CCDC169",
+              "CLDN10",
+              "CLDN10-AS1",
+              "CLN5",
+              "COMMD6",
+              "DNAJC3-DT",
+              "DOCK9-AS1",
+              "DZIP1",
+              "EDNRB",
+              "EDNRB-AS1",
+              "FARP1",
+              "GPR180",
+              "HNRNPA1L2",
+              "IPO5",
+              "IRS2",
+              "KLF12",
+              "LINC00343",
+              "LINC00381",
+              "LINC00382",
+              "LINC00391",
+              "LINC00402",
+              "LINC00443",
+              "LINC00458",
+              "LINC00460",
+              "LINC00558",
+              "LINC00561",
+              "LINC00564",
+              "LINC01039",
+              "LINC01078",
+              "LINC01080",
+              "LINC02335",
+              "LINC03082",
+              "LMO7",
+              "LNCARGI",
+              "LOC101927284",
+              "LOC130494219",
+              "MICOS10P1",
+              "MYO16-AS1",
+              "N4BP2L1",
+              "N4BP2L2",
+              "OBI1-AS1",
+              "PCDH8",
+              "PRR20A",
+              "PRR20C",
+              "PRR20D",
+              "PRR20E",
+              "RBM26-AS1",
+              "RFC3",
+              "SOHLH2",
+              "STK24",
+              "SUGT1",
+              "UBAC2-AS1"
+            ],
+            "gene_count": 54
+          },
+          "splice_dinucleotide": {
+            "added_mask_overlap_bp": 13,
+            "genes": [
+              "CLDN10-AS1",
+              "DCT",
+              "DNAJC3-DT",
+              "HNRNPA1L2",
+              "KLF12",
+              "LINC00382",
+              "LNCARGI",
+              "OBI1-AS1"
+            ],
+            "gene_count": 8
+          }
+        }
+      }
+    }
+  },
+  "boundary_note": "contract exclusions and halo touching are reported, not proven biological completeness; phase progression not audited",
+  "model_postprocessing": "unchanged native Tiberius minimum CDS length 200 and in-frame stop removal; no evaluator filtering"
+}

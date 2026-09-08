@@ -1,0 +1,23 @@
+{
+  "experiment_id": "GAP-BRIDGE-C-UTILITY-20260906-R1",
+  "protocol": "docs/experiments/GAP-BRIDGE-C-UTILITY-20260906-R1.md",
+  "profile": "screen",
+  "scientific_scoring_enabled": true,
+  "claim_eligible": false,
+  "masks": "outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/masks-20260905-r2",
+  "refseq": "data/raw/ucsc/human/hg38/genes/ncbiRefSeqCurated-20250813.txt.gz",
+  "container": "software_outputs/tiberius/GAP-BRIDGE-DOWNSTREAM-C-R1/container-20260905-r1/tiberius_2.0.7.sif",
+  "source": "refs/repos/Tiberius-gap-c-r1",
+  "source_commit": "4d657012a3ed4e923f5d0ac5cef65fecae8109bd",
+  "model_cfg": "mammalia_softmasking_v2",
+  "core_order": [0, 1, 2, 6, 10, 14, 15, 18, 20],
+  "prepare_modes": ["M0", "MW", "MP"],
+  "predict_modes": ["M0", "MW", "MP"],
+  "seq_len": 400050,
+  "batch_size": 1,
+  "reference_expected_distinct_chains": 243,
+  "reference_expected_eligible_rows": 330,
+  "gate": {"micro_f1_delta_strictly_positive": true, "min_gained_correct_chains": 1, "max_lost_correct_chains": 0},
+  "resources": {"gpus": 1, "cpus": 4, "memory_gb": 48, "max_hours": 2, "shared_ac_gpu_hours": 24, "prior_ac_gpu_seconds": 400},
+  "output_dir": "outputs/GAP-BRIDGE-C-UTILITY-20260906-R1/run-r1"
+}

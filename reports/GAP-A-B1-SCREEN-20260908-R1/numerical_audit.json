@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "dev_predictions": 60574,
+  "known_dev": 60569,
+  "training_rows_per_head_per_pass": 90081,
+  "updates_per_head_per_pass": 219,
+  "verified_head_pass_pairs": 18,
+  "independently_recomputed": {
+    "H0-O": {
+      "fraction_mse": 0.061489171982897536,
+      "action_ap": 0.3035989723385145,
+      "pseudo_base_brier": 0.10562712720280665
+    },
+    "HN-O": {
+      "fraction_mse": 0.056206927144975376,
+      "action_ap": 0.3872162195825447,
+      "pseudo_base_brier": 0.10034488236488448
+    },
+    "H0-S": {
+      "fraction_mse": 0.06125725458806361,
+      "action_ap": 0.30524766849386525,
+      "pseudo_base_brier": 0.1053952098079727
+    }
+  },
+  "method": "NumPy weighted averages and sklearn two-weighted-observation AP; no screen metric functions called",
+  "cal_or_sealed_scored": false,
+  "manifest_projection": "Only chr13 DEV target fields enter arithmetic; other manifest rows are filtered by role/seqid, not scored"
+}

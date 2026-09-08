@@ -1,0 +1,22 @@
+{
+  "experiment_id": "GAP-BRIDGE-A-COVERAGE-20260906-R1",
+  "profile": "smoke",
+  "purpose": "whole original candidate population CPU native-token coverage audit",
+  "parent_protocol": "docs/experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md",
+  "followup_protocol": "docs/experiments/GAP-BRIDGE-A-C-FOLLOWUP-20260906.md",
+  "scientific_claim": false,
+  "full_training_authorized": false,
+  "sealed_test_release_authorized": false,
+  "scope": {"chr3": ["TRAIN"], "chr5": ["TRAIN"], "chr13": ["DEV", "CAL_FIT", "CAL_GATE"]},
+  "known_eligibility": "all known and unknown original candidates; descriptive stratification only",
+  "native_geometry": {"window": 4096, "stride": 4096, "origin": 0, "token_cap": 688, "flank": 256, "gap_length": [1, 512]},
+  "assets": {
+    "candidate_manifest": "outputs/GAP-BRIDGE-NEURAL-STAGE1-R1/candidate-manifest-20260902-r1/candidate_manifest.tsv",
+    "region_root": "outputs/GAP-BRIDGE-PHASE0-R1/full-whole-20260901-r1",
+    "nt_model": "software_outputs/tefm_final/PIPE-TEFM-FINAL-20260623/runs/ntv2_250m_H0_w4096_seed42"
+  },
+  "resources": {"gpu": 0, "cpus": 2, "memory_gb": 12, "estimated_walltime_hours": 1, "max_job_hours": 2},
+  "primary_metric": "engineering_audit_completed",
+  "missing_coverage": "valid diagnostic; blocks unchanged all-candidate input contract, not audit completion",
+  "forbidden": ["model inference", "training", "target features", "donor decisions", "candidate filtering", "stats refit", "cache rebuild", "chr19-22 region access"]
+}

@@ -162,6 +162,32 @@ softmask通道、推理可用性及坐标转换，不支持partial-fill学习成
 
 ## 本轮执行记录
 
+### 2026-09-06 工程闭合后 Pro 独立审阅
+
+已在内置浏览器 `6 Pro` 完成用户指定的独立路线审阅，来源、有效摘要及旧定义错误
+剔除记录见 [审阅记录](GAP-BRIDGE-A-C-PRO-REVIEW-20260906.md)。结论为C有条件继续，
+A先coverage、当前完整训练NO-GO；建议先C非空预测/端点约定与A候选母体coverage。
+这是咨询，不是科学PASS或新作业授权；原config、P3与chr19封存不变。
+
+### 2026-09-06 C 路径修复后的工程闭合
+
+- 原container `12398482` 已COMPLETED0:0，用时1:39:52；TF2.17.0/Tiberius2.0.7。
+  原runtime `12398977` FAILED1:0/18s：输入在host存在，但host项目symlink在容器内不可解析。
+- 修复仅涉及运行路径：host用`pwd -P`解析BeeGFS目录，绑定`/work/te`，
+  源码仍绑定`/opt/Tiberius`，显式`--pwd /work/te`，所有输入/输出用容器路径。
+  独立fresh Codex CLI review PASS，`bash -n`PASS；旧失败输出保留。
+- 重跑 `12409697` COMPLETED0:0，113秒，1RTX3090；M0/MW/MP全部完成。
+  输出`outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/runtime-20260906-r2/`，GPU和3FASTA实际可见；
+  日志确认固定weights与Softmasking=True。三份FASTA与旧r1逐字节相同。
+- 输入为固定`chr13:31357280-31757330`，400050bp，firstDEVcandidate规则不变。
+  lowercase M0/MW/MP=230694/232168/235863bp。3个GTF均0字节，GFF3仅版本头，
+  日志都完成prediction/transcript形成/postprocessing/writing；没有输出转录本。
+  M0/MW/MP组内pipeline时间约12.159/9.987/9.900秒，不等于全chr13成本。
+- 这是有界runtime工程PASS，不是下游效用或非空CDS exporter验证。局部参考重叠RXFP2
+  两个isoform的完整链延伸到31802405，超过smoke右端；不能把0输出解释为C有效/无效。
+  A真实8crop工程PASS再次据当前JSON核实，无新训练或科学评分。下一步是用户指定的
+  内置浏览器ChatGPT Pro独立路线审阅，不自动扩大C全9core或A全量训练。
+
 - C reference-only `12399185` COMPLETED0:0 in1s；7/7 allocated testsPASS。
   1764chr13转录本中595noncoding、830outsideDEV、9boundary-incomplete；
   330eligible transcript rows去重为243条完整CDS链（重复87）。逐core分母

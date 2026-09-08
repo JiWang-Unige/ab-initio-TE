@@ -1,0 +1,41 @@
+{
+  "status": "RANK_ACTION_NECESSARY_NO_GO",
+  "dev_rows": 60574,
+  "known_rows": 60569,
+  "unknown_rows": 5,
+  "known_positive_bp": 461733,
+  "known_long_positive_bp": 435982,
+  "optimistic_genome_span_bp": 47185920,
+  "selected_candidate_minimum": 1000,
+  "unique_score_thresholds": 60497,
+  "feasible_thresholds": 0,
+  "risk_limited_maximum": {
+    "threshold": -1.4128624200820923,
+    "selected_candidates": 822,
+    "positive_bp": 4449,
+    "negative_bp": 441,
+    "unknown_bp": 0,
+    "long_positive_bp": 3395,
+    "candidate_minimum": false,
+    "positive_recovery": false,
+    "long_positive_recovery": false,
+    "known_negative_budget": true,
+    "worst_case_budget": true
+  },
+  "minimum_utility_threshold": {
+    "threshold": -0.20752792060375214,
+    "selected_candidates": 8414,
+    "positive_bp": 46251,
+    "negative_bp": 24747,
+    "unknown_bp": 0,
+    "long_positive_bp": 38245,
+    "candidate_minimum": true,
+    "positive_recovery": true,
+    "long_positive_recovery": true,
+    "known_negative_budget": false,
+    "worst_case_budget": false
+  },
+  "direct_decision_point_recomputation": "PASS",
+  "cal_or_sealed_scored": false,
+  "scope": "Optimistic necessary conditions only on reused DEV; no CAL or deployment claim"
+}
