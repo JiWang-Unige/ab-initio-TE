@@ -1,0 +1,42 @@
+{
+  "experiment_id": "P3-TIBERIUS-BASE-MASK-20260911-R1",
+  "protocol": "docs/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1.md",
+  "claim_eligible": false,
+  "assembly": "hg38",
+  "genome": "data/raw/ucsc/human/hg38/hg38.fa.gz",
+  "refseq": "data/raw/ucsc/human/hg38/genes/ncbiRefSeqCurated-20250813.txt.gz",
+  "repeat_mask": "software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/human/hg38/raw/rmsk.txt.gz",
+  "p3_model": "outputs/TE-STRUCTURE-PILOT-20260825-R1/p3-human-20260828-r2-12097867/unet",
+  "p3_expected_schema": "comparator_run_four_state_unet_v1",
+  "p3_mask_rule": {"p_te_threshold": 0.5, "states": ["interior", "left_boundary", "right_boundary"]},
+  "tiberius": {
+    "container": "software_outputs/tiberius/GAP-BRIDGE-DOWNSTREAM-C-R1/container-20260905-r1/tiberius_2.0.7.sif",
+    "source": "refs/repos/Tiberius-gap-c-r1",
+    "source_commit": "4d657012a3ed4e923f5d0ac5cef65fecae8109bd",
+    "model_cfg": "mammalia_softmasking_v2",
+    "seq_len": 400050,
+    "batch_size": 1
+  },
+  "geometry": {
+    "chromosomes": ["chr16", "chr18"],
+    "core_count_per_chromosome": 10,
+    "core_bp": 5000000,
+    "stride_bp": 7000000,
+    "halo_bp": 100000
+  },
+  "runs": {
+    "smoke": {"core_ids": ["chr16:0"]},
+    "full": {"core_ids": ["chr16:0", "chr16:1", "chr16:2", "chr16:3", "chr16:4", "chr16:5", "chr16:6", "chr16:7", "chr16:8", "chr16:9", "chr18:0", "chr18:1", "chr18:2", "chr18:3", "chr18:4", "chr18:5", "chr18:6", "chr18:7", "chr18:8", "chr18:9"]}
+  },
+  "modes": ["U", "P", "R"],
+  "score": {
+    "primary_comparison": "P_minus_U",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260908,
+    "min_absolute_locus_f1_delta": 0.01,
+    "min_bootstrap_ci95_lower": 0.0,
+    "min_recall_delta": -0.005,
+    "max_lost_u_correct_fraction": 0.01
+  },
+  "output_base": "outputs/P3-TIBERIUS-BASE-MASK-20260911-R1"
+}

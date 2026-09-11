@@ -1,0 +1,238 @@
+{
+  "status": "MATERIAL_INVENTORY_COMPLETE_NOT_EXPERIMENT_RELEASE",
+  "geometry": [
+    {
+      "chrom": "chr16",
+      "index": 0,
+      "start": 0,
+      "end": 5000000,
+      "halo_start": 0,
+      "halo_end": 5100000,
+      "distinct_complete_cds_chains": 455,
+      "symbol_strand_keys": 184,
+      "repeat_union_bp": 1994733
+    },
+    {
+      "chrom": "chr16",
+      "index": 1,
+      "start": 7000000,
+      "end": 12000000,
+      "halo_start": 6900000,
+      "halo_end": 12100000,
+      "distinct_complete_cds_chains": 98,
+      "symbol_strand_keys": 34,
+      "repeat_union_bp": 2640104
+    },
+    {
+      "chrom": "chr16",
+      "index": 2,
+      "start": 14000000,
+      "end": 19000000,
+      "halo_start": 13900000,
+      "halo_end": 19100000,
+      "distinct_complete_cds_chains": 88,
+      "symbol_strand_keys": 32,
+      "repeat_union_bp": 2814766
+    },
+    {
+      "chrom": "chr16",
+      "index": 3,
+      "start": 21000000,
+      "end": 26000000,
+      "halo_start": 20900000,
+      "halo_end": 26100000,
+      "distinct_complete_cds_chains": 100,
+      "symbol_strand_keys": 42,
+      "repeat_union_bp": 2893597
+    },
+    {
+      "chrom": "chr16",
+      "index": 4,
+      "start": 28000000,
+      "end": 33000000,
+      "halo_start": 27900000,
+      "halo_end": 33100000,
+      "distinct_complete_cds_chains": 283,
+      "symbol_strand_keys": 119,
+      "repeat_union_bp": 2848796
+    },
+    {
+      "chrom": "chr16",
+      "index": 5,
+      "start": 35000000,
+      "end": 40000000,
+      "halo_start": 34900000,
+      "halo_end": 40100000,
+      "distinct_complete_cds_chains": 0,
+      "symbol_strand_keys": 0,
+      "repeat_union_bp": 2769973
+    },
+    {
+      "chrom": "chr16",
+      "index": 6,
+      "start": 42000000,
+      "end": 47000000,
+      "halo_start": 41900000,
+      "halo_end": 47100000,
+      "distinct_complete_cds_chains": 13,
+      "symbol_strand_keys": 7,
+      "repeat_union_bp": 333872
+    },
+    {
+      "chrom": "chr16",
+      "index": 7,
+      "start": 49000000,
+      "end": 54000000,
+      "halo_start": 48900000,
+      "halo_end": 54100000,
+      "distinct_complete_cds_chains": 61,
+      "symbol_strand_keys": 21,
+      "repeat_union_bp": 2412213
+    },
+    {
+      "chrom": "chr16",
+      "index": 8,
+      "start": 56000000,
+      "end": 61000000,
+      "halo_start": 55900000,
+      "halo_end": 61100000,
+      "distinct_complete_cds_chains": 159,
+      "symbol_strand_keys": 55,
+      "repeat_union_bp": 2568399
+    },
+    {
+      "chrom": "chr16",
+      "index": 9,
+      "start": 63000000,
+      "end": 68000000,
+      "halo_start": 62900000,
+      "halo_end": 68100000,
+      "distinct_complete_cds_chains": 158,
+      "symbol_strand_keys": 65,
+      "repeat_union_bp": 2332533
+    },
+    {
+      "chrom": "chr18",
+      "index": 0,
+      "start": 0,
+      "end": 5000000,
+      "halo_start": 0,
+      "halo_end": 5100000,
+      "distinct_complete_cds_chains": 65,
+      "symbol_strand_keys": 20,
+      "repeat_union_bp": 2706490
+    },
+    {
+      "chrom": "chr18",
+      "index": 1,
+      "start": 7000000,
+      "end": 12000000,
+      "halo_start": 6900000,
+      "halo_end": 12100000,
+      "distinct_complete_cds_chains": 43,
+      "symbol_strand_keys": 20,
+      "repeat_union_bp": 2365547
+    },
+    {
+      "chrom": "chr18",
+      "index": 2,
+      "start": 14000000,
+      "end": 19000000,
+      "halo_start": 13900000,
+      "halo_end": 19100000,
+      "distinct_complete_cds_chains": 3,
+      "symbol_strand_keys": 3,
+      "repeat_union_bp": 4291671
+    },
+    {
+      "chrom": "chr18",
+      "index": 3,
+      "start": 21000000,
+      "end": 26000000,
+      "halo_start": 20900000,
+      "halo_end": 26100000,
+      "distinct_complete_cds_chains": 53,
+      "symbol_strand_keys": 21,
+      "repeat_union_bp": 2494015
+    },
+    {
+      "chrom": "chr18",
+      "index": 4,
+      "start": 28000000,
+      "end": 33000000,
+      "halo_start": 27900000,
+      "halo_end": 33100000,
+      "distinct_complete_cds_chains": 30,
+      "symbol_strand_keys": 16,
+      "repeat_union_bp": 2467066
+    },
+    {
+      "chrom": "chr18",
+      "index": 5,
+      "start": 35000000,
+      "end": 40000000,
+      "halo_start": 34900000,
+      "halo_end": 40100000,
+      "distinct_complete_cds_chains": 124,
+      "symbol_strand_keys": 16,
+      "repeat_union_bp": 2368889
+    },
+    {
+      "chrom": "chr18",
+      "index": 6,
+      "start": 42000000,
+      "end": 47000000,
+      "halo_start": 41900000,
+      "halo_end": 47100000,
+      "distinct_complete_cds_chains": 46,
+      "symbol_strand_keys": 16,
+      "repeat_union_bp": 2351545
+    },
+    {
+      "chrom": "chr18",
+      "index": 7,
+      "start": 49000000,
+      "end": 54000000,
+      "halo_start": 48900000,
+      "halo_end": 54100000,
+      "distinct_complete_cds_chains": 173,
+      "symbol_strand_keys": 18,
+      "repeat_union_bp": 2456243
+    },
+    {
+      "chrom": "chr18",
+      "index": 8,
+      "start": 56000000,
+      "end": 61000000,
+      "halo_start": 55900000,
+      "halo_end": 61100000,
+      "distinct_complete_cds_chains": 48,
+      "symbol_strand_keys": 20,
+      "repeat_union_bp": 2315693
+    },
+    {
+      "chrom": "chr18",
+      "index": 9,
+      "start": 63000000,
+      "end": 68000000,
+      "halo_start": 62900000,
+      "halo_end": 68100000,
+      "distinct_complete_cds_chains": 34,
+      "symbol_strand_keys": 17,
+      "repeat_union_bp": 2340694
+    }
+  ],
+  "distinct_symbol_strand_keys": 726,
+  "distinct_complete_cds_chains": 2034,
+  "disjoint_symbol_keys": [],
+  "exclusions": {
+    "noncoding_or_incomplete": 1221,
+    "outside_core": 1251,
+    "boundary_incomplete": 23
+  },
+  "reference_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/data/raw/ucsc/human/hg38/genes/ncbiRefSeqCurated-20250813.txt.gz",
+  "conventional_mask_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/human/hg38/raw/rmsk.txt.gz",
+  "model_predictions_read": false,
+  "sealed_labels_parsed": false,
+  "full_independence_certified": false
+}
