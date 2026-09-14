@@ -25,6 +25,22 @@ def write_canonical(path: Path, rows: list[dict[str, str]]) -> None:
 
 
 class RealPanelContractTests(unittest.TestCase):
+    def test_explicit_repeatmasker_class_precedes_subtype_or_name(self) -> None:
+        for label, expected in [
+            ("SINE/tRNA", "known_te"),
+            ("tRNA", "non_te"),
+            ("LINE/L1", "known_te"),
+            ("PLE/Chlamys", "unknown_or_ambiguous"),
+            ("DNA?", "unknown_or_ambiguous"),
+            ("Unrecognized/family", "unknown_or_ambiguous"),
+        ]:
+            with self.subTest(label=label):
+                self.assertEqual(real_panel.classify_bucket({
+                    "name": "RNA_like_fragment", "source": "RepeatMasker",
+                    "attributes": f"class_family={label}",
+                }), expected)
+        self.assertEqual(real_panel.classify_bucket({"name": "LINE_fragment"}), "unknown_or_ambiguous")
+
     def make_bundle(self, root: Path) -> tuple[Path, Path]:
         panels = {}
         for species in real_panel.SPECIES:

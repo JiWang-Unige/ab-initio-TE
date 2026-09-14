@@ -188,30 +188,28 @@ def read_canonical(path: Path, lengths: Mapping[str, int]) -> list[dict[str, str
     return rows
 
 
-def _annotation_text(row: Mapping[str, str]) -> str:
-    return " ".join(
-        str(row.get(field, "")) for field in ("name", "source", "attributes")
-    ).lower()
-
-
 def classify_bucket(row: Mapping[str, str]) -> str:
     """Coarsely preserve KnownTE/unknown/nonTE labels carried by callers.
 
     This is an annotation bucket for stratification, not an independent truth
     assignment.  A missing or unrecognized class stays unknown.
     """
-    text = _annotation_text(row)
-    if any(token in text for token in ("simple_repeat", "low_complexity", "satellite", "rna", "rrna", "trna")):
-        return "non_te"
-    if any(token in text for token in ("unknown", "unclassified", "ambiguous", "ambig", "#?")):
+    # Parse the explicit class, not substrings of names or subtype labels:
+    # SINE/tRNA is a TE, while a top-level tRNA annotation is non-TE.
+    match = re.search(
+        r"(?:^|;)\s*(?:class_family|class|family)=([^;\s]+)",
+        str(row.get("attributes", "")), re.IGNORECASE,
+    )
+    if match is None:
         return "unknown_or_ambiguous"
-    if re.search(r"(?:^|[#=/;_\s])(sine|line|ltr|dna|rc|retroposon|ple)(?:$|[/#=;_\s])", text):
+    value = match.group(1)
+    top = value.split("/", 1)[0].upper()
+    if "?" in value or top in {"UNKNOWN", "UNCLASSIFIED", "AMBIGUOUS", "AMBIG", "PLE"}:
+        return "unknown_or_ambiguous"
+    if top in {"SINE", "LINE", "LTR", "DNA", "RC", "RETROPOSON"}:
         return "known_te"
-    # RepeatMasker class_family values commonly look like ``LINE/L1`` or
-    # ``DNA/TcMar``.  Keep explicit family-bearing values as KnownTE even if
-    # the separator is not surrounded by whitespace.
-    if re.search(r"(?:class_family|class|family)=[^;\s]+/(?:[^;\s]+)", text):
-        return "known_te"
+    if top in {"SIMPLE_REPEAT", "LOW_COMPLEXITY", "SATELLITE", "RNA", "RRNA", "TRNA", "SNRNA", "SCRNA", "SRPRNA"}:
+        return "non_te"
     return "unknown_or_ambiguous"
 
 
