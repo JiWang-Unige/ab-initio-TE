@@ -14,7 +14,7 @@ stages:
     modules:
       - id: fixture
         repository: &local_repo
-          url: ../..
+          url: https://github.com/JiWang-Unige/ab-initio-TE.git
           commit: "1d4bcfa2415d7f437ccf6f9b2bf7ba89766e9aa9"
           entrypoint: default
     outputs:
