@@ -8,6 +8,8 @@
 
 Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；这两项都是工程验证。Tiberius修复smoke-r2作业12687393已完成，原20×3全量12694349正在运行，CPU评分及独立复算12696406依赖等待。新增hg19 chr1-only原生训练12696116及正式评估依赖12696405已启动；训练和推理接口smoke均通过。mm10新旧注释实际区间差异与chrX Unknown ontology审计已完成，见[新审计记录](../../experiments/ANNOTATION-REVISION-20260914.md)。论文草稿仍保留此前取证时的完成范围，不将正在运行的实验或toy分数写成研究结果。
 
+后续实际执行又补齐两项证据：固定D在三个外部候选上完成GPU推理，严格类别重评分后仅鸭嘴兽有有效TE阳性分母（F召回95.93%，RC均值96.19%）；海胆/CB4标签资格仍不满足，不能写成泛化失败。天然copy检索的同面板6-mer对照已完成，k4 medoids优于single medoid但仍弱于centroid，未支持多prototype的普遍优势。Omni的RC0四臂工程流程已从GitHub固定提交、不使用dirty完成12个jobs；这不替代真实传统方法的公平比较。具体数字、分母及进行中的补充见[并行实施记录](../../experiments/DIRECTIONS-EXECUTION-20260914.md)。
+
 ## 阅读入口
 
 - [完整英文初稿](manuscript-en.md)：Title、Abstract、Introduction、六节 Results、Discussion、Methods、Availability、References 和主要数字来源表。
@@ -35,4 +37,4 @@ Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；�
 
 优先补齐支撑正文的已有结果与版本记录（包括HN完整frontier），再完成一个当前D与传统完整workflow的同实例比较。要保留未见物种泛化、高效部署或基因注释改善的主张，分别依赖合格独立panel、代表性CPU/GPU性能实验、原Tiberius U/P/R协议结果。无需默认做MoE，也无需为这篇机制论文重开已关闭的HN阈值或旧C路线。
 
-第一轮交付时没有启动新训练、推理、benchmark、Tiberius修复或作业重提；后续实际执行更新见上方入口。原冻结规则保持有效。origin为public；用户随后明确允许推送，`2adbcba`已推送并核对远端。Pro的原始回复和附件是当时快照，不能当作对本轮新运行结果的再次审阅。
+第一轮交付时没有启动新训练、推理、benchmark、Tiberius修复或作业重提；后续实际执行更新见上方入口。原冻结规则保持有效。origin为public；用户随后明确允许推送，`2adbcba`及包含本轮主要源码的`1d4bcfa`、Omni GitHub配置`48cfb5d`均已推送并核对远端。Pro的原始回复和附件是当时快照，不能当作对本轮新运行结果的再次审阅。

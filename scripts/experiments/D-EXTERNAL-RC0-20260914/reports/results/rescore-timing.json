@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-14",
+  "execution_host": "login1.baobab",
+  "execution_mode": "direct shell via the bamboo ProxyJump; cache-only label-contract rescore",
+  "model_loaded": false,
+  "inference_rerun": false,
+  "future_large_file_policy": "submit to Slurm",
+  "candidates": {
+    "platypus": {
+      "elapsed_seconds": 61.15,
+      "user_seconds": 58.15,
+      "sys_seconds": 0.75,
+      "output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/platypus/label-contract-rescore-20260914-bpdenom"
+    },
+    "sea_urchin": {
+      "elapsed_seconds": 48.48,
+      "user_seconds": 45.91,
+      "sys_seconds": 0.39,
+      "output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/label-contract-rescore-20260914-bpdenom"
+    },
+    "c_briggsae": {
+      "elapsed_seconds": 47.16,
+      "user_seconds": 45.27,
+      "sys_seconds": 0.37,
+      "output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/c_briggsae/label-contract-rescore-20260914-bpdenom"
+    }
+  }
+}

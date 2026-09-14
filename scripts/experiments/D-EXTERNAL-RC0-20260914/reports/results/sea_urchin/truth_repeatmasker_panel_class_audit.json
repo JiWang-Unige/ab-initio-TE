@@ -1,0 +1,78 @@
+{
+  "canonical_paths": {
+    "excluded_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel_excluded_non_te.tsv",
+    "hard_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel_hard_non_te.tsv",
+    "known_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel.tsv",
+    "unknown_or_ambiguous": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel_unknown_or_ambiguous.tsv"
+  },
+  "panel_buckets": {
+    "excluded_non_te": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    },
+    "hard_non_te": {
+      "class_counts": {
+        "Low_complexity": 513,
+        "Simple_repeat": 3193
+      },
+      "overlap_bp": 236373,
+      "rows": 3706,
+      "union_bp": 234685
+    },
+    "known_te": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    },
+    "unknown_or_ambiguous": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    }
+  },
+  "panel_rows_retained_all_buckets": 3706,
+  "policy": {
+    "excluded_non_te_classes": [
+      "artefact",
+      "artifact"
+    ],
+    "hard_non_te_classes": [
+      "low_complexity",
+      "rna",
+      "rrna",
+      "satellite",
+      "scrna",
+      "simple_repeat",
+      "snrna",
+      "srprna",
+      "tandem_repeat",
+      "trna"
+    ],
+    "primary_truth": "known_te only",
+    "strict_te_classes": [
+      "DNA",
+      "LINE",
+      "LTR",
+      "RC",
+      "Retroposon",
+      "SINE"
+    ],
+    "unknown_classes": [
+      "unclassified",
+      "unknown"
+    ],
+    "unrecognised_classes": "unknown_or_ambiguous"
+  },
+  "raw_class_counts": {
+    "ARTEFACT": 4,
+    "Low_complexity": 111874,
+    "SINE/tRNA-Deu-L2": 23,
+    "Simple_repeat": 640986,
+    "rRNA": 90
+  },
+  "raw_repeatmasker_rows_seen": 752977
+}

@@ -1,0 +1,47 @@
+{
+  "assembly": "GCF_004115215.2",
+  "candidate": "platypus",
+  "model": {
+    "batch_size": 12,
+    "calibration_scope": "six-species-shared",
+    "cpu_flag": true,
+    "device": "cpu",
+    "model_load_seconds": 24.015603388892487,
+    "paths": {
+      "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model"
+    },
+    "seed": 42,
+    "threshold": 0.42330056285498807
+  },
+  "panel_selection": {
+    "assembly_report_order": true,
+    "description": "For each exact assembly, take the first four report rows in assembly-report order with the accession type used by its FASTA (RefSeq for GCF, GenBank for GCA) and use a centered 1,048,576-bp interval per sequence.",
+    "length_bp": 1048576,
+    "phase_offset_bp": 3,
+    "score_or_label_selection": false,
+    "start_policy": "centered_from_assembly_length",
+    "window_bp": 4096
+  },
+  "protocol": "D-EXTERNAL-RC0-20260914-CPU-GPU-TIMING",
+  "region": {
+    "end_bp": 93777296,
+    "fixed_panel_region_index": 1,
+    "length_bp": 1048576,
+    "seqid": "NC_041728.1",
+    "start_bp": 92728720
+  },
+  "scientific_scope": "timing only; no accuracy or model-selection endpoint",
+  "species": "Ornithorhynchus anatinus",
+  "status": "COMPLETED",
+  "timing": {
+    "cold_bp_per_second": 1382.62909707557,
+    "cold_forward_seconds": 758.3928345048334,
+    "input_bp": 1048576,
+    "warm_bp_per_second": 1382.7799030032634,
+    "warm_forward_seconds": 758.3101242089178,
+    "windows": 256
+  }
+}

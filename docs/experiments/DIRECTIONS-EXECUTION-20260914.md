@@ -10,19 +10,25 @@
 
 | 工作线 | 第一轮具体动作 | 对照/评价重点 | 当前边界 |
 |---|---|---|---|
-| D外部泛化 | 固定seed42 checkpoint与已有CAL；鸭嘴兽/海胆/CB4各4×1MiB固定区域 | 每物种及最差物种；区分比较注释一致性、独立accuracy、pretraining与TE监督暴露 | GPU12696615三组推理已完成；按明确TE类别核对并重评分，有限面板不等于whole-genome通用验收 |
+| D外部泛化 | 固定seed42 checkpoint与已有CAL；鸭嘴兽/海胆/CB4各4×1MiB固定区域 | 每物种及最差物种；区分比较注释一致性、独立accuracy、pretraining与TE监督暴露 | GPU12696615三组及严格TE重评分完成；鸭嘴兽F阳性召回=.959325。海胆/CB4固定区域无TE阳性，NOT_EVALUABLE，须先解决标签资格；不能据此判model失败 |
 | adapters/MoE | 新协议中先做dense/coverage目标与同参数adapter对照，证实专家互补再有限MoE | 监督适配与zero-shot分开；路由不读目标F1；计算量、每物种损益及router collapse | 尚未训练；若外部结果指导架构，那个panel转为开发证据，不再宣称未触碰的最终测试 |
-| 注释版本与FP | 同assembly旧/新注释资格审计；原生GLM hg19 chr1训练和固定跨染色体评估 | apparent-FP、匹配背景、TP/FN全分母；独立支持比例与剩余未解；mapping失败保留 | mm10实际改变已确认；CHM13 2022注释与4chains已取得；hg19训练12696116进行中，评价12696405依赖等待；尚无FP rescue |
+| 注释版本与FP | 同assembly旧/新注释资格审计；原生GLM hg19 chr1训练和固定跨染色体评估 | apparent-FP、匹配背景、TP/FN全分母；独立支持比例与剩余未解；mapping失败保留 | mm10实际改变已确认；CHM13资产已取得；hg19训练12696116→评价12696405→双向映射资格12705502依赖链已提交。实际liftOver含生产strand格式的smoke12705600通过；尚无FP rescue |
 | Unknown | 保留原六类混淆矩阵，独立核对ontology，再复核Unknown→main4/Unknown/BG | `.3886`是预测Unknown召回；重分类正确性需独立证据 | chrX90条历史Unknown中85条为SVA/Helitron等被既有映射合同折叠的具名类；不是85条人工漏注，更不证明model family正确 |
 | Tiberius效用 | 原批准20core×U/P/R；smoke-r2→full→CPUscore→独立NumPy复算 | 固定输入六通道、exact complete-CDS gene-locus终点与原门 | smoke12687393完成；full12694349进行中；score12696406依赖等待。独立复算已实现并通过fixture，实际60cell结果尚未完成 |
-| RC/strand | 当前D先做正向/RC映射诊断；有限augmentation/consistency消融 | material输出在RC下映回原坐标；方向型输出保持等变；匹配曝光及成本 | 历史mouse NT推理合并已经存在，新RC训练未做 |
+| RC/strand | 当前D先做正向/RC映射诊断；有限augmentation/consistency消融 | material输出在RC下映回原坐标；方向型输出保持等变；匹配曝光及成本 | 鸭嘴兽F/RC/mean/phase mean的T1召回=.959325/.959468/.961854/.960714，当前提升较小；另两物种无有效阳性分母。新RC训练未做 |
 | 双GLM互补 | 重用历史错误分型，为局部风险或pair关联提供第二源特征 | 单源同容量、简单融合、学习融合；材料与关系终点分开 | HN有ranking增量但whole-gap动作无可用点，不重扫旧阈值 |
 | Fragment linking | Phase0合同及Phase1距离/规则/轻量pair学习器工程对照 | 候选召回、pair PR、误融合、闭包错误；输出edge不填gap | Phase1的5项测试通过，受控样例36fragments/19pairs；尚无自然插入恢复结果。M2/M3下一步可用真实copy半模拟输入做机制实验，再验证自然样本 |
 | Dfam contrastive | 42个历史文件已恢复；同panel强k-mer对照和真实split先闭合 | coarse class与family分开；family标签参与contrastive不是全无监督 | Phase7强B1无raw闭环；consensus exp002无找到的完成指标，不合并不同panel |
 | Multi-prototype | 同一TRAIN集合single medoid、k4 medoids、random4、centroid，以及公版Dfam consensus参照 | 精确repName、source interval/相似性组件隔离；CAL固定pair误接纳预算；公版consensus来源另列 | 1600天然区间/40标签已抽取；共同29标签235query真实6-mer检索已完成。k4 top1=.3191、single TRAIN medoid=.2766、centroid=.4255、公版consensus=.6000；不足以支持通用工具或“多reference必优” |
-| Omnibenchmark | 一个小型fixture→现有converter→T0/T1evaluator→collector真正执行 | canonical坐标、truth tier、失败/unsupported分母；不以dry当成功 | 0.6.0真实host执行完成6个jobs；T0/T1及collector通过，详见OMNIBENCHMARK-SMOKE记录；真实方法矩阵/CPU-GPU速度未完成 |
+| Omnibenchmark | fixture→现有converter→T0/T1evaluator→collector真正执行；固定GitHub源码版本 | canonical坐标、truth tier、失败/unsupported分母；不以dry当成功 | 原6-job工程流程完成；新增RC0四臂流程从GitHub固定提交无dirty执行完成12个jobs、10个预期cell均保留。真实传统方法矩阵/CPU-GPU速度对照未完成 |
 
 ## 论文定位
+
+本轮外部评估的完整结果见[固定D与RC0实际报告](../../scripts/experiments/D-EXTERNAL-RC0-20260914/reports/RESULTS-20260914.md)。原实现直接转换所有RepeatMasker行，会将Simple_repeat等算为TE；现按既有严格类别合同分桶，并对保存概率重评分，不重复GPU推理、不覆盖原执行记录。海胆/CB4的整个Label-A文件各仅有23条`SINE/tRNA-Deu-L2`，固定区域内均无TE阳性。这是标签/库覆盖资格问题，不能被解释为模型跨物种召回为零；优先核对library/lineage，不通过移动窗口寻找更好看的评价集。鸭嘴兽的T0 F1=.784126仅是当前RepeatMasker比较注释的一致性，T1不报告独立precision/F1。
+
+CPU计时12696616三组均已完成：单区域1MiB、256 windows的forward冷/热耗时为鸭嘴兽758.393/758.310秒、海胆752.966/754.029秒、CB4 734.454/732.969秒（4 CPU、64G，cpu203）。这与GPU的4区域RC0运行口径不同，暂不计算CPU/GPU加速倍数。Callable分母也已修正：鸭嘴兽4,194,304bp、海胆4,192,804bp、CB4 4,106,348bp；非ACGT不进入callable TN，召回率/F1不受这次分母修正影响。
+
+库诊断进一步确认：两个目标的FamDB分区都在，但原`-species`命令只使用curated families；海胆/CB4的目标lineage-specific curated条目都为0。海胆有3,324个uncurated目标lineage条目，CB4为0。下一步应在不改区域、模型和阈值的前提下补做library sensitivity：海胆导出相应uncurated库，CB4先找exact-assembly已有注释；替代比较注释单列，不覆盖原Label-A，也不把补出的模型一致性当成独立accuracy。
 
 正文优先呈现：基础TE-material结果、受控模型/训练设计差异、合格的外部迁移、同输入传统比较；Tiberius达到原终点后可加入效用结果。注释修订若有独立候选支持及完整分母，可形成独立结果段，措辞为回顾性注释支持，不能称真正时间前瞻或所有FP都是真TE。
 
@@ -35,6 +41,7 @@
 - **历史注释：** 从原生pretrained GLM重新开始TE任务训练，不能使用已经监督见过其他染色体/新版标签的D/P3/H0 checkpoint，却声称只学过hg19一条染色体。后续用户授权执行后，已按[具体固定协议](HG19-CHR1-REVISION-20260914.md)落实chr1 TRAIN、chr11 CAL、chr13 DEV、chr2/3/4 EVAL 20.48Mb；两步训练与小型推理接口均通过，正式4000步运行中。独立作业12698548确认六条允许染色体的有效TE/ignore材料标签与UCSC2009初始注释完全一致；仅repFamily表示不同，完整原始记录不完全相同。chr16/18保留效用用途，chr19–22及跨版本对应区域保留封存。GLM预训练暴露仍未闭合，当前实验也不构成真实时间前瞻。
 - **完整分母可能改变直觉：** 若旧TP/FP/FN为 $T,F,N$，新版新增阳性中 $a$ 来自旧FP、$b$ 来自模型未预测背景（暂不含阳性删除），则 $F1_{new}=2(T+a)/(2T+F+N+a+b)$。因此新版支持若同时引入很多新FN，F1未必上升。先测“旧FP独立支持相对匹配背景的富集”，再量化整体影响，不能先宣布F1被低估多少。
 - **第二物种：** mm10资格作业12693564已完成：明确TE的Current独有6,124,486bp、Baseline独有10,431,606bp；Current总覆盖略低。官方轨道显示软件与库版本共同变化，所以它是实际同assembly注释修订候选，不能称library-only因果对照或预设F1提高。详见[实际审计](ANNOTATION-REVISION-20260914.md)。小鼠属于D训练物种，不能用来证明D的zero-shot物种泛化。
+- **映射先于新版标签：** [hg19→CHM13资格附录](HG19-CHR1-REVISION-20260914-mapping-qualification.md)规定唯一forward、唯一reverse回原区间、等长度、两端均在允许chr2/3/4；所有失败去向保留。官方liftOver的真实CLI smoke通过正向、负链及正式BED中的`.` strand格式，正式作业12705502依赖12696405。该阶段不读CHM13新注释；即使首尾等长度，也不能据此推断内部逐bp双射或直接重算same-base F1。
 - **RC与融合：** RC四臂包括F、映回的RC、二者均值和两个正向分词相位/切窗均值；先投影bp再映射。新轻量融合的训练预测必须来自底层模型未做任务监督训练的坐标或真实out-of-fold，避免stacking泄漏。对当前D与P3的比较是系统互补，不单归因backbone。
 - **Linking：** 单一insertion ID不适用于跨host/nested/background的混合fragment；真实输入应标ambiguous/多身份，不用truth偷偷切纯片段。背景误报的两个空ID不得算same。Phase0目前只证明受控合同；下一阶段还需要host locus、source-copy、homology组件共同隔离及真实curation。
 - **Multi-prototype：** 已落实40个精确repName各40天然区间；29标签能精确匹配公版Dfam consensus，11个缺失标签不做宽泛family替换。真实作业12698062及同TRAIN单medoid补充12698524已完成。k=4与single TRAIN medoid构成同来源6-mer容量对照，公版consensus仅是外部reference参照，不能把它与train-only arm差值全归因于表示方式。所有方法采用相同CAL **pair**误接纳预算1%；它不保证top1 query误接纳率或被接纳查询的错误率≤1%。当前GLM/HMM未运行，不否定其潜在效果，也没有达到工具发布依据。详见[检索记录](TE-IDENTITY-RETRIEVAL-20260914.md)。

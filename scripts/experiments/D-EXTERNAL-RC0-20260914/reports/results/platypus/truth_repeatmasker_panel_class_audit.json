@@ -1,0 +1,145 @@
+{
+  "canonical_paths": {
+    "excluded_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/platypus/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel_excluded_non_te.tsv",
+    "hard_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/platypus/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel_hard_non_te.tsv",
+    "known_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/platypus/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel.tsv",
+    "unknown_or_ambiguous": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/platypus/label-contract-rescore-20260914-bpdenom/truth_repeatmasker_panel_unknown_or_ambiguous.tsv"
+  },
+  "panel_buckets": {
+    "excluded_non_te": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    },
+    "hard_non_te": {
+      "class_counts": {
+        "Low_complexity": 179,
+        "Simple_repeat": 1098,
+        "rRNA": 1,
+        "tRNA": 15
+      },
+      "overlap_bp": 56845,
+      "rows": 1293,
+      "union_bp": 56638
+    },
+    "known_te": {
+      "class_counts": {
+        "DNA": 41,
+        "DNA/Crypton": 1,
+        "DNA/Crypton-A": 1,
+        "DNA/Kolobok": 1,
+        "DNA/Merlin": 2,
+        "DNA/PIF-Harbinger": 7,
+        "DNA/TcMar-Tc1": 1,
+        "DNA/TcMar-Tigger": 20,
+        "DNA/hAT": 15,
+        "DNA/hAT-Ac": 3,
+        "DNA/hAT-Charlie": 1,
+        "DNA/hAT-Tag1": 1,
+        "DNA/hAT-Tip100": 9,
+        "LINE/CR1": 147,
+        "LINE/I-Jockey": 2,
+        "LINE/L1": 1,
+        "LINE/L2": 3420,
+        "LINE/RTE-BovB": 376,
+        "LTR/DIRS": 10,
+        "SINE/5S-Deu-L2": 17,
+        "SINE/MIR": 5410,
+        "SINE/tRNA": 13,
+        "SINE/tRNA-RTE": 6
+      },
+      "overlap_bp": 1507740,
+      "rows": 9505,
+      "union_bp": 1483825
+    },
+    "unknown_or_ambiguous": {
+      "class_counts": {
+        "PLE": 2,
+        "Unknown": 11
+      },
+      "overlap_bp": 2345,
+      "rows": 13,
+      "union_bp": 2345
+    }
+  },
+  "panel_rows_retained_all_buckets": 10811,
+  "policy": {
+    "excluded_non_te_classes": [
+      "artefact",
+      "artifact"
+    ],
+    "hard_non_te_classes": [
+      "low_complexity",
+      "rna",
+      "rrna",
+      "satellite",
+      "scrna",
+      "simple_repeat",
+      "snrna",
+      "srprna",
+      "tandem_repeat",
+      "trna"
+    ],
+    "primary_truth": "known_te only",
+    "strict_te_classes": [
+      "DNA",
+      "LINE",
+      "LTR",
+      "RC",
+      "Retroposon",
+      "SINE"
+    ],
+    "unknown_classes": [
+      "unclassified",
+      "unknown"
+    ],
+    "unrecognised_classes": "unknown_or_ambiguous"
+  },
+  "raw_class_counts": {
+    "DNA": 11256,
+    "DNA/Crypton": 441,
+    "DNA/Crypton-A": 214,
+    "DNA/Kolobok": 681,
+    "DNA/Merlin": 225,
+    "DNA/PIF-Harbinger": 3321,
+    "DNA/TcMar": 207,
+    "DNA/TcMar-Pogo": 50,
+    "DNA/TcMar-Tc1": 71,
+    "DNA/TcMar-Tigger": 6982,
+    "DNA/hAT": 5638,
+    "DNA/hAT-Ac": 2597,
+    "DNA/hAT-Blackjack": 62,
+    "DNA/hAT-Charlie": 1230,
+    "DNA/hAT-Tag1": 512,
+    "DNA/hAT-Tip100": 1517,
+    "DNA/hAT-hAT19": 19,
+    "LINE/CR1": 67377,
+    "LINE/Dong-R4": 1632,
+    "LINE/I-Jockey": 144,
+    "LINE/L1": 421,
+    "LINE/L1-Tx1": 24,
+    "LINE/L2": 1421597,
+    "LINE/RTE-BovB": 112300,
+    "LTR": 66,
+    "LTR/DIRS": 7024,
+    "LTR/Gypsy": 13,
+    "Low_complexity": 106633,
+    "PLE": 546,
+    "RC/Helitron": 71,
+    "SINE/5S-Deu-L2": 3434,
+    "SINE/MIR": 2612403,
+    "SINE/tRNA": 2516,
+    "SINE/tRNA-Deu": 685,
+    "SINE/tRNA-Deu-L2": 39,
+    "SINE/tRNA-RTE": 3754,
+    "Simple_repeat": 583963,
+    "Unknown": 3360,
+    "rRNA": 652,
+    "scRNA": 27,
+    "snRNA": 842,
+    "srpRNA": 8,
+    "tRNA": 8453
+  },
+  "raw_repeatmasker_rows_seen": 4973007
+}

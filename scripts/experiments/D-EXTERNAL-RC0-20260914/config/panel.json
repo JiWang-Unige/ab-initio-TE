@@ -1,0 +1,110 @@
+{
+  "protocol": "D-EXTERNAL-RC0-20260914",
+  "status": "CONTRACT_APPROVED_EXTERNAL_RUN_STARTED",
+  "selection_rule": {
+    "description": "For each exact assembly, take the first four report rows in assembly-report order with the accession type used by its FASTA (RefSeq for GCF, GenBank for GCA) and use a centered 1,048,576-bp interval per sequence.",
+    "assembly_report_order": true,
+    "score_or_label_selection": false,
+    "start_policy": "centered_from_assembly_length",
+    "length_bp": 1048576,
+    "window_bp": 4096,
+    "phase_offset_bp": 3
+  },
+  "model": {
+    "seed": 42,
+    "model_relpath": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "calibration_relpath": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "model_code_relpath": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_scope": "six-species-shared",
+    "calibration_fit_split": "CAL",
+    "threshold_policy": "existing frozen CAL threshold; no external threshold fitting"
+  },
+  "remote_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "candidates": [
+    {
+      "id": "platypus",
+      "species": "Ornithorhynchus anatinus",
+      "assembly": "GCF_004115215.2",
+      "assembly_name": "mOrnAna1.pri.v4",
+      "fasta": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCF_004115215.2_mOrnAna1.pri.v4_genomic.fna.gz",
+      "assembly_report": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCF_004115215.2_mOrnAna1.pri.v4_assembly_report.txt",
+      "fasta_accession_column": "RefSeq-Accession",
+      "label_id": "labela-12664906-0",
+      "label_status": "LABEL_GENERATION_COMPLETED_NOT_SCIENTIFIC_PASS",
+      "label_out": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-0/annotation/assembly.fa.out",
+      "regions": [
+        {"seqid": "NC_041728.1", "role": "assembled-molecule", "molecule": "1", "length_bp": 186506016, "start_bp": 92728720, "end_bp": 93777296},
+        {"seqid": "NC_041729.1", "role": "assembled-molecule", "molecule": "2", "length_bp": 171719663, "start_bp": 85335543, "end_bp": 86384119},
+        {"seqid": "NC_041730.1", "role": "assembled-molecule", "molecule": "3", "length_bp": 141987082, "start_bp": 70469253, "end_bp": 71517829},
+        {"seqid": "NC_041731.1", "role": "assembled-molecule", "molecule": "4", "length_bp": 136094389, "start_bp": 67522906, "end_bp": 68571482}
+      ]
+    },
+    {
+      "id": "sea_urchin",
+      "species": "Strongylocentrotus purpuratus",
+      "assembly": "GCF_000002235.5",
+      "assembly_name": "Spur_5.0",
+      "fasta": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCF_000002235.5_Spur_5.0_genomic.fna.gz",
+      "assembly_report": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCF_000002235.5_Spur_5.0_assembly_report.txt",
+      "fasta_accession_column": "RefSeq-Accession",
+      "label_id": "labela-12664906-1",
+      "label_status": "LABEL_GENERATION_COMPLETED_NOT_SCIENTIFIC_PASS",
+      "label_out": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-1/annotation/assembly.fa.out",
+      "regions": [
+        {"seqid": "NW_022145594.1", "role": "unplaced-scaffold", "molecule": "na", "length_bp": 53101916, "start_bp": 26026670, "end_bp": 27075246},
+        {"seqid": "NW_022145605.1", "role": "unplaced-scaffold", "molecule": "na", "length_bp": 42589791, "start_bp": 20770607, "end_bp": 21819183},
+        {"seqid": "NW_022145609.1", "role": "unplaced-scaffold", "molecule": "na", "length_bp": 39838600, "start_bp": 19395012, "end_bp": 20443588},
+        {"seqid": "NW_022145610.1", "role": "unplaced-scaffold", "molecule": "na", "length_bp": 35917773, "start_bp": 17434598, "end_bp": 18483174}
+      ]
+    },
+    {
+      "id": "c_briggsae",
+      "species": "Caenorhabditis briggsae",
+      "assembly": "GCA_000004555.3",
+      "assembly_name": "CB4",
+      "fasta": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCA_000004555.3_CB4_genomic.fna.gz",
+      "assembly_report": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCA_000004555.3_CB4_assembly_report.txt",
+      "fasta_accession_column": "GenBank-Accession",
+      "label_id": "labela-12522308-2",
+      "label_status": "LABEL_GENERATION_COMPLETED_NOT_SCIENTIFIC_PASS",
+      "label_out": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12522308-2/annotation/assembly.fa.out",
+      "regions": [
+        {"seqid": "FR847112.2", "role": "assembled-molecule", "molecule": "I", "length_bp": 15455979, "start_bp": 7203701, "end_bp": 8252277},
+        {"seqid": "FR847113.2", "role": "assembled-molecule", "molecule": "II", "length_bp": 16627154, "start_bp": 7789289, "end_bp": 8837865},
+        {"seqid": "FR847114.2", "role": "assembled-molecule", "molecule": "III", "length_bp": 14578851, "start_bp": 6765137, "end_bp": 7813713},
+        {"seqid": "FR847118.2", "role": "assembled-molecule", "molecule": "IV", "length_bp": 17485439, "start_bp": 8218431, "end_bp": 9267007}
+      ]
+    }
+  ],
+  "feedback_audit": {
+    "status": "CLOSED_FOR_THIS_PANEL_WITH_LIMITATIONS",
+    "finding": "No per-candidate D inference, calibration, DEV score, or model-selection feedback artifact was found in the candidate preparation tree or the project planning records inspected for this contract.",
+    "cb4_qualification": "C. briggsae occurs in historical planning; that planning mention is retained as exposure history and is not treated as evidence that no prior use occurred.",
+    "excluded_inputs": ["labela-12522308-0", "labela-12522308-1"],
+    "excluded_reason": "Their logs contain Matrix::parseFromFile failures; the repaired platypus/sea-urchin products are used instead.",
+    "interpretation": "This closes the available task-feedback audit only. It does not prove absence of pretraining exposure, TE-family homology, or all unpublished use outside the inspected records."
+  },
+  "evaluation_contract": {
+    "primary_truth_tier": "T1",
+    "primary_truth_scope": "positive recovery against strict Label-A top-level classes LINE/SINE/LTR/DNA/RC/Retroposon; unlabelled sequence is unknown",
+    "truth_class_policy": {
+      "known_te": ["LINE", "SINE", "LTR", "DNA", "RC", "Retroposon"],
+      "unknown_or_ambiguous": ["Unknown", "Unclassified", "unrecognised classes", "class strings containing ?"],
+      "hard_non_te": ["Simple_repeat", "Low_complexity", "Satellite", "Tandem_repeat", "RNA classes"],
+      "excluded_non_te": ["ARTEFACT", "ARTIFACT"],
+      "primary_truth_rule": "Only known_te rows enter T1 truth; every other class is retained in an audit bucket and never silently coerced into TE truth"
+    },
+    "secondary_endpoint": "T0 comparator agreement is reported with an explicit comparator-dependent name and is not independent accuracy",
+    "negative_denominator": "not asserted for the sparse comparator",
+    "insertion_identity": "not reported; binary material runs remain L1 topology/material outputs",
+    "new_threshold": false,
+    "model_change": false,
+    "panel_change_after_scores": false
+  },
+  "resource_contract": {
+    "gpu": {"partition": "shared-gpu", "gpu": "one allocated accelerator", "walltime": "04:00:00", "memory": "64G", "cpus": 4, "max_jobs": 3},
+    "cpu_timing": {"partition": "public-longrun-cpu", "walltime": "04:00:00", "memory": "64G", "cpus": 4, "scope": "same fixed panel and --cpu path; timing only if completed"},
+    "no_training": true,
+    "stop_on_missing_gpu_or_path": true
+  }
+}
