@@ -1,0 +1,44 @@
+{
+  "blockers": [],
+  "complete_natural_copy_rows": 1600,
+  "consensus_fragments_are_not_natural_copies": true,
+  "consensus_origin_multiplicity": {},
+  "consensus_rows_with_identity_ids": 0,
+  "contract_version": "te-identity-retrieval-v1",
+  "cross_split_identity_overlap": {
+    "homology_component_id": {
+      "count": 0,
+      "examples": []
+    },
+    "source_copy_id": {
+      "count": 0,
+      "examples": []
+    }
+  },
+  "duplicate_record_id_count": 0,
+  "empty_ids_are_unknown": true,
+  "host_is_not_chromosome": true,
+  "host_roles": {
+    "human:hg38": [
+      "cal",
+      "eval",
+      "train"
+    ]
+  },
+  "invalid_split_counts": {},
+  "missing_content_counts": {},
+  "missing_identity_counts": {
+    "family_id": 0,
+    "homology_component_id": 0,
+    "host_id": 0,
+    "source_copy_id": 0,
+    "split": 0
+  },
+  "natural_copy_rows": 1600,
+  "records": 1629,
+  "source_kind_counts": {
+    "consensus": 29,
+    "natural_copy": 1600
+  },
+  "status": "PASS_AUDIT"
+}

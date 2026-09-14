@@ -1,0 +1,65 @@
+experiment_id: TE-IDENTITY-RETRIEVAL-GLM-20260914
+parent_contract: TE-IDENTITY-RETRIEVAL-20260914
+status: PASS_NUMERIC_ANNOTATION_LEVEL_EXPLORATORY
+scientific_claim_status: ANNOTATION_LEVEL_ONLY
+exploratory_arm: true
+pre_registration_status: NOT_PREREGISTERED_EXPLORATORY_ARM
+seed: 42
+input:
+  manifest: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/panel/identity_manifest.jsonl
+  expected_records: 1629
+  expected_natural_records: 1600
+  expected_consensus_records: 29
+  split_roles: [train, cal, eval]
+  no_split_changes: true
+model:
+  model_id: nucleotide-transformer-v2-500m-multi-species
+  relative_path: .backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species
+  local_files_only: true
+  expected_hidden_size: 1024
+  expected_max_position_embeddings: 2050
+  precision: float32
+  pretrained_exposure_status: UNRESOLVED
+  forbidden_substitutions:
+    - D-task-finetuned-checkpoint
+    - contrastive-checkpoint
+    - random-or-untrained-embedding
+pooling:
+  method: mean
+  tokenization: native_NTv2_6mer_tokenizer
+  include_special_tokens: false
+  special_token_ids: tokenizer_all_special_ids
+  max_token_length: 2048
+  content_token_budget: max_token_length_minus_runtime_special_token_count
+  long_sequence_policy: token-boundary-segmentation_without_overlap
+  segment_aggregation: content_token_count_weighted_mean
+  truncation: forbidden
+comparison:
+  representation: frozen_native_ntv2_embedding
+  prototype_record_ids: reuse_fixed_sequence_retrieval_selection
+  prototype_selection_space: fixed_kmer_space_from_parent_contract
+  arms:
+    - single_consensus
+    - single_train_medoid
+    - k4_natural_prototypes
+    - random4_natural_prototypes
+    - basic_train_centroid
+  scoring: cosine_similarity
+  calibration_split: cal
+  evaluation_split: eval
+  max_false_accept_rate: 0.01
+  minimum_negative_pairs: 100
+  contrastive_training: forbidden
+  fine_tuning: forbidden
+  gap_filling_or_mask_changes: forbidden
+outputs:
+  embedding_matrix: embeddings.npy
+  embedding_ids: embedding_ids.json
+  embedding_metadata: embedding_meta.json
+  retrieval_metrics: metrics.json
+  retrieval_queries: per_query.tsv
+  remote_output_dir: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_glm_ntv2_native_fixed
+  extraction_job: '12705597'
+  retrieval_job: '12705619'
+  retrieval_status: PASS_NUMERIC_ANNOTATION_LEVEL
+  claims: annotation_level_only

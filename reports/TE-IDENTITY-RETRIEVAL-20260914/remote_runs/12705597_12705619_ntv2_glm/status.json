@@ -1,0 +1,14 @@
+{
+  "contrastive_training": false,
+  "embedding_shape": [
+    1629,
+    1024
+  ],
+  "model_id": "nucleotide-transformer-v2-500m-multi-species",
+  "pretraining_exposure_status": "UNRESOLVED",
+  "real_glm_embedding": true,
+  "records": 1629,
+  "scientific_claim_status": "ANNOTATION_LEVEL_ONLY_PENDING_RETRIEVAL",
+  "scores_written": false,
+  "status": "PASS_GLM_EMBEDDING_EXTRACTION"
+}

@@ -1,0 +1,32 @@
+{
+  "biological_ground_truth": false,
+  "checkpoint_selection": "final step only",
+  "data_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/data-12695213",
+  "experiment": "HG19-CHR1-REVISION-20260914",
+  "interval_bp": {
+    "FN": 621748,
+    "FP": 472770,
+    "TN": 10094281,
+    "TP": 9275413
+  },
+  "interval_columns": [
+    "chrom",
+    "start0",
+    "end",
+    "old_state",
+    "score",
+    "strand",
+    "tile_id"
+  ],
+  "interval_unit": "tile-clipped old-confusion-state run; not insertion",
+  "intervals": "old_confusion_intervals.bed",
+  "label_source": "fixed old hg19 UCSC comparator",
+  "later_annotation_accessed": false,
+  "matching_controls": "TN pool retained in full; matched controls not yet selected",
+  "new_annotations_used": false,
+  "seed": 42,
+  "segment_interpretation": "tile-clipped material topology, not insertion identity",
+  "split": "EVAL",
+  "status": "OLD_ANNOTATION_CHROMOSOME_EVALUATION",
+  "training_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/full-12696116"
+}

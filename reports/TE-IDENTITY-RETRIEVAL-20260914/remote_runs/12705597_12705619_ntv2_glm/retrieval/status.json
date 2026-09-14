@@ -1,0 +1,19 @@
+{
+  "biological_insertion_truth": false,
+  "contrastive_training": false,
+  "exploratory_arm": true,
+  "families": 29,
+  "methods_scored": [
+    "glm_k4_natural_prototypes",
+    "glm_random4_natural_prototypes",
+    "glm_single_consensus",
+    "glm_single_train_medoid",
+    "glm_train_centroid"
+  ],
+  "model_id": "nucleotide-transformer-v2-500m-multi-species",
+  "pretraining_exposure_status": "UNRESOLVED",
+  "real_glm_embedding": true,
+  "scientific_claim_status": "ANNOTATION_LEVEL_ONLY",
+  "scores_written": true,
+  "status": "PASS_NUMERIC_ANNOTATION_LEVEL"
+}

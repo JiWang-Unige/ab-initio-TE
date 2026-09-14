@@ -1,0 +1,7 @@
+# Exploratory family retrieval comparison
+
+`identity-retrieval.svg`, `.pdf`, and `.png` compare 6-mer frequencies with mean-pooled native NTv2-500M embeddings on the same 235 held-out annotated intervals and 29 exact RepeatMasker labels. Reference-copy IDs and split assignments are identical. Four medoids outperform one medoid in both representations, but the TRAIN centroid is stronger than four medoids. The frozen NTv2 representation is weaker than 6-mer frequencies in this specific experiment.
+
+The separate external Dfam-consensus row has a different construction history and is not a causal one-versus-many comparison. Prototype selection was inherited from 6-mer space; no contrastive training or GLM-space prototype reselection was performed. The NTv2 arm was added after earlier EVAL results had been viewed, so this is exploratory annotation-level evidence, not confirmation of universal retrieval quality or insertion recovery. The displayed top-1 and macro-F1 scores precede abstention; the separately calibrated pair-level false-acceptance rate does not bound query-level false discovery.
+
+Sources: `reports/TE-IDENTITY-RETRIEVAL-20260914/remote_runs/12698524_exact_medoid/retrieval/metrics.json` and `reports/TE-IDENTITY-RETRIEVAL-20260914/remote_runs/12705597_12705619_ntv2_glm/retrieval/metrics.json`. Reproduce with `scripts/manuscript/plot_identity_retrieval_20260914.py --kmer <first JSON> --glm <second JSON> --output-prefix docs/manuscript/20260914/figures/identity-retrieval`.

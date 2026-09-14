@@ -43,6 +43,11 @@ preserved both identity columns, plus-strand `chr2:10-20` mapped to
 `chr2:60-70` and back, production-style dot-strand `chr2:20-30` mapped to
 `chr2:70-80` and back with strand `.` retained, and a minus-strand
 `chr3:0-100` mapped to `chr3:10-110` and back with output strand `-`. The
-qualification job
-`12705502` is queued as `PENDING (Dependency)` with `afterok:12696405`; no
-result is asserted before that dependency produces the interval export.
+qualification job `12705502` subsequently completed in 10 seconds after
+formal evaluation `12696405` completed. Of 97,242 source intervals, 93,116
+were unique, reciprocal, and the same length (17,120,893 source bp).
+For old-comparator FP intervals, 21,235 of 21,402 qualified. All other
+mapping outcomes are retained in the compact
+[summary](../../reports/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/summary.json).
+No target annotation was read in this job; mapping qualification alone
+does not demonstrate TE support or justify a same-base F1 recalculation.

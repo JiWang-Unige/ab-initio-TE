@@ -1,0 +1,109 @@
+{
+  "allowed_source_chromosomes": [
+    "chr2",
+    "chr3",
+    "chr4"
+  ],
+  "allowed_target_chromosomes": [
+    "chr2",
+    "chr3",
+    "chr4"
+  ],
+  "bed_plus": 6,
+  "f1_computed": false,
+  "forbidden_source_chromosomes": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "forbidden_target_chromosomes": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "forward_chain": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/hg19-chm13v2.chain",
+  "forward_mapped_row_count": 96753,
+  "interval_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/eval-full-12696405/old_confusion_intervals.bed",
+  "length_changed_mappings_counted_as_same_coordinate": false,
+  "liftOver": {
+    "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software/ucsc/liftOver",
+    "probe": {
+      "output": "liftOver - Move annotations from one assembly to another\nusage:\n   liftOver oldFile map.chain newFile unMapped\noldFile and newFile are in bed format by default, but can be in GFF and\nmaybe eventually others with the appropriate flags below.\nThe map.chain file has the old genome as the target and the new genome\nas the query.\n\n***********************************************************************\nWARNING: liftOver was only designed to work between different\n         assemblies of the same organism. It may not do what you want\n         if you are lifting between different organisms. If there has\n         been a rearrangement in one of the species, the size of the\n         region being mapped may change dramatically after mapping.\n***********************************************************************\n\noptions:\n   -minMatch=0.N Minimum ratio of bases that must remap. Default 0.95\n   -gff  File is in gff/gtf format.  Note that the gff lines are converted\n         separately.  It would be good to have a separate check after this\n         that the lines that make up a gene model still make a plausible gene\n         after liftOver\n   -genePred - File is in genePred format\n   -sample - File is in sample format\n   -bedPlus=N - File is bed N+ format (i.e. first N fields conform to bed format)\n   -positions - File is in browser \"position\" format\n   -hasBin - File has bin value (used only with -bedPlus)\n   -tab - Separate by tabs rather than space (used only with -bedPlus)\n   -pslT - File is in psl format, map target side only\n   -ends=N - Lift the first and last N bases of each record and combine the\n             result. This is useful for lifting large regions like BAC end pairs.\n   -minBlocks=0.N Minimum ratio of alignment blocks or exons that must map\n                  (default 1.00)\n   -fudgeThick    (bed 12 or 12+ only) If thickStart/thickEnd is not mapped,\n                  use the closest mapped base.  Recommended if using \n                  -minBlocks.\n   -multiple               Allow multiple output regions\n   -noSerial               In -multiple mode, do not put a serial number in the 5th BED column\n   -minChainT, -minChainQ  Minimum chain size in target/query, when mapping\n                           to multiple output regions (default 0, 0)\n   -minSizeT               deprecated synonym for -minChainT (ENCODE compat.)\n   -minSizeQ               Min matching region size in query with -multiple.\n   -chainTable             Used with -multiple, format is db.tablename,\n                               to extend chains from net (preserves dups)\n   -errorHelp              Explain error messages\n   -preserveInput          Attach positions from the input file to item names, to assist in\n                           determining what got mapped where (bed4+, gff, genePred, sample only)",
+      "returncode": 255
+    },
+    "source_url": "https://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver"
+  },
+  "min_match": 0.95,
+  "multiple": true,
+  "outcome_counts": {
+    "LENGTH_CHANGED_NONRECIPROCAL": 169,
+    "LENGTH_CHANGED_RECIPROCAL": 3252,
+    "LENGTH_CHANGED_REVERSE_UNMAPPED": 214,
+    "NONRECIPROCAL_COORDINATE": 2,
+    "UNIQUE_RECIPROCAL_SAME_LENGTH": 93116,
+    "UNMAPPED_FORWARD": 489
+  },
+  "outcome_counts_by_state": {
+    "FN": {
+      "LENGTH_CHANGED_NONRECIPROCAL": 6,
+      "LENGTH_CHANGED_RECIPROCAL": 80,
+      "LENGTH_CHANGED_REVERSE_UNMAPPED": 40,
+      "UNIQUE_RECIPROCAL_SAME_LENGTH": 24333,
+      "UNMAPPED_FORWARD": 129
+    },
+    "FP": {
+      "LENGTH_CHANGED_NONRECIPROCAL": 6,
+      "LENGTH_CHANGED_RECIPROCAL": 39,
+      "LENGTH_CHANGED_REVERSE_UNMAPPED": 29,
+      "UNIQUE_RECIPROCAL_SAME_LENGTH": 21235,
+      "UNMAPPED_FORWARD": 93
+    },
+    "TN": {
+      "LENGTH_CHANGED_NONRECIPROCAL": 42,
+      "LENGTH_CHANGED_RECIPROCAL": 1542,
+      "LENGTH_CHANGED_REVERSE_UNMAPPED": 113,
+      "NONRECIPROCAL_COORDINATE": 1,
+      "UNIQUE_RECIPROCAL_SAME_LENGTH": 23586,
+      "UNMAPPED_FORWARD": 193
+    },
+    "TP": {
+      "LENGTH_CHANGED_NONRECIPROCAL": 115,
+      "LENGTH_CHANGED_RECIPROCAL": 1591,
+      "LENGTH_CHANGED_REVERSE_UNMAPPED": 32,
+      "NONRECIPROCAL_COORDINATE": 1,
+      "UNIQUE_RECIPROCAL_SAME_LENGTH": 23962,
+      "UNMAPPED_FORWARD": 74
+    }
+  },
+  "outputs": {
+    "forward_mapped": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/forward_mapped.bed",
+    "forward_unmapped": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/forward_unmapped.txt",
+    "interval_outcomes": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/interval_outcomes.tsv",
+    "reverse_mapped": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/reverse_mapped.bed",
+    "reverse_unmapped": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/reverse_unmapped.txt"
+  },
+  "protocol": "HG19_CHM13V2_UNIQUE_RECIPROCAL_MAPPING_QUALIFICATION",
+  "qualified_source_bp": 17120893,
+  "qualified_unique_reciprocal_same_length_count": 93116,
+  "reverse_chain": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2-hg19.chain",
+  "reverse_mapped_row_count": 96539,
+  "source_interval_count": 97242,
+  "source_state_counts": {
+    "FN": 24588,
+    "FP": 21402,
+    "TN": 25477,
+    "TP": 25775
+  },
+  "status": "MAPPING_QUALIFICATION_COMPLETED",
+  "target_annotations_read": false,
+  "target_scope_counts": {
+    "IN_SCOPE": 96753,
+    "NONE": 489
+  }
+}

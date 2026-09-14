@@ -1,0 +1,8 @@
+{
+  "status": "TRAINING_COMPLETED_NOT_EVALUATED",
+  "steps": 4000,
+  "seed": 42,
+  "task_training_chromosomes": [
+    "chr1"
+  ]
+}

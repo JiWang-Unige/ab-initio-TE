@@ -1,0 +1,30 @@
+{
+  "biological_ground_truth": false,
+  "calibration_loss": 0.1624228712333029,
+  "checkpoint_selection": "final step only",
+  "data_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/data-12695213",
+  "experiment": "HG19-CHR1-REVISION-20260914",
+  "fit_chromosomes": [
+    "chr11"
+  ],
+  "fit_split": "CAL",
+  "label_source": "fixed old hg19 UCSC comparator",
+  "new_annotations_used": false,
+  "platt_intercept": -0.39951334792537485,
+  "platt_slope": 0.4112925935001278,
+  "seed": 42,
+  "segment_interpretation": "tile-clipped material topology, not insertion identity",
+  "selection": {
+    "candidate_count": 340900,
+    "macro_species_f1": 0.943303249856153,
+    "minimum_species_f1": 0.943303249856153,
+    "species_f1": {
+      "human": 0.943303249856153
+    },
+    "threshold": 0.5673416899047918
+  },
+  "status": "OLD_ANNOTATION_CHROMOSOME_EVALUATION",
+  "threshold": 0.5673416899047918,
+  "threshold_rule": "maximum chr11 CAL bp F1; ties closest to 0.5 then higher threshold",
+  "training_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/full-12696116"
+}

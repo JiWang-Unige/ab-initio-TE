@@ -1,0 +1,18 @@
+{
+  "biological_ground_truth": false,
+  "checkpoint_selection": "final step only",
+  "completed_splits": [
+    "CAL",
+    "DEV",
+    "EVAL"
+  ],
+  "cross_assembly_rescue": "NOT_YET_EVALUATED",
+  "data_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/data-12695213",
+  "experiment": "HG19-CHR1-REVISION-20260914",
+  "label_source": "fixed old hg19 UCSC comparator",
+  "new_annotations_used": false,
+  "seed": 42,
+  "segment_interpretation": "tile-clipped material topology, not insertion identity",
+  "status": "OLD_ANNOTATION_CHROMOSOME_EVALUATION",
+  "training_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/full-12696116"
+}

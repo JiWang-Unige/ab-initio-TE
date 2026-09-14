@@ -4,7 +4,9 @@
 
 The proposed single-consensus versus multi-prototype question is a valid
 experiment, and a bounded hg38 retrieval run is now complete at the
-annotation level.  It must not be described as biological insertion retrieval:
+annotation level.  A frozen native NTv2 embedding arm has also been run as a
+new exploratory comparison.  These results must not be described as biological
+insertion retrieval:
 the panel builder creates
 coordinate-derived annotated-interval IDs and sequence-based homology
 components from a small hg38 panel; these IDs are explicitly not biological
@@ -19,7 +21,9 @@ load genome FASTA, create embeddings, train a HMM, or report a retrieval score
 without explicit inputs.  The panel builder and sequence runner are
 `build_natural_panel.py` and `sequence_retrieval.py` in the same directory.
 They use only a bounded natural interval panel and the explicit Dfam consensus
-FASTA; they do not create GLM embeddings, train a HMM, or fill gaps.
+FASTA; they do not train a HMM or fill gaps.  The GLM arm only performs frozen
+encoder inference and retrieval; it does not fine-tune the encoder or train a
+contrastive projection.
 
 ## What the comparison must hold fixed
 
@@ -148,7 +152,7 @@ biological insertion recovery:
 | k=4 natural medoids | PASS_NUMERIC_ANNOTATION_LEVEL | coordinate-derived natural-copy identity |
 | random-4 natural copies | PASS_NUMERIC_ANNOTATION_LEVEL | fixed seed 42; coordinate-derived identity |
 | basic sequence features | PASS_NUMERIC_ANNOTATION_LEVEL | fixed k-mer representation |
-| frozen GLM embedding | NOTRUN | no explicit embedding table with model ID and copy identity |
+| frozen GLM embedding | PASS_NUMERIC_ANNOTATION_LEVEL | exploratory native NTv2 arm; pretraining exposure unresolved |
 | training-copy profile HMM | NOTRUN | no verified HMM/profile input and copy split |
 
 The remote evidence qualification is
@@ -200,8 +204,55 @@ slightly but remains below the TRAIN centroid.  The Dfam consensus is an
 external-reference operational baseline with a different construction history,
 so its difference from k=4 cannot be attributed solely to one versus four
 prototype capacity.  These scores are family-annotation scores, not biological
-insertion recovery scores.  A same-pool GLM and profile-HMM comparison remains
-NOTRUN.
+insertion recovery scores.  A profile-HMM comparison remains NOTRUN.
+
+## Frozen native NTv2 exploratory arm
+
+The native model was loaded from
+`.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species`
+(model ID `nucleotide-transformer-v2-500m-multi-species`, hidden size 1024) on
+Baobab.  The model's native implementation uses a GLU intermediate layer, so
+the extractor uses the native `AutoModelForMaskedLM` mapping with
+`trust_remote_code=True` and reads the final hidden state only; it never
+computes logits.  The initial `AutoModel` attempt is invalid because it
+selects the built-in non-GLU ESM class and cannot load the native weights.
+
+Pooling is the arithmetic mean over non-special content tokens from the native
+6-mer tokenizer.  Sequences longer than the effective 2,048-token limit are
+split only at token boundaries with no overlap and combined by content-token
+count weighted means; no sequence in this panel required more than one
+segment.  The embedding matrix has shape `(1629, 1024)`, is `float32`, and
+contains 1600 natural intervals plus 29 exact Dfam consensus rows.  The
+prototype record IDs, family set, split roles, CAL threshold rule, and EVAL
+queries were inherited unchanged from `sequence_retrieval.py`; medoids were
+not reselected in GLM space.
+
+The GPU extraction was Slurm `12705597` and the dependent CPU retrieval was
+Slurm `12705619`.  The remote output is
+`/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_glm_ntv2_native_fixed/`;
+compact outputs are under
+`reports/TE-IDENTITY-RETRIEVAL-20260914/remote_runs/12705597_12705619_ntv2_glm/`.
+The retrieval used the same 235 EVAL queries, 6,328 CAL negative pairs, and
+fixed alpha 0.01 false-accept rule for every arm:
+
+| frozen NTv2 arm | top-1 | family macro F1 | accepted EVAL | accepted accuracy |
+|---|---:|---:|---:|---:|
+| single Dfam consensus | 0.1277 | 0.1022 | 44 | 0.2955 |
+| single TRAIN medoid | 0.2043 | 0.1759 | 72 | 0.2083 |
+| k=4 TRAIN natural prototypes | 0.2638 | 0.2460 | 51 | 0.1961 |
+| random-4 TRAIN copies | 0.2340 | 0.1971 | 37 | 0.2162 |
+| TRAIN centroid | 0.3234 | 0.3103 | 49 | 0.3469 |
+
+Each arm calibrated at 63 false accepts among 6,328 known CAL negatives
+(`0.00996`).  These are numeric annotation-level results from a
+non-preregistered exploratory arm; native pretraining exposure to related
+sequences remains unresolved.  Within this fixed prototype selection, the
+TRAIN centroid is the strongest frozen-embedding arm, while k=4 does not
+outperform it.  The GLM-space results therefore do not establish a general
+multi-prototype advantage and should not be combined with the external Dfam
+consensus result as a causal one-versus-many comparison.  A GLM-space
+prototype reselection study, contrastive training study, and profile-HMM arm
+remain separate questions.
 
 ## Required next input before a Slurm run
 
@@ -211,9 +262,8 @@ natural genomic interval or validated consensus prototype.  It includes
 `homology_component_id`, exact `family_id`, `split`, and sequence content.  The
 builder documents how coordinate-derived source-copy and sequence/locus
 homology IDs were obtained.  The corrected CPU job has now run the sequence
-features.  Its EVAL table is an annotation-level result for the single-
-consensus, single-medoid, k=4, random-4, and centroid arms.  A later GLM/HMM
-run must use the same manifest and CAL budget.
+features, and the frozen native NTv2 arm has used the same manifest and CAL
+budget.  A later profile-HMM run must use the same manifest and CAL budget.
 
 The files `protocol_contract.json`, `input_inventory.tsv`, and `status.json`
 are the intended handoff to that later job.  They deliberately separate

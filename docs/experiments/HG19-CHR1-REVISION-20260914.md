@@ -25,8 +25,25 @@ CPU准备作业12695213于2分12秒完成。TRAIN chr1的3000tiles含11,876,062 
 
 正式训练 **12696116** 已在同一数据和固定配置下提交，资源上限为单RTX3090、8CPU、64GB、48小时。4000步完成后使用最终checkpoint，不按DEV选择模型。
 
+2026-09-14正式训练已 **COMPLETED**，耗时1:14:25，恰好4000步、seed42。实际曝光为chr1的3000个唯一tile、24,000次呈现；其他任务训练物种曝光为0。[完成记录与来源](../../reports/HG19-CHR1-REVISION-20260914/full-12696116/completion.json)已复制，权重保留Baobab。正式评估12696405已自动启动；训练完成本身不构成跨染色体性能或新版注释支持结果。
+
 `evaluate.py`在任何评价前检查准备配置、训练来源、固定步数、染色体/角色、半窗配对和数量；逐染色体推理并合并为human，避免复用旧多物种接口时覆盖同物种的多个染色体。chr11 CAL拟合非负斜率Platt，再按最大CAL bp-F1确定阈值（并列时更接近0.5，再取较高阈值）。随后只应用至chr13 DEV、chr2/3/4 EVAL，同时保留原始margin与精确坐标。旧注释bp指标是comparator agreement；tile截断的segment指标仅为材料拓扑辅助，不能解释为完整insertion恢复。新增数据/配对校验共5项测试通过。
 
 随后加入EVAL全分母冻结导出：`old_confusion_intervals.bed`为BED6+tile_id，分别保留TP/FP/FN/TN的原坐标连续区间，ignore孔洞不压缩；`old_prediction_manifest.json`记录四种bp总量，并与既有评分逐项核对。TN对照池完整保留，匹配背景抽样尚未完成。导出不读取后续版本的标签，FP区间是旧比较注释下的材料片段，不能计为生物insertion。针对新导出的坐标孔洞、全部分母和截短输入又增加2项测试，目前本地共7项通过。37秒接口smoke运行早于该导出增补，正式EVAL将使用增补后的版本。
 
 推理接口smoke **12696213 COMPLETED**（37秒），只使用每条染色体预先选定的前2tiles和两步smoke checkpoint，完成CAL→DEV→EVAL全接口；[紧凑输出](../../reports/HG19-CHR1-REVISION-20260914/eval-smoke-12696213/completion.json)明确标注 `ENGINEERING_INTERFACE_ONLY`，不参与正式阈值或checkpoint选择。正式评估 **12696405** 以 `afterok:12696116` 提交，必须等待4000步完成并满足脚本检查后才执行。
+
+## 正式跨染色体结果
+
+12696405 已完成，耗时6分22秒。最终checkpoint、chr11 CAL阈值和预定EVAL区域保持不变；原始margin及全量区间留在Baobab，紧凑[结果](../../reports/HG19-CHR1-REVISION-20260914/eval-full-12696405/eval_metrics.json)已归档。
+
+| EVAL | bp precision | bp recall | bp F1 | segment F1@IoU.8 |
+|---|---:|---:|---:|---:|
+| chr2 | .947465 | .931836 | .939585 | .556785 |
+| chr3 | .953107 | .936692 | .944829 | .573484 |
+| chr4 | .953645 | .942591 | .948086 | .570620 |
+| pooled | .951502 | .937179 | .944286 | .566925 |
+
+全量2,500 tiles，20,464,212 callable bp；TP=9,275,413bp，FP=472,770bp，FN=621,748bp。四种旧状态连续区间均已导出并与bp分母核对。这里的“FP”仅相对于旧比较注释；segment仍是tile-clipped材料结构，未赋予插入实例含义。
+
+接续12705502映射资格也已完成，97,242区间中的93,116通过唯一双向等长度资格，覆盖源17,120,893bp；旧FP为21,235/21,402个通过。完整失败类别保留，详见[映射附录](HG19-CHR1-REVISION-20260914-mapping-qualification.md)。尚未由此建立内部逐bp双射、独立TE确认或新版F1。
