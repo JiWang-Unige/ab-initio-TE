@@ -1,0 +1,33 @@
+{
+  "bed_plus": 6,
+  "dot_forward": {
+    "chrom": "chr2",
+    "end": 80,
+    "start0": 70,
+    "strand": "."
+  },
+  "f1_computed": false,
+  "forward_rows": 3,
+  "liftover": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software/ucsc/liftOver",
+  "minus_forward": {
+    "chrom": "chr3",
+    "end": 110,
+    "start0": 10,
+    "strand": "-"
+  },
+  "multiple": true,
+  "plus_forward": {
+    "chrom": "chr2",
+    "end": 70,
+    "start0": 60
+  },
+  "reciprocal_statuses": [
+    "UNIQUE_RECIPROCAL_SAME_LENGTH",
+    "UNIQUE_RECIPROCAL_SAME_LENGTH",
+    "UNIQUE_RECIPROCAL_SAME_LENGTH"
+  ],
+  "reverse_rows": 3,
+  "source_rows": 3,
+  "status": "LIFTOVER_SYNTHETIC_CLI_SMOKE_PASS",
+  "target_annotations_read": false
+}

@@ -1,0 +1,44 @@
+{
+  "protocol": "HG19_CHM13V2_UNIQUE_RECIPROCAL_MAPPING_QUALIFICATION",
+  "status": "FIXED_MAPPING_ONLY_QUALIFICATION",
+  "source_assembly": "hg19",
+  "target_assembly": "CHM13v2",
+  "intervals": "outputs/HG19-CHR1-REVISION-20260914/eval-full-12696405/old_confusion_intervals.bed",
+  "forward_chain": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/hg19-chm13v2.chain",
+  "reverse_chain": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2-hg19.chain",
+  "allowed_source_chromosomes": [
+    "chr2",
+    "chr3",
+    "chr4"
+  ],
+  "allowed_target_chromosomes": [
+    "chr2",
+    "chr3",
+    "chr4"
+  ],
+  "forbidden_source_chromosomes": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "forbidden_target_chromosomes": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "liftOver_source_url": "https://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/liftOver",
+  "bed_plus": 6,
+  "multiple": true,
+  "min_match": 0.95,
+  "qualification_rule": "Exactly one forward destination, exactly one reverse destination returning the original source interval, same source/target interval length, and target chromosome in the allowed target panel.",
+  "length_changed_policy": "Retain and classify; never count as same-coordinate base-level evidence.",
+  "target_annotation_policy": "Do not read or compare any CHM13 annotation in this stage.",
+  "metric_policy": "No F1, FP rescue, or annotation revision claim is computed here.",
+  "dependency": "afterok:12696405"
+}
