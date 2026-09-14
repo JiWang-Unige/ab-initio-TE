@@ -1,0 +1,7 @@
+{
+  "calls": 4,
+  "passed": true,
+  "masked_positions": 7645888,
+  "positions": 14401800,
+  "semantics": "first five tracks ACGTN; sixth track lowercase acgt"
+}

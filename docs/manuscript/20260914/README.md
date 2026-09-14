@@ -4,7 +4,7 @@
 
 ## 第二轮进展
 
-**最新补充与收敛：** hg19匹配背景和严格序列对应已完成；≥80%新版TE覆盖在双边exact序列对中为FP13.88%、匹配TN10.84%，差异主要在旧TE边界邻接片段。检索重训显示6-mer+监督对比学习可达到top1 .6426，未支持冻结GLM优于训练后的基本特征。粗分类审计发现旧1200窗口评分没有覆盖果蝇和线虫；既有前缀的四物种平衡重放现已完成，Unknown支持仅在斑马鱼，不能推断普遍漏注恢复。六物种MoE预测头pilot和海胆适配均已完成：后者提高海胆材料一致性，却损失片段指标和原六物种表现，不支持据此升级共享模型。[适配及保留性图](figures/sea-adaptation-retention-caption.md)已生成。真实固定区域矩阵已按原预算收束：11/12格有读数，鸭嘴兽RM2+RM为TIMEOUT；最终GitHub固定提交Omni重放保留全部12格及超时空指标。CPU/GPU同输入测速也已完成。Tiberius仍在等待全量结果。完整现状以[本轮追加记录](../../experiments/DIRECTIONS-FOLLOWUP-20260914.md)、[最新英文结果段](results-addendum.md)和[新增可复现图](figures/followup-controls-captions.md)为准；下方保留此前推进过程，Pro原稿是历史审阅快照。
+**最新补充与收敛：** hg19匹配背景和严格序列对应已完成；≥80%新版TE覆盖在双边exact序列对中为FP13.88%、匹配TN10.84%，差异主要在旧TE边界邻接片段。检索重训显示6-mer+监督对比学习可达到top1 .6426，未支持冻结GLM优于训练后的基本特征。粗分类审计发现旧1200窗口评分没有覆盖果蝇和线虫；既有前缀的四物种平衡重放现已完成，Unknown支持仅在斑马鱼，不能推断普遍漏注恢复。六物种MoE预测头pilot和海胆适配均已完成：后者提高海胆材料一致性，却损失片段指标和原六物种表现，不支持据此升级共享模型。[适配及保留性图](figures/sea-adaptation-retention-caption.md)已生成。真实固定区域矩阵已按原预算收束：11/12格有读数，鸭嘴兽RM2+RM为TIMEOUT；最终GitHub固定提交Omni重放保留全部12格及超时空指标。CPU/GPU同输入测速也已完成。Tiberius全60格与独立评分现已完成：P mask将locus-F1由0.6363提升至0.6994，P−U区间[0.0365,0.1068]；但丢失16/510个原U正确locus（3.14%）超过预设1%上限，四门联合标准未通过，按协议停止此固定问题。[Tiberius图及图注](figures/tiberius-base-mask-utility-caption.md)同时保留平均收益与局部损失。本批已启动计算已收束。完整现状以[本轮追加记录](../../experiments/DIRECTIONS-FOLLOWUP-20260914.md)、[最新英文结果段](results-addendum.md)和[新增可复现图](figures/followup-controls-captions.md)为准；下方保留此前推进过程，Pro原稿是历史审阅快照。
 
 用户追加的八个方向已完成第二轮Pro讨论，并启动并行工程推进。最新入口是[并行实施记录](../../experiments/DIRECTIONS-EXECUTION-20260914.md)、[Pro第二轮完整可见正文](pro-round2-visible-response.txt)及[最终事实勘误](pro-round2-fact-correction.md)。后者修正内部CONF遗漏、TE_final恢复状态、hs1库版本和历史RC结果。新增训练统一单seed42，替代第一轮建议中的新增多seed；历史结果保留。
 

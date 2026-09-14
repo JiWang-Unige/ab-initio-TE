@@ -497,7 +497,7 @@ def score(cfg: dict, run: str, revision: str = "r1") -> None:
     unmatched = {mode: set() for mode in cfg["modes"]}
     for core, cell in zip(expected, per_core):
         for mode, values in cell["modes"].items():
-            totals[mode].update(values["metric"])
+            totals[mode].update({key: values["metric"][key] for key in ("tp", "fp", "fn")})
             correct[mode].update((core.key, unit) for unit in values["correct"])
             unmatched[mode].update((core.key, chain.strand, chain.intervals) for chain in values["unmatched"])
     summary = {mode: metrics(**totals[mode]) for mode in cfg["modes"]}

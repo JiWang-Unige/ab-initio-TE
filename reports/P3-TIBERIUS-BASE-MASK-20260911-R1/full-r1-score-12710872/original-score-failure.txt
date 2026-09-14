@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/base_mask.py", line 558, in <module>
+    main()
+  File "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/base_mask.py", line 554, in main
+    score(cfg, args.run, args.revision)
+  File "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/base_mask.py", line 500, in score
+    totals[mode].update(values["metric"])
+  File "/home/users/j/jwang/.conda/envs/te_benchmark/lib/python3.10/collections/__init__.py", line 665, in update
+    self[elem] = count + self_get(elem, 0)
+TypeError: unsupported operand type(s) for +: 'NoneType' and 'float'

@@ -1,0 +1,28 @@
+{
+  "status": "RESULT_PROCESSING_COMPLETED",
+  "scientific_decision": "P3_BASE_MASK_UTILITY_GATE_NOT_MET",
+  "full_inference_job": {
+    "id": 12694349,
+    "state": "COMPLETED",
+    "elapsed": "09:49:37",
+    "exit_code": "0:0"
+  },
+  "original_score_job": {
+    "id": 12696406,
+    "state": "FAILED",
+    "elapsed": "00:00:05",
+    "exit_code": "1:0",
+    "reason": "Aggregator added derived precision/recall/F1 including undefined recall in a zero-reference core; no result.json was written."
+  },
+  "corrected_score_and_independent_recheck_job": {
+    "id": 12710872,
+    "state": "COMPLETED",
+    "elapsed": "00:00:10",
+    "exit_code": "0:0"
+  },
+  "repair": "Sum only tp/fp/fn, then recompute pooled ratios; all native outputs reused without inference or protocol changes. Nine local tests passed including full aggregation with a zero-reference core.",
+  "raw_output_directory": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/P3-TIBERIUS-BASE-MASK-20260911-R1/full-r1",
+  "phase_marker_note": "STATUS is the preserved full-inference marker FULL_COMPLETED_NO_SCORE; status.json is the earlier PREPARED_NO_MODEL_OUTPUTS marker. result.json and independent_recheck.json are the final scoring evidence.",
+  "original_sequences_probabilities_weights_exported": false,
+  "next_action": "Stop this fixed P3/Tiberius question under the prespecified joint gate; no extra seed, threshold, checkpoint or panel search."
+}

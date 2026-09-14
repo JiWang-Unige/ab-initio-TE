@@ -1,0 +1,34 @@
+{
+  "actual_loader": "bricks2marble.io.load_fasta().one_hot",
+  "first_five_tracks_equal": true,
+  "records": [
+    {
+      "masked_bp": 0,
+      "mode": "U",
+      "shape": [
+        1,
+        5200000,
+        6
+      ]
+    },
+    {
+      "masked_bp": 2391401,
+      "mode": "P",
+      "shape": [
+        1,
+        5200000,
+        6
+      ]
+    },
+    {
+      "masked_bp": 2403666,
+      "mode": "R",
+      "shape": [
+        1,
+        5200000,
+        6
+      ]
+    }
+  ],
+  "status": "INPUT_PREFLIGHT_PASS"
+}

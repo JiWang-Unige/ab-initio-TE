@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETE_INPUT_AND_RESULT_VERIFICATION_PASS",
+  "config_matches_frozen_repository_config": true,
+  "preflight_count": 20,
+  "native_observation_count": 60,
+  "canonical_and_independent_metrics_equal": true,
+  "independent_native_CDS_replay": {
+    "aggregate_counts": true,
+    "four_gate_decision": true,
+    "p_minus_r": true,
+    "p_minus_u": true,
+    "per_core_counts": true,
+    "r_minus_u": true
+  },
+  "zero_reference_cores_retained": [
+    "chr16:5"
+  ]
+}

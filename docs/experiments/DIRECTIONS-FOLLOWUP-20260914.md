@@ -54,9 +54,9 @@ SF5平衡重放12708861现已完成（10分08秒）：既有评分前缀内上�
 
 hg19匹配已完成12708406/12708553，严格双边exact-ACGT序列分层12708578也完成。18,079对的≥80%新TE覆盖为旧FP13.88%、匹配TN10.84%；孤立片段仅17.52%对16.77%，差异主要在边界邻接片段。只支持注释版本/边界敏感性的描述，暂不支持广泛FP救回或F1校正。控制复用最高775次，不能将pair数当独立重复。[完整结果](HG19-CHR1-REVISION-20260914-MATCHED-RESULT.md)
 
-## 仍在计算的方向
+## 本轮最终收束（2026-09-15）
 
-Tiberius固定U/P/R全60格任务12694349仍运行，本次收取开始时实际处于P3 mask/input准备阶段：20个core已有18个input manifest，尚无preflight或原生GTF输出。12696406依赖全量完成后评分；必须60格完整结果及独立重算通过后才判断下游效用。Gap已有fragment linking工程验证不能提前写成真实insertion恢复。
+Tiberius固定U/P/R全60格12694349已完成。原评分12696406因聚合派生指标、遇到无参考core的null recall而失败；仅修复为汇总TP/FP/FN，12710872评分和独立native CDS复算通过。20个preflight、60个原生输入观测和冻结配置一致性通过。726个参考locus上，U/P/R F1为0.636307/0.699363/0.695431；P−U=+0.063056，固定20core bootstrap95%区间[0.036503,0.106832]，recall差+0.053719。P新增55个正确locus但丢失16个，16/510=3.1373%超过预设1%上限，故前三门通过、四项联合门不通过。保留平均效用改善与局部损失两个结果，按协议停止此固定问题；不追加阈值、checkpoint或面板搜索。P−R的区间跨零，不作优势或等效结论。[完整结果与修复证据](../../reports/P3-TIBERIUS-BASE-MASK-20260911-R1/full-r1-score-12710872/RESULTS.md)；[论文图](../manuscript/20260914/figures/tiberius-base-mask-utility-caption.md)。Gap的fragment linking仍只有工程验证，不能提前写成真实insertion恢复。
 
 Benchmark新增真实native矩阵12708424_[0–8]，三物种固定四区域×RM、HiTE、RM2+RM；同输入但属于real-region feasibility/T2，不是全基因组排名。原D三格纳入共12格固定registry，保留失败和空library；Omni导入/收集成本与Slurm实际caller成本分开。[当前实际接入合同](TE-REAL-PANEL-BENCH-20260914.md)
 
@@ -64,6 +64,6 @@ Benchmark新增真实native矩阵12708424_[0–8]，三物种固定四区域×RM
 
 六物种adapter/MoE主试验12708683与海胆适配12709175均已完成并收回结果，见上表。此前海胆12709012因单个全masked训练tile退出，12708891因坐标体系不一致而取消；两次均无最终模型结果。相应修复与CPU回归12709166记录保留。[适配协议与记录](D-ADAPTER-MOE-PILOT-20260914.md)
 
-SF5首作业12708712的配置接口失败保留，修复重放12708861现已完成并收回紧凑结果。当前固定区域benchmark批次及最终Omni收集已收束（含一个超时），只剩Tiberius全量与依赖评分；本批收束不等于完整全基因组benchmark完成。[SF5重放协议与作业记录](SF5-BALANCED-REPLAY-20260914.md)
+SF5首作业12708712的配置接口失败保留，修复重放12708861现已完成并收回紧凑结果。Tiberius评分完成后，本批已启动作业的结果处理全部收束，固定区域benchmark含一个预算超时；本批收束不等于完整全基因组benchmark、未见物种普适性或biological insertion恢复已经完成。[SF5重放协议与作业记录](SF5-BALANCED-REPLAY-20260914.md)
 
-用户要求继续等待，本线程已建立每30分钟跟进（automation id `te`）：仅对这些已授权既有作业收取、固定评分、修复明确接口故障、记录及Git推送，有实质变化才通知；完成本轮结果处理后暂停。此跟进不授权新研究路线、增加训练预算或开放sealed数据。
+每30分钟自动跟进（automation id `te`）已完成本批既有作业的收取、固定评分、接口修复和结果记录；本次最终文档与compact结果推送核对后暂停。此批不新增研究路线、训练预算或sealed数据访问。

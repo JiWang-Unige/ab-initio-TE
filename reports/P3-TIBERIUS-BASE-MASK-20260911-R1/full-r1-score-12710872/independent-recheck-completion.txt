@@ -1,0 +1,1 @@
+{"gate_passed": false, "output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/P3-TIBERIUS-BASE-MASK-20260911-R1/full-r1/independent_recheck.json", "status": "INDEPENDENT_RECHECK_PASS"}

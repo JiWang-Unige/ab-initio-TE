@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 HERE = Path(__file__).parent
 SMOKE_SCRIPT = HERE.parents[2] / "sbatch" / "P3-TIBERIUS-BASE-MASK-20260911-R1-smoke.sbatch"
@@ -99,6 +100,31 @@ class BaseMaskUnitTest(unittest.TestCase):
         result = base.bootstrap([row, row], "P", "U", cfg)
         self.assertEqual(result["resamples"], 10)
         self.assertEqual(len(result["ci95"]), 2)
+
+    def test_full_score_retains_fp_from_zero_reference_core(self):
+        cfg = base.load_cfg(HERE.parents[2] / "configs" / "P3-TIBERIUS-BASE-MASK-20260911-R1.json")
+        cfg["score"]["bootstrap_replicates"] = 10
+        rows = []
+        for index in range(20):
+            # The final core has predictions but no reference loci: its recall
+            # is undefined, while both false positives must enter pooled F1.
+            correct = {f"unit-{index}"} if index < 19 else set()
+            unmatched = set() if index < 19 else {
+                base.Chain("+", ((10, 20),)), base.Chain("+", ((30, 40),))}
+            rows.append({"modes": {mode: {
+                "metric": base.metrics(len(correct), len(unmatched), 0),
+                "correct": correct, "unmatched": unmatched,
+            } for mode in cfg["modes"]}})
+        with mock.patch.object(base, "run_root", return_value=self.root), \
+             mock.patch.object(base, "load_contract", return_value=({"unit_count": 19}, {}, {})), \
+             mock.patch.object(base, "score_core", side_effect=rows), \
+             mock.patch("builtins.print"):
+            base.score(cfg, "full")
+        result = json.loads((self.root / "result.json").read_text())
+        self.assertEqual(result["completed_cells"], 60)
+        for mode in cfg["modes"]:
+            self.assertEqual(result["metrics"][mode], base.metrics(19, 2, 0))
+            self.assertIsNone(result["per_core"][-1]["metrics"][mode]["recall"])
 
 
 class SmokeLaunchContractTest(unittest.TestCase):

@@ -1,0 +1,29 @@
+{
+  "labels_read": false,
+  "reference_units": 726,
+  "run": "full",
+  "sealed_labels_read": false,
+  "selected_cores": [
+    "chr16:0",
+    "chr16:1",
+    "chr16:2",
+    "chr16:3",
+    "chr16:4",
+    "chr16:5",
+    "chr16:6",
+    "chr16:7",
+    "chr16:8",
+    "chr16:9",
+    "chr18:0",
+    "chr18:1",
+    "chr18:2",
+    "chr18:3",
+    "chr18:4",
+    "chr18:5",
+    "chr18:6",
+    "chr18:7",
+    "chr18:8",
+    "chr18:9"
+  ],
+  "status": "PREPARED_NO_MODEL_OUTPUTS"
+}
