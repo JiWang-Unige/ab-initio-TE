@@ -38,9 +38,11 @@ export TE_REAL_PANEL_BUNDLE=/tmp/te-real-panel-compact-12708424
 
 当前 pin 为 `57d208251c837fce8028b32e362358ffa9df3cf5`，包含跨主机 bundle-root 及显式类别解析修复，已推送并从 GitHub 实际获取。源端绝对目录作为 provenance 保留，data stage 解析根改为调用方本机 bundle 目录。
 
-## 已执行的真实部分矩阵
+## 已执行的固定区域矩阵
 
-Slurm export `12709406` 在 array `12708424` 的 8 个 native cell 已完成、`platypus|rm2_rm` 仍运行时生成当前 snapshot；另 3 个 D `F` 缓存 cell 已完成。因此当前 12-cell registry 有 11 个 completed、1 个 running。Slurm `COMPLETED` 只有调度层状态，caller 是否成功以各 cell 的 `status.json` 为准；本 snapshot 中 11 个可评价 cell 的 caller status 均为 `COMPLETED`。
+最终Slurm export `12709786`在array `12708424`全部终止后生成snapshot：8个native cell成功，`platypus|rm2_rm`为TIMEOUT，另3个D `F`缓存已完成。12-cell registry因此为11个COMPLETED、1个TIMEOUT，没有剩余running cell。Slurm `COMPLETED`只有调度层含义；鸭嘴兽RM2的driver虽以0退出，caller状态仍为TIMEOUT。
+
+该cell在RepeatModeler阶段达到110分钟原定总预算，末步退出码124、总walltime6599.34秒；最后日志停在RECON `eleredef`进度。没有最终RM注释供评分，也不把中间文件替代最终输出。超时作为预算内的观测结果保留，不扩预算、不重跑。最终export第一次12709781因记录路径尚未部署exporter而失败，复制同一已提交脚本后12709786用3秒完成；这不是新的native caller失败。
 
 当前 callable coverage 读数如下。每个物种四区域的名义总长为 4,194,304 bp，fraction使用该面板ACGT可用碱基数作分母。这些是所有caller候选区间的T2 coverage，包含其known-TE、unknown/ambiguous及non-TE类别；分类分桶另存metrics，不能把总覆盖率直接当TE-positive recall或accuracy：
 
@@ -48,6 +50,7 @@ Slurm export `12709406` 在 array `12708424` 的 8 个 native cell 已完成、`
 |---|---|---:|---:|---:|
 | platypus | fixed_rm | 15,359 | 2,428,915 | 0.579098 |
 | platypus | hite | 7,874 | 998,052 | 0.237954 |
+| platypus | rm2_rm (TIMEOUT) | N/A | N/A | N/A |
 | platypus | D_F_cache | 6,732 | 2,146,893 | 0.511859 |
 | sea_urchin | fixed_rm | 8,330 | 2,064,091 | 0.492294 |
 | sea_urchin | hite | 4,882 | 540,660 | 0.128950 |
@@ -64,9 +67,9 @@ Slurm export `12709406` 在 array `12708424` 的 8 个 native cell 已完成、`
 
 现仅按显式class_family/class/family的顶层类别分桶；SINE/tRNA属于known-TE，顶层tRNA才是non-TE，PLE在本项目比较中保留为unknown/ambiguous，不代表它在生物学上不是TE。实际3553条SINE/tRNA及子型记录从non-TE恢复为known-TE，298条PLE记录转为歧义分桶。以原提交的实际分类函数逐条复核差异，所有cell的总覆盖、candidate数及全部pairwise指标均不变。鸭嘴兽HiTE的known-TE callable覆盖从509,024修正为933,972bp；先前类别分桶不可再用于解释，原始输出不变。
 
-修正后的metrics和collector仍保留12格、11格有读数，`platypus|rm2_rm`的metric为null，precision/F1始终为null。当前权威类别读数、逐条类别更正计数和clean日志位于`reports/TE-REAL-PANEL-BENCH-20260914/clean-replay-57d2082/`。
+最终snapshot再次用修正后的GitHub提交57d2082、不加`--dirty`运行Omni，4个jobs完成。Metrics和collector保留12格、11格有读数，TIMEOUT的metric为null，precision/F1始终为null。11个有读数cell的指标与前一修正版逐项一致。当前权威终态、类别读数、native超时记录和clean日志位于`reports/TE-REAL-PANEL-BENCH-20260914/final-12708424/`；逐条类别更正证据仍保存在`clean-replay-57d2082/`。
 
-此前的紧凑证据保留在 `reports/TE-REAL-PANEL-BENCH-20260914/OMNI-CLEAN-12708424-COMPACT/`：其中native状态/registry及运行时间仍有效，旧类别桶由上述57d2082重放替代。完整bundle、Omni checkout和工作目录由本子树`.gitignore`排除，原始序列/概率/模型留在Baobab。`compact_snapshot_12708424_current`是两次重放的同一输入bundle；在native全部完成前不能把本次snapshot写成完整benchmark。
+此前的紧凑证据保留在 `reports/TE-REAL-PANEL-BENCH-20260914/OMNI-CLEAN-12708424-COMPACT/`：其中已完成native运行时间仍有效，旧类别桶与运行中状态已由后续更正及最终snapshot替代。完整bundle、Omni checkout和工作目录由本子树`.gitignore`排除，原始序列/概率/模型留在Baobab。最终本机bundle为`compact_final_12708424`，Omni工作目录为`omni_final_12708424_57d2082`。本有限区域批次已收束，不能扩大解释为完整全基因组benchmark。
 
 ## 产物
 

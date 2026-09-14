@@ -11,3 +11,19 @@
 产物：native logs、各步骤 argv/walltime/peak RSS、最终原生 annotation、canonical prediction、固定预期 cell registry。Omni 接入会明确区分 native Slurm 执行与其后重放/收集，不把已有结果导入的时间写成 native runtime。版本化 SIF 复用已有资产，无重新下载或安装。
 
 当前有限验证：GFF 1-based 端点转 half-open、未映射 query 失败、合法空 annotation 保留零 calls。使用旧 converter，不改历史评分器。
+
+## 本批最终状态
+
+Native array `12708424` 已全部结束：8个caller成功，鸭嘴兽RM2+RM在预设
+6600秒总预算内超时。`RepeatModeler`步骤返回124，最后进度记录为RECON
+`eleredef`；没有执行其后的最终RepeatMasker注释，也没有该cell的可评分结果。
+Slurm任务本身以0退出，是因为driver已把超时写入`status.json`，不能将其解释为
+caller成功。保留TIMEOUT及空指标，不扩预算重试。
+
+最终export `12709786`和GitHub固定提交`57d2082`的clean Omni重放完成。
+Registry保留12格：8个native成功、1个native TIMEOUT和3个D缓存；11格有读数，
+超时格为null。已完成cell的覆盖、分类桶和pairwise指标与前一修正版snapshot一致。
+紧凑结果在`reports/TE-REAL-PANEL-BENCH-20260914/final-12708424/`。
+
+这只关闭当前有限区域批次，不代表完整全基因组公平benchmark或独立accuracy验证
+已经完成；所有既有范围限制仍适用。

@@ -1,0 +1,119 @@
+{
+  "absolute_f1": null,
+  "absolute_precision": null,
+  "denominator_policy": "all 12 native plus saved-D cells remain; non-completed cells have null metrics",
+  "expected_cells": [
+    {
+      "cell_id": "platypus|fixed_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "role": "native_slurm",
+      "species": "platypus",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|hite",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "role": "native_slurm",
+      "species": "platypus",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|rm2_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "role": "native_slurm",
+      "species": "platypus",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|D_F_cache",
+      "device": "gpu_saved_replay",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "role": "completed_D_replay",
+      "species": "platypus",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|fixed_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "role": "native_slurm",
+      "species": "sea_urchin",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|hite",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "role": "native_slurm",
+      "species": "sea_urchin",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|rm2_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "role": "native_slurm",
+      "species": "sea_urchin",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|D_F_cache",
+      "device": "gpu_saved_replay",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "role": "completed_D_replay",
+      "species": "sea_urchin",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|fixed_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "role": "native_slurm",
+      "species": "c_briggsae",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|hite",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "role": "native_slurm",
+      "species": "c_briggsae",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|rm2_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "role": "native_slurm",
+      "species": "c_briggsae",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|D_F_cache",
+      "device": "gpu_saved_replay",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "role": "completed_D_replay",
+      "species": "c_briggsae",
+      "task": "T2"
+    }
+  ],
+  "protocol": "TE-REAL-PANEL-BENCH-20260914",
+  "schema": "te_real_panel_registry_v1",
+  "scope": "REAL_REGION_FEASIBILITY_AND_T2_CONCORDANCE_ONLY",
+  "truth_available": false
+}

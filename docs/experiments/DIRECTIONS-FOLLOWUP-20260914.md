@@ -46,7 +46,7 @@ MoE 先做有限开发对照：固定 D encoder，比较相同CAL重新校准D�
 
 FP匹配和adapter回答不同问题。前者检查被旧注释标记FP的区域是否在严格对应序列上、相对同背景TN更常获新TE注释支持；后者检查外部预测是否能适配。FP任务固定原模型、阈值及全TP/FP/FN/TN分母，核实内部chain无gap/indel、正反向对应、hg19与CHM13序列。匹配仅用旧source染色体、精确长度、GC、非ACGT、旧TE边界关系和距离，完成后才接入新版注释支持。[预先固定规则](HG19-CHR1-REVISION-20260914-MATCHED.md)
 
-分类方面，六类结果可以作为既定编码合同下的结果，但以下扩大解释不成立：Unknown高分代表人工漏注、预测出了SVA family、或完成广泛superfamily注释。LINE/SINE/LTR/DNA是粗粒度类别，并非L1/Alu等具体family/superfamily。现有nonsealed资产缺逐位SF5预测，不能凭aggregate反推出新ontology confusion。下一版标签应保留raw class/family，并分开main4、known_other_TE、ambiguous、true_unclassified与明确nonTE；未知区域不能自动充作经验证负例。已有六类指标保留便于复现，新的分类主张需要对应输出头与独立评价标签。
+分类方面，六类结果可以作为既定编码合同下的结果，但以下扩大解释不成立：Unknown高分代表人工漏注、预测出了SVA family、或完成广泛superfamily注释。LINE/SINE/LTR/DNA是粗粒度类别，并非L1/Alu等具体family/superfamily。最初检查的历史nonsealed归档缺逐位SF5预测，不能凭aggregate反推出新ontology confusion；后续重放补存了下述480窗口的逐位置预测。下一版标签应保留raw class/family，并分开main4、known_other_TE、ambiguous、true_unclassified与明确nonTE；未知区域不能自动充作经验证负例。已有六类指标保留便于复现，新的分类主张需要对应输出头与独立评价标签。
 
 新增实际分母复现12708568已完成：旧SF5两个模型仅按文件顺序评分前1200个test窗口，实际为mouse/zebrafish/chicken各360和frog120；没有fruit_fly/c_elegans。val也省略了c_elegans。这是评价覆盖缺口，不能只凭完整数据集metadata一致就说六物种分类评价完整。
 
@@ -56,14 +56,14 @@ hg19匹配已完成12708406/12708553，严格双边exact-ACGT序列分层1270857
 
 ## 仍在计算的方向
 
-Tiberius固定U/P/R全60格任务12694349仍运行，本次收取开始时实际处于P3 mask/input准备阶段：20个core已有16个input manifest，尚无preflight或原生GTF输出。12696406依赖全量完成后评分；必须60格完整结果及独立重算通过后才判断下游效用。Gap已有fragment linking工程验证不能提前写成真实insertion恢复。
+Tiberius固定U/P/R全60格任务12694349仍运行，本次收取开始时实际处于P3 mask/input准备阶段：20个core已有18个input manifest，尚无preflight或原生GTF输出。12696406依赖全量完成后评分；必须60格完整结果及独立重算通过后才判断下游效用。Gap已有fragment linking工程验证不能提前写成真实insertion恢复。
 
 Benchmark新增真实native矩阵12708424_[0–8]，三物种固定四区域×RM、HiTE、RM2+RM；同输入但属于real-region feasibility/T2，不是全基因组排名。原D三格纳入共12格固定registry，保留失败和空library；Omni导入/收集成本与Slurm实际caller成本分开。[当前实际接入合同](TE-REAL-PANEL-BENCH-20260914.md)
 
-新的真实部分snapshot12709406已由GitHub固定提交57d2082、无dirty模式完成4个Omni jobs：12格中11格有结果（3个原D+8个native caller），仅鸭嘴兽RM2+RM仍运行，其metric为null。8个native caller的自身status均COMPLETED，未从Slurm退出码单独推断成功。另修复了真实分桶错误：RNA子串使3553条SINE/tRNA及子型误入non-TE，298条PLE也按本项目口径改为歧义；显式顶层类别解析经测试和同snapshot实际重放通过。总覆盖与pairwise指标未变。输出覆盖率相差很大，例如CB固定RM仅141bp（全部non-TE），HiTE为276,511bp、RM2+RM为382,550bp；覆盖更多不代表更准确，当前没有独立truth。失败/缺失不折算零分。[真实Omni读数](TE-REAL-PANEL-BENCH-20260914-OMNI.md)
+最终snapshot12709786已由GitHub固定提交57d2082、无dirty模式完成4个Omni jobs：12格全部终止，11格有结果（3个原D+8个native caller），鸭嘴兽RM2+RM为TIMEOUT，其metric为null。该cell在RepeatModeler阶段达到原定110分钟总预算（末步退出124），并非Slurm COMPLETED所暗示的caller成功；保留超时，不扩预算重跑。11个已评分cell的指标与上次修正版完全一致。另修复了真实分桶错误：RNA子串使3553条SINE/tRNA及子型误入non-TE，298条PLE也按本项目口径改为歧义；显式顶层类别解析经测试和同snapshot实际重放通过。总覆盖与pairwise指标未变。输出覆盖率相差很大，例如CB固定RM仅141bp（全部non-TE），HiTE为276,511bp、RM2+RM为382,550bp；覆盖更多不代表更准确，当前没有独立truth。失败/缺失不折算零分。[真实Omni读数](TE-REAL-PANEL-BENCH-20260914-OMNI.md)
 
 六物种adapter/MoE主试验12708683与海胆适配12709175均已完成并收回结果，见上表。此前海胆12709012因单个全masked训练tile退出，12708891因坐标体系不一致而取消；两次均无最终模型结果。相应修复与CPU回归12709166记录保留。[适配协议与记录](D-ADAPTER-MOE-PILOT-20260914.md)
 
-SF5首作业12708712的配置接口失败保留，修复重放12708861现已完成并收回紧凑结果。当前剩余计算仅Tiberius全量/依赖评分及鸭嘴兽RM2+RM；完成后还需最终native snapshot和Omni收集。[SF5重放协议与作业记录](SF5-BALANCED-REPLAY-20260914.md)
+SF5首作业12708712的配置接口失败保留，修复重放12708861现已完成并收回紧凑结果。当前固定区域benchmark批次及最终Omni收集已收束（含一个超时），只剩Tiberius全量与依赖评分；本批收束不等于完整全基因组benchmark完成。[SF5重放协议与作业记录](SF5-BALANCED-REPLAY-20260914.md)
 
 用户要求继续等待，本线程已建立每30分钟跟进（automation id `te`）：仅对这些已授权既有作业收取、固定评分、修复明确接口故障、记录及Git推送，有实质变化才通知；完成本轮结果处理后暂停。此跟进不授权新研究路线、增加训练预算或开放sealed数据。

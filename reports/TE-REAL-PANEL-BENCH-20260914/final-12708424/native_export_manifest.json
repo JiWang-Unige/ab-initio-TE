@@ -1,0 +1,96 @@
+{
+  "bundle_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-REAL-PANEL-BENCH-20260914/compact-final-12708424",
+  "cell_registry": "cell_registry.json",
+  "cells": [
+    {
+      "cell_id": "platypus|fixed_rm",
+      "prediction_path": "cells/platypus__fixed_rm/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/platypus__fixed_rm/status.json"
+    },
+    {
+      "cell_id": "platypus|hite",
+      "prediction_path": "cells/platypus__hite/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/platypus__hite/status.json"
+    },
+    {
+      "cell_id": "platypus|rm2_rm",
+      "prediction_path": null,
+      "status": "TIMEOUT",
+      "status_path": "cells/platypus__rm2_rm/status.json"
+    },
+    {
+      "cell_id": "platypus|D_F_cache",
+      "prediction_path": "cells/platypus__D_F_cache/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/platypus__D_F_cache/status.json"
+    },
+    {
+      "cell_id": "sea_urchin|fixed_rm",
+      "prediction_path": "cells/sea_urchin__fixed_rm/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/sea_urchin__fixed_rm/status.json"
+    },
+    {
+      "cell_id": "sea_urchin|hite",
+      "prediction_path": "cells/sea_urchin__hite/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/sea_urchin__hite/status.json"
+    },
+    {
+      "cell_id": "sea_urchin|rm2_rm",
+      "prediction_path": "cells/sea_urchin__rm2_rm/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/sea_urchin__rm2_rm/status.json"
+    },
+    {
+      "cell_id": "sea_urchin|D_F_cache",
+      "prediction_path": "cells/sea_urchin__D_F_cache/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/sea_urchin__D_F_cache/status.json"
+    },
+    {
+      "cell_id": "c_briggsae|fixed_rm",
+      "prediction_path": "cells/c_briggsae__fixed_rm/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/c_briggsae__fixed_rm/status.json"
+    },
+    {
+      "cell_id": "c_briggsae|hite",
+      "prediction_path": "cells/c_briggsae__hite/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/c_briggsae__hite/status.json"
+    },
+    {
+      "cell_id": "c_briggsae|rm2_rm",
+      "prediction_path": "cells/c_briggsae__rm2_rm/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/c_briggsae__rm2_rm/status.json"
+    },
+    {
+      "cell_id": "c_briggsae|D_F_cache",
+      "prediction_path": "cells/c_briggsae__D_F_cache/predictions.tsv",
+      "status": "COMPLETED",
+      "status_path": "cells/c_briggsae__D_F_cache/status.json"
+    }
+  ],
+  "independent_truth": false,
+  "metrics_scope": [
+    "callable_bp_coverage",
+    "callable_intersection",
+    "callable_jaccard",
+    "candidate_fragment_count"
+  ],
+  "native_array_id": "12708424",
+  "panels": {
+    "c_briggsae": "panels/c_briggsae.json",
+    "platypus": "panels/platypus.json",
+    "sea_urchin": "panels/sea_urchin.json"
+  },
+  "probabilities_copied": false,
+  "protocol": "TE-REAL-PANEL-BENCH-20260914",
+  "raw_fasta_copied": false,
+  "schema": "te_real_panel_compact_bundle_v1",
+  "source_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE"
+}

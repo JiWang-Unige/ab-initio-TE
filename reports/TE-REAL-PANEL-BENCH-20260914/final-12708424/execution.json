@@ -1,0 +1,31 @@
+{
+  "native_array_id": "12708424",
+  "export_job": "12709786",
+  "export_failed_attempt": {
+    "job": "12709781",
+    "reason": "exporter absent at documented remote path; deployed unchanged exporter before retry",
+    "native_cell_failure": false
+  },
+  "source_commit": "57d208251c837fce8028b32e362358ffa9df3cf5",
+  "dirty": false,
+  "omni_jobs_completed": 4,
+  "registry_cells": 12,
+  "status_counts": {
+    "COMPLETED": 11,
+    "TIMEOUT": 1
+  },
+  "native_completed": 8,
+  "native_timeout": 1,
+  "D_cached_completed": 3,
+  "all_cells_terminal": true,
+  "scored_cells": 11,
+  "timeout_cell": "platypus|rm2_rm",
+  "timeout_stage": "RepeatModeler RECON; final progress log mentioned eleredef",
+  "native_budget_seconds": 6600,
+  "timeout_wall_seconds": 6599.343154540984,
+  "timeout_exit_code": 124,
+  "unavailable_metrics_are_null": true,
+  "completed_cell_metrics_unchanged_since_previous_corrected_snapshot": true,
+  "independent_truth": false,
+  "interpretation": "Fixed-region T2 batch closed with one budget-censored cell; not a whole-genome accuracy benchmark. No budget extension or retry."
+}
