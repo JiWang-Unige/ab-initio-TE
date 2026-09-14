@@ -1,0 +1,66 @@
+{
+  "protocol": "HG19_CHM13V2_FIXED_2022_ANNOTATION_DESCRIPTIVE_OVERLAP",
+  "status": "FIXED_DESCRIPTIVE_OVERLAP_ONLY",
+  "mapping_outcomes": "outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/interval_outcomes.tsv",
+  "annotation": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2.0_RepeatMasker_4.1.2p1.2022Apr14.out",
+  "annotation_source_url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/annotation/chm13v2.0_RepeatMasker_4.1.2p1.2022Apr14.out",
+  "annotation_release": "CHM13v2.0 RepeatMasker 4.1.2p1, 2022-04-14",
+  "source_assembly": "hg19",
+  "target_assembly": "CHM13v2",
+  "allowed_source_chromosomes": [
+    "chr2",
+    "chr3",
+    "chr4"
+  ],
+  "allowed_target_chromosomes": [
+    "chr2",
+    "chr3",
+    "chr4"
+  ],
+  "forbidden_source_chromosomes": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "forbidden_target_chromosomes": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "annotation_coordinate_convention": "RepeatMasker .out 1-based closed; converted to 0-based half-open",
+  "mapping_coordinate_convention": "qualified forward target coordinates are 0-based half-open",
+  "annotation_categories": {
+    "TE": "base class in SINE, LINE, LTR, DNA, RC, RETROPOSON",
+    "UNKNOWN": "base class UNKNOWN or class/family field containing ?",
+    "NONTE": "known non-TE base classes SIMPLE_REPEAT, LOW_COMPLEXITY, SATELLITE, RNA, SNRNA, SCRNA, SRPRNA, TRNA, RRNA",
+    "UNRECOGNIZED": "any other base class; retained separately and never treated as known non-TE"
+  },
+  "overlap_definition": {
+    "annotation_union": "Merge overlapping annotation intervals within each category and target chromosome before measuring overlap",
+    "parallel_categories": "TE, UNKNOWN, NONTE and UNRECOGNIZED are measured independently; categories are not forced into a winner when source annotations overlap",
+    "any": "category union overlap_bp >= 1",
+    "ge50": "category union overlap_bp / qualified target interval length >= 0.50",
+    "ge80": "category union overlap_bp / qualified target interval length >= 0.80",
+    "failed_mapping_rows": "Retain every non-qualified mapping outcome with mapping status and empty annotation fields; do not treat it as zero-support evidence",
+    "denominator": "All source TP/FP/FN/TN rows remain the denominator; qualified rows are reported as a separate subset"
+  },
+  "claim_policy": {
+    "target_annotations_read": true,
+    "descriptive_only": true,
+    "same_base_f1_computed": false,
+    "fp_rescue_claim": false,
+    "threshold_or_model_changed": false,
+    "equal_span_is_not_internal_bijective": true
+  },
+  "overlap_thresholds": {
+    "any": 0.0,
+    "ge50": 0.5,
+    "ge80": 0.8
+  }
+}

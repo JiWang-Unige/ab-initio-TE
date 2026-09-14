@@ -10,7 +10,7 @@ Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；�
 
 后续实际执行又补齐两项证据：固定D在三个外部候选上完成GPU推理，严格类别重评分后仅鸭嘴兽有有效TE阳性分母（F召回95.93%，RC均值96.19%）；海胆/CB4标签资格仍不满足，不能写成泛化失败。天然copy检索的同面板6-mer对照已完成，k4 medoids优于single medoid但仍弱于centroid，未支持多prototype的普遍优势。Omni的RC0四臂工程流程已从GitHub固定提交、不使用dirty完成12个jobs；这不替代真实传统方法的公平比较。具体数字、分母及进行中的补充见[并行实施记录](../../experiments/DIRECTIONS-EXECUTION-20260914.md)。
 
-新增原生NTv2 mean-pooled embedding检索也已完成：相同235个EVAL query上，centroid top1=.3234，高于k4=.2638，但低于6-mer centroid=.4255。现已制作[可复现对比图与图注](figures/identity-retrieval-caption.md)；这是探索性表示消融，没有完成contrastive训练或工具独立验证。hg19 chr1-only正式4000步训练已完成（12696116），跨染色体评估12696405及映射资格12705502随后均已完成：chr2/3/4 pooled旧注释bp-F1=.944286，93,116/97,242区间通过唯一双向等长度资格。此时尚未读取新版TE标签，不能宣称FP得到确认。
+新增原生NTv2 mean-pooled embedding检索也已完成：相同235个EVAL query上，centroid top1=.3234，高于k4=.2638，但低于6-mer centroid=.4255。现已制作[可复现对比图与图注](figures/identity-retrieval-caption.md)；这是探索性表示消融，没有完成contrastive训练或工具独立验证。hg19 chr1-only正式4000步训练已完成（12696116），跨染色体评估12696405及映射资格12705502随后均已完成：chr2/3/4 pooled旧注释bp-F1=.944286，93,116/97,242区间通过唯一双向等长度资格。随后固定2022 CHM13描述性重叠统计发现3,171/21,235合格旧FP区间被TE注释覆盖≥80%；匹配背景和独立确认仍未完成，不能称FP得到证实或重算F1。
 
 ## 阅读入口
 
