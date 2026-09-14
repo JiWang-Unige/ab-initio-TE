@@ -2,6 +2,8 @@
 
 2026-09-14，Europe/Zurich。用户要求：使用 Git 保存最新进展，在内置浏览器用 ChatGPT Pro 系统梳理所有研究结果，形成完整论文，并判断正文/补充材料安排及必要补实验。本文是本轮取证导航和待审判断，不是独立实验、论文 claim 批准或新训练授权。
 
+送审后更正：Pro 已完成梳理，本文第4、7、9项按源码和原表核对后修正。原始送审版本保留在 `c678141`；完整交付见 `docs/manuscript/20260914/README.md`。
+
 ## 证据层次与当前状态
 
 - 本轮读取本地当前源码、协议、归档表格及 JSON；没有重跑模型或评分，没有读取封存科学面板。
@@ -43,7 +45,7 @@
 
 ### 4. 能否由基因组特征推断泛化性能或置信度
 
-历史 deployed-feature selector in-sample R2 .8203，但 leave-species-out RMSE .3040；标签来源变量改善解释但不能供新基因组部署。后续 top2+local probe 在内部 leave-species contains-best .8636、regret .0071，leave-clade best .6364，需要 abstain。20260811 新 transfer surface 因 5/5 anchor provenance 缺失未执行，不能记为性能失败。
+历史 deployed-feature selector in-sample R2 .8203，但 leave-species-out RMSE .3040；标签来源变量改善解释但不能供新基因组部署。所选 `baseline_plus_kmer` 的 leave-species contains-best 为19/22（.8636），leave-clade 为13/22（.5909）；.6364 属于其他特征组。`selector_conservative_router.py` 直接取 top2 的已观测真实 `te_f1` 最大值，所以 .007083 regret 是 oracle shortlist 结果，不是已执行 local probe 的部署收益。leave-clade 分支全部 abstain，不能称有效部署覆盖。20260811 新 transfer surface 因 5/5 anchor provenance 缺失未执行，不能记为性能失败。
 
 入口：`docs/10_findings.md`、`reports/tefm_final/PIPE-TEFM-FINAL-SELECTOR-20260630/`、`DECAY-TRANSFER-SURFACE-SCREEN-20260811-R1.md`。
 
@@ -69,7 +71,7 @@ HN-O 对 H0-O 的 fraction-MSE 降低 8.5905%，action AP .30359897→.38721622�
 
 `reports/tefm_lock/PIPE-TEFM-LOCK-20260619/summaries/superfamily5.tsv`：base-pretrained TE detect F1 .9041037，main4 conditional macro-F1 .8644150，Unknown recall .3885974；binary-H0 初始化 main4 .8632672、Unknown recall .0426272。
 
-**命名需纠正**：BG/SINE/LINE/LTR/DNA/Unknown 是粗 TE 类型集合，并非完整生物学 superfamily 清单。conditional main4 排除了部分拒识/背景问题，不能用来替代全输出性能。应同时显示 per-class、全六类、reject/risk-coverage。
+**命名需纠正**：BG/SINE/LINE/LTR/DNA/Unknown 是粗 TE 类型集合，并非完整生物学 superfamily 清单。源码 `superfamily5_task.py:compute_metrics` 在全部有效六类位置上计算每类 FP/FN/F1，再平均 main4，因此 BG/Unknown 混淆仍计入；只是 BG/Unknown 自身 F1 不参与四类平均。仅 `main4_conditional_accuracy` 限制 true label 属于 main4。应同时显示 per-class、全六类 macro-F1（.814575）、Unknown recall 和适当的拒识评价。原送审导航对此指标的解释有误，已按源码更正。
 
 20260812 accession-preserving adapter 6/6 仅为语法工程；full identity/homology-safe direct-S0 后续未完成。入口 `SF-DIRECT-BASELINE-SCREEN-20260811-R2.md`、`SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1.md`。历史好分可报告，但不足以宣布广泛可用的真 superfamily 注释器。
 
@@ -91,6 +93,8 @@ HN-O 对 H0-O 的 fraction-MSE 降低 8.5905%，action AP .30359897→.38721622�
 ### 9. 传统 benchmark、CPU 和 Omnibenchmark
 
 `LEMMI-TE-BENCH-20260824-R1.md` 已有同一 FlyBase r6.68 全组装 3 个有效 cell：HiTE、Base-CE、DAPT-CE。T1 positive-only bp recall 为 .448982/.003408/.018514，segment recall@.8 为 .216412/0/.000402；不可报 genome precision/F1。这些是历史 Base/DAPT，不是当前 P3/shared D 的比较，不能相互替代。
+
+送审后补齐：`P3-R2-CLOSURE-20260830.md` 另有后来完成的同一 FlyBase 实例 P3 诊断，segment recall .078037、fragments/truth 51.557723；不可遗漏，但仍不是当前共享 D，也没有支持优于 HiTE 的结构召回。
 
 五传统工具完整公平矩阵尚未完成；不同物种工程产物和早期部分 de novo 表不能合并成该 R1。最小缺口是同一合格冻结实例的第二个传统完整 workflow，加当前拟发布模型。
 
