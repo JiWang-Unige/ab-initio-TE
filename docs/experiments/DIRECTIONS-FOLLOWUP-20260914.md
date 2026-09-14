@@ -16,7 +16,7 @@ MoE 继续做有限开发对照：固定 D encoder，比较原D、相同CAL重�
 - **k-mer与投影重训**：12708302完成。长度4/6/8的centroid top-1为0.3872/0.4255/0.3915；k=4 prototype数和k-mer长度已明确分开。NTv2监督对比投影的centroid top-1/macro-F1由0.3234/0.3103升到0.5106/0.5048；235个已见EVAL中130个accepted，accepted accuracy0.7231，不是可保证99%准确的工具。[详细结果](TE-IDENTITY-RETRIEVAL-IMPROVE-20260914.md)
 - **CPU/GPU同输入前向测速**：CPU12696616与GPU12708296全部完成。同1MiB和batch12，CPU第二次前向733–758秒，TITAN X/P100为31–34秒；各硬件与加载时间另列，不能当传统端到端工具速度或整基因组外推。[测速结果](../../scripts/experiments/D-EXTERNAL-RC0-20260914/reports/CPU-GPU-TIMING-20260914.md)
 
-监督投影改善还需区分表示与目标函数的贡献，因此新增固定三臂控制：L2 6-mer+supcon、L2 NTv2+supcon、L2 NTv2+cross-entropy，均50epoch、128d、同TRAIN/CAL及seed42；CAL选epoch，既往EVAL只算最终结果。参数量按输入维度如实报告。作业12708540，未把提交当结果。
+监督投影改善还需区分表示与目标函数的贡献，因此完成固定三臂控制12708540：L2 6-mer+supcon、L2 NTv2+supcon、L2 NTv2+cross-entropy，均50epoch、128d、同TRAIN/CAL及seed42；CAL选epoch，既往EVAL只算最终结果。top-1/macro-F1依次为0.6426/0.6057、0.5064/0.4994、0.2809/0.2687。6-mer投影参数量更大，CE结果仅是其投影后centroid检索，不是充分调优的分类结果。这否定了用“raw→trained NTv2提升”独自证明GLM胜过基本特征的解释。[图及完整限制](../manuscript/20260914/figures/followup-controls-captions.md)
 
 ## 匹配背景、序列对应与分类修复
 
@@ -25,6 +25,8 @@ FP匹配和adapter回答不同问题。前者检查被旧注释标记FP的区域
 分类方面，六类结果可以作为既定编码合同下的结果，但以下扩大解释不成立：Unknown高分代表人工漏注、预测出了SVA family、或完成广泛superfamily注释。LINE/SINE/LTR/DNA是粗粒度类别，并非L1/Alu等具体family/superfamily。现有nonsealed资产缺逐位SF5预测，不能凭aggregate反推出新ontology confusion。下一版标签应保留raw class/family，并分开main4、known_other_TE、ambiguous、true_unclassified与明确nonTE；未知区域不能自动充作经验证负例。已有六类指标保留便于复现，新的分类主张需要对应输出头与独立评价标签。
 
 新增实际分母复现12708568已完成：旧SF5两个模型仅按文件顺序评分前1200个test窗口，实际为mouse/zebrafish/chicken各360和frog120；没有fruit_fly/c_elegans。val也省略了c_elegans。这是评价覆盖缺口，不能只凭完整数据集metadata一致就说六物种分类评价完整。已开始限定在旧已评分前缀内的平衡重放，每个上述物种120窗口，保存逐位置预测和分物种混淆；不为补齐分母而自动开放新held-out物种。
+
+hg19匹配已完成12708406/12708553，严格双边exact-ACGT序列分层12708578也完成。18,079对的≥80%新TE覆盖为旧FP13.88%、匹配TN10.84%；孤立片段仅17.52%对16.77%，差异主要在边界邻接片段。只支持注释版本/边界敏感性的描述，暂不支持广泛FP救回或F1校正。控制复用最高775次，不能将pair数当独立重复。[完整结果](HG19-CHR1-REVISION-20260914-MATCHED-RESULT.md)
 
 ## 仍在计算的方向
 

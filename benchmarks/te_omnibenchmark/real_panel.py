@@ -539,9 +539,18 @@ def run_data(args: argparse.Namespace) -> None:
     manifest, registry, _ = load_bundle(manifest_path, registry_path)
     if manifest.get("raw_fasta_copied") or manifest.get("probabilities_copied"):
         raise ValueError("compact bundle unexpectedly contains raw FASTA/probability material")
+    # The Slurm exporter records its source-side absolute root for provenance.
+    # Omni replays a copied compact bundle on another host, so stage paths must
+    # resolve from the local bundle supplied to this data module.
+    materialized_manifest = {
+        **manifest,
+        "bundle_root_source": manifest.get("bundle_root"),
+        "bundle_root": str(bundle),
+        "stage_source_manifest": str(manifest_path),
+    }
     write_json(
         args.output_dir / "bundle_manifest.json",
-        {**manifest, "stage_source_manifest": str(manifest_path)},
+        materialized_manifest,
     )
     write_json(args.output_dir / "cell_registry.json", registry)
 

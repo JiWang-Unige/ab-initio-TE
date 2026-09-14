@@ -167,6 +167,9 @@ class RealPanelContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             bundle = Path(temporary) / "bundle"
             manifest, _ = self.make_bundle(bundle)
+            source_manifest = json.loads(manifest.read_text())
+            source_manifest['bundle_root'] = '/remote/baobab/compact_bundle'
+            write_json(manifest, source_manifest)
             output = Path(temporary) / "data"
             real_panel.run_data(Namespace(bundle=bundle, output_dir=output))
             self.assertTrue((output / "bundle_manifest.json").is_file())
@@ -174,6 +177,11 @@ class RealPanelContractTests(unittest.TestCase):
             self.assertFalse((output / "panel_regions.fa").exists())
             materialized = json.loads((output / "bundle_manifest.json").read_text())
             self.assertEqual(materialized["stage_source_manifest"], str(manifest.resolve()))
+            self.assertEqual(materialized["bundle_root"], str(bundle.resolve()))
+            self.assertEqual(materialized["bundle_root_source"], '/remote/baobab/compact_bundle')
+            result = real_panel.score_bundle(output/'bundle_manifest.json', output/'cell_registry.json', Path(temporary)/'scores')
+            self.assertEqual(result['expected_cell_count'], 2)
+            self.assertEqual(result['cells'][0]['status'], 'COMPLETED')
 
 
 if __name__ == "__main__":
