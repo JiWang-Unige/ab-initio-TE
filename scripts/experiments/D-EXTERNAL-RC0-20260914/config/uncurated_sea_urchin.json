@@ -1,0 +1,37 @@
+{
+  "protocol": "D-EXTERNAL-RC0-20260914-UNCURATED-DFAM-COMPARATOR",
+  "status": "PREPARED",
+  "scientific_scope": "bounded library-sensitivity comparator on the already scored sea-urchin panel; it does not replace Label-A or claim independent truth",
+  "fixed_d_contract": {
+    "candidate": "sea_urchin",
+    "species": "Strongylocentrotus purpuratus",
+    "assembly": "GCF_000002235.5",
+    "assembly_name": "Spur_5.0",
+    "famdb_taxon_id": 7668,
+    "famdb_release": "Dfam 3.9",
+    "expected_lineage_specific_consensus": 3324,
+    "panel_config": "scripts/experiments/D-EXTERNAL-RC0-20260914/config/panel.json",
+    "panel_prediction_output": "outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1",
+    "model_checkpoint": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "calibration": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "seed": 42,
+    "threshold_policy": "reuse the frozen six-species CAL threshold from the D checkpoint; no refitting or threshold change",
+    "panel_policy": "reuse the four fixed centered 1,048,576-bp regions and saved panel_regions.fa; no score- or label-based window selection",
+    "label_a_policy": "retain the original Label-A output and its results as the primary D record; this comparator is reported separately"
+  },
+  "comparator": {
+    "library": "Dfam 3.9 FamDB uncurated lineage-specific families for taxon 7668",
+    "selection_command": "famdb.py families -f fasta_acc --include-class-in-name -ad --uncurated 7668",
+    "annotation_engine": "installed RepeatMasker",
+    "annotation_parameters": ["-pa", "4", "-xsmall", "-gff", "-lib"],
+    "label_contract": "strict D class buckets; only LINE/SINE/LTR/DNA/RC/Retroposon enter primary T1, other classes remain audited",
+    "output_role": "separate library-sensitivity comparator; not a replacement for Label-A"
+  },
+  "resource_contract": {
+    "partition": "public-longrun-cpu",
+    "cpus_per_task": 4,
+    "memory": "16G",
+    "walltime": "02:00:00",
+    "large_file_policy": "export, annotation, and cache-only rescore all run through Slurm"
+  }
+}

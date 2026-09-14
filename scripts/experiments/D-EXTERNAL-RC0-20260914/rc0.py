@@ -295,7 +295,14 @@ def _make_truth(
     regions: list[dict[str, Any]],
     output_dir: Path,
 ) -> tuple[Path, Path, dict[str, Any]]:
-    by_seqid = {str(row["source_seqid"]): row for row in regions}
+    # Label-A is generated on source assembly IDs, whereas a comparator run
+    # over the saved panel FASTA is reported on the frozen region IDs.  Accept
+    # both names while keeping the coordinate translation tied to the same
+    # frozen region record.
+    by_seqid: dict[str, dict[str, Any]] = {}
+    for row in regions:
+        by_seqid[str(row["source_seqid"])] = row
+        by_seqid[str(row["id"])] = row
     bucket_paths = {
         "known_te": output_dir / "truth_repeatmasker_panel.bed",
         "unknown_or_ambiguous": output_dir / "truth_repeatmasker_panel_unknown_or_ambiguous.bed",

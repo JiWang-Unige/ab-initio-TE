@@ -1,0 +1,31 @@
+{
+  "assembly": "GCF_000002235.5",
+  "expected_count_match": true,
+  "expected_lineage_specific_consensus": 3324,
+  "famdb_release": "Dfam 3.9",
+  "famdb_taxon_id": 7668,
+  "fasta_consensus_records": 3324,
+  "first_pass_manifest": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/library_manifest.first_pass.json",
+  "interpretation": "derived library audit only; RepeatMasker annotation remains a separate comparator and cannot establish independent truth",
+  "length_audit": "re-audited from complete wrapped FASTA records on Slurm",
+  "library_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/uncurated_lineage_taxon7668.fa",
+  "raw_export": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/uncurated_lineage.raw.txt",
+  "raw_summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/uncurated_lineage.summary.txt",
+  "selection": "lineage-specific uncurated families from famdb families -ad --uncurated 7668",
+  "sequence_length_bp": {
+    "count": 3324,
+    "min": 33,
+    "max": 20961,
+    "total": 5216115
+  },
+  "species": "Strongylocentrotus purpuratus",
+  "status": "COMPLETED",
+  "summary_class_audit": {
+    "other_or_unparsed": 25,
+    "transposable_element_like": 1154,
+    "unknown_or_unclassified": 2145
+  },
+  "summary_record_count": 3324,
+  "supersedes_length_audit": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/library_manifest.json",
+  "length_audit_repair": "sum all FASTA sequence lines per record; library itself unchanged"
+}

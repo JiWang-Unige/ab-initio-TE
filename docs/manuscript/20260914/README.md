@@ -12,6 +12,8 @@ Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；�
 
 新增原生NTv2 mean-pooled embedding检索也已完成：相同235个EVAL query上，centroid top1=.3234，高于k4=.2638，但低于6-mer centroid=.4255。现已制作[可复现对比图与图注](figures/identity-retrieval-caption.md)；这是探索性表示消融，没有完成contrastive训练或工具独立验证。hg19 chr1-only正式4000步训练已完成（12696116），跨染色体评估12696405及映射资格12705502随后均已完成：chr2/3/4 pooled旧注释bp-F1=.944286，93,116/97,242区间通过唯一双向等长度资格。随后固定2022 CHM13描述性重叠统计发现3,171/21,235合格旧FP区间被TE注释覆盖≥80%；匹配背景和独立确认仍未完成，不能称FP得到证实或重算F1。
 
+海胆替代Dfam uncurated库的同区域重评分也已完成：844,932bp严格TE类注释上，冻结D的F召回=.428937，RC平均=.424200。它不构成独立生物学accuracy，但暴露了当前外部覆盖上的低召回，不能将共享模型描述为只在C. elegans较弱。具体修复和来源见[库敏感性报告](../../../scripts/experiments/D-EXTERNAL-RC0-20260914/reports/LIBRARY-SENSITIVITY-20260914.md)。
+
 ## 阅读入口
 
 - [审阅后新增实验的英文结果段](results-addendum.md)：已完成的原生hg19跨染色体评价、映射资格、外部标签覆盖诊断和6-mer/NTv2检索比较，可供下一版论文整合；不代表Pro再次审阅。

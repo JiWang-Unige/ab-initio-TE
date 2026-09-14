@@ -1,0 +1,13 @@
+{
+  "rows": 10021,
+  "mapped_region_ids": [
+    "sea_urchin__r01__NW_022145594.1__26026670_27075246",
+    "sea_urchin__r02__NW_022145605.1__20770607_21819183",
+    "sea_urchin__r03__NW_022145609.1__19395012_20443588",
+    "sea_urchin__r04__NW_022145610.1__17434598_18483174"
+  ],
+  "short_query_sequences_equal_frozen_panel": true,
+  "previous_lifted_out_equal": true,
+  "annotation_job": "12705928",
+  "new_annotation_run": false
+}

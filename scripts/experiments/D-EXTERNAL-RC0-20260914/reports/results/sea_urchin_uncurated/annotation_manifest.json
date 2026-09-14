@@ -1,0 +1,25 @@
+{
+  "annotation_engine": "/home/users/j/jwang/.conda/envs/te_benchmark/bin/RepeatMasker",
+  "annotation_input_short_ids": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/annotation_lifted/panel_regions.short_ids.fa",
+  "annotation_out": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/annotation_lifted/panel_regions.lifted.out",
+  "coordinate_lift": "add each frozen region start_bp to RepeatMasker panel-relative 1-based begin/end",
+  "frozen_panel_regions_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1/panel_regions.json",
+  "id_mapping": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/annotation_lifted/panel_regions.id_map.tsv",
+  "interpretation": "derived Dfam uncurated comparator annotation; not an independent accuracy truth",
+  "library_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/uncurated_lineage_taxon7668.fa",
+  "library_manifest": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/library_manifest.json",
+  "panel_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1/panel_regions.fa",
+  "panel_fasta_bytes": 4194516,
+  "parameters": [
+    "-pa",
+    "4",
+    "-xsmall",
+    "-gff",
+    "-lib",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/uncurated_lineage_taxon7668.fa"
+  ],
+  "query_identifier_limit_workaround": "four deterministic short IDs; lifted .out retains frozen region IDs",
+  "raw_annotation_out": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/annotation_lifted/panel_regions.short_ids.fa.out",
+  "repeatmasker_out_rows": 10021,
+  "status": "COMPLETED"
+}

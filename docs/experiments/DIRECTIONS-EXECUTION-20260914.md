@@ -10,12 +10,12 @@
 
 | 工作线 | 第一轮具体动作 | 对照/评价重点 | 当前边界 |
 |---|---|---|---|
-| D外部泛化 | 固定seed42 checkpoint与已有CAL；鸭嘴兽/海胆/CB4各4×1MiB固定区域 | 每物种及最差物种；区分比较注释一致性、独立accuracy、pretraining与TE监督暴露 | GPU12696615三组及严格TE重评分完成；鸭嘴兽F阳性召回=.959325。海胆/CB4固定区域无TE阳性，NOT_EVALUABLE，须先解决标签资格；不能据此判model失败 |
+| D外部泛化 | 固定seed42 checkpoint与已有CAL；鸭嘴兽/海胆/CB4各4×1MiB固定区域 | 每物种及最差物种；区分比较注释一致性、独立accuracy、pretraining与TE监督暴露 | GPU12696615三组及严格TE重评分完成；鸭嘴兽F阳性召回=.959325。原Label-A海胆/CB4无TE阳性；海胆替代uncurated库有844,932bp TE类注释，F召回=.428937、RC均值=.424200，外部稳定性未建立；CB4仍不可评 |
 | adapters/MoE | 新协议中先做dense/coverage目标与同参数adapter对照，证实专家互补再有限MoE | 监督适配与zero-shot分开；路由不读目标F1；计算量、每物种损益及router collapse | 尚未训练；若外部结果指导架构，那个panel转为开发证据，不再宣称未触碰的最终测试 |
 | 注释版本与FP | 同assembly旧/新注释资格审计；原生GLM hg19 chr1训练和固定跨染色体评估 | apparent-FP、匹配背景、TP/FN全分母；独立支持比例与剩余未解；mapping失败保留 | mm10实际改变已确认；CHM13资产已取得；hg19训练12696116、评价12696405及双向映射12705502均完成。跨chr2/3/4旧注释bp-F1=.944286；93,116/97,242区间通过唯一双向等长度资格；其中旧FP的14.93%被2022 TE覆盖≥80%，仅描述性支持，matched-control/独立确认未完成 |
 | Unknown | 保留原六类混淆矩阵，独立核对ontology，再复核Unknown→main4/Unknown/BG | `.3886`是预测Unknown召回；重分类正确性需独立证据 | chrX90条历史Unknown中85条为SVA/Helitron等被既有映射合同折叠的具名类；不是85条人工漏注，更不证明model family正确 |
 | Tiberius效用 | 原批准20core×U/P/R；smoke-r2→full→CPUscore→独立NumPy复算 | 固定输入六通道、exact complete-CDS gene-locus终点与原门 | smoke12687393完成；full12694349进行中；score12696406依赖等待。独立复算已实现并通过fixture，实际60cell结果尚未完成 |
-| RC/strand | 当前D先做正向/RC映射诊断；有限augmentation/consistency消融 | material输出在RC下映回原坐标；方向型输出保持等变；匹配曝光及成本 | 鸭嘴兽F/RC/mean/phase mean的T1召回=.959325/.959468/.961854/.960714，当前提升较小；另两物种无有效阳性分母。新RC训练未做 |
+| RC/strand | 当前D先做正向/RC映射诊断；有限augmentation/consistency消融 | material输出在RC下映回原坐标；方向型输出保持等变；匹配曝光及成本 | 鸭嘴兽F/RC/mean/phase mean的T1召回=.959325/.959468/.961854/.960714，当前提升较小；海胆替代库F/RC/mean/phase=.428937/.418908/.424200/.424027，没有改善。CB4无阳性分母；新RC训练未做 |
 | 双GLM互补 | 重用历史错误分型，为局部风险或pair关联提供第二源特征 | 单源同容量、简单融合、学习融合；材料与关系终点分开 | HN有ranking增量但whole-gap动作无可用点，不重扫旧阈值 |
 | Fragment linking | Phase0合同及Phase1距离/规则/轻量pair学习器工程对照 | 候选召回、pair PR、误融合、闭包错误；输出edge不填gap | Phase1的5项测试通过，受控样例36fragments/19pairs；尚无自然插入恢复结果。M2/M3下一步可用真实copy半模拟输入做机制实验，再验证自然样本 |
 | Dfam contrastive | 42个历史文件已恢复；同panel强k-mer对照和真实split先闭合 | coarse class与family分开；family标签参与contrastive不是全无监督 | Phase7强B1无raw闭环；consensus exp002无找到的完成指标，不合并不同panel |
@@ -31,6 +31,8 @@ CPU计时12696616三组均已完成：单区域1MiB、256 windows的forward冷/�
 库诊断进一步确认：两个目标的FamDB分区都在，但原`-species`命令只使用curated families；海胆/CB4的目标lineage-specific curated条目都为0。海胆有3,324个uncurated目标lineage条目，CB4为0。下一步应在不改区域、模型和阈值的前提下补做library sensitivity：海胆导出相应uncurated库，CB4先找exact-assembly已有注释；替代比较注释单列，不覆盖原Label-A，也不把补出的模型一致性当成独立accuracy。[CB4/CGC2资产核实](CB4-CGC2-ASSET-READINESS-20260914.md)已找到2026年T2T候选及自定义库的方法来源，但尚未取得exact-CB4替代TE truth，不能用其他组装的gene GFF替代。
 
 原生NTv2 frozen-embedding作业12705597及CPU检索12705619均完成，同面板五臂的top1/macro-F1见[结果报告](../../reports/TE-IDENTITY-RETRIEVAL-20260914/NTV2_GLM_REPORT.md)和[对比图](../manuscript/20260914/figures/identity-retrieval.png)。1,629条序列均完整编码、无截断；prototype IDs沿用6-mer空间选出的同一批TRAIN拷贝。这是查看前序EVAL后追加的探索性表示消融，未做contrastive训练，也不能据此否定所有GLM表示或多原型策略。
+
+海胆library sensitivity最终验证与缓存重评分 **12706353 COMPLETED**：3,324条完整consensus共5,216,115bp，原区域内3,371条严格TE类注释合并为844,932bp。F阳性召回=.428937，RC/mean/phase mean=.418908/.424200/.424027；简单RC平均未改善。该uncurated替代注释不是独立真值，但结果足以否定“当前外部稳定性已确认”的表述。长query ID、局部坐标还原及FASTA首行长度审计的问题已修正，旧失败输出保留；所有重处理均经Slurm。详见[独立库敏感性报告](../../scripts/experiments/D-EXTERNAL-RC0-20260914/reports/LIBRARY-SENSITIVITY-20260914.md)。
 
 **CHM13描述性支持统计也已产生实际结果。** 在21,235个合格旧FP区间中，4,059个与2022 TE注释至少重叠1bp（19.11%）、3,570个覆盖≥50%（16.81%）、3,171个覆盖≥80%（14.93%）。同一组未匹配TN的对应比例为18.81%、5.69%、4.25%；三层都报告，不能只选择有较大差异的一层。FP/TN长度、邻近旧TE边界等尚未匹配，且跨组装/样本的内部逐bp对应未建立；这些数值只能称回顾性注释支持，不能称3,171个新插入被确认或已证明F1被低估。全TP/FP/FN/TN及映射失败分母保留于[结果汇总](../../reports/HG19-CHR1-REVISION-20260914/chm13-2022-overlap-summary-12706180/summary.json)。下一步以匹配背景、边界扩展/新孤立候选分型和序列对应核实为主，不改变已有模型或阈值。
 

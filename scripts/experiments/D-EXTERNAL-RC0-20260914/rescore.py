@@ -125,6 +125,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--existing-output", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--remote-root", type=Path)
+    parser.add_argument(
+        "--label-out",
+        type=Path,
+        help="optional alternate RepeatMasker .out; defaults to the candidate Label-A output",
+    )
+    parser.add_argument(
+        "--label-source",
+        default=None,
+        help="short provenance label for an alternate comparator annotation",
+    )
     return parser
 
 
@@ -153,7 +163,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     if regions != source_summary.get("regions"):
         raise ValueError("source panel region record differs between summary and panel_regions.json")
     remote_root = Path(args.remote_root or config["remote_root"])
-    label_out = rc0._resolve_path(remote_root, str(candidate["label_out"]))
+    if args.label_out is None:
+        label_out = rc0._resolve_path(remote_root, str(candidate["label_out"]))
+        label_source = args.label_source or "candidate_Label-A"
+    else:
+        label_out = args.label_out.expanduser().resolve()
+        label_source = args.label_source or "alternate_RepeatMasker_comparator"
     calibration_path = rc0._resolve_path(
         remote_root, str(config["model"]["calibration_relpath"])
     )
@@ -223,10 +238,12 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "source_prediction_output": str(source_dir),
         "source_summary": str(source_summary_path),
         "source_probability_arrays": str(source_probabilities),
+        "label_out": str(label_out.resolve()),
+        "label_source": label_source,
         "threshold": threshold,
         "truth": {
             "primary_tier": "T1",
-            "source": "RepeatMasker/Dfam-derived sparse comparator",
+            "source": label_source,
             "raw_repeatmasker_rows_seen": int(truth_audit["raw_repeatmasker_rows_seen"]),
             "panel_rows_retained": int(truth_audit["panel_buckets"]["known_te"]["rows"]),
             "panel_rows_retained_all_buckets": int(truth_audit["panel_rows_retained_all_buckets"]),
