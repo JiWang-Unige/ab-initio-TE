@@ -1,0 +1,22 @@
+{
+  "protocol": "CROSS-SPECIES-L1-PAIR-CONTEXT-V1",
+  "seed": 42,
+  "status": "PASS",
+  "device": "NVIDIA GeForce RTX 3090 24GB",
+  "activation_checkpointing": "existing native encoder path, both arms",
+  "completed_gpu_jobs": {"12497149": 103, "12497160": 71},
+  "consumed_gpu_seconds": 174,
+  "budget_gpu_seconds": 28800,
+  "warmed_step_seconds": {"BLOCK4": 1.8523900160798803, "PAIR8": 1.8305519178975374},
+  "fp32_inference_pair_seconds": {"BLOCK4": 0.14131026796530932, "PAIR8": 0.13955034303944558},
+  "updates_per_arm": 4000,
+  "evaluation_tiles_per_arm": {"CAL": 3000, "DEV": 3000, "SCREEN": 512},
+  "additional_startup_tokenization_calibration_metrics_io_allowance_seconds_total": 1800,
+  "runtime_margin_multiplier": 1.2,
+  "projected_total_gpu_hours_including_margin_and_consumed": 6.168577344924211,
+  "slurm_training_caps_seconds": [10200, 10200],
+  "slurm_evaluation_caps_seconds": [3600, 3600],
+  "total_allocation_upper_bound_gpu_hours_including_consumed": 7.715,
+  "peak_allocated_bytes_each_arm": 9867876864,
+  "notes": "Cost estimate is not scientific evidence. No automatic replacement after scientific failure; engineering retries must fit actual remaining budget. Evaluation submission follows completed training validation."
+}

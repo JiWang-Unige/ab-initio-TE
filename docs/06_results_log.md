@@ -1,11 +1,80 @@
 # Results Log
 
+## Result: GAP-BRIDGE-C-UTILITY-20260906-R1 — verified 2026-09-08
+
+- Job12416179 COMPLETED0:0,2972s(49m32s),1RTX3090/4CPU/48GiB;
+  MaxRSS4355148K。含此前400GPU秒累计0.936667GPUh，未超24GPUh。
+- 工程完成：27/27单元exit0，全部GTF/GFF3原生CDS一致，27次单元输入观测通过；
+  原配置一致，330参考来源/243distinct链。重新解析和微汇总/身份gain-loss与原报告完全一致。
+- 固定chr13九DEV core；无训练/loss/new checkpoint，无SOTA或独立确认主张。
+- 主结果：M0 TP54/FP37/FN189，F1=0.32335329341317365；MW完全相同；
+  MP TP54/FP36/FN189，F1=0.32432432432432434。
+- MW delta0,gained0,lost0；MP delta0.0009710309111506943,gained0,lost0。
+  两臂均未通过预先批准的delta>0且gained>=1且lost=0门。MP的FP净减1不等于
+  仅删除1条预测：报告保留2条新unmatched，不能隐藏身份替换。
+- 新增mask MW143476bp/MP461752bp；CDS重叠6/80bp，exon773/2010bp，
+  intronic splice dinucleotide5/13bp。属风险描述，不另设事后阈值。
+- 原始结果：`outputs/GAP-BRIDGE-C-UTILITY-20260906-R1/run-r1/result.json`；
+  取证：同exp下`collection_audit.json`；日志`logs/gap-c-utility_12416179.{out,err}`。
+- semantic success PASS，科学继续门FAIL；validate_goal两臂均not_yet，run/semantic/guardrails通过。
+  依据用户预先授权的自动规则关闭此gene-utility扩张；无需另行审阅来重复批准该固定决策。
+  泛用validator的tuning建议与MP数值超越字段不覆盖gained门或停止规则。
+  阴性仅限当前固定predictor/panel/mask干预，不能推断所有gap路线失败。
+- 完整结果与命令契约：`docs/experiments/GAP-BRIDGE-C-UTILITY-20260906-R1-RESULT.md`；
+  `reports/GAP-BRIDGE-C-UTILITY-20260906-R1-validation/`。原独立code-review PASS不变；
+  无evaluator变更。跨物种总目标未完成，下一步为已有L1/upstream证据的新机制提案。
+
 > 由 /result-log append。每个 experiment_id 一段。
 > 单次失败也进这里(只有 abandon route 才进 docs/09)。
 
 每个 entry 用 ## Result: <exp_id> 开头。模板见 /result-log SKILL.md。
 
 ---
+
+## Result: GAP-BRIDGE-A-COVERAGE-20260906-R1 / GAP-BRIDGE-C-ENDPOINT-20260906-R1 (pending)
+
+- 2026-09-06 submit-and-handoff; both smoke/claim-ineligible, separate code gates PASS.
+- A12416056: running CPU-only input audit, 4/4 allocation tests PASS; no final coverage
+  counts yet. Output `outputs/GAP-BRIDGE-A-COVERAGE-20260906-R1/audit-20260906-r1`.
+- C12416061: allocation8/8tests PASS; actual exporter330rows/243distinctchains
+  roundtrip and six FASTA track preflight PASS; M0 inference running; output
+  `outputs/GAP-BRIDGE-C-ENDPOINT-20260906-R1/run-r1`.
+- Logs: `logs/gap-a-coverage_12416056.{out,err}` and `logs/gap-c-endpoint_12416061.{out,err}`.
+- Scientific metrics, semantic success and consumed runtime are pending. No training
+  loss/checkpoint/SOTA comparison applies. Configs/sbatch match exp IDs.
+- Protocol `docs/experiments/GAP-BRIDGE-A-C-FOLLOWUP-20260906.md`; after completion,
+  inspect original-population missing coverage and actual C exporter/codon/track output;
+  never treat Slurm success alone as endpoint or scientific success.
+
+## Result: GAP-BRIDGE-DOWNSTREAM-C-R1 / runtime-20260906-r2
+
+- Date: 2026-09-05 UTC / 2026-09-06 CEST. Bounded runtime engineering only;
+  no scientific metric, SOTA comparison, training loss or new checkpoint applies.
+- Old runtime `12398977` FAILED1:0/18s because host symlink paths were not resolvable
+  inside Apptainer. Repair uses physical host root, bind `/work/te`, explicit container
+  CWD and consistent container input/output paths. Fresh independent code review PASS
+  and Bash syntax PASS are recorded in `docs/21_code_review_log.md`.
+- Retry `12409697` COMPLETED0:0 in113s, 1 RTX3090. Fixed weights loaded with
+  Softmasking=True; all three M0/MW/MP inference/postprocessing/export steps completed.
+  Inputs remain byte-identical to the failed attempt; uppercase letters agree across
+  modes. Selection JSON is parseable; fixed chr13:31357280-31757330,400050bp.
+- Runtime semantic success PASS for the bounded execution contract, NOT all eight
+  training-result checks: performance/loss checks are N/A. All three GTF files are empty,
+  GFF3 files have only the version header, and logs report zero transcripts. This is
+  not a finite-zero performance metric and not a nonempty exporter validation.
+- The fixed RefSeq has no complete coding chain fully contained in this smoke span;
+  overlapping RXFP2 isoforms extend to31802405. The zero outputs therefore establish
+  neither C utility nor failure. Stop-codon/strand/nonempty export and paired scoring
+  remain unverified. Full9core inference is not authorized by this smoke config.
+- Evidence: `outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/runtime-20260906-r2/`;
+  `logs/gap-c-runtime_12409697.{out,err}`; script
+  `scripts/experiments/GAP-BRIDGE-DOWNSTREAM-C-R1/submit_runtime_smoke.sbatch`.
+- A `12398722` remains an8-crop chr3 engineering PASS only; full-population native NT
+  coverage and HN gain are not established. User-requested independent browser Pro
+  route review completed: corrected final section recommends C nonempty/endpoint
+  validation and A coverage first, no direct full training. See
+  `experiments/GAP-BRIDGE-A-C-PRO-REVIEW-20260906.md` for rejected old-definition
+  paragraphs and valid advisory summary; advice cannot authorize training or chr19 release.
 
 ## Result: GAP-BRIDGE-P3-NT-R2 / smoke-20260905-r1
 

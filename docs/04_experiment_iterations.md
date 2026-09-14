@@ -1,9 +1,59 @@
 # Experiment Iterations
 
+## ITER-C-UTILITY-20260906-R1 — closed 2026-09-08
+
+- exp_id: GAP-BRIDGE-C-UTILITY-20260906-R1; Track A exploratory utility;
+  Path Human fixed-mask downstream; milestone: paired CDS-chain utility.
+- Execution: submit-and-handoff resumed as run-and-evaluate; job12416179
+  private/1RTX3090, COMPLETED0:0/2972s, all27cells. Sbatch
+  `sbatch/GAP-BRIDGE-C-UTILITY-20260906-R1.sbatch`.
+- Hypothesis/mechanism_delta: input softmask only, fixed M0/MW/MP under the same
+  Tiberius backbone/head/objective/reference; no model training or tuning.
+- Result: M0/MW F1=.32335329341317365; MP=.32432432432432434;
+  delta MW0/MP+.0009710309111506943; gained0/lost0 both. Both frozen gates FAIL.
+- Review/decision: original independent code PASS; fixed user auto-decision applied,
+  not a new tri-review consensus. Close gene-utility expansion; no A training.
+- Links: docs/06 current C result; docs/experiments/GAP-BRIDGE-C-UTILITY-20260906-R1-RESULT.md;
+  outputs/GAP-BRIDGE-C-UTILITY-20260906-R1/run-r1/result.json.
+
 > 由 `/goal` 在每轮迭代结束时维护。每条 iteration 一段。
 > Track A 是小样本并行筛架构；Track B 是从 Track A 晋升候选后的 scale-up / full validation。
 
 ---
+
+## ITER-20260906-GAP-AC-READINESS-R1
+
+- Experiments: GAP-BRIDGE-A-COVERAGE-20260906-R1 and GAP-BRIDGE-C-ENDPOINT-20260906-R1.
+- Track/milestone: Human gap A/C bounded engineering readiness, claim-ineligible.
+- Hypothesis: original A candidate coverage can be explicitly audited without weights;
+  C native CDS endpoints and actual softmask input can be validated on nonempty M0.
+- Change: no model architecture/training change. A production-token projection audit;
+  C native-CDS-only parser plus actual exporter/one_hot observation, old evaluator intact.
+- Execution mode: submit-and-handoff; A12416056 CPU2/12GB/0GPU and C12416061
+  RTX3090x1/CPU4/48GB, both private/2h cap. A4/4 allocated tests PASS.
+- Review: independent read-only fresh-context code gates PASS; docs/21.
+- Result / tri-review / pivot: pending result processing, no scientific pass or scale.
+- Configs and sbatch: matching IDs under configs/ and sbatch/.
+- Outputs: A audit-20260906-r1 and C run-r1 under their new exp IDs.
+- Next: reconcile real output before further work; preserve all original candidates,
+  P3, CAL scientific boundaries, chr19 seal and old NO_ACTIONABLE_ARM.
+
+## ITER-20260906-GAP-C-PATH-R2
+
+- Experiment: `GAP-BRIDGE-DOWNSTREAM-C-R1`; Human gap C, bounded runtime milestone.
+- Execution mode: run-and-evaluate; Job12409697 COMPLETED0:0/113s/1RTX3090.
+- Hypothesis: consistent physical-host to `/work/te` container paths restore the
+  unchanged fixed400050bp three-mask runtime. Mechanism delta is path-only; no head,
+  backbone, objective, data view, weights, labels or selection change.
+- Result: engineering PASS, M0/MW/MP all finish; zero predicted transcripts and no
+  fully-contained reference coding chain in the technical span. Primary scientific
+  metric/gap=N/A; nonempty exporter and downstream effect remain untested.
+- Review: independent path-only code review PASS; browser Pro route review complete,
+  corrected final section only, not a tri-review quorum. Pivot: bounded readiness proposal
+  first, no automatic scientific expansion. Review: `experiments/GAP-BRIDGE-A-C-PRO-REVIEW-20260906.md`.
+- Links: `docs/06_results_log.md` runtime-20260906-r2 entry;
+  `scripts/experiments/GAP-BRIDGE-DOWNSTREAM-C-R1/submit_runtime_smoke.sbatch`;
+  `outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/runtime-20260906-r2/`.
 
 ## ITER-20260812-BENCH-HITE-ISOLATED-R1
 

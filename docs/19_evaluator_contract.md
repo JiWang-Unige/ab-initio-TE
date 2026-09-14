@@ -1,5 +1,31 @@
 # Evaluator Contract / 评估器与可比性合约
 
+## 2026-09-06 C utility approved exploratory contract
+
+`GAP-BRIDGE-C-UTILITY-20260906-R1`已获用户“批准”：原九chr13 DEV core × M0/MW/MP，
+native CDS已含stop，精确strand/区间链，原owner和243distinct/330source分母不变。
+主读数为九core汇总的micro complete-CDS-chain F1；机器primary_metric为MW−M0的
+该F1差值（非macro），同时完整报告三臂F1及MW/MP两个配对差值。
+每个干预臂继续门：未舍入delta F1>0、gained≥1、lost=0，三项同时满足。
+零参考core保留FP，gain/loss按链身份而非净TP变化；报告new-unmatched、所有解析排除、
+halo端点接触以及CDS/exon/intronic splice dinucleotide新增mask风险，不据此过滤结果。
+无训练/拟合/CAL/确认集；科学评分开启但claim_eligible=false，仅DEV探索。
+详见`experiments/GAP-BRIDGE-C-UTILITY-20260906-R1.md`；旧readiness及provisional分数不改。
+
+## 2026-09-06 A/C followup readiness 局部合约
+
+仅适用于 `GAP-BRIDGE-A-COVERAGE-20260906-R1` 和
+`GAP-BRIDGE-C-ENDPOINT-20260906-R1`，细则见
+`experiments/GAP-BRIDGE-A-C-FOLLOWUP-20260906.md`。
+A 的 `engineering_audit_completed=1` 只代表原候选输入覆盖审计完成；缺失是有效
+诊断，不过滤候选、不作概率、不构成科学失败。包含 chr3/5 TRAIN、chr13 既定
+DEV/CAL_FIT/CAL_GATE 的 known/unknown 输入；不运行校准或性能评分。
+C 新端点仅取实际 exporter CDS 行（已含 stop），忽略辅助 start/stop_codon 行；
+不修改旧 provisional evaluator。真实 exporter 参考往返和非空 M0 坐标/track
+验证是工程闸，不按 truth match 数设 PASS。保留原九 DEV core 的参考分母及
+min-genomic-CDS-start ownership；core6/10 预定阳性检查不替换九core科学面板。
+两者 claim-ineligible、无训练 loss/checkpoint、无外部 SOTA 比较。
+
 ## 2026-09-05 Human gap A/C 局部合约
 
 仅适用于 `GAP-BRIDGE-P3-NT-R2` 与 `GAP-BRIDGE-DOWNSTREAM-C-R1`；

@@ -1,0 +1,22 @@
+{"event": "start", "protocol": "CROSS-SPECIES-L1-PAIR-CONTEXT-V1", "device": "NVIDIA GeForce RTX 3090", "torch": "2.5.1+cu121", "atol": 1e-05, "rtol": 0.0001, "activation_checkpointing": true}
+{"event": "train_pairing_pass", "counts": {"human": 1500, "mouse": 1500, "chicken": 1500, "zebrafish": 1500, "pig": 1500, "c_elegans": 3000}}
+{"event": "encoding_pass", "shapes": {"human": [2, 688], "mouse": [2, 688], "chicken": [2, 688], "zebrafish": [2, 688], "pig": [2, 688], "c_elegans": [2, 688]}}
+{"event": "native_fp32_complete", "loss": 0.9964948892593384}
+{"event": "real_h0_fp32_equivalence_pass", "max_valid_logit_error": 1.6927719116210938e-05, "loss_error": 2.384185791015625e-07, "max_gradient_error": 1.895427703857422e-05}
+{"event": "real_h0_cross_half_influence_pass", "max_left_logit_change": 0.6126629114151001}
+{"event": "checkpoint_state_and_adapter_reload_pass"}
+{"event": "timing_step", "arm": "BLOCK4", "step": 1, "seconds": 3.145747286034748, "losses": [0.20705042779445648, 0.21753866970539093, 0.5150439143180847, 0.727024257183075, 0.6029221415519714, 0.9988698959350586]}
+{"event": "timing_step", "arm": "BLOCK4", "step": 2, "seconds": 1.848005243926309, "losses": [0.13209719955921173, 0.14849306643009186, 0.19274687767028809, 0.6038656234741211, 0.4393576383590698, 0.3394349217414856]}
+{"event": "timing_step", "arm": "BLOCK4", "step": 3, "seconds": 1.852193008060567, "losses": [0.11213724315166473, 0.1105906218290329, 0.13168621063232422, 0.465401291847229, 0.3203120529651642, 0.2628718614578247]}
+{"event": "timing_step", "arm": "BLOCK4", "step": 4, "seconds": 1.8522901959950104, "losses": [0.0957060232758522, 0.09357817471027374, 0.11907008290290833, 0.36292946338653564, 0.22640132904052734, 0.16852042078971863]}
+{"event": "timing_step", "arm": "BLOCK4", "step": 5, "seconds": 1.8523900160798803, "losses": [0.08018073439598083, 0.08374509960412979, 0.08091849088668823, 0.29142114520072937, 0.1747802048921585, 0.10713958740234375]}
+{"event": "timing_arm_complete", "arm": "BLOCK4", "warmed_step_seconds": 1.8523900160798803, "peak_allocated_bytes": 9867876864, "peak_reserved_bytes": 10060038144, "projected_4000_step_seconds": 7409.560064319521}
+{"event": "inference_timing", "arm": "BLOCK4", "fp32_pair_seconds": 0.14131026796530932}
+{"event": "timing_step", "arm": "PAIR8", "step": 1, "seconds": 1.8884975881082937, "losses": [0.20366019010543823, 0.22071751952171326, 0.6595715880393982, 0.7817715406417847, 0.6347125768661499, 0.8569543361663818]}
+{"event": "timing_step", "arm": "PAIR8", "step": 2, "seconds": 1.8268439510138705, "losses": [0.142654687166214, 0.16030803322792053, 0.26365381479263306, 0.597996175289154, 0.4720878005027771, 0.33595922589302063]}
+{"event": "timing_step", "arm": "PAIR8", "step": 3, "seconds": 1.8302744399989024, "losses": [0.12091232091188431, 0.12546417117118835, 0.13353991508483887, 0.46271073818206787, 0.34674033522605896, 0.3034347891807556]}
+{"event": "timing_step", "arm": "PAIR8", "step": 4, "seconds": 1.8305519178975374, "losses": [0.1002890020608902, 0.10170632600784302, 0.11790308356285095, 0.35939183831214905, 0.24927572906017303, 0.2078888863325119]}
+{"event": "timing_step", "arm": "PAIR8", "step": 5, "seconds": 1.8297001150203869, "losses": [0.08284248411655426, 0.08653314411640167, 0.0759618952870369, 0.285422682762146, 0.1929301768541336, 0.11611248552799225]}
+{"event": "timing_arm_complete", "arm": "PAIR8", "warmed_step_seconds": 1.8305519178975374, "peak_allocated_bytes": 9867876864, "peak_reserved_bytes": 10060038144, "projected_4000_step_seconds": 7322.207671590149}
+{"event": "inference_timing", "arm": "PAIR8", "fp32_pair_seconds": 0.13955034303944558}
+{"event": "PASS", "scope": "real-H0 numerical and matched training-cost smoke only", "scientific_evidence": false}

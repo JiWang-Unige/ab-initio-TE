@@ -1,0 +1,2 @@
+{"event": "start", "protocol": "CROSS-SPECIES-L1-PAIR-CONTEXT-V1", "device": "NVIDIA GeForce RTX 3090", "torch": "2.5.1+cu121", "atol": 1e-05, "rtol": 0.0001, "activation_checkpointing": true}
+{"event": "train_pairing_pass", "counts": {"human": 1500, "mouse": 1500, "chicken": 1500, "zebrafish": 1500, "pig": 1500, "c_elegans": 3000}}

@@ -10,6 +10,59 @@
 
 ## Review Entries
 
+### 2026-09-06 C utility nine-core pre-submit
+
+- Experiment `GAP-BRIDGE-C-UTILITY-20260906-R1`, user approved fixed9core×M0/MW/MP and deltaF1>0/gained≥1/lost=0. Verdict PASS, blockers0.
+- Independent read-only Codex subagent `/root/historical_fix_review`; did not author C implementation, not external model or separate CLI. Self-contained pack `/tmp/pre_submit_GAP-BRIDGE-C-UTILITY-20260906-R1.md`; no reviewer writes or GPU jobs.
+- Reviewed utility.py, test_utility.py, config, sbatch, native endpoint/observed_tiberius/reference parser and protocol. Eight new deterministic tests and bash syntax PASS.
+- Contract: utility148–176 sums nine-core TP/FP/FN before microF1, retains zero-reference FP, exact chain-set gained/lost and unrounded gate;177–201 checks dual formats/full multiplicity and shows exclusions;204–238 requires all27cells and243/330denominator, records paired and gene-risk outputs.
+- Coordinates: endpoint63–88 nativeCDS only, 1-based closed to genomic half-open, original owner; risk utility83–137 only core-local upper-to-lower additions, union bp by CDS/exon/intronic2bp and gene IDs. No new prediction filter or fitted parameter.
+- Main live comparison: three reused helpers identical on HPC/local; fixed Tiberius source has no tracked diff. Full-N negative cores are retained: installed iterate_sequences groups by total length, then annotate_genome/predict_function unconditionally process the group/one_hot and export even empty annotation. No code change needed for this check.
+- Run one1RTX3090/CPU4/48GiB/2h job, fresh run-r1 and reports path, no retries. Machine gate contains seven reviewed code/config hashes consumed by existing pre_submit_gate before submission and allocation; mismatch means stop/review, replaces repeating full review, no raw-data fingerprints.
+- Limits: exploratory chr13 DEV only, no full A/CONF/sealed/claim; phase progression and biological completeness remain unproven. PASS permits execution, not scientific success.
+
+### 2026-09-06 C native endpoint readiness
+- exp: GAP-BRIDGE-C-ENDPOINT-20260906-R1; Verdict PASS; blockers0. Independent
+  read-only Codex subagent `/root/review_a`, fresh from authors' implementation context,
+  not external model or separate CLI. Reviewer did not run tests or container.
+- Six authored files reviewed: endpoint.py, observed_tiberius.py, test_endpoint.py,
+  README.md, matching config and sbatch. Also old evaluate_chains reference/geometry/
+  ownership/metrics, docs/19, docs/20, followup protocol.
+- Native CDS-only endpoint49–78, offset and ownership81–88; real exporter243chains/
+  330source rows128–142; all six FASTA same-letter/six-track94–157; actual inference
+  wrapper15–48 returns original object; GTF/GFF3 full multiplicity197–203.
+- sbatch32–46 onlycore6 then zero-CDS core10, onlyM0, fixed400050/batch1/model.
+  endpoint208–215 numeric engineering primary; exact-chain scores descriptive only.
+  codon audit167–191 strand-correct拼接并统计start/stop/mod3，不过滤。
+- bash syntax PASS; worker local7testsPASS/1real-exporter skipped; allocation will
+  execute all eight tests and installed-exporter/full-FASTA preflight before prediction.
+- Limits: phase progression not audited; no nine-core utility or mask-benefit claim.
+  Native end-codon evidence will be inspected from actual M0, not inferred from an
+  identity-export roundtrip alone. No truth match count used as engineering threshold.
+- Machine gate: outputs/GAP-BRIDGE-C-ENDPOINT-20260906-R1/code_review_gate.json.
+
+### 2026-09-06 A whole-population coverage readiness
+- exp: GAP-BRIDGE-A-COVERAGE-20260906-R1; Verdict PASS; blockers 0.
+- Independence: fresh-context read-only Codex subagent `/root/review_a`, not an external
+  model or separate CLI process. No reviewer writes or compute. Main `bash -n` PASS;
+  four tests and actual tokenizer sentinels execute in the allocation.
+- Reviewed: audit_coverage.py, test_audit_coverage.py, README.md under this exp,
+  matching config and sbatch; docs/19 current local contract, docs/20 and followup protocol;
+  actual prepare_pair native projection/region reader and fixture, strict adapter,
+  tokenizer loader, stage1 module import side effects.
+- Metric contract evidence: audit lines185–187 engineering completion only; 176–183
+  all candidates aggregated before missing diagnostic export; 21–22/77–95 role scope,
+  no known filter; 107–129 gap/crop counts;159–171 unique native4096 windows;
+  195 occurrence-weighted bp;197 missing blocks unchanged input contract.
+- Projection evidence: prepare_pair171–210 observes actual offsets/fallback against
+  strict188–266; selected_regions135–149 preserves original8192 coordinates and short tail.
+  No target/score/calibration/weight loading, no sealed region access.
+- Main compared actual remote/local infer_probs_for_label_mode and load_tokenizer
+  source directly: identical. Other task's unrelated pipeline edits are not synchronized.
+- Limit: shape sentinel tests tokenizer/projection, not future model-forward exceptions;
+  runtime estimate not yet measured. No scientific pass or training authorization.
+- Machine gate: outputs/GAP-BRIDGE-A-COVERAGE-20260906-R1/code_review_gate.json.
+
 ### 2026-09-06 C runtime container path repair
 - Separate fresh Codex CLI (configured model gpt-5.6-luna), PASS; source `/tmp/c_path_fix_review_20260906.md`.
 - Previous `12398977` FAILED before inference: host `/home/users/j/jwang/ab-initio-TE` alias not resolvable inside container; input existed on host. Container `12398482` COMPLETED0:0; no rebuild.

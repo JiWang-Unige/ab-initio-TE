@@ -1,5 +1,41 @@
 # Pivot Decisions
 
+## 2026-09-08 A/B1与HN动作路线结清（当前）
+
+持续授权内完成新三臂三seed有界筛选：HN-O信息增量阳性、H0-S未过5%门。
+按预先登记的新后续分支完成HN排序必要条件诊断，宽松DEV风险预算下0可行阈值。
+决定：停止该固定HN模型的CAL/部署推进，不追加GPU，不扫描超参，不改screen阳性结论。
+当前无可部署gap修复，P3/chr19–22封存保持；累计6.593333/24GPUh、全部作业已结清。
+原全量A/B1与缺真值路线仍为未执行/资源不可实施，不宣称所有TE修复方法被否定。
+完整范围与证据见 `docs/experiments/GAP-ROUTE-TERMINAL-AUDIT-20260908.md`。
+
+## 2026-09-08 C最终收尾（用户恢复指令）
+
+用户取消强制第三方评阅及人数门槛；以下pending quorum记录已被本决定取代。
+依据已收集且验证的27单元结果，MW/MP均无新增正确链，原冻结继续门均FAIL。
+关闭本Tiberius/chr13 DEV面板的gene-utility扩张，不重跑、不调门、不据此启动A或
+partial-fill学习。该判断是Agent对现有证据的结论，不冒充外部共识。
+A完整学习、B1及Gate L仍未执行，不记为科学失败，也不声明所有gap路线完成。
+后续具体方案见 `docs/experiments/GAP-ROUTES-RESUMPTION-20260908.md`。
+
+# Pivot Decision: GAP-BRIDGE-C-UTILITY-20260906-R1 — pending quorum (2026-09-08)
+
+- Consumed: verified result-log, collection audit, MW/MP validate_goal results,
+  docs/07 current review. Both run_ok/semantic_ok true; frozen gates fail on gain0.
+- All reviewer outcomes: A Claude authentication401/no scientific judgment; B Codex
+  abandon only current C predictor/panel gene-utility rationale, preserve unexecutedA,
+  confidenceHigh within this narrow scope; C unavailableCLI/no scientific judgment.
+- Reviewer-proposed direction B: protocol stop, retain negative control, park H0/HN
+  pending prospective protocol/coverage and training authority. A/C directions absent.
+- Formal primary pivot: **not finalized**, quorum1<2 for abandon. No fabricated
+  consensus or additional host reviewer. Restore missing independent review first.
+- Existing user-frozen operational decision remains binding: do not expand C/A on
+  this gene-utility rationale, do not tune gates/repeatC. This is not a new pivot
+  authorization and not completion of all gap routes.
+- Global goal audit: A/B1/GateL not experimentally falsified; see
+  `docs/experiments/GAP-ROUTE-TERMINAL-AUDIT-20260908.md`. ACTIVE_GOAL.json unchanged.
+
+
 > 由 /pivot append。每个 pivot 一段。
 
 每个 entry 用 # Pivot Decision: <exp_id> 开头。模板见 /pivot SKILL.md。

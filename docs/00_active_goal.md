@@ -1,5 +1,26 @@
 # Active Goal
 
+## current_C_utility_authorized_2026-09-06
+
+- 用户已批准完整C九DEV core×M0/MW/MP及“chain F1增、gained≥1、lost=0”探索门。
+- 新执行协议：`experiments/GAP-BRIDGE-C-UTILITY-20260906-R1.md`；12416179已COMPLETED0:0/2972s，27单元复算一致；两臂gained0，gene-utility扩张按用户规则关闭。结果见同目录`GAP-BRIDGE-C-UTILITY-20260906-R1-RESULT.md`。
+- C端点12416061已COMPLETED：core6非空20链、native CDS/stop/实际softmask检查通过。
+- A覆盖12416056已COMPLETED：926253候选中89crop非完整；原全候选A训练暂不能启动。
+- 本次不重开旧G/R/H、INIT、旧CONF或chr19，不把C视为统一动物L1交付。
+
+## current_runs_2026-09-06_followup
+
+- 用户已授权后续实验，按 `docs/experiments/GAP-BRIDGE-A-C-FOLLOWUP-20260906.md`
+  先执行readiness；不是重新开放旧G/R/H、chr19或完整训练。
+- A CPU coverage `12416056`：4/4 allocation tests PASS，审计运行中；输出
+  `outputs/GAP-BRIDGE-A-COVERAGE-20260906-R1/audit-20260906-r1`。
+- C M0 nonempty endpoint `12416061`：8/8 allocation tests PASS，真实exporter
+  330rows/243chains往返及三臂六通道预检PASS，M0推断运行中；输出
+  `outputs/GAP-BRIDGE-C-ENDPOINT-20260906-R1/run-r1`；固定core6/zero-CDS才core10。
+- 两个独立代码gate PASS。新结果尚待读取，不把提交成功写成工程或科学PASS。
+- 取结果后先核对coverage缺口、真实CDS/stop/one_hot与资源用量，再决定下一步；
+  A完整head训练仍需覆盖与gate就绪，不自动重写候选/NT窗口/三seed契约。
+
 > /research-interview 写到这里。此后整个工作流的"研究意图源头"——/research-synthesize 和后续 skill 都会回读。
 
 ## current_route_2026-09-01_gap_bridge_data_only
@@ -33,16 +54,27 @@
   8192-bp 对齐的私有节点分片执行。当前仍无新科学结果。
 
 ## last_result_summary
-- exp_id: FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1
-- date: 2026-08-12 CEST
-- track: F Rice T1 positive-only consensus-collinearity information-sufficiency audit
-- primary_metric: information_sufficiency_gate_pass=0; terminal=`VALID_NEGATIVE_INFORMATION_INSUFFICIENT`
-- SOTA: n/a; CPU audit, claim-ineligible
-- gap: candidate exact-group recovery `0.1389` versus best positive-only comparator `0.3717`; paired bootstrap candidate-minus-comparator mean `-0.2322` with 95% interval `[-0.2801,-0.1734]`
-- semantic_success: pass as a route-local valid negative; Job `11531090` completed `0:0` and all audited manifests verify. The old ACTIVE_GOAL validator returns `failed_run` only because it expects obsolete selector metrics; that stop signal is retained without changing the route-local verdict.
-- tri_review_status: completed, `2/3 DEGRADED_REVIEW`; Claude and Codex both chose `abandon-route`, Antigravity failed three CLI retries
-- pivot_status: completed: abandon the standalone consensus-collinearity parent assembler; preserve broader fragmentation only under DEC-004 re-entry criteria
-- recommended_next: no F compute. Continue only the separately reviewed S leaf exact-access probe; do not tune thresholds, add Fly/H0, or reopen DEC-001/002/004 cousins
+- exp_id: GAP-BRIDGE-C-UTILITY-20260906-R1
+- date: 2026-09-08 UTC (retrieval and exact recomputation)
+- track: chr13 DEV exploratory utility, no training
+- primary_metric: MW delta micro chain F1=0; MP delta=0.0009710309111506943; both gained=lost=0
+- SOTA/gap: N/A; paired M0 comparator only
+- semantic_success: PASS;27 native cells exact match,243chains/330rows;validate_goal both not_yet
+- tri_review_status: original independent code gate PASS; closure implements explicit user rule, no new scientific quorum claimed
+- pivot_status: completed: close gene-utility expansion; terminal cross-species goal remains active
+- recommended_next: existing L1/upstream evidence synthesis for a separately scoped mechanism proposal; no A or C rerun
+
+## historical_result_summary_before_C_utility
+- exp_id: GAP-BRIDGE-DOWNSTREAM-C-R1/runtime-20260906-r2; paired A smoke12398722
+- date: 2026-09-05 UTC / 2026-09-06 CEST
+- track: Human gap A/C bounded engineering readiness
+- primary_metric: N/A; C three-arm runtime complete, all0transcripts; A8 input crops PASS
+- SOTA: N/A; no scientific claim
+- gap: N/A; no paired scientific evaluation or new head training
+- semantic_success: bounded runtime PASS (12409697 COMPLETED0:0/113s/1RTX3090); nonempty CDS exporter and scientific success unverified
+- tri_review_status: independent path-code review PASS; browser Pro route review completed with definition-error caveat, not a tri-review quorum
+- pivot_status: sanity_check boundary; no automatic A full training or C full9core science
+- recommended_next: seek authorization for C nonempty endpoint validation and A population coverage audit; no automatic full runs; preserve P3, old Stage1 NO_ACTIONABLE_ARM and chr19 seal
 
 ## 当前研究方向
 <一句话>

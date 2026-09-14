@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "synthetic native two-layer ESM only; not real H0 smoke",
+  "device": "cpu",
+  "dtype": "float32",
+  "atol": 1e-05,
+  "rtol": 0.0001,
+  "max_valid_logit_error": 2.9802322387695312e-08,
+  "loss_error": 0.0,
+  "max_gradient_error": 2.9802322387695312e-08,
+  "cross_half_logit_change": 0.014878600835800171
+}

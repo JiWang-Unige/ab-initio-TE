@@ -1,5 +1,35 @@
 # Master Plan / TE-FM 总路线合同
 
+> **2026-09-08 当前结论：** C12416179工程PASS、27单元复算一致；MW/MP均未新增
+> 正确CDS链，按用户冻结规则关闭gene-utility扩张，不启动A。跨物种总目标仍未完成。
+> 结果：`docs/experiments/GAP-BRIDGE-C-UTILITY-20260906-R1-RESULT.md`。
+> 下一步回到已有L1/upstream错误证据，准备有限新机制提案；不调门、不解封、不发布。
+> 已向原完整Git审阅的内置浏览器Pro发送后续咨询，要求唯一有界机制方案；
+> 准备证据与批准边界：`docs/experiments/CROSS-SPECIES-L1-NEXT-MECHANISM-20260908.md`。
+> **咨询已完成：** 唯一候选为保持原token/损失/样本不变的BLOCK4/PAIR8信息通路比较；
+> 新协议 `docs/experiments/CROSS-SPECIES-L1-PAIR-CONTEXT-V1.md` 已拟定，等待新科学范围
+> 与8GPUh种子42、可选条件8GPUh种子17批准。尚未提交新GPU作业，不借用C/INIT剩余额度。
+
+> **2026-09-06 用户明确授权自主接续。** 总目标仍是足供学术界使用的跨物种TE掩码基础模型，
+> 不以Human gap C分支或作业提交为完成。起点复用12416179，按冻结C三项门自动处理
+> MW/MP结果；工程失败或27单元不完整则停止该实验，不作科学结论。
+> 接续规则、当前SSH取证限制及总目标剩余证据见
+> `docs/experiments/CROSS-SPECIES-AUTONOMOUS-CONTINUATION-20260906.md`。
+> 此补记不改变旧ACTIVE_GOAL.json状态，不开放封存面板或对外发布。
+
+> **2026-09-06 后续实验已授权。** 当前先执行 A 原候选母体 CPU coverage 审计，
+> 和 C 预定 core6/必要时core10 的 M0 非空与真实 exporter/softmask-track 验证。
+> 协议为 `docs/experiments/GAP-BRIDGE-A-C-FOLLOWUP-20260906.md`。
+> 不采用 Pro 误认的“新增NT候选池”，不修改原P3候选与三seed契约；
+> 完整A训练仍停在覆盖与gate就绪之前，C科学收益比较等工程端点闭合后再判断。
+
+> **2026-09-06 工程闭合更新。** A8crop smoke和C固定三臂runtime已完成；C路径修复
+> Job12409697为工程PASS，但0transcripts不支持下游结论或非空exporter验证。
+> 用户指定的内置浏览器Pro独立路线审阅已完成；有效修订结论建议先C非空/endpoint
+> 与A全母体coverage，再考虑限定科学试验。新训练/全9core推断仍需授权。
+> 结果链见`docs/06_results_log.md`，审阅及错误剔除见
+> `docs/experiments/GAP-BRIDGE-A-C-PRO-REVIEW-20260906.md`；旧阶段冻结边界不变。
+
 > **2026-09-05 用户指定 A/C 并行推进。** 当前 Human gap 新工作为
 > `GAP-BRIDGE-P3-NT-R2` 的原生窗口配对准备/有界 smoke，与
 > `GAP-BRIDGE-DOWNSTREAM-C-R1` 的固定三种 softmask 下游诊断准备。

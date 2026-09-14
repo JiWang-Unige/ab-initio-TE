@@ -1,5 +1,11 @@
 # Findings Log
 
+- 2026-09-08 GAP-BRIDGE-C-UTILITY-20260906-R1: fixed chr13 DEV masking adds no
+  correct complete-CDS chain (MW/MP gained=lost=0); MP micro-F1 +.000971 reflects
+  net FP reduction with two new unmatched identities, not recovered genes.
+  Both registered utility gates fail. Do not use this result to expand A or to
+  reject TE-material masking generally; cross-species capability remains untested here.
+
 > 会话恢复 / 每轮迭代开局**必读**。分两类，避免重复踩坑。
 > - **Research Findings**：方法层洞察（影响 /pivot 决策）。
 > - **Engineering Findings**：调试/环境层经验（下一轮 baseline 知识）。
@@ -78,6 +84,7 @@
 - 2026-06-30 [SELF_LABELA_VS_UCSC_CURRENT_READY_RERUN_20260630_V3] Re-ran the current ready-by-design self Label-A vs UCSC/local strict-TE comparison again via `srun` job `9854803`. The new report is byte-identical to `V2` for `summary.tsv` (`sha256=c030a6e165bafa963ea22b23b4034cc2e2c6fa14db57ac517cc0412858064b05`): 24 paired entries, 7 high, 2 moderate, 5 low, and 10 severe; missing strict comparators remain `setaria_italica`, `tomato`, `wild_rice`, `arabidopsis_lyrata`, `grape`, and `green_foxtail`. Current report path: `reports/repeatmasker_dfam/SELF_LABELA_VS_UCSC_CURRENT_READY_RERUN_20260630_V3`.
 
 ## Engineering Findings
+- 2026-09-06 [GAP-BRIDGE-DOWNSTREAM-C-R1] A valid host project symlink need not resolve inside Apptainer: resolve the host root physically, bind it once to `/work/te`, and use that namespace consistently for CWD, preflight, inputs and outputs. The repaired unchanged three-mask smoke completed, but zero transcripts in a span without a complete reference CDS chain cannot validate a nonempty exporter or downstream utility.
 - 2026-08-11 [SF-DIRECT-BASELINE-SCREEN-20260811-R2] Python `csv.DictReader` retains a default 131072-byte field limit. The S0 CPU DATA stage failed before materialization when the frozen chunk manifest contained a larger field; large manifest readers need an explicitly bounded, audited `csv.field_size_limit` plus a regression fixture before resubmission.
 - 2026-08-11 [SF-DIRECT-BASELINE-SCREEN-20260811-R2] The frozen RepeatMasker annotation universe is not identical to the Dfam 3.9 name universe: generic/ambiguous names and custom `DR...` families prevent an all-record one-to-one accession/consensus mapping. A leakage-safe S0 must either bind those families to frozen consensus-sequence identities or formally revise the grouping contract; dropping unresolved positives or random/chromosome fallback would bias evaluation.
 - 2026-08-11 [SF-DIRECT-BASELINE-SCREEN-20260811-R2] A local 2,000,000-character CSV field limit with `try/finally` restoration fixed the real 1,203,362-character manifest field and passed a 495×17 frozen-source probe; Job `11523252` progressed beyond parsing, confirming the repair rather than repeating the first failure.

@@ -1,0 +1,3 @@
+{"assembly": "GCF_004115215.2_mOrnAna1.pri.v4", "status": "PASS", "sequences": 322, "total_bp": 1859281927, "primary_bp": 1859264908, "N_bp": 15158118, "other_non_ACGTN_bp": 0}
+{"assembly": "GCF_000002235.5_Spur_5.0", "status": "PASS", "sequences": 871, "total_bp": 921855793, "primary_bp": 921840143, "N_bp": 337500, "other_non_ACGTN_bp": 0}
+{"assembly": "GCA_000004555.3_CB4", "status": "PASS", "sequences": 367, "total_bp": 108384165, "primary_bp": 108384165, "N_bp": 2967626, "other_non_ACGTN_bp": 0}

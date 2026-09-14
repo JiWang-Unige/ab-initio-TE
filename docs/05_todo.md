@@ -1,15 +1,32 @@
 # TODO / Run Tracker
 
+## 2026-09-06 approved C utility execution
+
+- [x] 用户批准全部9DEV core×M0/MW/MP及delta chainF1>0、gained≥1、lost=0探索门。
+- [x] 新8tests、独立代码门、远端7文件提交门、资源核对PASS；12416179已COMPLETED 0:0/2972s。
+- [x] 27单元与result.json齐全；本地native端点、243/330分母、配对身份及全部审计复算一致。
+- [x] MW/MP均gained=0，不通过冻结门；按用户规则关闭gene-utility扩张，不启动A。
+- [x] 跨物种总目标：已有L1/upstream证据与Pro咨询完成；有限BLOCK4/PAIR8机制提案已形成。
+- [ ] L1-PAIR-CONTEXT-V1新科学范围/效应门/预算批准；批准后实施独立代码门、GPU可行性与配对训练，旧路线/封存不变。
+- 结果`experiments/GAP-BRIDGE-C-UTILITY-20260906-R1-RESULT.md`；A覆盖缺口仍保留，不再为本C扩张修补训练入口。
+
 ## 2026-09-05 Human gap A/C bounded preparation
 
 - [x] A independent code review and real8-candidate input smoke: `12398722` COMPLETED0:0,
   engineeringPASS; no head training, full-population coverage or scientific comparison.
-- [ ] C container `12398482` prepared in isolated environment; runtime completion pending.
+- [x] C container `12398482` COMPLETED0:0/1:39:52; isolated TF2.17/Tiberius2.0.7.
 - [x] C mask `12398578` failed on6 candidate-bearing versus9 frozen DEV cores; preserve
   empty cores via originalsplit. Reviewed retry `12398970` COMPLETED0:0 in26s,
   4/4 testsPASS, all9cores60574candidates; output`masks-20260905-r2`.
-- [ ] C fixed400050bp M0/MW/MP runtime `12398977`, afterok container+mask dependencies;
-  complete-CDS-chain evaluator readiness remains separate.
+- [x] C old runtime `12398977` failed on container paths; reviewed path-only repair
+  `12409697` COMPLETED0:0/113s/1RTX3090. Fixed400050bp M0/MW/MP all finish,0transcripts;
+  complete-CDS-chain evaluator readiness remains separate. Result chain recorded.
+- [x] User-requested browser Pro independent route review after A/C engineering closure;
+  corrected final section archived in `experiments/GAP-BRIDGE-A-C-PRO-REVIEW-20260906.md`.
+- [x] 2026-09-06 用户授权后续实验；先执行 A population coverage 与 C gene-bearing
+  nonempty/endpoint readiness，协议 `experiments/GAP-BRIDGE-A-C-FOLLOWUP-20260906.md`。
+- [ ] A全候选coverage审计；C core6（必要时仅core10）M0非空/endpoint验证。
+- [ ] 根据readiness结果再决定有限科学运行；不启动未锁定gate的A完整head训练。
 - [x] C reference-only `12399185` COMPLETED0:0，7/7testsPASS；243 distinct完整CDS链。
   GTF stop-codon convention尚未验证，不执行科学配对评分。
 - [ ] No automatic fulltrain/claim/chr19 release. Protocol `experiments/GAP-BRIDGE-A-C-PARALLEL-20260905.md`.
@@ -63,6 +80,11 @@
 
 | Date | Run | Jobs | Status | Evidence |
 |---|---|---|---|---|
+| 2026-09-08 | GAP-BRIDGE-C-UTILITY-20260906-R1 | `12416179` | DONE_VALID_NEGATIVE_ROUTE_CLOSED | COMPLETED0:0/2972s;27/27; MW/MP gained0; outputs/GAP-BRIDGE-C-UTILITY-20260906-R1/run-r1/result.json; full result in docs/experiments |
+| 2026-09-06 | GAP-BRIDGE-C-ENDPOINT-20260906-R1 | `12416061` | RUNNING | 1RTX3090/CPU4/48GB/2h; 8/8 allocation tests及真实243chain/330row exporter与6track预检PASS; outputs/GAP-BRIDGE-C-ENDPOINT-20260906-R1/run-r1; M0core6/conditionalcore10 |
+| 2026-09-06 | GAP-BRIDGE-A-COVERAGE-20260906-R1 | `12416056` | RUNNING | CPU2/12GB/0GPU,2h; four allocation tests PASS; outputs/GAP-BRIDGE-A-COVERAGE-20260906-R1/audit-20260906-r1; original candidate coverage only |
+| 2026-09-06 | GAP-BRIDGE-DOWNSTREAM-C-R1 runtime path repair | `12409697` | DONE_ENGINEERING_ONLY | 1RTX3090/113s, three modes complete/0transcripts; outputs/GAP-BRIDGE-DOWNSTREAM-C-R1/runtime-20260906-r2; no scientific metrics |
+| 2026-09-05 | GAP-BRIDGE-P3-NT-R2 bounded smoke | `12398722` | DONE_ENGINEERING_ONLY | eight chr3 input crops PASS; outputs/GAP-BRIDGE-P3-NT-R2/smoke-20260905-r1/inference/alignment_smoke.json; no trained HN |
 | 2026-08-12 | SF-FAMDB-LEAF-EXACT-ACCESS-PROBE-20260812-R1 | `11533175` | FAILED_RUN_CHAIN_PENDING | Exact 1CPU/4GiB/10m/0GPU; gate and 23/23 tests passed; read-mode finalizer raised after in-memory probe and before result publication; audit manifest verified; no scientific inference or downstream authorization |
 | 2026-08-12 | SF-FAMDB-LEAF-CLOSE-ONLY-REPAIR-20260812-R1 | `11534847` | COMPLETED_COMPONENT_PASS_CHAIN_CLOSED | Exact 1CPU/4GiB/10m/0GPU; 59/59 tests; 72/72 exact calls, 6/6 resolved, 12/12 handles closed; audited manifests pass; 2/3 degraded tri-review and pivot allow only a new CPU leaf-adapter proposal |
 | 2026-08-12 | SF-FAMDB-LEAF-ADAPTER-PREFLIGHT-20260812-R1 | `11535362` | COMPLETED_COMPONENT_PASS_CHAIN_CLOSED | 1CPU/4GiB/10m/0GPU; paired 6-record FASTA syntax pass, identical ordered sequence/class semantics; 2/3 degraded tri-review/pivot continue only to goal-revision human gate and a future representative CPU proposal |

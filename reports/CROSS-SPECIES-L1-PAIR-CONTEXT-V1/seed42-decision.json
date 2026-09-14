@@ -1,0 +1,986 @@
+{
+  "experiment": "CROSS-SPECIES-L1-PAIR-CONTEXT-V1",
+  "protocol": "CROSS-SPECIES-L1-PAIR-CONTEXT-V1",
+  "seed": 42,
+  "decision": "STOP_PAIR_CONTEXT_SCIENTIFIC_NO_GO",
+  "scientific_gate_pass": false,
+  "absolute_readiness": {
+    "panels": {
+      "DEV": {
+        "c_elegans": {
+          "bp_f1": false,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": false
+        },
+        "chicken": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "human": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "mouse": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "pig": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        },
+        "zebrafish": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        }
+      },
+      "SCREEN": {
+        "c_elegans": {
+          "bp_f1": true,
+          "bp_precision": true,
+          "bp_recall": true,
+          "pass": true
+        }
+      }
+    },
+    "macro_dev_f1": 0.8921867740153835,
+    "minimum_macro_dev_f1": 0.83,
+    "pass": false
+  },
+  "contrasts": {
+    "PAIR8_minus_BLOCK4": {
+      "gates": {
+        "screen_f1": {
+          "candidate": 0.812997778007051,
+          "reference": 0.8095003016839449,
+          "delta": 0.0034974763231061,
+          "bound": 0.005,
+          "direction": "minimum",
+          "strict": false,
+          "pass": false
+        },
+        "worm_dev_f1": {
+          "candidate": 0.7941535004266551,
+          "reference": 0.7957636671684205,
+          "delta": -0.0016101667417654,
+          "bound": 0.005,
+          "direction": "minimum",
+          "strict": false,
+          "pass": false
+        },
+        "screen_ap": {
+          "candidate": 0.8925853385740198,
+          "reference": 0.883832173640104,
+          "delta": 0.0087531649339158,
+          "bound": -0.002,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "worm_dev_ap": {
+          "candidate": 0.8766934233692072,
+          "reference": 0.8747488439258521,
+          "delta": 0.0019445794433551,
+          "bound": -0.002,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "macro_dev_hardN": {
+          "candidate": 0.04341258767676237,
+          "reference": 0.046344370387035864,
+          "delta": -0.002931782710273494,
+          "bound": 0.005,
+          "direction": "maximum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/human": {
+          "candidate": 0.9421225062306419,
+          "reference": 0.939824334610585,
+          "delta": 0.0022981716200569,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/mouse": {
+          "candidate": 0.942520999799281,
+          "reference": 0.9416469492746232,
+          "delta": 0.0008740505246578,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/chicken": {
+          "candidate": 0.8456368027468211,
+          "reference": 0.8377320190272465,
+          "delta": 0.0079047837195746,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/zebrafish": {
+          "candidate": 0.9330892799135414,
+          "reference": 0.9296303470591133,
+          "delta": 0.0034589328544281,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/pig": {
+          "candidate": 0.8955975549753611,
+          "reference": 0.8937247334143591,
+          "delta": 0.001872821561002,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        }
+      },
+      "topology": {
+        "DEV": {
+          "human": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.5453635089124774,
+                "reference": 0.5372083668543846,
+                "delta": 0.0081551420580928,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.2918085319447226,
+                "reference": 0.2831858407079646,
+                "delta": 0.008622691236758,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.08629762155335718,
+                "reference": 0.08735003157230056,
+                "delta": -0.00105241001894338,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0570406230267313,
+                "reference": 1.053251946958535,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.08819195958745528,
+                "reference": 0.0888234055988213,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "mouse": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.5798930481283422,
+                "reference": 0.567801988576264,
+                "delta": 0.0120910595520782,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.30524064171122994,
+                "reference": 0.30399830759466895,
+                "delta": 0.00124233411656099,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.08655156746933212,
+                "reference": 0.08836892321671967,
+                "delta": -0.00181735574738755,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0272603362108133,
+                "reference": 1.0299863698318945,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.0781462971376647,
+                "reference": 0.0781462971376647,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "chicken": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.4123989218328841,
+                "reference": 0.41661258922777417,
+                "delta": -0.00421366739489007,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.1522911051212938,
+                "reference": 0.14536015574302402,
+                "delta": 0.00693094937826978,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.2078559738134206,
+                "reference": 0.2127659574468085,
+                "delta": -0.0049099836333879,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 0.9983633387888707,
+                "reference": 1.0474631751227497,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.13911620294599017,
+                "reference": 0.15711947626841244,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "zebrafish": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.39020317283607014,
+                "reference": 0.3833531946099551,
+                "delta": 0.00684997822611504,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.13897393079135356,
+                "reference": 0.1343844532037767,
+                "delta": 0.00458947758757686,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.0853404134268917,
+                "reference": 0.08742651242177128,
+                "delta": -0.00208609899487958,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0887540299639673,
+                "reference": 1.103925659017637,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.1027877868386118,
+                "reference": 0.10506353119666224,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "pig": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.5063461754464788,
+                "reference": 0.5064758009543285,
+                "delta": -0.0001296255078497,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.21318656632595753,
+                "reference": 0.2113156100886162,
+                "delta": 0.00187095623734133,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.138353765323993,
+                "reference": 0.1446084563422567,
+                "delta": -0.0062546910182637,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.008256192144108,
+                "reference": 0.9969977483112334,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.09907430572929697,
+                "reference": 0.09832374280710533,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "c_elegans": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.3189873417721519,
+                "reference": 0.31329381879762913,
+                "delta": 0.00569352297452277,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.140084388185654,
+                "reference": 0.13265594129268982,
+                "delta": 0.00742844689296418,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.24041585445094216,
+                "reference": 0.25016244314489927,
+                "delta": -0.00974658869395711,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0168940870695258,
+                "reference": 0.9779077322936972,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.11176088369070825,
+                "reference": 0.11565951916829109,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.33595231644540774,
+                "reference": 0.33902036323610346,
+                "delta": -0.00306804679069572,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.14034137090219453,
+                "reference": 0.15795266923500276,
+                "delta": -0.01761129833280823,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.2116468378209142,
+                "reference": 0.2185347526612398,
+                "delta": -0.0068879148403256,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0363180964308079,
+                "reference": 1.0037570444583594,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.11521603005635567,
+                "reference": 0.11020663744520977,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        }
+      },
+      "effects": {
+        "DEV": {
+          "c_elegans": {
+            "bp_f1": -0.0016101667417654,
+            "bp_precision": -0.0185873013331327,
+            "bp_recall": 0.0127041137007915,
+            "bp_average_precision": 0.0019445794433551
+          },
+          "chicken": {
+            "bp_f1": 0.0079047837195746,
+            "bp_precision": 0.0138829427299063,
+            "bp_recall": 0.0023305151831797,
+            "bp_average_precision": 0.0083741450901382
+          },
+          "human": {
+            "bp_f1": 0.0022981716200569,
+            "bp_precision": 0.0001164633889585,
+            "bp_recall": 0.0043742237664944,
+            "bp_average_precision": 0.0010392346642245
+          },
+          "mouse": {
+            "bp_f1": 0.0008740505246578,
+            "bp_precision": -0.0013272569617457,
+            "bp_recall": 0.0030809644431935,
+            "bp_average_precision": 0.0006274717631876
+          },
+          "pig": {
+            "bp_f1": 0.001872821561002,
+            "bp_precision": 0.0009970962684273,
+            "bp_recall": 0.0026864067293436,
+            "bp_average_precision": 0.0018509147313172
+          },
+          "zebrafish": {
+            "bp_f1": 0.0034589328544281,
+            "bp_precision": 0.0004668410388435,
+            "bp_recall": 0.0064678774566547,
+            "bp_average_precision": 0.001589786251239
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "bp_f1": 0.0034974763231061,
+            "bp_precision": -0.0086860033488995,
+            "bp_recall": 0.0141862245649164,
+            "bp_average_precision": 0.0087531649339158
+          }
+        }
+      },
+      "pass": false
+    },
+    "PAIR8_minus_D": {
+      "gates": {
+        "screen_f1": {
+          "candidate": 0.812997778007051,
+          "reference": 0.8027355252736541,
+          "delta": 0.0102622527333969,
+          "bound": 0.005,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "worm_dev_f1": {
+          "candidate": 0.7941535004266551,
+          "reference": 0.7975654176821919,
+          "delta": -0.0034119172555368,
+          "bound": 0.005,
+          "direction": "minimum",
+          "strict": false,
+          "pass": false
+        },
+        "screen_ap": {
+          "candidate": 0.8925853385740198,
+          "reference": 0.8843888326677172,
+          "delta": 0.0081965059063026,
+          "bound": -0.002,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "worm_dev_ap": {
+          "candidate": 0.8766934233692072,
+          "reference": 0.8735322878458215,
+          "delta": 0.0031611355233857,
+          "bound": -0.002,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "macro_dev_hardN": {
+          "candidate": 0.04341258767676237,
+          "reference": 0.046117063257713004,
+          "delta": -0.002704475580950634,
+          "bound": 0.005,
+          "direction": "maximum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/human": {
+          "candidate": 0.9421225062306419,
+          "reference": 0.9403099509744551,
+          "delta": 0.0018125552561868,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/mouse": {
+          "candidate": 0.942520999799281,
+          "reference": 0.9419978474097841,
+          "delta": 0.0005231523894969,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/chicken": {
+          "candidate": 0.8456368027468211,
+          "reference": 0.831719754637499,
+          "delta": 0.0139170481093221,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/zebrafish": {
+          "candidate": 0.9330892799135414,
+          "reference": 0.9278362929881653,
+          "delta": 0.0052529869253761,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        },
+        "nonworm_dev_f1/pig": {
+          "candidate": 0.8955975549753611,
+          "reference": 0.8931382115557549,
+          "delta": 0.0024593434196062,
+          "bound": -0.01,
+          "direction": "minimum",
+          "strict": false,
+          "pass": true
+        }
+      },
+      "topology": {
+        "DEV": {
+          "human": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.5453635089124774,
+                "reference": 0.5442218174458612,
+                "delta": 0.0011416914666162,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.2918085319447226,
+                "reference": 0.2888079336166768,
+                "delta": 0.0030005983280458,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.08629762155335718,
+                "reference": 0.08461376552304778,
+                "delta": 0.0016838560303094,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0570406230267313,
+                "reference": 1.0534624289623238,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.08819195958745528,
+                "reference": 0.08692906756472321,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "mouse": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.5798930481283422,
+                "reference": 0.5660818713450292,
+                "delta": 0.013811176783313,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.30524064171122994,
+                "reference": 0.29771398192450826,
+                "delta": 0.00752665978672168,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.08655156746933212,
+                "reference": 0.0858700590640618,
+                "delta": 0.00068150840527032,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0272603362108133,
+                "reference": 1.0279418446160835,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.0781462971376647,
+                "reference": 0.07746478873239436,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "chicken": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.4123989218328841,
+                "reference": 0.3783783783783784,
+                "delta": 0.0340205434545057,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.1522911051212938,
+                "reference": 0.15057915057915058,
+                "delta": 0.00171195454214322,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.2078559738134206,
+                "reference": 0.2160392798690671,
+                "delta": -0.0081833060556465,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 0.9983633387888707,
+                "reference": 1.067103109656301,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.13911620294599017,
+                "reference": 0.14729950900163666,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "zebrafish": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.39020317283607014,
+                "reference": 0.3811808118081181,
+                "delta": 0.00902236102795204,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.13897393079135356,
+                "reference": 0.1370848708487085,
+                "delta": 0.00188905994264506,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.0853404134268917,
+                "reference": 0.083443959795183,
+                "delta": 0.0018964536317087,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0887540299639673,
+                "reference": 1.0959605537644606,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.1027877868386118,
+                "reference": 0.10392565901763702,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "pig": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.5063461754464788,
+                "reference": 0.5005070422535212,
+                "delta": 0.0058391331929576,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.21318656632595753,
+                "reference": 0.2152112676056338,
+                "delta": -0.00202470127967627,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.138353765323993,
+                "reference": 0.1398548911683763,
+                "delta": -0.0015011258443833,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.008256192144108,
+                "reference": 0.994996247185389,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.09907430572929697,
+                "reference": 0.09582186639979985,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          },
+          "c_elegans": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.3189873417721519,
+                "reference": 0.30493273542600896,
+                "delta": 0.01405460634614294,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.140084388185654,
+                "reference": 0.1367713004484305,
+                "delta": 0.0033130877372235,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.24041585445094216,
+                "reference": 0.23196881091617932,
+                "delta": 0.00844704353476284,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0168940870695258,
+                "reference": 1.0019493177387915,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.11176088369070825,
+                "reference": 0.12605588044184535,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "checks": {
+              "segment_f1_iou_0_8": {
+                "candidate": 0.33595231644540774,
+                "reference": 0.32923570283270975,
+                "delta": 0.00671661361269799,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "boundary_f1_5bp": {
+                "candidate": 0.14034137090219453,
+                "reference": 0.14163548904329235,
+                "delta": -0.00129411814109782,
+                "bound": -0.05,
+                "direction": "minimum",
+                "strict": false,
+                "pass": true
+              },
+              "missed_rate": {
+                "candidate": 0.2116468378209142,
+                "reference": 0.21916092673763307,
+                "delta": -0.00751408891671887,
+                "bound": 0.03,
+                "direction": "maximum",
+                "strict": false,
+                "pass": true
+              },
+              "fragments_per_truth": {
+                "candidate": 1.0363180964308079,
+                "reference": 0.9949906073888541,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              },
+              "split_rate": {
+                "candidate": 0.11521603005635567,
+                "reference": 0.10457107075767064,
+                "maximum_multiplier": 1.25,
+                "pass": true
+              }
+            },
+            "pass": true
+          }
+        }
+      },
+      "effects": {
+        "DEV": {
+          "c_elegans": {
+            "bp_f1": -0.0034119172555368,
+            "bp_precision": -0.0130371616272578,
+            "bp_recall": 0.0048487025231212,
+            "bp_average_precision": 0.0031611355233857
+          },
+          "chicken": {
+            "bp_f1": 0.0139170481093221,
+            "bp_precision": 0.0196198225659198,
+            "bp_recall": 0.0086001076596688,
+            "bp_average_precision": 0.0125198036585394
+          },
+          "human": {
+            "bp_f1": 0.0018125552561868,
+            "bp_precision": 0.0009735127878612,
+            "bp_recall": 0.0026129834370566,
+            "bp_average_precision": 0.0007684023902292
+          },
+          "mouse": {
+            "bp_f1": 0.0005231523894969,
+            "bp_precision": -0.0002652595212065,
+            "bp_recall": 0.0013159458360697,
+            "bp_average_precision": 0.0003411266485912
+          },
+          "pig": {
+            "bp_f1": 0.0024593434196062,
+            "bp_precision": 0.0048600431584582,
+            "bp_recall": 0.0002086699744073,
+            "bp_average_precision": 0.0019106924602805
+          },
+          "zebrafish": {
+            "bp_f1": 0.0052529869253761,
+            "bp_precision": 0.0052913461775649,
+            "bp_recall": 0.0052140604016227,
+            "bp_average_precision": 0.0017523303222011
+          }
+        },
+        "SCREEN": {
+          "c_elegans": {
+            "bp_f1": 0.0102622527333969,
+            "bp_precision": 0.0028397149507421,
+            "bp_recall": 0.0168291174651785,
+            "bp_average_precision": 0.0081965059063026
+          }
+        }
+      },
+      "pass": false
+    }
+  },
+  "release_seed17": false,
+  "two_seed_internal_candidate": false,
+  "conf_opening_authorized": false,
+  "external_success_claim": false,
+  "scientific_scope": "effective sequence context; reused internal development panels",
+  "inputs": {
+    "PAIR8": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-PAIR-CONTEXT-V1/evaluate/seed42/12499111_1",
+    "BLOCK4": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-PAIR-CONTEXT-V1/evaluate/seed42/12499111_0",
+    "D": "/Users/jiwang/Desktop/TE/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1"
+  }
+}

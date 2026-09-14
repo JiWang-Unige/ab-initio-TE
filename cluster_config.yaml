@@ -91,28 +91,3 @@ path_conventions:
   report_root: reports
   status_root: outputs
   log_root: logs
-
-cli_review:
-  mode: independent_parallel_cli
-  min_successful_reviewers: 2
-  timeout_seconds: 1800
-  output_root: /tmp/tri_review
-  reviewers:
-    - id: A
-      label: claude
-      cmd: claude
-      stdin: true
-      command_template: 'cat {prompt_file} | claude -p --append-system-prompt "You are a neutral independent external reviewer. Output only the requested structured review in professional Simplified Chinese." "Follow stdin exactly."'
-      output_file: output_a_claude.md
-    - id: B
-      label: codex
-      cmd: codex
-      stdin: true
-      command_template: 'codex exec --sandbox read-only --skip-git-repo-check - < {prompt_file}'
-      output_file: output_b_codex.md
-    - id: C
-      label: antigravity
-      cmd: antigravity
-      stdin: true
-      command_template: 'bash .agents/skills/tri-review/scripts/reviewer_c_antigravity.sh {prompt_file}'
-      output_file: output_c_antigravity.md

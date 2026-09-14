@@ -1,0 +1,49 @@
+{
+  "protocol": "CROSS-SPECIES-L1-PAIR-CONTEXT-V1",
+  "seed": 42,
+  "status": "PASS",
+  "steps_per_arm": 4000,
+  "matched_exposure": {
+    "human": {
+      "presentations": 4000,
+      "unique_tiles": 1500,
+      "unique_positive_bp": 5573160,
+      "unique_callable_bp": 12263060
+    },
+    "mouse": {
+      "presentations": 4000,
+      "unique_tiles": 1500,
+      "unique_positive_bp": 4529011,
+      "unique_callable_bp": 12266511
+    },
+    "chicken": {
+      "presentations": 4000,
+      "unique_tiles": 1500,
+      "unique_positive_bp": 450199,
+      "unique_callable_bp": 12283781
+    },
+    "zebrafish": {
+      "presentations": 4000,
+      "unique_tiles": 1500,
+      "unique_positive_bp": 6590012,
+      "unique_callable_bp": 12273128
+    },
+    "pig": {
+      "presentations": 4000,
+      "unique_tiles": 1500,
+      "unique_positive_bp": 3266685,
+      "unique_callable_bp": 12286791
+    },
+    "c_elegans": {
+      "presentations": 4000,
+      "unique_tiles": 3000,
+      "unique_positive_bp": 2532606,
+      "unique_callable_bp": 24378312
+    }
+  },
+  "scope": "complete training artifacts; Slurm completion must be verified separately",
+  "inputs": {
+    "BLOCK4": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-PAIR-CONTEXT-V1/train/seed42/12497274_0",
+    "PAIR8": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-PAIR-CONTEXT-V1/train/seed42/12497274_1"
+  }
+}

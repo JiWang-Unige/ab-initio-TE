@@ -1,5 +1,48 @@
 # Tri-Review Log
 
+> 2026-09-08 当前指令：用户已取消强制第三方评阅及人数门槛。下面的C评阅欠额、
+> OAuth登录和补评阅要求仅为历史记录，现已撤销，不执行。未完成的评阅不伪称完成。
+> 当前路线收尾见 `docs/experiments/GAP-ROUTE-TERMINAL-AUDIT-20260908.md`。
+
+## Agent科学核验：A/B1 screen与HN动作必要条件（2026-09-08）
+
+无第三方/quorum要求。本轮九head、18个head-pass、60574完整DEV预测和独立NumPy/
+sklearn复算已完成。HN-O相对H0-O MSE降低8.5905%、AP提高0.083617；三个seed、六长度层、
+原homology-purged DEV方向一致。H0-S仅改善0.3772%，未过固定5%筛选门。
+前序改善是NT+seam组合的探索性增量，不能单独归因NT、不能当旧Stage1门通过。
+
+随后另立协议枚举HN完整tie前缀：宽松风险预算内最多822 gap/4449正bp；达到最低
+效用需要24747负bp，60497阈值无可行点。两个决策点直接选择复算PASS，停止此模型
+CAL/部署；未检查的完整mask/gene门不冒充通过或已执行。DEV复用不支持独立泛化。
+原全量A/B1未执行、Gate L/empty-site缺真值/材料，不写成科学失败。
+证据：`docs/experiments/GAP-A-B1-SCREEN-20260908-R1-RESULT.md`、
+`docs/experiments/GAP-HN-RANK-FEASIBILITY-20260908-R1.md`。
+
+# Tri-Review: GAP-BRIDGE-C-UTILITY-20260906-R1 (2026-09-08)
+
+- User explicitly requires post-result tri-review/pivot in this gap task. An already
+  frozen automatic stop does not substitute for that requested review deliverable.
+- Identical self-contained full-scope prompt:
+  `/tmp/tri_review_GAP-BRIDGE-C-UTILITY-20260906-R1/prompt_full_scope.md`.
+- A Claude: failed once, HTTP401 invalid OAuth access token; human login required,
+  no futile repeat. C Antigravity wrapper: exit127, CLI not installed; no retry/install.
+- B separate Codex CLI: successful, Overall judgment=abandon-route **only current
+  C predictor/panel gene-utility rationale**. Engineering/semantic PASS, both frozen
+  scientific gates FAIL; no A/TrackB promotion; keep A unexecuted, not falsified.
+- Quorum1/3, insufficient for abandon/claim/goal-revision. Not recorded as successful
+  SINGLE_REVIEW_CONTINUATION because proposed action is abandon. Aggregate confidence Low.
+- B concerns: reused DEV, incomplete biological reference, phase progression limitation,
+  MP dose/resolution confounding, identity turnover despite netFP−1, unexecuted A.
+  No new comparability blocker for this fixed internal negative readout.
+- Raw B and backend outcomes persisted in
+  `outputs/GAP-BRIDGE-C-UTILITY-20260906-R1/review_b_codex.md` and `review_quorum.json`.
+- Next: restore Claude CLI authentication (or an approved second reviewer pathway),
+  then complete missing review only. Do not repeat experiments or completed checks.
+- Subsequent continuation: `claude auth status` reported loggedIn=true; one retry
+  of the missing review still ended HTTP401/invalid OAuth, total2attempts. Local
+  credential presence is insufficient. Do not retry again without actual login recovery.
+
+
 > 由 tri-review append。每个 experiment_id 一段。
 > Reviewer A=Claude CLI / B=Codex CLI / C=Antigravity CLI（agy，替代 Gemini）。
 > 三方不是固定角色分工；每个 reviewer 都必须独立完整审阅 fairness、comparability、semantic success、leakage/reproducibility、architecture hypothesis、Track A/B decision、next SOTA step。
