@@ -1,0 +1,711 @@
+{
+  "absolute_f1": null,
+  "absolute_precision": null,
+  "cells": [
+    {
+      "cell_id": "platypus|fixed_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 2352438,
+            "candidate_fragment_count": 14384,
+            "coverage_bp": 2352438,
+            "merged_fragment_count": 4980
+          },
+          "non_te": {
+            "callable_coverage_bp": 9158,
+            "candidate_fragment_count": 60,
+            "coverage_bp": 9158,
+            "merged_fragment_count": 59
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 164113,
+            "candidate_fragment_count": 915,
+            "coverage_bp": 164113,
+            "merged_fragment_count": 882
+          }
+        },
+        "callable_coverage_bp": 2428915,
+        "callable_coverage_fraction": 0.5790984630584717,
+        "candidate_fragment_count": 15359,
+        "coverage_bp": 2428915,
+        "merged_fragment_count": 4932,
+        "panel_callable_bp": 4194304
+      },
+      "prediction_rows": 15359,
+      "role": "native_slurm",
+      "species": "platypus",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|hite",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 509024,
+            "candidate_fragment_count": 3458,
+            "coverage_bp": 509024,
+            "merged_fragment_count": 3147
+          },
+          "non_te": {
+            "callable_coverage_bp": 507256,
+            "candidate_fragment_count": 4416,
+            "coverage_bp": 507256,
+            "merged_fragment_count": 4161
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          }
+        },
+        "callable_coverage_bp": 998052,
+        "callable_coverage_fraction": 0.23795413970947266,
+        "candidate_fragment_count": 7874,
+        "coverage_bp": 998052,
+        "merged_fragment_count": 6383,
+        "panel_callable_bp": 4194304
+      },
+      "prediction_rows": 7874,
+      "role": "native_slurm",
+      "species": "platypus",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|rm2_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "metrics": null,
+      "role": "native_slurm",
+      "species": "platypus",
+      "status": "RUNNING",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|D_F_cache",
+      "device": "gpu_saved_replay",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 2146893,
+            "candidate_fragment_count": 6732,
+            "coverage_bp": 2146893,
+            "merged_fragment_count": 6732
+          }
+        },
+        "callable_coverage_bp": 2146893,
+        "callable_coverage_fraction": 0.5118591785430908,
+        "candidate_fragment_count": 6732,
+        "coverage_bp": 2146893,
+        "merged_fragment_count": 6732,
+        "panel_callable_bp": 4194304
+      },
+      "prediction_rows": 6732,
+      "role": "completed_D_replay",
+      "species": "platypus",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|fixed_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 897660,
+            "candidate_fragment_count": 3472,
+            "coverage_bp": 897660,
+            "merged_fragment_count": 2434
+          },
+          "non_te": {
+            "callable_coverage_bp": 96130,
+            "candidate_fragment_count": 563,
+            "coverage_bp": 96130,
+            "merged_fragment_count": 491
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 1187120,
+            "candidate_fragment_count": 4295,
+            "coverage_bp": 1187120,
+            "merged_fragment_count": 3319
+          }
+        },
+        "callable_coverage_bp": 2064091,
+        "callable_coverage_fraction": 0.4922937013034714,
+        "candidate_fragment_count": 8330,
+        "coverage_bp": 2064091,
+        "merged_fragment_count": 4524,
+        "panel_callable_bp": 4192804
+      },
+      "prediction_rows": 8330,
+      "role": "native_slurm",
+      "species": "sea_urchin",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|hite",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 305923,
+            "candidate_fragment_count": 1297,
+            "coverage_bp": 305923,
+            "merged_fragment_count": 1225
+          },
+          "non_te": {
+            "callable_coverage_bp": 234751,
+            "candidate_fragment_count": 3585,
+            "coverage_bp": 234751,
+            "merged_fragment_count": 3237
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          }
+        },
+        "callable_coverage_bp": 540660,
+        "callable_coverage_fraction": 0.12894950491365684,
+        "candidate_fragment_count": 4882,
+        "coverage_bp": 540660,
+        "merged_fragment_count": 4419,
+        "panel_callable_bp": 4192804
+      },
+      "prediction_rows": 4882,
+      "role": "native_slurm",
+      "species": "sea_urchin",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|rm2_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 132215,
+            "candidate_fragment_count": 505,
+            "coverage_bp": 132215,
+            "merged_fragment_count": 482
+          },
+          "non_te": {
+            "callable_coverage_bp": 4359,
+            "candidate_fragment_count": 23,
+            "coverage_bp": 4359,
+            "merged_fragment_count": 23
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 763564,
+            "candidate_fragment_count": 2515,
+            "coverage_bp": 763564,
+            "merged_fragment_count": 2044
+          }
+        },
+        "callable_coverage_bp": 890099,
+        "callable_coverage_fraction": 0.2122920603968132,
+        "candidate_fragment_count": 3043,
+        "coverage_bp": 890099,
+        "merged_fragment_count": 2398,
+        "panel_callable_bp": 4192804
+      },
+      "prediction_rows": 3043,
+      "role": "native_slurm",
+      "species": "sea_urchin",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|D_F_cache",
+      "device": "gpu_saved_replay",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 628428,
+            "candidate_fragment_count": 4396,
+            "coverage_bp": 628428,
+            "merged_fragment_count": 4396
+          }
+        },
+        "callable_coverage_bp": 628428,
+        "callable_coverage_fraction": 0.14988251299130606,
+        "candidate_fragment_count": 4396,
+        "coverage_bp": 628428,
+        "merged_fragment_count": 4396,
+        "panel_callable_bp": 4192804
+      },
+      "prediction_rows": 4396,
+      "role": "completed_D_replay",
+      "species": "sea_urchin",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|fixed_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 141,
+            "candidate_fragment_count": 1,
+            "coverage_bp": 141,
+            "merged_fragment_count": 1
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          }
+        },
+        "callable_coverage_bp": 141,
+        "callable_coverage_fraction": 3.433708005264045e-05,
+        "candidate_fragment_count": 1,
+        "coverage_bp": 141,
+        "merged_fragment_count": 1,
+        "panel_callable_bp": 4106348
+      },
+      "prediction_rows": 1,
+      "role": "native_slurm",
+      "species": "c_briggsae",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|hite",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 224891,
+            "candidate_fragment_count": 1017,
+            "coverage_bp": 224922,
+            "merged_fragment_count": 973
+          },
+          "non_te": {
+            "callable_coverage_bp": 51620,
+            "candidate_fragment_count": 1105,
+            "coverage_bp": 51620,
+            "merged_fragment_count": 1072
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          }
+        },
+        "callable_coverage_bp": 276511,
+        "callable_coverage_fraction": 0.06733744923713236,
+        "candidate_fragment_count": 2122,
+        "coverage_bp": 276542,
+        "merged_fragment_count": 2038,
+        "panel_callable_bp": 4106348
+      },
+      "prediction_rows": 2122,
+      "role": "native_slurm",
+      "species": "c_briggsae",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|rm2_rm",
+      "device": "cpu",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 163175,
+            "candidate_fragment_count": 746,
+            "coverage_bp": 163176,
+            "merged_fragment_count": 708
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 220224,
+            "candidate_fragment_count": 1179,
+            "coverage_bp": 220352,
+            "merged_fragment_count": 1021
+          }
+        },
+        "callable_coverage_bp": 382550,
+        "callable_coverage_fraction": 0.09316063811445109,
+        "candidate_fragment_count": 1925,
+        "coverage_bp": 382679,
+        "merged_fragment_count": 1688,
+        "panel_callable_bp": 4106348
+      },
+      "prediction_rows": 1925,
+      "role": "native_slurm",
+      "species": "c_briggsae",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|D_F_cache",
+      "device": "gpu_saved_replay",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 237027,
+            "candidate_fragment_count": 1704,
+            "coverage_bp": 237043,
+            "merged_fragment_count": 1704
+          }
+        },
+        "callable_coverage_bp": 237027,
+        "callable_coverage_fraction": 0.05772209272083126,
+        "candidate_fragment_count": 1704,
+        "coverage_bp": 237043,
+        "merged_fragment_count": 1704,
+        "panel_callable_bp": 4106348
+      },
+      "prediction_rows": 1704,
+      "role": "completed_D_replay",
+      "species": "c_briggsae",
+      "status": "COMPLETED",
+      "task": "T2"
+    }
+  ],
+  "expected_cell_count": 12,
+  "metric_scope": [
+    "callable_bp_coverage",
+    "callable_intersection",
+    "callable_jaccard",
+    "candidate_fragment_count"
+  ],
+  "pairwise": [
+    {
+      "cell_a": "c_briggsae|D_F_cache",
+      "cell_b": "c_briggsae|fixed_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 237027,
+        "callable_coverage_b_bp": 141,
+        "callable_intersection_bp": 0,
+        "callable_jaccard": 0.0,
+        "callable_union_bp": 237168
+      },
+      "pair_id": "c_briggsae|D_F_cache__c_briggsae|fixed_rm",
+      "species": "c_briggsae",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "c_briggsae|D_F_cache",
+      "cell_b": "c_briggsae|hite",
+      "metrics": {
+        "callable_coverage_a_bp": 237027,
+        "callable_coverage_b_bp": 276511,
+        "callable_intersection_bp": 129099,
+        "callable_jaccard": 0.335811403109466,
+        "callable_union_bp": 384439
+      },
+      "pair_id": "c_briggsae|D_F_cache__c_briggsae|hite",
+      "species": "c_briggsae",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "c_briggsae|D_F_cache",
+      "cell_b": "c_briggsae|rm2_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 237027,
+        "callable_coverage_b_bp": 382550,
+        "callable_intersection_bp": 155432,
+        "callable_jaccard": 0.334878109211561,
+        "callable_union_bp": 464145
+      },
+      "pair_id": "c_briggsae|D_F_cache__c_briggsae|rm2_rm",
+      "species": "c_briggsae",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "c_briggsae|fixed_rm",
+      "cell_b": "c_briggsae|hite",
+      "metrics": {
+        "callable_coverage_a_bp": 141,
+        "callable_coverage_b_bp": 276511,
+        "callable_intersection_bp": 0,
+        "callable_jaccard": 0.0,
+        "callable_union_bp": 276652
+      },
+      "pair_id": "c_briggsae|fixed_rm__c_briggsae|hite",
+      "species": "c_briggsae",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "c_briggsae|fixed_rm",
+      "cell_b": "c_briggsae|rm2_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 141,
+        "callable_coverage_b_bp": 382550,
+        "callable_intersection_bp": 0,
+        "callable_jaccard": 0.0,
+        "callable_union_bp": 382691
+      },
+      "pair_id": "c_briggsae|fixed_rm__c_briggsae|rm2_rm",
+      "species": "c_briggsae",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "c_briggsae|hite",
+      "cell_b": "c_briggsae|rm2_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 276511,
+        "callable_coverage_b_bp": 382550,
+        "callable_intersection_bp": 203839,
+        "callable_jaccard": 0.44777932525229447,
+        "callable_union_bp": 455222
+      },
+      "pair_id": "c_briggsae|hite__c_briggsae|rm2_rm",
+      "species": "c_briggsae",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "platypus|D_F_cache",
+      "cell_b": "platypus|fixed_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 2146893,
+        "callable_coverage_b_bp": 2428915,
+        "callable_intersection_bp": 2090951,
+        "callable_jaccard": 0.8414773968884326,
+        "callable_union_bp": 2484857
+      },
+      "pair_id": "platypus|D_F_cache__platypus|fixed_rm",
+      "species": "platypus",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "platypus|D_F_cache",
+      "cell_b": "platypus|hite",
+      "metrics": {
+        "callable_coverage_a_bp": 2146893,
+        "callable_coverage_b_bp": 998052,
+        "callable_intersection_bp": 948784,
+        "callable_jaccard": 0.4320193282732914,
+        "callable_union_bp": 2196161
+      },
+      "pair_id": "platypus|D_F_cache__platypus|hite",
+      "species": "platypus",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "platypus|D_F_cache",
+      "cell_b": "platypus|rm2_rm",
+      "metrics": null,
+      "pair_id": "platypus|D_F_cache__platypus|rm2_rm",
+      "reason": {
+        "cell_a_status": "COMPLETED",
+        "cell_b_status": "RUNNING"
+      },
+      "species": "platypus",
+      "status": "NOT_SCORED"
+    },
+    {
+      "cell_a": "platypus|fixed_rm",
+      "cell_b": "platypus|hite",
+      "metrics": {
+        "callable_coverage_a_bp": 2428915,
+        "callable_coverage_b_bp": 998052,
+        "callable_intersection_bp": 975298,
+        "callable_jaccard": 0.3978098185358627,
+        "callable_union_bp": 2451669
+      },
+      "pair_id": "platypus|fixed_rm__platypus|hite",
+      "species": "platypus",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "platypus|fixed_rm",
+      "cell_b": "platypus|rm2_rm",
+      "metrics": null,
+      "pair_id": "platypus|fixed_rm__platypus|rm2_rm",
+      "reason": {
+        "cell_a_status": "COMPLETED",
+        "cell_b_status": "RUNNING"
+      },
+      "species": "platypus",
+      "status": "NOT_SCORED"
+    },
+    {
+      "cell_a": "platypus|hite",
+      "cell_b": "platypus|rm2_rm",
+      "metrics": null,
+      "pair_id": "platypus|hite__platypus|rm2_rm",
+      "reason": {
+        "cell_a_status": "COMPLETED",
+        "cell_b_status": "RUNNING"
+      },
+      "species": "platypus",
+      "status": "NOT_SCORED"
+    },
+    {
+      "cell_a": "sea_urchin|D_F_cache",
+      "cell_b": "sea_urchin|fixed_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 628428,
+        "callable_coverage_b_bp": 2064091,
+        "callable_intersection_bp": 535037,
+        "callable_jaccard": 0.2479914085030605,
+        "callable_union_bp": 2157482
+      },
+      "pair_id": "sea_urchin|D_F_cache__sea_urchin|fixed_rm",
+      "species": "sea_urchin",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "sea_urchin|D_F_cache",
+      "cell_b": "sea_urchin|hite",
+      "metrics": {
+        "callable_coverage_a_bp": 628428,
+        "callable_coverage_b_bp": 540660,
+        "callable_intersection_bp": 116163,
+        "callable_jaccard": 0.11032409715791723,
+        "callable_union_bp": 1052925
+      },
+      "pair_id": "sea_urchin|D_F_cache__sea_urchin|hite",
+      "species": "sea_urchin",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "sea_urchin|D_F_cache",
+      "cell_b": "sea_urchin|rm2_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 628428,
+        "callable_coverage_b_bp": 890099,
+        "callable_intersection_bp": 268017,
+        "callable_jaccard": 0.21432615492878906,
+        "callable_union_bp": 1250510
+      },
+      "pair_id": "sea_urchin|D_F_cache__sea_urchin|rm2_rm",
+      "species": "sea_urchin",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "sea_urchin|fixed_rm",
+      "cell_b": "sea_urchin|hite",
+      "metrics": {
+        "callable_coverage_a_bp": 2064091,
+        "callable_coverage_b_bp": 540660,
+        "callable_intersection_bp": 467479,
+        "callable_jaccard": 0.21872695660636549,
+        "callable_union_bp": 2137272
+      },
+      "pair_id": "sea_urchin|fixed_rm__sea_urchin|hite",
+      "species": "sea_urchin",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "sea_urchin|fixed_rm",
+      "cell_b": "sea_urchin|rm2_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 2064091,
+        "callable_coverage_b_bp": 890099,
+        "callable_intersection_bp": 816486,
+        "callable_jaccard": 0.3819453020623997,
+        "callable_union_bp": 2137704
+      },
+      "pair_id": "sea_urchin|fixed_rm__sea_urchin|rm2_rm",
+      "species": "sea_urchin",
+      "status": "SCORED"
+    },
+    {
+      "cell_a": "sea_urchin|hite",
+      "cell_b": "sea_urchin|rm2_rm",
+      "metrics": {
+        "callable_coverage_a_bp": 540660,
+        "callable_coverage_b_bp": 890099,
+        "callable_intersection_bp": 286786,
+        "callable_jaccard": 0.25069297964200205,
+        "callable_union_bp": 1143973
+      },
+      "pair_id": "sea_urchin|hite__sea_urchin|rm2_rm",
+      "species": "sea_urchin",
+      "status": "SCORED"
+    }
+  ],
+  "protocol": "TE-REAL-PANEL-BENCH-20260914",
+  "schema": "te_real_panel_t2_metrics_v1",
+  "scope": "REAL_REGION_FEASIBILITY_AND_T2_CONCORDANCE_ONLY",
+  "source_bundle_manifest": "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/TE-REAL-PANEL-BENCH-20260914/omni_clean_current/data/bundle/.default/bundle_manifest.json",
+  "status": "COMPLETED",
+  "status_counts": {
+    "COMPLETED": 11,
+    "RUNNING": 1
+  },
+  "truth_available": false
+}

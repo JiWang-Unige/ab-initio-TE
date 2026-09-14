@@ -115,13 +115,78 @@ only `selection.json`, `selection.tsv`, `metrics.json`, `completion.json`, and
 
 ## Corrected Slurm run
 
-The corrected job is Slurm `12708861`, submitted on `shared-gpu` with the
-same RTX 3090, four CPU, 64 GB, and two-hour resource contract. Its isolated
-output is
-`outputs/SF5-BALANCED-REPLAY-20260914/replay-12708861/`. The first live
-check reported `PENDING (Priority)` with no selection or model output yet.
-The compact report destination is
-`reports/SF5-BALANCED-REPLAY-20260914/replay-12708861/`. A completed run is
-accepted only when both model results, the all-record tokenization contract,
-and the six-class/per-species metrics are present. A queue state is not a
-result.
+The corrected job was Slurm `12708861`, submitted on `shared-gpu` with the
+same RTX 3090, four CPU, 64 GB, and two-hour resource contract. It completed
+in `00:10:08` with exit code 0. Its isolated output is
+`outputs/SF5-BALANCED-REPLAY-20260914/replay-12708861/`, and the compact
+local report is
+`reports/SF5-BALANCED-REPLAY-20260914/replay-12708861/`. The first live
+check saw `PENDING (Priority)` and later `PENDING (Resources)`; neither queue
+state was treated as a result.
+
+The completed selection manifest has 480 records: 120 each for mouse,
+zebrafish, chicken, and western-clawed frog, with source-index blocks
+`0–119`, `360–479`, `720–839`, and `1080–1199`. Each model reports 1,966,080
+labeled positions (`480 × 4,096`), and each per-species confusion matrix sums
+to 491,520 positions (`120 × 4,096`). The two model records both report the
+same 1-nt-to-1-token contract for all 480 records: 4,096 raw tokens, BOS at
+0, EOS at 4,097, and 4,098 input tokens. A local compact-invariant check
+passed for the selection counts, confusion-matrix totals, and token contract.
+
+## Balanced replay results
+
+The table gives the aggregate over all 1,966,080 positions and the arithmetic
+mean over the four species. `binary F1` is BG versus all five non-BG labels,
+including Unknown. `main4 F1` is the mean of SINE, LINE, LTR, and DNA F1;
+each component is computed over all six-label positions, so BG and Unknown
+errors remain in FP/FN. Unknown is recall for the Unknown class only when its
+true support is nonzero.
+
+| model | level | binary F1 | main4 F1 | Unknown support (bp) | Unknown recall |
+|---|---|---:|---:|---:|---:|
+| base pretrained | global pooled | 0.893830 | 0.847821 | 7,872 | 0.438008 |
+| base pretrained | four-species macro | 0.861297 | 0.733729 | 7,872 total | N/A (3/4 species have zero support) |
+| binary H0 | global pooled | 0.878067 | 0.845838 | 7,872 | 0.091845 |
+| binary H0 | four-species macro | 0.839775 | 0.745040 | 7,872 total | N/A (3/4 species have zero support) |
+
+Per-species values are:
+
+| species | base binary F1 | base main4 F1 | base Unknown support | base Unknown recall | H0 binary F1 | H0 main4 F1 | H0 Unknown support | H0 Unknown recall |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| mouse | 0.959913 | 0.835546 | 0 | N/A | 0.958880 | 0.846866 | 0 | N/A |
+| zebrafish | 0.850346 | 0.766350 | 7,872 | 0.438008 | 0.846041 | 0.780617 | 7,872 | 0.091845 |
+| chicken | 0.879604 | 0.764835 | 0 | N/A | 0.871750 | 0.721696 | 0 | N/A |
+| western-clawed frog | 0.755323 | 0.568185 | 0 | N/A | 0.682427 | 0.630980 | 0 | N/A |
+
+The true support in the four main classes and Unknown is the same for both
+models because the labels are fixed:
+
+| species | SINE support (bp) | LINE support (bp) | LTR support (bp) | DNA support (bp) | Unknown support (bp) |
+|---|---:|---:|---:|---:|---:|
+| mouse | 7,747 | 205,516 | 157,759 | 3,741 | 0 |
+| zebrafish | 17,335 | 12,964 | 25,147 | 151,851 | 7,872 |
+| chicken | 292 | 26,065 | 5,597 | 3,057 | 0 |
+| western-clawed frog | 2,334 | 19,796 | 22,578 | 50,358 | 0 |
+| global | 27,708 | 264,341 | 211,081 | 209,007 | 7,872 |
+
+The JSON retains `0.0` for recall and F1 when a class has zero true support,
+following the scorer's zero-division convention. Those values are reported
+as N/A above rather than interpreted as Unknown recovery. The literal
+`macro_f1_all6` field still averages all six class F1 values and therefore
+includes zero for a zero-support Unknown class; the main4 macro remains
+interpretable here because all four main classes have positive support in
+each species.
+
+The full six-class confusion matrices, class precision/recall/F1, binary
+material counts, and per-species records are in the copied `metrics.json`.
+The compact `verification.json` records the post-copy invariant checks. The
+report directory contains `selection.json`, `selection.tsv`, `metrics.json`,
+`completion.json`, `STATUS`, and `verification.json`; no raw prediction file
+was copied locally.
+The raw prediction arrays remain only at the two Baobab paths recorded in
+that file and were not copied into the repository.
+
+These numbers are a transparent species-balanced replay of the same first
+1,200 test records and the same frozen checkpoints. They do not constitute
+independent validation or complete six-species typing evaluation, and they
+do not retroactively change the historical aggregate score.

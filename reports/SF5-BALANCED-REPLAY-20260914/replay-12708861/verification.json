@@ -1,0 +1,90 @@
+{
+  "job_id": "12708861",
+  "models": {
+    "SF5_base_pretrained_seed42": {
+      "global_positions": 1966080,
+      "species": {
+        "chicken": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        },
+        "mouse": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        },
+        "western_clawed_frog": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        },
+        "zebrafish": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        }
+      },
+      "tokenization_contract": true
+    },
+    "SF5_binary_h0_seed42": {
+      "global_positions": 1966080,
+      "species": {
+        "chicken": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        },
+        "mouse": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        },
+        "western_clawed_frog": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        },
+        "zebrafish": {
+          "confusion_total": 491520,
+          "n_positions": 491520,
+          "n_records": 120
+        }
+      },
+      "tokenization_contract": true
+    }
+  },
+  "raw_predictions_local_copy": false,
+  "raw_predictions_remote_paths": {
+    "SF5_base_pretrained_seed42": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SF5-BALANCED-REPLAY-20260914/replay-12708861/raw_predictions/SF5_base_pretrained_seed42.npz",
+    "SF5_binary_h0_seed42": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SF5-BALANCED-REPLAY-20260914/replay-12708861/raw_predictions/SF5_binary_h0_seed42.npz"
+  },
+  "selection": {
+    "index_blocks": [
+      [
+        0,
+        119
+      ],
+      [
+        360,
+        479
+      ],
+      [
+        720,
+        839
+      ],
+      [
+        1080,
+        1199
+      ]
+    ],
+    "selected_total": 480,
+    "species_counts": {
+      "chicken": 120,
+      "mouse": 120,
+      "western_clawed_frog": 120,
+      "zebrafish": 120
+    }
+  },
+  "status": "PASS"
+}

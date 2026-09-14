@@ -91,3 +91,39 @@ Report actual `optimizer_steps` and `skipped_fully_masked_steps` from each
 epoch trace: `train_steps_per_epoch` is the nominal tile-loop count. No new
 evaluation result existed at resubmission. The active thread heartbeat will
 retrieve and score the fixed outputs after completion.
+
+## Sea execution record
+
+Slurm job `12709175` completed in `20:47` with exit code `0:0`. The compact
+report is `reports/D-ADAPTER-MOE-PILOT-20260914/sea-12709175/SEA-RESULTS-12709175.md`,
+with the full JSON in `results.json` and the compact machine-readable summary
+in `sea-summary.json`. The corrected materialization has EVAL totals of
+152,710 positive, 582,987 reference-negative, and 312,879 masked bp, leaving
+735,697 callable bp. TRAIN and CAL totals are recorded in the materialization
+manifest; every arm uses the same EVAL mask.
+
+On the Sea EVAL region, D with historical full-CAL parameters gave P/R/bp-F1
+`0.759113/0.442230/0.558879`, while D recalibrated on Sea CAL gave
+`0.622707/0.789457/0.696237`. The dense, soft-gated, and constant-average
+heads gave bp-F1 `0.734447`, `0.733255`, and `0.737559`, respectively. Their
+segment-F1 at IoU 0.8 was `0.119278`, `0.110905`, and `0.105889`, and their
+boundary-F1 at 25 bp was `0.104449`, `0.096035`, and `0.089233`; the small bp
+gain therefore did not translate into topology or boundary recovery.
+
+Each head had 256 nominal tile loops per epoch, 255 optimizer updates, and
+one counted fully masked skip per epoch. CAL selected dense epoch 5, soft-gate
+epoch 6, and constant-average epoch 23. The Sea soft gate routed on average
+`0.961793/0.038207` between its two experts. These observations demonstrate
+an executable head-level adaptation and routing signal, but remain a bounded,
+single-seed exploratory result rather than evidence for a sparse backbone MoE
+or universal species generalization.
+
+The original six-species retention is reported in two separate ways. Applying
+Sea-selected parameters directly to the original six-species DEV produced
+macro bp-F1 `0.833649` for D Sea recalibration, `0.784429` for dense, `0.780717`
+for soft-gate, and `0.737466` for constant-average. Refitting one shared
+calibration on the original six-species CAL after adaptation produced
+`0.830082`, `0.830388`, and `0.796599` for dense, soft-gate, and
+constant-average. The historical fixed D and base six-species CAL-refit
+references were `0.876984` and `0.878221`. Original six-species DEV was not
+used to choose any Sea epoch or threshold.

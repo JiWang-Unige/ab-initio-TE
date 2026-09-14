@@ -1,0 +1,11 @@
+{
+  "base_logits_dtype": "float32_on_host",
+  "feature_dtype": "float16_on_host",
+  "hidden_size": 1024,
+  "scope": [
+    "TRAIN",
+    "CAL"
+  ],
+  "status": "extracted_in_memory",
+  "tokens": 526848
+}

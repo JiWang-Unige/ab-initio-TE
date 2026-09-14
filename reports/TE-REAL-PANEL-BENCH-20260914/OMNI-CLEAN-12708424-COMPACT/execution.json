@@ -1,0 +1,270 @@
+{
+  "collector": {
+    "expected_cell_count": 12,
+    "observed_cell_count": 12,
+    "scored_cell_count": 11,
+    "status_counts": {
+      "COMPLETED": 11,
+      "RUNNING": 1
+    }
+  },
+  "metrics": {
+    "absolute_f1": null,
+    "absolute_precision": null,
+    "expected_cell_count": 12,
+    "metric_scope": [
+      "callable_bp_coverage",
+      "callable_intersection",
+      "callable_jaccard",
+      "candidate_fragment_count"
+    ],
+    "status": "COMPLETED",
+    "status_counts": {
+      "COMPLETED": 11,
+      "RUNNING": 1
+    },
+    "truth_available": false
+  },
+  "native_array_id": "12708424",
+  "native_cells": {
+    "c_briggsae|D_F_cache": {
+      "failure_reason": null,
+      "native_format": null,
+      "prediction_rows": 1704,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [],
+      "wall_seconds": null
+    },
+    "c_briggsae|fixed_rm": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 1,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "export_library",
+          "peak_rss_kb": 69052,
+          "seconds": 4.605395826976746
+        },
+        {
+          "exit_code": 0,
+          "name": "repeatmasker",
+          "peak_rss_kb": 148288,
+          "seconds": 62.33911213092506
+        }
+      ],
+      "wall_seconds": 67.14986371109262
+    },
+    "c_briggsae|hite": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 2122,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "hite",
+          "peak_rss_kb": 608580,
+          "seconds": 332.70731629710644
+        }
+      ],
+      "wall_seconds": 332.78150595212355
+    },
+    "c_briggsae|rm2_rm": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 1925,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "build_database",
+          "peak_rss_kb": 51672,
+          "seconds": 5.172971352934837
+        },
+        {
+          "exit_code": 0,
+          "name": "repeatmodeler",
+          "peak_rss_kb": 203200,
+          "seconds": 475.6796032108832
+        },
+        {
+          "exit_code": 0,
+          "name": "mask_discovered",
+          "peak_rss_kb": 148288,
+          "seconds": 48.39172548195347
+        }
+      ],
+      "wall_seconds": 529.3421406301204
+    },
+    "platypus|D_F_cache": {
+      "failure_reason": null,
+      "native_format": null,
+      "prediction_rows": 6732,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [],
+      "wall_seconds": null
+    },
+    "platypus|fixed_rm": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 15359,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "export_library",
+          "peak_rss_kb": 164328,
+          "seconds": 16.316717186011374
+        },
+        {
+          "exit_code": 0,
+          "name": "repeatmasker",
+          "peak_rss_kb": 240672,
+          "seconds": 1597.3895520991646
+        }
+      ],
+      "wall_seconds": 1613.9809866070282
+    },
+    "platypus|hite": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 7874,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "hite",
+          "peak_rss_kb": 607080,
+          "seconds": 619.8913253389765
+        }
+      ],
+      "wall_seconds": 620.0927440989763
+    },
+    "platypus|rm2_rm": {
+      "failure_reason": null,
+      "native_format": null,
+      "prediction_rows": null,
+      "source_status": "RUNNING",
+      "status": "RUNNING",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "build_database",
+          "peak_rss_kb": 48896,
+          "seconds": 5.2949093349743634
+        }
+      ],
+      "wall_seconds": null
+    },
+    "sea_urchin|D_F_cache": {
+      "failure_reason": null,
+      "native_format": null,
+      "prediction_rows": 4396,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [],
+      "wall_seconds": null
+    },
+    "sea_urchin|fixed_rm": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 8330,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "export_library",
+          "peak_rss_kb": 178272,
+          "seconds": 23.702322938013822
+        },
+        {
+          "exit_code": 0,
+          "name": "repeatmasker",
+          "peak_rss_kb": 146944,
+          "seconds": 483.4891647549812
+        }
+      ],
+      "wall_seconds": 507.39580866205506
+    },
+    "sea_urchin|hite": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 4882,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "hite",
+          "peak_rss_kb": 615384,
+          "seconds": 574.3626619679853
+        }
+      ],
+      "wall_seconds": 574.5212695170194
+    },
+    "sea_urchin|rm2_rm": {
+      "failure_reason": null,
+      "native_format": "repeatmasker_out",
+      "prediction_rows": 3043,
+      "source_status": "COMPLETED",
+      "status": "COMPLETED",
+      "steps": [
+        {
+          "exit_code": 0,
+          "name": "build_database",
+          "peak_rss_kb": 51776,
+          "seconds": 5.413826572010294
+        },
+        {
+          "exit_code": 0,
+          "name": "repeatmodeler",
+          "peak_rss_kb": 213060,
+          "seconds": 662.1406350329053
+        },
+        {
+          "exit_code": 0,
+          "name": "mask_discovered",
+          "peak_rss_kb": 146944,
+          "seconds": 65.74022636702284
+        }
+      ],
+      "wall_seconds": 733.404064262053
+    }
+  },
+  "native_export_job_id": "12709406",
+  "native_export_status": {
+    "completed_cell_count": 11,
+    "expected_cell_count": 12,
+    "native_array_id": "12708424",
+    "noncompleted_cell_count": 1,
+    "schema": "te_real_panel_compact_export_status_v1",
+    "status": "COMPLETED"
+  },
+  "omni": {
+    "clean_pinned_checkout": true,
+    "command": "TE_REAL_PANEL_BUNDLE=<local compact_snapshot_12708424_current> ob run benchmarks/te_omnibenchmark/real_panel.yaml --out-dir <omni_clean_current> --cores 1 -- --scheduler greedy",
+    "cores": 1,
+    "dirty_flag": false,
+    "initial_arm64_scheduler_failure": "The first no-scheduler invocation stopped before any rule because bundled CBC is x86_64; successful run used Snakemake greedy scheduler.",
+    "jobs_completed": 4,
+    "ob_version": "0.6.0",
+    "repository_commit": "b75ebfa93254579147ee44f12ba83c4d24838365",
+    "run_id": "2be25ba7-4d36-438b-ae66-b973444ca789",
+    "scheduler": "greedy",
+    "status": "COMPLETED"
+  },
+  "protocol": "TE-REAL-PANEL-BENCH-20260914",
+  "raw_fasta_or_probabilities_copied": false,
+  "schema": "te_real_panel_omni_execution_v1",
+  "source_bundle": "compact_snapshot_12708424_current"
+}

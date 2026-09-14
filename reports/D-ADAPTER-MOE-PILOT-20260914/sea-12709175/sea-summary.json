@@ -1,0 +1,1135 @@
+{
+  "arms": {
+    "D_historical_six_species_calibration": {
+      "cal_selection_metrics": null,
+      "calibration": {
+        "platt_intercept": -0.8050313412075021,
+        "platt_slope": 0.6984053956932976,
+        "threshold": 0.42330056285498807
+      },
+      "eval": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.11166666666666666,
+            "bp_f1": 0.558879146615468,
+            "bp_precision": 0.7591133392533975,
+            "bp_recall": 0.44223037129199133,
+            "segment_f1_iou_0_8": 0.13666666666666666
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.11166666666666666,
+          "macro_bp_average_precision": 0.6575783146668844,
+          "macro_bp_f1": 0.558879146615468,
+          "macro_bp_precision": 0.7591133392533975,
+          "macro_bp_recall": 0.44223037129199133,
+          "macro_fragments_per_truth": 0.8554421768707483,
+          "macro_segment_f1_iou_0_8": 0.13666666666666666,
+          "macro_short_prediction_rate": 0.6797385620915033,
+          "macro_split_rate": 0.13095238095238096,
+          "minimum_species_bp_f1": 0.558879146615468
+        }
+      },
+      "route_statistics_eval": null,
+      "selected_epoch": null,
+      "trainable_parameters": 0,
+      "training": {
+        "epochs": 0,
+        "nominal_train_steps_per_epoch": null,
+        "optimizer_steps_per_epoch": [],
+        "selected_epoch": null,
+        "selected_epoch_trace": null,
+        "skipped_fully_masked_steps_per_epoch": [],
+        "trace_keys": []
+      }
+    },
+    "D_sea_cal_recalibrated": {
+      "cal_selection_metrics": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.14536928487690504,
+            "bp_f1": 0.6615610253794159,
+            "bp_precision": 0.6331612288988978,
+            "bp_recall": 0.6926281494932771,
+            "segment_f1_iou_0_8": 0.17584994138335286
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.14536928487690504,
+          "macro_bp_average_precision": 0.660216932676959,
+          "macro_bp_f1": 0.6615610253794159,
+          "macro_bp_precision": 0.6331612288988978,
+          "macro_bp_recall": 0.6926281494932771,
+          "macro_fragments_per_truth": 1.0147874306839186,
+          "macro_segment_f1_iou_0_8": 0.17584994138335286,
+          "macro_short_prediction_rate": 0.7081545064377682,
+          "macro_split_rate": 0.11460258780036968,
+          "minimum_species_bp_f1": 0.6615610253794159
+        }
+      },
+      "calibration": {
+        "platt_intercept": -0.17922030890687085,
+        "platt_slope": 0.4284897551427135,
+        "threshold": 0.2566795818698709
+      },
+      "eval": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.14584300975383185,
+            "bp_f1": 0.6962372189320066,
+            "bp_precision": 0.6227072927588932,
+            "bp_recall": 0.7894571409861829,
+            "segment_f1_iou_0_8": 0.17649790989317232
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.14584300975383185,
+          "macro_bp_average_precision": 0.6575783146668844,
+          "macro_bp_f1": 0.6962372189320066,
+          "macro_bp_precision": 0.6227072927588932,
+          "macro_bp_recall": 0.7894571409861829,
+          "macro_fragments_per_truth": 0.9948979591836735,
+          "macro_segment_f1_iou_0_8": 0.17649790989317232,
+          "macro_short_prediction_rate": 0.7284345047923323,
+          "macro_split_rate": 0.10884353741496598,
+          "minimum_species_bp_f1": 0.6962372189320066
+        }
+      },
+      "route_statistics_eval": null,
+      "selected_epoch": null,
+      "trainable_parameters": 0,
+      "training": {
+        "epochs": 0,
+        "nominal_train_steps_per_epoch": null,
+        "optimizer_steps_per_epoch": [],
+        "selected_epoch": null,
+        "selected_epoch_trace": null,
+        "skipped_fully_masked_steps_per_epoch": [],
+        "trace_keys": []
+      }
+    },
+    "constant_average_experts": {
+      "cal_selection_metrics": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.08867362146050671,
+            "bp_f1": 0.6811760729976344,
+            "bp_precision": 0.6897354120755027,
+            "bp_recall": 0.672826565900685,
+            "segment_f1_iou_0_8": 0.11549925484351714
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.08867362146050671,
+          "macro_bp_average_precision": 0.7378093770664721,
+          "macro_bp_f1": 0.6811760729976344,
+          "macro_bp_precision": 0.6897354120755027,
+          "macro_bp_recall": 0.672826565900685,
+          "macro_fragments_per_truth": 1.700554528650647,
+          "macro_segment_f1_iou_0_8": 0.11549925484351714,
+          "macro_short_prediction_rate": 0.8236117592160522,
+          "macro_split_rate": 0.266173752310536,
+          "minimum_species_bp_f1": 0.6811760729976344
+        }
+      },
+      "calibration": {
+        "platt_intercept": -1.096349805291514,
+        "platt_slope": 0.8752233576450271,
+        "threshold": 0.33198737642230164
+      },
+      "eval": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.08923259964306961,
+            "bp_f1": 0.7375592325501603,
+            "bp_precision": 0.6984947571178493,
+            "bp_recall": 0.7812520463623862,
+            "segment_f1_iou_0_8": 0.1058893515764426
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.08923259964306961,
+          "macro_bp_average_precision": 0.8087230515579021,
+          "macro_bp_f1": 0.7375592325501603,
+          "macro_bp_precision": 0.6984947571178493,
+          "macro_bp_recall": 0.7812520463623862,
+          "macro_fragments_per_truth": 1.8588435374149659,
+          "macro_segment_f1_iou_0_8": 0.1058893515764426,
+          "macro_short_prediction_rate": 0.8428262436914203,
+          "macro_split_rate": 0.28061224489795916,
+          "minimum_species_bp_f1": 0.7375592325501603
+        }
+      },
+      "route_statistics_eval": {
+        "sea_urchin": {
+          "callable_bp_mass": 735697.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 123928
+        }
+      },
+      "selected_epoch": 23,
+      "trainable_parameters": 65732,
+      "training": {
+        "epochs": 25,
+        "nominal_train_steps_per_epoch": 256,
+        "optimizer_steps_per_epoch": [
+          255
+        ],
+        "selected_epoch": 23,
+        "selected_epoch_trace": {
+          "cal_macro_bp_f1": 0.6811760729976344,
+          "cal_minimum_species_bp_f1": 0.6811760729976344,
+          "cal_platt_intercept": -1.096349805291514,
+          "cal_platt_slope": 0.8752233576450271,
+          "cal_threshold": 0.33198737642230164,
+          "epoch": 23,
+          "optimizer_steps": 255,
+          "skipped_fully_masked_steps": 1,
+          "train_loss": 0.3726621703189962
+        },
+        "skipped_fully_masked_steps_per_epoch": [
+          1
+        ],
+        "trace_keys": [
+          "cal_macro_bp_f1",
+          "cal_minimum_species_bp_f1",
+          "cal_platt_intercept",
+          "cal_platt_slope",
+          "cal_threshold",
+          "epoch",
+          "optimizer_steps",
+          "skipped_fully_masked_steps",
+          "train_loss"
+        ]
+      }
+    },
+    "dense_residual_adapter": {
+      "cal_selection_metrics": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.10066006600660066,
+            "bp_f1": 0.6787277895275686,
+            "bp_precision": 0.6848164408138855,
+            "bp_recall": 0.6727464516042888,
+            "segment_f1_iou_0_8": 0.12293729372937294
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.10066006600660066,
+          "macro_bp_average_precision": 0.7252867511805912,
+          "macro_bp_f1": 0.6787277895275686,
+          "macro_bp_precision": 0.6848164408138855,
+          "macro_bp_recall": 0.6727464516042888,
+          "macro_fragments_per_truth": 1.5064695009242144,
+          "macro_segment_f1_iou_0_8": 0.12293729372937294,
+          "macro_short_prediction_rate": 0.8050982474774296,
+          "macro_split_rate": 0.21256931608133087,
+          "minimum_species_bp_f1": 0.6787277895275686
+        }
+      },
+      "calibration": {
+        "platt_intercept": -1.2645609775657423,
+        "platt_slope": 0.8772079974155791,
+        "threshold": 0.33117529871333645
+      },
+      "eval": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.10444874274661509,
+            "bp_f1": 0.7344472422136169,
+            "bp_precision": 0.6929748129559924,
+            "bp_recall": 0.7811996594852989,
+            "segment_f1_iou_0_8": 0.11927788523533205
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.10444874274661509,
+          "macro_bp_average_precision": 0.801650791937623,
+          "macro_bp_f1": 0.7344472422136169,
+          "macro_bp_precision": 0.6929748129559924,
+          "macro_bp_recall": 0.7811996594852989,
+          "macro_fragments_per_truth": 1.683673469387755,
+          "macro_segment_f1_iou_0_8": 0.11927788523533205,
+          "macro_short_prediction_rate": 0.8277645186953063,
+          "macro_split_rate": 0.23979591836734693,
+          "minimum_species_bp_f1": 0.7344472422136169
+        }
+      },
+      "route_statistics_eval": {},
+      "selected_epoch": 5,
+      "trainable_parameters": 65730,
+      "training": {
+        "epochs": 25,
+        "nominal_train_steps_per_epoch": 256,
+        "optimizer_steps_per_epoch": [
+          255
+        ],
+        "selected_epoch": 5,
+        "selected_epoch_trace": {
+          "cal_macro_bp_f1": 0.6787277895275686,
+          "cal_minimum_species_bp_f1": 0.6787277895275686,
+          "cal_platt_intercept": -1.2645609775657423,
+          "cal_platt_slope": 0.8772079974155791,
+          "cal_threshold": 0.33117529871333645,
+          "epoch": 5,
+          "optimizer_steps": 255,
+          "skipped_fully_masked_steps": 1,
+          "train_loss": 0.431693937833987
+        },
+        "skipped_fully_masked_steps_per_epoch": [
+          1
+        ],
+        "trace_keys": [
+          "cal_macro_bp_f1",
+          "cal_minimum_species_bp_f1",
+          "cal_platt_intercept",
+          "cal_platt_slope",
+          "cal_threshold",
+          "epoch",
+          "optimizer_steps",
+          "skipped_fully_masked_steps",
+          "train_loss"
+        ]
+      }
+    },
+    "two_expert_soft_gate_residual_adapter": {
+      "cal_selection_metrics": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.10287565816119887,
+            "bp_f1": 0.6830985915492958,
+            "bp_precision": 0.6895859694953536,
+            "bp_recall": 0.6767321378499993,
+            "segment_f1_iou_0_8": 0.12312677197245848
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.10287565816119887,
+          "macro_bp_average_precision": 0.7329393508800118,
+          "macro_bp_f1": 0.6830985915492958,
+          "macro_bp_precision": 0.6895859694953536,
+          "macro_bp_recall": 0.6767321378499993,
+          "macro_fragments_per_truth": 1.4972273567467653,
+          "macro_segment_f1_iou_0_8": 0.12312677197245848,
+          "macro_short_prediction_rate": 0.8018672199170125,
+          "macro_split_rate": 0.22365988909426987,
+          "minimum_species_bp_f1": 0.6830985915492958
+        }
+      },
+      "calibration": {
+        "platt_intercept": -1.1959793072654035,
+        "platt_slope": 0.8997575991487018,
+        "threshold": 0.3263056337003345
+      },
+      "eval": {
+        "per_species": {
+          "sea_urchin": {
+            "boundary_f1_25bp": 0.09603469640644362,
+            "bp_f1": 0.7332545275163644,
+            "bp_precision": 0.6871482793956846,
+            "bp_recall": 0.7859930587387859,
+            "segment_f1_iou_0_8": 0.11090458488228006
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.09603469640644362,
+          "macro_bp_average_precision": 0.7773319370772003,
+          "macro_bp_f1": 0.7332545275163644,
+          "macro_bp_precision": 0.6871482793956846,
+          "macro_bp_recall": 0.7859930587387859,
+          "macro_fragments_per_truth": 1.7380952380952381,
+          "macro_segment_f1_iou_0_8": 0.11090458488228006,
+          "macro_short_prediction_rate": 0.8348484848484848,
+          "macro_split_rate": 0.23469387755102042,
+          "minimum_species_bp_f1": 0.7332545275163644
+        }
+      },
+      "route_statistics_eval": {
+        "sea_urchin": {
+          "callable_bp_mass": 735697.0,
+          "mean_expert_weight": [
+            0.9617934553685432,
+            0.03820654282218406
+          ],
+          "valid_token_count": 123928
+        }
+      },
+      "selected_epoch": 6,
+      "trainable_parameters": 67782,
+      "training": {
+        "epochs": 25,
+        "nominal_train_steps_per_epoch": 256,
+        "optimizer_steps_per_epoch": [
+          255
+        ],
+        "selected_epoch": 6,
+        "selected_epoch_trace": {
+          "cal_macro_bp_f1": 0.6830985915492958,
+          "cal_minimum_species_bp_f1": 0.6830985915492958,
+          "cal_platt_intercept": -1.1959793072654035,
+          "cal_platt_slope": 0.8997575991487018,
+          "cal_threshold": 0.3263056337003345,
+          "epoch": 6,
+          "optimizer_steps": 255,
+          "skipped_fully_masked_steps": 1,
+          "train_loss": 0.42075534298577727
+        },
+        "skipped_fully_masked_steps_per_epoch": [
+          1
+        ],
+        "trace_keys": [
+          "cal_macro_bp_f1",
+          "cal_minimum_species_bp_f1",
+          "cal_platt_intercept",
+          "cal_platt_slope",
+          "cal_threshold",
+          "epoch",
+          "optimizer_steps",
+          "skipped_fully_masked_steps",
+          "train_loss"
+        ]
+      }
+    }
+  },
+  "experiment": "D-ADAPTER-MOE-PILOT-20260914",
+  "job_id": "12709175",
+  "label_denominators": {
+    "comparison_boundary": "These denominators are specific to the new sea mask and are not the old T1 knownTE union denominator.",
+    "evaluation_split": "EVAL",
+    "masked": "label == ? (unknown/ambiguous/PLE or non-ACGT)",
+    "positive": "label == 1",
+    "reference_negative": "label == 0 on A/C/G/T bases after unknown-over-positive masking",
+    "same_mask_for_all_arms": true,
+    "split_label_totals": {
+      "CAL": {
+        "masked_bp": 319718,
+        "positive_bp": 149786,
+        "reference_negative_bp": 579072,
+        "total_bp": 1048576
+      },
+      "EVAL": {
+        "masked_bp": 312879,
+        "positive_bp": 152710,
+        "reference_negative_bp": 582987,
+        "total_bp": 1048576
+      },
+      "TRAIN": {
+        "masked_bp": 608590,
+        "positive_bp": 445247,
+        "reference_negative_bp": 1043315,
+        "total_bp": 2097152
+      }
+    }
+  },
+  "retention": {
+    "D_historical_six_species_calibration": {
+      "calibration": {
+        "platt_intercept": -0.8050313412075021,
+        "platt_slope": 0.6984053956932976,
+        "threshold": 0.42330056285498807
+      },
+      "dev": {
+        "per_species": {
+          "c_elegans": {
+            "boundary_f1_25bp": 0.32116788321167883,
+            "bp_f1": 0.8282932559671075,
+            "bp_precision": 0.8873465029364656,
+            "bp_recall": 0.7766095924702113,
+            "segment_f1_iou_0_8": 0.35766423357664234
+          },
+          "chicken": {
+            "boundary_f1_25bp": 0.29411764705882354,
+            "bp_f1": 0.7509809496730168,
+            "bp_precision": 0.7369419642857142,
+            "bp_recall": 0.7655652173913043,
+            "segment_f1_iou_0_8": 0.37254901960784315
+          },
+          "human": {
+            "boundary_f1_25bp": 0.4779220779220779,
+            "bp_f1": 0.91026702881283,
+            "bp_precision": 0.9374064861671003,
+            "bp_recall": 0.8846548188653451,
+            "segment_f1_iou_0_8": 0.5558441558441558
+          },
+          "mouse": {
+            "boundary_f1_25bp": 0.5153153153153153,
+            "bp_f1": 0.9548466982791372,
+            "bp_precision": 0.9537417898001443,
+            "bp_recall": 0.955954169797145,
+            "segment_f1_iou_0_8": 0.5585585585585585
+          },
+          "pig": {
+            "boundary_f1_25bp": 0.43736730360934184,
+            "bp_f1": 0.8946663612496256,
+            "bp_precision": 0.8927943451962301,
+            "bp_recall": 0.8965462443055409,
+            "segment_f1_iou_0_8": 0.4883227176220807
+          },
+          "zebrafish": {
+            "boundary_f1_25bp": 0.3014018691588785,
+            "bp_f1": 0.9228519333306135,
+            "bp_precision": 0.9136735353334493,
+            "bp_recall": 0.9322166075968629,
+            "segment_f1_iou_0_8": 0.39485981308411217
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.39121534937935265,
+          "macro_bp_average_precision": 0.9440217104139776,
+          "macro_bp_f1": 0.8769843712187217,
+          "macro_bp_precision": 0.8869841039531842,
+          "macro_bp_recall": 0.8685911084044017,
+          "macro_fragments_per_truth": 1.0465021337143072,
+          "macro_segment_f1_iou_0_8": 0.45463308304889877,
+          "macro_short_prediction_rate": 0.35138050426656126,
+          "macro_split_rate": 0.09750862345938811,
+          "minimum_species_bp_f1": 0.7509809496730168
+        }
+      }
+    },
+    "D_recalibrated_six_species_cal_refit": {
+      "calibration": {
+        "platt_intercept": -0.8013121236793055,
+        "platt_slope": 0.723122305627303,
+        "threshold": 0.37406222572140657
+      },
+      "dev": {
+        "per_species": {
+          "c_elegans": {
+            "boundary_f1_25bp": 0.3392226148409894,
+            "bp_f1": 0.83332466586926,
+            "bp_precision": 0.8669119238260117,
+            "bp_recall": 0.8022429157905276,
+            "segment_f1_iou_0_8": 0.36042402826855124
+          },
+          "chicken": {
+            "boundary_f1_25bp": 0.3018867924528302,
+            "bp_f1": 0.7566810465572301,
+            "bp_precision": 0.7321118820468343,
+            "bp_recall": 0.7829565217391304,
+            "segment_f1_iou_0_8": 0.39622641509433965
+          },
+          "human": {
+            "boundary_f1_25bp": 0.45373891001267425,
+            "bp_f1": 0.9096739564265954,
+            "bp_precision": 0.9284102295180215,
+            "bp_recall": 0.8916789581609527,
+            "segment_f1_iou_0_8": 0.5221799746514575
+          },
+          "mouse": {
+            "boundary_f1_25bp": 0.518918918918919,
+            "bp_f1": 0.9547476292158928,
+            "bp_precision": 0.948002888728404,
+            "bp_recall": 0.9615890308039068,
+            "segment_f1_iou_0_8": 0.5621621621621622
+          },
+          "pig": {
+            "boundary_f1_25bp": 0.4175365344467641,
+            "bp_f1": 0.8940963299155872,
+            "bp_precision": 0.8823741811241597,
+            "bp_recall": 0.9061341243775823,
+            "segment_f1_iou_0_8": 0.4759916492693111
+          },
+          "zebrafish": {
+            "boundary_f1_25bp": 0.27209302325581397,
+            "bp_f1": 0.9208031908775224,
+            "bp_precision": 0.9033328453618309,
+            "bp_recall": 0.9389626116672901,
+            "segment_f1_iou_0_8": 0.3627906976744186
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.3838994656546652,
+          "macro_bp_average_precision": 0.9440217104139776,
+          "macro_bp_f1": 0.8782211364770146,
+          "macro_bp_precision": 0.8768573251008771,
+          "macro_bp_recall": 0.8805940270898983,
+          "macro_fragments_per_truth": 1.067820967491904,
+          "macro_segment_f1_iou_0_8": 0.44662915452004004,
+          "macro_short_prediction_rate": 0.37166462640264686,
+          "macro_split_rate": 0.09250494719828915,
+          "minimum_species_bp_f1": 0.7566810465572301
+        }
+      }
+    },
+    "D_sea_cal_recalibrated_direct_on_six_dev": {
+      "calibration": {
+        "platt_intercept": -0.17922030890687085,
+        "platt_slope": 0.4284897551427135,
+        "threshold": 0.2566795818698709
+      },
+      "dev": {
+        "per_species": {
+          "c_elegans": {
+            "boundary_f1_25bp": 0.17647058823529413,
+            "bp_f1": 0.7202166991886618,
+            "bp_precision": 0.5851882757901324,
+            "bp_recall": 0.9362504589299423,
+            "segment_f1_iou_0_8": 0.20098039215686275
+          },
+          "chicken": {
+            "boundary_f1_25bp": 0.2982456140350877,
+            "bp_f1": 0.7670704048641606,
+            "bp_precision": 0.6569680938998181,
+            "bp_recall": 0.9215072463768116,
+            "segment_f1_iou_0_8": 0.3333333333333333
+          },
+          "human": {
+            "boundary_f1_25bp": 0.26971428571428574,
+            "bp_f1": 0.8705413620307237,
+            "bp_precision": 0.801159731462441,
+            "bp_recall": 0.9530794690074469,
+            "segment_f1_iou_0_8": 0.3314285714285714
+          },
+          "mouse": {
+            "boundary_f1_25bp": 0.34056761268781305,
+            "bp_f1": 0.9273929875013825,
+            "bp_precision": 0.8767158810489774,
+            "bp_recall": 0.9842881292261457,
+            "segment_f1_iou_0_8": 0.4240400667779633
+          },
+          "pig": {
+            "boundary_f1_25bp": 0.26595744680851063,
+            "bp_f1": 0.8232695139911634,
+            "bp_precision": 0.7220875725776381,
+            "bp_recall": 0.9574283999011195,
+            "segment_f1_iou_0_8": 0.3333333333333333
+          },
+          "zebrafish": {
+            "boundary_f1_25bp": 0.09134615384615384,
+            "bp_f1": 0.8934033009473338,
+            "bp_precision": 0.8200272356840449,
+            "bp_recall": 0.9812012198601345,
+            "segment_f1_iou_0_8": 0.1778846153846154
+          }
+        },
+        "summary": {
+          "macro_boundary_f1_25bp": 0.24038361688785748,
+          "macro_bp_average_precision": 0.9440217104139776,
+          "macro_bp_f1": 0.8336490447539043,
+          "macro_bp_precision": 0.743691131743842,
+          "macro_bp_recall": 0.9556258205502667,
+          "macro_fragments_per_truth": 1.0112670596938576,
+          "macro_segment_f1_iou_0_8": 0.3001667187357799,
+          "macro_short_prediction_rate": 0.45061787527895,
+          "macro_split_rate": 0.041964178439186685,
+          "minimum_species_bp_f1": 0.7202166991886618
+        }
+      }
+    },
+    "adapted_heads": {
+      "constant_average_experts": {
+        "route_statistics_dev": {
+          "c_elegans": {
+            "callable_bp_mass": 260664.0,
+            "mean_expert_weight": [
+              0.5,
+              0.5
+            ],
+            "valid_token_count": 43670
+          },
+          "chicken": {
+            "callable_bp_mass": 262144.0,
+            "mean_expert_weight": [
+              0.5,
+              0.5
+            ],
+            "valid_token_count": 43904
+          },
+          "human": {
+            "callable_bp_mass": 262042.0,
+            "mean_expert_weight": [
+              0.5,
+              0.5
+            ],
+            "valid_token_count": 43888
+          },
+          "mouse": {
+            "callable_bp_mass": 261886.0,
+            "mean_expert_weight": [
+              0.5,
+              0.5
+            ],
+            "valid_token_count": 43870
+          },
+          "pig": {
+            "callable_bp_mass": 262144.0,
+            "mean_expert_weight": [
+              0.5,
+              0.5
+            ],
+            "valid_token_count": 43904
+          },
+          "zebrafish": {
+            "callable_bp_mass": 261850.0,
+            "mean_expert_weight": [
+              0.5,
+              0.5
+            ],
+            "valid_token_count": 43858
+          }
+        },
+        "sea_selected_calibration_direct_on_six_dev": {
+          "calibration": {
+            "platt_intercept": -1.096349805291514,
+            "platt_slope": 0.8752233576450271,
+            "threshold": 0.33198737642230164
+          },
+          "dev": {
+            "per_species": {
+              "c_elegans": {
+                "boundary_f1_25bp": 0.07042253521126761,
+                "bp_f1": 0.7317777095486644,
+                "bp_precision": 0.6775064669262912,
+                "bp_recall": 0.7955008177297153,
+                "segment_f1_iou_0_8": 0.07276995305164319
+              },
+              "chicken": {
+                "boundary_f1_25bp": 0.0802675585284281,
+                "bp_f1": 0.5362872920955462,
+                "bp_precision": 0.3733733733733734,
+                "bp_recall": 0.9514202898550724,
+                "segment_f1_iou_0_8": 0.08695652173913043
+              },
+              "human": {
+                "boundary_f1_25bp": 0.07246376811594203,
+                "bp_f1": 0.7665101387406617,
+                "bp_precision": 0.6340517444324121,
+                "bp_recall": 0.9689265028600209,
+                "segment_f1_iou_0_8": 0.10628019323671498
+              },
+              "mouse": {
+                "boundary_f1_25bp": 0.12786108918705605,
+                "bp_f1": 0.8462477292226389,
+                "bp_precision": 0.7408927727583702,
+                "bp_recall": 0.9865326821938393,
+                "segment_f1_iou_0_8": 0.15943172849250198
+              },
+              "pig": {
+                "boundary_f1_25bp": 0.0426179604261796,
+                "bp_f1": 0.6371155247602632,
+                "bp_precision": 0.47373219569256175,
+                "bp_recall": 0.972525338136102,
+                "segment_f1_iou_0_8": 0.0639269406392694
+              },
+              "zebrafish": {
+                "boundary_f1_25bp": 0.12788398154251812,
+                "bp_f1": 0.9068578656726932,
+                "bp_precision": 0.8771581604237519,
+                "bp_recall": 0.9386392599684257,
+                "segment_f1_iou_0_8": 0.19775873434410018
+              }
+            },
+            "summary": {
+              "macro_boundary_f1_25bp": 0.08691948216856525,
+              "macro_bp_average_precision": 0.908527505161477,
+              "macro_bp_f1": 0.7374660433400778,
+              "macro_bp_precision": 0.6294524522677934,
+              "macro_bp_recall": 0.9355908151238626,
+              "macro_fragments_per_truth": 1.4910546427857245,
+              "macro_segment_f1_iou_0_8": 0.11452067858389336,
+              "macro_short_prediction_rate": 0.7798367764764041,
+              "macro_split_rate": 0.18036003015374558,
+              "minimum_species_bp_f1": 0.5362872920955462
+            }
+          }
+        },
+        "six_species_cal_refit": {
+          "calibration": {
+            "platt_intercept": -2.6207925572333934,
+            "platt_slope": 1.1848352692873385,
+            "threshold": 0.32324128593786866
+          },
+          "dev": {
+            "per_species": {
+              "c_elegans": {
+                "boundary_f1_25bp": 0.06451612903225806,
+                "bp_f1": 0.6728911653794188,
+                "bp_precision": 0.8500101895251682,
+                "bp_recall": 0.5568572477554153,
+                "segment_f1_iou_0_8": 0.0785413744740533
+              },
+              "chicken": {
+                "boundary_f1_25bp": 0.14035087719298245,
+                "bp_f1": 0.6574928542262147,
+                "bp_precision": 0.507469271982351,
+                "bp_recall": 0.9334492753623188,
+                "segment_f1_iou_0_8": 0.16666666666666666
+              },
+              "human": {
+                "boundary_f1_25bp": 0.15837346174424827,
+                "bp_f1": 0.8599942782036877,
+                "bp_precision": 0.7977845301742374,
+                "bp_recall": 0.9327265532251682,
+                "segment_f1_iou_0_8": 0.18512573568753343
+              },
+              "mouse": {
+                "boundary_f1_25bp": 0.24358974358974358,
+                "bp_f1": 0.9055396014643664,
+                "bp_precision": 0.8492249496320052,
+                "bp_recall": 0.9698534936138242,
+                "segment_f1_iou_0_8": 0.2673992673992674
+              },
+              "pig": {
+                "boundary_f1_25bp": 0.10574412532637076,
+                "bp_f1": 0.7769687580686806,
+                "bp_precision": 0.6672621989077685,
+                "bp_recall": 0.9298477946110111,
+                "segment_f1_iou_0_8": 0.12924281984334204
+              },
+              "zebrafish": {
+                "boundary_f1_25bp": 0.1589319771137953,
+                "bp_f1": 0.9067092400905558,
+                "bp_precision": 0.9366724120450167,
+                "bp_recall": 0.8786036278792567,
+                "segment_f1_iou_0_8": 0.21106166560712014
+              }
+            },
+            "summary": {
+              "macro_boundary_f1_25bp": 0.14525105233323307,
+              "macro_bp_average_precision": 0.908527505161477,
+              "macro_bp_f1": 0.7965993162388206,
+              "macro_bp_precision": 0.7680705920444245,
+              "macro_bp_recall": 0.8668896654078324,
+              "macro_fragments_per_truth": 1.8894368539509514,
+              "macro_segment_f1_iou_0_8": 0.17300625494633048,
+              "macro_short_prediction_rate": 0.7590373769316132,
+              "macro_split_rate": 0.3348140727644427,
+              "minimum_species_bp_f1": 0.6574928542262147
+            }
+          }
+        }
+      },
+      "dense_residual_adapter": {
+        "route_statistics_dev": {},
+        "sea_selected_calibration_direct_on_six_dev": {
+          "calibration": {
+            "platt_intercept": -1.2645609775657423,
+            "platt_slope": 0.8772079974155791,
+            "threshold": 0.33117529871333645
+          },
+          "dev": {
+            "per_species": {
+              "c_elegans": {
+                "boundary_f1_25bp": 0.11965811965811966,
+                "bp_f1": 0.7469370387216997,
+                "bp_precision": 0.6664484708839548,
+                "bp_recall": 0.8495377323854344,
+                "segment_f1_iou_0_8": 0.1225071225071225
+              },
+              "chicken": {
+                "boundary_f1_25bp": 0.11299435028248588,
+                "bp_f1": 0.6291097865795039,
+                "bp_precision": 0.4706559263521289,
+                "bp_recall": 0.9484057971014492,
+                "segment_f1_iou_0_8": 0.14689265536723164
+              },
+              "human": {
+                "boundary_f1_25bp": 0.10688042752171009,
+                "bp_f1": 0.8247507507276579,
+                "bp_precision": 0.7203226478074859,
+                "bp_recall": 0.9645915026801454,
+                "segment_f1_iou_0_8": 0.15497661990647962
+              },
+              "mouse": {
+                "boundary_f1_25bp": 0.1968408262454435,
+                "bp_f1": 0.8827466815693162,
+                "bp_precision": 0.7987438122105711,
+                "bp_recall": 0.9864951164537942,
+                "segment_f1_iou_0_8": 0.2551640340218712
+              },
+              "pig": {
+                "boundary_f1_25bp": 0.06818181818181818,
+                "bp_f1": 0.7164315212152004,
+                "bp_precision": 0.5676038312278094,
+                "bp_recall": 0.9710421301691563,
+                "segment_f1_iou_0_8": 0.09242424242424242
+              },
+              "zebrafish": {
+                "boundary_f1_25bp": 0.14623955431754876,
+                "bp_f1": 0.9065994218586629,
+                "bp_precision": 0.8802498551867046,
+                "bp_recall": 0.9345751729297566,
+                "segment_f1_iou_0_8": 0.2116991643454039
+              }
+            },
+            "summary": {
+              "macro_boundary_f1_25bp": 0.12513251603452102,
+              "macro_bp_average_precision": 0.903275262414942,
+              "macro_bp_f1": 0.7844292001120068,
+              "macro_bp_precision": 0.6840040906114425,
+              "macro_bp_recall": 0.9424412419532894,
+              "macro_fragments_per_truth": 1.2756911344411932,
+              "macro_segment_f1_iou_0_8": 0.16394397309539188,
+              "macro_short_prediction_rate": 0.6907612528060251,
+              "macro_split_rate": 0.11983119890931998,
+              "minimum_species_bp_f1": 0.6291097865795039
+            }
+          }
+        },
+        "six_species_cal_refit": {
+          "calibration": {
+            "platt_intercept": -2.726465849384914,
+            "platt_slope": 1.3231959414813164,
+            "threshold": 0.4991986380191062
+          },
+          "dev": {
+            "per_species": {
+              "c_elegans": {
+                "boundary_f1_25bp": 0.07516339869281045,
+                "bp_f1": 0.6957300079337633,
+                "bp_precision": 0.8908105855386539,
+                "bp_recall": 0.5707419645539201,
+                "segment_f1_iou_0_8": 0.07516339869281045
+              },
+              "chicken": {
+                "boundary_f1_25bp": 0.21333333333333335,
+                "bp_f1": 0.7224820143884892,
+                "bp_precision": 0.5900844656628719,
+                "bp_recall": 0.9314782608695652,
+                "segment_f1_iou_0_8": 0.26666666666666666
+              },
+              "human": {
+                "boundary_f1_25bp": 0.2296793437733035,
+                "bp_f1": 0.8951335689356191,
+                "bp_precision": 0.8743706956439703,
+                "bp_recall": 0.9169065007015146,
+                "segment_f1_iou_0_8": 0.2714392244593587
+              },
+              "mouse": {
+                "boundary_f1_25bp": 0.2522167487684729,
+                "bp_f1": 0.9220687955754716,
+                "bp_precision": 0.8967708721663028,
+                "bp_recall": 0.9488354620586026,
+                "segment_f1_iou_0_8": 0.2876847290640394
+              },
+              "pig": {
+                "boundary_f1_25bp": 0.18144750254842,
+                "bp_f1": 0.8447182667591497,
+                "bp_precision": 0.785271047321388,
+                "bp_recall": 0.9139033089663453,
+                "segment_f1_iou_0_8": 0.22018348623853212
+              },
+              "zebrafish": {
+                "boundary_f1_25bp": 0.15727391874180865,
+                "bp_f1": 0.90035997506318,
+                "bp_precision": 0.9550739168462146,
+                "bp_recall": 0.8515752299918211,
+                "segment_f1_iou_0_8": 0.20576671035386632
+              }
+            },
+            "summary": {
+              "macro_boundary_f1_25bp": 0.18485237430969148,
+              "macro_bp_average_precision": 0.903275262414942,
+              "macro_bp_f1": 0.8300821047759456,
+              "macro_bp_precision": 0.8320635971965668,
+              "macro_bp_recall": 0.8555734545236282,
+              "macro_fragments_per_truth": 1.9180928347613833,
+              "macro_segment_f1_iou_0_8": 0.2211507025792123,
+              "macro_short_prediction_rate": 0.6944493711757521,
+              "macro_split_rate": 0.33258798298818093,
+              "minimum_species_bp_f1": 0.6957300079337633
+            }
+          }
+        }
+      },
+      "two_expert_soft_gate_residual_adapter": {
+        "route_statistics_dev": {
+          "c_elegans": {
+            "callable_bp_mass": 260664.0,
+            "mean_expert_weight": [
+              0.987157305239337,
+              0.012842693457946178
+            ],
+            "valid_token_count": 43670
+          },
+          "chicken": {
+            "callable_bp_mass": 262144.0,
+            "mean_expert_weight": [
+              0.9913502618268524,
+              0.008649736849070711
+            ],
+            "valid_token_count": 43904
+          },
+          "human": {
+            "callable_bp_mass": 262042.0,
+            "mean_expert_weight": [
+              0.9317643699595699,
+              0.06823562844296843
+            ],
+            "valid_token_count": 43888
+          },
+          "mouse": {
+            "callable_bp_mass": 261886.0,
+            "mean_expert_weight": [
+              0.8648309461967422,
+              0.1351690531487091
+            ],
+            "valid_token_count": 43870
+          },
+          "pig": {
+            "callable_bp_mass": 262144.0,
+            "mean_expert_weight": [
+              0.9491715350862915,
+              0.050828463787527735
+            ],
+            "valid_token_count": 43904
+          },
+          "zebrafish": {
+            "callable_bp_mass": 261850.0,
+            "mean_expert_weight": [
+              0.8147909337331288,
+              0.18520906562656203
+            ],
+            "valid_token_count": 43858
+          }
+        },
+        "sea_selected_calibration_direct_on_six_dev": {
+          "calibration": {
+            "platt_intercept": -1.1959793072654035,
+            "platt_slope": 0.8997575991487018,
+            "threshold": 0.3263056337003345
+          },
+          "dev": {
+            "per_species": {
+              "c_elegans": {
+                "boundary_f1_25bp": 0.10256410256410256,
+                "bp_f1": 0.7445926732613365,
+                "bp_precision": 0.6808287002461759,
+                "bp_recall": 0.8215346617269117,
+                "segment_f1_iou_0_8": 0.1076923076923077
+              },
+              "chicken": {
+                "boundary_f1_25bp": 0.1375,
+                "bp_f1": 0.645919615035696,
+                "bp_precision": 0.48947871831659495,
+                "bp_recall": 0.9493333333333334,
+                "segment_f1_iou_0_8": 0.175
+              },
+              "human": {
+                "boundary_f1_25bp": 0.09267376330619913,
+                "bp_f1": 0.8086919920025255,
+                "bp_precision": 0.6945950831525669,
+                "bp_recall": 0.9676403928481491,
+                "segment_f1_iou_0_8": 0.13149655604257984
+              },
+              "mouse": {
+                "boundary_f1_25bp": 0.21153846153846154,
+                "bp_f1": 0.8809188464118042,
+                "bp_precision": 0.7955481526347669,
+                "bp_recall": 0.9868144252441773,
+                "segment_f1_iou_0_8": 0.2644230769230769
+              },
+              "pig": {
+                "boundary_f1_25bp": 0.06502890173410404,
+                "bp_f1": 0.7001362033630775,
+                "bp_precision": 0.5473707256876716,
+                "bp_recall": 0.9711833880707702,
+                "segment_f1_iou_0_8": 0.09248554913294797
+              },
+              "zebrafish": {
+                "boundary_f1_25bp": 0.14507042253521127,
+                "bp_f1": 0.9040444912289242,
+                "bp_precision": 0.869018722473402,
+                "bp_recall": 0.9420122620036393,
+                "segment_f1_iou_0_8": 0.2028169014084507
+              }
+            },
+            "summary": {
+              "macro_boundary_f1_25bp": 0.12572927527967975,
+              "macro_bp_average_precision": 0.9126920836360882,
+              "macro_bp_f1": 0.7807173035505607,
+              "macro_bp_precision": 0.6794733504185296,
+              "macro_bp_recall": 0.9397530772044967,
+              "macro_fragments_per_truth": 1.339703502243905,
+              "macro_segment_f1_iou_0_8": 0.16231906519989384,
+              "macro_short_prediction_rate": 0.6997542004526848,
+              "macro_split_rate": 0.1306393102944096,
+              "minimum_species_bp_f1": 0.645919615035696
+            }
+          }
+        },
+        "six_species_cal_refit": {
+          "calibration": {
+            "platt_intercept": -2.639461633096312,
+            "platt_slope": 1.2546611169730517,
+            "threshold": 0.3890888887010602
+          },
+          "dev": {
+            "per_species": {
+              "c_elegans": {
+                "boundary_f1_25bp": 0.10472972972972973,
+                "bp_f1": 0.6851790860436393,
+                "bp_precision": 0.8938718513346582,
+                "bp_recall": 0.5554888021094089,
+                "segment_f1_iou_0_8": 0.11148648648648649
+              },
+              "chicken": {
+                "boundary_f1_25bp": 0.21476510067114093,
+                "bp_f1": 0.725912653975364,
+                "bp_precision": 0.5914598540145986,
+                "bp_recall": 0.9394782608695652,
+                "segment_f1_iou_0_8": 0.2684563758389262
+              },
+              "human": {
+                "boundary_f1_25bp": 0.22302158273381295,
+                "bp_f1": 0.8893425501216702,
+                "bp_precision": 0.8532938833194211,
+                "bp_recall": 0.9285714285714286,
+                "segment_f1_iou_0_8": 0.2589928057553957
+              },
+              "mouse": {
+                "boundary_f1_25bp": 0.31363088057901084,
+                "bp_f1": 0.929346681896571,
+                "bp_precision": 0.8884169057508672,
+                "bp_recall": 0.9742299023290759,
+                "segment_f1_iou_0_8": 0.3474065138721351
+              },
+              "pig": {
+                "boundary_f1_25bp": 0.17932489451476794,
+                "bp_f1": 0.8384126882818483,
+                "bp_precision": 0.7647358463105807,
+                "bp_recall": 0.9277995550376099,
+                "segment_f1_iou_0_8": 0.2088607594936709
+              },
+              "zebrafish": {
+                "boundary_f1_25bp": 0.1921598770176787,
+                "bp_f1": 0.9141351025879894,
+                "bp_precision": 0.9365364406666933,
+                "bp_recall": 0.8927803807941771,
+                "segment_f1_iou_0_8": 0.2644119907763259
+              }
+            },
+            "summary": {
+              "macro_boundary_f1_25bp": 0.20460534420769017,
+              "macro_bp_average_precision": 0.9126920836360882,
+              "macro_bp_f1": 0.8303881271511804,
+              "macro_bp_precision": 0.8213857968994698,
+              "macro_bp_recall": 0.8697247216185442,
+              "macro_fragments_per_truth": 1.6284101578130714,
+              "macro_segment_f1_iou_0_8": 0.24326915537049001,
+              "macro_short_prediction_rate": 0.6832284624696938,
+              "macro_split_rate": 0.27210848070650173,
+              "minimum_species_bp_f1": 0.6851790860436393
+            }
+          }
+        }
+      }
+    }
+  },
+  "scientific_status": "exploratory_supervised_sea_urchin_adaptation_not_zero_shot",
+  "selection_isolation": {
+    "eval_extracted_after_cal_selection": true,
+    "original_six_dev_not_used_for_sea_epoch_or_threshold_selection": true,
+    "sea_calibration_direct_vs_six_cal_refit_both_reported": true
+  },
+  "split_policy": {
+    "CAL": "region 3",
+    "EVAL": "region 4, touched only after CAL epoch selection",
+    "TRAIN": "regions 1+2"
+  },
+  "status": "completed"
+}

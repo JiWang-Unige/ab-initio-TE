@@ -1,0 +1,8 @@
+{
+  "hidden_size": 1024,
+  "scope": [
+    "EVAL"
+  ],
+  "status": "extracted_after_cal_selection",
+  "tokens": 175616
+}

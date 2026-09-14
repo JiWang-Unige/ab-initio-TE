@@ -1,0 +1,14 @@
+{
+  "status": "COMPLETED_4_OMNI_JOBS_PARTIAL_NATIVE_MATRIX",
+  "source_commit": "57d208251c837fce8028b32e362358ffa9df3cf5",
+  "dirty": false,
+  "native_array": "12708424",
+  "export_job": "12709406",
+  "registry_cells": 12,
+  "completed_native_or_cached_cells": 11,
+  "running_cells": [
+    "platypus|rm2_rm"
+  ],
+  "same_bundle_as_pre_correction_replay": true,
+  "truth_available": false
+}

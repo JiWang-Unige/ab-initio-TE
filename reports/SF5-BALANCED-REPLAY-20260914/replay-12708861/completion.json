@@ -1,0 +1,12 @@
+{
+  "inference_only": true,
+  "job_id": "12708861",
+  "metrics": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SF5-BALANCED-REPLAY-20260914/replay-12708861/metrics.json",
+  "model_names": [
+    "SF5_base_pretrained_seed42",
+    "SF5_binary_h0_seed42"
+  ],
+  "selected_total": 480,
+  "status": "SF5_BALANCED_REPLAY_COMPLETED",
+  "training_called": false
+}

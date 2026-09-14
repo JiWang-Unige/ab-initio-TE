@@ -1,0 +1,18 @@
+TE real panel clean pinned Omni replay
+=======================================
+protocol: TE-REAL-PANEL-BENCH-20260914
+native array: 12708424
+native compact export job: 12709406
+OmniBenchmark: 0.6.0
+repository pin: b75ebfa93254579147ee44f12ba83c4d24838365
+clean checkout: yes (no --dirty)
+scheduler: greedy (the bundled arm64 CBC binary cannot execute on Apple Silicon)
+workflow result: COMPLETED; 4 Snakemake jobs
+
+Cell denominator:
+  expected=12 observed=12 scored=11
+  status_counts={'COMPLETED': 11, 'RUNNING': 1}
+  the one RUNNING native cell remains null; no precision/F1 is computed
+
+Native caller status and T2 metrics are in native_cell_registry.json and metrics.json.
+This is a real-region feasibility/T2 concordance replay, not an independent accuracy benchmark.

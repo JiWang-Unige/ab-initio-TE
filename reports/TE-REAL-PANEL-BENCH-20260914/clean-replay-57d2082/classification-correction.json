@@ -1,0 +1,94 @@
+{
+  "original_source_commit": "b75ebfa93254579147ee44f12ba83c4d24838365",
+  "corrected_source_commit": "57d208251c837fce8028b32e362358ffa9df3cf5",
+  "same_native_bundle": true,
+  "overall_coverage_and_pairwise_metrics_unchanged": true,
+  "record_reclassifications": [
+    {
+      "cell": "platypus__fixed_rm",
+      "rows": [
+        {
+          "before": "known_te",
+          "after": "unknown_or_ambiguous",
+          "attributes": "class_family=PLE",
+          "count": 1
+        },
+        {
+          "before": "non_te",
+          "after": "known_te",
+          "attributes": "class_family=SINE/tRNA",
+          "count": 42
+        }
+      ]
+    },
+    {
+      "cell": "platypus__hite",
+      "rows": [
+        {
+          "before": "non_te",
+          "after": "known_te",
+          "attributes": "class_family=SINE/tRNA",
+          "count": 2957
+        }
+      ]
+    },
+    {
+      "cell": "sea_urchin__fixed_rm",
+      "rows": [
+        {
+          "before": "known_te",
+          "after": "unknown_or_ambiguous",
+          "attributes": "class_family=PLE",
+          "count": 34
+        },
+        {
+          "before": "known_te",
+          "after": "unknown_or_ambiguous",
+          "attributes": "class_family=PLE/Chlamys",
+          "count": 236
+        },
+        {
+          "before": "known_te",
+          "after": "unknown_or_ambiguous",
+          "attributes": "class_family=PLE/Hydra",
+          "count": 27
+        },
+        {
+          "before": "non_te",
+          "after": "known_te",
+          "attributes": "class_family=SINE/tRNA",
+          "count": 490
+        }
+      ]
+    },
+    {
+      "cell": "sea_urchin__hite",
+      "rows": [
+        {
+          "before": "non_te",
+          "after": "known_te",
+          "attributes": "class_family=SINE/tRNA",
+          "count": 28
+        },
+        {
+          "before": "non_te",
+          "after": "known_te",
+          "attributes": "class_family=SINE/tRNA-Deu-CR1",
+          "count": 13
+        }
+      ]
+    },
+    {
+      "cell": "sea_urchin__rm2_rm",
+      "rows": [
+        {
+          "before": "non_te",
+          "after": "known_te",
+          "attributes": "class_family=SINE/tRNA",
+          "count": 23
+        }
+      ]
+    }
+  ],
+  "interpretation": "Explicit top-level class overrides subtype/name text. PLE remains ambiguous under this project label policy, not a claim that it is biologically non-TE."
+}
