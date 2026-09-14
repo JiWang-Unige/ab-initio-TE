@@ -13,10 +13,11 @@ cd /home/users/j/jwang/ab-initio-TE
 TASK_ROOT=$(pwd -P)
 CFG=configs/P3-TIBERIUS-BASE-MASK-20260911-R1.json
 RUN=smoke
+REVISION=r1
 CORE=chr16:0
 SCRIPT=scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/base_mask.py
 OBS=scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/observed_tiberius.py
-OUT=outputs/P3-TIBERIUS-BASE-MASK-20260911-R1/${RUN}-r1
+OUT=outputs/P3-TIBERIUS-BASE-MASK-20260911-R1/${RUN}-${REVISION}
 IMAGE="$TASK_ROOT/software_outputs/tiberius/GAP-BRIDGE-DOWNSTREAM-C-R1/container-20260905-r1/tiberius_2.0.7.sif"
 
 source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
@@ -30,14 +31,19 @@ test "$(git -C refs/repos/Tiberius-gap-c-r1 rev-parse HEAD)" = 4d657012a3ed4e923
 test -d outputs/TE-STRUCTURE-PILOT-20260825-R1/p3-human-20260828-r2-12097867/unet
 test ! -e "$OUT"
 python -m unittest scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/test_base_mask.py -v
-python "$SCRIPT" prepare --config "$CFG" --run "$RUN"
-python "$SCRIPT" run-core --config "$CFG" --run "$RUN" --core "$CORE"
+python "$SCRIPT" prepare --config "$CFG" --run "$RUN" --revision "$REVISION"
+python "$SCRIPT" run-core --config "$CFG" --run "$RUN" --revision "$REVISION" --core "$CORE"
 
 container=(singularity exec --nv --cleanenv --env "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES" --bind "$TASK_ROOT:/work/te" --bind "$TASK_ROOT/refs/repos/Tiberius-gap-c-r1:/opt/Tiberius" --pwd /work/te "$IMAGE" /usr/bin/python3)
-"${container[@]}" "/work/te/$SCRIPT" preflight-core --config "/work/te/$CFG" --run "$RUN" --core "$CORE"
+"${container[@]}" "/work/te/$SCRIPT" preflight-core --config "/work/te/$CFG" --run "$RUN" --revision "$REVISION" --core "$CORE"
 for MODE in U P R; do
-  BASE_MASK_OBSERVATION="/work/te/$OUT/core-chr16-0/$MODE.observation.json" \
-  "${container[@]}" "/work/te/$OBS" \
+  mode_container=(singularity exec --nv --cleanenv \
+    --env "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES" \
+    --env "BASE_MASK_OBSERVATION=/work/te/$OUT/core-chr16-0/$MODE.observation.json" \
+    --bind "$TASK_ROOT:/work/te" \
+    --bind "$TASK_ROOT/refs/repos/Tiberius-gap-c-r1:/opt/Tiberius" \
+    --pwd /work/te "$IMAGE" /usr/bin/python3)
+  "${mode_container[@]}" "/work/te/$OBS" \
     --genome "/work/te/$OUT/core-chr16-0/$MODE.fasta" \
     --model_cfg /opt/Tiberius/model_cfg/mammalia_softmasking_v2.yaml \
     --seq_len 400050 --batch_size 1 \

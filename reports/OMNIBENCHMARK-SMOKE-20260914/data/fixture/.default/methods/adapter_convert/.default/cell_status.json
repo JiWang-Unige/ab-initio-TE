@@ -1,0 +1,29 @@
+{
+  "cells": [
+    {
+      "cell_id": "adapter_convert|convert|host",
+      "device": "host",
+      "method": "adapter_convert",
+      "status": "COMPLETED",
+      "task": "convert"
+    },
+    {
+      "cell_id": "synthetic_status_unsupported|status|host",
+      "device": "host",
+      "method": "synthetic_status_unsupported",
+      "reason": "deliberate denominator-preservation fixture",
+      "status": "UNSUPPORTED",
+      "task": "status"
+    },
+    {
+      "cell_id": "synthetic_status_blocked|status|host",
+      "device": "host",
+      "method": "synthetic_status_blocked",
+      "reason": "deliberate denominator-preservation fixture",
+      "status": "BLOCKED",
+      "task": "status"
+    }
+  ],
+  "engineering_only": true,
+  "schema": "te_engineering_status_v1"
+}

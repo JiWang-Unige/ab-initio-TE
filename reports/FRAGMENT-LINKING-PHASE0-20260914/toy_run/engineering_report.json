@@ -1,0 +1,20 @@
+{
+  "B0_overmerged_components": 3,
+  "B1_overmerged_components": 2,
+  "B1_transitive_chain_false_merge_detected": true,
+  "M2": "INPUT_CONTRACT_ONLY; no model or score",
+  "M3": "INPUT_CONTRACT_ONLY; no model or score",
+  "candidate_pairs": 8,
+  "candidate_recall": 0.5,
+  "contract_version": "fragment-linking-phase0-v1",
+  "fixture_fragments": 16,
+  "gap_filling_applied": false,
+  "intervals_unchanged": true,
+  "material_mask_changed": false,
+  "metric_scope": "all fixture pairs; engineering diagnostic, not a heldout evaluation",
+  "report_type": "engineering_fixture",
+  "role_gated_B0_edges": 4,
+  "role_gated_B1_edges": 3,
+  "status": "PASS_ENGINEERING_ONLY",
+  "unresolved_pairs_excluded": 1
+}

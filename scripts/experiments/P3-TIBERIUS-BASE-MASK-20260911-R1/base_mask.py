@@ -93,10 +93,12 @@ def cores(cfg: dict) -> list[Core]:
     return result
 
 
-def run_root(cfg: dict, run: str) -> Path:
+def run_root(cfg: dict, run: str, revision: str = "r1") -> Path:
     if run not in cfg["runs"]:
         raise ValueError(f"unknown run: {run}")
-    return ROOT / cfg["output_base"] / f"{run}-r1"
+    if revision not in ("r1", "r2"):
+        raise ValueError(f"unknown output revision: {revision}")
+    return ROOT / cfg["output_base"] / f"{run}-{revision}"
 
 
 def selected(cfg: dict, run: str) -> list[Core]:
@@ -230,8 +232,8 @@ def parse_reference(cfg: dict, all_cores: list[Core]) -> tuple[dict, dict]:
     return report, lookup
 
 
-def prepare(cfg: dict, run: str) -> None:
-    out = run_root(cfg, run)
+def prepare(cfg: dict, run: str, revision: str = "r1") -> None:
+    out = run_root(cfg, run, revision)
     out.mkdir(parents=True, exist_ok=False)
     all_cores = cores(cfg)
     report, _ = parse_reference(cfg, all_cores)
@@ -298,11 +300,11 @@ def write_fasta(path: Path, record: str, sequence: str) -> None:
             handle.write(sequence[i:i+80] + "\n")
 
 
-def run_core(cfg: dict, run: str, requested: str) -> None:
+def run_core(cfg: dict, run: str, requested: str, revision: str = "r1") -> None:
     current = next((c for c in selected(cfg, run) if c.key == requested), None)
     if current is None:
         raise ValueError("core is not in this frozen run")
-    out = run_root(cfg, run)
+    out = run_root(cfg, run, revision)
     if not (out / "reference_contract.json").exists():
         raise ValueError("prepare must run first")
     cell = out / f"core-{current.chrom}-{current.index}"
@@ -347,10 +349,10 @@ def fasta(path: Path):
         yield name, "".join(chunks)
 
 
-def preflight_core(cfg: dict, run: str, requested: str) -> None:
+def preflight_core(cfg: dict, run: str, requested: str, revision: str = "r1") -> None:
     from bricks2marble.io import load_fasta
     current = next(c for c in selected(cfg, run) if c.key == requested)
-    cell = run_root(cfg, run) / f"core-{current.chrom}-{current.index}"
+    cell = run_root(cfg, run, revision) / f"core-{current.chrom}-{current.index}"
     records = []
     first_five = None
     for mode in cfg["modes"]:
@@ -479,8 +481,8 @@ def bootstrap(per_core: list[dict], left: str, right: str, cfg: dict) -> dict:
             "ci95": [float(np.quantile(diffs, 0.025)), float(np.quantile(diffs, 0.975))]}
 
 
-def score(cfg: dict, run: str) -> None:
-    out = run_root(cfg, run)
+def score(cfg: dict, run: str, revision: str = "r1") -> None:
+    out = run_root(cfg, run, revision)
     expected = selected(cfg, run)
     report, units, mapping = load_contract(out)
     if run != "full":
@@ -532,21 +534,22 @@ def main() -> None:
     parser.add_argument("action", choices=["prepare", "run-core", "preflight-core", "score"])
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--run", choices=["smoke", "full"], required=True)
+    parser.add_argument("--revision", choices=["r1", "r2"], default="r1")
     parser.add_argument("--core")
     args = parser.parse_args()
     cfg = load_cfg(args.config)
     if args.action == "prepare":
-        prepare(cfg, args.run)
+        prepare(cfg, args.run, args.revision)
     elif args.action == "run-core":
         if args.core is None:
             parser.error("run-core requires --core")
-        run_core(cfg, args.run, args.core)
+        run_core(cfg, args.run, args.core, args.revision)
     elif args.action == "preflight-core":
         if args.core is None:
             parser.error("preflight-core requires --core")
-        preflight_core(cfg, args.run, args.core)
+        preflight_core(cfg, args.run, args.core, args.revision)
     else:
-        score(cfg, args.run)
+        score(cfg, args.run, args.revision)
 
 
 if __name__ == "__main__":

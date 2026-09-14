@@ -1,0 +1,17 @@
+cluster_id	fragment_id	truth_status	truth_parent_insertion_id	case
+0	adj_a	known	ins_adj_a	adjacent_independent
+0	adj_b	known	ins_adj_b	adjacent_independent
+1	chain_a	known	ins_chain_a	transitive_chain
+1	chain_b	known	ins_chain_b	transitive_chain
+1	chain_c	known	ins_chain_c	transitive_chain
+2	far_a	known	ins_far	far_same_insertion
+3	far_b	known	ins_far	far_same_insertion
+4	inner	known	ins_inner	nested_inner
+5	outer_left	known	ins_outer	nested_outer
+6	outer_right	known	ins_outer	nested_outer
+7	same_a	known	ins_same	same_insertion
+7	same_b	known	ins_same	same_insertion
+8	unknown_a	known	ins_unknown	unknown_orientation
+9	unknown_b	known	ins_unknown	unknown_orientation
+10	unresolved_a	unresolved		unresolved_truth
+10	unresolved_b	unresolved		unresolved_truth

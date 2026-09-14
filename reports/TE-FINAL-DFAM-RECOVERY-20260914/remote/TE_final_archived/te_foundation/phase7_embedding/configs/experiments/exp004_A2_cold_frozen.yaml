@@ -1,0 +1,126 @@
+# Experiment 004-A2: Cold Start + Frozen GLM
+# Goal: Baseline comparison - Pre-trained GLM with frozen backbone (only train projection head)
+# Hypothesis: Poor performance - Pre-trained GLM doesn't understand TE features, projection head alone cannot rescue
+# GPU: gpu022 or gpu030
+
+experiment:
+  name: "exp004_A2_cold_frozen"
+  description: "Cold Start (Pre-trained) + Frozen Backbone: Only train projection head"
+  output_dir: "experiments/exp004_A2_cold_frozen"
+
+# Model configuration
+model:
+  name: "GENERanno"
+  # Pre-trained model (no TE fine-tuning)
+  path: "/home/users/j/jwang/TE_final/glm_model/GENERanno-eukaryote-0.5b-base"
+  feat_dim: 128  # Projection head output dimension
+  max_length: 512
+  pooling: "mean"
+  # KEY: Freeze backbone, only train projection head
+  freeze_backbone: true
+
+# Multi-species genome data (same as exp004)
+species:
+  hg38:
+    name: "Human"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/hg38.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/rmsk_te.bed.gz"
+    priority_classes: ["SINE", "LINE"]
+
+  dm6:
+    name: "Drosophila"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/dm6/dm6.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/dm6/rmsk_te.bed.gz"
+    priority_classes: ["LTR", "RC"]
+
+  danRer11:
+    name: "Zebrafish"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/danRer11/danRer11.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/danRer11/rmsk_te.bed.gz"
+    priority_classes: ["DNA"]
+
+  galGal6:
+    name: "Chicken"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/galGal6/galGal6.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/galGal6/rmsk_te.bed.gz"
+    priority_classes: ["LINE"]
+
+  ce11:
+    name: "C.elegans"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/ce11/ce11.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/ce11/rmsk_te.bed.gz"
+    priority_classes: ["DNA", "RC"]
+
+  mm39:
+    name: "Mouse"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/mm39/mm39.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/mm39/rmsk_te.bed.gz"
+    priority_classes: ["SINE", "LTR"]
+
+# Data sampling configuration
+sampling:
+  classes:
+    - "SINE"
+    - "LINE"
+    - "LTR"
+    - "DNA"
+    - "RC"
+    - "Unknown"
+    - "Background"
+
+  per_class_samples: 8000
+  min_per_species_class: 200
+
+  background:
+    min_distance_from_te: 5000
+    sequence_length: 512
+
+  sequence_length: 512
+  min_te_length: 100
+  max_te_length: 2000
+
+# Contrastive learning configuration
+contrastive:
+  positive_strategy: "same_class_any_species"
+  hard_negative_ratio: 0.3
+  loss: "InfoNCE"
+  temperature: 0.07
+  pairs_per_epoch: 100000
+
+# Training configuration
+# NOTE: With frozen backbone, can use larger batch size (less memory for gradients)
+training:
+  batch_size: 32  # Larger batch OK with frozen backbone
+  num_epochs: 10
+  learning_rate: 1.0e-4  # Higher LR for projection head only
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  gradient_accumulation_steps: 2
+  fp16: false
+  bf16: true
+  save_strategy: "epoch"
+  eval_steps: 1000
+  early_stopping_patience: 3
+
+# Evaluation configuration
+evaluation:
+  clustering:
+    - method: "kmeans"
+      n_clusters: 7
+    - method: "hdbscan"
+      min_cluster_size: 100
+  metrics:
+    - "ari"
+    - "nmi"
+    - "purity"
+    - "silhouette"
+  visualization:
+    umap:
+      n_neighbors: 15
+      min_dist: 0.1
+    tsne:
+      perplexity: 30
+
+comparison:
+  enabled: true
+  output_dir: "experiments/exp004_A2_cold_frozen/comparison"

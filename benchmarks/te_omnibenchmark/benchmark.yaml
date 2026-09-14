@@ -1,0 +1,77 @@
+api_version: "0.5.0"
+id: te_engineering_smoke
+name: "TE adapter engineering smoke"
+description: "ENGINEERING_ONLY fixture for OmniBenchmark wiring"
+benchmarker: "ab-initio-TE"
+version: "0.1.0"
+software_backend: host
+
+software_environments:
+  - id: host
+
+stages:
+  - id: data
+    modules:
+      - id: fixture
+        repository: &local_repo
+          url: ../..
+          commit: "05f393d46ebafe7c857b92d6acda61e1b4036bdb"
+          entrypoint: default
+    outputs:
+      - id: data.genome
+        path: genome.fa
+      - id: data.truth_t0_source
+        path: truth_t0.bed
+      - id: data.truth_t1_source
+        path: truth_t1.bed
+      - id: data.prediction_source
+        path: prediction.gff3
+      - id: data.lengths
+        path: lengths.json
+      - id: data.cell_registry
+        path: cell_registry.json
+
+  - id: methods
+    inputs:
+      - data.truth_t0_source
+      - data.truth_t1_source
+      - data.prediction_source
+    modules:
+      - id: adapter_convert
+        repository: *local_repo
+    outputs:
+      - id: methods.truth_t0_canonical
+        path: truth_t0.tsv
+      - id: methods.truth_t1_canonical
+        path: truth_t1.tsv
+      - id: methods.prediction_canonical
+        path: prediction.tsv
+      - id: methods.cell_status
+        path: cell_status.json
+
+  - id: metrics
+    inputs:
+      - data.lengths
+      - methods.truth_t0_canonical
+      - methods.truth_t1_canonical
+      - methods.prediction_canonical
+    modules:
+      - id: evaluate
+        repository: *local_repo
+        parameters:
+          - id: tier_grid
+            tier: ["T0", "T1"]
+    outputs:
+      - id: metrics.score
+        path: metrics.json
+
+metric_collectors:
+  - id: summary
+    repository: *local_repo
+    inputs:
+      - metrics.score
+      - methods.cell_status
+      - data.cell_registry
+    outputs:
+      - id: collector.summary
+        path: collector_summary.json

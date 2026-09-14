@@ -1,0 +1,164 @@
+{
+  "candidate_recall": 0.5,
+  "candidate_recall_denominator_all_known_same_insertion_pairs": 4,
+  "candidate_recall_numerator_same_insertion_pairs_in_candidates": 2,
+  "candidate_window_bp": 25,
+  "contract_version": "fragment-linking-phase0-v1",
+  "edge_file_policy": "edges_B0_distance.tsv and edges_B1_predicted_rules.tsv keep only same-role pairs under both split views; *_all_fixture.tsv preserves all toy predictions",
+  "fixture_provenance": "ENGINEERING_ONLY",
+  "gap_filling_applied": false,
+  "intervals_unchanged": true,
+  "material_mask_changed": false,
+  "material_mask_input": null,
+  "methods": {
+    "B0_distance": {
+      "candidate_pairs": 8,
+      "component_count": 8,
+      "components": [
+        [
+          "adj_a",
+          "adj_b"
+        ],
+        [
+          "chain_a",
+          "chain_b",
+          "chain_c"
+        ],
+        [
+          "far_a"
+        ],
+        [
+          "far_b"
+        ],
+        [
+          "inner",
+          "outer_left",
+          "outer_right"
+        ],
+        [
+          "same_a",
+          "same_b"
+        ],
+        [
+          "unknown_a",
+          "unknown_b"
+        ],
+        [
+          "unresolved_a",
+          "unresolved_b"
+        ]
+      ],
+      "different_insertion_candidate_pairs": 5,
+      "edge_false_negative_within_candidates": 0,
+      "edge_false_positive_known_different_insertion": 5,
+      "edge_precision_known_only": 0.2857142857142857,
+      "edge_recall_given_candidate": 1.0,
+      "edge_true_positive": 2,
+      "known_candidate_pairs": 7,
+      "method": "B0_distance",
+      "overmerged_component_count": 3,
+      "overmerged_component_rate": 0.375,
+      "overmerged_components": [
+        [
+          "adj_a",
+          "adj_b"
+        ],
+        [
+          "chain_a",
+          "chain_b",
+          "chain_c"
+        ],
+        [
+          "inner",
+          "outer_left",
+          "outer_right"
+        ]
+      ],
+      "predicted_edges": 8,
+      "same_insertion_candidate_pairs": 2,
+      "transitive_chain_false_merge_detected": true,
+      "unresolved_candidate_pairs_excluded": 1,
+      "unresolved_never_counted_as_negative": true,
+      "unresolved_predicted_edges_excluded": 1
+    },
+    "B1_predicted_family_orientation_length": {
+      "candidate_pairs": 8,
+      "component_count": 11,
+      "components": [
+        [
+          "adj_a",
+          "adj_b"
+        ],
+        [
+          "chain_a",
+          "chain_b",
+          "chain_c"
+        ],
+        [
+          "far_a"
+        ],
+        [
+          "far_b"
+        ],
+        [
+          "inner"
+        ],
+        [
+          "outer_left"
+        ],
+        [
+          "outer_right"
+        ],
+        [
+          "same_a",
+          "same_b"
+        ],
+        [
+          "unknown_a"
+        ],
+        [
+          "unknown_b"
+        ],
+        [
+          "unresolved_a",
+          "unresolved_b"
+        ]
+      ],
+      "different_insertion_candidate_pairs": 5,
+      "edge_false_negative_within_candidates": 1,
+      "edge_false_positive_known_different_insertion": 3,
+      "edge_precision_known_only": 0.25,
+      "edge_recall_given_candidate": 0.5,
+      "edge_true_positive": 1,
+      "known_candidate_pairs": 7,
+      "method": "B1_predicted_family_orientation_length",
+      "overmerged_component_count": 2,
+      "overmerged_component_rate": 0.18181818181818182,
+      "overmerged_components": [
+        [
+          "adj_a",
+          "adj_b"
+        ],
+        [
+          "chain_a",
+          "chain_b",
+          "chain_c"
+        ]
+      ],
+      "predicted_edges": 5,
+      "same_insertion_candidate_pairs": 2,
+      "transitive_chain_false_merge_detected": true,
+      "unresolved_candidate_pairs_excluded": 1,
+      "unresolved_never_counted_as_negative": true,
+      "unresolved_predicted_edges_excluded": 1
+    }
+  },
+  "metric_scope": "all fixture pairs; engineering diagnostic, not a heldout evaluation",
+  "output_policy": "edges/components only; input intervals are immutable and no gap/mask output exists",
+  "scientific_status": "ENGINEERING_ONLY; no model score and no biological claim",
+  "split_group_leakage": {
+    "family_group_id": false,
+    "source_copy_id": false
+  },
+  "unresolved_pairs_in_candidate_table": 1
+}

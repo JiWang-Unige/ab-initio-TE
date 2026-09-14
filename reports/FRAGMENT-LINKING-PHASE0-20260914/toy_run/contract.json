@@ -1,0 +1,69 @@
+{
+  "contract_version": "fragment-linking-phase0-v1",
+  "decode_policy": {
+    "all_fixture_edge_files": [
+      "edges_B0_distance_all_fixture.tsv",
+      "edges_B1_predicted_rules_all_fixture.tsv"
+    ],
+    "change_material_mask": false,
+    "fill_gap": false,
+    "output": "association edges and connected components only; no merged interval is emitted",
+    "role_gated_edge_files": [
+      "edges_B0_distance.tsv",
+      "edges_B1_predicted_rules.tsv"
+    ]
+  },
+  "edge_rules": {
+    "B0_distance": "candidate distance_bp <= 25",
+    "B1_predicted_family_orientation_length": {
+      "distance_bp": "<= 25",
+      "predicted_family": "both known and equal",
+      "predicted_length_ratio": ">= 0.500",
+      "predicted_orientation": "both known and equal"
+    }
+  },
+  "fragment_identity": [
+    "fragment_id",
+    "contig",
+    "start",
+    "end"
+  ],
+  "future_stages": {
+    "M2": {
+      "real_truth_gap": "no verified insertion-level ground truth supplied in Phase0",
+      "requires": "verified model edge scores and an approved training/evaluation split",
+      "status": "INPUT_CONTRACT_ONLY"
+    },
+    "M3": {
+      "real_truth_gap": "no verified biological fragment-to-insertion linkage truth supplied in Phase0",
+      "requires": "context-aware sequence evidence and an independent truth panel",
+      "status": "INPUT_CONTRACT_ONLY"
+    }
+  },
+  "interval_convention": "[start,end)",
+  "prediction_namespace": {
+    "predicted_family": "feature supplied by a detector; null means unknown",
+    "predicted_length": "positive detector feature; not substituted with interval length",
+    "predicted_orientation": "feature supplied by a detector; null means unknown"
+  },
+  "split_contract": {
+    "family_group": "family_group_id; all rows in one family group stay in one split",
+    "note": "source-copy and family-group split assignments are emitted separately",
+    "pair_gate": "a role-specific edge may enter a role only when both endpoints share that role; otherwise EXCLUDED_CROSS_SPLIT",
+    "source_copy_group": "source_copy_id; all fragments from one source copy stay in one split",
+    "split_names": [
+      "train",
+      "dev",
+      "test"
+    ]
+  },
+  "status": "ENGINEERING_ONLY",
+  "truth_namespace": {
+    "parent_insertion_id": "independent insertion identity; null only when truth_status=unresolved",
+    "truth_same_insertion": "null whenever either endpoint is unresolved",
+    "truth_status": [
+      "known",
+      "unresolved"
+    ]
+  }
+}

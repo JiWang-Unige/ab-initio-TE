@@ -1,0 +1,32 @@
+# Experiment 002: Consensus TE Fragments (100bp minimum)
+# Compare with Real genome fragments to evaluate training data source impact
+
+experiment:
+  name: "exp002_consensus_100bp"
+  description: "Consensus TE fragments from Dfam38 (100-300bp)"
+  version: "1.0"
+
+# Data source configuration
+data:
+  source: "consensus"
+  min_length: 100
+  max_length: 10000
+  fragment_size_min: 100
+  fragment_size_max: 300
+  num_train_pairs: 10000
+  num_val_pairs: 1000
+  # Consensus-specific: balance classes
+  balance_classes: true
+  max_sequences_per_class: 5000
+
+# Output paths
+paths:
+  data_dir: "data/consensus_100bp"
+  output_dir: "experiments/exp002_consensus_100bp"
+  checkpoint_dir: "experiments/exp002_consensus_100bp/checkpoints"
+  embedding_dir: "experiments/exp002_consensus_100bp/embeddings"
+  clustering_dir: "experiments/exp002_consensus_100bp/clustering"
+
+# Experiment-specific overrides
+training:
+  num_epochs: 5

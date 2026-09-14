@@ -1,0 +1,86 @@
+{
+  "cells": [
+    {
+      "cell_id": "adapter_convert|convert|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "adapter_convert",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "convert"
+    },
+    {
+      "cell_id": "evaluate|T0|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T0"
+    },
+    {
+      "cell_id": "evaluate|T1|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T1"
+    },
+    {
+      "cell_id": "synthetic_status_unsupported|status|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "UNSUPPORTED",
+      "method": "synthetic_status_unsupported",
+      "reason": "deliberate denominator-preservation fixture",
+      "status": "UNSUPPORTED",
+      "task": "status"
+    },
+    {
+      "cell_id": "synthetic_status_blocked|status|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "BLOCKED",
+      "method": "synthetic_status_blocked",
+      "reason": "deliberate denominator-preservation fixture",
+      "status": "BLOCKED",
+      "task": "status"
+    }
+  ],
+  "claim_scope": "workflow connectivity and status-denominator preservation only",
+  "engineering_only": true,
+  "expected_cell_count": 5,
+  "fixture_cases": {
+    "fragment_gap_bp": 1,
+    "left_edge": {
+      "end": 5,
+      "seqid": "chrA",
+      "start": 0
+    },
+    "overlapping_source_records": true,
+    "right_edge": {
+      "end": 100,
+      "seqid": "chrB",
+      "start": 95
+    },
+    "t1_unknown_chr": "chrB"
+  },
+  "metric_files": [
+    "/private/tmp/te-omnibenchmark-run-20260914-d/data/fixture/.default/methods/adapter_convert/.default/metrics/evaluate/.6e008c3f/metrics.json",
+    "/private/tmp/te-omnibenchmark-run-20260914-d/data/fixture/.default/methods/adapter_convert/.default/metrics/evaluate/.03847738/metrics.json"
+  ],
+  "observed_cell_count": 5,
+  "schema": "te_engineering_summary_v1",
+  "status_counts": {
+    "BLOCKED": 1,
+    "COMPLETED": 3,
+    "UNSUPPORTED": 1
+  },
+  "status_files": [
+    "/private/tmp/te-omnibenchmark-run-20260914-d/data/fixture/.default/methods/adapter_convert/.default/cell_status.json"
+  ]
+}

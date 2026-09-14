@@ -1,0 +1,833 @@
+第二轮结论：优先补“可辨识的证据”，而不是先增加模型复杂度
+
+我赞成并行推进，但建议分成三条科学线，而不是把八个方向拼成一个万能注释器：
+
+科学线	核心问题	包含方向
+A．标签资格与 TE material 检测	当前误差来自模型、标签还是部署分布？哪些低成本操作真正改善检测？	固定 D 外部评估、历史注释不足、Unknown、RC、两个 GLM 条件互补
+B．Fragment association	两个片段是否属于同一次插入，而非是否应该填满中间序列？	显式 same-insertion linking、结构及方向证据
+C．Family representation / retrieval	怎样表达家族内部多样性，才能改善独立 query 的检索和拒识？	真正的 TE_final Dfam 结果、multi-prototype
+共同支撑	比较是否公平、可复核、有实际用途？	完整 Omnibenchmark、已批准的 Tiberius U/P/R
+
+最先应做的是：原 Tiberius 工程闭环、固定 D 外部评估的数据资格与实际输出、同一 assembly 的历史标签对照、真正 TE_final 结果恢复，以及 Omnibenchmark 的单实例闭环。MoE 不应成为这些工作的前置条件。
+
+下载完整中文研究方案 Markdown
+
+下载本轮只读来源核查记录
+
+本轮实际读到了什么
+
+我已完整读取 DIRECTIONS-PRO-BRIEF-20260914.md，重新解压旧 ZIP，并检查相关训练、推理、评分和 Tiberius 启动实现。新增方案按附件要求使用单 seed；历史判定不变。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+GitHub 工具实际返回：
+
+仓库：JiWang-Unige/ab-initio-TE
+
+分支：main
+
+commit：3891293dc3ec7de3e90d167b21ce24c97537c169
+
+实际读取文件包括 docs/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1.md、对应 smoke.sbatch、observed_tiberius.py，以及旧 fragment-collinearity 路线关闭记录。这不等于读到了尚未推送的完整 05f393d 工作树。
+
+**没有连接 Baobab，没有执行新模型或 benchmark，也尚未收到正在恢复的 TE_final 新结果。**因此该分支以下保持条件性判断，不用旧 1,800-fragment 表替代。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+一、八个方向的决策总表
+方向	判断	最小第一轮	什么结果才值得继续
+1．共享 D / MoE	先补外部评估；MoE 暂缓	固定 D、固定原 CAL/阈值，对全部合格外部候选输出逐物种结果	参数与计算受控的适配实验确有可部署的专家互补
+2．历史注释不足	优先支持检验，不接受其为既定解释	同一 hg19、旧/新 library、完整固定分母，并盲审旧 FP 与匹配背景	GLM 旧 FP 获得的独立支持显著富集，而非普遍增加注释或只挑成功案例
+3．效用与结构	原 Tiberius 继续；RC/融合先轻量；linking 先真值	U/P/R 原协议；RC audit；双源条件增量；association pilot	各子问题在各自终点成立，不能借另一个子问题阳性翻案
+4．Unknown	支持重分类审计	完整转移矩阵与独立验证，不先重训	有可靠支持的改类超过对照，且拒识/误改风险可控
+5．TE_final Dfam	等待实际证据，条件性保留	原代码、panel、split、输出和全部对照恢复	干净的同 panel 优势应更正前轮总括判断
+6．Omnibenchmark	支持完整矩阵，增量执行	一个真正端到端实例，再扩方法×assembly×truth regime	执行完整、信息访问清楚、失败分母保留，而非只有 YAML
+7．单 seed	所有新增训练固定 42	区分初始化、空间抽样、身份分组与计时重复	不把多 seed 当本轮前置门，也不假装初始化方差已知
+8．Multi-prototype	值得独立做检索实验	相同训练 copies 的 single / k=4 / random-k / HMM 对照	在相同误报预算下改善独立 query，随后才接 genome annotation
+
+这些判断对应附件的八点，但下列具体样本数、比较臂和新筛选门属于本轮建议草案，不是已经运行的实验，也不改变旧 PASS/NO-GO。
+
+所有分支共用的数据合同
+
+每个新实验至少保存：
+
+合同部分	必须记录
+数据身份	assembly/accession、FASTA SHA、原始坐标、规范化坐标、来源与许可
+标签资格	annotation/library 版本、分类层级、positive/negative/Unknown/callable 定义
+划分	TRAIN/CAL/DEV/EVAL、历史使用情况、同源位点及 copy/insertion 分组
+模型身份	checkpoint、tokenizer、calibration、源码、配置及环境 hash
+完整输出	原始分数、预测、各类计数、失败/排除原因，不能只保存最终 F1
+
+训练、投影和标准化只看 TRAIN；阈值、拒识与概率校准只看 CAL；DEV 只选择预定有限候选；EVAL 在冻结后比较。旧坐标不会因为新建一个文件夹就变成完全独立 TEST。
+
+历史评价固定旧 callable mask；旧 Unknown 不直接算旧 FP，后来新增可判定区域另列。chr19–22 及跨 assembly 对应区域继续封存；chr16/18 留给原效用实验，不拿其效用结果反向调 RC、融合或新模型。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+二、方向 1：先完成固定 D 外部测试，再决定是否需要 MoE
+1.1 当前到底完成到哪一步
+
+目前支持的是：D 在六个参与训练物种上的内部结果，macro bp-F1 为 .888761，worm 为 .797565。platypus、urchin、CB4 的 Label-A 工程准备完成，没有因此产生外部模型性能结果，也没有执行过的 MoE。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+所以第一实验应该是 X0：冻结模型外部评估，而非另一轮训练。
+
+X0：最小第一实验
+
+**输入：**固定 D checkpoint、原六物种 CAL、原 global threshold，以及三个候选物种的合格数据。
+
+**先做资格检查：**标签覆盖、N/Unknown、assembly、annotation engine/library、任务训练暴露、可知的预训练暴露。不能因程序成功生成 Label-A，就认定未注释区域都是可信负类。
+
+**输出：**逐物种 callable/positive bp、TP/FP/FN、P/R/F1/AP、预测覆盖、结构端点和标签来源分层；同时给 macro、最差物种及空间区间。
+
+停止与解释：
+
+标签不合格记 BLOCKED_LABEL_QUALIFICATION，不是模型 F1=0。
+
+只有可信 positives 的部分只报 recall，不硬算 genome precision/F1。
+
+模型差就如实报告；不在外部 EVAL 上调整阈值、换 checkpoint 或筛掉困难物种。
+
+全部候选都应留在登记表中，不能事后选择最好看的两个。
+
+1.2 MoE 的最小进入路径
+
+建议的有限顺序是：
+
+frozen D→shared dense/adapter→conditional adapters→有证据再做 MoE.
+
+X0 显示明确失效场景后，第一轮适配只比较：
+
+臂	目的
+冻结 D	实际原基线
+一个共享 dense 增量模块或共享 adapter	检验额外适配容量本身
+两个条件 adapter	检验条件化是否优于同预算共享容量
+
+总可训练参数、训练 bp、更新数和采样尽量匹配，同时报告激活参数和 FLOPs。稀疏专家通常不能在一次比较中同时做到总容量、激活容量、计算量完全相同；不能只选对 MoE 有利的一种“匹配”。
+
+仅用原训练物种适配与使用目标物种标签是不同设置。后者必须单列为 supervised adaptation，不再叫 zero-shot。
+
+进入 MoE 的条件应是：已有专家在不同条件下出现可重复的相对优势，部署可得信息能够识别这些条件，而且真实路由优于共享 adapter/简单融合，并不过度损害最差物种。用目标 F1 选择专家的 oracle 不满足这个条件。
+
+三、方向 2：历史注释不足——我认为值得优先验证，但必须允许它被反驳
+
+这是本轮最有可能改变项目解释的方向之一。它研究的不只是“能不能提高 F1”，而是：
+
+旧评价中的错误，有多少是模型错误，有多少是 comparator 尚未覆盖的 TE？
+
+但需要先拆开四件事。
+
+2.1 四种证据不能混为一谈
+对比	能说明什么	不能说明什么
+同一 assembly，更换 annotation/library	标签更新如何改变固定预测的评价	新标签不自动等于完备真值
+跨 assembly，共同同源区	共同序列上的后续注释支持	不包含旧组装根本没有的 DNA
+新增组装序列、补齐旧 gap	扩大了可观察空间	不是旧序列上的旧 FP 被证实
+mapping 失败、非共线、等位差异	暴露不可比较范围	不能删去后只报告成功映射的候选
+
+GRCh38 是多来源参考，CHM13 来源不同，也包含新解开的重复区域及结构差异。因此 hg19→hg38→hs1 不是只改变注释版本的一条时间轴。现代 GLM 回看这些版本首先是 retrospective annotation recovery，不是历史时间前瞻预测。
+doi.org
+
+2.2 H0：先做“一模型、同 hg19”的第一轮
+
+我建议真正按你的问题设定：选择一个原生 pretrained GLM，仅用 hg19 chr1 的旧标签进行任务训练，seed 42。
+
+不要从 D、H0 或 P3 这类已经在其他染色体或较新标签上监督训练过的 task checkpoint 开始，然后宣称只在 hg19 chr1 学过 TE。
+
+一个明确、有限的划分草案是：
+
+用途	建议
+TRAIN	hg19 chr1
+CAL	chr11
+DEV	chr13
+EVAL	chr2/3/4 中预先固定的 20 Mb 空间分层范围
+不访问	chr19–22 及对应跨版本同源区
+不用于新模型选择	原 Tiberius chr16/18
+
+这些 EVAL 染色体仍须核查既往项目使用历史；即使任务训练留出，也不保证预训练或整个项目完全未见。
+
+同一 assembly 的必要对照
+
+先建立两份受控重注释：
+
+hg19 + 固定 caller/settings + 旧 library,
+hg19 + 相同 caller/settings + 新 library.
+
+另保存真正的历史 rmsk 档案。**用现代软件重新运行旧库，不等于恢复了当年原始注释。**旧库无法合法取得或版本不可追溯时，可以做档案标签比较，但不能声称隔离了 library 的因果效应。
+
+这里的“旧 FP”是相对于旧计算 comparator 的 FP，不是已经确认的生物非 TE。
+
+2.3 为什么不能只数“FP 后来转阳”
+
+冻结模型后，保留同一完整评价分母，至少记录：
+
+旧状态	后续需要追踪的状态
+旧 FP	新注释支持 / 独立证据支持 / 仍未解决 / 被反驳
+旧 TP	保留 / 改类 / 被删除
+旧 FN	后续仍为 TE / 改类或删除
+未预测的旧阴性	是否也大量被新注释标为 TE
+旧 Unknown	新增可判定部分，单独报告，不混进旧 FP
+
+这个区别有直接的数学后果。设旧 TP、FP、FN 分别为 T,F,N，新增注释中 a 来自旧 FP，b 来自未预测的旧阴性，暂不考虑阳性删除，则
+
+F1
+new
+	​
+
+=
+2T+F+N+a+b
+2(T+a)
+	​
+
+.
+
+**更完整的注释也可能产生大量新 FN，因此 F1 不一定上升。**必须同时回答“模型提前覆盖多少”与“模型漏掉多少同批新增 TE”。
+
+2.4 独立验证与主终点
+
+建议第一批盲审以 300 个旧 FP、300 个匹配未预测背景、各 100 个旧 TP/FN为规模草案。按 GC、长度、重复环境和空间区域分层，保存入样概率；总体比例估计需要抽样权重。
+
+审阅者不看 GLM 分数，依据序列同源覆盖、家族证据、结构及来源，将候选分成“支持”“不支持”“无法判断”，而不是强迫全部二分类。
+
+主终点：
+
+旧 FP 获得新且独立支持的比例，相比匹配未预测背景是否富集；
+
+完整固定分母上的新旧误差变化；
+
+支持来自什么证据，多少仍只是另一个计算资源的判断。
+
+**会否定或削弱假设的结果：**新注释普遍增加，但不富集于 GLM 旧 FP；优势仅来自同一来源库的自一致；模型同时漏掉更多新增 TE；或支持只存在于少数容易映射区域。
+
+2.5 再扩到 hg38/hs1，而不是第一步混在一起
+
+第二阶段才做：
+
+Assembly	旧库、固定 caller	新库、相同 caller
+hg19	第一轮	第一轮
+hg38	第二轮	第二轮
+hs1	第二轮	第二轮
+
+共同可比区需要 reciprocal one-to-one mapping，检查局部比对、内部 indel、方向及覆盖；只 liftOver 两端不够。同一同源块的不同版本必须归在同一个数据划分组。
+
+“注释贫乏解释跨物种低 F1”则应先看同一物种、同一预测、不同标签来源的变化，再谈跨物种相关性。还可以在人为隐藏部分已知 locus/family 标签的对照中验证分析能否识别测量偏差，但它不能证明自然数据的低分确实由缺失注释造成。
+
+2.6 推荐两个历史注释类比物种
+物种	已核查的官方资源	优先比较与取舍
+小鼠：优先	UCSC mm10 中有 rmskOutBaseline/Current、rmskAlignBaseline/Current；另有 mm39 rmsk 和 mm10→mm39 chain	先同 mm10 隔离注释变化，再比较 mm10/mm39 共同区。Baseline/Current 名称和文件修改时间不够，仍须恢复工具、库及生成日期。小鼠已参与 D 训练，不用于独立 zero-shot claim
+果蝇：第二选择	FlyBase archive 提供 FB2014_03/dmel5.57、FB2014_04/dmel6.01、FB2023_05/dmel6.54；r6.54 GFF 可下载并校验	先检查 Release 6 内实际 TE-feature 变化，再扩 r5→r6。版本更新可能只改变基因注释，若 TE 特征没实质变化就停止该类比；现有 positive-only T1 不能支持 genome F1
+
+这些资源确实存在，但存在旧/新发行版不等于存在足够多的、方向正确的 TE 重注释事件，第一项工作仍是实际差异清点。
+s3ftp.flybase.org
++4
+hgdownload.soe.ucsc.edu
++4
+hgdownload.cse.ucsc.edu
++4
+
+四、方向 3：原 Tiberius 继续，三个新结构方向分别设门
+3A．Tiberius：修最小工程原因，继续原 60 cells
+
+本轮源码核查发现：
+
+启动器使用 singularity ... --cleanenv；
+
+BASE_MASK_OBSERVATION 只设置在宿主命令环境；
+
+wrapper 在 try/finally 前直接读取 os.environ["BASE_MASK_OBSERVATION"]。
+
+这与归档 KeyError 一致，高可信指向显式环境传递遗漏，但不等于本轮已经验证修复成功。
+
+最小修复是每臂显式传入：
+
+--env BASE_MASK_OBSERVATION=<容器内可见的该臂观测文件路径>
+
+保留 cleanenv、CUDA、bind、模型及真实 six-channel 观测。增加明确的环境预检查和失败终态，不绕过通道检查，也不通过删除观测 wrapper“修好”作业。显式 --env 与清理宿主环境是可以并存的。
+apptainer.org
+
+执行序列继续原合同：
+
+原 chr16:0 三臂 smoke，仅检查真实输入与原生输出 → 同一不可变实现全 20 core×3 → 全部完整后 CPU scoring → 独立 NumPy 复算。
+
+保留原主终点和门：ΔF1(P−U)≥0.01、95% 下界 >0、recall 差不低于 −0.005、U 正确 unit 损失不超过 1%；原 20-core bootstrap 10,000 次及 seed 20260908 不改。R 是全部 rmsk repeats，不是与 P 等信息量的 TE-only 对照。已批准范围没有新的预算硬上限，也无需重新批准原范围。
+
+旧 C 的阴性、新 smoke 的工程失败和新 U/P/R 的科学结果仍是三个不同事实。
+
+3B．RC/strand：先诊断与推理平均，再做增强或等变改造
+RC0：无需训练的第一实验
+
+对长度 L 的同一窗口 x，比较
+
+p
+i
+	​
+
+=f(x)
+i
+	​
+
+,q
+i
+	​
+
+=f(RC(x))
+L−1−i
+	​
+
+.
+
+区间映射为
+
+[s,e)⟼[L−e,L−s).
+
+同时交换 left/right boundary 通道及正负 strand。Binary material 的坐标映射等变，不等于方向型 family/insertion 输出在 RC 后仍保持原方向标签。
+
+第一轮固定四臂：
+
+臂	目的
+F	正向原预测
+RC 映回	测方向不一致
+F/RC 概率均值	测推理集成收益
+两个正向 token-phase/切窗预测的均值	排除只是分词相位或双倍推理带来的收益
+
+记录 mean |p−q|、阈值翻转率、bp AP/F1、run/joint-boundary 端点，并按 seam、窗口边缘、N 和短 fragment 分层。
+
+这里尤其要控制当前 4,096-bp 半窗的 6-mer 尾部。RC 会改变分词相位，应先投影回 bp 再对齐，而不是倒置 token 数组。同一物理窗口和 halo 保证上下文相同。
+
+两个重要解释边界：
+
+F/RC 平均可以在代数上变得 RC 一致，不代表生物准确性提高。
+
+固定 D 原阈值诊断与新 RC 臂的 source-CAL-only 校准分开；不能用外部物种标签选阈值。
+
+RC1：有限训练比较
+
+比较同一原始初始化与预算的 no-RC 和 每次呈现以 0.5 概率替换为 RC，均 seed 42。不是在每个 batch 再追加一份 RC，从而翻倍训练量。
+
+若 RC0 无准确性收益但失配明显，仍值得做这一对有限训练比较；若失配已很小且平均无益，全面等变重构优先级应下降。
+
+Caduceus 已提供 RC-equivariant DNA 建模先例，因此 RC 本身不是新颖性声明；本项目能贡献的是它对 TE material、边界及外部泛化的受控效应。
+arXiv
+
+Biological prior 必须具体化
+
+建议先把“biophysical prior”改写为可计算特征，例如 terminal direct/inverted similarity、poly(A) 尾、候选 TSD 长度和方向；每次只引入一个明确特征，并做长度/GC 匹配对照。
+
+这些特征更适合先进入 linking。**缺乏某类端部结构不等于非 TE，方向未知也不是负例。**不能用一个未定义的“生物先验”解释所有改善。
+
+3C．两个 GLM：检验“条件增量”，而不是再次平均后找最佳阈值
+
+历史简单 ensemble 阴性不否定所有互补；HN 的 logit+seam 信息增量也不证明任意融合能部署。它们是不同问题。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+ 
+
+MANUSCRIPT-EVIDENCE-BRIEF-20260…
+
+FUS0：先缓存同分母预测，再训练很小的头
+
+两个固定模型必须作用于同一 FASTA、同一 callable grid。先统一 token→bp、坐标、校准和标签来源，再检查：
+
+仅 A 正确、仅 B 正确、同时错误；
+
+差异是否集中在长度、GC、seam、局部上下文或特定标签来源；
+
+oracle union 的可达上界，但不把 oracle 当部署结果。
+
+D 与 P3 的训练历史不同，适合研究系统互补，不能把结果直接归因为 backbone。
+
+最小有限比较：
+
+臂	输入与作用
+A、B	两个单模型
+Mean	各自校准后的简单等权融合
+g
+A
+	​
+
+(A,u)、g
+B
+	​
+
+(B,u)	同容量单源头，排除额外 head 容量收益
+g
+AB
+	​
+
+(A,B,u)	双源条件融合
+条件打乱 B	在匹配 strata 内打乱第二来源，作为信息阴性对照
+
+u 只包含部署可得的序列/边缘信息。冻结 backbone，轻量 head 的参数预算、训练坐标和更新数匹配，seed 42。
+
+**关键划分：**head 的训练预测必须来自底层模型未做任务监督训练的坐标，或真实 out-of-fold 预测。否则 head 学到的可能是底层模型训练内误差，而不是可泛化互补。
+
+主终点建议预先固定为负类误报预算下的 bp recall，辅以 F1/AP 和配对空间差值。Pair association 可以是另一任务，但不能同时搜索 bp、whole-gap、pair 三种目标后只挑最好的一种。
+
+**继续条件：**双源超过最强 single、same-capacity 单源与简单融合，优势不只存在于某一个标签来源。
+
+**停止条件：**没有条件增量就停止该融合头，不追加 MoE 救场；不重开固定 HN 的 60,497 阈值 whole-gap 搜索。
+
+3D．显式 fragment linking：有价值，而且不需要填 gap
+
+**这个方向值得正面推进。**它改变的是预测对象：
+
+p
+ij
+	​
+
+=P(z
+i
+	​
+
+=z
+j
+	​
+
+),
+
+而不是
+
+P(gap 中全部 bp 都是 TE).
+
+输出关联边及置信度，原 material mask 不动。同一历史 insertion 两端的关联，不要求中间普通 DNA 或另一个 nested TE 被归入该 insertion。
+
+首先处理一个容易遗漏的身份问题
+
+单一 z
+i
+	​
+
+ 只适用于来源较纯的 fragment。一个预测 run 可能跨越 host TE 和 nested TE，或包含背景误报：
+
+混合来源 fragment 应标 ambiguous/多身份，并报告比例；
+
+不能用真值偷偷切成容易分类的纯片段；
+
+正 pair 必须是相同且非空的 insertion 身份；两个背景误报不能因为都“没有身份”而算同一次插入。
+
+四个比较臂
+臂	输入	检验问题
+B0	distance	距离已经能解释多少？
+B1	distance、预测 family/strand、overlap、长度	规则整合的基线
+M2	h
+i
+	​
+
+,h
+j
+	​
+
+ 与 distance	两端序列是否提供信息？
+M3	M2＋gap＋左右 context＋orientation 缺失状态	上下文能否区分同 family 的独立插入？
+
+**当前 coarse classifier 的 LINE/SINE 不是 family。**B1 需要真正的预测 family，或明确属于 reference-assisted 设置；不能把“同 LINE”当“同 family”。资源信息应分 regime 或公平提供，Unknown family 不能被候选生成器一律排除。
+
+还有一个原文细节：RepeatCraft 的 loose 模式确有 150 bp 默认值，但 strict 模式及 consensus 坐标等规则不同。所以你的 B1 应称 RepeatCraft-like rule，而非声称完整复现 RepeatCraft。
+OUP Academic
+
+RepeatMasker ID 是计算推断，不是独立插入真值。旧树关闭的是特定 consensus-collinearity＋DAG/path-cover 方法族，并非所有 linking。
+RepeatMasker
+
+LINK0：先做有身份的半模拟实验
+
+建议以 2,000 个场景为第一轮规模目标，保存父 insertion IDs，包含碎片化、截断、nested 插入、非 TE 间隔、同 family 相邻独立 copy、反向及方向未知。
+
+正负 pair 距离分布应尽量匹配，避免模型只识别模拟模板。父模板、高同源组件、宿主背景 locus 在生成前按组划分 70/15/15，所有裁片和 RC 后代随组走。
+
+分两层评价：
+
+**Relation-only：**受控、不可变碎片，隔离关联评分能力；
+
+**实际输入层：**固定 material detector 产生的 fragments，报告混合来源、漏检和背景误报，不能把第一层当端到端结果。
+
+候选器第一版可以固定为“每个 fragment 最多 8 个邻居、距离≤10 kb”，不按真 family 筛选。这定义的是局部 association 范围，不是所有 TE 的最大跨度。
+
+报告 eligible 预测 fragments 间全部真 same-insertion pairs 的候选覆盖率，另报真实 insertion 的 material 覆盖。条件 pair recall 不能冒充端到端 insertion recall。
+
+LINK1：真实 curated 子集并行准备
+
+以 100–200 个 locus为资格建设目标，使用可核查的插入/ortholog 证据、结构与长读长支持进行盲审。长读长只证明序列存在，并不单独证明同一祖先插入。
+
+RepeatMasker ID 可以作 silver/proxy 标签另列；难判或嵌合 pair 保留 unknown，不强迫赋 0。
+
+终点与停止条件
+
+主终点是固定候选分布的 pair PR/AUPRC，以及 CAL 选阈值后的 precision/recall。硬规则 B1 只提供一个 PR 点，不能伪造连续排序曲线。
+
+还必须报告 B-cubed、误融合、碎片化、AB/BC 高分但 AC 低分的传递矛盾，以及连通分量闭包错误。所有臂使用相同候选器和固定 decoder。
+
+M3 不胜 B1/M2：停止上下文扩展。
+
+只在模拟上胜出：发布 association prototype/benchmark，不叫 biological reconstruction。
+
+真实关系真值上改善 fusion/fragmentation：才支持更强的 L3 claim。
+
+五、方向 4：Unknown 可以重新分类，但低 recall 本身不是证据
+R
+Unknown
+	​
+
+=P(
+y
+	​
+
+=Unknown∣y
+old
+	​
+
+=Unknown).
+
+.388597 或 .042627 只说明保留原 Unknown 标签的比例，无法知道其余去了 known 还是 BG，更无法证明改类正确。现有 main4 宏 F1 仍计入 BG/Unknown 混淆造成的 FP/FN。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+必须区分：
+
+状态	含义
+类型 Unknown	已认为是 TE，但类型未定
+标签 ?	不可判定或被屏蔽的监督位置
+缺库 family	测试对象不在已知分类目录中
+BG	背景输出类别
+UNK0：第一轮不重训
+
+先取回逐项预测，恢复完整六类 confusion、support、概率和 locus，明确区分 Unknown→known、Unknown→BG、known→Unknown。
+
+建议第一批审查 200 个 Unknown→known、100 个 Unknown→BG、100 个 known→Unknown，以及已知正确类别对照；按 locus/身份组抽样。只有汇总表时，先取回输出，不从 recall 推测流向。
+
+独立验证应在一致的分类层级上结合家族同源、结构、蛋白域、多 copy 和人工复核。新 Dfam 命中是更新资源支持；由同一库生成、再用同一库“验证”的结果不构成独立确认。
+
+同时保留两套结果：
+
+旧标签下的全部指标及 Unknown recall；
+
+有证据支持的重分类率、证据覆盖率、误改率和仍未定比例。
+
+拒识阈值只用 CAL，报告 risk–coverage。模型若只是把 Unknown 挤成 BG，或支持率不高于匹配对照，应停止“重分类能力”claim。
+
+当前输出只有 SINE/LINE/LTR/DNA 等粗类型，最多先验证粗类型重分类，不能直接写 family 重分类工具。
+
+六、方向 5：TE_final Dfam——应先纠正结论范围，而不是争论记忆谁对
+
+我现在应修改前轮结论的适用范围：旧 1,800-fragment 表只能约束那个 panel；不能据此判断所有 TE_final Dfam 实验。
+
+旧树中确实存在 TE_final 的外部路径、证据登记和模块入口，但这不是你所指实验的恢复结果。目前该分支应标为：
+
+PENDING_RECOVERED_EVIDENCE
+
+而不是 positive、negative 或“用户记错”。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+最小恢复包
+证据	必须回答的问题
+原目录、代码/配置/命令、commit 或文件 SHA、job、checkpoint	实际运行了哪个实验？
+Dfam 版本、accession、记录数与唯一序列数	consensus、天然 copy、consensus 裁片，还是混合？
+分类层级、每类 support、全部 split IDs	大类还是 family？重复/同源是否跨 split？
+scaler/PCA/contrastive/prototype/cluster 的 fit 边界	有没有使用 TEST 分布或标签？K 是否 oracle？
+全部 A/C 对照及 cluster assignment	是否同 panel、同分母？是否丢弃 noise 或混合 train/test？
+逐 query 预测/检索排名与成本	能否复算并支持工具使用，而不只是二维可视化？
+
+若 F1 通过 TEST 上最优 cluster-label 映射获得，应明确为 oracle cluster-label score，不能当部署分类 F1。
+
+条件性判断
+恢复结果	应怎样更新结论
+干净的同 panel、独立划分，GLM 超过强 basic＋contrastive	更正前轮总括判断，可进入正文
+优势来自 family-supervised contrastive	支持监督度量学习，不称整个流程无监督
+高分主要来自 pooled evaluation、oracle K 或不同 panel	保留原 scope，另做相应边界的严格比较
+元数据/原输出不全	证据待补，不等于实验失败
+
+先按恢复实现做 seed 42 复现；原实验 seed 不同时应明示，不能承诺完全同数值。随后针对确实识别的问题改一项合同形成新实验，不混淆“复现原结果”和“更严格外推”。
+
+在恢复数字前，可以完成 validator、身份合同和 matched baseline；不应猜 ARI，也不应先选更大模型。
+
+七、方向 6：完整 Omnibenchmark——登记完整矩阵，分批真实执行
+6.1 我建议的主矩阵
+
+L1 主矩阵先登记七臂：
+
+方法臂	计入的完整工作
+固定 D	模型加载、序列处理、推理、投影、输出
+固定 P3	同上，保留其独立训练历史
+RepeatModeler2→RepeatMasker	建库＋分类/整理＋注释
+HiTE	所选完整 workflow
+Earl Grey	所选完整 workflow
+EDTA	适用任务上的完整 workflow
+RepeatModeler2→TEtrimmer→RepeatMasker	上游建库＋curation＋注释
+
+TEtrimmer 原论文明确其输入可以来自 RepeatModeler2、EDTA 等产生的候选库；因此不能只计 TEtrimmer 自身耗时，就称为独立 raw-genome de novo workflow。
+Nature
+
+Panel 建议登记六个内部物种、三个外部候选、legacy FlyBase r6.68 和 rice RGAP7，共 11 个 assembly 实例，形成 77 个计划方法–assembly 格子。
+
+**这不是 77 个已完成结果，也不意味着每格都科学适用。**先检查任务和 truth 资格。人类只用允许的非 sealed 范围，不能通过“全基因组建库”间接读取 chr19–22；该格标 restricted-scope，不叫 whole-human-genome。
+
+完整的含义是预登记的合格任务执行完整，不是解除访问边界。
+
+6.2 不同任务分别评分
+任务	合适方法	评价限制
+Genome material	上述合格 workflow	有完整 callable comparator 才报 P/R/F1；T1 只报 positive recall
+Fixed-library search	consensus 搜索、profile-HMM、prototype	同 family 目录与资源资格；不混入 de novo 排名
+Library refinement	固定上游库 ± TEtrimmer	同时报增量和整条 workflow 成本
+Typing/retrieval	实际输出相应 ontology 的方法	class/family 分开，保留 Unknown
+Fragment association	B0/B1/M2/M3及可比传统关联输出	独立关系真值，不用 union BED 当 insertion
+Gene utility	原 P3 U/P/R	原 20×3，不擅自换 D 或新融合模型
+
+所有格子登记：
+
+PLANNED / RUNNING / VALID / FAILED / TIMEOUT /
+BLOCKED_DATA / NOT_APPLICABLE
+
+不适用保留在计划清单，但不进入 F1 平均；失败保留并报告 eligible 完成率，也不一律硬记 F1=0。
+
+6.3 信息访问公平，比统一文件格式更重要
+
+区分三个部署 regime：
+
+外部固定 library 可用；
+
+只提供目标 DNA，允许 de novo/transductive 建库；
+
+只使用训练侧数据的 frozen 模型。
+
+目标基因组建库不是天然作弊，而是不同任务假设。反之，直接给某工具生成 Label-A 的同一库，主要评价的是对该 comparator 的一致性，不是独立生物真值优势。
+
+输入统一清除历史 softmask，保留序列与 N/IUPAC 坐标。记录所有库来源、构建、分类、去冗余及 annotation 成本。
+
+GLM 预训练/任务训练作为一次性成本披露，推理另报；传统方法也不能把建库当免费。复用缓存可以减少执行费用，但缓存增量和完整 workflow 成本必须分开。
+
+6.4 当前 Omnibenchmark 文档需要这样落地
+
+这次核查确认：官方 tutorial 仍有 mapping 式 software_environments 示例，而 spec-reference 使用列表，支持 named entrypoint、host/apptainer 和可选 storage。页面与安装示例也存在版本差异，所以必须冻结实际安装版本和对应 schema，不能把 /latest/ 当成兼容保证。
+Omnibenchmark
++1
+
+第一工程实例应真正完成：
+
+合格的非sealed FASTA
+→ 一个 method
+→ canonical adapter
+→ metrics
+→ collector
+→ 完整状态与资源记录
+
+先用小型 truth fixture 验证坐标和分母，不宣称科学性能。先 host 验合同，再用生产 Apptainer 环境；不要求先建 S3 或网站。
+
+运行顺序是 module/plan validation → dry plan 检查 → 真正单实例运行 → 扩矩阵。--dry 只生成工作流，不代表 benchmark 已执行。
+Omnibenchmark
+
+Slurm 使用兼容的 Snakemake executor/profile 映射线程、GPU、内存和 runtime；保留成功与失败日志，避免默认清理破坏审计。
+Snakemake
+
+6.5 CPU/GPU 速度：需要，但不要由小 smoke 外推
+
+建议固定 20 Mb 真实 FASTA 面板，包含 gene-rich、repeat-rich、N-rich strata；固定 CPU 线程，例如 16，及 GPU 型号/批量，分别做三次 cold-process、warm-process 计时。
+
+不能控制操作系统文件缓存时，应写 process-cold/cache-uncontrolled，不称真正 cold disk。
+
+报告 input bp/s、callable bp/s、walltime、CPU core-hours、GPU-hours、RSS、VRAM及加载/IO/推理/后处理分解。GPU 计时应同步，VRAM 独立观测，不能默认 Omnibenchmark performance 表涵盖全部 GPU 指标。官方 collector 可以汇总工作流性能记录，但具体观测边界仍由实现决定。
+Omnibenchmark
+
+另在完整合格 assembly 上测 de novo workflow。20 Mb 推理测试不能代替全基因组建库测试，旧 8,206-bp smoke 更不能用于外推。
+
+八、方向 7：单 seed 可以执行，但应准确写出它没有估计什么
+
+所有新增训练、轻量 head 和 contrastive 实验固定 seed 42。固定模型评估不重训；计时重复不是训练 seed。相同 seed 也不保证所有硬件算子完全确定，仍需记录环境。
+
+DIRECTIONS-PRO-BRIEF-20260914
+
+对象	合适的不确定性单位
+bp material、RC、融合	预定义空间 block 的配对重抽样，不按单 bp
+Fragment linking	parent insertion、host locus、同源组
+Prototype retrieval	family 与独立 copy/homology group
+Tiberius	原 20-core 配对 bootstrap，原 seed 不改
+CPU/GPU timing	同配置重复运行，报告变异与缓存条件
+
+逐物种结果必须单列，不能把几个物种的海量 bp 当成大量独立物种样本。
+
+新筛选门应同时包含实际效应、风险和不确定性。例如材料探索可预先约定 ΔF1≥.005、任一物种下降不超过 .01，作为投资判断草案；它不是旧验收门，也不估计初始化方差。区间宽就写不确定，不通过换 panel、追加超参或反复重训追到显著。
+
+九、方向 8：Multi-prototype 值得做，但必须与 profile-HMM 公平比较
+
+**“一个 family 一个 consensus 可能损失内部多样性”是合理假设，但“传统方法都只有一个代表序列”不成立。**Dfam 已同时提供 consensus 和基于 MSA 的 profile-HMM，后者表达位置特异变异与 indel；传统 subfamily 表示也已考虑家族内部结构。
+Springer
+
+值得检验的是：
+
+相同训练 copy 来源、相同 library 可用性、相同误报预算下，多 prototype 是否补充 single consensus/profile-HMM；GLM 是否进一步超过基本序列特征。
+
+8.1 最小数据资格与划分
+
+先以最多 40 个 family 为首轮范围，资格目标可以是每 family 至少 30 个可追溯天然 copies、至少三个可分离的近同源组件，且 TRAIN 足够构造 k=4。
+
+实际不满足就缩小或停止，不能把 consensus 人工突变当成真实 within-family diversity。
+
+先按 copy/近同源组件分 TRAIN/CAL/TEST，再构建 consensus、MSA/HMM、prototype及裁片。Dfam seed alignment 可作为 copy 入口，但须追溯来源和测试重叠；只有 consensus 时，首先缺的是独立 copy 数据，不是更大的 GLM。
+
+这里有三种不同任务：
+
+任务	允许的信息
+已知 family、独立 copy 检索	支持库有该 family，但 query copy/近同源不能泄漏
+新 family 的 episodic support/query	projection 训练不见该 family；测试时明确提供其 support
+库外 family	必须测试 reject，不能要求闭集 top-1“正确”
+8.2 第一轮固定 k=4，不做大范围搜索
+表示	Single	Multi	必须保留的对照
+Sequence search	train-derived consensus、single medoid	4 个 diversity medoids	random matched-4；相同搜索器
+Basic features	6-mer 等 single centroid	4 个 cluster prototypes	random matched-4、相同 copies
+GLM embeddings	single centroid	4 个 cluster prototypes	random matched-4、相同投影与预算
+Profile-HMM	同一 TRAIN MSA 构建一个 profile	第一轮不扩多 HMM	相同 copy 来源；公版 profile 另列
+
+Single consensus 可能有去噪优势；多个天然 copy 也可能引入私有突变、低复杂度和 host 污染。multi 不应被预设为优于 single。
+
+公版 Dfam profile 可能包含 TEST 来源，不能当 train-only 因果对照。标准化、聚类和 projection 只 fit TRAIN，seed 42。
+
+8.3 必须控制“多试几次，总能更像”的偏差
+s
+f
+	​
+
+(x)=
+j
+max
+	​
+
+sim(e(x),e
+fj
+	​
+
+)
+
+增加 j 会改变分数分布。因此不能把 single 的阈值原封不动给 multi，然后将 recall 增益都归因于更好的表示。
+
+每个方案使用同一 CAL negatives，在相同全库误接纳预算下确定阈值。固定 family 数、候选数和长度分布；random-k 检验收益是否只是多比较了几条序列。
+
+CAL/TEST 同时包含缺库 family 和有独立支持的非 TE 难负例。分别报告：
+
+已知 query 被分错 family；
+
+缺库 family 被强行接纳；
+
+非 TE 被接纳。
+
+主终点是固定全库 false-acceptance 下的 family-macro recall，辅以 MRR/top-1、Unknown risk–coverage，并按 family size、novelty 和 fragment length 分层。
+
+**停止条件：**multi 不胜 single/random-k，停止多原型优势 claim；GLM 不胜 basic，可以保留 prototype 本身贡献，不扩大 backbone；HMM 更强也应照报。
+
+8.4 检索阳性后，才接 genome annotation
+
+下一步必须测候选生成召回、bp FP/false-mask budget、family 错误、边界以及 embedding、索引、搜索、后处理总成本。
+
+**预切好的真实 TE 片段检索优秀，不等于全基因组扫描优秀。**这也是 multi-prototype 不能直接被接成“已完成的通用注释器”的原因。
+
+十、可执行的并行矩阵
+
+为避免编造 GPU 小时，成本用实测单位表示：
+
+I
+m
+	​
+
+(B)：模型 m 对 B bp 的一次推理；
+
+T：一次预定预算训练；
+
+E(n)：n 条序列的 embedding；
+
+W
+j
+	​
+
+(G)：传统 workflow j 对 genome G 的完整运行；
+
+U
+c
+	​
+
+：Tiberius 一个 core 的一臂。
+
+先由代表性实例把它们换算成设备小时。测运行成本不等于增加训练 seed。
+
+ID	最小有限比较/产物	数据或前置条件	主终点与停止条件	成本及并行关系
+UPR	原三臂 smoke→60 cells	原批准范围、显式 env 修复	原四个门；失败停止固定效用问题	∑60U
+c
+	​
+
++原 P3 导出；立即工程优先，无新增预算上限
+D-X0	固定 D×三候选	Label-A 资格与暴露清单	逐物种误差；资格失败阻断，不记0	∑I
+D
+	​
+
+(G
+s
+	​
+
+)；与 UPR 并行
+H0	hg19 单 GLM＋旧/新标签审计	旧库/档案、明确 chromosome split	FP 支持富集与全分母变化	T+I(20Mb)+两次 annotation＋盲审
+RC0	F/RC/均值/双正向相位	固定 D、合法 DEV/source CAL	一致性与准确性分开；无益不扩架构	有 F 缓存后约增加两次 panel 推理
+RC1	no-RC vs 0.5 RC 替换	RC0 显示值得解释的残余问题	同预算改善；不改旧 PAIR8	2T，条件启动
+FUS0	singles/mean/单源 heads/双源 head	无 stacking 泄漏的 paired logits	胜最强匹配对照；否则停止融合	I
+A
+	​
+
++I
+B
+	​
+
+ 缓存＋轻量训练
+LINK0	B0/B1/M2/M3	独立身份的半模拟场景	candidate/pair/cluster 三层	CPU生成＋E(n)＋小 head；真实 curation 并行
+UNK0	转移矩阵＋盲审	原逐项输出、独立分类证据	支持改类率，不以 recall 下降作阳性	CPU＋人工核查，无新模型
+DF0	真 TE_final 恢复/复算	恢复包到位	同 panel、同分母、split 资格	CPU审计先行；必要时 seed42 复现
+MP0	single/k4/random-k/HMM	独立天然 copy 集合	固定误报下 recall；不胜对照则收敛	E(n) 缓存＋CPU检索/profile
+OB0→OB1	一个完整实例→77格登记执行	数据、方法、库许可与任务资格	真实运行、缺失与失败分母	单实例轻；完整 ∑W
+j
+	​
+
+(G)＋GLM推理，分批实施
+ADAPT→MoE	shared/conditional matched adapters	D-X0 明确问题、合法适配数据	可部署专家互补先成立	adapter 训练；MoE 不默认启动
+并行依赖图
+版本 / 数据 / 分母合同
+ ├─ 原Tiberius最小修复 → 原60 cells → 独立复算与效用结论
+ ├─ 外部标签资格 → 固定D-X0 → 是否需要adapters → 条件MoE
+ ├─ paired logits / source CAL → RC0、FUS0 → 有限训练 / 固定新模型
+ ├─ 旧新注释资产 → H0与Unknown盲审 → 跨assembly / 跨物种验证
+ ├─ TE_final恢复 → 原结果资格 → 表征claim更正
+ ├─ 独立天然copies → MP0检索 → 条件genome annotation
+ └─ insertion / host身份真值 → LINK0 + 真实curation → association或L3
+
+Omnibenchmark贯穿组织与追溯，
+但不阻塞已批准UPR，也不替代任何真值资格。
+现有代码怎么复用
+分支	已读的复用入口	不能直接沿用的假设
+D/RC	scripts/experiments/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/infer_fasta.py；CROSS-SPECIES-L1-20260903/{cross_species_token_task.py,calibrate_evaluate_x0.py}	原 CAL/阈值与新 RC 臂校准须分清；不能倒置 token 当 bp 映射
+新训练	CROSS-SPECIES-L1-UPSTREAM-20260904/{materialize_upstream.py,train_upstream.py,evaluate_upstream.py}	历史 hg19 实验复用数据/评分逻辑，不照搬已监督 H0 loader
+UPR	P3-TIBERIUS-BASE-MASK-20260911-R1/{base_mask.py,observed_tiberius.py,test_base_mask.py} 及原 sbatch/config	只修工程，不换原 gene-locus 端点
+Benchmark	LEMMI-TE-BENCH-20260824-R1/adapter.py	material reader 只保留区间，不能成为 insertion truth
+Linking	FRAG-CONSENSUS-COLLINEARITY-AUDIT-20260812-R1/{common.py,build_sample.py,evaluate_t1.py}	复用不可变 leaf/审计思想，不把旧 proxy 真值升级为 biological truth
+Dfam/identity	CONTRASTIVE-IDENTITY-SCREEN-20260824-R1/{contrastive_identity_screen.py,enrich_module5_from_bed.py,README.md}	必须等真正 TE_final 输入恢复；不能替换成旧 panel
+Unknown	pipelines/PIPE-TEFM-LOCK-20260619/superfamily5_task.py	保留真实指标定义与六类 confusion
+Prototype	identity/homology split 脚本及 accession-preserving adapter	把 Dfam accession 放进 homology_component 字段，不代表做过序列级同源隔离
+十一、什么会改变论文结论，以及怎样避免无限追加实验
+
+方法论文需要至少一个定义清楚、可部署的新操作，在合格留出上超过强匹配对照，并有完整成本、风险和失败记录。
+
+RC 的代数一致、旧 FP 获得某库支持、模拟 pair 高 AP、或 pooled clustering 高 ARI，都不能单独替代这个条件。
+
+新证据组合	合理的论文方向
+固定 D 外部评估＋RC/条件融合阳性，成本可接受	标签资格清晰的 TE-material 方法；Tiberius 阳性可增加真实用途
+历史审计强阳性，但新模型操作没有优势	Annotation incompleteness 与评价偏差研究，不假称新 SOTA
+真 TE_final/MP0 严格检索强阳性	表征/检索方法，可与 genome material 稿分开
+独立实例真值上的 linking 改善	Fragment association/reconstruction 的独立贡献，不必填 gap
+Linking 只在模拟成立	Prototype/benchmark 或补充结果，不写生物重建完成
+多分支阴性	收敛为受控评估与机制论文，保留清楚的阴性边界
+
+我的优先排序是：
+
+**第一梯队：**原 Tiberius 工程闭环、D 外部资格与固定评估、历史注释同 assembly 对照、真正 TE_final 恢复、Omnibenchmark 单实例。
+
+**第二梯队，可并行：**RC0、Unknown 审计、paired-logit 条件互补诊断，以及独立 copy/insertion 真值建设。
+
+**第三梯队，仅条件启动：**RC 训练增强、轻量融合、multi-prototype genome annotation、条件 adapters。
+
+**目前不应默认启动：**MoE、大规模等变架构重做、固定 HN whole-gap 阈值重搜，或为了挽救论文不断扩大 panel/模型/搜索空间。
+
+最终需要保留的开放性是：**历史注释不足可能解释一部分低分，但未必是主要原因；RC 可能有效，但一致不等于正确；GLM 可以互补，但必须超过单源容量对照；same-insertion 可以关联而不填 gap；真正 TE_final 结果可能推翻前轮局部结论，但必须先读到同一实验的证据。**这些都可以并行检验，而不必在开始前先选定一个“所有问题都来自哪里”的统一解释。

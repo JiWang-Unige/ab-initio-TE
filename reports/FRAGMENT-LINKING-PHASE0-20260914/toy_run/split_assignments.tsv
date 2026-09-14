@@ -1,0 +1,17 @@
+fragment_id	source_copy_id	source_copy_split	family_group_id	family_group_split
+adj_a	copy_adj_a	dev	Fam_LINE_A	train
+adj_b	copy_adj_b	test	Fam_LINE_A	train
+chain_a	copy_chain_a	train	Fam_LINE_A	train
+chain_b	copy_chain_b	train	Fam_LINE_A	train
+chain_c	copy_chain_c	dev	Fam_LINE_A	train
+far_a	copy_far	train	Fam_RC_A	train
+far_b	copy_far	train	Fam_RC_A	train
+inner	copy_inner	train	Fam_DNA_A	test
+outer_left	copy_outer	train	Fam_LINE_A	train
+outer_right	copy_outer	train	Fam_LINE_A	train
+same_a	copy_same	train	Fam_LTR_A	train
+same_b	copy_same	train	Fam_LTR_A	train
+unknown_a	copy_unknown	train	Fam_SINE_A	dev
+unknown_b	copy_unknown	train	Fam_SINE_A	dev
+unresolved_a	copy_unresolved	test	Fam_LINE_A	train
+unresolved_b	copy_unresolved	test	Fam_LINE_A	train

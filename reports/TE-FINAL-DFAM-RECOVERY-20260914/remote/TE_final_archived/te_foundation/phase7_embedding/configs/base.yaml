@@ -1,0 +1,55 @@
+# Phase 7: Base Configuration
+# TE Embedding Space Clustering
+
+# Model configuration
+model:
+  name: "GENERanno"
+  path: "/home/users/j/jwang/TE_benchmark/glm_models/generanno/GENERanno-eukaryote-0.5b-base"
+  feat_dim: 128
+  max_length: 512
+  pooling: "mean"
+
+# Training configuration
+training:
+  num_epochs: 5
+  batch_size: 8               # Reduced from 16 to avoid OOM
+  learning_rate_backbone: 3.0e-6
+  learning_rate_head: 3.0e-4
+  temperature: 0.05
+  margin: 0.5
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  seed: 42
+  num_workers: 4
+  fp16: false                  # Use bf16 instead
+  bf16: true                   # Enable bfloat16 for A100
+
+# Data configuration defaults
+data:
+  te_classes: ["DNA", "LINE", "LTR", "SINE"]
+  min_length: 100
+  max_length: 10000
+  max_n_ratio: 0.1
+  fragment_size_min: 100
+  fragment_size_max: 300
+  num_train_pairs: 10000
+  num_val_pairs: 1000
+  positive_ratio: 0.5
+
+# Genome data paths
+genome:
+  fasta: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/hg38.fa"
+  annotation: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/rmsk_te.bed.gz"
+  consensus: "/home/users/j/jwang/Pretrain/data/Dfam38_curated.repbase_format.fa"
+
+# Evaluation configuration
+evaluation:
+  clustering_methods: ["kmeans", "spectral", "hierarchical", "hdbscan"]
+  num_clusters: [4, 6]
+  umap_visualization: true
+  umap_n_neighbors: 15
+  umap_min_dist: 0.1
+
+# Paths (will be overridden by experiment configs)
+paths:
+  base_dir: "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/te_foundation/phase7_embedding"

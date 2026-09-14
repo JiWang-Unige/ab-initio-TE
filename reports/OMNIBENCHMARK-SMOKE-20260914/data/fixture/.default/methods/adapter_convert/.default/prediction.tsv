@@ -1,0 +1,7 @@
+seqid	start	end	name	score	strand	source	attributes
+chrA	0	5	left_exact	.	+	synthetic	feature=repeat_region;phase=.;ID=left_exact
+chrA	3	6	left_overlap	.	+	synthetic	feature=repeat_region;phase=.;ID=left_overlap
+chrA	10	15	middle_fragment_a	.	+	synthetic	feature=repeat_region;phase=.;ID=middle_fragment_a
+chrA	16	20	middle_fragment_b	.	+	synthetic	feature=repeat_region;phase=.;ID=middle_fragment_b
+chrB	49	52	explicit_candidate	.	-	synthetic	feature=repeat_region;phase=.;ID=explicit_candidate
+chrB	95	100	right_exact	.	-	synthetic	feature=repeat_region;phase=.;ID=right_exact

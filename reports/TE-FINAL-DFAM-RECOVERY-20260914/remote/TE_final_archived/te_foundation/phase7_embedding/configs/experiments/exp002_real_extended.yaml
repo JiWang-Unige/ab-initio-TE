@@ -1,0 +1,68 @@
+# Phase 7 Extended Experiment: Increased Sample Size
+# Addresses overfitting issue from MVP (10k pairs → 100k pairs)
+
+experiment:
+  name: "exp002_real_extended"
+  description: "Extended training with 100k pairs from hg38 chr1"
+  version: "1.0"
+
+# Data configuration - significantly increased
+data:
+  source: "real_genome"
+  chromosomes: ["chr1"]
+  te_classes: ["DNA", "LINE", "LTR", "SINE"]
+  min_length: 100
+  max_length: 10000
+  max_n_ratio: 0.1
+  fragment_size_min: 100
+  fragment_size_max: 300
+  # Key change: 5x more training pairs (balanced for 8h time limit)
+  # MVP: 10k pairs × 5 epochs = 50k pair-epochs → 31min
+  # Extended: 50k pairs × 10 epochs = 500k pair-epochs → ~310min (5.2h)
+  num_train_pairs: 50000
+  num_val_pairs: 5000
+  positive_ratio: 0.5
+  # Note: Contrastive pair generation already uses class-balanced sampling
+  # (random class selection, not proportional to class size)
+
+# Training configuration - more epochs
+training:
+  num_epochs: 10
+  batch_size: 8
+  learning_rate_backbone: 3.0e-6
+  learning_rate_head: 3.0e-4
+  temperature: 0.05
+  margin: 0.5
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  seed: 42
+  num_workers: 4
+  fp16: false
+  bf16: true
+  # Note: Monitor val_loss to identify optimal epoch (best checkpoint saved automatically)
+
+# Model configuration
+model:
+  name: "GENERanno"
+  path: "/home/users/j/jwang/TE_benchmark/glm_models/generanno/GENERanno-eukaryote-0.5b-base"
+  feat_dim: 128
+  max_length: 512
+  pooling: "mean"
+
+# Evaluation - including HDBSCAN
+evaluation:
+  clustering_methods: ["kmeans", "spectral", "hierarchical", "hdbscan"]
+  num_clusters: [4, 6, 8]  # Also try 6 and 8 for comparison
+  umap_visualization: true
+  umap_n_neighbors: 15
+  umap_min_dist: 0.1
+  hdbscan_min_cluster_size: 100
+  hdbscan_min_samples: 50
+
+# Paths
+paths:
+  data_dir: "data/real_extended"
+  output_dir: "experiments/exp002_real_extended"
+  checkpoint_dir: "experiments/exp002_real_extended/checkpoints"
+  embedding_dir: "experiments/exp002_real_extended/embeddings"
+  clustering_dir: "experiments/exp002_real_extended/clustering"

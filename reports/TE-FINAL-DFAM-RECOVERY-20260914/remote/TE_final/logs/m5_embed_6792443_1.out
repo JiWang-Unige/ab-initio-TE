@@ -1,0 +1,56 @@
+=== Module 5: Compute Embeddings (Setting A1) ===
+  Fragments: module5_contrastive/data/te_fragments.jsonl
+  Model: /srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/glm_models/generanno/GENERanno-eukaryote-0.5b-base
+  Output: module5_contrastive/results/A1
+  Start: Sat Feb 14 04:36:25 PM CET 2026
+Loading fragments from module5_contrastive/data/te_fragments.jsonl...
+  10000 fragments, 12 classes, 13 species
+
+=== Computing embeddings: Setting A1 ===
+  Computing model embeddings (/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/glm_models/generanno/GENERanno-eukaryote-0.5b-base)...
+  Processed 32/10000 sequences
+  Processed 352/10000 sequences
+  Processed 672/10000 sequences
+  Processed 992/10000 sequences
+  Processed 1312/10000 sequences
+  Processed 1632/10000 sequences
+  Processed 1952/10000 sequences
+  Processed 2272/10000 sequences
+  Processed 2592/10000 sequences
+  Processed 2912/10000 sequences
+  Processed 3232/10000 sequences
+  Processed 3552/10000 sequences
+  Processed 3872/10000 sequences
+  Processed 4192/10000 sequences
+  Processed 4512/10000 sequences
+  Processed 4832/10000 sequences
+  Processed 5152/10000 sequences
+  Processed 5472/10000 sequences
+  Processed 5792/10000 sequences
+  Processed 6112/10000 sequences
+  Processed 6432/10000 sequences
+  Processed 6752/10000 sequences
+  Processed 7072/10000 sequences
+  Processed 7392/10000 sequences
+  Processed 7712/10000 sequences
+  Processed 8032/10000 sequences
+  Processed 8352/10000 sequences
+  Processed 8672/10000 sequences
+  Processed 8992/10000 sequences
+  Processed 9312/10000 sequences
+  Processed 9632/10000 sequences
+  Processed 9952/10000 sequences
+  Embedding shape: (10000, 1280)
+
+=== Clustering by TE class ===
+  NMI=0.0565, ARI=0.0208
+
+=== Clustering by species ===
+  NMI=0.0211, ARI=0.0065
+
+=== Results saved to module5_contrastive/results/A1 ===
+  Embeddings: embeddings_A1.npy
+  UMAP: umap_coords_A1.tsv
+  Metrics: metrics_A1.json
+
+=== Complete: Sat Feb 14 05:25:08 PM CET 2026 ===

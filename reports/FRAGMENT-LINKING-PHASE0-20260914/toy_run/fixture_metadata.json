@@ -1,0 +1,23 @@
+{
+  "cases": [
+    "adjacent_independent",
+    "far_same_insertion",
+    "nested_inner",
+    "nested_outer",
+    "same_insertion",
+    "transitive_chain",
+    "unknown_orientation",
+    "unresolved_truth"
+  ],
+  "family_id_policy": "synthetic Fam_* identifiers; no coarse class is presented as a family",
+  "fixture_provenance": "ENGINEERING_ONLY",
+  "manual_features": [
+    "predicted_family",
+    "predicted_orientation",
+    "predicted_length",
+    "truth_parent_insertion_id"
+  ],
+  "max_distance_bp": 25,
+  "min_length_ratio": 0.5,
+  "seed_for_group_split": 42
+}

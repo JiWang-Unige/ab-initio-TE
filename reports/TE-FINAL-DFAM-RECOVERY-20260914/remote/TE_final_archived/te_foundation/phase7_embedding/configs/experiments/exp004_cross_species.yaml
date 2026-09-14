@@ -1,0 +1,156 @@
+# Experiment 004: Cross-Species Contrastive Learning
+# Goal: Train embedding model on 6 species + Background, compare before/after fine-tuning
+# GPU: gpu022 (7×A100-40G) or gpu030 (4×A100-40G)
+
+experiment:
+  name: "exp004_cross_species"
+  description: "Cross-species TE embedding with 7 classes (6 TE + Background)"
+  output_dir: "experiments/exp004_cross_species"
+
+# Model configuration
+model:
+  name: "GENERanno"
+  path: "/home/users/j/jwang/TE_benchmark/glm_models/generanno/GENERanno-eukaryote-0.5b-base"
+  feat_dim: 128  # Projection head output dimension
+  max_length: 512
+  pooling: "mean"
+
+# Multi-species genome data
+species:
+  hg38:
+    name: "Human"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/hg38.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/rmsk_te.bed.gz"
+    priority_classes: ["SINE", "LINE"]  # Rich in these
+
+  dm6:
+    name: "Drosophila"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/dm6/dm6.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/dm6/rmsk_te.bed.gz"
+    priority_classes: ["LTR", "RC"]  # Rich in these
+
+  danRer11:
+    name: "Zebrafish"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/danRer11/danRer11.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/danRer11/rmsk_te.bed.gz"
+    priority_classes: ["DNA"]  # Dominant class
+
+  galGal6:
+    name: "Chicken"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/galGal6/galGal6.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/galGal6/rmsk_te.bed.gz"
+    priority_classes: ["LINE"]  # CR1-rich
+
+  ce11:
+    name: "C.elegans"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/ce11/ce11.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/ce11/rmsk_te.bed.gz"
+    priority_classes: ["DNA", "RC"]  # DNA transposon rich
+
+  mm39:
+    name: "Mouse"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/mm39/mm39.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/mm39/rmsk_te.bed.gz"
+    priority_classes: ["SINE", "LTR"]  # Mammalian comparison
+
+# Data sampling configuration
+sampling:
+  # 7 classes: 6 TE classes + Background
+  classes:
+    - "SINE"
+    - "LINE"
+    - "LTR"
+    - "DNA"
+    - "RC"
+    - "Unknown"  # Includes Other, Retroposon
+    - "Background"  # Non-TE genomic sequences
+
+  # Per-class sampling targets
+  per_class_samples: 8000  # 8000 × 7 = 56,000 total
+  min_per_species_class: 200  # Minimum samples per species per class
+
+  # Background sampling
+  background:
+    min_distance_from_te: 5000  # At least 5kb away from any TE
+    sequence_length: 512  # Same as TE sequences
+
+  # Sequence parameters
+  sequence_length: 512
+  min_te_length: 100  # Minimum TE length to sample
+  max_te_length: 2000  # Maximum TE length
+
+# Contrastive learning configuration
+contrastive:
+  # Positive pairs: same class (can be different species)
+  # Negative pairs: different class
+  positive_strategy: "same_class_any_species"
+
+  # Hard negative mining
+  hard_negative_ratio: 0.3  # 30% hard negatives
+
+  # Loss function
+  loss: "InfoNCE"
+  temperature: 0.07
+
+  # Training pairs per epoch
+  pairs_per_epoch: 100000
+
+# Training configuration
+training:
+  batch_size: 8  # Small batch to fit in memory (2 seqs/pair × 8 = 16 seqs)
+  num_epochs: 10
+  learning_rate: 1.0e-5
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+
+  # Keep accumulation low to avoid OOM (8 * 2 = 16 effective batch)
+  gradient_accumulation_steps: 2
+
+  # Mixed precision
+  fp16: false
+  bf16: true
+
+  # Checkpointing
+  save_strategy: "epoch"
+  eval_steps: 1000
+
+  # Early stopping
+  early_stopping_patience: 3
+
+# Evaluation configuration
+evaluation:
+  # Clustering methods
+  clustering:
+    - method: "kmeans"
+      n_clusters: 7
+    - method: "hdbscan"
+      min_cluster_size: 100
+
+  # Metrics
+  metrics:
+    - "ari"  # Adjusted Rand Index
+    - "nmi"  # Normalized Mutual Information
+    - "purity"
+    - "silhouette"
+
+  # Visualization
+  visualization:
+    umap:
+      n_neighbors: 15
+      min_dist: 0.1
+    tsne:
+      perplexity: 30
+
+# Comparison experiment: Before vs After fine-tuning
+comparison:
+  enabled: true
+  stages:
+    - name: "baseline"
+      description: "Original GENERanno embeddings (no fine-tuning)"
+      model_state: "pretrained"
+
+    - name: "finetuned"
+      description: "After cross-species contrastive learning"
+      model_state: "finetuned"
+
+  output_dir: "experiments/exp004_cross_species/comparison"

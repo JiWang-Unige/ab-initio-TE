@@ -1,0 +1,4 @@
+seqid	start	end	name	score	strand	source	attributes
+chrA	0	5	left_edge	.	.	BED	.
+chrA	10	20	middle	.	.	BED	.
+chrB	95	100	right_edge	.	.	BED	.

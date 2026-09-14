@@ -1,0 +1,24 @@
+=== Module 5: Compute Embeddings (Setting A0) ===
+  Fragments: module5_contrastive/data/te_fragments.jsonl
+  Model: 'k-mer only'
+  Output: module5_contrastive/results/A0
+  Start: Sat Feb 14 04:36:25 PM CET 2026
+Loading fragments from module5_contrastive/data/te_fragments.jsonl...
+  10000 fragments, 12 classes, 13 species
+
+=== Computing embeddings: Setting A0 ===
+  Computing 6-mer features...
+  k-mer feature shape: (10000, 4096)
+
+=== Clustering by TE class ===
+  NMI=0.1015, ARI=0.0315
+
+=== Clustering by species ===
+  NMI=0.1476, ARI=0.0434
+
+=== Results saved to module5_contrastive/results/A0 ===
+  Embeddings: embeddings_A0.npy
+  UMAP: umap_coords_A0.tsv
+  Metrics: metrics_A0.json
+
+=== Complete: Sat Feb 14 04:39:34 PM CET 2026 ===

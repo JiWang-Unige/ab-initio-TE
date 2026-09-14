@@ -1,0 +1,66 @@
+=== Module 5: Compute Embeddings (Setting B0) ===
+  Fragments: module5_contrastive/data/te_fragments.jsonl
+  Model: 'k-mer only'
+  Output: module5_contrastive/results/B0
+  Start: Sat Feb 14 04:36:25 PM CET 2026
+
+--- Step 1: Train contrastive projection head ---
+Loading fragments from module5_contrastive/data/te_fragments.jsonl...
+  10000 fragments, 12 classes
+    DNA: 1783
+    LINE: 1701
+    LTR: 1641
+    SINE: 1380
+    RC: 1217
+    DNA?: 902
+    LTR?: 563
+    Retroposon: 378
+    RC?: 152
+    Satellite?: 144
+    SINE?: 136
+    ARTEFACT: 3
+
+=== Step 1: Precomputing base embeddings (B0) ===
+  Base embedding shape: (10000, 4096)
+
+=== Step 2: Training contrastive projection head ===
+  Epochs: 50, LR: 0.001, Temp: 0.07
+  Hidden: 256, Projection: 128
+  Epoch 10/50: loss=4.1224 (best=4.1224)
+  Epoch 20/50: loss=4.1106 (best=4.1077)
+  Epoch 30/50: loss=4.1061 (best=4.1061)
+  Epoch 40/50: loss=4.1088 (best=4.1054)
+  Epoch 50/50: loss=4.1072 (best=4.1039)
+  Best contrastive loss: 4.1039
+
+=== Step 3: Computing projected embeddings ===
+
+=== Saving results ===
+  Projection head: contrastive_head_B0.pt
+  Projected embeddings: embeddings_B0.npy ((10000, 128))
+  Config: contrastive_config_B0.json
+
+=== Done ===
+
+--- Step 2: Compute projected embeddings ---
+Loading fragments from module5_contrastive/data/te_fragments.jsonl...
+  10000 fragments, 12 classes, 13 species
+
+=== Computing embeddings: Setting B0 ===
+  Computing 6-mer features...
+  k-mer feature shape: (10000, 4096)
+  Applying contrastive projection head: module5_contrastive/results/B0/contrastive_head_B0.pt
+  Projected embedding shape: (10000, 128)
+
+=== Clustering by TE class ===
+  NMI=0.9713, ARI=0.9281
+
+=== Clustering by species ===
+  NMI=0.1211, ARI=0.0245
+
+=== Results saved to module5_contrastive/results/B0 ===
+  Embeddings: embeddings_B0.npy
+  UMAP: umap_coords_B0.tsv
+  Metrics: metrics_B0.json
+
+=== Complete: Sat Feb 14 04:39:29 PM CET 2026 ===

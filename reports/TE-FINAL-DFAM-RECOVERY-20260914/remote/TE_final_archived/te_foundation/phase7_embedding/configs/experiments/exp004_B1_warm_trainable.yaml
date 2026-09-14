@@ -1,0 +1,127 @@
+# Experiment 004-B1: Warm Start + Trainable GLM
+# Goal: Best expected performance - TE Fine-tuned GLM with trainable backbone
+# Hypothesis: Fastest convergence and best final performance
+# GPU: gpu022 or gpu030
+
+experiment:
+  name: "exp004_B1_warm_trainable"
+  description: "Warm Start (Fine-tuned) + Trainable Backbone: Full model training"
+  output_dir: "experiments/exp004_B1_warm_trainable"
+
+# Model configuration
+model:
+  name: "GENERanno-TE-Finetuned"
+  # TE Fine-tuned model (already trained on TE classification)
+  path: "/home/users/j/jwang/TE_final/results/genome_8192bp"
+  feat_dim: 128  # Projection head output dimension
+  max_length: 512
+  pooling: "mean"
+  # KEY: Backbone is trainable (end-to-end fine-tuning)
+  freeze_backbone: false
+
+# Multi-species genome data (same as exp004)
+species:
+  hg38:
+    name: "Human"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/hg38.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/hg38/rmsk_te.bed.gz"
+    priority_classes: ["SINE", "LINE"]
+
+  dm6:
+    name: "Drosophila"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/dm6/dm6.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/dm6/rmsk_te.bed.gz"
+    priority_classes: ["LTR", "RC"]
+
+  danRer11:
+    name: "Zebrafish"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/danRer11/danRer11.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/danRer11/rmsk_te.bed.gz"
+    priority_classes: ["DNA"]
+
+  galGal6:
+    name: "Chicken"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/galGal6/galGal6.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/galGal6/rmsk_te.bed.gz"
+    priority_classes: ["LINE"]
+
+  ce11:
+    name: "C.elegans"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/ce11/ce11.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/ce11/rmsk_te.bed.gz"
+    priority_classes: ["DNA", "RC"]
+
+  mm39:
+    name: "Mouse"
+    fasta: "/home/users/j/jwang/TE_final/genome_data/animals/mm39/mm39.fa"
+    annotation: "/home/users/j/jwang/TE_final/genome_data/animals/mm39/rmsk_te.bed.gz"
+    priority_classes: ["SINE", "LTR"]
+
+# Data sampling configuration
+sampling:
+  classes:
+    - "SINE"
+    - "LINE"
+    - "LTR"
+    - "DNA"
+    - "RC"
+    - "Unknown"
+    - "Background"
+
+  per_class_samples: 8000
+  min_per_species_class: 200
+
+  background:
+    min_distance_from_te: 5000
+    sequence_length: 512
+
+  sequence_length: 512
+  min_te_length: 100
+  max_te_length: 2000
+
+# Contrastive learning configuration
+contrastive:
+  positive_strategy: "same_class_any_species"
+  hard_negative_ratio: 0.3
+  loss: "InfoNCE"
+  temperature: 0.07
+  pairs_per_epoch: 100000
+
+# Training configuration
+# NOTE: Reduced batch_size for 7-GPU DataParallel (OOM fix)
+# Effective batch size: 4 * 7 GPUs * 4 accum = 112 samples/step
+training:
+  batch_size: 4  # Reduced for multi-GPU OOM fix
+  num_epochs: 10
+  learning_rate: 1.0e-5  # Standard LR for full model
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+  gradient_accumulation_steps: 4  # Increased to compensate smaller batch
+  fp16: false
+  bf16: true
+  save_strategy: "epoch"
+  eval_steps: 1000
+  early_stopping_patience: 3
+
+# Evaluation configuration
+evaluation:
+  clustering:
+    - method: "kmeans"
+      n_clusters: 7
+    - method: "hdbscan"
+      min_cluster_size: 100
+  metrics:
+    - "ari"
+    - "nmi"
+    - "purity"
+    - "silhouette"
+  visualization:
+    umap:
+      n_neighbors: 15
+      min_dist: 0.1
+    tsne:
+      perplexity: 30
+
+comparison:
+  enabled: true
+  output_dir: "experiments/exp004_B1_warm_trainable/comparison"

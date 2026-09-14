@@ -1,0 +1,130 @@
+=== Module 5: Compute Embeddings (Setting B2) ===
+  Fragments: module5_contrastive/data/te_fragments.jsonl
+  Model: module1_training/1.4_multi_species/results/multi_2048bp
+  Output: module5_contrastive/results/B2
+  Start: Sun Feb 15 11:10:37 PM CET 2026
+
+--- Step 1: Train contrastive projection head ---
+Loading fragments from module5_contrastive/data/te_fragments.jsonl...
+  10000 fragments, 12 classes
+    DNA: 1783
+    LINE: 1701
+    LTR: 1641
+    SINE: 1380
+    RC: 1217
+    DNA?: 902
+    LTR?: 563
+    Retroposon: 378
+    RC?: 152
+    Satellite?: 144
+    SINE?: 136
+    ARTEFACT: 3
+
+=== Step 1: Precomputing base embeddings (B2) ===
+  Processed 32/10000 sequences
+  Processed 352/10000 sequences
+  Processed 672/10000 sequences
+  Processed 992/10000 sequences
+  Processed 1312/10000 sequences
+  Processed 1632/10000 sequences
+  Processed 1952/10000 sequences
+  Processed 2272/10000 sequences
+  Processed 2592/10000 sequences
+  Processed 2912/10000 sequences
+  Processed 3232/10000 sequences
+  Processed 3552/10000 sequences
+  Processed 3872/10000 sequences
+  Processed 4192/10000 sequences
+  Processed 4512/10000 sequences
+  Processed 4832/10000 sequences
+  Processed 5152/10000 sequences
+  Processed 5472/10000 sequences
+  Processed 5792/10000 sequences
+  Processed 6112/10000 sequences
+  Processed 6432/10000 sequences
+  Processed 6752/10000 sequences
+  Processed 7072/10000 sequences
+  Processed 7392/10000 sequences
+  Processed 7712/10000 sequences
+  Processed 8032/10000 sequences
+  Processed 8352/10000 sequences
+  Processed 8672/10000 sequences
+  Processed 8992/10000 sequences
+  Processed 9312/10000 sequences
+  Processed 9632/10000 sequences
+  Processed 9952/10000 sequences
+  Base embedding shape: (10000, 1280)
+
+=== Step 2: Training contrastive projection head ===
+  Epochs: 50, LR: 0.001, Temp: 0.07
+  Hidden: 256, Projection: 128
+  Epoch 10/50: loss=6.2131 (best=6.2131)
+  Epoch 20/50: loss=6.2118 (best=6.2111)
+  Epoch 30/50: loss=6.2103 (best=6.2088)
+  Epoch 40/50: loss=6.2097 (best=6.2088)
+  Epoch 50/50: loss=6.2090 (best=6.2086)
+  Best contrastive loss: 6.2086
+
+=== Step 3: Computing projected embeddings ===
+
+=== Saving results ===
+  Projection head: contrastive_head_B2.pt
+  Projected embeddings: embeddings_B2.npy ((10000, 128))
+  Config: contrastive_config_B2.json
+
+=== Done ===
+
+--- Step 2: Compute projected embeddings ---
+Loading fragments from module5_contrastive/data/te_fragments.jsonl...
+  10000 fragments, 12 classes, 13 species
+
+=== Computing embeddings: Setting B2 ===
+  Computing model embeddings (module1_training/1.4_multi_species/results/multi_2048bp)...
+  Processed 32/10000 sequences
+  Processed 352/10000 sequences
+  Processed 672/10000 sequences
+  Processed 992/10000 sequences
+  Processed 1312/10000 sequences
+  Processed 1632/10000 sequences
+  Processed 1952/10000 sequences
+  Processed 2272/10000 sequences
+  Processed 2592/10000 sequences
+  Processed 2912/10000 sequences
+  Processed 3232/10000 sequences
+  Processed 3552/10000 sequences
+  Processed 3872/10000 sequences
+  Processed 4192/10000 sequences
+  Processed 4512/10000 sequences
+  Processed 4832/10000 sequences
+  Processed 5152/10000 sequences
+  Processed 5472/10000 sequences
+  Processed 5792/10000 sequences
+  Processed 6112/10000 sequences
+  Processed 6432/10000 sequences
+  Processed 6752/10000 sequences
+  Processed 7072/10000 sequences
+  Processed 7392/10000 sequences
+  Processed 7712/10000 sequences
+  Processed 8032/10000 sequences
+  Processed 8352/10000 sequences
+  Processed 8672/10000 sequences
+  Processed 8992/10000 sequences
+  Processed 9312/10000 sequences
+  Processed 9632/10000 sequences
+  Processed 9952/10000 sequences
+  Embedding shape: (10000, 1280)
+  Applying contrastive projection head: module5_contrastive/results/B2/contrastive_head_B2.pt
+  Projected embedding shape: (10000, 128)
+
+=== Clustering by TE class ===
+  NMI=0.0771, ARI=0.0245
+
+=== Clustering by species ===
+  NMI=0.0615, ARI=0.0224
+
+=== Results saved to module5_contrastive/results/B2 ===
+  Embeddings: embeddings_B2.npy
+  UMAP: umap_coords_B2.tsv
+  Metrics: metrics_B2.json
+
+=== Complete: Sun Feb 15 11:31:23 PM CET 2026 ===
