@@ -1,0 +1,20 @@
+pair_id	left_id	right_id	host_id	contig	left_role	right_role	pair_role	cross_split_status	distance_bp	overlap_bp	truth_pair_status	truth_same_insertion	pred_family_match	pred_orientation_match	pred_length_ratio	candidate	b0_link	b1_link	m1_score	m1_link
+cal_00_left__cal_00_right	cal_00_left	cal_00_right	host_cal	chr1	cal	cal	cal	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+cal_01_left__cal_01_right	cal_01_left	cal_01_right	host_cal	chr1	cal	cal	cal	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+cal_02_left__cal_02_right	cal_02_left	cal_02_right	host_cal	chr1	cal	cal	cal	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+cal_adj_a__cal_adj_b	cal_adj_a	cal_adj_b	host_cal	chr1	cal	cal	cal	SAME_ROLE	10	0	known	0	1	1	1.0	1	1	1	0.8528732531	0
+cal_adj_b__cal_adj_c	cal_adj_b	cal_adj_c	host_cal	chr1	cal	cal	cal	SAME_ROLE	10	0	known	0	1	1	1.0	1	1	1	0.8528732531	0
+ev_regular_left__ev_regular_right	ev_regular_left	ev_regular_right	host_eval	chr1	eval	eval	eval	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+ev_unknown_left__ev_unknown_right	ev_unknown_left	ev_unknown_right	host_eval	chr1	eval	eval	eval	SAME_ROLE	15	0	known	1	1	0	1.0	1	1	0	0.7995747052	0
+ev_outer_left__ev_inner	ev_outer_left	ev_inner	host_eval	chr1	eval	eval	eval	SAME_ROLE	5	0	known	0	0	1	0.75	1	1	0	0.7788617459	0
+ev_inner__ev_outer_right	ev_inner	ev_outer_right	host_eval	chr1	eval	eval	eval	SAME_ROLE	5	0	known	0	0	1	0.75	1	1	0	0.7788617459	0
+ev_chain_a__ev_chain_b	ev_chain_a	ev_chain_b	host_eval	chr1	eval	eval	eval	SAME_ROLE	15	0	known	0	1	1	1.0	1	1	1	0.8546032792	1
+ev_chain_b__ev_chain_c	ev_chain_b	ev_chain_c	host_eval	chr1	eval	eval	eval	SAME_ROLE	15	0	known	0	1	1	1.0	1	1	1	0.8546032792	1
+ev_unresolved_a__ev_unresolved_b	ev_unresolved_a	ev_unresolved_b	host_eval	chr1	eval	eval	eval	SAME_ROLE	10	0	unresolved		1	1	1.0	1	1	1	0.8528732531	0
+tr_00_left__tr_00_right	tr_00_left	tr_00_right	host_train	chr1	train	train	train	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+tr_01_left__tr_01_right	tr_01_left	tr_01_right	host_train	chr1	train	train	train	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+tr_02_left__tr_02_right	tr_02_left	tr_02_right	host_train	chr1	train	train	train	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+tr_03_left__tr_03_right	tr_03_left	tr_03_right	host_train	chr1	train	train	train	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+tr_04_left__tr_04_right	tr_04_left	tr_04_right	host_train	chr1	train	train	train	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+tr_05_left__tr_05_right	tr_05_left	tr_05_right	host_train	chr1	train	train	train	SAME_ROLE	15	0	known	1	1	1	1.0	1	1	1	0.8546032792	1
+tr_adj_a__tr_adj_b	tr_adj_a	tr_adj_b	host_train	chr1	train	train	train	SAME_ROLE	10	0	known	0	1	1	1.0	1	1	1	0.8528732531	0

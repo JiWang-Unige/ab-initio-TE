@@ -1,0 +1,49 @@
+{
+  "status": "ASSETS_ACQUIRED_NOT_EVALUATED",
+  "sources": [
+    {
+      "url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/annotation/chm13v2.0_RepeatMasker_4.1.2p1.2022Apr14.out",
+      "path": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2.0_RepeatMasker_4.1.2p1.2022Apr14.out",
+      "bytes": 510255277,
+      "acquired_utc": "2026-09-14T12:57:19.695256+00:00",
+      "last_modified": "Mon, 18 Apr 2022 23:29:17 GMT",
+      "etag": "\"1a4be0c4a5a86d2a3cbb2ca3ea618b35-61\""
+    },
+    {
+      "url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/chain/v1_nflo/hg19-chm13v2.chain",
+      "path": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/hg19-chm13v2.chain",
+      "bytes": 6249927,
+      "acquired_utc": "2026-09-14T12:57:22.344997+00:00",
+      "last_modified": "Thu, 31 Mar 2022 02:38:17 GMT",
+      "etag": "\"767936ab084cc0d8b6dc9c4e75aa8be0\""
+    },
+    {
+      "url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/chain/v1_nflo/chm13v2-hg19.chain",
+      "path": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2-hg19.chain",
+      "bytes": 6249876,
+      "acquired_utc": "2026-09-14T12:57:24.382231+00:00",
+      "last_modified": "Thu, 31 Mar 2022 02:38:16 GMT",
+      "etag": "\"17861a1454b41c16b4fe6d8bb3e07fee\""
+    },
+    {
+      "url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/chain/v1_nflo/grch38-chm13v2.chain",
+      "path": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/grch38-chm13v2.chain",
+      "bytes": 6288201,
+      "acquired_utc": "2026-09-14T12:57:27.001471+00:00",
+      "last_modified": "Thu, 31 Mar 2022 02:38:16 GMT",
+      "etag": "\"913bb9a3352e88c23010d968d8b3af8c\""
+    },
+    {
+      "url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/chain/v1_nflo/chm13v2-grch38.chain",
+      "path": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2-grch38.chain",
+      "bytes": 6288151,
+      "acquired_utc": "2026-09-14T12:57:29.538998+00:00",
+      "last_modified": "Thu, 31 Mar 2022 02:38:16 GMT",
+      "etag": "\"edd92167c94b8ea7bad3a211cf60744e\""
+    }
+  ],
+  "annotation_generation": "RepeatMasker 4.1.2p1 2022Apr14 CHM13v2.0",
+  "library_engine_joint_change": true,
+  "label_rows_read": false,
+  "note": "Future evaluation restricted to mapped allowed hg19 chr2/3/4 panel. Exclude mappings into chr19-22 counterparts. Acquisition is not FP validation."
+}

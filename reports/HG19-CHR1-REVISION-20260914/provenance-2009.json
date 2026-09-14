@@ -1,0 +1,657 @@
+{
+  "allowed_chromosomes": [
+    "chr1",
+    "chr2",
+    "chr3",
+    "chr4",
+    "chr11",
+    "chr13"
+  ],
+  "by_chromosome": {
+    "chr1": {
+      "TE_records": {
+        "matched_rows": 371131,
+        "official_2009_only_rows": 450,
+        "official_2009_rows": 371581,
+        "official_2009_unique_keys": 371581,
+        "training_rmsk_only_rows": 450,
+        "training_rmsk_rows": 371581,
+        "training_rmsk_unique_keys": 371581
+      },
+      "all_coordinates_with_strand": {
+        "matched_rows": 432854,
+        "official_2009_only_rows": 0,
+        "official_2009_rows": 432854,
+        "official_2009_unique_keys": 432854,
+        "training_rmsk_only_rows": 0,
+        "training_rmsk_rows": 432854,
+        "training_rmsk_unique_keys": 432854
+      },
+      "all_records": {
+        "matched_rows": 371218,
+        "official_2009_only_rows": 61636,
+        "official_2009_rows": 432854,
+        "official_2009_unique_keys": 432854,
+        "training_rmsk_only_rows": 61636,
+        "training_rmsk_rows": 432854,
+        "training_rmsk_unique_keys": 432854
+      },
+      "ignore_records": {
+        "matched_rows": 2,
+        "official_2009_only_rows": 823,
+        "official_2009_rows": 825,
+        "official_2009_unique_keys": 825,
+        "training_rmsk_only_rows": 823,
+        "training_rmsk_rows": 825,
+        "training_rmsk_unique_keys": 825
+      },
+      "label_material": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 141723,
+            "official_2009_bp": 141723,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 141723,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 110017410,
+            "official_2009_bp": 110017410,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 110017410,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 110017410,
+          "official_2009_bp": 110017410,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 110017410,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    },
+    "chr11": {
+      "TE_records": {
+        "matched_rows": 205209,
+        "official_2009_only_rows": 327,
+        "official_2009_rows": 205536,
+        "official_2009_unique_keys": 205536,
+        "training_rmsk_only_rows": 327,
+        "training_rmsk_rows": 205536,
+        "training_rmsk_unique_keys": 205536
+      },
+      "all_coordinates_with_strand": {
+        "matched_rows": 239924,
+        "official_2009_only_rows": 0,
+        "official_2009_rows": 239924,
+        "official_2009_unique_keys": 239924,
+        "training_rmsk_only_rows": 0,
+        "training_rmsk_rows": 239924,
+        "training_rmsk_unique_keys": 239924
+      },
+      "all_records": {
+        "matched_rows": 205390,
+        "official_2009_only_rows": 34534,
+        "official_2009_rows": 239924,
+        "official_2009_unique_keys": 239924,
+        "training_rmsk_only_rows": 34534,
+        "training_rmsk_rows": 239924,
+        "training_rmsk_unique_keys": 239924
+      },
+      "ignore_records": {
+        "matched_rows": 3,
+        "official_2009_only_rows": 411,
+        "official_2009_rows": 414,
+        "official_2009_unique_keys": 414,
+        "training_rmsk_only_rows": 411,
+        "training_rmsk_rows": 414,
+        "training_rmsk_unique_keys": 414
+      },
+      "label_material": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 71314,
+            "official_2009_bp": 71314,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 71314,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 63435995,
+            "official_2009_bp": 63435995,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 63435995,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 63436009,
+          "official_2009_bp": 63436009,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 63436009,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    },
+    "chr13": {
+      "TE_records": {
+        "matched_rows": 130964,
+        "official_2009_only_rows": 224,
+        "official_2009_rows": 131188,
+        "official_2009_unique_keys": 131188,
+        "training_rmsk_only_rows": 224,
+        "training_rmsk_rows": 131188,
+        "training_rmsk_unique_keys": 131188
+      },
+      "all_coordinates_with_strand": {
+        "matched_rows": 161789,
+        "official_2009_only_rows": 0,
+        "official_2009_rows": 161789,
+        "official_2009_unique_keys": 161789,
+        "training_rmsk_only_rows": 0,
+        "training_rmsk_rows": 161789,
+        "training_rmsk_unique_keys": 161789
+      },
+      "all_records": {
+        "matched_rows": 130992,
+        "official_2009_only_rows": 30797,
+        "official_2009_rows": 161789,
+        "official_2009_unique_keys": 161789,
+        "training_rmsk_only_rows": 30797,
+        "training_rmsk_rows": 161789,
+        "training_rmsk_unique_keys": 161789
+      },
+      "ignore_records": {
+        "matched_rows": 2,
+        "official_2009_only_rows": 347,
+        "official_2009_rows": 349,
+        "official_2009_unique_keys": 349,
+        "training_rmsk_only_rows": 347,
+        "training_rmsk_rows": 349,
+        "training_rmsk_unique_keys": 349
+      },
+      "label_material": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 59863,
+            "official_2009_bp": 59863,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 59863,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 43791928,
+            "official_2009_bp": 43791928,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 43791928,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 43791931,
+          "official_2009_bp": 43791931,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 43791931,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    },
+    "chr2": {
+      "TE_records": {
+        "matched_rows": 346222,
+        "official_2009_only_rows": 567,
+        "official_2009_rows": 346789,
+        "official_2009_unique_keys": 346789,
+        "training_rmsk_only_rows": 567,
+        "training_rmsk_rows": 346789,
+        "training_rmsk_unique_keys": 346789
+      },
+      "all_coordinates_with_strand": {
+        "matched_rows": 414353,
+        "official_2009_only_rows": 0,
+        "official_2009_rows": 414353,
+        "official_2009_unique_keys": 414353,
+        "training_rmsk_only_rows": 0,
+        "training_rmsk_rows": 414353,
+        "training_rmsk_unique_keys": 414353
+      },
+      "all_records": {
+        "matched_rows": 346298,
+        "official_2009_only_rows": 68055,
+        "official_2009_rows": 414353,
+        "official_2009_unique_keys": 414353,
+        "training_rmsk_only_rows": 68055,
+        "training_rmsk_rows": 414353,
+        "training_rmsk_unique_keys": 414353
+      },
+      "ignore_records": {
+        "matched_rows": 3,
+        "official_2009_only_rows": 902,
+        "official_2009_rows": 905,
+        "official_2009_unique_keys": 905,
+        "training_rmsk_only_rows": 902,
+        "training_rmsk_rows": 905,
+        "training_rmsk_unique_keys": 905
+      },
+      "label_material": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 155043,
+            "official_2009_bp": 155043,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 155043,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 110570819,
+            "official_2009_bp": 110570819,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 110570819,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 110570824,
+          "official_2009_bp": 110570824,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 110570824,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    },
+    "chr3": {
+      "TE_records": {
+        "matched_rows": 293136,
+        "official_2009_only_rows": 417,
+        "official_2009_rows": 293553,
+        "official_2009_unique_keys": 293553,
+        "training_rmsk_only_rows": 417,
+        "training_rmsk_rows": 293553,
+        "training_rmsk_unique_keys": 293553
+      },
+      "all_coordinates_with_strand": {
+        "matched_rows": 348034,
+        "official_2009_only_rows": 0,
+        "official_2009_rows": 348034,
+        "official_2009_unique_keys": 348034,
+        "training_rmsk_only_rows": 0,
+        "training_rmsk_rows": 348034,
+        "training_rmsk_unique_keys": 348034
+      },
+      "all_records": {
+        "matched_rows": 293195,
+        "official_2009_only_rows": 54839,
+        "official_2009_rows": 348034,
+        "official_2009_unique_keys": 348034,
+        "training_rmsk_only_rows": 54839,
+        "training_rmsk_rows": 348034,
+        "training_rmsk_unique_keys": 348034
+      },
+      "ignore_records": {
+        "matched_rows": 2,
+        "official_2009_only_rows": 712,
+        "official_2009_rows": 714,
+        "official_2009_unique_keys": 714,
+        "training_rmsk_only_rows": 712,
+        "training_rmsk_rows": 714,
+        "training_rmsk_unique_keys": 714
+      },
+      "label_material": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 120126,
+            "official_2009_bp": 120126,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 120126,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 94136774,
+            "official_2009_bp": 94136774,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 94136774,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 94136774,
+          "official_2009_bp": 94136774,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 94136774,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    },
+    "chr4": {
+      "TE_records": {
+        "matched_rows": 261759,
+        "official_2009_only_rows": 426,
+        "official_2009_rows": 262185,
+        "official_2009_unique_keys": 262185,
+        "training_rmsk_only_rows": 426,
+        "training_rmsk_rows": 262185,
+        "training_rmsk_unique_keys": 262185
+      },
+      "all_coordinates_with_strand": {
+        "matched_rows": 321696,
+        "official_2009_only_rows": 0,
+        "official_2009_rows": 321696,
+        "official_2009_unique_keys": 321696,
+        "training_rmsk_only_rows": 0,
+        "training_rmsk_rows": 321696,
+        "training_rmsk_unique_keys": 321696
+      },
+      "all_records": {
+        "matched_rows": 261849,
+        "official_2009_only_rows": 59847,
+        "official_2009_rows": 321696,
+        "official_2009_unique_keys": 321696,
+        "training_rmsk_only_rows": 59847,
+        "training_rmsk_rows": 321696,
+        "training_rmsk_unique_keys": 321696
+      },
+      "ignore_records": {
+        "matched_rows": 4,
+        "official_2009_only_rows": 687,
+        "official_2009_rows": 691,
+        "official_2009_unique_keys": 691,
+        "training_rmsk_only_rows": 687,
+        "training_rmsk_rows": 691,
+        "training_rmsk_unique_keys": 691
+      },
+      "label_material": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 122964,
+            "official_2009_bp": 122964,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 122964,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 91732361,
+            "official_2009_bp": 91732361,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 91732361,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 91732398,
+          "official_2009_bp": 91732398,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 91732398,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    }
+  },
+  "config": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/configs/HG19-CHR1-REVISION-20260914.json",
+  "coverage": {
+    "by_chromosome": {
+      "chr1": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 141723,
+            "official_2009_bp": 141723,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 141723,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 110017410,
+            "official_2009_bp": 110017410,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 110017410,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 110017410,
+          "official_2009_bp": 110017410,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 110017410,
+          "training_rmsk_only_bp": 0
+        }
+      },
+      "chr11": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 71314,
+            "official_2009_bp": 71314,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 71314,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 63435995,
+            "official_2009_bp": 63435995,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 63435995,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 63436009,
+          "official_2009_bp": 63436009,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 63436009,
+          "training_rmsk_only_bp": 0
+        }
+      },
+      "chr13": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 59863,
+            "official_2009_bp": 59863,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 59863,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 43791928,
+            "official_2009_bp": 43791928,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 43791928,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 43791931,
+          "official_2009_bp": 43791931,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 43791931,
+          "training_rmsk_only_bp": 0
+        }
+      },
+      "chr2": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 155043,
+            "official_2009_bp": 155043,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 155043,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 110570819,
+            "official_2009_bp": 110570819,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 110570819,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 110570824,
+          "official_2009_bp": 110570824,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 110570824,
+          "training_rmsk_only_bp": 0
+        }
+      },
+      "chr3": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 120126,
+            "official_2009_bp": 120126,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 120126,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 94136774,
+            "official_2009_bp": 94136774,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 94136774,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 94136774,
+          "official_2009_bp": 94136774,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 94136774,
+          "training_rmsk_only_bp": 0
+        }
+      },
+      "chr4": {
+        "effective_labels": {
+          "I": {
+            "exact_intervals": true,
+            "intersection_bp": 122964,
+            "official_2009_bp": 122964,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 122964,
+            "training_rmsk_only_bp": 0
+          },
+          "P": {
+            "exact_intervals": true,
+            "intersection_bp": 91732361,
+            "official_2009_bp": 91732361,
+            "official_2009_only_bp": 0,
+            "training_rmsk_bp": 91732361,
+            "training_rmsk_only_bp": 0
+          }
+        },
+        "te": {
+          "intersection_bp": 91732398,
+          "official_2009_bp": 91732398,
+          "official_2009_only_bp": 0,
+          "training_rmsk_bp": 91732398,
+          "training_rmsk_only_bp": 0
+        }
+      }
+    },
+    "effective_label_intervals_equal": true
+  },
+  "differences_file": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/audit-2009-12698548/report/normalized_differences.tsv.gz",
+  "normalization": {
+    "case_folding": "repeat_name, repClass and repFamily converted to uppercase",
+    "comparison_key": "chrom,start0,end0,strand,repeat_name,repClass,repFamily",
+    "excluded_from_key": [
+      "RepeatMasker ID",
+      "score",
+      "div",
+      "del",
+      "ins",
+      "alignment offsets"
+    ],
+    "label_buckets": {
+      "I": "UNKNOWN or ? class",
+      "N": "other class",
+      "P": "TE class"
+    },
+    "strand": "C converted to -; + retained"
+  },
+  "official_2009": {
+    "TE_rows": 1610832,
+    "coordinate_convention": "1-based closed; normalized to 0-based half-open",
+    "downloaded_file": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914/audit-2009-12698548/hg19.fa.out.gz",
+    "index_url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/",
+    "library": "RepBase RELEASE 20090120",
+    "repeatmasker": "open-3-2-7 (2009-01-29), -s",
+    "rows": 1918650,
+    "url": "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.fa.out.gz"
+  },
+  "overall": {
+    "TE_normalized_coordinates_with_strand": {
+      "matched_rows": 1610832,
+      "official_2009_only_rows": 0,
+      "official_2009_rows": 1610832,
+      "official_2009_unique_keys": 1610832,
+      "training_rmsk_only_rows": 0,
+      "training_rmsk_rows": 1610832,
+      "training_rmsk_unique_keys": 1610832
+    },
+    "TE_normalized_records": {
+      "matched_rows": 1608421,
+      "official_2009_only_rows": 2411,
+      "official_2009_rows": 1610832,
+      "official_2009_unique_keys": 1610832,
+      "training_rmsk_only_rows": 2411,
+      "training_rmsk_rows": 1610832,
+      "training_rmsk_unique_keys": 1610832
+    },
+    "all_normalized_coordinates_with_strand": {
+      "matched_rows": 1918650,
+      "official_2009_only_rows": 0,
+      "official_2009_rows": 1918650,
+      "official_2009_unique_keys": 1918650,
+      "training_rmsk_only_rows": 0,
+      "training_rmsk_rows": 1918650,
+      "training_rmsk_unique_keys": 1918650
+    },
+    "all_normalized_records": {
+      "matched_rows": 1608942,
+      "official_2009_only_rows": 309708,
+      "official_2009_rows": 1918650,
+      "official_2009_unique_keys": 1918650,
+      "training_rmsk_only_rows": 309708,
+      "training_rmsk_rows": 1918650,
+      "training_rmsk_unique_keys": 1918650
+    },
+    "exact_TE_records": false,
+    "exact_all_records": false,
+    "exact_ignore_records": false,
+    "ignore_normalized_records": {
+      "matched_rows": 16,
+      "official_2009_only_rows": 3882,
+      "official_2009_rows": 3898,
+      "official_2009_unique_keys": 3898,
+      "training_rmsk_only_rows": 3882,
+      "training_rmsk_rows": 3898,
+      "training_rmsk_unique_keys": 3898
+    }
+  },
+  "status": "AUDIT_COMPLETED",
+  "training_rmsk": {
+    "TE_rows": 1610832,
+    "coordinate_convention": "0-based half-open",
+    "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/human/hg19/raw/rmsk.txt.gz",
+    "rows": 1918650
+  },
+  "verdict": "2009_LABEL_MATERIAL_MATCH_RECORD_PROVENANCE_NOT_EXACT"
+}

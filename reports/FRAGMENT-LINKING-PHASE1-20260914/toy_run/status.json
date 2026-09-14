@@ -1,0 +1,17 @@
+{
+  "outputs": [
+    "contract.json",
+    "fragments.jsonl",
+    "pairs.tsv",
+    "edges_B0_distance.tsv",
+    "edges_B1_rules.tsv",
+    "edges_M1_bounded_logistic.tsv",
+    "calibration.json",
+    "fit.json",
+    "metrics.json"
+  ],
+  "real_encoder_input": "NOTRUN",
+  "real_insertion_truth": "NOTRUN",
+  "scientific_claim_status": "NOTRUN",
+  "status": "PASS_ENGINEERING_ONLY"
+}

@@ -1,0 +1,77 @@
+{
+  "calibration": {
+    "cal_split": "CAL",
+    "max_false_accept_rate": 0.01,
+    "minimum_negative_pairs": 100,
+    "same_budget_across_protocols": true,
+    "threshold_rule": "choose the lowest tested score threshold whose CAL false-accept rate is at most 0.01; report ties deterministically"
+  },
+  "contract_version": "te-identity-retrieval-v1",
+  "identity_rules": {
+    "consensus_fragments": "prototype material only; never independent natural copies",
+    "copy_key": "(host_id, source_copy_id)",
+    "empty_ids": "unknown; never a same-copy positive and never used to infer identity",
+    "homology_key": "homology_component_id",
+    "natural_copy_required_fields": [
+      "host_id",
+      "source_copy_id",
+      "homology_component_id",
+      "family_id",
+      "split"
+    ],
+    "split_rule": "source-copy and homology component must not cross train/cal/eval; host is contextual"
+  },
+  "protocols": {
+    "basic_sequence_features": {
+      "fit_split": "TRAIN only; threshold fixed on CAL",
+      "representation": "fixed sequence k-mer features"
+    },
+    "glm_embedding": {
+      "random_embedding_policy": "forbidden",
+      "representation": "explicit frozen GLM embedding table with model_id"
+    },
+    "k4_natural_prototypes": {
+      "prototype_source": "four distinct TRAIN natural copies per family",
+      "selection": "deterministic greedy PAM-style k-medoids in TRAIN k-mer space"
+    },
+    "random4_natural_prototypes": {
+      "prototype_source": "four distinct TRAIN natural copies per family",
+      "selection": "seed 42 random sample after identity filtering"
+    },
+    "single_consensus": {
+      "prototype_source": "one explicit consensus row per family",
+      "query_source": "natural genomic copies in EVAL"
+    },
+    "single_train_medoid": {
+      "prototype_source": "one distinct TRAIN natural copy per family",
+      "selection": "deterministic greedy PAM-style k-medoids in TRAIN k-mer space with k=1"
+    },
+    "training_copy_profile_hmm": {
+      "representation": "profile HMM trained from TRAIN natural copies",
+      "test_copy_policy": "EVAL copies never enter profile construction"
+    }
+  },
+  "question": "Does one consensus per family limit identity-aware TE retrieval compared with multiple natural-copy prototypes?",
+  "reporting": {
+    "identity_strata": [
+      "host",
+      "source_copy",
+      "homology_component",
+      "family",
+      "sequence_length"
+    ],
+    "primary": [
+      "family_macro_recall",
+      "family_macro_precision",
+      "family_macro_f1",
+      "top1_accuracy"
+    ],
+    "required_status_separation": [
+      "engineering_ready",
+      "numeric_valid",
+      "scientific_pass",
+      "generalization_pass"
+    ]
+  },
+  "seed": 42
+}

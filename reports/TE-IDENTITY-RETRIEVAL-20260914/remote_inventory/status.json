@@ -1,0 +1,105 @@
+{
+  "status": "PASS_INPUT_INVENTORY_INITIAL_AUDIT",
+  "initial_audit_status": "NOTRUN_IDENTITY_INCOMPLETE",
+  "observed_on": "2026-09-14",
+  "remote_access": {
+    "host": "login1.baobab.hpc.unige.ch",
+    "account": "jwang",
+    "transport": "ProxyJump via login1.bamboo.hpc.unige.ch",
+    "search_roots": [
+      "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final",
+      "/srv/beegfs/scratch/users/j/jwang/Pretrain"
+    ],
+    "scope": "targeted ls/stat/head/limited zcat over known TE_final, Phase 7, and TE_Contrastive_Clean paths; no broad user-tree scan"
+  },
+  "qualified_inputs": {
+    "natural_copy_interval_source": {
+      "path_pattern": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/genome_data/animals/{hg19,hg38,hs1,mm39}/rmsk_te.bed.gz",
+      "observed_fields": [
+        "chrom",
+        "start",
+        "end",
+        "repeat_name",
+        "score",
+        "strand",
+        "class",
+        "family",
+        "repeat_begin",
+        "repeat_end",
+        "divergence"
+      ],
+      "interpretation": "annotated host-assembly intervals; no verified insertion-level source_copy_id or homology_component_id in this compact export"
+    },
+    "dfam_consensus": {
+      "path": "/srv/beegfs/scratch/users/j/jwang/Pretrain/TE_Contrastive_Clean/data/Dfam38_curated.strict_te_only.fa",
+      "bytes": 42457662,
+      "headers_observed": [">MIR#SINE/MIR", ">AluY#SINE/Alu"],
+      "interpretation": "family consensus prototype material; not independent genomic copies"
+    }
+  },
+  "compact_family_summaries": {
+    "hg19": {
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/archive/v1_modules/module0_data/statistics/hg19/01_family_composition.tsv",
+      "leading_class_family": "SINE/Alu",
+      "leading_count": 1244709
+    },
+    "hg38": {
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/archive/v1_modules/module0_data/statistics/hg38/01_family_composition.tsv",
+      "leading_class_family": "SINE/Alu",
+      "leading_count": 1282821
+    },
+    "hs1": {
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/archive/v1_modules/module0_data/statistics/hs1/01_family_composition.tsv",
+      "leading_class_family": "SINE/Alu",
+      "leading_count": 1204921
+    },
+    "mm39": {
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/archive/v1_modules/module0_data/statistics/mm39/01_family_composition.tsv",
+      "leading_class_family": "LINE/L1",
+      "leading_count": 877139
+    }
+  },
+  "phase7_sources": {
+    "real_genome_py": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/archive/v1_modules/te_foundation/phase7_embedding/data_sources/real_genome.py",
+    "consensus_py": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/archive/v1_modules/te_foundation/phase7_embedding/data_sources/consensus.py",
+    "consensus_semantics": "consensus.py crops multiple fragments from one consensus; those fragments cannot be counted as distinct natural copies"
+  },
+  "identity_qualification": {
+    "natural_copy_manifest": "constructed by the bounded exact-repName panel builder; it was not pre-existing in the targeted paths",
+    "current_manifest_remote_path": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/panel/identity_manifest.jsonl",
+    "glm_embedding_table_with_model_and_copy_ids": "not found in the targeted paths",
+    "training_copy_profile_hmm": "not found in the targeted paths",
+    "v2_jsonl_identity_fields": "sequence/labels/chr/start/end/species were observed; source-copy and homology identity were absent"
+  },
+  "why_initial_audit_had_no_score": [
+    "A consensus-only file cannot establish independent copy-level EVAL queries.",
+    "The natural-copy BED source is not enough to construct a source-copy/homology split.",
+    "No explicit frozen GLM embedding table or training-copy profile-HMM was available.",
+    "No real score table was available, so no CAL threshold or retrieval metric was written."
+  ],
+  "retrieval_runs": {
+    "panel_job": {
+      "slurm_job": "12698062",
+      "status": "PASS_ENGINEERING_PANEL",
+      "remote_run": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact"
+    },
+    "sequence_job": {
+      "slurm_jobs": ["12698062", "12698524"],
+      "status": "PASS_NUMERIC_ANNOTATION_LEVEL",
+      "remote_runs": [
+        "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/retrieval",
+        "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact_medoid/retrieval"
+      ],
+      "scientific_claim_status": "ANNOTATION_LEVEL_ONLY"
+    }
+  },
+  "copied_evidence": [
+    "reports/TE-IDENTITY-RETRIEVAL-20260914/remote_inventory/hg19_01_family_composition.tsv",
+    "reports/TE-IDENTITY-RETRIEVAL-20260914/remote_inventory/hg38_01_family_composition.tsv",
+    "reports/TE-IDENTITY-RETRIEVAL-20260914/remote_inventory/hs1_01_family_composition.tsv",
+    "reports/TE-IDENTITY-RETRIEVAL-20260914/remote_inventory/mm39_01_family_composition.tsv",
+    "reports/TE-IDENTITY-RETRIEVAL-20260914/remote_inventory/real_genome.py",
+    "reports/TE-IDENTITY-RETRIEVAL-20260914/remote_inventory/consensus.py"
+  ],
+  "scientific_claim_status": "NOTRUN"
+}

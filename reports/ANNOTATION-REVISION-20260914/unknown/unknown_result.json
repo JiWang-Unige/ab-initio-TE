@@ -1,0 +1,38 @@
+{
+  "status": "HISTORICAL_ONTOLOGY_DIAGNOSTIC",
+  "source": "reports/tefm_final/PIPE-TEFM-FINAL-INTERPRET-20260630/fragment_feature_table.tsv",
+  "mapper": "pipelines/PIPE-TEFM-LOCK-20260619/prepare_superfamily5_data.py",
+  "eligibility": "human chrX archived unknown_annotation only",
+  "fragment_count": 90,
+  "mapping_reasons": {
+    "named_non_main4_taxon": 85,
+    "ambiguous_annotation": 5
+  },
+  "taxonomy": [
+    {
+      "rep_class": "DNA?",
+      "rep_family": "hAT-Tip100?",
+      "fragments": 1
+    },
+    {
+      "rep_class": "LTR?",
+      "rep_family": "LTR?",
+      "fragments": 4
+    },
+    {
+      "rep_class": "RC",
+      "rep_family": "Helitron",
+      "fragments": 2
+    },
+    {
+      "rep_class": "Retroposon",
+      "rep_family": "SVA",
+      "fragments": 83
+    }
+  ],
+  "historical_mapping_mismatches": 0,
+  "model_predictions_used": false,
+  "new_annotation_validation": false,
+  "representative_population_estimate": false,
+  "scope": "Explains label construction; does not prove model family assignments correct or estimate population annotation error."
+}

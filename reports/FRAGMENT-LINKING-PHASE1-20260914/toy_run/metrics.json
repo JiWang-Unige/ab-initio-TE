@@ -1,0 +1,182 @@
+{
+  "all_same_host_pairs": 193,
+  "candidate_pairs": 19,
+  "fragments": 36,
+  "invariants": {
+    "consensus_crops_used_as_copies": false,
+    "cross_host_edges": 0,
+    "gap_filling_applied": false,
+    "intervals_unchanged": true,
+    "material_mask_changed": false
+  },
+  "known_truth_policy": {
+    "known_same_insertion_all_pair_denominator": 12,
+    "unresolved_as_negative": 0,
+    "unresolved_candidates": 1
+  },
+  "methods": {
+    "B0_distance": {
+      "candidate_pairs": 19,
+      "candidate_recall_numerator": 11,
+      "cluster": {
+        "components": 17,
+        "overmerged_components": 4,
+        "overmerged_examples": [
+          {
+            "members": [
+              "tr_adj_a",
+              "tr_adj_b"
+            ],
+            "parent_count": 2,
+            "root": "tr_adj_a"
+          },
+          {
+            "members": [
+              "cal_adj_a",
+              "cal_adj_b",
+              "cal_adj_c"
+            ],
+            "parent_count": 3,
+            "root": "cal_adj_a"
+          },
+          {
+            "members": [
+              "ev_outer_left",
+              "ev_inner",
+              "ev_outer_right"
+            ],
+            "parent_count": 2,
+            "root": "ev_outer_left"
+          },
+          {
+            "members": [
+              "ev_chain_a",
+              "ev_chain_b",
+              "ev_chain_c"
+            ],
+            "parent_count": 3,
+            "root": "ev_chain_a"
+          }
+        ]
+      },
+      "known_candidate_pairs": 18,
+      "known_same_insertion_candidate_numerator": 11,
+      "known_same_insertion_pair_denominator": 12,
+      "method": "b0_link",
+      "pair_f1": 0.7333333333333334,
+      "pair_false_positive": 7,
+      "pair_precision": 0.6111111111111112,
+      "pair_recall": 0.9166666666666666,
+      "pair_true_positive": 11,
+      "same_role_candidate_pairs": 19,
+      "unresolved_candidates_excluded_from_negative": 1
+    },
+    "B1_rules": {
+      "candidate_pairs": 19,
+      "candidate_recall_numerator": 10,
+      "cluster": {
+        "components": 20,
+        "overmerged_components": 3,
+        "overmerged_examples": [
+          {
+            "members": [
+              "tr_adj_a",
+              "tr_adj_b"
+            ],
+            "parent_count": 2,
+            "root": "tr_adj_a"
+          },
+          {
+            "members": [
+              "cal_adj_a",
+              "cal_adj_b",
+              "cal_adj_c"
+            ],
+            "parent_count": 3,
+            "root": "cal_adj_a"
+          },
+          {
+            "members": [
+              "ev_chain_a",
+              "ev_chain_b",
+              "ev_chain_c"
+            ],
+            "parent_count": 3,
+            "root": "ev_chain_a"
+          }
+        ]
+      },
+      "known_candidate_pairs": 18,
+      "known_same_insertion_candidate_numerator": 11,
+      "known_same_insertion_pair_denominator": 12,
+      "method": "b1_link",
+      "pair_f1": 0.7407407407407408,
+      "pair_false_positive": 5,
+      "pair_precision": 0.6666666666666666,
+      "pair_recall": 0.8333333333333334,
+      "pair_true_positive": 10,
+      "same_role_candidate_pairs": 19,
+      "unresolved_candidates_excluded_from_negative": 1
+    },
+    "M1_bounded_pair_logistic": {
+      "candidate_pairs": 19,
+      "candidate_recall_numerator": 10,
+      "cluster": {
+        "components": 24,
+        "overmerged_components": 1,
+        "overmerged_examples": [
+          {
+            "members": [
+              "ev_chain_a",
+              "ev_chain_b",
+              "ev_chain_c"
+            ],
+            "parent_count": 3,
+            "root": "ev_chain_a"
+          }
+        ]
+      },
+      "known_candidate_pairs": 18,
+      "known_same_insertion_candidate_numerator": 11,
+      "known_same_insertion_pair_denominator": 12,
+      "method": "m1_link",
+      "pair_f1": 0.8333333333333334,
+      "pair_false_positive": 2,
+      "pair_precision": 0.8333333333333334,
+      "pair_recall": 0.8333333333333334,
+      "pair_true_positive": 10,
+      "same_role_candidate_pairs": 19,
+      "unresolved_candidates_excluded_from_negative": 1
+    }
+  },
+  "partition": {
+    "cross_role_overlap": {
+      "homology_component_id": {
+        "count": 0,
+        "examples": []
+      },
+      "host_id": {
+        "count": 0,
+        "examples": []
+      },
+      "source_copy_id": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    "empty_ids_excluded_from_group_keys": true,
+    "group_fields": [
+      "host_id",
+      "source_copy_id",
+      "homology_component_id"
+    ],
+    "pass": true
+  },
+  "role_counts": {
+    "cal": 9,
+    "eval": 13,
+    "train": 14
+  },
+  "scientific_claim_status": "NOTRUN",
+  "status": "ENGINEERING_ONLY"
+}

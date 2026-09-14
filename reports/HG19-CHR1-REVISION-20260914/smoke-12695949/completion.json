@@ -1,0 +1,8 @@
+{
+  "status": "ENGINEERING_SMOKE_PASS",
+  "steps": 2,
+  "seed": 42,
+  "task_training_chromosomes": [
+    "chr1"
+  ]
+}

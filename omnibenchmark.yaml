@@ -2,3 +2,4 @@ version: "0.1.0"
 
 entrypoints:
   default: benchmarks/te_omnibenchmark/te_smoke.py
+  rc0: benchmarks/te_omnibenchmark/rc0_fixture.py

@@ -1,0 +1,49 @@
+{
+  "baselines": {
+    "B0": "distance candidate edge",
+    "B1": "predicted family + orientation + length ratio >= 0.5",
+    "M1": "bounded logistic pair features, fit TRAIN and threshold fixed on CAL",
+    "M2": "sequence evidence; INPUT_CONTRACT_ONLY until real encoder input exists",
+    "M3": "gap/context-aware association; INPUT_CONTRACT_ONLY until real context/truth exists"
+  },
+  "calibration": {
+    "alpha": 0.01,
+    "minimum_negative_pairs_claim_grade": 100,
+    "same_budget_for_all_methods": true,
+    "toy_negative_pairs_are_engineering_only": true
+  },
+  "candidate": {
+    "max_distance_bp": 25,
+    "overlap_is_candidate": true
+  },
+  "contract_version": "fragment-linking-phase1-v1",
+  "gap_policy": {
+    "gap_filling_applied": false,
+    "material_mask_changed": false,
+    "pair_or_cluster_outputs_do_not_change_intervals": true
+  },
+  "identity": {
+    "host_gate": "pairs require equal host_id and contig",
+    "negative": "both truth statuses known and parent insertion IDs differ",
+    "positive": "both truth statuses known and parent insertion IDs equal",
+    "source_copy_and_homology": "identity split keys; never inferred from family or coordinate",
+    "unresolved": "empty/ambiguous truth identity excluded from negative denominator"
+  },
+  "interval_convention": "[start,end)",
+  "seed": 42,
+  "sequence_origin": "independent_insertion_semisim; no consensus cropping",
+  "splits": {
+    "cross_role": "EXCLUDED_CROSS_SPLIT",
+    "group_keys": [
+      "host_id",
+      "source_copy_id",
+      "homology_component_id"
+    ],
+    "roles": [
+      "train",
+      "cal",
+      "eval"
+    ]
+  },
+  "status": "ENGINEERING_ONLY"
+}

@@ -1,0 +1,128 @@
+{
+  "audit": {
+    "blockers": [
+      "empty_manifest"
+    ],
+    "complete_natural_copy_rows": 0,
+    "consensus_fragments_are_not_natural_copies": true,
+    "consensus_origin_multiplicity": {},
+    "consensus_rows_with_identity_ids": 0,
+    "contract_version": "te-identity-retrieval-v1",
+    "cross_split_identity_overlap": {
+      "homology_component_id": {
+        "count": 0,
+        "examples": []
+      },
+      "source_copy_id": {
+        "count": 0,
+        "examples": []
+      }
+    },
+    "duplicate_record_id_count": 0,
+    "empty_ids_are_unknown": true,
+    "host_is_not_chromosome": true,
+    "host_roles": {},
+    "invalid_split_counts": {},
+    "missing_content_counts": {},
+    "missing_identity_counts": {
+      "family_id": 0,
+      "homology_component_id": 0,
+      "host_id": 0,
+      "source_copy_id": 0,
+      "split": 0
+    },
+    "natural_copy_rows": 0,
+    "records": 0,
+    "source_kind_counts": {},
+    "status": "NOTRUN_NO_INPUT"
+  },
+  "input_manifest": null,
+  "protocol_availability": {
+    "counts": {
+      "cal": {
+        "families": 0,
+        "rows": 0,
+        "rows_with_content": 0,
+        "rows_without_content": 0
+      },
+      "complete": {
+        "families": 0,
+        "rows": 0,
+        "rows_with_content": 0,
+        "rows_without_content": 0
+      },
+      "consensus": {
+        "families": 0,
+        "rows": 0,
+        "rows_with_content": 0,
+        "rows_without_content": 0
+      },
+      "eval": {
+        "families": 0,
+        "rows": 0,
+        "rows_with_content": 0,
+        "rows_without_content": 0
+      },
+      "natural": {
+        "families": 0,
+        "rows": 0,
+        "rows_with_content": 0,
+        "rows_without_content": 0
+      },
+      "train": {
+        "families": 0,
+        "rows": 0,
+        "rows_with_content": 0,
+        "rows_without_content": 0
+      }
+    },
+    "protocols": {
+      "basic_sequence_features": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      },
+      "glm_embedding": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      },
+      "k4_natural_prototypes": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      },
+      "random4_natural_prototypes": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      },
+      "single_consensus": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      },
+      "single_train_medoid": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      },
+      "training_copy_profile_hmm": {
+        "reasons": [
+          "identity_audit_notrun_no_input"
+        ],
+        "status": "NOTRUN"
+      }
+    }
+  },
+  "reason": "no identity-aware manifest was supplied; no sequence, embedding, or HMM was fabricated",
+  "scientific_claim_status": "NOTRUN",
+  "scores_written": false,
+  "status": "NOTRUN_INPUT_MISSING"
+}

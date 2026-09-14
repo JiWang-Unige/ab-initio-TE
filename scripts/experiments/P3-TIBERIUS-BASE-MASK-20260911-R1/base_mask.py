@@ -456,11 +456,13 @@ def score_core(cfg: dict, out: Path, core: Core, units: dict, mapping: dict) -> 
             raise ValueError("U reached model with a nonzero softmask")
         if mode != "U" and obs.get("masked_positions", 0) <= 0:
             raise ValueError(f"{mode} reached model with no observed softmask")
-        correct = {mapping[(core.chrom, chain.strand, chain.intervals)] for chain in chains
-                   if (core.chrom, chain.strand, chain.intervals) in mapping}
+        matched_chains = {chain for chain in chains
+                          if (core.chrom, chain.strand, chain.intervals) in mapping}
+        correct = {mapping[(core.chrom, chain.strand, chain.intervals)] for chain in matched_chains}
+        unmatched = chains - matched_chains
         values[mode] = {"predicted": chains, "correct": correct,
-                        "unmatched": chains - {chain for chain in chains if (core.chrom, chain.strand, chain.intervals) in mapping},
-                        "metric": metrics(len(correct), len(chains)-len(correct), len(truth-correct)),
+                        "unmatched": unmatched,
+                        "metric": metrics(len(correct), len(unmatched), len(truth-correct)),
                         "observation": obs}
     return {"truth": truth, "modes": values}
 

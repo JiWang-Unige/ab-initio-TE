@@ -1,0 +1,44 @@
+{
+  "experiment": "HG19-CHR1-REVISION-20260914",
+  "status": "FIXED_EXPLORATORY_PROTOCOL",
+  "seed": 42,
+  "assembly": "hg19",
+  "fasta": "data/raw/ucsc/human/hg19/hg19.fa.gz",
+  "comparator": "software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/human/hg19/raw/rmsk.txt.gz",
+  "tile_bp": 8192,
+  "max_non_acgt_fraction": 0.01,
+  "tiles_by_split": {
+    "TRAIN": {
+      "chr1": 3000
+    },
+    "CAL": {
+      "chr11": 256
+    },
+    "DEV": {
+      "chr13": 256
+    },
+    "EVAL": {
+      "chr2": 834,
+      "chr3": 833,
+      "chr4": 833
+    }
+  },
+  "forbidden": [
+    "chr16",
+    "chr18",
+    "chr19",
+    "chr20",
+    "chr21",
+    "chr22"
+  ],
+  "native_model": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "train_steps": 4000,
+  "warmup_steps": 400,
+  "learning_rate": 2e-05,
+  "training_tile_presentations_per_step": 6,
+  "checkpoint_policy": "final-step-only",
+  "label_contract": "Known TE classes are P; ambiguous/Unknown annotations are ignored; other repeats and unannotated ACGT are comparator N, not certified biological negative. Non-ACGT is ignored. Ignore overrides P where annotations conflict.",
+  "evaluation": "CAL-only calibration; old/new annotation results on EVAL cannot select checkpoints or thresholds. No new annotation used in training, calibration, or region selection. Chromosome holdout does not imply sequence-homology or pretraining independence.",
+  "annotation_generation_provenance_closed": false,
+  "cross_assembly_mapping": "NOT_YET_RUN"
+}

@@ -1,0 +1,14 @@
+{
+  "job_id": "12696619",
+  "status": "CANCELLED_INVALID_ENGINEERING_DRAFT",
+  "submitted_on": "2026-09-14",
+  "reason": "The first builder revision used RepeatMasker repFamily (for example Alu) as family_id instead of exact repName (for example AluY). It was stopped before any result was promoted and its remote output was renamed with the invalid marker.",
+  "observed_remote_output": {
+    "natural_rows": 1257,
+    "broad_families": 36,
+    "consensus_rows": 33,
+    "homology_components": 1241
+  },
+  "use_for_scientific_claim": false,
+  "replacement": "resubmit after exact repName/superfamily separation and whole-panel sequence+locus component construction"
+}

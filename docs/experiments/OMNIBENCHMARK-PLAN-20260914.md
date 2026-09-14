@@ -51,9 +51,10 @@ Omni 普通节点会自动执行类似 `entrypoint --output_dir ... --name ... -
 ```yaml
 entrypoints:
   default: benchmarks/te_omnibenchmark/te_smoke.py
+  rc0: benchmarks/te_omnibenchmark/rc0_fixture.py
 ```
 
-本轮已在现有 `ab-initio-TE` 内增加一个小 benchmark 目录和根级 `omnibenchmark.yaml` 的 named `default` 入口（0.6.0 metadata 要求该键），并用 synthetic fixture 实际跑通 adapter、T0/T1 evaluator 和 collector；不新建 benchmark repository，不为尚未接入的工具放置空 wrapper、CITATION/license 体系或额外仓库。具体运行证据见 [OMNIBENCHMARK-SMOKE-20260914.md](OMNIBENCHMARK-SMOKE-20260914.md)。
+本轮已在现有 `ab-initio-TE` 内增加一个小 benchmark 目录和根级 `omnibenchmark.yaml` 的 named `default`/`rc0` 入口（0.6.0 metadata 要求模块引用命名入口），并用 synthetic fixture 实际跑通 adapter、T0/T1 evaluator 和 collector；不新建 benchmark repository，不为尚未接入的工具放置空 wrapper、CITATION/license 体系或额外仓库。default 证据见 [OMNIBENCHMARK-SMOKE-20260914.md](OMNIBENCHMARK-SMOKE-20260914.md)，RC0 证据与命令见本文件上方的 RC0 小节。
 
 ## 3. 最小可运行 DAG（仅工程 smoke）
 
@@ -88,6 +89,31 @@ collector
 只用小型 synthetic FASTA 和 synthetic source files，至少包含：两个 contig、相邻独立 insertion、一个 fragmentary/overlap case、已知边界和一个 T1 positive view。toy 运行要验证：named entrypoint、BED/GFF3 坐标转换、T0 完整 precision/recall/F1、T1 precision/F1 空值、自动 `performance.txt`、collector 汇总和失败状态保留。RepeatMasker `.out` 仍是后续 adapter cell 的接口，不在本轮 toy 验收中。T2 仅保留未来 schema 检查项，不是本轮运行验收项。toy 的所有结果标为 `ENGINEERING_ONLY`，不进入论文数值或方法排名。
 
 `cell_registry` 预先列出每个 profile 期待的 method/task/device cell。每个 wrapper 都写 `{status, method, task, input_id, output_schema, runtime_mode}`；允许值至少为 `COMPLETED`、`FAILED`、`TIMEOUT`、`UNSUPPORTED`、`INVALID_INPUT`、`BLOCKED`。最小 smoke 使用名称明确的 `synthetic_status_unsupported` 和 `synthetic_status_blocked` 占位 cell，避免把未运行的真实方法误读为能力结论。科学汇总按 registry 分母统计，缺文件不转成零分，也不静默剔除。
+
+### RC0 的单模块接入
+
+`benchmarks/te_omnibenchmark/rc0.yaml` 和 named `rc0` entrypoint 提供一个
+同样很小的工程 fixture：data stage 产生固定 synthetic genome/truth，methods
+stage 产生 F、映回 RC、mean 和 phase-mean 四个 source-format BED，metrics
+stage 将 4×2（arm×T0/T1）展开交给现有 adapter，collector 同时保留一个
+`UNSUPPORTED` 和一个 `BLOCKED` 状态。它检查的是 RC0 的参数展开、坐标合同、
+T1 空 precision/F1 和失败分母；没有真实模型、RepeatMasker 或生物学数据，
+不能进入论文结果。
+
+在 macOS arm64 上，Snakemake 默认 CBC 调度器会因缓存的 x86_64 solver
+返回 `Bad CPU type in executable`；使用 `--scheduler greedy` 可绕过这一环境
+问题。实际验收命令为：
+
+```bash
+ob run benchmarks/te_omnibenchmark/rc0.yaml --dirty \
+  --out-dir /tmp/te-omnibenchmark-rc0-20260914-c --cores 1 \
+  -- --scheduler greedy
+```
+
+该 run 于 2026-09-14 完成 12 个 jobs；collector 的 10 个 registry cells 为
+8 `COMPLETED`、1 `UNSUPPORTED`、1 `BLOCKED`。这只是工程连通性证据；真实 D
+external runner 位于 `scripts/experiments/D-EXTERNAL-RC0-20260914/rc0.py`，
+不由这个 synthetic profile 偷换为已完成的外部科学评价。
 
 ## 4. 完整方法 × 任务 × 成本矩阵
 
@@ -163,7 +189,7 @@ T0/T1/T2 同一方法仍使用同一 query genome 和版本化 input；只有 tr
 
 ## 7. 后续实施顺序与停止条件
 
-1. **工程准备：** 已在现有 `ab-initio-TE` 增加一个小 benchmark 目录和根级 named `default` 入口；`ob validate plan`、`ob run --dry` 和一次实际 host run 均通过。第一阶段只调用现有 converter/evaluator 和 synthetic source fixture，不创建外部方法的空 wrapper；后续失败仍只修 schema/bridge，不改旧评分器。
+1. **工程准备：** 已在现有 `ab-initio-TE` 增加一个小 benchmark 目录和根级 named `default`/`rc0` 入口；两份 plan 的 `ob validate plan` 和实际 host run 均通过（macOS arm64 运行 RC0 时需 `--scheduler greedy`）。第一阶段只调用现有 converter/evaluator 和 synthetic source fixture，不创建外部方法的空 wrapper；后续失败仍只修 schema/bridge，不改旧评分器。
 2. **toy full-truth：** 已验收 canonical conversion、T0/T1 输出、collector 和 status denominator；T2 只另行做 schema 检查，终态只能写 `ENGINEERING_ONLY`。
 3. **同输入外部矩阵：** 下一阶段再选择当前 D + 已有 HiTE + RM2+RM 一个完整传统 workflow，在同一 FlyBase/Rice profile 冻结 input/runtime/truth tier；EDTA/EarlGrey/TEtrimmer 按适用性加入。
 4. **T1/T2 解释：** T1 只报 positive recovery；T2 用于 cross-release/independent evidence 候选支持，不把 label revision 直接当 gold truth。human hg19→hg38→hs1 的 rescue 仍需 unique mapping、序列存在和独立 annotation。

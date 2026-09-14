@@ -6,7 +6,7 @@
 
 用户追加的八个方向已完成第二轮Pro讨论，并启动并行工程推进。最新入口是[并行实施记录](../../experiments/DIRECTIONS-EXECUTION-20260914.md)、[Pro第二轮完整可见正文](pro-round2-visible-response.txt)及[最终事实勘误](pro-round2-fact-correction.md)。后者修正内部CONF遗漏、TE_final恢复状态、hs1库版本和历史RC结果。新增训练统一单seed42，替代第一轮建议中的新增多seed；历史结果保留。
 
-Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；这两项都是工程验证。Tiberius环境修复已提交smoke-r2作业12687393并已进入RUNNING，原20×3和独立评分尚未完成。论文正文只补入已取证的CONF结果，不把本轮设计或toy分数写成研究结果。
+Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；这两项都是工程验证。Tiberius修复smoke-r2作业12687393已完成，原20×3全量12694349正在运行，CPU评分及独立复算12696406依赖等待。新增hg19 chr1-only原生训练12696116及正式评估依赖12696405已启动；训练和推理接口smoke均通过。mm10新旧注释实际区间差异与chrX Unknown ontology审计已完成，见[新审计记录](../../experiments/ANNOTATION-REVISION-20260914.md)。论文草稿仍保留此前取证时的完成范围，不将正在运行的实验或toy分数写成研究结果。
 
 ## 阅读入口
 
@@ -29,10 +29,10 @@ Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；�
 2. 所选 `baseline_plus_kmer` 的leave-species contains-best=19/22，leave-clade=13/22；.6364属于其他组。源码取top2已观测真实F1的最大值，因此.007083是oracle shortlist regret，不能称已执行probe收益。
 3. 当前共享D的loader为NTv2-500M H0；与历史250M recipe、GENERanno/P3和HN附加NT-logit输入保持分开。
 4. 从D六物种原JSON重算：3,000 tiles、24,541,946 callable bp、7,452,597 positive bp；物种macro bp-F1=.8887612459、run-F1@IoU.8=.4458837761、IoU-qualified joint-boundary-F1@5bp=.2043614175。六物种均参与训练。
-5. 新Tiberius smoke 12652888为工程FAILED，`BASE_MASK_OBSERVATION`缺失；完整20core×3尚无结果。旧C无新增正确链是另一已完成科学结果。Pro提出容器环境传参原因是源码支持的推断，未通过修复重跑验证。
+5. 第一轮Tiberius smoke 12652888为工程FAILED，`BASE_MASK_OBSERVATION`缺失；后续12687393修复重跑已通过，完整20core×3仍无最终结果。旧C无新增正确链是另一已完成科学结果。
 
 ## 下一步取舍
 
 优先补齐支撑正文的已有结果与版本记录（包括HN完整frontier），再完成一个当前D与传统完整workflow的同实例比较。要保留未见物种泛化、高效部署或基因注释改善的主张，分别依赖合格独立panel、代表性CPU/GPU性能实验、原Tiberius U/P/R协议结果。无需默认做MoE，也无需为这篇机制论文重开已关闭的HN阈值或旧C路线。
 
-第一轮交付时没有启动新训练、推理、benchmark、Tiberius修复或作业重提；第二轮实际执行更新见上方入口。原冻结规则保持有效。origin本轮确认是public；本地提交不等于已公开推送。
+第一轮交付时没有启动新训练、推理、benchmark、Tiberius修复或作业重提；后续实际执行更新见上方入口。原冻结规则保持有效。origin为public；用户随后明确允许推送，`2adbcba`已推送并核对远端。Pro的原始回复和附件是当时快照，不能当作对本轮新运行结果的再次审阅。

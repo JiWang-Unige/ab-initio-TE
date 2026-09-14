@@ -14,9 +14,11 @@ CFG=configs/P3-TIBERIUS-BASE-MASK-20260911-R1.json
 RUN=full
 REVISION=r1
 SCRIPT=scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/base_mask.py
+RECHECK=scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/independent_recheck.py
 OUT=outputs/P3-TIBERIUS-BASE-MASK-20260911-R1/${RUN}-${REVISION}
 
 source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
 conda activate te_benchmark
 test "$(< "$OUT/STATUS")" = FULL_COMPLETED_NO_SCORE
 python "$SCRIPT" score --config "$CFG" --run "$RUN" --revision "$REVISION"
+python "$RECHECK" --config "$CFG" --run "$RUN" --revision "$REVISION"

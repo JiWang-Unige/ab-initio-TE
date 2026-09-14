@@ -4,8 +4,9 @@ This is an evidence report prepared for the current Pro discussion and updated
 with the authorized Tiberius smoke repair. It separates live Slurm state,
 engineering completion, metric validity and scientific/generalization status.
 No model was trained and no sealed data were opened. The Tiberius smoke-r2
-inference was submitted only after the explicit container-contract repair; its
-job and output state are recorded below.
+inference was submitted only after the explicit container-contract repair;
+its completed engineering state and the remaining full/score steps are
+recorded below.
 
 ## Executive findings
 
@@ -15,7 +16,7 @@ job and output state are recorded below.
 | Are platypus/urchin/CB4 ready? | The usable Label-A engineering products are complete: CB4 `12522308_2`, sea urchin `12664906_1`, platypus `12664906_0`. Their `STATUS` explicitly says `LABEL_GENERATION_COMPLETED_NOT_SCIENTIFIC_PASS`. | Assembly/annotation preparation is complete; independence, exposure, homology and model evaluation remain open. |
 | Has MoE or an adapter route been run? | No executable MoE/adapters result was found. The historical route recorded `NO MOE` because its prerequisites were not met; the user's current request is a new hypothesis. | Do not claim a routing benefit; define a new matched protocol before running it. |
 | What does coarse `Unknown recall=.3886` mean? | `Unknown` is label 5 in a six-class coarse classifier. It means 38.86% of true Unknown positions were predicted Unknown, among 16,961 true Unknown positions. | It is not Unknown-TE recovery and cannot identify annotation errors by itself. |
-| Is the Tiberius result available? | The retained smoke-r1 stopped at its first U call during import with `KeyError: BASE_MASK_OBSERVATION`, so it has no GTF/GFF/observation output. The repaired smoke-r2 job `12687393` is currently running in P3 preparation and has not reached a Tiberius call. | Engineering status is unresolved; neither smoke is a Tiberius scientific result. |
+| Is the Tiberius result available? | The retained smoke-r1 stopped at its first U call during import with `KeyError: BASE_MASK_OBSERVATION`. Repaired smoke-r2 `12687393` completed the fixed P3 input contract and all U/P/R Tiberius calls; full 20-core job `12694349` is now running. | Engineering smoke passed; no full 60-cell score or scientific utility gate exists yet. |
 | Have RC/strand and two-model fusion solved the gap? | RC inference-time merges have one mouse-chr1 screen; no RC-aware training or biological-prior result exists. The P3+NT risk head improved ranking diagnostics but had no admissible safe action. | Keep as prior evidence; a new relation/consistency experiment must be separately defined. |
 | Is the old graph linker evidence for the new fragment-linking proposal? | A one-seed graph screen exists, but `promotion_gate_pass=false`; its edge target is contiguous truth segmentation, not biological insertion identity. | It is a negative prior, not a solved same-insertion model. |
 
@@ -23,8 +24,8 @@ job and output state are recorded below.
 
 The initial live check on 2026-09-14 through the configured Baobab SSH route
 returned an empty `squeue -u jwang`; after the authorized repair submission,
-job `12687393` is the sole pending Tiberius smoke. Relevant `sacct` records
-and the current repair state are:
+job `12687393` was the sole submitted repair smoke and has completed. Relevant
+`sacct` records and the current repair state are:
 
 | Job | Role | State | Elapsed |
 |---|---|---|---:|
@@ -34,7 +35,8 @@ and the current repair state are:
 | `12664906_1` | repaired sea-urchin Label-A | `COMPLETED 0:0` | 02:32:39 |
 | `12664906_0` | repaired platypus Label-A | `COMPLETED 0:0` | 15:50:00 |
 | `12652888` | P3/Tiberius smoke | `FAILED` | 00:21:58 |
-| `12687393` | P3/Tiberius smoke-r2 repair | `RUNNING (P3 run-core)` | 00:16:02 at last check |
+| `12687393` | P3/Tiberius smoke-r2 repair | `COMPLETED` | 00:43:00 |
+| `12694349` | P3/Tiberius full-r1, 20 cores × U/P/R | `RUNNING` | 00:21:29 at last check |
 
 The original platypus and sea-urchin products are retained as failure evidence
 because of the `simple1.matrix` error. Only the repaired products above are
@@ -182,14 +184,22 @@ output-revision implementation in
 `scripts/experiments/P3-TIBERIUS-BASE-MASK-20260911-R1/base_mask.py`:
 the U/P/R loop now builds a per-mode container argv with an explicit
 `BASE_MASK_OBSERVATION` `--env` entry. The observer, config, gates, inputs,
-outputs and scientific protocol were unchanged. The same two scripts were
-copied to Baobab after the previous remote versions were backed up under
-`.codex-backups/P3-TIBERIUS-BASE-MASK-20260914-r1/`; no Slurm job was submitted.
+outputs and scientific protocol were unchanged. The runner, base module and
+test were copied to Baobab after the previous remote versions were backed up under
+`.codex-backups/P3-TIBERIUS-BASE-MASK-20260914-r1/` and
+`.codex-backups/P3-TIBERIUS-BASE-MASK-20260914-r2-pre/`. The independent
+recheck module and full/score launchers were then synchronized through the
+working SSH route. The pre-fix copies for the contract corrections are also
+retained under `.codex-backups/P3-TIBERIUS-BASE-MASK-20260914-contract-fix-pre/`
+and `.codex-backups/P3-TIBERIUS-BASE-MASK-20260914-contract-fix2-pre/`. No
+scientific configuration was changed.
 
 Validation results:
 
 - The initial environment repair validation was 4/4; after adding revision
-  isolation, the current Baobab `te_benchmark` suite is 5/5, including a recording
+  isolation, the independent replay fixture, the score-chain assertion, and
+  the two-isoform/unmatched-chain contract case, the current Baobab
+  `te_benchmark` suite is 8/8, including a recording
   Singularity shim that executes the exact extracted U/P/R loop and verifies
   all three argv values place the observation target before the image under
   `--cleanenv`.
@@ -205,18 +215,29 @@ evidence immutable, `base_mask.py` now accepts an explicit output revision
 (default `r1`) and the new launcher
 `sbatch/P3-TIBERIUS-BASE-MASK-20260911-R1-smoke-r2.sbatch` uses `RUN=smoke`,
 `REVISION=r2`, and the matching internal `smoke-r2` path. The single submitted
-repair smoke is Baobab job `12687393` (at the last live check it was
-`RUNNING` on `gpu035`, still in the fixed P3 `run-core` stage; R2 has
-`region.jsonl.gz` and no Tiberius model outputs yet); no duplicate job was
-submitted. The prepared
-`full-r1` GPU launcher and separate `score-full-r1` CPU launcher use the same
-implementation and remain unsubmitted until the smoke has real U/P/R model
-outputs. The score launcher currently invokes the canonical `base_mask.py score`
-once; it is not the independent NumPy recheck required by the protocol.
-After the full 60-cell result exists, the remaining validation is to replay
-the count aggregation, P-minus-U deltas, 10,000 shared-core bootstrap and all
-four gate predicates independently, compare that replay to `result.json`, and
-only then interpret the scientific decision.
+repair smoke is Baobab job `12687393` (completed on `gpu035` with exit `0`);
+no duplicate job was submitted. R2 preflight passed with U/P/R shapes
+`[1, 5100000, 6]`, unique preflight masked bp `0/2,014,566/2,045,296`,
+`actual_loader=bricks2marble.io.load_fasta().one_hot`, and
+`first_five_tracks_equal=true`. Each U/P/R observer had `calls=4` and
+`passed=true`; observer cumulative masked positions were `0/5,136,766/5,223,892`
+(window-overlap counts), and each arm produced nonempty GTF and GFF3.
+The `full-r1` GPU launcher and separate `score-full-r1` CPU launcher use the
+same implementation. Smoke completion permitted the original full-run step;
+full job `12694349` is running with a fresh `full-r1` output root. CPU score job
+`12696406` is submitted with `afterok:12694349`; it remains dependent until full
+finishes, and the scorer still requires all 60 cells plus `FULL_COMPLETED_NO_SCORE`.
+No full-run utility result or independent scientific replay is available yet. The canonical
+score now counts only chains matching no reference unit as FP; multiple
+predicted isoforms matching one unit contribute one TP and no FP. The
+independent parser follows the canonical rule that non-CDS rows are ignored,
+and its synthetic replay covers two matched isoforms from one unit plus one
+unmatched chain. The score launcher invokes the canonical `base_mask.py score`
+and then `independent_recheck.py`. The latter independently replays the count
+aggregation, P-minus-U deltas, 10,000 shared-core bootstrap and all four gate
+predicates, comparing the replay to `result.json`; only a successful replay
+writes `independent_recheck.json` and permits interpretation of the scientific
+decision.
 
 ## RC/strand, dual-model fusion and graph prior
 

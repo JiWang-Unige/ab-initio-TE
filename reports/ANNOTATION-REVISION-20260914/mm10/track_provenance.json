@@ -1,0 +1,8 @@
+{
+  "source": "https://genome.ucsc.edu/cgi-bin/hgTrackUi?c=chr1&db=mm10&g=joinedRmsk",
+  "accessed": "2026-09-14",
+  "baseline_display_label": "RepeatMasker v3.0.1 db20100302 : Browser Baseline Dataset",
+  "current_display_label": "RepeatMasker v4.0.7 Dfam_2.0 : Current Dataset",
+  "scope": "Version labels of associated Baseline/Current visualization tracks; exact native generation command and complete library settings remain unverified.",
+  "same_engine_library_only_control": false
+}

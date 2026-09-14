@@ -1,0 +1,105 @@
+{
+  "assembly": "hg38",
+  "component_count": 1570,
+  "consensus_exact_match_audit": {
+    "ambiguous_families": [],
+    "exact_matches": [
+      "AluJb",
+      "AluJo",
+      "AluJr",
+      "AluJr4",
+      "AluSc",
+      "AluSc8",
+      "AluSg",
+      "AluSp",
+      "AluSq",
+      "AluSq2",
+      "AluSx",
+      "AluSx1",
+      "AluSx3",
+      "AluSx4",
+      "AluSz",
+      "AluSz6",
+      "AluY",
+      "FLAM_A",
+      "FLAM_C",
+      "L2",
+      "L3",
+      "MER5A",
+      "MIR",
+      "MIR3",
+      "MIRb",
+      "MIRc",
+      "MLT1A0",
+      "MSTA",
+      "THE1B"
+    ],
+    "missing_families": [
+      "L1M5",
+      "L1ME1",
+      "L1ME4a",
+      "L1PA16",
+      "L1PA3",
+      "L1PA4",
+      "L1PA5",
+      "L1PA7",
+      "L2a",
+      "L2b",
+      "L2c"
+    ]
+  },
+  "consensus_rows": 29,
+  "contract_version": "te-identity-retrieval-natural-panel-v1",
+  "families_meeting_minimum": 40,
+  "families_selected": 40,
+  "families_with_component_isolated_train_cal_eval": 40,
+  "family_selection": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/panel/family_selection.tsv",
+  "filters": {
+    "max_divergence": 20.0,
+    "max_families": 40,
+    "max_length": 10000,
+    "min_intervals": 30,
+    "min_length": 80,
+    "panel_nonoverlap": true,
+    "target_per_family": 40
+  },
+  "homology": {
+    "interpretation": "split-blocking homology component; not biological insertion truth",
+    "jaccard_threshold": 0.7,
+    "k": 7,
+    "method": "whole-panel pairwise k-mer Jaccard plus same-locus nearby/overlap connected components",
+    "nearby_distance": 25
+  },
+  "host_id": "human:hg38",
+  "host_loci": [
+    "chr1",
+    "chr11",
+    "chr13"
+  ],
+  "identity_policy": {
+    "empty_biological_insertion_id": "unknown and not used as positive truth",
+    "host_id": "genome identity; host_locus stores chromosome",
+    "source_copy_id": "coordinate-derived annotated interval; never called biological insertion ID"
+  },
+  "natural_rows": 1600,
+  "no_go_conditions": {
+    "families_without_component_isolated_roles": [],
+    "families_without_minimum": []
+  },
+  "outputs": [
+    "identity_manifest.jsonl",
+    "selected_sequences.fa",
+    "family_selection.tsv",
+    "panel_status.json"
+  ],
+  "paths": {
+    "bed": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/genome_data/animals/hg38/rmsk_te.bed.gz",
+    "consensus": "/srv/beegfs/scratch/users/j/jwang/Pretrain/TE_Contrastive_Clean/data/Dfam38_curated.strict_te_only.fa",
+    "fai": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/genome_data/animals/hg38/hg38.fa.fai",
+    "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/TE_benchmark/TE_final/genome_data/animals/hg38/hg38.fa"
+  },
+  "scientific_claim_status": "NOTRUN",
+  "seed": 42,
+  "source_kind": "natural_copy_coordinate_derived_interval",
+  "status": "PASS_ENGINEERING_PANEL"
+}

@@ -1,0 +1,30 @@
+experiment_id: FRAGMENT-LINKING-PHASE1-20260914
+status: ENGINEERING_ONLY_SYNTHETIC_BASELINE
+seed: 42
+fixture:
+  sequence_origin: independent_insertion_semisim
+  consensus_crops_as_copies: false
+  interval_convention: '[start,end)'
+  max_distance_bp: 25
+  unresolved_truth_is_negative: false
+splits:
+  roles: [train, cal, eval]
+  group_keys: [host_id, source_copy_id, homology_component_id]
+  cross_split_action: EXCLUDED_CROSS_SPLIT
+baselines:
+  B0: distance
+  B1: distance_predicted_family_orientation_length
+  M1: bounded_logistic_pair_features
+  M2: INPUT_CONTRACT_ONLY_real_sequence_encoder_required
+  M3: INPUT_CONTRACT_ONLY_gap_context_and_linkage_truth_required
+calibration:
+  alpha: 0.01
+  minimum_negative_pairs_claim_grade: 100
+  seed: 42
+gap_policy:
+  fill_gap: false
+  change_material_mask: false
+execution:
+  synthetic_fixture_local: true
+  natural_data_or_training: slurm_only
+  auto_submit: false

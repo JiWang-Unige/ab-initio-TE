@@ -1,0 +1,15 @@
+{
+  "biological_insertion_truth": false,
+  "families": 29,
+  "methods_scored": [
+    "basic_train_centroid",
+    "k4_natural_prototypes",
+    "random4_natural_prototypes",
+    "single_consensus",
+    "single_train_medoid"
+  ],
+  "real_glm_embedding": false,
+  "scientific_claim_status": "ANNOTATION_LEVEL_ONLY",
+  "scores_written": true,
+  "status": "PASS_NUMERIC_ANNOTATION_LEVEL"
+}

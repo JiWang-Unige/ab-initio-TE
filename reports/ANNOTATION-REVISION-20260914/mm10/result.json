@@ -1,0 +1,156 @@
+{
+  "status": "MATERIAL_CHANGES_PRESENT_PROVENANCE_OPEN",
+  "scope": "annotation qualification only; no model, FP rescue, or accuracy claim",
+  "assembly": "mm10 GCA_000001635.2",
+  "chromosomes": [
+    "chr1",
+    "chr10",
+    "chr11",
+    "chr12",
+    "chr13",
+    "chr14",
+    "chr15",
+    "chr16",
+    "chr17",
+    "chr18",
+    "chr19",
+    "chr2",
+    "chr3",
+    "chr4",
+    "chr5",
+    "chr6",
+    "chr7",
+    "chr8",
+    "chr9",
+    "chrM",
+    "chrX",
+    "chrY"
+  ],
+  "sources": [
+    {
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/rmskOutBaseline.sql",
+      "path": "outputs/ANNOTATION-REVISION-20260914/mm10-12693564/raw/rmskOutBaseline.sql",
+      "bytes": 1932,
+      "acquired_utc": "2026-09-14T12:49:02.283559+00:00",
+      "last_modified": "Mon, 23 Mar 2015 01:34:20 GMT",
+      "etag": "\"78c-511eaaa419f00\""
+    },
+    {
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/rmskOutBaseline.txt.gz",
+      "path": "outputs/ANNOTATION-REVISION-20260914/mm10-12693564/raw/rmskOutBaseline.txt.gz",
+      "bytes": 149293778,
+      "acquired_utc": "2026-09-14T12:49:15.011204+00:00",
+      "last_modified": "Mon, 23 Mar 2015 01:34:31 GMT",
+      "etag": "\"8e60ad2-511eaaae977c0\""
+    },
+    {
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/rmskOutCurrent.sql",
+      "path": "outputs/ANNOTATION-REVISION-20260914/mm10-12693564/raw/rmskOutCurrent.sql",
+      "bytes": 1929,
+      "acquired_utc": "2026-09-14T12:49:15.480636+00:00",
+      "last_modified": "Sun, 28 Oct 2018 10:42:29 GMT",
+      "etag": "\"789-579479bea0f40\""
+    },
+    {
+      "url": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/database/rmskOutCurrent.txt.gz",
+      "path": "outputs/ANNOTATION-REVISION-20260914/mm10-12693564/raw/rmskOutCurrent.txt.gz",
+      "bytes": 149143650,
+      "acquired_utc": "2026-09-14T12:49:25.363739+00:00",
+      "last_modified": "Sun, 28 Oct 2018 10:42:37 GMT",
+      "etag": "\"8e3c062-579479c642140\""
+    }
+  ],
+  "baseline": {
+    "total_source_records": 5249536,
+    "excluded_noncanonical_records": 9625,
+    "included_records": 5239911,
+    "normalized_distinct_records": 5239911,
+    "raw_class_counts": {
+      "LINE": 984754,
+      "Simple_repeat": 1373158,
+      "Low_complexity": 157299,
+      "LTR": 964863,
+      "SINE": 1507591,
+      "DNA": 162605,
+      "snRNA": 2953,
+      "Other": 18884,
+      "Unknown": 11369,
+      "DNA?": 1679,
+      "srpRNA": 448,
+      "tRNA": 4743,
+      "Satellite": 37971,
+      "LTR?": 893,
+      "RNA": 664,
+      "scRNA": 8032,
+      "RC": 315,
+      "rRNA": 1515,
+      "RC?": 67,
+      "SINE?": 108
+    }
+  },
+  "current": {
+    "total_source_records": 5235046,
+    "excluded_noncanonical_records": 9621,
+    "included_records": 5225425,
+    "normalized_distinct_records": 5225425,
+    "raw_class_counts": {
+      "LINE": 972664,
+      "Simple_repeat": 1369625,
+      "Low_complexity": 159238,
+      "LTR": 966745,
+      "SINE": 1507387,
+      "DNA": 160784,
+      "snRNA": 2949,
+      "Other": 17129,
+      "Unknown": 8717,
+      "DNA?": 1581,
+      "srpRNA": 463,
+      "tRNA": 4750,
+      "Satellite": 41502,
+      "LTR?": 1269,
+      "RNA": 662,
+      "scRNA": 8035,
+      "RC": 315,
+      "rRNA": 1517,
+      "RC?": 93
+    }
+  },
+  "normalized_record_common": 4741333,
+  "normalized_record_baseline_only": 498578,
+  "normalized_record_current_only": 484092,
+  "normalized_record_fields": [
+    "chrom",
+    "start0",
+    "end",
+    "strand",
+    "name",
+    "class",
+    "family"
+  ],
+  "material": {
+    "all_repeat": {
+      "baseline_bp": 1185346433,
+      "current_bp": 1180589950,
+      "shared_bp": 1174546941,
+      "baseline_only_bp": 10799492,
+      "current_only_bp": 6043009
+    },
+    "known_te": {
+      "baseline_bp": 1086969162,
+      "current_bp": 1082662042,
+      "shared_bp": 1076537556,
+      "baseline_only_bp": 10431606,
+      "current_only_bp": 6124486
+    },
+    "potential_te": {
+      "baseline_bp": 1090067540,
+      "current_bp": 1085659829,
+      "shared_bp": 1079533544,
+      "baseline_only_bp": 10533996,
+      "current_only_bp": 6126285
+    }
+  },
+  "annotation_generation_provenance_closed": false,
+  "same_engine_same_library_control": false,
+  "note": "File timestamps are database dump metadata, not generation dates. Known TE excludes ambiguous/Unknown; potential TE retains them separately. No claim of complete negative truth."
+}

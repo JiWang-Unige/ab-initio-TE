@@ -1,0 +1,81 @@
+experiment_id: TE-IDENTITY-RETRIEVAL-20260914
+purpose: >-
+  Compare one family consensus with multiple natural-copy prototypes under an
+  identity-aware, CAL-budgeted retrieval contract.
+status: PASS_NUMERIC_ANNOTATION_LEVEL
+scientific_claim_status: ANNOTATION_LEVEL_ONLY
+seed: 42
+input_contract:
+  manifest_required: true
+  natural_copy_required_fields:
+    - host_id
+    - source_copy_id
+    - homology_component_id
+    - family_id
+    - split
+  split_roles: [train, cal, eval]
+  empty_identity_policy: unknown_never_same_copy
+  consensus_fragment_policy: prototype_material_only
+  consensus_fragments_are_natural_copies: false
+  host_id_is_genome_not_chromosome: true
+  host_locus_field: host_locus
+  split_leakage_keys: [source_copy_id, homology_component_id]
+  source_copy_id_semantics: coordinate_derived_annotated_interval
+  biological_insertion_id: not_available_in_repeatmasker_compact_export
+  family_id_semantics: exact_repeat_name_repName
+  superfamily_context_field: superfamily_id
+protocols:
+  single_consensus:
+    prototype_source: one_consensus_per_family
+    query_source: eval_natural_copies
+  single_train_medoid:
+    prototype_source: one_distinct_train_natural_copy_per_family
+    selection: greedy_train_k_medoids_in_kmer_space_k1
+  k4_natural_prototypes:
+    prototype_source: four_distinct_train_natural_copies_per_family
+    selection: greedy_train_k_medoids_in_kmer_space
+  random4_natural_prototypes:
+    prototype_source: four_distinct_train_natural_copies_per_family
+    seed: 42
+  basic_sequence_features:
+    representation: fixed_kmer_features
+    fit_split: train
+  glm_embedding:
+    representation: explicit_frozen_embedding_table
+    random_embeddings: forbidden
+  training_copy_profile_hmm:
+    representation: profile_hmm_from_train_natural_copies
+completed_runs:
+  panel_slurm_job: 12698062
+  sequence_slurm_jobs: [12698062, 12698524]
+  matched_families: 29
+  natural_intervals: 1600
+  exact_consensus_rows: 29
+  missing_exact_consensus_families: 11
+calibration:
+  cal_split: cal
+  max_false_accept_rate: 0.01
+  minimum_negative_pairs: 100
+  same_budget_for_all_protocols: true
+execution:
+  default_command: >-
+    python3 scripts/experiments/TE-IDENTITY-RETRIEVAL-20260914/identity_retrieval.py
+    --input-manifest MANIFEST.tsv --out-dir OUTPUT_DIR
+  heavy_extraction: slurm_only
+  auto_submit: false
+  panel_builder:
+    assembly: hg38
+    species: human
+    host_id: human:hg38
+    host_loci: [chr1, chr11, chr13]
+    max_families: 40
+    target_per_family: 40
+    minimum_intervals_per_family: 30
+    seed: 42
+    family_key: repeat_name_repName
+    superfamily_context: repFamily
+    homology: whole_panel_kmer_jaccard_plus_nearby_locus_components
+    homology_kmer_size: 7
+    homology_jaccard_threshold: 0.70
+    nearby_locus_distance_bp: 25
+  retrieval_runner: sequence_retrieval.py
