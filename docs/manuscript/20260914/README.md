@@ -14,6 +14,7 @@ Omni最小流程已实际跑通，fragment-linking Phase0的9项测试通过；�
 
 ## 阅读入口
 
+- [审阅后新增实验的英文结果段](results-addendum.md)：已完成的原生hg19跨染色体评价、映射资格、外部标签覆盖诊断和6-mer/NTv2检索比较，可供下一版论文整合；不代表Pro再次审阅。
 - [完整英文初稿](manuscript-en.md)：Title、Abstract、Introduction、六节 Results、Discussion、Methods、Availability、References 和主要数字来源表。
 - [中文十问决策](review-zh.md)：逐项结论、正文/补充材料取舍与最小缺口。
 - [主图、补图与补实验](figures-and-next-experiments.md)：5张主图、9组补充材料及有条件的实验优先级；这是设计，图尚未制作、实验尚未执行。
