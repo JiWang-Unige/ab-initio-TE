@@ -1,0 +1,17 @@
+{
+  "biological_insertion_truth": false,
+  "contrastive_training": true,
+  "families": 29,
+  "kmer_lengths": [
+    4,
+    6,
+    8
+  ],
+  "pretraining_exposure_status": "UNRESOLVED",
+  "projection_selected_epoch": 49,
+  "real_glm_embedding": true,
+  "records": 1629,
+  "scientific_claim_status": "ANNOTATION_LEVEL_ONLY_EXPLORATORY",
+  "scores_written": true,
+  "status": "PASS_NUMERIC_ANNOTATION_LEVEL_EXPLORATORY"
+}

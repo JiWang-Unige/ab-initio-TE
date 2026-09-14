@@ -1,0 +1,47 @@
+{
+  "scope": "MODEL_FORWARD_TIMING_ONLY",
+  "rows": [
+    {
+      "candidate": "platypus",
+      "input_bp": 1048576,
+      "cpu_warm_seconds": 758.3101242089178,
+      "gpu_warm_seconds": 31.01706029707566,
+      "ratio_cpu_over_gpu": 24.448162299907338,
+      "gpu": "NVIDIA TITAN X (Pascal)",
+      "cpu_node": "cpu203",
+      "cpu_node_features": "E5-2680V4,V6",
+      "cpu_allocated_cores": 4,
+      "cpu_hardware_source": "sacct jobs12696616 and scontrol cpu203, checked20260914",
+      "cpu_load_seconds": 24.015603388892487,
+      "gpu_load_seconds": 25.58460661699064
+    },
+    {
+      "candidate": "sea_urchin",
+      "input_bp": 1048576,
+      "cpu_warm_seconds": 754.0294982721098,
+      "gpu_warm_seconds": 30.794732162030414,
+      "ratio_cpu_over_gpu": 24.485665090531956,
+      "gpu": "NVIDIA TITAN X (Pascal)",
+      "cpu_node": "cpu203",
+      "cpu_node_features": "E5-2680V4,V6",
+      "cpu_allocated_cores": 4,
+      "cpu_hardware_source": "sacct jobs12696616 and scontrol cpu203, checked20260914",
+      "cpu_load_seconds": 31.69315328914672,
+      "gpu_load_seconds": 21.445206976961344
+    },
+    {
+      "candidate": "c_briggsae",
+      "input_bp": 1048576,
+      "cpu_warm_seconds": 732.9693933101371,
+      "gpu_warm_seconds": 34.364440283039585,
+      "ratio_cpu_over_gpu": 21.329298171979563,
+      "gpu": "Tesla P100-PCIE-12GB",
+      "cpu_node": "cpu203",
+      "cpu_node_features": "E5-2680V4,V6",
+      "cpu_allocated_cores": 4,
+      "cpu_hardware_source": "sacct jobs12696616 and scontrol cpu203, checked20260914",
+      "cpu_load_seconds": 38.606441400013864,
+      "gpu_load_seconds": 34.58571228198707
+    }
+  ]
+}

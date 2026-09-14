@@ -1,0 +1,10 @@
+{
+  "cpus_per_task": 4,
+  "elapsed_seconds_wallclock_integer": 36,
+  "host": "Slurm public-longrun-cpu",
+  "inference_rerun": false,
+  "job_id": "12708396",
+  "memory": "16G",
+  "status": "COMPLETED",
+  "training": false
+}

@@ -1,0 +1,330 @@
+{
+  "dataset": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/animal_sf5_w4096",
+  "historical_unknown_sample": null,
+  "interpretation": {
+    "historical_unknown_sample_has_model_predictions": false,
+    "historical_unknown_sample_is_population_estimate": false,
+    "known_other_te_is_encoded_as_bg": false,
+    "known_other_te_is_encoded_as_unknown": true,
+    "legacy_unknown_is_not_one_biological_class": true,
+    "raw_other_te_vs_true_unclassified_cannot_be_recovered_from_six_ids": true,
+    "unlabelled_bases_are_painted_bg_by_window_builder": true
+  },
+  "label_map": {
+    "exact_match": true,
+    "expected": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "Unknown"
+    },
+    "observed": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "Unknown"
+    }
+  },
+  "label_map_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/animal_sf5_w4096/label_map.json",
+  "legacy_scores": [
+    {
+      "macro_f1_all6": 0.814574697508414,
+      "main4_conditional_macro_f1": 0.8644150348955204,
+      "main4_false_unknown_rate": 0.00030765518781743597,
+      "stage": "animal_sf5_base_pretrained",
+      "te_detect_f1": 0.904103736766723,
+      "unknown_f1": 0.5019993145207358,
+      "unknown_precision": 0.7088621208862121,
+      "unknown_recall": 0.3885973704380638,
+      "unknown_to_main4_rate": 0.4193148988856789,
+      "window": 4096.0
+    },
+    {
+      "macro_f1_all6": 0.7409563957412132,
+      "main4_conditional_macro_f1": 0.8632671972642624,
+      "main4_false_unknown_rate": 0.00011094966615778399,
+      "stage": "animal_sf5_binary_h0",
+      "te_detect_f1": 0.8977652823399271,
+      "unknown_f1": 0.07084415266277987,
+      "unknown_precision": 0.20956521739130435,
+      "unknown_recall": 0.042627203584694295,
+      "unknown_to_main4_rate": 0.4632391958021343,
+      "window": 4096.0
+    }
+  ],
+  "mapper_probe": {
+    "all_pass": true,
+    "known_other_te_examples_are_unknown": true,
+    "known_other_te_to_bg": false,
+    "rows": [
+      {
+        "expected": "Unknown",
+        "id": "bg_like_missing_class",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "unclassified"
+      },
+      {
+        "expected": "SINE",
+        "id": "sine",
+        "observed": "SINE",
+        "pass": true,
+        "semantic": "main4"
+      },
+      {
+        "expected": "LINE",
+        "id": "line",
+        "observed": "LINE",
+        "pass": true,
+        "semantic": "main4"
+      },
+      {
+        "expected": "LTR",
+        "id": "ltr",
+        "observed": "LTR",
+        "pass": true,
+        "semantic": "main4"
+      },
+      {
+        "expected": "DNA",
+        "id": "dna",
+        "observed": "DNA",
+        "pass": true,
+        "semantic": "main4"
+      },
+      {
+        "expected": "Unknown",
+        "id": "rc_known_other",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "known_other_te"
+      },
+      {
+        "expected": "Unknown",
+        "id": "retroposon_known_other",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "known_other_te"
+      },
+      {
+        "expected": "Unknown",
+        "id": "ple_known_other",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "known_other_te"
+      },
+      {
+        "expected": "Unknown",
+        "id": "question_mark",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "ambiguous"
+      },
+      {
+        "expected": "Unknown",
+        "id": "simple_repeat",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "non_te_or_unresolved"
+      },
+      {
+        "expected": "Unknown",
+        "id": "low_complexity",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "non_te_or_unresolved"
+      },
+      {
+        "expected": "Unknown",
+        "id": "satellite",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "non_te_or_unresolved"
+      },
+      {
+        "expected": "Unknown",
+        "id": "rna",
+        "observed": "Unknown",
+        "pass": true,
+        "semantic": "non_te_or_unresolved"
+      }
+    ]
+  },
+  "mapper_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/pipelines/PIPE-TEFM-LOCK-20260619/prepare_superfamily5_data.py",
+  "metadata_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/animal_sf5_w4096/metadata.json",
+  "status": "COMPLETED",
+  "train_eval_ontology_consistency": {
+    "aggregate_class_bp": {
+      "BG": 23066499,
+      "DNA": 4156127,
+      "LINE": 4497534,
+      "LTR": 4303212,
+      "SINE": 470821,
+      "Unknown": 369807
+    },
+    "aggregate_denominators": {
+      "all6_bp": 36864000,
+      "bg_bp": 23066499,
+      "main4_bp": 13427694,
+      "main4_plus_unknown_te_like_bp": 13797501,
+      "unknown_bp": 369807
+    },
+    "all_splits_pass": true,
+    "encoded_label_set": [
+      "BG",
+      "DNA",
+      "LINE",
+      "LTR",
+      "SINE",
+      "Unknown"
+    ],
+    "errors": [],
+    "splits": {
+      "test": {
+        "denominators": {
+          "all6_bp": 8847360,
+          "bg_bp": 5232207,
+          "main4_bp": 3523237,
+          "main4_plus_unknown_te_like_bp": 3615153,
+          "unknown_bp": 91916
+        },
+        "metadata_class_bp": {
+          "BG": 5232207,
+          "DNA": 1049013,
+          "LINE": 1142586,
+          "LTR": 1255834,
+          "SINE": 75804,
+          "Unknown": 91916
+        },
+        "metadata_match": true,
+        "species_match": true,
+        "species_metadata": {
+          "c_elegans": 360,
+          "chicken": 360,
+          "fruit_fly": 360,
+          "mouse": 360,
+          "western_clawed_frog": 360,
+          "zebrafish": 360
+        },
+        "stream": {
+          "class_bp": {
+            "BG": 5232207,
+            "DNA": 1049013,
+            "LINE": 1142586,
+            "LTR": 1255834,
+            "SINE": 75804,
+            "Unknown": 91916
+          },
+          "length_bp": 8847360,
+          "records": 2160,
+          "species_windows": {
+            "c_elegans": 360,
+            "chicken": 360,
+            "fruit_fly": 360,
+            "mouse": 360,
+            "western_clawed_frog": 360,
+            "zebrafish": 360
+          }
+        }
+      },
+      "train": {
+        "denominators": {
+          "all6_bp": 22118400,
+          "bg_bp": 13301627,
+          "main4_bp": 8592510,
+          "main4_plus_unknown_te_like_bp": 8816773,
+          "unknown_bp": 224263
+        },
+        "metadata_class_bp": {
+          "BG": 13301627,
+          "DNA": 2543516,
+          "LINE": 2985204,
+          "LTR": 2787156,
+          "SINE": 276634,
+          "Unknown": 224263
+        },
+        "metadata_match": true,
+        "species_match": true,
+        "species_metadata": {
+          "c_elegans": 900,
+          "chicken": 900,
+          "fruit_fly": 900,
+          "mouse": 900,
+          "western_clawed_frog": 900,
+          "zebrafish": 900
+        },
+        "stream": {
+          "class_bp": {
+            "BG": 13301627,
+            "DNA": 2543516,
+            "LINE": 2985204,
+            "LTR": 2787156,
+            "SINE": 276634,
+            "Unknown": 224263
+          },
+          "length_bp": 22118400,
+          "records": 5400,
+          "species_windows": {
+            "c_elegans": 900,
+            "chicken": 900,
+            "fruit_fly": 900,
+            "mouse": 900,
+            "western_clawed_frog": 900,
+            "zebrafish": 900
+          }
+        }
+      },
+      "val": {
+        "denominators": {
+          "all6_bp": 5898240,
+          "bg_bp": 4532665,
+          "main4_bp": 1311947,
+          "main4_plus_unknown_te_like_bp": 1365575,
+          "unknown_bp": 53628
+        },
+        "metadata_class_bp": {
+          "BG": 4532665,
+          "DNA": 563598,
+          "LINE": 369744,
+          "LTR": 260222,
+          "SINE": 118383,
+          "Unknown": 53628
+        },
+        "metadata_match": true,
+        "species_match": true,
+        "species_metadata": {
+          "c_elegans": 240,
+          "chicken": 240,
+          "fruit_fly": 240,
+          "mouse": 240,
+          "western_clawed_frog": 240,
+          "zebrafish": 240
+        },
+        "stream": {
+          "class_bp": {
+            "BG": 4532665,
+            "DNA": 563598,
+            "LINE": 369744,
+            "LTR": 260222,
+            "SINE": 118383,
+            "Unknown": 53628
+          },
+          "length_bp": 5898240,
+          "records": 1440,
+          "species_windows": {
+            "c_elegans": 240,
+            "chicken": 240,
+            "fruit_fly": 240,
+            "mouse": 240,
+            "western_clawed_frog": 240,
+            "zebrafish": 240
+          }
+        }
+      }
+    }
+  }
+}

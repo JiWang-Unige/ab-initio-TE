@@ -1,0 +1,16 @@
+{
+  "contrastive_backbone_training": "forbidden; native NTv2 frozen",
+  "epoch_selection": "earliest epoch maximizing projected TRAIN-centroid CAL true pair accepts under FAR<=0.01",
+  "epochs_requested": 50,
+  "eval_policy": "EVAL read only for final selected-epoch metrics",
+  "input_dimension": 1024,
+  "learning_rate": 0.001,
+  "model_id": "nucleotide-transformer-v2-500m-multi-species",
+  "objective": "full_batch supervised contrastive loss on TRAIN family labels",
+  "projection_dimension": 128,
+  "seed": 42,
+  "temperature": 0.1,
+  "train_families": 29,
+  "train_rows": 699,
+  "weight_decay": 0.0001
+}

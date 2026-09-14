@@ -1,0 +1,14 @@
+{
+  "candidates": [
+    "sea_urchin_uncurated_dfam",
+    "platypus_label_a"
+  ],
+  "config": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/ONTOLOGY-AND-EXTERNAL-ERRORS-20260914/config/analysis.json",
+  "inference_rerun": false,
+  "output_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ONTOLOGY-AND-EXTERNAL-ERRORS-20260914/run-12708396",
+  "protocol": "ONTOLOGY-AND-EXTERNAL-ERRORS-20260914",
+  "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "status": "COMPLETED",
+  "threshold": 0.42330056285498807,
+  "training": false
+}

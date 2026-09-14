@@ -1,0 +1,35 @@
+{
+  "protocol": "TE-REAL-PANEL-BENCH-20260914",
+  "scope": "REAL_REGION_FEASIBILITY_AND_T2_CONCORDANCE_ONLY",
+  "input_rule": "Reuse all four fixed 1-MiB external D regions per species, no outcome selection. Same sequences; short identifiers are mapped explicitly.",
+  "candidates": [
+    "platypus",
+    "sea_urchin",
+    "c_briggsae"
+  ],
+  "native_methods": [
+    "fixed_rm",
+    "hite",
+    "rm2_rm"
+  ],
+  "fixed_D": "F probabilities and old frozen threshold from 12696615; no model or calibration change",
+  "seed": 42,
+  "cpus": 4,
+  "memory_gb": 32,
+  "native_timeout_seconds": 6600,
+  "fixed_rm_library": "Dfam3.9 lineage ancestors+descendants, curated and uncurated; retain empty lineage as BLOCKED_NO_LIBRARY, no surrogate taxon",
+  "fixed_rm_version": "4.2.2",
+  "hite_version": "3.3.3",
+  "rm2_version": "2.0.9",
+  "rm2_masker_version": "4.2.4",
+  "interpretation": "De novo discovery on 4 MiB may lack repeats/copy diversity. This is neither a whole-genome benchmark nor a method ranking; no absolute precision/F1. T2 concordance is not truth.",
+  "status_denominator": "All 9 native cells plus 3 completed D cells retained. Failure and timeout do not become zero scores.",
+  "runtimes": {
+    "hite": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+    "rm2": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+    "rm": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+    "famdb4": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2",
+    "famdb3": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions",
+    "famdb_cli": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-1/RepeatMasker/famdb.py"
+  }
+}

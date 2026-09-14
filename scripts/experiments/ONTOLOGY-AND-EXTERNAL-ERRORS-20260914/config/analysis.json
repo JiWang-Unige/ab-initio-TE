@@ -1,0 +1,70 @@
+{
+  "protocol": "ONTOLOGY-AND-EXTERNAL-ERRORS-20260914",
+  "status": "FIXED_ANALYSIS_CONTRACT",
+  "remote_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "ontology": {
+    "dataset_relpath": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/animal_sf5_w4096",
+    "mapper_relpath": "pipelines/PIPE-TEFM-LOCK-20260619/prepare_superfamily5_data.py",
+    "legacy_summary_relpath": "reports/tefm_lock/PIPE-TEFM-LOCK-20260619/summaries/superfamily5.tsv",
+    "historical_unknown_relpath": "reports/ANNOTATION-REVISION-20260914/unknown/unknown_result.json",
+    "splits": ["train", "val", "test"],
+    "expected_label_map": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "Unknown"
+    },
+    "probe_rows": [
+      {"id": "bg_like_missing_class", "rep_class": "", "rep_family": "", "rep_name": "", "expected": "Unknown", "semantic": "unclassified"},
+      {"id": "sine", "rep_class": "SINE", "rep_family": "tRNA", "rep_name": "MIR", "expected": "SINE", "semantic": "main4"},
+      {"id": "line", "rep_class": "LINE", "rep_family": "L1", "rep_name": "L1Md", "expected": "LINE", "semantic": "main4"},
+      {"id": "ltr", "rep_class": "LTR", "rep_family": "ERV", "rep_name": "ERVK", "expected": "LTR", "semantic": "main4"},
+      {"id": "dna", "rep_class": "DNA", "rep_family": "TcMar", "rep_name": "Tigger", "expected": "DNA", "semantic": "main4"},
+      {"id": "rc_known_other", "rep_class": "RC", "rep_family": "Helitron", "rep_name": "Helitron", "expected": "Unknown", "semantic": "known_other_te"},
+      {"id": "retroposon_known_other", "rep_class": "Retroposon", "rep_family": "SVA", "rep_name": "SVA", "expected": "Unknown", "semantic": "known_other_te"},
+      {"id": "ple_known_other", "rep_class": "PLE", "rep_family": "Penelope", "rep_name": "Penelope", "expected": "Unknown", "semantic": "known_other_te"},
+      {"id": "question_mark", "rep_class": "DNA?", "rep_family": "", "rep_name": "", "expected": "Unknown", "semantic": "ambiguous"},
+      {"id": "simple_repeat", "rep_class": "Simple_repeat", "rep_family": "", "rep_name": "", "expected": "Unknown", "semantic": "non_te_or_unresolved"},
+      {"id": "low_complexity", "rep_class": "Low_complexity", "rep_family": "", "rep_name": "", "expected": "Unknown", "semantic": "non_te_or_unresolved"},
+      {"id": "satellite", "rep_class": "Satellite", "rep_family": "", "rep_name": "", "expected": "Unknown", "semantic": "non_te_or_unresolved"},
+      {"id": "rna", "rep_class": "RNA", "rep_family": "", "rep_name": "", "expected": "Unknown", "semantic": "non_te_or_unresolved"}
+    ]
+  },
+  "external": {
+    "frozen_threshold": 0.42330056285498807,
+    "candidates": [
+      {
+        "id": "sea_urchin_uncurated_dfam",
+        "species": "Strongylocentrotus purpuratus",
+        "assembly": "GCF_000002235.5",
+        "label_source": "Dfam 3.9 uncurated lineage-specific export; RepeatMasker annotation on the saved fixed panel, lifted to assembly coordinates",
+        "prediction_relpath": "outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1",
+        "label_relpath": "outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/finalize-12706353/panel_regions.lifted.out"
+      },
+      {
+        "id": "platypus_label_a",
+        "species": "Ornithorhynchus anatinus",
+        "assembly": "GCF_004115215.2",
+        "label_source": "Label-A RepeatMasker 4.2.2/Dfam 3.9 sparse comparator on the original assembly",
+        "prediction_relpath": "outputs/D-EXTERNAL-RC0-20260914/platypus/slurm-12696615_0",
+        "label_relpath": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-0/annotation/assembly.fa.out"
+      }
+    ],
+    "arms": ["F", "RC", "mean", "phase_mean"],
+    "length_bins": [
+      {"name": "<80", "min": 0, "max": 80},
+      {"name": "80-499", "min": 80, "max": 500},
+      {"name": "500-999", "min": 500, "max": 1000},
+      {"name": ">=1000", "min": 1000, "max": null}
+    ],
+    "divergence_bins": [
+      {"name": "<5", "min": 0, "max": 5},
+      {"name": "5-15", "min": 5, "max": 15},
+      {"name": "15-30", "min": 15, "max": 30},
+      {"name": ">=30", "min": 30, "max": null},
+      {"name": "NA", "min": null, "max": null}
+    ]
+  }
+}

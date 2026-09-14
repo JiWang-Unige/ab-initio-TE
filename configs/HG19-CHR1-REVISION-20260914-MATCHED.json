@@ -1,0 +1,60 @@
+{
+  "protocol": "HG19_CHM13V2_MATCHED_BACKGROUND_AND_SEQUENCE_QUALIFICATION",
+  "status": "FIXED_RULES_BEFORE_SEQUENCE_OR_TARGET_SUPPORT_READ",
+  "seed": 42,
+  "source_assembly": "hg19",
+  "target_assembly": "CHM13v2",
+  "mapping_outcomes": "outputs/HG19-CHR1-REVISION-20260914/mapping-qualification-12705502/interval_outcomes.tsv",
+  "old_confusion_intervals": "outputs/HG19-CHR1-REVISION-20260914/eval-full-12696405/old_confusion_intervals.bed",
+  "old_comparator": "software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/human/hg19/raw/rmsk.txt.gz",
+  "source_fasta": "data/raw/ucsc/human/hg19/hg19.fa.gz",
+  "target_fasta": "outputs/HG19-CHR1-REVISION-20260914-MATCHED/assets/chm13v2.0.fa.gz",
+  "forward_chain": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/hg19-chm13v2.chain",
+  "reverse_chain": "outputs/ANNOTATION-REVISION-20260914/chm13-assets-12695221/chm13v2-hg19.chain",
+  "target_fasta_url": "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/analysis_set/chm13v2.0.fa.gz",
+  "allowed_source_chromosomes": ["chr2", "chr3", "chr4"],
+  "allowed_target_chromosomes": ["chr2", "chr3", "chr4"],
+  "forbidden_source_chromosomes": ["chr16", "chr18", "chr19", "chr20", "chr21", "chr22"],
+  "forbidden_target_chromosomes": ["chr16", "chr18", "chr19", "chr20", "chr21", "chr22"],
+  "old_te_classes": ["SINE", "LINE", "LTR", "DNA", "RC", "RETROPOSON"],
+  "qualification": {
+    "input_population": "All source TP/FP/FN/TN rows are retained. Chain and sequence strata are computed only for existing UNIQUE_RECIPROCAL_SAME_LENGTH rows in allowed chr2/3/4.",
+    "forward_chain_rule": "At least one forward chain path must cover the complete source interval, map exactly to the existing forward target coordinates, and expose every internal chain block.",
+    "reverse_chain_rule": "At least one reverse chain path must cover the complete forward target interval and map exactly back to the original source interval.",
+    "strict_internal_bijection": "A path is strict only when all source bases are covered and query blocks are contiguous in chain orientation with no internal source gap, target gap, or target overlap. One block is SINGLE_BLOCK; multiple contiguous blocks are MULTIBLOCK_CONTIGUOUS.",
+    "indel_policy": "Any internal source gap or query gap/overlap is retained in its own stratum and excluded from strict sequence qualification. Equal outer span is not sufficient.",
+    "orientation_policy": "Forward and reverse chain orientations must agree; source strand '.' is retained as metadata and is not used as chain orientation."
+  },
+  "sequence_check": {
+    "source_target_scope": "Read only source and target chr2/3/4 FASTA records.",
+    "orientation": "Compare source sequence to target sequence in forward chain orientation; use reverse complement when the forward chain query strand is '-'.",
+    "metrics": ["source_gc_count", "source_gc_fraction", "source_non_acgt_count", "target_gc_count", "target_non_acgt_count", "mismatch_bp", "mismatch_fraction"],
+    "exact_rule": "SEQUENCE_EXACT requires an internally strict path, equal sequence lengths, and zero aligned-base mismatches; mismatch and non-ACGT counts are still reported separately."
+  },
+  "matching": {
+    "control_pool": "Existing qualified mapping rows with old state TN only; target annotation support and model probability are never read for selection.",
+    "case_pool": "Existing qualified mapping rows with old state FP only; all unmatched FP rows are retained.",
+    "hard_covariates": ["same_source_chromosome", "exact_source_length", "same_old_te_relation", "exact_source_non_acgt_count", "same_old_te_distance_bin"],
+    "old_te_relation": "OVERLAP when source interval overlaps the merged old TE union; ADJACENT when it does not overlap but touches a merged old TE boundary; ISOLATED otherwise.",
+    "old_te_distance": "Distance in bp from a non-overlapping interval to the nearest merged old TE boundary; zero for overlap or adjacency.",
+    "old_te_distance_bins": ["ZERO", "1_10", "11_50", "51_200", "GT_200"],
+    "gc_tolerance_fraction": 0.02,
+    "selection_order": "Among hard-covariate candidates within GC tolerance, minimize absolute GC-fraction difference, then absolute old-TE-boundary distance, then source row_id.",
+    "reuse_policy": "Control reuse is allowed and counted; matching is deterministic with seed 42 recorded, and no model score, new annotation support, or target sequence identity is a selection covariate.",
+    "boundary_vs_isolated": "Report FP and matched TN separately by OVERLAP, ADJACENT (boundary-extension candidate), and ISOLATED; do not merge these labels into a single enrichment claim."
+  },
+  "support_report": {
+    "precomputed_overlap_table": "outputs/HG19-CHR1-REVISION-20260914/chm13-2022-overlap-12705941/annotation_overlap.tsv",
+    "read_after_matching_only": true,
+    "layers": ["any", "ge50", "ge80"],
+    "categories": ["TE", "UNKNOWN", "NONTE", "UNRECOGNIZED"],
+    "policy": "Join fixed per-interval support fields only after controls are selected; report weighted matched pairs and unique-control diagnostics, with unmatched FP preserved. No F1 or FP rescue is computed."
+  },
+  "claim_policy": {
+    "new_target_annotation_used_for_matching": false,
+    "model_probability_used_for_matching": false,
+    "same_base_f1_computed": false,
+    "fp_rescue_claim": false,
+    "matched_control_is_confirmation": false
+  }
+}

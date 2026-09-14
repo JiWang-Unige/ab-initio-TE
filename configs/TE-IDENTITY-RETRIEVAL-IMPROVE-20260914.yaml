@@ -1,0 +1,59 @@
+experiment_id: TE-IDENTITY-RETRIEVAL-IMPROVE-20260914
+parent_contract: TE-IDENTITY-RETRIEVAL-20260914
+status: PASS_NUMERIC_ANNOTATION_LEVEL_EXPLORATORY
+scientific_claim_status: ANNOTATION_LEVEL_ONLY_EXPLORATORY
+seed: 42
+input:
+  manifest: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/panel/identity_manifest.jsonl
+  embeddings: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_glm_ntv2_native_fixed/embeddings.npy
+  embedding_ids: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_glm_ntv2_native_fixed/embedding_ids.json
+  embedding_meta: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_glm_ntv2_native_fixed/embedding_meta.json
+  expected_records: 1629
+  expected_natural_records: 1600
+  common_matched_families: 29
+  split_roles: [train, cal, eval]
+  source_copy_and_homology_split_fixed: true
+  reference_provenance_fixed: true
+kmer_ablation:
+  nucleotide_kmer_lengths: [4, 6, 8]
+  prototype_counts: [1, 4, all_train_copies]
+  arms:
+    - single_train_medoid
+    - k4_natural_prototypes
+    - basic_train_centroid
+  medoid_selection: deterministic_greedy_pam_style_on_train_only_in_same_kmer_space
+  centroid_definition: mean_of_all_train_kmer_vectors
+  eval_selection_forbidden: true
+contrastive_projection:
+  backbone: frozen_native_nucleotide-transformer-v2-500m-multi-species
+  training_data: TRAIN_natural_copies_family_labels_only
+  projection: single_linear_1024_to_128
+  objective: full_batch_supervised_contrastive_loss
+  temperature: 0.1
+  epochs: 50
+  optimizer: AdamW
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  prototype_selection: fixed_kmer6_train_only_record_ids
+  epoch_selection: earliest_epoch_maximizing_projected_train_centroid_CAL_true_pairs_at_far_0.01
+  threshold_selection: per_arm_CAL_only_at_far_0.01
+  eval_usage: final_selected_epoch_only
+  eval_seen_before: true
+  independent_test: false
+  unsupervised: false
+  backbone_retraining: forbidden
+  contrastive_backbone_finetuning: forbidden
+calibration:
+  alpha: 0.01
+  minimum_negative_pairs: 100
+  seed: 42
+outputs:
+  metrics: metrics.json
+  queries: per_query.tsv
+  input_audit: input_audit.json
+  training_config: training_config.json
+  training_trace: training_trace.jsonl
+  projection_state: projection_state.pt
+  status: status.json
+  slurm_job: '12708302'
+  remote_output_dir: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_improve_20260914/run1

@@ -1,0 +1,534 @@
+{
+  "case_fp_qualified_n": 21235,
+  "claim_policy": {
+    "enrichment_test": false,
+    "fp_rescue_claim": false,
+    "matched_control_is_confirmation": false,
+    "same_base_f1_computed": false
+  },
+  "matched_pair_n": 18649,
+  "outputs": {
+    "matched_support": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914-MATCHED/support-12708553/matched_support.tsv",
+    "summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/HG19-CHR1-REVISION-20260914-MATCHED/support-12708553/summary.json"
+  },
+  "protocol": "HG19_CHM13V2_MATCHED_BACKGROUND_AND_SEQUENCE_QUALIFICATION",
+  "qualification_strata": {
+    "chain_strata_by_state": {
+      "FN": {
+        "SINGLE_BLOCK": 24333
+      },
+      "FP": {
+        "SINGLE_BLOCK": 21235
+      },
+      "TN": {
+        "INTERNAL_SOURCE_GAP": 24,
+        "SINGLE_BLOCK": 23562
+      },
+      "TP": {
+        "INTERNAL_SOURCE_GAP": 29,
+        "SINGLE_BLOCK": 23933
+      }
+    },
+    "mismatch_by_state": {
+      "FN": {
+        "checked_n": 24333,
+        "mismatch_bp_total": 577,
+        "mismatch_n": 497
+      },
+      "FP": {
+        "checked_n": 21235,
+        "mismatch_bp_total": 415,
+        "mismatch_n": 380
+      },
+      "TN": {
+        "checked_n": 23562,
+        "mismatch_bp_total": 6153,
+        "mismatch_n": 3799
+      },
+      "TP": {
+        "checked_n": 23933,
+        "mismatch_bp_total": 6773,
+        "mismatch_n": 4166
+      }
+    },
+    "sequence_strata_by_state": {
+      "FN": {
+        "SEQUENCE_EXACT": 23836,
+        "SEQUENCE_MISMATCH": 497
+      },
+      "FP": {
+        "SEQUENCE_EXACT": 20855,
+        "SEQUENCE_MISMATCH": 380
+      },
+      "TN": {
+        "CHAIN_NOT_STRICT": 24,
+        "SEQUENCE_EXACT": 19763,
+        "SEQUENCE_MISMATCH": 3799
+      },
+      "TP": {
+        "CHAIN_NOT_STRICT": 29,
+        "SEQUENCE_EXACT": 19767,
+        "SEQUENCE_MISMATCH": 4166
+      }
+    },
+    "source_state_counts": {
+      "FN": 24588,
+      "FP": 21402,
+      "TN": 25477,
+      "TP": 25775
+    }
+  },
+  "qualified_count_by_state": {
+    "FN": 24333,
+    "FP": 21235,
+    "TN": 23586,
+    "TP": 23962
+  },
+  "qualified_mapping_count": 93116,
+  "seed": 42,
+  "source_interval_count": 97242,
+  "source_state_counts": {
+    "FN": 24588,
+    "FP": 21402,
+    "TN": 25477,
+    "TP": 25775
+  },
+  "status": "MATCHED_CHM13_SUPPORT_REPORT_COMPLETED",
+  "support_by_category_layer": {
+    "NONTE": {
+      "any": {
+        "control_support_fraction": 0.060753927824548234,
+        "control_supported_n": 1133,
+        "fp_minus_control_fraction": -0.031208107673333693,
+        "fp_support_fraction": 0.02954582015121454,
+        "fp_supported_n": 551,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.058000682360968954,
+        "unique_control_supported_n": 170
+      },
+      "ge50": {
+        "control_support_fraction": 0.056142420505120916,
+        "control_supported_n": 1047,
+        "fp_minus_control_fraction": -0.03270952866105421,
+        "fp_support_fraction": 0.023432891844066706,
+        "fp_supported_n": 437,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.04094165813715456,
+        "unique_control_supported_n": 120
+      },
+      "ge80": {
+        "control_support_fraction": 0.053032334173414124,
+        "control_supported_n": 989,
+        "fp_minus_control_fraction": -0.03254866212665558,
+        "fp_support_fraction": 0.02048367204675854,
+        "fp_supported_n": 382,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.027976799727055614,
+        "unique_control_supported_n": 82
+      }
+    },
+    "TE": {
+      "any": {
+        "control_support_fraction": 0.1495522548125905,
+        "control_supported_n": 2789,
+        "fp_minus_control_fraction": 0.02906322054801866,
+        "fp_support_fraction": 0.17861547536060915,
+        "fp_supported_n": 3331,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.1896963493688161,
+        "unique_control_supported_n": 556
+      },
+      "ge50": {
+        "control_support_fraction": 0.11190948576331171,
+        "control_supported_n": 2087,
+        "fp_minus_control_fraction": 0.04606145101614027,
+        "fp_support_fraction": 0.15797093677945198,
+        "fp_supported_n": 2946,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.1132719208461276,
+        "unique_control_supported_n": 332
+      },
+      "ge80": {
+        "control_support_fraction": 0.10670813448442276,
+        "control_supported_n": 1990,
+        "fp_minus_control_fraction": 0.034800793608236374,
+        "fp_support_fraction": 0.14150892809265914,
+        "fp_supported_n": 2639,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.09825997952917093,
+        "unique_control_supported_n": 288
+      }
+    },
+    "UNKNOWN": {
+      "any": {
+        "control_support_fraction": 0.0,
+        "control_supported_n": 0,
+        "fp_minus_control_fraction": 0.0,
+        "fp_support_fraction": 0.0,
+        "fp_supported_n": 0,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.0,
+        "unique_control_supported_n": 0
+      },
+      "ge50": {
+        "control_support_fraction": 0.0,
+        "control_supported_n": 0,
+        "fp_minus_control_fraction": 0.0,
+        "fp_support_fraction": 0.0,
+        "fp_supported_n": 0,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.0,
+        "unique_control_supported_n": 0
+      },
+      "ge80": {
+        "control_support_fraction": 0.0,
+        "control_supported_n": 0,
+        "fp_minus_control_fraction": 0.0,
+        "fp_support_fraction": 0.0,
+        "fp_supported_n": 0,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.0,
+        "unique_control_supported_n": 0
+      }
+    },
+    "UNRECOGNIZED": {
+      "any": {
+        "control_support_fraction": 0.0,
+        "control_supported_n": 0,
+        "fp_minus_control_fraction": 0.0,
+        "fp_support_fraction": 0.0,
+        "fp_supported_n": 0,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.0,
+        "unique_control_supported_n": 0
+      },
+      "ge50": {
+        "control_support_fraction": 0.0,
+        "control_supported_n": 0,
+        "fp_minus_control_fraction": 0.0,
+        "fp_support_fraction": 0.0,
+        "fp_supported_n": 0,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.0,
+        "unique_control_supported_n": 0
+      },
+      "ge80": {
+        "control_support_fraction": 0.0,
+        "control_supported_n": 0,
+        "fp_minus_control_fraction": 0.0,
+        "fp_support_fraction": 0.0,
+        "fp_supported_n": 0,
+        "matched_pair_n": 18649,
+        "unique_control_n": 2931,
+        "unique_control_support_fraction": 0.0,
+        "unique_control_supported_n": 0
+      }
+    }
+  },
+  "support_by_old_te_relation": {
+    "ADJACENT": {
+      "NONTE": {
+        "any": {
+          "control_support_fraction": 0.06438546641678254,
+          "control_supported_n": 1065,
+          "fp_minus_control_fraction": -0.034338915422284025,
+          "fp_support_fraction": 0.03004655099449852,
+          "fp_supported_n": 497,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.07384087006296508,
+          "unique_control_supported_n": 129
+        },
+        "ge50": {
+          "control_support_fraction": 0.060697660359107675,
+          "control_supported_n": 1004,
+          "fp_minus_control_fraction": -0.03609213469560486,
+          "fp_support_fraction": 0.02460552566350281,
+          "fp_supported_n": 407,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.05266170578133944,
+          "unique_control_supported_n": 92
+        },
+        "ge80": {
+          "control_support_fraction": 0.058098059367631946,
+          "control_supported_n": 961,
+          "fp_minus_control_fraction": -0.0365153255546823,
+          "fp_support_fraction": 0.02158273381294964,
+          "fp_supported_n": 357,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.03606182026330853,
+          "unique_control_supported_n": 63
+        }
+      },
+      "TE": {
+        "any": {
+          "control_support_fraction": 0.14255486367208753,
+          "control_supported_n": 2358,
+          "fp_minus_control_fraction": 0.034459827096306156,
+          "fp_support_fraction": 0.17701469076839368,
+          "fp_supported_n": 2928,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.17229536348025187,
+          "unique_control_supported_n": 301
+        },
+        "ge50": {
+          "control_support_fraction": 0.10398403965902908,
+          "control_supported_n": 1720,
+          "fp_minus_control_fraction": 0.05066199141527114,
+          "fp_support_fraction": 0.15464603107430022,
+          "fp_supported_n": 2558,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0726960503720664,
+          "unique_control_supported_n": 127
+        },
+        "ge80": {
+          "control_support_fraction": 0.09926848437216614,
+          "control_supported_n": 1642,
+          "fp_minus_control_fraction": 0.03760353062088144,
+          "fp_support_fraction": 0.13687201499304757,
+          "fp_supported_n": 2264,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.05552375500858615,
+          "unique_control_supported_n": 97
+        }
+      },
+      "UNKNOWN": {
+        "any": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge50": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge80": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        }
+      },
+      "UNRECOGNIZED": {
+        "any": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge50": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge80": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 16541,
+          "unique_control_n": 1747,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        }
+      }
+    },
+    "ISOLATED": {
+      "NONTE": {
+        "any": {
+          "control_support_fraction": 0.03225806451612903,
+          "control_supported_n": 68,
+          "fp_minus_control_fraction": -0.006641366223908918,
+          "fp_support_fraction": 0.025616698292220113,
+          "fp_supported_n": 54,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.03462837837837838,
+          "unique_control_supported_n": 41
+        },
+        "ge50": {
+          "control_support_fraction": 0.020398481973434534,
+          "control_supported_n": 43,
+          "fp_minus_control_fraction": -0.006166982922201138,
+          "fp_support_fraction": 0.014231499051233396,
+          "fp_supported_n": 30,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.02364864864864865,
+          "unique_control_supported_n": 28
+        },
+        "ge80": {
+          "control_support_fraction": 0.013282732447817837,
+          "control_supported_n": 28,
+          "fp_minus_control_fraction": -0.0014231499051233394,
+          "fp_support_fraction": 0.011859582542694497,
+          "fp_supported_n": 25,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.016047297297297296,
+          "unique_control_supported_n": 19
+        }
+      },
+      "TE": {
+        "any": {
+          "control_support_fraction": 0.20445920303605314,
+          "control_supported_n": 431,
+          "fp_minus_control_fraction": -0.013282732447817858,
+          "fp_support_fraction": 0.19117647058823528,
+          "fp_supported_n": 403,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.21537162162162163,
+          "unique_control_supported_n": 255
+        },
+        "ge50": {
+          "control_support_fraction": 0.17409867172675522,
+          "control_supported_n": 367,
+          "fp_minus_control_fraction": 0.009962049335863365,
+          "fp_support_fraction": 0.1840607210626186,
+          "fp_supported_n": 388,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.17314189189189189,
+          "unique_control_supported_n": 205
+        },
+        "ge80": {
+          "control_support_fraction": 0.1650853889943074,
+          "control_supported_n": 348,
+          "fp_minus_control_fraction": 0.012808349146110037,
+          "fp_support_fraction": 0.17789373814041745,
+          "fp_supported_n": 375,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.16131756756756757,
+          "unique_control_supported_n": 191
+        }
+      },
+      "UNKNOWN": {
+        "any": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge50": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge80": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        }
+      },
+      "UNRECOGNIZED": {
+        "any": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge50": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        },
+        "ge80": {
+          "control_support_fraction": 0.0,
+          "control_supported_n": 0,
+          "fp_minus_control_fraction": 0.0,
+          "fp_support_fraction": 0.0,
+          "fp_supported_n": 0,
+          "matched_pair_n": 2108,
+          "unique_control_n": 1184,
+          "unique_control_support_fraction": 0.0,
+          "unique_control_supported_n": 0
+        }
+      }
+    }
+  },
+  "target_annotation_join": {
+    "model_probability_used_for_selection": false,
+    "new_annotation_used_for_selection": false,
+    "selection_completed_before_join": true,
+    "source": "fixed precomputed CHM13 overlap table",
+    "target_sequence_used_for_selection": false
+  },
+  "unique_controls_used_n": 2931,
+  "unmatched_fp_n": 2586
+}

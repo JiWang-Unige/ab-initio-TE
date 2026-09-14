@@ -1,0 +1,59 @@
+{
+  "assembly": "GCF_000002235.5",
+  "candidate": "sea_urchin",
+  "hardware": {
+    "accelerator": "NVIDIA TITAN X (Pascal)",
+    "arch": "x86_64",
+    "cpu_count": 12,
+    "cuda_version": "12.1",
+    "device_index": 0,
+    "hostname": "gpu002.baobab",
+    "platform": "Linux-5.14.0-687.39.1.el9_8.x86_64-x86_64-with-glibc2.34",
+    "slurm_job_id": "12708298",
+    "slurm_job_node": "gpu002",
+    "slurm_nodelist": "gpu002"
+  },
+  "model": {
+    "batch_size": 12,
+    "calibration_scope": "six-species-shared",
+    "cpu_flag": false,
+    "device": "cuda",
+    "model_load_seconds": 21.445206976961344,
+    "paths": {
+      "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model"
+    },
+    "seed": 42,
+    "threshold": 0.42330056285498807
+  },
+  "panel_selection": {
+    "assembly_report_order": true,
+    "description": "For each exact assembly, take the first four report rows in assembly-report order with the accession type used by its FASTA (RefSeq for GCF, GenBank for GCA) and use a centered 1,048,576-bp interval per sequence.",
+    "length_bp": 1048576,
+    "phase_offset_bp": 3,
+    "score_or_label_selection": false,
+    "start_policy": "centered_from_assembly_length",
+    "window_bp": 4096
+  },
+  "protocol": "D-EXTERNAL-RC0-20260914-CPU-GPU-TIMING",
+  "region": {
+    "end_bp": 27075246,
+    "fixed_panel_region_index": 1,
+    "length_bp": 1048576,
+    "seqid": "NW_022145594.1",
+    "start_bp": 26026670
+  },
+  "scientific_scope": "timing only; no accuracy or model-selection endpoint",
+  "species": "Strongylocentrotus purpuratus",
+  "status": "COMPLETED",
+  "timing": {
+    "cold_bp_per_second": 34171.786860614586,
+    "cold_forward_seconds": 30.68543077004142,
+    "input_bp": 1048576,
+    "warm_bp_per_second": 34050.49910753513,
+    "warm_forward_seconds": 30.794732162030414,
+    "windows": 256
+  }
+}

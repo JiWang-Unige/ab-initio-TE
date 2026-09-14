@@ -1,0 +1,110 @@
+{
+  "status": "EXACT_LEGACY_DENOMINATOR_REPLAY",
+  "scope": "existing scored rows only; no prediction, threshold change, or new held-out evaluation",
+  "runs": {
+    "SF5_base_pretrained_seed42": {
+      "limit": 1200,
+      "val": {
+        "windows": 1200,
+        "species_windows": {
+          "mouse": 240,
+          "zebrafish": 240,
+          "chicken": 240,
+          "western_clawed_frog": 240,
+          "fruit_fly": 240
+        },
+        "class_bp": {
+          "bg": 3676309,
+          "ltr": 259545,
+          "sine": 115291,
+          "line": 361763,
+          "dna": 481692,
+          "unknown": 20600
+        },
+        "chromosome_windows": {
+          "mouse:unrecorded": 240,
+          "zebrafish:unrecorded": 240,
+          "chicken:unrecorded": 240,
+          "western_clawed_frog:unrecorded": 240,
+          "fruit_fly:unrecorded": 240
+        }
+      },
+      "test": {
+        "windows": 1200,
+        "species_windows": {
+          "mouse": 360,
+          "zebrafish": 360,
+          "chicken": 360,
+          "western_clawed_frog": 120
+        },
+        "class_bp": {
+          "ltr": 555156,
+          "bg": 2834240,
+          "line": 813671,
+          "sine": 63889,
+          "dna": 631283,
+          "unknown": 16961
+        },
+        "chromosome_windows": {
+          "mouse:unrecorded": 360,
+          "zebrafish:unrecorded": 360,
+          "chicken:unrecorded": 360,
+          "western_clawed_frog:unrecorded": 120
+        },
+        "legacy_support_matches": true
+      }
+    },
+    "SF5_binary_h0_seed42": {
+      "limit": 1200,
+      "val": {
+        "windows": 1200,
+        "species_windows": {
+          "mouse": 240,
+          "zebrafish": 240,
+          "chicken": 240,
+          "western_clawed_frog": 240,
+          "fruit_fly": 240
+        },
+        "class_bp": {
+          "bg": 3676309,
+          "ltr": 259545,
+          "sine": 115291,
+          "line": 361763,
+          "dna": 481692,
+          "unknown": 20600
+        },
+        "chromosome_windows": {
+          "mouse:unrecorded": 240,
+          "zebrafish:unrecorded": 240,
+          "chicken:unrecorded": 240,
+          "western_clawed_frog:unrecorded": 240,
+          "fruit_fly:unrecorded": 240
+        }
+      },
+      "test": {
+        "windows": 1200,
+        "species_windows": {
+          "mouse": 360,
+          "zebrafish": 360,
+          "chicken": 360,
+          "western_clawed_frog": 120
+        },
+        "class_bp": {
+          "ltr": 555156,
+          "bg": 2834240,
+          "line": 813671,
+          "sine": 63889,
+          "dna": 631283,
+          "unknown": 16961
+        },
+        "chromosome_windows": {
+          "mouse:unrecorded": 360,
+          "zebrafish:unrecorded": 360,
+          "chicken:unrecorded": 360,
+          "western_clawed_frog:unrecorded": 120
+        },
+        "legacy_support_matches": true
+      }
+    }
+  }
+}

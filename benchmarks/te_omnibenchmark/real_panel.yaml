@@ -1,0 +1,45 @@
+api_version: "0.5.0"
+id: te_real_panel_t2_concordance
+name: "TE real-region T2 concordance replay"
+description: "Replay native Slurm outputs and saved D predictions on the fixed three-species panel; no independent truth or absolute accuracy metric is available."
+benchmarker: "ab-initio-TE"
+version: "0.1.0"
+software_backend: host
+
+software_environments:
+  - id: host
+
+stages:
+  - id: data
+    modules:
+      - id: bundle
+        repository: &local_repo
+          url: https://github.com/JiWang-Unige/ab-initio-TE.git
+          commit: "b0c0b852bd0dd9e161f65c617a662b7be2a92651"
+          entrypoint: real_panel
+    outputs:
+      - id: data.bundle_manifest
+        path: bundle_manifest.json
+      - id: data.cell_registry
+        path: cell_registry.json
+
+  - id: metrics
+    inputs:
+      - data.bundle_manifest
+      - data.cell_registry
+    modules:
+      - id: score
+        repository: *local_repo
+    outputs:
+      - id: metrics.score
+        path: metrics.json
+
+metric_collectors:
+  - id: summary
+    repository: *local_repo
+    inputs:
+      - metrics.score
+      - data.cell_registry
+    outputs:
+      - id: collector.summary
+        path: collector_summary.json

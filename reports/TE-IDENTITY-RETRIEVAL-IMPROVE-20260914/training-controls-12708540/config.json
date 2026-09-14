@@ -1,0 +1,16 @@
+{
+  "arms": [
+    "kmer6_l2_supcon",
+    "ntv2_l2_supcon",
+    "ntv2_l2_cross_entropy"
+  ],
+  "dimension": 128,
+  "epoch_selection": "earliest max CAL centroid true pair accepts under pair FAR<=.01",
+  "epochs": 50,
+  "eval": "already-seen EVAL; exploratory, final selected epoch only",
+  "lr": 0.001,
+  "note": "CE head optimized only on TRAIN; final retrieval uses projected TRAIN centroid, same as contrastive arms",
+  "seed": 42,
+  "temperature": 0.1,
+  "weight_decay": 0.0001
+}
