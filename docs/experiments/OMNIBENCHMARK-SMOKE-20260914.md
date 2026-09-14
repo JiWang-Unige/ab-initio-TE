@@ -62,3 +62,18 @@ fixture 写入两个 contig 的 synthetic FASTA、BED truth、GFF3 prediction、
 - `MetricCollector` 会按 0.6.0 规则收集所引用 stage 的全部 output files；collector 因此按 JSON schema 识别 registry/status/metric 文件，不能把“被收集”解释为新的评分逻辑。
 - 失败分母在成功 collector 运行时由 registry 与 sidecar 合并保留；若 upstream native job 失败到使 collector 无法调度，需另行做 post-run status aggregation，不能把缺失 score 当成零分。
 - macOS ARM64 上 venv 自带的 Snakemake 默认 ILP solver 是 x86 `cbc`，第一次运行在任何规则启动前因 `Bad CPU type in executable` 退出；显式透传 `--scheduler greedy` 后运行成功。这个是本机调度器兼容性限制，不是 benchmark DAG 失败。
+
+## 后续：GitHub 固定提交的无 dirty 执行
+
+2026-09-14 13:50 UTC，RC0 四臂工程流程已从公开 GitHub 固定源码提交 `1d4bcfa2415d7f437ccf6f9b2bf7ba89766e9aa9` 完成真实执行。初次去掉 `--dirty` 时，Omni 0.6.0 在任何任务启动前拒绝 `url: ../..`：本地路径即使带 commit 仍需 dirty。两份计划现改为 `https://github.com/JiWang-Unige/ab-initio-TE.git`，并固定到包含两个入口的已推送源码提交。
+
+```bash
+/Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-venv/bin/ob run \
+  benchmarks/te_omnibenchmark/rc0.yaml \
+  --out-dir /tmp/te-omnibenchmark-rc0-github-20260914 --cores 1 -- \
+  --scheduler greedy
+```
+
+本次未使用 `--dirty`，完成 12 个 jobs。run ID 为 `623b650a-46f5-462a-93f5-d04b48c739b8`；module metadata 明确记录 GitHub URL、上述提交及 `rc0_fixture.py` 入口。collector 的 10 个预期 cell 全部保留：8 个实际完成的四臂×T0/T1评分、1 个专用合成 UNSUPPORTED、1 个专用合成 BLOCKED。8 份评分均为 `ENGINEERING_ONLY`，T1 precision/F1 保持空值。
+
+紧凑证据位于 [reports/OMNIBENCHMARK-RC0-CLEAN-20260914](../../reports/OMNIBENCHMARK-RC0-CLEAN-20260914/)，包含原 manifest、解析后的 module 信息、实际计划、collector 和 8 份评分。该结果解决了从已提交代码独立执行的问题，仍未执行真实传统方法矩阵，也不提供模型性能或 CPU/GPU 速度结论。

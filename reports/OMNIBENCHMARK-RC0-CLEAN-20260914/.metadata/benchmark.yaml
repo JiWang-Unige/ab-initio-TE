@@ -1,0 +1,79 @@
+api_version: "0.5.0"
+id: te_rc0_engineering_smoke
+name: "TE RC0 four-arm engineering smoke"
+description: "ENGINEERING_ONLY fixture for forward/RC/mean/phase wiring and status denominators"
+benchmarker: "ab-initio-TE"
+version: "0.1.0"
+software_backend: host
+
+software_environments:
+  - id: host
+
+stages:
+  - id: data
+    modules:
+      - id: fixture
+        repository: &local_repo
+          url: https://github.com/JiWang-Unige/ab-initio-TE.git
+          commit: "1d4bcfa2415d7f437ccf6f9b2bf7ba89766e9aa9"
+          entrypoint: rc0
+    outputs:
+      - id: data.genome
+        path: genome.fa
+      - id: data.truth_t0_source
+        path: truth_t0.bed
+      - id: data.truth_t1_source
+        path: truth_t1.bed
+      - id: data.lengths
+        path: lengths.json
+      - id: data.cell_registry
+        path: cell_registry.json
+
+  - id: methods
+    inputs:
+      - data.genome
+    modules:
+      - id: arms
+        repository: *local_repo
+    outputs:
+      - id: methods.f_prediction_source
+        path: F.bed
+      - id: methods.rc_prediction_source
+        path: RC.bed
+      - id: methods.mean_prediction_source
+        path: mean.bed
+      - id: methods.phase_mean_prediction_source
+        path: phase_mean.bed
+      - id: methods.arm_status
+        path: arm_status.json
+
+  - id: metrics
+    inputs:
+      - data.truth_t0_source
+      - data.truth_t1_source
+      - data.lengths
+      - methods.f_prediction_source
+      - methods.rc_prediction_source
+      - methods.mean_prediction_source
+      - methods.phase_mean_prediction_source
+    modules:
+      - id: evaluate
+        repository: *local_repo
+        parameters:
+          - id: arm_tier_grid
+            arm: ["F", "RC", "mean", "phase_mean"]
+            tier: ["T0", "T1"]
+    outputs:
+      - id: metrics.score
+        path: metrics.json
+
+metric_collectors:
+  - id: summary
+    repository: *local_repo
+    inputs:
+      - metrics.score
+      - methods.arm_status
+      - data.cell_registry
+    outputs:
+      - id: collector.summary
+        path: collector_summary.json

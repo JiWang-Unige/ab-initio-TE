@@ -1,0 +1,124 @@
+{
+  "cells": [
+    {
+      "arm": "F",
+      "cell_id": "evaluate|F|T0|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T0"
+    },
+    {
+      "arm": "F",
+      "cell_id": "evaluate|F|T1|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T1"
+    },
+    {
+      "arm": "RC",
+      "cell_id": "evaluate|RC|T0|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T0"
+    },
+    {
+      "arm": "RC",
+      "cell_id": "evaluate|RC|T1|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T1"
+    },
+    {
+      "arm": "mean",
+      "cell_id": "evaluate|mean|T0|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T0"
+    },
+    {
+      "arm": "mean",
+      "cell_id": "evaluate|mean|T1|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T1"
+    },
+    {
+      "arm": "phase_mean",
+      "cell_id": "evaluate|phase_mean|T0|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T0"
+    },
+    {
+      "arm": "phase_mean",
+      "cell_id": "evaluate|phase_mean|T1|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "evaluate",
+      "reason": null,
+      "status": "COMPLETED",
+      "task": "T1"
+    },
+    {
+      "arm": null,
+      "cell_id": "synthetic_status_unsupported|status|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "UNSUPPORTED",
+      "method": "synthetic_status_unsupported",
+      "reason": "deliberate denominator-preservation fixture",
+      "status": "UNSUPPORTED",
+      "task": "status"
+    },
+    {
+      "arm": null,
+      "cell_id": "synthetic_status_blocked|status|host",
+      "device": "host",
+      "evidence": "observed",
+      "expected_status": "BLOCKED",
+      "method": "synthetic_status_blocked",
+      "reason": "deliberate denominator-preservation fixture",
+      "status": "BLOCKED",
+      "task": "status"
+    }
+  ],
+  "claim_scope": "RC0 wiring and status denominator only",
+  "engineering_only": true,
+  "expected_cell_count": 10,
+  "observed_cell_count": 10,
+  "schema": "te_rc0_engineering_summary_v1",
+  "status_counts": {
+    "BLOCKED": 1,
+    "COMPLETED": 8,
+    "UNSUPPORTED": 1
+  }
+}
