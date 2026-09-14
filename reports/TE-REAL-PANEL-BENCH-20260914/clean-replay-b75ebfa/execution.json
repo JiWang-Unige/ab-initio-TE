@@ -1,0 +1,12 @@
+{
+  "status": "COMPLETED_4_OMNI_JOBS_PARTIAL_NATIVE_MATRIX",
+  "source_commit": "b75ebfa93254579147ee44f12ba83c4d24838365",
+  "dirty": false,
+  "module_source": "https://github.com/JiWang-Unige/ab-initio-TE.git",
+  "native_array": "12708424",
+  "export_job": "12708689",
+  "registry_cells": 12,
+  "completed_native_or_cached_cells": 4,
+  "task": "T2 real-region concordance; no independent truth",
+  "runtime_scope": "Omni replay time excludes native caller time"
+}

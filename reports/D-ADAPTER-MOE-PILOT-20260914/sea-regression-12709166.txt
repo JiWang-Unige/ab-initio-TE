@@ -1,0 +1,2 @@
+[train] dense_residual_adapter epoch=1 loss=0.693147 cal_min=0.5000 cal_macro=0.5000
+PASS masked-step handling and single-species CAL routing

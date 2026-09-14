@@ -1,0 +1,273 @@
+{
+  "absolute_f1": null,
+  "absolute_precision": null,
+  "cells": [
+    {
+      "cell_id": "platypus|fixed_rm",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "metrics": null,
+      "reason": null,
+      "species": "platypus",
+      "status": "RUNNING",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|hite",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 509024,
+            "candidate_fragment_count": 3458,
+            "coverage_bp": 509024,
+            "merged_fragment_count": 3147
+          },
+          "non_te": {
+            "callable_coverage_bp": 507256,
+            "candidate_fragment_count": 4416,
+            "coverage_bp": 507256,
+            "merged_fragment_count": 4161
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          }
+        },
+        "callable_coverage_bp": 998052,
+        "callable_coverage_fraction": 0.23795413970947266,
+        "candidate_fragment_count": 7874,
+        "coverage_bp": 998052,
+        "merged_fragment_count": 6383,
+        "panel_callable_bp": 4194304
+      },
+      "reason": null,
+      "species": "platypus",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|rm2_rm",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "metrics": null,
+      "reason": null,
+      "species": "platypus",
+      "status": "RUNNING",
+      "task": "T2"
+    },
+    {
+      "cell_id": "platypus|D_F_cache",
+      "device": "gpu_saved_replay",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 2146893,
+            "candidate_fragment_count": 6732,
+            "coverage_bp": 2146893,
+            "merged_fragment_count": 6732
+          }
+        },
+        "callable_coverage_bp": 2146893,
+        "callable_coverage_fraction": 0.5118591785430908,
+        "candidate_fragment_count": 6732,
+        "coverage_bp": 2146893,
+        "merged_fragment_count": 6732,
+        "panel_callable_bp": 4194304
+      },
+      "reason": null,
+      "species": "platypus",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|fixed_rm",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "metrics": null,
+      "reason": "status.json absent when compact bundle was exported",
+      "species": "sea_urchin",
+      "status": "NOTRUN",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|hite",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "metrics": null,
+      "reason": "status.json absent when compact bundle was exported",
+      "species": "sea_urchin",
+      "status": "NOTRUN",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|rm2_rm",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "metrics": null,
+      "reason": "status.json absent when compact bundle was exported",
+      "species": "sea_urchin",
+      "status": "NOTRUN",
+      "task": "T2"
+    },
+    {
+      "cell_id": "sea_urchin|D_F_cache",
+      "device": "gpu_saved_replay",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 628428,
+            "candidate_fragment_count": 4396,
+            "coverage_bp": 628428,
+            "merged_fragment_count": 4396
+          }
+        },
+        "callable_coverage_bp": 628428,
+        "callable_coverage_fraction": 0.14988251299130606,
+        "candidate_fragment_count": 4396,
+        "coverage_bp": 628428,
+        "merged_fragment_count": 4396,
+        "panel_callable_bp": 4192804
+      },
+      "reason": null,
+      "species": "sea_urchin",
+      "status": "COMPLETED",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|fixed_rm",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "fixed_rm",
+      "metrics": null,
+      "reason": "status.json absent when compact bundle was exported",
+      "species": "c_briggsae",
+      "status": "NOTRUN",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|hite",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "hite",
+      "metrics": null,
+      "reason": "status.json absent when compact bundle was exported",
+      "species": "c_briggsae",
+      "status": "NOTRUN",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|rm2_rm",
+      "device": "cpu",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "rm2_rm",
+      "metrics": null,
+      "reason": "status.json absent when compact bundle was exported",
+      "species": "c_briggsae",
+      "status": "NOTRUN",
+      "task": "T2"
+    },
+    {
+      "cell_id": "c_briggsae|D_F_cache",
+      "device": "gpu_saved_replay",
+      "evidence": "observed",
+      "expected_status": "COMPLETED",
+      "method": "D_F_cache",
+      "metrics": {
+        "by_bucket": {
+          "known_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "non_te": {
+            "callable_coverage_bp": 0,
+            "candidate_fragment_count": 0,
+            "coverage_bp": 0,
+            "merged_fragment_count": 0
+          },
+          "unknown_or_ambiguous": {
+            "callable_coverage_bp": 237027,
+            "candidate_fragment_count": 1704,
+            "coverage_bp": 237043,
+            "merged_fragment_count": 1704
+          }
+        },
+        "callable_coverage_bp": 237027,
+        "callable_coverage_fraction": 0.05772209272083126,
+        "candidate_fragment_count": 1704,
+        "coverage_bp": 237043,
+        "merged_fragment_count": 1704,
+        "panel_callable_bp": 4106348
+      },
+      "reason": null,
+      "species": "c_briggsae",
+      "status": "COMPLETED",
+      "task": "T2"
+    }
+  ],
+  "expected_cell_count": 12,
+  "metric_files": [
+    "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/TE-REAL-PANEL-BENCH-20260914/omni_clean_b75ebfa/data/bundle/.default/metrics/score/.default/metrics.json"
+  ],
+  "observed_cell_count": 12,
+  "protocol": "TE-REAL-PANEL-BENCH-20260914",
+  "schema": "te_real_panel_t2_collector_v1",
+  "scope": "REAL_REGION_FEASIBILITY_AND_T2_CONCORDANCE_ONLY",
+  "scored_cell_count": 4,
+  "status_counts": {
+    "COMPLETED": 4,
+    "NOTRUN": 6,
+    "RUNNING": 2
+  },
+  "truth_available": false
+}

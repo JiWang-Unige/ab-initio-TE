@@ -1,0 +1,142 @@
+{
+  "assembly": "sea_urchin_fixed_panel",
+  "coordinate_contract": "project RepeatMasker adapter: 1-based inclusive to zero-based half-open",
+  "half_bp": 4096,
+  "label_policy": {
+    "known_te": "strict LINE/SINE/LTR/DNA/RC/Retroposon -> 1",
+    "reference_negative": "all remaining bases -> 0",
+    "unknown_or_ambiguous": "Unknown/Unclassified/PLE or class containing ? -> ?; masks take precedence"
+  },
+  "output_jsonl_gz": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-ADAPTER-MOE-PILOT-20260914/sea-materialized/sea_urchin_tiles.jsonl.gz",
+  "raw_rows_retained_on_four_regions": 10021,
+  "record_count": 1024,
+  "region_stats": [
+    {
+      "label_counts_raw_rows": {
+        "known_te_rows": 1021,
+        "reference_negative_rows": 454,
+        "unknown_or_ambiguous_rows": 1234
+      },
+      "label_covered_bp_raw_overlap_sum": {
+        "known_te_rows": 322986,
+        "reference_negative_rows": 42668,
+        "unknown_or_ambiguous_rows": 336175
+      },
+      "masked_bp": 323298,
+      "non_acgt_masked_bp": 0,
+      "positive_bp": 279663,
+      "reference_negative_bp": 445615,
+      "region_id": "sea_urchin__r01__NW_022145594.1__26026670_27075246",
+      "region_number": 1,
+      "repeatmasker_rows_seen": 2709,
+      "sequence_bp": 1048576,
+      "split": "TRAIN"
+    },
+    {
+      "label_counts_raw_rows": {
+        "known_te_rows": 902,
+        "reference_negative_rows": 570,
+        "unknown_or_ambiguous_rows": 1352
+      },
+      "label_covered_bp_raw_overlap_sum": {
+        "known_te_rows": 200183,
+        "reference_negative_rows": 32370,
+        "unknown_or_ambiguous_rows": 299155
+      },
+      "masked_bp": 285292,
+      "non_acgt_masked_bp": 0,
+      "positive_bp": 165584,
+      "reference_negative_bp": 597700,
+      "region_id": "sea_urchin__r02__NW_022145605.1__20770607_21819183",
+      "region_number": 2,
+      "repeatmasker_rows_seen": 2824,
+      "sequence_bp": 1048576,
+      "split": "TRAIN"
+    },
+    {
+      "label_counts_raw_rows": {
+        "known_te_rows": 690,
+        "reference_negative_rows": 536,
+        "unknown_or_ambiguous_rows": 880
+      },
+      "label_covered_bp_raw_overlap_sum": {
+        "known_te_rows": 177992,
+        "reference_negative_rows": 30679,
+        "unknown_or_ambiguous_rows": 327896
+      },
+      "masked_bp": 319718,
+      "non_acgt_masked_bp": 1000,
+      "positive_bp": 149786,
+      "reference_negative_bp": 579072,
+      "region_id": "sea_urchin__r03__NW_022145609.1__19395012_20443588",
+      "region_number": 3,
+      "repeatmasker_rows_seen": 2106,
+      "sequence_bp": 1048576,
+      "split": "CAL"
+    },
+    {
+      "label_counts_raw_rows": {
+        "known_te_rows": 758,
+        "reference_negative_rows": 491,
+        "unknown_or_ambiguous_rows": 1133
+      },
+      "label_covered_bp_raw_overlap_sum": {
+        "known_te_rows": 198410,
+        "reference_negative_rows": 28458,
+        "unknown_or_ambiguous_rows": 321914
+      },
+      "masked_bp": 312879,
+      "non_acgt_masked_bp": 500,
+      "positive_bp": 152710,
+      "reference_negative_bp": 582987,
+      "region_id": "sea_urchin__r04__NW_022145610.1__17434598_18483174",
+      "region_number": 4,
+      "repeatmasker_rows_seen": 2382,
+      "sequence_bp": 1048576,
+      "split": "EVAL"
+    }
+  ],
+  "source_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1/panel_regions.fa",
+  "source_regions": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1/panel_regions.json",
+  "source_repeatmasker_out": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/finalize-12706353/panel_regions.lifted.out",
+  "species": "sea_urchin",
+  "split_label_totals": {
+    "CAL": {
+      "masked_bp": 319718,
+      "positive_bp": 149786,
+      "reference_negative_bp": 579072,
+      "total_bp": 1048576
+    },
+    "EVAL": {
+      "masked_bp": 312879,
+      "positive_bp": 152710,
+      "reference_negative_bp": 582987,
+      "total_bp": 1048576
+    },
+    "TRAIN": {
+      "masked_bp": 608590,
+      "positive_bp": 445247,
+      "reference_negative_bp": 1043315,
+      "total_bp": 2097152
+    }
+  },
+  "split_policy": {
+    "CAL": [
+      3
+    ],
+    "EVAL": [
+      4
+    ],
+    "TRAIN": [
+      1,
+      2
+    ]
+  },
+  "status": "COMPLETED",
+  "tile_bp": 8192,
+  "tile_count": {
+    "CAL": 128,
+    "EVAL": 128,
+    "TRAIN": 256
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "experiment": "D-ADAPTER-MOE-PILOT-20260914",
+  "status": "protocol_locked_before_extraction",
+  "purpose": "Bounded exploratory adapter and prediction-head MoE pilot on frozen six-species D hidden features.",
+  "seed": 42,
+  "selection": {
+    "tiles_per_species_per_split": 32,
+    "tile_order": "first_32_complete_tiles_in_source_order",
+    "window_bp": 4096,
+    "tile_bp": 8192,
+    "splits": ["TRAIN", "CAL", "DEV"],
+    "train_only_for_adapter_weights": true,
+    "cal_only_for_epoch_and_threshold": true,
+    "dev_only_final_evaluation": true,
+    "eval_split": "DEV",
+    "no_eval_during_selection": true,
+    "species": ["human", "mouse", "chicken", "zebrafish", "pig", "c_elegans"]
+  },
+  "remote": {
+    "project_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+    "d_model": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "historical_calibration": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "native_model_code": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "data_root": "outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202",
+    "worm_train_override": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/materialization/12306000/TRAIN/c_elegans.jsonl.gz",
+    "sea_panel_fasta": "outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1/panel_regions.fa",
+    "sea_panel_regions": "outputs/D-EXTERNAL-RC0-20260914/sea_urchin/slurm-12696615_1/panel_regions.json",
+    "sea_labels": "outputs/D-EXTERNAL-RC0-20260914/sea_urchin_uncurated_dfam/finalize-12706353/panel_regions.lifted.out",
+    "output_root": "outputs/D-ADAPTER-MOE-PILOT-20260914/seed42"
+  },
+  "encoding": {
+    "tokenizer_contract": "cross_species_token_task.encode_record",
+    "kmer_bp": 6,
+    "full_6mer_tokens_then_single_base_tail": true,
+    "non_acgt_token": "<unk>",
+    "label_masses": "cross_species_token_task.label_chunk_masses",
+    "bp_projection": "calibrate_evaluate_x0.project_token_margins",
+    "native_quality_unit": "base_pair",
+    "ignore_label": "?",
+    "hard_negative_label": "H",
+    "te_bp_weight": 3.0
+  },
+  "model": {
+    "hidden_size": 1024,
+    "base_num_labels": 2,
+    "base_head_trainable": false,
+    "final_hidden_definition": "EsmForTokenClassification output_hidden_states[-1] at non-special attended token positions",
+    "adapters_are_prediction_head_only": true,
+    "backbone_frozen": true,
+    "arms": {
+      "D_recalibrated": {
+        "kind": "frozen_base_logits",
+        "trainable_parameters": 0
+      },
+      "dense_residual_adapter": {
+        "kind": "base_logits_plus_tanh_bottleneck_residual",
+        "bottleneck_width": 64,
+        "trainable_parameters": 65730,
+        "formula": "(1024*64+64)+(64*2+2)"
+      },
+      "two_expert_soft_gate_residual_adapter": {
+        "kind": "base_logits_plus_softmax_hidden_gated_two_expert_residual",
+        "expert_count": 2,
+        "expert_bottleneck_width": 32,
+        "gate_input": "detached 1024-dimensional final hidden state",
+        "trainable_parameters": 67782,
+        "formula": "2*((1024*32+32)+(32*2+2))+(1024*2+2)",
+        "interpretation": "prediction-head MoE; not a sparse or routed backbone"
+      },
+      "constant_average_experts": {
+        "kind": "base_logits_plus_fixed_average_of_two_residual_experts",
+        "expert_count": 2,
+        "expert_bottleneck_width": 32,
+        "trainable_parameters": 65732,
+        "formula": "2*((1024*32+32)+(32*2+2))",
+        "gate": "fixed weights (0.5, 0.5)"
+      }
+    }
+  },
+  "training": {
+    "epochs": 25,
+    "feature_batch_size": 1,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "batch_unit": "one tile per species per step, both 4096-bp halves",
+    "steps_per_epoch": 32,
+    "species_balanced": true,
+    "class_weighting": "TE_BP_WEIGHT=3.0 with callable-base normalization per half",
+    "cal_selection_rule": "fit shared six-species Platt on CAL; select threshold with legacy select_global_threshold; select epoch by minimum species F1 then macro F1",
+    "early_stopping": false,
+    "multiseed": false,
+    "max_gpu_hours": 2,
+    "gpu_count": 1,
+    "cpus": 4,
+    "memory_gb": 64
+  },
+  "sea_urchin_exploration": {
+    "status": "separate_exploratory_single-domain_adaptation_with_six-species_retention_eval",
+    "enabled": true,
+    "reason": "Run as a separate finite job after the six-species main pilot; materialize the fixed four-region RepeatMasker output before supervised adaptation.",
+    "materialized_output": "outputs/D-ADAPTER-MOE-PILOT-20260914/sea-materialized/sea_urchin_tiles.jsonl.gz",
+    "tiles_per_split": {"TRAIN": 256, "CAL": 128, "EVAL": 128},
+    "train_regions": [1, 2],
+    "cal_regions": [3],
+    "eval_regions": [4],
+    "unknown_and_ambiguous": "masked, including PLE",
+    "other_acgt": "reference_negative",
+    "post_adaptation_retention": "re-evaluate each adapted head on the original six-species DEV after fitting a separate shared six-species CAL calibration; no six-species DEV selection",
+    "claim_boundary": "adapted sea-urchin evaluation is supervised adaptation, not zero-shot; this is not a seven-domain joint-training result"
+  },
+  "scientific_boundary": {
+    "status": "exploratory_single_seed",
+    "not_claimed": [
+      "backbone MoE sparsity",
+      "species-independent biological generalization",
+      "confirmation on an independent untouched test set",
+      "sea-urchin zero-shot performance"
+    ],
+    "required_report": [
+      "per-species precision recall F1 AP on DEV",
+      "macro and worst-species F1",
+      "CAL slope intercept threshold and selected epoch",
+      "threshold change relative to D_recalibrated",
+      "soft-gate route means by species",
+      "exact trainable parameter counts",
+      "source tile IDs and feature extraction contract",
+      "actual runtime and any interface failure"
+    ]
+  }
+}

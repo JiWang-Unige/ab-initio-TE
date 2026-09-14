@@ -15,7 +15,7 @@ stages:
       - id: bundle
         repository: &local_repo
           url: https://github.com/JiWang-Unige/ab-initio-TE.git
-          commit: "df78a8bb61183c0051313019af65e4c5c8994100"
+          commit: "b75ebfa93254579147ee44f12ba83c4d24838365"
           entrypoint: real_panel
     outputs:
       - id: data.bundle_manifest

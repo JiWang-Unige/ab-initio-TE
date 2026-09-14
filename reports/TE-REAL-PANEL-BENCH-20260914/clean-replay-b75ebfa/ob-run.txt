@@ -1,0 +1,18 @@
+Benchmark YAML file integrity check passed.
+
+Cached 1/1 repositories
+
+Resolved 2 modules
+Generated 3 rules in 6.5s in
+reports/TE-REAL-PANEL-BENCH-20260914/omni_clean_b75ebfa/Snakefile
+Running:
+/Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-venv/bin/snake
+make --snakefile Snakefile --cores 1 --scheduler greedy
+Log file:
+/Users/jiwang/Desktop/TE/ab-initio-TE/reports/TE-REAL-PANEL-BENCH-20260914/omni_
+clean_b75ebfa/.logs/snakemake_20260914_204100.log
+
+Completed 4 jobs successfully
+
+Benchmark run completed successfully.
+INFO:omnibenchmark:Benchmark run completed successfully.

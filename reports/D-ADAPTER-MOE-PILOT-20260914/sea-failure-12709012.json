@@ -1,0 +1,5 @@
+{
+  "error": "TRAIN selection has no callable bases",
+  "status": "failed",
+  "traceback": "Traceback (most recent call last):\n  File \"/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/D-ADAPTER-MOE-PILOT-20260914/sea_pilot.py\", line 426, in main\n    result = run(args.config, args.output_dir)\n  File \"/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/D-ADAPTER-MOE-PILOT-20260914/sea_pilot.py\", line 124, in run\n    trained = pilot.train_one_arm(\n  File \"/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/D-ADAPTER-MOE-PILOT-20260914/pilot.py\", line 491, in train_one_arm\n    raise RuntimeError(\"TRAIN selection has no callable bases\")\nRuntimeError: TRAIN selection has no callable bases\n"
+}

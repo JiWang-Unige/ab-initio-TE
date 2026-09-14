@@ -1,0 +1,69 @@
+{
+  "protocol": "SF5_BALANCED_REPLAY_20260914",
+  "status": "FIXED_BEFORE_INFERENCE",
+  "seed": 42,
+  "window": 4096,
+  "selection": {
+    "data_relpath": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/animal_sf5_w4096/test/data.jsonl.gz",
+    "legacy_scored_prefix_limit": 1200,
+    "species_order": [
+      "mouse",
+      "zebrafish",
+      "chicken",
+      "western_clawed_frog"
+    ],
+    "per_species_quota": 120,
+    "selected_windows": 480,
+    "old_scored_population": {
+      "mouse": 360,
+      "zebrafish": 360,
+      "chicken": 360,
+      "western_clawed_frog": 120,
+      "fruit_fly": 0,
+      "c_elegans": 0
+    },
+    "excluded_from_new_scoring": [
+      "fruit_fly",
+      "c_elegans",
+      "human",
+      "sealed_species"
+    ]
+  },
+  "model_paths": {
+    "SF5_base_pretrained_seed42": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_base_pretrained_seed42/best_model",
+    "SF5_binary_h0_seed42": "software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_binary_h0_seed42/best_model"
+  },
+  "outputs": {
+    "remote_relroot": "outputs/SF5-BALANCED-REPLAY-20260914",
+    "raw_predictions_policy": "retain only on Baobab; copy compact metrics and frozen selection manifest"
+  },
+  "resources": {
+    "partition": "shared-gpu",
+    "gpu": "nvidia_geforce_rtx_3090:1",
+    "cpus_per_task": 4,
+    "memory": "64G",
+    "time": "02:00:00"
+  },
+  "metric_contract": {
+    "labels": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "Unknown"
+    },
+    "confusion_orientation": "true rows, predicted columns",
+    "main4_macro_f1": "Mean of SINE/LINE/LTR/DNA F1, with each class F1 computed over all six-label valid positions; BG and Unknown errors contribute FP/FN",
+    "binary_material": "BG versus all five non-BG labels, including Unknown",
+    "raw_position_count": 1966080
+  },
+  "execution_policy": {
+    "inference_only": true,
+    "legacy_loader": "pipelines/PIPE-TEFM-LOCK-20260619/superfamily5_task.py:load_model",
+    "training_path_called": false,
+    "tokenization": "1 nt per token plus BOS/EOS; 4096 labeled positions from token indices 1..4096",
+    "new_validation": false,
+    "independent_validation": false
+  }
+}

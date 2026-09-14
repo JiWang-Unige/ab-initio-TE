@@ -1,0 +1,263 @@
+{
+  "arms": {
+    "D_recalibrated": {
+      "calibration": {
+        "platt_intercept": -0.8013121236793055,
+        "platt_slope": 0.723122305627303,
+        "threshold": 0.37406222572140657
+      },
+      "dev_per_species_bp_f1": {
+        "c_elegans": 0.83332466586926,
+        "chicken": 0.7566810465572301,
+        "human": 0.9096739564265954,
+        "mouse": 0.9547476292158928,
+        "pig": 0.8940963299155872,
+        "zebrafish": 0.9208031908775224
+      },
+      "dev_summary": {
+        "macro_boundary_f1_25bp": 0.3838994656546652,
+        "macro_bp_average_precision": 0.9440217104139776,
+        "macro_bp_f1": 0.8782211364770146,
+        "macro_bp_precision": 0.8768573251008771,
+        "macro_bp_recall": 0.8805940270898983,
+        "macro_segment_f1_iou_0_8": 0.44662915452004004,
+        "macro_short_prediction_rate": 0.37166462640264686,
+        "macro_split_rate": 0.09250494719828915,
+        "minimum_species_bp_f1": 0.7566810465572301
+      },
+      "selected_epoch": null,
+      "trainable_parameters": 0
+    },
+    "constant_average_experts": {
+      "calibration": {
+        "platt_intercept": -0.807866173330222,
+        "platt_slope": 0.7066405616836078,
+        "threshold": 0.3733743788268027
+      },
+      "dev_per_species_bp_f1": {
+        "c_elegans": 0.8350189305533945,
+        "chicken": 0.7562629602645295,
+        "human": 0.9095470933059345,
+        "mouse": 0.9546014100794569,
+        "pig": 0.8940305655941133,
+        "zebrafish": 0.9208760067614596
+      },
+      "dev_summary": {
+        "macro_boundary_f1_25bp": 0.38277486497631613,
+        "macro_bp_average_precision": 0.9439879894781904,
+        "macro_bp_f1": 0.8783894944264814,
+        "macro_bp_precision": 0.8765280911213821,
+        "macro_bp_recall": 0.8812026888181105,
+        "macro_segment_f1_iou_0_8": 0.44411948890848657,
+        "macro_short_prediction_rate": 0.37159397887998846,
+        "macro_split_rate": 0.08841089624298394,
+        "minimum_species_bp_f1": 0.7562629602645295
+      },
+      "route_statistics_dev": {
+        "c_elegans": {
+          "callable_bp_mass": 260664.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 43670
+        },
+        "chicken": {
+          "callable_bp_mass": 262144.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 43904
+        },
+        "human": {
+          "callable_bp_mass": 262042.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 43888
+        },
+        "mouse": {
+          "callable_bp_mass": 261886.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 43870
+        },
+        "pig": {
+          "callable_bp_mass": 262144.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 43904
+        },
+        "zebrafish": {
+          "callable_bp_mass": 261850.0,
+          "mean_expert_weight": [
+            0.5,
+            0.5
+          ],
+          "valid_token_count": 43858
+        }
+      },
+      "selected_epoch": 1,
+      "trainable_parameters": 65732
+    },
+    "dense_residual_adapter": {
+      "calibration": {
+        "platt_intercept": -0.8015253482428493,
+        "platt_slope": 0.7117133138844307,
+        "threshold": 0.37519681981444686
+      },
+      "dev_per_species_bp_f1": {
+        "c_elegans": 0.8340345956054231,
+        "chicken": 0.7562629602645295,
+        "human": 0.9096122437744297,
+        "mouse": 0.9545696191906285,
+        "pig": 0.8940329845531926,
+        "zebrafish": 0.9208926462360912
+      },
+      "dev_summary": {
+        "macro_boundary_f1_25bp": 0.3820543563632033,
+        "macro_bp_average_precision": 0.9440078589721494,
+        "macro_bp_f1": 0.8782341749373827,
+        "macro_bp_precision": 0.8767579226929483,
+        "macro_bp_recall": 0.8806901041145238,
+        "macro_segment_f1_iou_0_8": 0.4445245542861833,
+        "macro_short_prediction_rate": 0.3734513039833299,
+        "macro_split_rate": 0.08850022159450964,
+        "minimum_species_bp_f1": 0.7562629602645295
+      },
+      "selected_epoch": 1,
+      "trainable_parameters": 65730
+    },
+    "two_expert_soft_gate_residual_adapter": {
+      "calibration": {
+        "platt_intercept": -0.7906284874248555,
+        "platt_slope": 0.649435567810211,
+        "threshold": 0.34356372847493816
+      },
+      "dev_per_species_bp_f1": {
+        "c_elegans": 0.8380333090040475,
+        "chicken": 0.7623293396489272,
+        "human": 0.907440188331478,
+        "mouse": 0.9528123820309551,
+        "pig": 0.8918229609452262,
+        "zebrafish": 0.9216610563757316
+      },
+      "dev_summary": {
+        "macro_boundary_f1_25bp": 0.3452178421359111,
+        "macro_bp_average_precision": 0.9436589934459688,
+        "macro_bp_f1": 0.8790165393893944,
+        "macro_bp_precision": 0.8675675805845265,
+        "macro_bp_recall": 0.8912948290510747,
+        "macro_segment_f1_iou_0_8": 0.4016911089877692,
+        "macro_short_prediction_rate": 0.45574720105265315,
+        "macro_split_rate": 0.10862051888354397,
+        "minimum_species_bp_f1": 0.7623293396489272
+      },
+      "route_statistics_dev": {
+        "c_elegans": {
+          "callable_bp_mass": 260664.0,
+          "mean_expert_weight": [
+            0.9143586841482232,
+            0.08564131365706287
+          ],
+          "valid_token_count": 43670
+        },
+        "chicken": {
+          "callable_bp_mass": 262144.0,
+          "mean_expert_weight": [
+            0.9557553230829304,
+            0.04424467404885146
+          ],
+          "valid_token_count": 43904
+        },
+        "human": {
+          "callable_bp_mass": 262042.0,
+          "mean_expert_weight": [
+            0.535365412651228,
+            0.4646345871086668
+          ],
+          "valid_token_count": 43888
+        },
+        "mouse": {
+          "callable_bp_mass": 261886.0,
+          "mean_expert_weight": [
+            0.5694298168742832,
+            0.43057018236421474
+          ],
+          "valid_token_count": 43870
+        },
+        "pig": {
+          "callable_bp_mass": 262144.0,
+          "mean_expert_weight": [
+            0.7394566440972278,
+            0.26054335583681487
+          ],
+          "valid_token_count": 43904
+        },
+        "zebrafish": {
+          "callable_bp_mass": 261850.0,
+          "mean_expert_weight": [
+            0.3636486986637723,
+            0.636351300632789
+          ],
+          "valid_token_count": 43858
+        }
+      },
+      "selected_epoch": 10,
+      "trainable_parameters": 67782
+    }
+  },
+  "experiment": "D-ADAPTER-MOE-PILOT-20260914",
+  "feature_contract": {
+    "calibration": "shared six-species Platt and legacy global threshold",
+    "dev_touched_only_after_selected_epoch": true,
+    "hidden_size": 1024,
+    "kmer_bp": 6,
+    "projection": "legacy project_token_margins with stripped non-special token order",
+    "quality_unit": "bp",
+    "train_species_balance": "one source-order tile per species per step, both halves"
+  },
+  "historical_full_calibration": {
+    "bounded_dev_descriptive": {
+      "per_species_bp_f1": {
+        "c_elegans": 0.8282932559671075,
+        "chicken": 0.7509809496730168,
+        "human": 0.91026702881283,
+        "mouse": 0.9548466982791372,
+        "pig": 0.8946663612496256,
+        "zebrafish": 0.9228519333306135
+      },
+      "scope": "same bounded DEV tiles, original full-CAL parameters; descriptive baseline, no new fitting",
+      "summary": {
+        "macro_boundary_f1_25bp": 0.39121534937935265,
+        "macro_boundary_f1_5bp": 0.20074529233843139,
+        "macro_bp_average_precision": 0.9440217104139776,
+        "macro_bp_f1": 0.8769843712187217,
+        "macro_bp_precision": 0.8869841039531842,
+        "macro_bp_recall": 0.8685911084044017,
+        "macro_fragments_per_truth": 1.0465021337143072,
+        "macro_hardN_fp_rate": 0.062373211630123986,
+        "macro_missed_rate": 0.13368367290719466,
+        "macro_segment_f1_iou_0_8": 0.45463308304889877,
+        "macro_short_prediction_rate": 0.35138050426656126,
+        "macro_split_rate": 0.09750862345938811,
+        "minimum_species_bp_f1": 0.7509809496730168
+      }
+    },
+    "calibration_scope": "six-species-shared",
+    "fit_split": "CAL",
+    "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "platt_intercept": -0.8050313412075021,
+    "platt_slope": 0.6984053956932976,
+    "threshold": 0.42330056285498807
+  },
+  "job_id": "12708683",
+  "scientific_status": "exploratory_single_seed42_bounded_feature_head_pilot",
+  "status": "completed"
+}

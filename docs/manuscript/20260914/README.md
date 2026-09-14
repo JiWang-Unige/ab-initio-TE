@@ -4,7 +4,7 @@
 
 ## 第二轮进展
 
-**最新补充与收敛：** hg19匹配背景和严格序列对应已完成；≥80%新版TE覆盖在双边exact序列对中为FP13.88%、匹配TN10.84%，差异主要在旧TE边界邻接片段。检索重训显示6-mer+监督对比学习可达到top1 .6426，未支持冻结GLM优于训练后的基本特征。粗分类审计还发现旧1200窗口评分没有覆盖果蝇和线虫，已开始限定既有评分前缀内的平衡重放。MoE/adapter pilot与真实传统方法矩阵已启动，Tiberius仍在等待全量结果。完整现状以[本轮追加记录](../../experiments/DIRECTIONS-FOLLOWUP-20260914.md)、[最新英文结果段](results-addendum.md)和[新增可复现图](figures/followup-controls-captions.md)为准；下方保留此前推进过程，Pro原稿是历史审阅快照。
+**最新补充与收敛：** hg19匹配背景和严格序列对应已完成；≥80%新版TE覆盖在双边exact序列对中为FP13.88%、匹配TN10.84%，差异主要在旧TE边界邻接片段。检索重训显示6-mer+监督对比学习可达到top1 .6426，未支持冻结GLM优于训练后的基本特征。粗分类审计还发现旧1200窗口评分没有覆盖果蝇和线虫，已开始限定既有评分前缀内的平衡重放。MoE预测头pilot已完成：bp-F1只有极小增益，segment/边界指标下降，不支持据此扩大MoE；海胆适配另行推进。真实传统方法矩阵已启动，部分输出已通过GitHub固定提交的实际Omni重放，CPU/GPU同输入测速也已完成。Tiberius仍在等待全量结果。完整现状以[本轮追加记录](../../experiments/DIRECTIONS-FOLLOWUP-20260914.md)、[最新英文结果段](results-addendum.md)和[新增可复现图](figures/followup-controls-captions.md)为准；下方保留此前推进过程，Pro原稿是历史审阅快照。
 
 用户追加的八个方向已完成第二轮Pro讨论，并启动并行工程推进。最新入口是[并行实施记录](../../experiments/DIRECTIONS-EXECUTION-20260914.md)、[Pro第二轮完整可见正文](pro-round2-visible-response.txt)及[最终事实勘误](pro-round2-fact-correction.md)。后者修正内部CONF遗漏、TE_final恢复状态、hs1库版本和历史RC结果。新增训练统一单seed42，替代第一轮建议中的新增多seed；历史结果保留。
 
