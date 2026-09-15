@@ -26,7 +26,9 @@
 
 每个 native cell 16 CPUs、80 GB、最多 24 h，完整端到端阶段计时；所有失败、超时与缺失保留为状态而不是零分。模拟和真实各一套完整输入，共十个 native cells。模型 GPU 与 CPU 的完整特征/forward/合并成本分开报告，不能把 GPU forward 与传统全流程 CPU 时间直接排名。
 
-在正式 native 作业前将具体命令、版本、库范围和固定 GLM 写入配置。模拟原型库恰好与生成共用，是有利于参考方法的条件而非无偏新家族发现；据此限制结论，不声称合成胜出等于真实生物优势。
+在正式 native 作业前将具体命令、版本、库范围和固定 GLM 写入配置。模拟生成库与固定参考库均来自Dfam3.9，这是有利于参考方法的条件；据此限制结论，不把本模拟称为无偏新家族发现，也不声称合成胜出等于真实生物优势。
+
+实际条目覆盖已核实：生成用366个参考条目名称全部按Dfam精确NM及accession匹配到固定RM实际lineage库，无歧义或缺失。该计数包含LTR/内部区段独立记录及rRNA，不能等同于366个生物TE家族。accession匹配忽略末尾版本号，未宣称consensus逐碱基完全相同。详见[库覆盖结果](../../reports/TE-LONG-BENCH-20260915/library-exposure/RESULTS.md)。
 
 来源：[TE_Bench](https://github.com/hkania/TE_Bench)、[论文](https://link.springer.com/article/10.1186/s13100-026-00405-z)、[Dfam 3.9](https://www.dfam.org/releases/Dfam_3.9/families/)。
 

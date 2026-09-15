@@ -21,6 +21,16 @@ SPEC.loader.exec_module(CONTROL)
 
 
 class ControlContractTests(unittest.TestCase):
+    def test_cached_index_preserves_half_open_overlap(self) -> None:
+        intervals = [(2, 5), (10, 15), (20, 22)]
+        starts = [2, 10, 20]
+        covered = {bp for left, right in intervals for bp in range(left, right)}
+        for left in range(26):
+            for right in range(left + 1, 27):
+                expected = len(covered.intersection(range(left, right)))
+                self.assertEqual(CONTROL.overlap_bp(intervals, left, right), expected)
+                self.assertEqual(CONTROL.overlap_bp(intervals, left, right, starts), expected)
+
     def test_annotation_categories_keep_unknown_and_unrecognized_separate(self) -> None:
         self.assertEqual(CONTROL.annotation_category("SINE/Alu"), "TE")
         self.assertEqual(CONTROL.annotation_category("LINE/L1"), "TE")

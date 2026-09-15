@@ -312,11 +312,18 @@ def merge_intervals(intervals: Iterable[Tuple[int, int]]) -> List[Tuple[int, int
     return merged
 
 
-def overlap_bp(intervals: Sequence[Tuple[int, int]], start: int, end: int) -> int:
+def overlap_bp(
+    intervals: Sequence[Tuple[int, int]],
+    start: int,
+    end: int,
+    starts: Optional[Sequence[int]] = None,
+) -> int:
     if end <= start:
         raise ValueError("invalid query interval")
-    starts = [left for left, _ in intervals]
-    index = max(0, bisect.bisect_left(starts, start) - 1)
+    left_boundaries = starts if starts is not None else [left for left, _ in intervals]
+    if len(left_boundaries) != len(intervals):
+        raise ValueError("interval start index length does not match intervals")
+    index = max(0, bisect.bisect_left(left_boundaries, start) - 1)
     total = 0
     while index < len(intervals):
         left, right = intervals[index]
@@ -399,6 +406,7 @@ def support_record(
     panel_by_tile: Mapping[str, Mapping[str, str]],
     annotation: Mapping[str, Mapping[str, Sequence[Tuple[int, int]]]],
     old_union: Mapping[str, Sequence[Tuple[int, int]]],
+    old_starts: Optional[Mapping[str, Sequence[int]]] = None,
 ) -> dict:
     tile = panel_by_tile[row["tile_id"]]
     query = tile["query_id"]
@@ -406,6 +414,13 @@ def support_record(
     end = int(row["source_end_int"])
     relative_start = int(tile["center_offset0"]) + (start - int(tile["tile_start0"]))
     relative_end = relative_start + (end - start)
+    old_intervals = old_union[row["source_chrom"]]
+    old_overlap = overlap_bp(
+        old_intervals,
+        start,
+        end,
+        None if old_starts is None else old_starts.get(row["source_chrom"]),
+    )
     result = {
         "mapping_id": row["mapping_id"],
         "state": row["state"],
@@ -415,8 +430,8 @@ def support_record(
         "source_length": end - start,
         "tile_id": row["tile_id"],
         "mapping_status": row.get("mapping_status", ""),
-        "old_te_overlap_bp": overlap_bp(old_union[row["source_chrom"]], start, end),
-        "old_te_supported": overlap_bp(old_union[row["source_chrom"]], start, end) > 0,
+        "old_te_overlap_bp": old_overlap,
+        "old_te_supported": old_overlap > 0,
     }
     for category in CATEGORIES:
         amount = overlap_bp(annotation[query][category], relative_start, relative_end)
@@ -522,6 +537,7 @@ def score(config: Mapping[str, object], root: Path, panel_dir: Path, output: Pat
     by_tile = {row["tile_id"]: row for row in panel.values()}
     qualification = parse_qualification(resolve(root, str(config["interval_qualification"])), set(config["allowed_chromosomes"]))
     old_union = parse_old_union(resolve(root, str(config["old_comparator"])), set(config["allowed_chromosomes"]))
+    old_starts = {chrom: [left for left, _ in intervals] for chrom, intervals in old_union.items()}
     matches = parse_matches(resolve(root, str(config["matched_controls"])))
     all_records_by_library: Dict[str, List[dict]] = {}
     library_summaries: Dict[str, dict] = {}
@@ -535,7 +551,7 @@ def score(config: Mapping[str, object], root: Path, panel_dir: Path, output: Pat
         for row in qualification.values():
             if row["tile_id"] not in by_tile:
                 raise ValueError(f"qualification row references missing tile {row['tile_id']}")
-            records.append(support_record(row, by_tile, annotation, old_union))
+            records.append(support_record(row, by_tile, annotation, old_union, old_starts))
         records.sort(key=lambda row: str(row["mapping_id"]))
         all_records_by_library[label] = records
         write_interval_table(output / f"interval_support.{label}.tsv", records)
