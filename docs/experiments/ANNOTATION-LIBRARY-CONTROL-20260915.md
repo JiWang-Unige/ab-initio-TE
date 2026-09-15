@@ -28,6 +28,13 @@ consensus library:
    generated with `famdb.py families -a -d -c 9606` and
    `--include-class-in-name`.
 
+This compares two **library configurations**, not a pure release-date effect:
+the 2018 library is global and includes RepBase material, while the newer
+export is restricted to curated human-lineage Dfam families. Taxonomic scope,
+curation and database contents are inseparable in this contrast. Report
+library sensitivity without attributing it solely to newer annotation or to
+the one-consensus representation hypothesis.
+
 The old hg19 RepeatMasker comparator is used only to retain the pre-existing
 old-TE relation and to report the frozen denominator.  It is not treated as
 biological truth and is not an input to library selection.  The existing
@@ -105,6 +112,17 @@ are appended below after Slurm completion.  A failed run remains a preserved
 engineering result and is not silently replaced by a different engine or input
 context.
 
+Execution provenance is kept separate from the result claim.  Job `12732016`
+was the first serial `-pa4` implementation run. It was cancelled as a redundant
+attempt after byte-identical panel manifests were confirmed; its partial logs
+remain an engineering record, not a timing result. Job `12732075` is the main two-library run: it uses
+the same `-pa4` invocation for each library, with the two processes run in
+parallel on an 8-CPU node.  Jobs `12731953` and `12731964` are preserved
+startup/input-contract failures; they do not contribute annotations.
+
 ## Results
 
-_Pending Slurm execution._
+The library result remains pending until `12732075` and its dependent
+no-reuse score `12732397` have completed.  The independent source-only and
+protein layer is in
+[`reports/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/`](../../reports/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/).
