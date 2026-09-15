@@ -1,0 +1,18 @@
+{
+  "status": "RUNNING",
+  "species": "cow",
+  "core": {
+    "id": "c15",
+    "chrom": "NC_037334.1",
+    "chromosome": "7",
+    "index": 1,
+    "start": 71288495,
+    "end": 76288495,
+    "halo_start": 71188495,
+    "halo_end": 76388495,
+    "record_id": "NC_037334.1|base_mask_core=1|core=71288495-76288495|halo=71188495-76388495"
+  },
+  "slurm_job_id": "12737977",
+  "model": "frozen_P3_human",
+  "steps": []
+}

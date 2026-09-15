@@ -16,6 +16,8 @@ def portable_earlgrey(source):
     """Keep newest-directory semantics without GNU find's unsupported -printf."""
     old = 'latestStrainDir="$(find . -maxdepth 1 -type d -name "TS_${species}-families.fa_*" -printf \'%T@\\t%p\\n\' 2>/dev/null | sort -nr | head -n 1 | cut -f2-)"'
     new = 'latestStrainDir="$(python3 -c \'import glob,os,sys; print(max((p for p in glob.glob("TS_"+sys.argv[1]+"-families.fa_*") if os.path.isdir(p)), key=os.path.getmtime, default=""))\' "$species")"'
+    if source.count(new) == 1 and old not in source:
+        return source  # A preserved continuation already carries this exact patch.
     if source.count(old) != 1:
         raise ValueError('EarlGrey compatibility patch does not match installed source')
     return source.replace(old, new)
@@ -50,7 +52,8 @@ def run(args):
               'knowledge_condition': cfg['method_information']}
     if prior:
         status.update(resumed_from=str(args.resume_from.resolve()), prior_wall_seconds=prior_seconds,
-                      prior_steps=prior['steps'], timing_scope='original failed attempt plus copy and continuation; same total native budget')
+                      prior_steps=prior.get('prior_steps', []) + prior['steps'],
+                      timing_scope='all failed attempts plus copies and continuation; same total native budget')
     write(out / 'status.json', status)
 
     def command(name, argv, allow_nonzero=False):
@@ -80,9 +83,12 @@ def run(args):
             cmd += ['--bind', f'{runtime["famdb4"]}:/usr/local/share/RepeatMasker/Libraries/famdb:ro']
             if (work / 'earlGrey.compat.sh').exists():
                 cmd += ['--bind', f'{work / "earlGrey.compat.sh"}:/usr/local/bin/earlGrey:ro']
+            if (work / 'LTR_FINDER_parallel.compat').exists():
+                cmd += ['--bind', f'{work / "LTR_FINDER_parallel.compat"}:/usr/local/share/earlgrey-7.3.0-1/scripts/LTR_FINDER_parallel:ro']
         if which == 'edta':
             cmd += ['--bind', f'{runtime["edta_source"]}:/opt/edta230:ro']
-        return cmd + [str(runtime[which]), 'env', 'HOME=/work/home', 'TMPDIR=/work/tmp',
+        perl_env = ['PERL5LIB=/usr/local/share/RepeatMasker'] if which == 'earlgrey' else []
+        return cmd + [str(runtime[which]), 'env', 'HOME=/work/home', 'TMPDIR=/work/tmp', *perl_env,
                       'FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb',
                       f'OMP_NUM_THREADS={cfg["cpus"]}', *map(str, argv)]
 
@@ -171,7 +177,14 @@ def run(args):
             patched = portable_earlgrey((out / 'earlgrey_source.stdout').read_text())
             (work / 'earlGrey.compat.sh').write_text(patched)
             (work / 'earlGrey.compat.sh').chmod(0o755)
-            status['runtime_compatibility_fix'] = 'GNU find -printf replaced by Python mtime selection; biological stages and parameters unchanged'
+            command('ltr_finder_source', container('earlgrey', ['cat', '/usr/local/share/earlgrey-7.3.0-1/scripts/LTR_FINDER_parallel']))
+            ltr = (out / 'ltr_finder_source.stdout').read_text()
+            if not ltr.startswith(('#!/usr/bin/perl -w\n', '#!/usr/local/bin/perl -w\n')):
+                raise ValueError('unexpected LTR_FINDER_parallel interpreter declaration')
+            ltr = ltr.replace('#!/usr/bin/perl -w\n', '#!/usr/local/bin/perl -w\n', 1)
+            (work / 'LTR_FINDER_parallel.compat').write_text(ltr)
+            (work / 'LTR_FINDER_parallel.compat').chmod(0o755)
+            status['runtime_compatibility_fix'] = 'portable directory selection; actual Perl interpreter; RepeatMasker PERL5LIB; biological stages and parameters unchanged'
             command('earlgrey_help', container('earlgrey', ['earlGrey', '-h']))
             # Use EarlGrey's supported starting-library interface so its initial
             # reference information equals the fixed-RM arm, including uncurated entries.

@@ -1,0 +1,18 @@
+{
+  "status": "RUNNING",
+  "species": "cow",
+  "core": {
+    "id": "c16",
+    "chrom": "NC_037338.1",
+    "chromosome": "11",
+    "index": 0,
+    "start": 33160824,
+    "end": 38160824,
+    "halo_start": 33060824,
+    "halo_end": 38260824,
+    "record_id": "NC_037338.1|base_mask_core=0|core=33160824-38160824|halo=33060824-38260824"
+  },
+  "slurm_job_id": "12737978",
+  "model": "frozen_P3_human",
+  "steps": []
+}

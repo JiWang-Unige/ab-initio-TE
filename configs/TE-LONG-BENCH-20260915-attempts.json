@@ -6,8 +6,8 @@
       "fixed_rm": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-fixed_rm",
       "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm",
       "hite": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite",
-      "edta": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta",
-      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12735632/c_briggsae-earlgrey",
+      "edta": "outputs/TE-LONG-BENCH-20260915/native-12738345/c_briggsae-edta",
+      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12738271/c_briggsae-earlgrey",
       "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731957/c_briggsae",
       "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731959/c_briggsae"
     },
@@ -15,8 +15,8 @@
       "fixed_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-fixed_rm",
       "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm",
       "hite": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite",
-      "edta": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta",
-      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12735633/sim100-earlgrey",
+      "edta": "outputs/TE-LONG-BENCH-20260915/native-12738345/sim100-edta",
+      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12738272/sim100-earlgrey",
       "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731958/sim100",
       "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731960/sim100"
     }
@@ -53,6 +53,22 @@
     {
       "path": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-earlgrey",
       "reason": "Installed EarlGrey uses GNU find -printf, unavailable in its BusyBox image; exit 1 after completed refined library. Original work preserved; copied continuation uses portable equivalent directory selection and counts prior wall time against the unchanged 84600-second budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12735632/c_briggsae-earlgrey",
+      "reason": "Final RepeatMasker completed; merge failed because LTR_FINDER_parallel shebang points to absent /usr/bin/perl and rmOutToGFF3 lacks RepeatMasker module path. Resume preserved copy with /usr/local/bin/perl and PERL5LIB; all prior wall time remains in the same budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12735633/sim100-earlgrey",
+      "reason": "Final RepeatMasker completed; merge failed because LTR_FINDER_parallel shebang points to absent /usr/bin/perl and rmOutToGFF3 lacks RepeatMasker module path. Resume preserved copy with /usr/local/bin/perl and PERL5LIB; all prior wall time remains in the same budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta",
+      "reason": "TIR-Learner GRF split-ID parser rejects dotted accession IDs; unresolved chunk IDs cause FASTA KeyError before TIR completion. Copied recovery restores original coordinates and named pandas column access; unchanged total wall budget includes original failure."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta",
+      "reason": "TIR-Learner TIR/TSD check uses positional Series access incompatible with pandas 3.0.3 (KeyError: 0). Copied recovery uses named TIR_type column, preserves completed stages and original elapsed time within the same total budget."
     }
   ],
   "slurm_jobs": {
@@ -60,8 +76,8 @@
       "fixed_rm": "12732198_0",
       "rm2_rm": "12731966_1",
       "hite": "12731946_2",
-      "edta": "12731946_3",
-      "earlgrey": "12735632_4",
+      "edta": "12738345_0",
+      "earlgrey": "12738271_4",
       "D_gpu": "12731957",
       "D_cpu": "12731959"
     },
@@ -69,8 +85,8 @@
       "fixed_rm": "12731947_0",
       "rm2_rm": "12731947_1",
       "hite": "12731947_2",
-      "edta": "12731947_3",
-      "earlgrey": "12735633_4",
+      "edta": "12738345_1",
+      "earlgrey": "12738272_4",
       "D_gpu": "12731958",
       "D_cpu": "12731960"
     }

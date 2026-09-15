@@ -1,0 +1,20 @@
+{
+  "source_job": "12732214_1",
+  "source_path": "outputs/P3-TIBERIUS-EXTERNAL-20260915/prepared/platypus/preparation.json",
+  "species": "platypus",
+  "assembly": "GCF_004115215.2_mOrnAna1.pri.v4",
+  "status": "PREPARED_WITH_NATIVE_RM",
+  "complete_library_export": true,
+  "library": "Dfam3.9 complete lineage curated+uncurated",
+  "library_records": 1139,
+  "repeatmasker_version": "4.2.4",
+  "repeatmasker_canonical": "reference-dfam39-12732214/R.canonical.tsv",
+  "repeat_rows": 387011,
+  "canonical_file_total_lines": 387012,
+  "canonical_file_header_lines": 1,
+  "reference_loci": 639,
+  "curated_loci": 0,
+  "core_count": 20,
+  "core_bp": 100000000,
+  "halo_input_bp": 104000000
+}

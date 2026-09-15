@@ -43,3 +43,13 @@ CB4 `12732198_4` 与模拟 `12731947_4` 均在 TEstrainer 已生成精炼库后�
 `native.py` 对实际安装脚本的这一处目录选择替换为 Python 按目录修改时间选取，保持处理阶段、模型、库和参数不变。原始镜像与两次失败目录保留；续跑复制各自工作目录并复用已完成精炼库，不再运行发现和精炼阶段。CB4/模拟续跑为 `12735632_4` / `12735633_4`。截至恢复核查，两者均已进入最终 RepeatMasker 阶段，尚未形成最终 benchmark 结果。
 
 原失败耗时6359.03/7942.04秒从84600秒总预算扣除，复制及续跑耗时继续计入；`wall_seconds` 报原尝试加续跑总时间，另存 `attempt_wall_seconds`。这是有失败恢复记录的全流程成本，不能伪称一次无中断运行的耗时。最终评分12732389已实际更新为等待全部14个选定cell终态，旧失败记录仍在attempts配置。详见[恢复记录](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/RECOVERY.md)。
+
+后续两项EarlGrey完成最终RM后，因LTR_FINDER_parallel错误的Perl解释器路径及rmOutToGFF3缺少PERL5LIB在merge阶段失败。再次复制保留结果后，只修复这两个运行环境问题，续跑12738271_4/12738272_4；先前累计8120.87/8786.05秒仍计入原预算。尚不据此声称native比较已全部完成。
+
+两项EarlGrey续跑现已COMPLETED且最终坐标输出合格：CB4全部108384165bp，sim100全部100000000bp；累计wall分别8725.85s/9014.24s。行数和实际计时见恢复报告，准确性仍等待完整benchmark评分。
+
+## EDTA TIR-Learner compatibility recovery
+
+原CB4 12731946_3在TIR-Learner序列提取时因带点accession的split ID未被解析，导致原基因组FASTA查找失败；sim100 12731947_3在pandas 3下因Series位置索引 `x[0]` 变为标签索引而失败。两者不是生物学无候选或零分。`edta_recovery.py` 对原镜像的三处源码实施兼容补丁：split ID识别、分段坐标还原以及按 `TIR_type` 列读取。源码匹配、坐标边界oracle与语法检查已执行，原始镜像和失败目录保留。
+
+恢复12738345_[0,1]在复制的工作目录使用EDTA `--overwrite 0`，保持sensitive/anno设置、输入和原模型，复用已完成阶段。16CPU/80GB、E5-2630V4；原耗时31097.63/14614.03秒及复制/续跑仍共同计入84600秒预算。待完整输出与坐标资格核实后计分，不因恢复运行而宣布完成。详见[EDTA诊断](../../reports/TE-LONG-BENCH-20260915/edta-recovery/DIAGNOSIS.md)。

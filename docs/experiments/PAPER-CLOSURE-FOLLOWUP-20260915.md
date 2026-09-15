@@ -12,7 +12,7 @@
 
 ## 当前执行图
 
-**最近核实，2026-09-15 15:08 UTC：** SSH已恢复，本轮使用任务专用控制连接 `/tmp/te-closure-baobab.sock` 复用会话（10分钟空闲保留；过期后可重新建立，不修改用户SSH配置）。库控制两项评分及SF5完整评价均已收回并完成解释；连同先前NTv2六臂，前三项补实验已收敛。Tiberius和EarlGrey已完成实际接口修复、保留失败并提交原协议重试，尚无两方向最终科学比较。下表为该时点实际状态。
+**最近核实，2026-09-15 20:39 UTC：** SSH恢复且实际连接正常，使用任务专用控制连接 `/tmp/te-closure-baobab.sock`。前三项补实验已收敛，不重复训练或评分。Tiberius两物种smoke的五臂均完成；full完成cow c00–c14后被UID 0取消，保留结果并只恢复24个缺失core。EarlGrey两输入已完成最终输出资格化，两项CPU推理也已完成。EDTA已定位真实运行错误并提交12738345_[0,1]，均运行中；最终比较尚未完成。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
@@ -21,15 +21,15 @@
 | NTv2 label-free | 12732191完成41分33秒；权重核查12733074完成；旧尝试保留 | 六臂已完整评价：适配transductive ARI小幅增，但NMI和inductive ARI较冻结NTv2下降，不能称稳定提升；本项闭合，见独立RESULTS.md |
 | SF5 ontology | train/eval及legacy12731987已COMPLETED（3h55m09s），结果本地收回 | 5400/1440/2160完整六物种；TEST材料F1=0.884305，main4 macro=0.833687；状态/物种差异明显，无稳定整体提升，见RESULTS.md |
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
-| Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条、219080 repeat rows；platypus实际manifest仍需收取核实 |
-| Tiberius smoke | 原12732021两项FAILED保留；重试12735505_0运行、_20等资源 | 根因是源码bind遮蔽镜像checkpoint嵌套目标；目标目录修复并实际挂载验证，尚非Tiberius阳性/阴性结果 |
-| Tiberius full | 12732547_[0–39%2]已实际更新afterok12735505，PENDING Dependency | 保留两物种五arm全部合格才扩展条件；已合格smoke复用 |
-| Tiberius score | 12732548，afterok12732547 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
+| Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条/219080 repeat rows；platypus已核实1139条/387011 repeat rows，manifest PREPARED_WITH_NATIVE_RM |
+| Tiberius smoke | 原12732021失败保留；12735505_0和_20均COMPLETED（36m38s/34m46s） | 两物种五arm均合格；checkpoint bind修复实际通过 |
+| Tiberius full | 原12732547完成cow c00–c14；复用platypus c00后合计16core/80cell；缺失24core恢复12738295_[15–19,21–39%2]等资源 | UID 0取消原因未公开，无模型失败证据；部分输出保留，未重跑完整core |
+| Tiberius score | 12732548，afterok12738295 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
-| native方法 | 两输入固定RM/HiTE/RM2均完成；EDTA两项运行；EarlGrey续跑12735632_4/12735633_4运行，已进入最终RM | GNU find/BusyBox兼容性已复现修复，复用精炼库；原失败耗时计入相同总预算，不是一次无中断计时 |
-| 固定D | 两项GPU已完成：CB4 3952.27s/P100、sim 3029.51s/TITAN X；CPU12731959/12731960均运行 | 全部108384165/100000000bp实际处理；GPU硬件不同，CPU/native未齐前不形成速度排名 |
-| 长输入评分 | 12732389，afterany所有上述native和D作业 | `outputs/TE-LONG-BENCH-20260915/score-12732389/result.json`；Slurm终态进入完整14cell分母 |
+| native方法 | 两输入固定RM/HiTE/RM2已完成；EarlGrey12738271_4/12738272_4均COMPLETED；EDTA原两项FAILED保留，恢复12738345_[0,1]均RUNNING | EarlGrey修复Perl路径/模块后合格，累计耗时8725.85s/9014.24s包括失败及续跑；EDTA恢复见下文 |
+| 固定D | 两GPU完成；CPU CB4 12731959 COMPLETED（Slurm 7h15m16s；实测26112.05s）；sim CPU12731960 COMPLETED（Slurm 6h37m45s；实测23861.16s） | CB4全部108384165bp/367序列；CPU E5-2630v4、16线程；GPU硬件不同，完整分母齐前不排名 |
+| 长输入评分 | 12732389已解除hold，afterany12738345；其余选定12cell已核实全部COMPLETED | `outputs/TE-LONG-BENCH-20260915/score-12732389/result.json`；失败进入完整分母，不提前选完成方法评分 |
 | 模拟库条目覆盖 | 已收回12733209结果；本地计数核对通过 | 366/366生成条目名称被实际固定RM库覆盖；包含非TE条目，不用于声称新家族发现 |
 
 ## 真实失败与修正
@@ -40,7 +40,7 @@
 - native EDTA 在 CB4 LTR 阶段出现空候选文件警告但继续执行；最终必须结合完整输出检查它是无候选还是实际未完成，不能只凭进程exit0认可科学输出。
 - 库控制旧评分循环重复为chr级旧注释union构建starts数组，并重复计算同一overlap。已缓存该索引并复用单次结果，独立逐碱基集合oracle验证半开区间语义不变；12732075仅在评分阶段超时，修复后仅对现有结果重评分。
 
-上述库评分修复已部署并完成；新旧legacy区间表逐字一致，两份native注释未重跑。Tiberius失败保留于 `run-r1-failed-12732021`，恢复细节见该方向 `SMOKE-RECOVERY-12735505.md`。EarlGrey原失败工作目录未覆盖，新目录复制后续跑；`native.py --resume-from`仅用于已确认的库汇总中断，最终评分12732389已更新等待两续跑及其余选定cell，完整14分母不变。
+上述库评分修复已部署并完成；新旧legacy区间表逐字一致，两份native注释未重跑。Tiberius失败保留于 `run-r1-failed-12732021`，恢复细节见该方向 `SMOKE-RECOVERY-12735505.md`。EarlGrey原失败工作目录未覆盖，新目录复制后续跑；`native.py --resume-from`用于已确认的EarlGrey兼容性中断。第二次修复仅涉及Perl解释器和模块路径，现两输入均完成；全部失败及续跑耗时计入相同预算，完整14分母不变。
 
 SF5报告修正了一个解释问题：三个status的one-vs-rest TP之和不是合并Unknown的精确TP，状态间错分在合并后会成为TP。目前JSON可给出status精确标签micro F1及二值合并F1下界，不能假造未保存的联合混淆矩阵。未新增训练、模型选择或测试集调优。
 
@@ -54,3 +54,11 @@ SF5报告修正了一个解释问题：三个status的one-vs-rest TP之和不是
 5. 将compact结果、限制、正文/补充材料定位与用户五项问题的结论写入研究文档；原始序列、概率数组、权重留远程。提交并推送到既有GitHub。没有完整结果时保持RUNNING/PARTIAL，不写“论文已闭合”。
 
 若计算跨本次交互，沿用已有TE跟进任务，正常运行或状态未变时静默，仅对完成、真实失败、结论变化或用户决策通知。全部已授权结果处理和推送完成后暂停跟进。
+
+## 本次恢复补充
+
+Tiberius full的UID 0取消记录没有披露管理员/控制器的具体原因，不推断为模型失败或用户取消。cow c15/c16部分输出完整保留到 `run-r1-cancelled-12732547`。先前恢复12738275包含已完成index20，所有任务均在执行前取消，改为精确缺失集合12738295；见 [full恢复报告](../../reports/P3-TIBERIUS-EXTERNAL-20260915/FULL-RECOVERY-12738275.md)。
+
+EarlGrey在最终RepeatMasker后遇到缺失 `/usr/bin/perl` 及RepeatMasker Perl模块目录问题，已在复制的工作目录中修复并完成。原始失败输出、阶段计时及最终状态均保留，见 [EarlGrey报告](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/RECOVERY.md)。CB4完整CPU计时与节点硬件证据见 [CPU报告](../../reports/TE-LONG-BENCH-20260915/cpu-completed/RESULTS.md)。
+
+EDTA原CB4在TIR-Learner的分段ID/坐标还原处失败，sim100因pandas 3的Series索引语义失败。三处源码兼容补丁在原镜像源码上验证，并做分段坐标oracle；恢复12738345_[0,1]使用同E5-2630V4、16CPU/80GB，复制原工作目录并以overwrite0复用已完成阶段，原耗时31097.63s/14614.03s从84600s预算扣除。原失败和具体修复见 [EDTA诊断](../../reports/TE-LONG-BENCH-20260915/edta-recovery/DIAGNOSIS.md)。attempts已同步远程；12732389已解除hold，等待剩余两项EDTA终态后按完整14cell固定评分。

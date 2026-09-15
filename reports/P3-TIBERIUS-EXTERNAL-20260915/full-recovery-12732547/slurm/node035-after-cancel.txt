@@ -1,0 +1,31 @@
+NodeName=gpu035 Arch=x86_64 CoresPerSocket=16
+   CPUAlloc=16 CPUEfctv=126 CPUTot=128 CPULoad=0.14
+   AvailableFeatures=EPYC-7742,V8,COMPUTE_CAPABILITY_8_6,COMPUTE_TYPE_AMPERE,nvidia_geforce_rtx_3090
+   ActiveFeatures=EPYC-7742,V8,COMPUTE_CAPABILITY_8_6,COMPUTE_TYPE_AMPERE,nvidia_geforce_rtx_3090
+   Gres=gpu:nvidia_geforce_rtx_3090:8(S:1-3,5-7),VramPerGpu:no_consume:24G
+   NodeAddr=gpu035 NodeHostName=gpu035 Version=26.05.2
+   OS=Linux 5.14.0-687.39.1.el9_8.x86_64 #1 SMP PREEMPT_DYNAMIC Thu Aug 13 13:06:27 UTC 2026
+   RealMemory=503000 AllocMem=32768 FreeMem=318637 Sockets=8 Boards=1
+   CoreSpecCount=2 CPUSpecList=111,127
+   State=MIXED+PLANNED ThreadsPerCore=1 TmpDisk=1758000 Weight=5 Owner=N/A MCS_label=N/A
+   Partitions=private-teodoro-gpu,shared-gpu
+   BootTime=2026-08-28T11:24:48 SlurmdStartTime=2026-09-04T16:10:16
+   LastBusyTime=2026-09-15T22:01:01 ResumeAfterTime=None SuspendTime=INFINITE
+   CfgTRES=cpu=126,mem=503000M,billing=296,gres/gpu=8,gres/gpu:nvidia_geforce_rtx_3090=8
+   AllocTRES=cpu=16,mem=32G,gres/gpu=8,gres/gpu:nvidia_geforce_rtx_3090=8
+   CurrentWatts=n/a AveWatts=n/a
+
+===sinfo-R===
+REASON               USER      TIMESTAMP           NODELIST
+issue-1233 : Not res slurm     2026-08-05T21:43:26 cpu242
+Prolog error         slurm     2026-09-11T08:51:33 cpu313
+issue-7484           root      2026-09-07T09:02:58 cpu308
+issue-7188           root      2026-08-06T14:52:47 cpu087
+Not responding       slurm     2026-09-03T10:40:47 cpu[226-229],gpu008
+Not responding       slurm     2026-09-13T11:45:42 cpu334
+issue-7188           root      2026-08-06T15:00:38 cpu269
+issue-7478           root      2026-08-28T13:21:54 cpu336
+Not responding       slurm     2026-09-07T17:15:39 cpu352
+Kill task failed (Jo root      2026-09-10T02:43:03 gpu019
+health_cuda___GPU_br root      2026-09-09T11:50:50 gpu021
+issue-7369 : Not res slurm     2026-08-05T21:43:31 gpu015

@@ -1,0 +1,313 @@
+2026-09-15 21:59:38.672296: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:485] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2026-09-15 21:59:38.873869: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:8473] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2026-09-15 21:59:38.927943: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1471] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2026-09-15 21:59:40.170575: I tensorflow/core/platform/cpu_feature_guard.cc:211] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-09-15 22:00:12,012 - Model Config File: /opt/Tiberius/model_cfg/mammalia_softmasking_v2.yaml
+2026-09-15 22:00:12,023 - Using existing model weights file at /opt/Tiberius/tiberius/../model_weights/tiberius_weights_v2 .
+2026-09-15 22:00:12,023 -
+2026-09-15 22:00:15.085819: I tensorflow/core/common_runtime/gpu/gpu_device.cc:2021] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 21719 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 3090, pci bus id: 0000:41:00.0, compute capability: 8.6
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+2026-09-15 22:00:21.813891: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:531] Loaded cuDNN version 90701
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1789502423.947487  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.657513  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.742253  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.743000  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.743393  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.743832  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.744288  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.744997  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.816900  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.947072  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502424.983477  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502425.530919  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502425.628233  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502425.653763  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.352768  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.392083  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.393285  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.393771  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.395335  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.557391  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502426.949585  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502427.302467  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502427.302914  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502427.303464  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502427.304019  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502428.847239  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502428.847821  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+'+ptx85' is not a recognized feature for this target (ignoring feature)
+W0000 00:00:1789502429.795826  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.800082  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.804101  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.808114  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.812198  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.818608  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.884429  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.889124  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.893451  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.898545  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.904425  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.908806  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.914338  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.920243  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.924279  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.928217  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.932631  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.943083  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.947690  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.954761  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.960816  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.968472  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502429.989261  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.011018  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.015223  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.022857  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.027635  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.035616  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.043705  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.053737  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.064522  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.084418  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.094338  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.098706  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.103080  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.107520  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.112457  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.117208  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.122105  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.126657  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.131990  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.138212  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.142795  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.148537  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.154563  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.158690  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.162719  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.167250  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.174126  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.178781  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.186012  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.192181  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.199962  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.221369  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.243672  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.247944  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.255851  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.260760  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.269015  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.277058  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.286927  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502430.297814  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.118381  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.119110  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.119704  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.120380  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.120756  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.121167  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.121594  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.122246  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.123179  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.123680  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.124491  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.124829  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.125193  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.125525  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.126661  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.127854  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.128920  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.129335  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.130398  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.130787  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.131672  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.133366  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.133748  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.134225  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.134699  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.135894  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502435.136319  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.337010  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.337744  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.338341  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.339024  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.339399  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.339812  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.340240  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.340897  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.341831  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.342341  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.343150  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.343490  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.343856  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.344190  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.345325  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.346518  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.347577  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.347995  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.349060  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.349451  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.350336  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.352030  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.352413  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.352895  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.353371  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.354565  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502437.354995  722161 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.554110  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.554839  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.555436  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.556123  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.556495  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.556901  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.557329  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.557988  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.558921  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.559427  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.560241  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.560580  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.560945  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.561279  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.562415  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.563607  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.564669  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.565083  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.566147  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.566537  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.567418  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.569108  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.569495  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.569972  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.570454  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.571645  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced
+W0000 00:00:1789502439.572072  722162 gpu_timer.cc:114] Skipping the delay kernel, measurement accuracy will be reduced

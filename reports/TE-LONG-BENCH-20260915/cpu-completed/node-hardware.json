@@ -1,0 +1,59 @@
+{
+  "source": "scontrol show node; metadata snapshot after runs, not per-process measured hardware",
+  "nodes": [
+    {
+      "NodeName": "cpu238",
+      "Arch": "x86_64",
+      "Sockets": "2",
+      "CoresPerSocket": "10",
+      "ThreadsPerCore": "1",
+      "AvailableFeatures": "E5-2630V4,V6",
+      "RealMemory": "94000"
+    },
+    {
+      "NodeName": "cpu239",
+      "Arch": "x86_64",
+      "Sockets": "2",
+      "CoresPerSocket": "10",
+      "ThreadsPerCore": "1",
+      "AvailableFeatures": "E5-2630V4,V6",
+      "RealMemory": "94000"
+    },
+    {
+      "NodeName": "cpu240",
+      "Arch": "x86_64",
+      "Sockets": "2",
+      "CoresPerSocket": "10",
+      "ThreadsPerCore": "1",
+      "AvailableFeatures": "E5-2630V4,V6",
+      "RealMemory": "94000"
+    },
+    {
+      "NodeName": "cpu241",
+      "Arch": "x86_64",
+      "Sockets": "2",
+      "CoresPerSocket": "10",
+      "ThreadsPerCore": "1",
+      "AvailableFeatures": "E5-2630V4,V6",
+      "RealMemory": "94000"
+    },
+    {
+      "NodeName": "cpu243",
+      "Arch": "x86_64",
+      "Sockets": "2",
+      "CoresPerSocket": "10",
+      "ThreadsPerCore": "1",
+      "AvailableFeatures": "E5-2630V4,V6",
+      "RealMemory": "94000"
+    },
+    {
+      "NodeName": "cpu244",
+      "Arch": "x86_64",
+      "Sockets": "2",
+      "CoresPerSocket": "10",
+      "ThreadsPerCore": "1",
+      "AvailableFeatures": "E5-2630V4,V6",
+      "RealMemory": "94000"
+    }
+  ]
+}

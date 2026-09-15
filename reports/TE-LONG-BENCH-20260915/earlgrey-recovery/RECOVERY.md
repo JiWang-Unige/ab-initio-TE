@@ -16,3 +16,19 @@ Each continuation copies the preserved original work tree inside its Slurm alloc
 The unchanged 84600-second native budget includes original wall time, work-tree copying and continuation. `status.json` retains original steps and prior wall time, adds continuation wall time separately, and reports their sum as the cell's `wall_seconds`. These are interrupted workflow costs with disclosed engineering recovery, not an uninterrupted fresh-run timing claim. The original failed status files are retained here; sequence, libraries and raw outputs remain on Baobab.
 
 This repair supplies no accuracy result. Final output qualification and the complete 14-cell comparison remain pending. Final scoring job 12732389 was updated to wait on both continuation jobs and every other selected cell.
+
+## Second compatibility failure after final masking
+
+At the next live check, 12735632_4 and 12735633_4 had finished final RepeatMasker annotation but failed at merging (exit2). Their cumulative wall times were 8120.870137 and 8786.049792 seconds. The original and continuation artifacts remain preserved.
+
+Two concrete failures were visible in the native logs: `LTR_FINDER_parallel` declared `/usr/bin/perl`, which is absent in the image (the installed interpreter is `/usr/local/bin/perl`), and `rmOutToGFF3.pl` could not find `CrossmatchSearchEngine.pm`. The latter made an empty GFF, causing the subsequent RepeatCraft and R failures. The bundled LTR_FINDER binary itself successfully displayed its native help; invoking the Perl scripts with the existing interpreter/module path passed their syntax checks.
+
+The next copied continuations, 12738271_4 (CB4) and 12738272_4 (sim100), retain final RepeatMasker outputs. Only the LTR_FINDER_parallel shebang and the `PERL5LIB=/usr/local/share/RepeatMasker` environment were repaired. Runtime source patches remain local copies bound into the unchanged image; prior patch application is recognized when resuming its preserved work tree. Logs confirm actual LTR_FINDER execution and, for sim100, progression through RepeatCraft to overlap resolution. No biological threshold or model was changed.
+
+All earlier elapsed time remains included in each cell's original 84600-second budget and cumulative wall-time result. The complete step history is retained across continuations. These jobs still require final output qualification; an intermediate successful stage is not a benchmark result.
+
+## Qualified completion
+
+The final continuations both completed with exit 0 and nonempty, coordinate-qualified canonical outputs. CB4 job `12738271_4` processed all 108,384,165 bp in 367 sequences and produced 164,463 native GFF rows; sim100 job `12738272_4` processed all 100,000,000 bp and produced 35,363 rows. These are output row counts before the common TE/non-TE scoring filter, not measures of accuracy.
+
+Cumulative workflow wall times are 8725.850726 seconds for CB4 and 9014.238390 seconds for sim100, including their failed attempts and copies. The final continuation alone took 604.980589 and 228.188598 seconds, respectively. Both remain within the original 84600-second budget. The corresponding completed status JSON files are included in this directory. Actual method accuracy comparisons wait for the complete benchmark scoring bundle.

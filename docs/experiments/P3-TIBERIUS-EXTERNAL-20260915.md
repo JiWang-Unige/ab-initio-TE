@@ -36,7 +36,7 @@
 
 准备12732000识别到 Dfam4 导出忽略缺失 uncurated 分区却返回exit0。原注释保留为不完整库尝试，不用于本批五臂比较。12732197首次修复缺少引擎启动所需库路径挂载而失败，12732214在相同40个core重新运行完整 Dfam3.9 lineage curated+uncurated + RepeatMasker4.2.4；`run_core.py`要求 `complete_library_export=true` 后才允许推理。原始参考基因和区域几何均不改变。
 
-执行依赖为 reference12732214 → 两core smoke → 全40core12732547 → 全200cell评分12732548。原 smoke 作业 12732021 已失败并保留；恢复重试为 12735505_[0,20]。full 12732547 已实际更新为 `afterok:12735505`，score 12732548 继续依赖 full。后两级只在前级全部成功后启动；full runner 同时检查两份 smoke 五臂资格。已完成 smoke 可复用。P3 导出后释放 PyTorch 未使用的 GPU 缓存，再启动同 GPU 的 TensorFlow 子进程，模型与阈值不变。
+执行依赖为 reference12732214 → 两core smoke → 全40core12732547 → 全200cell评分12732548。原 smoke 作业 12732021 已失败并保留；修复后的 smoke 重试为 `12735505_[0,20]`，两 cell 均已完成且五臂均成功。原 full 作业 12732547 的 cow c00--c14 已完成，c15/c16 在 2026-09-15 集群本地时间 22:01 以外部 UID 0 取消，c17--c19 及 platypus c01--c19 未启动；取消记录未说明是管理员动作还是控制器事件，不能解释为科学失败。c15/c16 部分目录已原样保留。已完成 platypus c00 smoke 复用，不按 full 数组编号重跑。针对实际缺失的 24 个 core，恢复作业为 `12738295_[15-19,21-39%2]`；score 12732548 已更新为 `afterok:12738295`。由于已完成 smoke 的子作业依赖不再被 Slurm 接受，恢复 array 在核实两份 smoke 五臂资格后提交，但 `TE_REQUIRE_SMOKE=1` 仍由 full runner 硬性检查。后两级只在前级全部成功后启动；P3 导出后释放 PyTorch 未使用的 GPU 缓存，再启动同 GPU 的 TensorFlow 子进程，模型与阈值不变。
 
 ## Smoke 故障与有界恢复记录（2026-09-15）
 
@@ -50,4 +50,4 @@ FATAL: container creation failed: mount hook function failure: mount .../tiberiu
 
 失败 cell 的完整目录保留在 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1-failed-12732021/{cow,platypus}/c00`，原 `run-r1` 路径未用失败文件覆盖。修复仅在启动容器前确保 checkout 中的 `model_weights/tiberius_nosm_weights_v2` 目录存在；staged 官方 `weights.h5` 仍绑定到原定的 `/opt/Tiberius/model_weights/tiberius_nosm_weights_v2`。在 Baobab 上用同一镜像和两个 bind 做了无模型轻量验证，容器内 checkpoint 文件可见。
 
-在相同输入、固定 P3 checkpoint、Tiberius checkpoint、阈值、GPU/CPU/内存及 6 小时预算下，重试作业为 `12735505_[0,20]`。恢复时该作业等待 3090 资源，尚未产生科学结果；两物种的五臂 smoke 仍须全部完成并通过输入观察与 GTF/GFF3 一致性检查，才可放行 full。
+在相同输入、固定 P3 checkpoint、Tiberius checkpoint、阈值、GPU/CPU/内存及 6 小时预算下，重试作业 `12735505_[0,20]` 已完成；cow 与 platypus 两个 smoke cell 均通过输入观察、GTF/GFF3 一致性检查，且各自五臂均 exit 0。原 full 中断的 c15/c16 部分输出已保留；其余实际缺失的 24 个 core 由 `12738295_[15-19,21-39%2]` 补跑。未完成所有固定 core 和输入资格检查前不运行评分。
