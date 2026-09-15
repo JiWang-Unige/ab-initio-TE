@@ -1,0 +1,46 @@
+{
+  "protocol": "TE-LONG-BENCH-20260915",
+  "cpus": 16,
+  "memory_gb": 80,
+  "native_timeout_seconds": 84600,
+  "seed": 42,
+  "datasets": {
+    "sim100": {
+      "input": "software_outputs/TE-LONG-BENCH-20260915/sim100-12731886/sim100.input.fa",
+      "taxid": 7227,
+      "truth": "software_outputs/TE-LONG-BENCH-20260915/sim100-12731886/sim100.truth.tsv",
+      "scope": "synthetic_material"
+    },
+    "c_briggsae": {
+      "input": "software_outputs/TE-LONG-BENCH-20260915/c_briggsae/panel.fa",
+      "taxid": 6238,
+      "scope": "external_whole_genome_reference_positive_recall_only",
+      "source_fasta": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCA_000004555.3_CB4_genomic.fna.gz",
+      "label_out": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12522308-2/annotation/assembly.fa.out"
+    }
+  },
+  "native_methods": [
+    "fixed_rm",
+    "rm2_rm",
+    "hite",
+    "edta",
+    "earlgrey"
+  ],
+  "runtimes": {
+    "hite": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+    "rm2": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+    "rm": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+    "famdb4": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2",
+    "famdb3": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions",
+    "famdb_cli": "software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-1/RepeatMasker/famdb.py",
+    "edta": "container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+    "earlgrey": "container_candidates/E1B2R2-EARLGREY-ACQUIRE-20260809A/earlgrey_7_3_0.sif",
+    "edta_source": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0"
+  },
+  "fixed_library": "Dfam3.9 complete installed partitions, taxon ancestors+descendants curated and uncurated; same explicit library for fixed RM and EarlGrey initial mask",
+  "method_information": "Reference-assisted RM and EarlGrey separated from de novo discovery workflows; report bundled classifier and protein evidence per tool; no generated truth supplied to any caller.",
+  "fixed_D_config": "scripts/experiments/D-EXTERNAL-RC0-20260914/config/panel.json",
+  "D_mode": "existing forward only, 4096 windows, existing six-species calibration, no refit",
+  "D_batch_size": 12,
+  "classifier_library_scope": "RM2/EarlGrey native Dfam4.0 curated component; uncurated Dfam4 partitions are absent and not claimed as available. HiTE/EDTA bundled classifier information retained separately."
+}

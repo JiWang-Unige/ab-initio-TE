@@ -1,0 +1,70 @@
+{
+  "protocol": "TE-LONG-BENCH-20260915",
+  "selected_attempt_rule": "Use the stated engineering-corrected run; selection never uses accuracy.",
+  "datasets": {
+    "c_briggsae": {
+      "fixed_rm": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-fixed_rm",
+      "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm",
+      "hite": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite",
+      "edta": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta",
+      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-earlgrey",
+      "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731957/c_briggsae",
+      "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731959/c_briggsae"
+    },
+    "sim100": {
+      "fixed_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-fixed_rm",
+      "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm",
+      "hite": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite",
+      "edta": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta",
+      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-earlgrey",
+      "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731958/sim100",
+      "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731960/sim100"
+    }
+  },
+  "failed_engineering_attempts": [
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-fixed_rm",
+      "reason": "RepeatMasker -version prints version but rejects option; changed probe to supported -help before annotation"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-rm2_rm",
+      "reason": "Same unsupported RepeatMasker version probe; no discovery had begun"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-earlgrey",
+      "reason": "EarlGrey taxon library lookup uses a different container path; failed before masking"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-earlgrey",
+      "reason": "Environment variable did not override EarlGrey derived library path. Added actual required bind and supported -l same-lineage library, making reference information explicit and equal to fixed RM; no prior annotation results existed"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-fixed_rm",
+      "reason": "Completed native annotation but Dfam4 export omitted uncurated partitions with exit0; this is an incomplete-reference attempt, excluded from planned full-library comparison"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12732043/c_briggsae-earlgrey",
+      "reason": "Stopped before completion after detecting same incomplete Dfam4 initial library; replaced by complete Dfam3.9 library for both reference-assisted arms"
+    }
+  ],
+  "slurm_jobs": {
+    "c_briggsae": {
+      "fixed_rm": "12732198_0",
+      "rm2_rm": "12731966_1",
+      "hite": "12731946_2",
+      "edta": "12731946_3",
+      "earlgrey": "12732198_4",
+      "D_gpu": "12731957",
+      "D_cpu": "12731959"
+    },
+    "sim100": {
+      "fixed_rm": "12731947_0",
+      "rm2_rm": "12731947_1",
+      "hite": "12731947_2",
+      "edta": "12731947_3",
+      "earlgrey": "12731947_4",
+      "D_gpu": "12731958",
+      "D_cpu": "12731960"
+    }
+  }
+}

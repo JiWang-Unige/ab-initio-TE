@@ -4,3 +4,4 @@ entrypoints:
   default: benchmarks/te_omnibenchmark/te_smoke.py
   rc0: benchmarks/te_omnibenchmark/rc0_fixture.py
   real_panel: benchmarks/te_omnibenchmark/real_panel.py
+  long_panel: benchmarks/te_omnibenchmark/long_panel.py
