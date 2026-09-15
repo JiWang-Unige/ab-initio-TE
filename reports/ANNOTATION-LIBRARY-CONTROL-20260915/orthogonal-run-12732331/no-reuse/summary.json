@@ -1,0 +1,52 @@
+{
+  "by_old_te_relation": {
+    "ADJACENT": {
+      "fp_n": 17548,
+      "matched_n": 3970,
+      "unmatched_control_exhausted_n": 12571,
+      "unmatched_n": 13578,
+      "unmatched_no_covariate_candidate_n": 1007
+    },
+    "ISOLATED": {
+      "fp_n": 3687,
+      "matched_n": 1570,
+      "unmatched_control_exhausted_n": 538,
+      "unmatched_n": 2117,
+      "unmatched_no_covariate_candidate_n": 1579
+    }
+  },
+  "candidate_count": {
+    "available_min": 0,
+    "max": 37,
+    "median": 10,
+    "min": 0
+  },
+  "control_reuse_allowed": false,
+  "control_reuse_histogram": {
+    "1": 5540
+  },
+  "matched_pairs_n": 5540,
+  "matching_rule": {
+    "control_reuse_allowed": false,
+    "exact_source_length": true,
+    "exact_source_non_acgt_count": true,
+    "gc_tolerance_fraction": 0.02,
+    "same_old_te_distance_bin": true,
+    "same_old_te_relation": true,
+    "same_source_chromosome": true,
+    "seed": 42,
+    "selection_order": "absolute GC fraction, absolute old-TE-boundary distance, row_id"
+  },
+  "max_control_reuse": 1,
+  "qualified_case_fp_n": 21235,
+  "qualified_control_tn_n": 23586,
+  "selection_excludes": [
+    "model score or probability",
+    "new annotation support",
+    "target annotation",
+    "target sequence identity"
+  ],
+  "status": "NO_REUSE_MATCHING_COMPLETED",
+  "unique_controls_used_n": 5540,
+  "unmatched_fp_n": 15695
+}

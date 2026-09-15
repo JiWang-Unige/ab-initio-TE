@@ -1,0 +1,84 @@
+{
+  "blastx": {
+    "evalue_cutoff": 1e-05,
+    "max_hsps": 1,
+    "max_target_seqs": 5,
+    "seg": "yes",
+    "strand": "blastx default translated both strands",
+    "strong_bitscore_cutoff": 50.0,
+    "strong_qcovhsp_cutoff_percent": 20.0
+  },
+  "claim_policy": {
+    "computational_orthogonal_support": true,
+    "fp_rescue_claim": false,
+    "independent_biological_truth": false,
+    "manual_or_experimental_truth": false,
+    "model_scores_read": false,
+    "same_base_f1_computed": false,
+    "target_annotation_read": false
+  },
+  "database": "refs/repos/hite_3_3_3/library/RepeatPeps.lib",
+  "database_description": "HiTE RepeatPeps library; 18,011 predicted proteins, 16.1 million aa, readme retained with the asset",
+  "fp_by_old_te_relation": {
+    "ADJACENT": {
+      "any_hit_n": 7,
+      "n": 17548,
+      "strong_hit_n": 2
+    },
+    "ISOLATED": {
+      "any_hit_n": 7,
+      "n": 3687,
+      "strong_hit_n": 2
+    }
+  },
+  "no_reuse_matched_pair_support": {
+    "any_hit": {
+      "all_fp_supported_n": 14,
+      "matched_fp_fraction": 0.00036101083032490973,
+      "matched_fp_minus_tn_difference_pp": 0.036101083032490974,
+      "matched_fp_supported_n": 2,
+      "matched_pairs_n": 5540,
+      "matched_tn_fraction": 0.0,
+      "matched_tn_supported_n": 0,
+      "unmatched_fp_n": 15695,
+      "unmatched_fp_supported_n": 12
+    },
+    "strong_hit": {
+      "all_fp_supported_n": 4,
+      "matched_fp_fraction": 0.0,
+      "matched_fp_minus_tn_difference_pp": 0.0,
+      "matched_fp_supported_n": 0,
+      "matched_pairs_n": 5540,
+      "matched_tn_fraction": 0.0,
+      "matched_tn_supported_n": 0,
+      "unmatched_fp_n": 15695,
+      "unmatched_fp_supported_n": 4
+    }
+  },
+  "queries": {
+    "fp": {
+      "any_hit_fraction": 0.0006592889098186956,
+      "any_hit_n": 14,
+      "n": 21235,
+      "shorter_than_30bp": 17196,
+      "strong_hit_fraction": 0.00018836825994819872,
+      "strong_hit_n": 4,
+      "total_bp": 463108
+    },
+    "selection_uses_model_scores": false,
+    "selection_uses_new_library_support": false,
+    "source_only_match_table": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/no-reuse/matched_controls_no_reuse.tsv",
+    "target_annotation_read": false,
+    "tn": {
+      "any_hit_fraction": 0.0,
+      "any_hit_n": 0,
+      "n": 5540,
+      "shorter_than_30bp": 3864,
+      "strong_hit_fraction": 0.0,
+      "strong_hit_n": 0,
+      "total_bp": 175365
+    },
+    "total": 26775
+  },
+  "status": "PROTEIN_ORTHOGONAL_SUPPORT_COMPLETED"
+}

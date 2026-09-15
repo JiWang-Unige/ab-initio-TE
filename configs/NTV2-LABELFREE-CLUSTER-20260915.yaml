@@ -1,0 +1,109 @@
+experiment_id: NTV2-LABELFREE-CLUSTER-20260915
+status: exploratory_protocol
+seed: 42
+
+input:
+  manifest: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/panel/identity_manifest.jsonl
+  source_kind: natural_copy
+  description: TE-enriched natural-copy panel; family-label-free conditional on TE-enriched input selection
+  expected_records: 1331
+  expected_families: 40
+  prior_query_exclusion_tsv: /srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_improve_20260914/run1/per_query.tsv
+  prior_query_exclusion: record_id plus homology component plus fixed 50 kb host-locus block
+  old_235_query_panel: excluded from the new panel by identifiers/coordinates only
+  sealed_data: forbidden
+
+split:
+  unit: connected component of host-scoped source_copy_id, homology_component_id, and host_locus_block
+  locus_block_bp: 50000
+  assignment: seed42 shuffled components with repeating 6 train / 2 CAL / 2 EVAL pattern
+  species_holdout: false
+  family_labels_used_for_assignment: false
+  expected_observation: 1205 components; approximately 806 train, 266 CAL, 259 EVAL after prior-query neighborhood exclusion
+
+model:
+  path: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species
+  model_id: nucleotide-transformer-v2-500m-multi-species
+  hidden_size: 1024
+  encoder_layers: 29
+  native_max_position_embeddings: 2050
+  mean_pooling: non_special_tokens_only
+  checkpoint_download: forbidden
+
+views:
+  view_one: masked_original
+  view_two: masked_reverse_complement
+  mask_fraction: 0.05
+  deterministic_per_record_seed: true
+  positive_pair: same_record_only
+  family_labels_used: false
+  training_max_bp: 2048
+  long_sequence_rule: fixed_center_crop_for_training_views
+  evaluation_sequence_rule: complete_sequence_with_native_token_segmentation
+
+arms:
+  raw_6mer:
+    kind: raw_sequence_composition
+    kmer_length: 6
+  raw_frozen_ntv2:
+    kind: native_mean_pooled_hidden
+    backbone_updated: false
+  kmer_ssl_head:
+    kind: two_layer_projection
+    input_dim: 4096
+    hidden_dim: 256
+    output_dim: 128
+    backbone_updated: false
+    family_labels_used: false
+  frozen_ntv2_ssl_head:
+    kind: two_layer_projection
+    input_dim: 1024
+    hidden_dim: 256
+    output_dim: 128
+    backbone_updated: false
+    family_labels_used: false
+  last_two_ntv2_ssl:
+    kind: native_encoder_adaptation_plus_projection
+    trainable_encoder_layers: [27, 28]
+    projection_input_dim: 1024
+    projection_hidden_dim: 256
+    projection_output_dim: 128
+    backbone_updated: true
+    family_labels_used: false
+  frozen_ntv2_capacity_matched_head:
+    kind: two_layer_projection
+    input_dim: 1024
+    hidden_dim: 938
+    output_dim: 128
+    backbone_updated: false
+    family_labels_used: false
+
+training:
+  objective: same_record_masked_reverse_complement_nt_xent
+  max_updates_per_trained_arm: 2000
+  batch_size: 4
+  embedding_batch_size: 8
+  temperature: 0.07
+  head_learning_rate: 0.001
+  encoder_learning_rate: 0.00001
+  weight_decay: 0.01
+  gradient_clipping: 1.0
+  selection: fixed_final_updates; no CAL family metrics or EVAL metrics used
+  multiseed: forbidden
+
+evaluation:
+  split: EVAL
+  k_selection: predeclared_grid_20_30_40_50_by_raw_frozen_ntv2_train_silhouette
+  fixed_k: selected_from_train_only
+  clustering: [transductive_eval_kmeans, inductive_train_kmeans]
+  metrics: [ARI, NMI, purity, silhouette_for_transductive_only]
+  family_labels_used_only_for_posthoc_metrics: true
+  eval_labels_loaded_after_training_and_k_selection: true
+  biological_insertion_truth: unavailable
+
+resources:
+  partition: shared-gpu
+  gpus: 1
+  cpus_per_task: 8
+  memory: 64G
+  walltime: 02:00:00

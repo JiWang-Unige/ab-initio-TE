@@ -1,0 +1,10 @@
+{
+  "status": "COMPLETED",
+  "slurm_job_id": "12732331",
+  "no_reuse_summary": "/home/users/j/jwang/ab-initio-TE/outputs/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/no-reuse/summary.json",
+  "protein_summary": "/home/users/j/jwang/ab-initio-TE/outputs/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/protein-summary/summary.json",
+  "raw_blastx_retained_on_baobab": true,
+  "target_annotation_read": false,
+  "same_base_f1_computed": false,
+  "fp_rescue_claim": false
+}

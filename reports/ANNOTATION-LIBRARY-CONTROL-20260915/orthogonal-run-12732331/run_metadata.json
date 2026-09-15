@@ -1,0 +1,11 @@
+{
+  "status": "BLASTX_RUNNING",
+  "slurm_job_id": "12732331",
+  "blastx": "blastx: 2.14.1+",
+  "database": "/home/users/j/jwang/ab-initio-TE/refs/repos/hite_3_3_3/library/RepeatPeps.lib",
+  "query_fasta": "/home/users/j/jwang/ab-initio-TE/outputs/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/query/queries.fa",
+  "query_scope": ["chr2", "chr3", "chr4"],
+  "target_annotation_read": false,
+  "model_scores_read": false,
+  "selection_uses_new_library_support": false
+}

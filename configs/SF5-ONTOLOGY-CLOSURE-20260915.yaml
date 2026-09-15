@@ -1,0 +1,51 @@
+protocol: SF5_ONTOLOGY_CLOSURE_20260915
+seed: 42
+window: 4096
+step: 4096
+max_n_frac: 0.2
+species:
+  - mouse
+  - zebrafish
+  - chicken
+  - western_clawed_frog
+  - fruit_fly
+  - c_elegans
+chromosomes:
+  mouse: {train: chr1, val: chr2, test: chrX}
+  zebrafish: {train: chr4, val: chr7, test: chr5}
+  chicken: {train: chr1, val: chr2, test: chr3}
+  western_clawed_frog: {train: chr1, val: chr2, test: chr5}
+  fruit_fly: {train: chr3R, val: chr3L, test: chr2R}
+  c_elegans: {train: chrV, val: chrX, test: chrIV}
+quotas: {train_per_species: 900, val_per_species: 240, test_per_species: 360}
+ontology:
+  "0": BG
+  "1": SINE
+  "2": LINE
+  "3": LTR
+  "4": DNA
+  "5": KNOWN_OTHER_TE
+  "6": AMBIGUOUS_TE
+  "7": UNCLASSIFIED
+source:
+  manifest: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  column: comparator_plus_unknown
+  semantics: >-
+    BG means uncovered by the repository TE-plus-unknown comparator;
+    Unknown/Unspecified rows are unresolved annotation candidates, not
+    independent biological truth. No non-TE repeat class is trained.
+model:
+  init_checkpoint: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  old_collapsed_baseline: software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_base_pretrained_seed42
+training:
+  max_steps: 900
+  eval_steps: 150
+  batch_size: 1
+  grad_accum: 16
+  learning_rate: 2.0e-5
+  class_weights: [1.0, 3.0, 3.0, 3.0, 3.0, 3.0, 2.0, 2.0]
+  full_validation_for_selection: true
+  full_test_after_selection: true
+outputs:
+  remote_root: software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/ontology_closure_20260915
+  report_root: reports/SF5-ONTOLOGY-CLOSURE-20260915

@@ -1,0 +1,54 @@
+{
+  "protocol": "ANNOTATION_LIBRARY_CONTROL_20260915",
+  "status": "FIXED_BEFORE_ANNOTATION",
+  "seed": 42,
+  "source_assembly": "hg19",
+  "allowed_chromosomes": ["chr2", "chr3", "chr4"],
+  "tile_bp": 8192,
+  "halo_bp": 4096,
+  "expected_tile_count": 2500,
+  "old_confusion_intervals": "outputs/HG19-CHR1-REVISION-20260914/eval-full-12696405/old_confusion_intervals.bed",
+  "interval_qualification": "outputs/HG19-CHR1-REVISION-20260914-MATCHED/match-12708406/interval_qualification.tsv",
+  "matched_controls": "outputs/HG19-CHR1-REVISION-20260914-MATCHED/match-12708406/matched_controls.tsv",
+  "old_comparator": "software_outputs/repeatmasker_dfam/comparators/ucsc_reference_repeatmasker/human/hg19/raw/rmsk.txt.gz",
+  "source_fasta": "data/raw/ucsc/human/hg19/hg19.fa.gz",
+  "engine_control": "RepeatMasker 4.2.2; -pa 4 -xsmall -gff -lib; identical fixed panel FASTA with 4096-bp halo",
+  "libraries": [
+    {
+      "label": "dfam2018_consensus",
+      "source": ".backup/data/libraries/dfam/3.9/families/Dfam-RepeatMasker.lib.gz",
+      "annotation_out": "outputs/ANNOTATION-LIBRARY-CONTROL-20260915/annotation-dfam2018/panel.fa.out",
+      "library_origin": "Frozen Dfam/RepBase release 20181026 consensus library; supplied as the legacy comparison library"
+    },
+    {
+      "label": "dfam39_human_curated",
+      "source": "software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions; famdb.py families -a -d -c 9606",
+      "annotation_out": "outputs/ANNOTATION-LIBRARY-CONTROL-20260915/annotation-dfam39-curated/panel.fa.out",
+      "library_origin": "Current human-lineage curated Dfam 3.9 FamDB export, generated before RepeatMasker execution"
+    }
+  ],
+  "matching_policy": {
+    "source": "Existing matched_controls.tsv selected before this library comparison",
+    "model_scores_read": false,
+    "new_library_support_used": false,
+    "target_annotation_read": false,
+    "unmatched_fp_retained": true,
+    "control_reuse_retained": true
+  },
+  "support_policy": {
+    "categories": ["TE", "UNKNOWN", "NONTE", "UNRECOGNIZED"],
+    "known_non_te_classes": ["SIMPLE_REPEAT", "LOW_COMPLEXITY", "SATELLITE", "RNA", "SNRNA", "SCRNA", "SRPRNA", "TRNA", "RRNA"],
+    "te_classes": ["SINE", "LINE", "LTR", "DNA", "RC", "RETROPOSON"],
+    "layers": ["any", "ge50", "ge80"],
+    "description": "Per-interval support is joined after both annotations exist. It is descriptive library sensitivity evidence; no same-base F1, FP rescue, or independent biological-truth claim is made."
+  },
+  "claim_policy": {
+    "same_engine_same_query_panel": true,
+    "same_base_f1_computed": false,
+    "fp_rescue_claim": false,
+    "independent_biological_truth": false,
+    "model_scores_read": false,
+    "target_annotation_read": false,
+    "annotation_support_is_descriptive": true
+  }
+}
