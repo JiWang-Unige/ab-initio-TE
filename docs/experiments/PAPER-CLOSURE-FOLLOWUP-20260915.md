@@ -21,7 +21,8 @@
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
 | Tiberius 参考修复 | 12732214_[0,1] | 原Dfam4导出缺少uncurated分区；用完整Dfam3.9重注释，`complete_library_export=true` 后才能推理 |
 | Tiberius smoke | 12732021_[0,20]，依赖12732214 | 两物种各一 core × 五arm，实际模型5/6通道、相同大写序列、GTF/GFF3坐标一致 |
-| Tiberius full | **尚未提交** | smoke和只读代码核查通过后提交40core（array0–39%2），已完成smoke跳过，再提交固定200cell scorer |
+| Tiberius full | 12732547_[0–39%2]，afterok12732021 | 两物种smoke五arm全部完成才可开始，runner另检查两份资格状态；已完成smoke复用，其余core新运行 |
+| Tiberius score | 12732548，afterok12732547 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
 | native方法 | CB4: selected12732198_0/4、12731966_1、12731946_2/3；sim:12731947_[0–4] | 五软件 × 两输入，16CPU/80GB/24h，每个完整管线；保留TIMEOUT和失败 |
@@ -40,7 +41,7 @@
 1. 读取各作业实时Slurm终态、日志和实际产物；修复明确接口错误时保留原尝试，按相同输入、模型、阈值、预算重试并更新映射和依赖。不得为达到好分数换配置。
 2. Tiberius只有200cell全部合格才运行固定科学评分；比较P–R_TE、P–U_nosm及其他两对照，按染色体paired bootstrap，保留loss loci。原人类结论不覆盖。
 3. benchmark聚合每方法/物种的实际输入、失败、墙钟、资源、知识条件。模拟真值F1和真实阳性召回分开，CPU/GPU同硬件类别解释，不能把Omni回放时间当native时间。
-4. 在干净Git提交固定代码后将 `benchmarks/te_omnibenchmark/long_panel.yaml` 固定到真实代码commit；用本机现成 Omni runtime、真实 compact block bundle 运行图。Omni的范围是从Slurm已验证block充分统计量重算指标，不伪称重跑native工具。
+4. `benchmarks/te_omnibenchmark/long_panel.yaml` 已固定到代码commit `4edaeb16e735be4c25fdbace12822f026604f649`（配置提交ef6cecf已推送）；用本机现成 Omni runtime、真实 compact block bundle 运行图。Omni的范围是从Slurm已验证block充分统计量重算指标，不伪称重跑native工具。
 5. 将compact结果、限制、正文/补充材料定位与用户五项问题的结论写入研究文档；原始序列、概率数组、权重留远程。提交并推送到既有GitHub。没有完整结果时保持RUNNING/PARTIAL，不写“论文已闭合”。
 
 若计算跨本次交互，沿用已有TE跟进任务，正常运行或状态未变时静默，仅对完成、真实失败、结论变化或用户决策通知。全部已授权结果处理和推送完成后暂停跟进。

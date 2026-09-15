@@ -2,6 +2,7 @@
 """Execute five paired native Tiberius cells for one fixed external core."""
 import argparse
 import csv
+import gc
 import importlib.util
 import json
 import os
@@ -23,6 +24,12 @@ def module(path, name):
 
 
 def run(index):
+    if os.getenv('TE_REQUIRE_SMOKE')=='1':
+        for smoke_species in ('cow','platypus'):
+            smoke=BASE/'run-r1'/smoke_species/'c00'/'status.json'
+            observed=json.loads(smoke.read_text())
+            if observed.get('status')!='COMPLETED' or [s['mode'] for s in observed['steps']]!=list(MODES):
+                raise ValueError('both five-arm engineering smoke cores must qualify before expansion')
     species=('cow','platypus')[index//20]
     prepared=BASE/'prepared'/species
     manifest=json.loads((prepared/'preparation.json').read_text())
@@ -45,6 +52,11 @@ def run(index):
     model=ROOT/'outputs/TE-STRUCTURE-PILOT-20260825-R1/p3-human-20260828-r2-12097867/unet'
     phase0.export_frozen_p3(model,prepared/core['id']/'region.jsonl.gz',out/'p3_pte.npy',out/'p3_states.npy',
                            out/'P.canonical.tsv',out/'p3_export.json',None)
+    # The next process runs TensorFlow on this same GPU; release PyTorch's
+    # now-unused caching allocator after the frozen mask has been exported.
+    import torch
+    gc.collect()
+    torch.cuda.empty_cache()
     export=json.loads((out/'p3_export.json').read_text())
     if export['model_schema']!='comparator_run_four_state_unet_v1' or export['threshold']!=0.5:
         raise ValueError('P3 checkpoint/threshold changed')

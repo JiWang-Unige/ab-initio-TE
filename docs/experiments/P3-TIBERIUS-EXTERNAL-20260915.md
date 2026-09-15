@@ -34,4 +34,6 @@
 
 ## Reference 库资格修复
 
-准备12732000识别到 Dfam4 导出忽略缺失 uncurated 分区却返回exit0。原注释保留为不完整库尝试，不用于本批五臂比较。12732197在相同40个core重新运行完整 Dfam3.9 lineage curated+uncurated + RepeatMasker4.2.4；`run_core.py`要求 `complete_library_export=true` 后才允许推理。原始参考基因和区域几何均不改变。
+准备12732000识别到 Dfam4 导出忽略缺失 uncurated 分区却返回exit0。原注释保留为不完整库尝试，不用于本批五臂比较。12732197首次修复缺少引擎启动所需库路径挂载而失败，12732214在相同40个core重新运行完整 Dfam3.9 lineage curated+uncurated + RepeatMasker4.2.4；`run_core.py`要求 `complete_library_export=true` 后才允许推理。原始参考基因和区域几何均不改变。
+
+执行依赖为 reference12732214 → 两core smoke12732021 → 全40core12732547 → 全200cell评分12732548。后两级只在前级全部成功后启动；full runner同时检查两份smoke五arm资格。已完成smoke复用。P3导出后释放PyTorch未使用的GPU缓存，再启动同GPU的TensorFlow子进程，模型与阈值不变。
