@@ -1,0 +1,37 @@
+api_version: "0.5.0"
+id: te_long_input_comparison
+name: "TE long-input simulated material and real positive recovery"
+description: "Recompute actual Slurm sufficient statistics; synthetic known material and real reference-positive recovery are separate endpoints."
+benchmarker: "ab-initio-TE"
+version: "0.1.0"
+software_backend: host
+software_environments:
+  - id: host
+stages:
+  - id: data
+    modules:
+      - id: bundle
+        repository: &repo
+          url: https://github.com/JiWang-Unige/ab-initio-TE.git
+          commit: "4edaeb16e735be4c25fdbace12822f026604f649"
+          entrypoint: long_panel
+    outputs:
+      - id: data.block_bundle
+        path: block_bundle.json
+  - id: metrics
+    inputs:
+      - data.block_bundle
+    modules:
+      - id: score
+        repository: *repo
+    outputs:
+      - id: metrics.score
+        path: metrics.json
+metric_collectors:
+  - id: summary
+    repository: *repo
+    inputs:
+      - metrics.score
+    outputs:
+      - id: collector.summary
+        path: collector_summary.json
