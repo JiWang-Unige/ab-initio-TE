@@ -1,0 +1,49 @@
+{
+  "assignment": "component_shuffle_6_train_2_cal_2_eval",
+  "components": 1205,
+  "components_by_split": {
+    "cal": 240,
+    "eval": 240,
+    "train": 725
+  },
+  "contract_version": "ntv2-label-free-cluster-v1",
+  "cross_split_homology_component": {
+    "count": 0,
+    "examples": []
+  },
+  "cross_split_locus_block": {
+    "count": 0,
+    "examples": []
+  },
+  "cross_split_source_copy": {
+    "count": 0,
+    "examples": []
+  },
+  "families_in_all_splits": null,
+  "family_labels_read_for_assignment_or_split_audit": false,
+  "family_labels_used_for_assignment": false,
+  "family_support_external_audit": null,
+  "host_is_context_not_split_unit": true,
+  "locus_block_bp": 50000,
+  "no_species_holdout": true,
+  "prior_query_exclusion": {
+    "enabled": true,
+    "excluded_by_homology_component_after_id": 0,
+    "excluded_by_locus_block_after_id_and_homology": 34,
+    "excluded_by_record_id": 235,
+    "kept_records": 1331,
+    "prior_homology_component_count": 232,
+    "prior_locus_block_count": 229,
+    "prior_query_id_count": 235,
+    "prior_query_labels_or_scores_read": false,
+    "prior_query_rows_found": 235,
+    "source_tsv": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_improve_20260914/run1/per_query.tsv"
+  },
+  "records": 1331,
+  "rows_by_split": {
+    "cal": 266,
+    "eval": 259,
+    "train": 806
+  },
+  "seed": 42
+}

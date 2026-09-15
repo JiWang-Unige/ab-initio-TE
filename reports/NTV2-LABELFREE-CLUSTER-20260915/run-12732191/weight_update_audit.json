@@ -1,0 +1,131 @@
+{
+  "aggregate": {
+    "changed_elements_exact": 33570706,
+    "changed_tensors_exact": 28,
+    "l2_difference": 2.854631016484373,
+    "matched_numel": 33570880,
+    "max_abs_difference": 0.004675813019275665,
+    "mean_abs_difference": 0.0003856997693985356
+  },
+  "matching": {
+    "matched_tensor_count": 30,
+    "saved_layer_tensor_count": 30,
+    "unmatched_examples": [],
+    "unmatched_tensor_count": 0
+  },
+  "per_layer": {
+    "27": {
+      "changed_elements_exact": 16785371,
+      "l2_difference": 1.9814971602168687,
+      "max_abs_difference": 0.003866806044243276,
+      "numel": 16785440,
+      "tensor_count": 15
+    },
+    "28": {
+      "changed_elements_exact": 16785335,
+      "l2_difference": 2.054893487343587,
+      "max_abs_difference": 0.004675813019275665,
+      "numel": 16785440,
+      "tensor_count": 15
+    }
+  },
+  "representative_tensors": [
+    {
+      "base_key": "esm.encoder.layer.27.LayerNorm.bias",
+      "base_l2": 3.657318928259985,
+      "changed_elements_exact": 1024,
+      "l2_difference": 0.017452521414518137,
+      "layer": "27",
+      "max_abs_difference": 0.0019920170307159424,
+      "mean_abs_difference": 0.0004294240998046206,
+      "numel": 1024,
+      "saved_key": "esm.encoder.layer.27.LayerNorm.bias",
+      "shape": [
+        1024
+      ]
+    },
+    {
+      "base_key": "esm.encoder.layer.27.LayerNorm.weight",
+      "base_l2": 27.07164194794487,
+      "changed_elements_exact": 1024,
+      "l2_difference": 0.019861362402509627,
+      "layer": "27",
+      "max_abs_difference": 0.002227604389190674,
+      "mean_abs_difference": 0.0004989420704077929,
+      "numel": 1024,
+      "saved_key": "esm.encoder.layer.27.LayerNorm.weight",
+      "shape": [
+        1024
+      ]
+    },
+    {
+      "base_key": "esm.encoder.layer.27.attention.LayerNorm.bias",
+      "base_l2": 2.433920700718397,
+      "changed_elements_exact": 1024,
+      "l2_difference": 0.01536134016684882,
+      "layer": "27",
+      "max_abs_difference": 0.0017551779747009277,
+      "mean_abs_difference": 0.00037580290774702485,
+      "numel": 1024,
+      "saved_key": "esm.encoder.layer.27.attention.LayerNorm.bias",
+      "shape": [
+        1024
+      ]
+    },
+    {
+      "base_key": "esm.encoder.layer.28.LayerNorm.bias",
+      "base_l2": 4.296781163350286,
+      "changed_elements_exact": 1024,
+      "l2_difference": 0.015414572102521716,
+      "layer": "28",
+      "max_abs_difference": 0.0017383992671966553,
+      "mean_abs_difference": 0.00038347108016001386,
+      "numel": 1024,
+      "saved_key": "esm.encoder.layer.28.LayerNorm.bias",
+      "shape": [
+        1024
+      ]
+    },
+    {
+      "base_key": "esm.encoder.layer.28.LayerNorm.weight",
+      "base_l2": 36.631697306254146,
+      "changed_elements_exact": 1024,
+      "l2_difference": 0.015641556596458477,
+      "layer": "28",
+      "max_abs_difference": 0.001967787742614746,
+      "mean_abs_difference": 0.0003845849714707583,
+      "numel": 1024,
+      "saved_key": "esm.encoder.layer.28.LayerNorm.weight",
+      "shape": [
+        1024
+      ]
+    },
+    {
+      "base_key": "esm.encoder.layer.28.attention.LayerNorm.bias",
+      "base_l2": 3.3317184245300853,
+      "changed_elements_exact": 1024,
+      "l2_difference": 0.010568736106169855,
+      "layer": "28",
+      "max_abs_difference": 0.0016888976097106934,
+      "mean_abs_difference": 0.0002514098852088864,
+      "numel": 1024,
+      "saved_key": "esm.encoder.layer.28.attention.LayerNorm.bias",
+      "shape": [
+        1024
+      ]
+    }
+  ],
+  "scope": {
+    "compared_layers": [
+      27,
+      28
+    ],
+    "comparison": "saved encoder_last_two tensors versus native model.safetensors",
+    "family_labels_read": false,
+    "native_model_dir": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "retraining": false,
+    "saved_state": "/srv/beegfs/scratch/users/j/jwang/NTV2_LABELFREE_CLUSTER_20260915/run_12732191/last_two_ntv2_ssl_state.pt"
+  },
+  "status": "PASS_NUMERIC_UPDATE_AUDIT",
+  "torch_version": "2.5.1+cu121"
+}

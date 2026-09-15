@@ -1,0 +1,23 @@
+{
+  "native_source": "/srv/beegfs/scratch/users/j/jwang/NTV2_LABELFREE_CLUSTER_20260915/run_12732191",
+  "native_outputs_modified": false,
+  "corrections": {
+    "components_by_split": {
+      "old_misreported_record_counts": {
+        "cal": 266,
+        "eval": 259,
+        "train": 806
+      },
+      "correct_unique_component_counts": {
+        "cal": 240,
+        "eval": 240,
+        "train": 725
+      },
+      "verification": "unique label_free_component_id counts in the saved split_manifest.jsonl; no overlap across roles"
+    },
+    "uncomputed_inductive_silhouette": "Native NaN replaced by JSON null; no value was measured for this field."
+  },
+  "split_assignment_changed": false,
+  "model_or_training_changed": false,
+  "ari_nmi_purity_changed": false
+}

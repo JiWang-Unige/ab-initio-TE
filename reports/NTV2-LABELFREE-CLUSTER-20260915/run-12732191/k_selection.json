@@ -1,0 +1,27 @@
+{
+  "candidate_grid": [
+    {
+      "k": 20,
+      "train_silhouette": 0.13808849453926086
+    },
+    {
+      "k": 30,
+      "train_silhouette": 0.08998199552297592
+    },
+    {
+      "k": 40,
+      "train_silhouette": 0.08409871906042099
+    },
+    {
+      "k": 50,
+      "train_silhouette": 0.08321117609739304
+    }
+  ],
+  "family_labels_used": false,
+  "mode": "train_only_silhouette",
+  "seed": 42,
+  "selected_k": 20,
+  "selection_features": "raw_frozen_ntv2_original_train_only",
+  "selection_labels_read": false,
+  "selection_split": "train"
+}

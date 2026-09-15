@@ -1,0 +1,639 @@
+{
+  "arms": {
+    "frozen_ntv2_capacity_matched_head": {
+      "clustering": {
+        "inductive_train_kmeans": {
+          "ari": 0.2155994417616305,
+          "nmi": 0.5870126062817427,
+          "purity": 0.3436293436293436,
+          "silhouette": null
+        },
+        "k_selected_using_family_labels": false,
+        "k_used": 20,
+        "labels_used_only_for_metrics": true,
+        "n_eval": 259,
+        "n_train": 806,
+        "sklearn": true,
+        "transductive_eval_kmeans": {
+          "ari": 0.191857252963203,
+          "nmi": 0.5799165893924602,
+          "purity": 0.33976833976833976,
+          "silhouette": 0.32963573932647705
+        }
+      },
+      "representation": {
+        "batch_size": 4,
+        "family_labels_in_loss": false,
+        "hidden_dim": 938,
+        "input_dim": 1024,
+        "learning_rate": 0.001,
+        "max_updates": 2000,
+        "name": "frozen_ntv2_capacity_matched_head",
+        "objective": "same_record_masked_reverse_complement_nt_xent",
+        "output_dim": 128,
+        "temperature": 0.07,
+        "trainable_parameters": 1081642,
+        "weight_decay": 0.01
+      }
+    },
+    "frozen_ntv2_ssl_head": {
+      "clustering": {
+        "inductive_train_kmeans": {
+          "ari": 0.19479543002816474,
+          "nmi": 0.5787571170109479,
+          "purity": 0.33204633204633205,
+          "silhouette": null
+        },
+        "k_selected_using_family_labels": false,
+        "k_used": 20,
+        "labels_used_only_for_metrics": true,
+        "n_eval": 259,
+        "n_train": 806,
+        "sklearn": true,
+        "transductive_eval_kmeans": {
+          "ari": 0.19666328611360054,
+          "nmi": 0.5905599806583764,
+          "purity": 0.35135135135135137,
+          "silhouette": 0.28160029649734497
+        }
+      },
+      "representation": {
+        "batch_size": 4,
+        "family_labels_in_loss": false,
+        "hidden_dim": 256,
+        "input_dim": 1024,
+        "learning_rate": 0.001,
+        "max_updates": 2000,
+        "name": "frozen_ntv2_ssl_head",
+        "objective": "same_record_masked_reverse_complement_nt_xent",
+        "output_dim": 128,
+        "temperature": 0.07,
+        "trainable_parameters": 295296,
+        "weight_decay": 0.01
+      }
+    },
+    "kmer_ssl_head": {
+      "clustering": {
+        "inductive_train_kmeans": {
+          "ari": 0.23672438582786529,
+          "nmi": 0.6230979585728825,
+          "purity": 0.33976833976833976,
+          "silhouette": null
+        },
+        "k_selected_using_family_labels": false,
+        "k_used": 20,
+        "labels_used_only_for_metrics": true,
+        "n_eval": 259,
+        "n_train": 806,
+        "sklearn": true,
+        "transductive_eval_kmeans": {
+          "ari": 0.22860465170973027,
+          "nmi": 0.6207632214526614,
+          "purity": 0.3474903474903475,
+          "silhouette": 0.352969765663147
+        }
+      },
+      "representation": {
+        "batch_size": 4,
+        "family_labels_in_loss": false,
+        "hidden_dim": 256,
+        "input_dim": 4096,
+        "learning_rate": 0.001,
+        "max_updates": 2000,
+        "name": "kmer_ssl_head",
+        "objective": "same_record_masked_reverse_complement_nt_xent",
+        "output_dim": 128,
+        "temperature": 0.07,
+        "trainable_parameters": 1081728,
+        "weight_decay": 0.01
+      }
+    },
+    "last_two_ntv2_ssl": {
+      "clustering": {
+        "inductive_train_kmeans": {
+          "ari": 0.21680897783155406,
+          "nmi": 0.5967618927289846,
+          "purity": 0.35135135135135137,
+          "silhouette": null
+        },
+        "k_selected_using_family_labels": false,
+        "k_used": 20,
+        "labels_used_only_for_metrics": true,
+        "n_eval": 259,
+        "n_train": 806,
+        "sklearn": true,
+        "transductive_eval_kmeans": {
+          "ari": 0.2566769684275047,
+          "nmi": 0.6129365377674472,
+          "purity": 0.3938223938223938,
+          "silhouette": 0.2586313486099243
+        }
+      },
+      "representation": {
+        "backbone_update_scope": "last_two_encoder_blocks_only",
+        "backbone_updated": true,
+        "batch_size": 4,
+        "encoder_learning_rate": 1e-05,
+        "family_labels_in_loss": false,
+        "head_learning_rate": 0.001,
+        "hidden_dim": 256,
+        "input_dim": 1024,
+        "max_updates": 2000,
+        "name": "last_two_ntv2_ssl",
+        "objective": "same_record_masked_reverse_complement_nt_xent",
+        "output_dim": 128,
+        "projection_trainable_parameters": 295296,
+        "temperature": 0.07,
+        "total_encoder_layers": 29,
+        "trainable_backbone_parameters": 33570816,
+        "trainable_encoder_layers": [
+          27,
+          28
+        ],
+        "weight_decay": 0.01
+      }
+    },
+    "raw_6mer": {
+      "clustering": {
+        "inductive_train_kmeans": {
+          "ari": 0.09005294627173889,
+          "nmi": 0.4490722570522752,
+          "purity": 0.13127413127413126,
+          "silhouette": null
+        },
+        "k_selected_using_family_labels": false,
+        "k_used": 20,
+        "labels_used_only_for_metrics": true,
+        "n_eval": 259,
+        "n_train": 806,
+        "sklearn": true,
+        "transductive_eval_kmeans": {
+          "ari": 0.05134248168587001,
+          "nmi": 0.3869782763586276,
+          "purity": 0.1583011583011583,
+          "silhouette": 0.06493044644594193
+        }
+      },
+      "representation": {
+        "dimension": 4096,
+        "family_labels_in_training": false,
+        "kind": "raw_sequence_composition",
+        "training_updates": 0
+      }
+    },
+    "raw_frozen_ntv2": {
+      "clustering": {
+        "inductive_train_kmeans": {
+          "ari": 0.22151106012593477,
+          "nmi": 0.5936666767562021,
+          "purity": 0.33204633204633205,
+          "silhouette": null
+        },
+        "k_selected_using_family_labels": false,
+        "k_used": 20,
+        "labels_used_only_for_metrics": true,
+        "n_eval": 259,
+        "n_train": 806,
+        "sklearn": true,
+        "transductive_eval_kmeans": {
+          "ari": 0.23607431815810956,
+          "nmi": 0.6159945240135852,
+          "purity": 0.36293436293436293,
+          "silhouette": 0.14980095624923706
+        }
+      },
+      "representation": {
+        "backbone_frozen": true,
+        "dimension": 1024,
+        "family_labels_in_training": false,
+        "kind": "native_ntv2_mean_pooled_hidden",
+        "training_updates": 0
+      }
+    }
+  },
+  "capacity": {
+    "capacity_head_hidden": 938,
+    "kmer_head": 1081728,
+    "kmer_head_hidden": 256,
+    "ntv2_capacity_matched_head": 1081642,
+    "ntv2_head_hidden": 256,
+    "ntv2_standard_head": 295296
+  },
+  "contract_version": "ntv2-label-free-cluster-v1",
+  "input": {
+    "cal_records": 266,
+    "eval_families": 40,
+    "eval_records": 259,
+    "family_labels_used_for_training_or_selection": false,
+    "manifest": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_20260914/run_exact/panel/identity_manifest.jsonl",
+    "old_query_labels_or_scores_read": false,
+    "old_query_record_ids_read_for_exclusion": true,
+    "prior_query_exclusion": {
+      "enabled": true,
+      "excluded_by_homology_component_after_id": 0,
+      "excluded_by_locus_block_after_id_and_homology": 34,
+      "excluded_by_record_id": 235,
+      "kept_records": 1331,
+      "prior_homology_component_count": 232,
+      "prior_locus_block_count": 229,
+      "prior_query_id_count": 235,
+      "prior_query_labels_or_scores_read": false,
+      "prior_query_rows_found": 235,
+      "source_tsv": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_improve_20260914/run1/per_query.tsv"
+    },
+    "records": 1331,
+    "records_before_prior_query_exclusion": 1600,
+    "source_kind": "natural_copy",
+    "te_enriched_family_label_free_training_input": true,
+    "train_records": 806
+  },
+  "k_selection": {
+    "candidate_grid": [
+      {
+        "k": 20,
+        "train_silhouette": 0.13808849453926086
+      },
+      {
+        "k": 30,
+        "train_silhouette": 0.08998199552297592
+      },
+      {
+        "k": 40,
+        "train_silhouette": 0.08409871906042099
+      },
+      {
+        "k": 50,
+        "train_silhouette": 0.08321117609739304
+      }
+    ],
+    "family_labels_used": false,
+    "mode": "train_only_silhouette",
+    "seed": 42,
+    "selected_k": 20,
+    "selection_features": "raw_frozen_ntv2_original_train_only",
+    "selection_labels_read": false,
+    "selection_split": "train"
+  },
+  "label_use_audit": {
+    "family_field_loaded_only_for_posthoc_eval": true,
+    "family_labels_in_split_assignment": false,
+    "family_labels_in_ssl_loss": false,
+    "family_labels_in_update_or_epoch_selection": false,
+    "family_labels_in_view_generation": false,
+    "k_grid": [
+      {
+        "k": 20,
+        "train_silhouette": 0.13808849453926086
+      },
+      {
+        "k": 30,
+        "train_silhouette": 0.08998199552297592
+      },
+      {
+        "k": 40,
+        "train_silhouette": 0.08409871906042099
+      },
+      {
+        "k": 50,
+        "train_silhouette": 0.08321117609739304
+      }
+    ],
+    "k_selected_using_family_labels": false,
+    "k_selection_labels_read": false,
+    "k_selection_mode": "train_only_silhouette",
+    "k_used": 20
+  },
+  "model": {
+    "config_hidden_size": 1024,
+    "config_layers": 29,
+    "config_max_position_embeddings": 2050,
+    "device": "cuda",
+    "model_id": "nucleotide-transformer-v2-500m-multi-species",
+    "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "torch_version": "2.5.1+cu121",
+    "weights": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species/model.safetensors"
+  },
+  "posthoc_family_support": {
+    "families_in_all_splits": 40,
+    "family_names_seen_in_eval": [
+      "AluJb",
+      "AluJo",
+      "AluJr",
+      "AluJr4",
+      "AluSc",
+      "AluSc8",
+      "AluSg",
+      "AluSp",
+      "AluSq",
+      "AluSq2",
+      "AluSx",
+      "AluSx1",
+      "AluSx3",
+      "AluSx4",
+      "AluSz",
+      "AluSz6",
+      "AluY",
+      "FLAM_A",
+      "FLAM_C",
+      "L1M5",
+      "L1ME1",
+      "L1ME4a",
+      "L1PA16",
+      "L1PA3",
+      "L1PA4",
+      "L1PA5",
+      "L1PA7",
+      "L2",
+      "L2a",
+      "L2b",
+      "L2c",
+      "L3",
+      "MER5A",
+      "MIR",
+      "MIR3",
+      "MIRb",
+      "MIRc",
+      "MLT1A0",
+      "MSTA",
+      "THE1B"
+    ],
+    "family_support_by_split": {
+      "AluJb": {
+        "cal": 7,
+        "eval": 5,
+        "train": 17
+      },
+      "AluJo": {
+        "cal": 5,
+        "eval": 8,
+        "train": 11
+      },
+      "AluJr": {
+        "cal": 9,
+        "eval": 2,
+        "train": 25
+      },
+      "AluJr4": {
+        "cal": 9,
+        "eval": 3,
+        "train": 20
+      },
+      "AluSc": {
+        "cal": 4,
+        "eval": 9,
+        "train": 20
+      },
+      "AluSc8": {
+        "cal": 7,
+        "eval": 7,
+        "train": 20
+      },
+      "AluSg": {
+        "cal": 4,
+        "eval": 8,
+        "train": 21
+      },
+      "AluSp": {
+        "cal": 7,
+        "eval": 5,
+        "train": 15
+      },
+      "AluSq": {
+        "cal": 7,
+        "eval": 7,
+        "train": 18
+      },
+      "AluSq2": {
+        "cal": 7,
+        "eval": 6,
+        "train": 15
+      },
+      "AluSx": {
+        "cal": 5,
+        "eval": 7,
+        "train": 19
+      },
+      "AluSx1": {
+        "cal": 6,
+        "eval": 2,
+        "train": 23
+      },
+      "AluSx3": {
+        "cal": 7,
+        "eval": 5,
+        "train": 18
+      },
+      "AluSx4": {
+        "cal": 5,
+        "eval": 7,
+        "train": 12
+      },
+      "AluSz": {
+        "cal": 6,
+        "eval": 5,
+        "train": 23
+      },
+      "AluSz6": {
+        "cal": 5,
+        "eval": 5,
+        "train": 23
+      },
+      "AluY": {
+        "cal": 3,
+        "eval": 11,
+        "train": 17
+      },
+      "FLAM_A": {
+        "cal": 6,
+        "eval": 5,
+        "train": 22
+      },
+      "FLAM_C": {
+        "cal": 4,
+        "eval": 9,
+        "train": 19
+      },
+      "L1M5": {
+        "cal": 11,
+        "eval": 11,
+        "train": 17
+      },
+      "L1ME1": {
+        "cal": 6,
+        "eval": 10,
+        "train": 24
+      },
+      "L1ME4a": {
+        "cal": 9,
+        "eval": 7,
+        "train": 24
+      },
+      "L1PA16": {
+        "cal": 12,
+        "eval": 6,
+        "train": 22
+      },
+      "L1PA3": {
+        "cal": 2,
+        "eval": 6,
+        "train": 32
+      },
+      "L1PA4": {
+        "cal": 8,
+        "eval": 13,
+        "train": 19
+      },
+      "L1PA5": {
+        "cal": 7,
+        "eval": 7,
+        "train": 26
+      },
+      "L1PA7": {
+        "cal": 3,
+        "eval": 9,
+        "train": 27
+      },
+      "L2": {
+        "cal": 7,
+        "eval": 7,
+        "train": 20
+      },
+      "L2a": {
+        "cal": 7,
+        "eval": 8,
+        "train": 21
+      },
+      "L2b": {
+        "cal": 7,
+        "eval": 9,
+        "train": 24
+      },
+      "L2c": {
+        "cal": 7,
+        "eval": 7,
+        "train": 24
+      },
+      "L3": {
+        "cal": 11,
+        "eval": 2,
+        "train": 19
+      },
+      "MER5A": {
+        "cal": 9,
+        "eval": 6,
+        "train": 18
+      },
+      "MIR": {
+        "cal": 5,
+        "eval": 2,
+        "train": 21
+      },
+      "MIR3": {
+        "cal": 7,
+        "eval": 5,
+        "train": 17
+      },
+      "MIRb": {
+        "cal": 11,
+        "eval": 4,
+        "train": 17
+      },
+      "MIRc": {
+        "cal": 6,
+        "eval": 6,
+        "train": 24
+      },
+      "MLT1A0": {
+        "cal": 6,
+        "eval": 3,
+        "train": 21
+      },
+      "MSTA": {
+        "cal": 8,
+        "eval": 5,
+        "train": 14
+      },
+      "THE1B": {
+        "cal": 4,
+        "eval": 10,
+        "train": 17
+      }
+    },
+    "labels_loaded_after_all_label_free_training": true
+  },
+  "provenance_limits": [
+    "TE annotation was used to select the natural-copy input panel; training is family-label-free conditional on this TE-enriched input.",
+    "EVAL family labels are external scoring labels, not a self-supervised training signal.",
+    "This is exploratory and single-seed; it does not establish broad species generalization or biological insertion recovery."
+  ],
+  "scientific_claim_status": "EXPLORATORY_LABEL_FREE_OBJECTIVE_WITH_EXTERNAL_CLUSTERING_LABELS",
+  "split_audit": {
+    "assignment": "component_shuffle_6_train_2_cal_2_eval",
+    "components": 1205,
+    "components_by_split": {
+      "cal": 240,
+      "eval": 240,
+      "train": 725
+    },
+    "contract_version": "ntv2-label-free-cluster-v1",
+    "cross_split_homology_component": {
+      "count": 0,
+      "examples": []
+    },
+    "cross_split_locus_block": {
+      "count": 0,
+      "examples": []
+    },
+    "cross_split_source_copy": {
+      "count": 0,
+      "examples": []
+    },
+    "families_in_all_splits": null,
+    "family_labels_read_for_assignment_or_split_audit": false,
+    "family_labels_used_for_assignment": false,
+    "family_support_external_audit": null,
+    "host_is_context_not_split_unit": true,
+    "locus_block_bp": 50000,
+    "no_species_holdout": true,
+    "prior_query_exclusion": {
+      "enabled": true,
+      "excluded_by_homology_component_after_id": 0,
+      "excluded_by_locus_block_after_id_and_homology": 34,
+      "excluded_by_record_id": 235,
+      "kept_records": 1331,
+      "prior_homology_component_count": 232,
+      "prior_locus_block_count": 229,
+      "prior_query_id_count": 235,
+      "prior_query_labels_or_scores_read": false,
+      "prior_query_rows_found": 235,
+      "source_tsv": "/srv/beegfs/scratch/users/j/jwang/TE_identity_retrieval_improve_20260914/run1/per_query.tsv"
+    },
+    "records": 1331,
+    "rows_by_split": {
+      "cal": 266,
+      "eval": 259,
+      "train": 806
+    },
+    "seed": 42
+  },
+  "status": "PASS_NUMERIC_EXPLORATORY",
+  "training": {
+    "batch_size": 4,
+    "calibration_or_epoch_selection": "none_fixed_final_updates",
+    "encoder_learning_rate": 1e-05,
+    "family_labels_in_ssl_loss": false,
+    "head_learning_rate": 0.001,
+    "max_updates_per_trained_arm": 2000,
+    "seed": 42,
+    "temperature": 0.07,
+    "weight_decay": 0.01
+  },
+  "views": {
+    "family_labels_in_views": false,
+    "mask_fraction": 0.05,
+    "max_train_view_bp": 2048,
+    "same_record_positive_only": true,
+    "view_one": "masked_original",
+    "view_two": "masked_reverse_complement"
+  }
+}

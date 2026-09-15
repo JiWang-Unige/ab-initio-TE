@@ -1,0 +1,15 @@
+{
+  "arms": [
+    "frozen_ntv2_capacity_matched_head",
+    "frozen_ntv2_ssl_head",
+    "kmer_ssl_head",
+    "last_two_ntv2_ssl",
+    "raw_6mer",
+    "raw_frozen_ntv2"
+  ],
+  "backbone_updated": true,
+  "family_labels_in_ssl_loss": false,
+  "finished_unix": 1789469413.352073,
+  "job_id": "12732191",
+  "status": "PASS_NUMERIC_EXPLORATORY"
+}

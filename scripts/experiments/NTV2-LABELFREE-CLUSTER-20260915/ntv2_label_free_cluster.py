@@ -41,7 +41,7 @@ MASK_FRACTION = 0.05
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    temporary.write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
     temporary.replace(path)
 
 
@@ -224,7 +224,8 @@ def build_isolated_split(
         "records": len(split_rows),
         "components": len(component_records),
         "rows_by_split": dict(sorted(collections.Counter(row["split"] for row in split_rows).items())),
-        "components_by_split": dict(sorted(collections.Counter(assignments[index] for index in assignments).items())),
+        "components_by_split": dict(sorted(collections.Counter(
+            assignments[members[0]] for _, members in shuffled).items())),
         "cross_split_source_copy": {"count": len(cross_split("source_copy_id", scoped=True)), "examples": cross_split("source_copy_id", scoped=True)[:10]},
         "cross_split_homology_component": {"count": len(cross_split("homology_component_id")), "examples": cross_split("homology_component_id")[:10]},
         "cross_split_locus_block": {"count": len(cross_split("label_free_locus_block")), "examples": cross_split("label_free_locus_block")[:10]},
@@ -743,7 +744,7 @@ def _cluster_metrics(train_value: Any, eval_value: Any, labels: Sequence[int], k
         transductive_pred = KMeans(n_clusters=k, n_init=20, random_state=seed, algorithm="lloyd").fit_predict(eval_std)
         inductive_model = KMeans(n_clusters=k, n_init=20, random_state=seed, algorithm="lloyd").fit(train_std)
         inductive_pred = inductive_model.predict(eval_std)
-        silhouette = float(silhouette_score(eval_std, transductive_pred)) if len(set(transductive_pred.tolist())) > 1 else float("nan")
+        silhouette = float(silhouette_score(eval_std, transductive_pred)) if len(set(transductive_pred.tolist())) > 1 else None
         metric_fn = {
             "ari": lambda pred: float(adjusted_rand_score(true_labels, pred)),
             "nmi": lambda pred: float(normalized_mutual_info_score(true_labels, pred)),
@@ -759,7 +760,7 @@ def _cluster_metrics(train_value: Any, eval_value: Any, labels: Sequence[int], k
                 "ari": metric_fn["ari"](inductive_pred),
                 "nmi": metric_fn["nmi"](inductive_pred),
                 "purity": _purity(true_labels, inductive_pred),
-                "silhouette": float("nan"),
+                "silhouette": None,
             },
             "sklearn": True,
         }

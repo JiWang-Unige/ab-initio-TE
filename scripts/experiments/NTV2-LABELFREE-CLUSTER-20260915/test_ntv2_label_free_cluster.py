@@ -45,6 +45,9 @@ class LabelFreeClusterContractTests(unittest.TestCase):
         self.assertEqual(audit["cross_split_source_copy"]["count"], 0)
         self.assertEqual(audit["cross_split_homology_component"]["count"], 0)
         self.assertEqual(audit["cross_split_locus_block"]["count"], 0)
+        self.assertEqual(audit["components"], 3)
+        self.assertEqual(sum(audit["components_by_split"].values()), 3)
+        self.assertEqual(sum(audit["rows_by_split"].values()), 5)
         by_record = {item["record_id"]: item["split"] for item in split_rows}
         self.assertEqual(by_record[split_rows[0]["record_id"]], by_record[split_rows[1]["record_id"]])
         self.assertEqual(by_record[split_rows[3]["record_id"]], by_record[split_rows[4]["record_id"]])

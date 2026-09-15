@@ -1,0 +1,39 @@
+{
+  "protocol": "TE-LONG-BENCH-20260915",
+  "dataset": "c_briggsae",
+  "status": "COMPLETED",
+  "model_paths": {
+    "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json"
+  },
+  "model_load_seconds": 61.32841220195405,
+  "device": "cuda",
+  "cpus_allocated": "4",
+  "hostname": "gpu006.baobab",
+  "cpu_model": "Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz",
+  "job": "12731957",
+  "accelerator": "Tesla P100-PCIE-12GB",
+  "window_bp": 4096,
+  "batch_size": 12,
+  "model_changed": false,
+  "threshold_refit": false,
+  "input": "software_outputs/TE-LONG-BENCH-20260915/c_briggsae/panel.fa",
+  "wall_seconds": 3952.2700108650606,
+  "input_bp": 108384165,
+  "calibration": {
+    "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+    "fit_split": "CAL",
+    "seed": 42,
+    "platt_intercept": -0.8050313412075021,
+    "platt_slope": 0.6984053956932976,
+    "threshold": 0.42330056285498807
+  },
+  "sequence_count": 367,
+  "verified_sequence_bp_sum": 108384165,
+  "forward_seconds_total": 3874.091076439945,
+  "merge_and_write_seconds_total": 3.465873927809298,
+  "native_status_path": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731957/c_briggsae/status.json",
+  "scope": "Observed GPU wall time on full input; CPU and native method comparison remains pending."
+}

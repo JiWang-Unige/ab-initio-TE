@@ -1,0 +1,39 @@
+{
+  "protocol": "TE-LONG-BENCH-20260915",
+  "dataset": "sim100",
+  "status": "COMPLETED",
+  "model_paths": {
+    "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json"
+  },
+  "model_load_seconds": 35.38016176200472,
+  "device": "cuda",
+  "cpus_allocated": "4",
+  "hostname": "gpu002.baobab",
+  "cpu_model": "Intel(R) Xeon(R) CPU E5-2643 v3 @ 3.40GHz",
+  "job": "12731958",
+  "accelerator": "NVIDIA TITAN X (Pascal)",
+  "window_bp": 4096,
+  "batch_size": 12,
+  "model_changed": false,
+  "threshold_refit": false,
+  "input": "software_outputs/TE-LONG-BENCH-20260915/sim100-12731886/sim100.input.fa",
+  "wall_seconds": 3029.5142681228463,
+  "input_bp": 100000000,
+  "calibration": {
+    "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+    "fit_split": "CAL",
+    "seed": 42,
+    "platt_intercept": -0.8050313412075021,
+    "platt_slope": 0.6984053956932976,
+    "threshold": 0.42330056285498807
+  },
+  "sequence_count": 1,
+  "verified_sequence_bp_sum": 100000000,
+  "forward_seconds_total": 2991.5709350390825,
+  "merge_and_write_seconds_total": 0.5691250660456717,
+  "native_status_path": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731958/sim100/status.json",
+  "scope": "Observed GPU wall time on full input; CPU and native method comparison remains pending."
+}

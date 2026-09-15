@@ -115,10 +115,24 @@ the result should not be called fully unsupervised discovery.
 The Slurm script is
 `sbatch/NTV2-LABELFREE-CLUSTER-20260915.sbatch` and requests one GPU on
 `shared-gpu`, 8 CPUs, 64 GiB RAM, and 2 hours. The script activates the
-existing `te_benchmark` environment. The exact corrected job ID, terminal
-state, output path, runtime, model load audit, training traces, and metrics are
-to be added here after the real Slurm run. A submitted job or a synthetic test
-is not a result.
+existing `te_benchmark` environment. The corrected run `12732191` completed
+in 41 min 33 s. Native layer-state comparison `12733074` completed in 19 s
+and confirms numerical changes in all 28 layer-27/28 weight tensors; the two
+rotary-frequency buffers remained unchanged. The 1,331 retained records form
+1,205 split components, distributed 725/240/240 across TRAIN/CAL/EVAL; record
+counts are 806/266/259. The native report initially repeated record counts in
+`components_by_split`; the compact report corrects this metadata from the
+saved manifest without changing split assignment or clustering metrics.
+Uncomputed silhouette fields use null.
+
+The six-arm result and audit are in
+[the completed report](../../reports/NTV2-LABELFREE-CLUSTER-20260915/run-12732191/RESULTS.md).
+Actual adaptation improves transductive ARI from 0.236074 to 0.256677 but
+reduces NMI from 0.615995 to 0.612937 and inductive ARI from 0.221511 to
+0.216809. There is no consistent improvement over the frozen encoder or the
+k-mer SSL baseline. This closes the bounded adaptation experiment and belongs
+in supplementary ablations; it does not establish a generally better family
+annotation tool. The CAL set was retained and was not used for model selection.
 
 ## Local checks before submission
 
