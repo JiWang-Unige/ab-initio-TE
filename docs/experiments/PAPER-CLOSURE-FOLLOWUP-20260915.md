@@ -8,26 +8,26 @@
 
 共享 D 的 dm6、cattle、horse、opossum 和原协议指定的 worm 留出染色体继续封存；人类 chr19–22 不开放。新的 cow **P3/Tiberius** 实验单独获准，不授权共享 D cattle 评价。NTv2 的新 EVAL 需要排除先前读过的 query 及其同源/近邻记录；不能把旧结果重新命名为独立验证。
 
-本机 `/Users/jiwang/Desktop/TE/ab-initio-TE`；远程 `/home/users/j/jwang/ab-initio-TE`。当前直接 `ssh baobab` 可用，旧 Bamboo 跳转不是必需路径。重计算只用 Slurm；login 只读小型状态、日志、调度与传输。
+本机 `/Users/jiwang/Desktop/TE/ab-initio-TE`；远程 `/home/users/j/jwang/ab-initio-TE`。使用 `ssh baobab`；连接可用性以最近实际连接为准。重计算只用 Slurm；login 只读小型状态、日志、调度与传输。
 
 ## 当前执行图
 
-**连接状态，2026-09-15 12:17 UTC：** 直接 `ssh baobab` 返回Connection refused；已知Bamboo跳转路径在SSH banner交换阶段超时。下表运行/等待状态为末次成功读取的状态，当前未获新Slurm证据，不能据连接失败推断作业终止。后续恢复连接时先读取状态与现有输出，再决定处理，不重启已完成项。
+**最近核实，2026-09-15 13:20 UTC：** 用户报告恢复后，直接 `ssh baobab` 成功读取 Slurm；随后新的连接再次返回Connection refused，因此下表为13:20实际快照，不能视为持续在线状态。库控制已TIMEOUT，Tiberius两项smoke已FAILED，CB4 EarlGrey已FAILED；不能将这些作业继续记作运行。下一次可连接时先读取对应错误和产物，再修复及调整被阻塞的依赖，不重启已完成项。之前12:17的连接故障不表示计算作业被取消。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
-| 库控制 | selected12732075；12732016为重复的顺序版本已取消，输入panel.tsv逐字一致 | 同引擎/同 hg19 输入；区分全库与人 lineage 的内容混杂；旧重复尝试保留，不用于速度比较 |
-| source-only 匹配/蛋白 | 12732331已完成；12732397在新库注释完成后计算no-reuse库支持 | 5540个唯一配对；15695 FP未匹配；强蛋白命中仅4/21235且matched为0/5540，不能支持广泛FP rescue |
+| 库控制 | selected12732075已TIMEOUT（2h00m29s）；12732016为重复的顺序版本已取消，输入panel.tsv逐字一致 | 核实两份已生成native注释及评分中断点，符合条件则只重评分；区分全库与人lineage内容混杂 |
+| source-only 匹配/蛋白 | 12732331已完成；12732397为DependencyNeverSatisfied，需修复评分依赖 | 5540个唯一配对；15695 FP未匹配；强蛋白命中仅4/21235且matched为0/5540，不能支持广泛FP rescue |
 | NTv2 label-free | 12732191完成41分33秒；权重核查12733074完成；旧尝试保留 | 六臂已完整评价：适配transductive ARI小幅增，但NMI和inductive ARI较冻结NTv2下降，不能称稳定提升；本项闭合，见独立RESULTS.md |
-| SF5 ontology | prep12731940完成；train/eval12731987 | 5400 TRAIN、1440 VAL、2160 TEST，完整六物种、八类本体；按物种报分母 |
+| SF5 ontology | prep12731940完成；train/eval12731987仍RUNNING（3h30m47s） | 5400 TRAIN、1440 VAL、2160 TEST，完整六物种、八类本体；按物种报分母 |
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
-| Tiberius 参考修复 | 12732214_0 cow已完成；_1 platypus继续运行 | cow完整Dfam3.9库1718条、219080 repeat rows；两物种均合格后继续smoke |
-| Tiberius smoke | 12732021_[0,20]，依赖12732214 | 两物种各一 core × 五arm，实际模型5/6通道、相同大写序列、GTF/GFF3坐标一致 |
-| Tiberius full | 12732547_[0–39%2]，afterok12732021 | 两物种smoke五arm全部完成才可开始，runner另检查两份资格状态；已完成smoke复用，其余core新运行 |
+| Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条、219080 repeat rows；platypus实际manifest仍需收取核实 |
+| Tiberius smoke | 12732021_0及_20均FAILED（21m12s/19m55s） | 先收取实际异常再修复；两物种各一core×五arm，实际模型5/6通道、相同大写序列、GTF/GFF3坐标一致 |
+| Tiberius full | 12732547_[0–39%2]为DependencyNeverSatisfied | 修复smoke后更新依赖，保留两物种五arm全部合格才扩展的条件；已合格smoke复用 |
 | Tiberius score | 12732548，afterok12732547 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
-| native方法 | CB4: selected12732198_0/4、12731966_1、12731946_2/3；sim:12731947_[0–4] | 五软件 × 两输入，16CPU/80GB/24h，每个完整管线；保留TIMEOUT和失败 |
+| native方法 | CB4固定RM/HiTE完成，RM2/EDTA运行，EarlGrey12732198_4已FAILED（1h46m01s）；模拟固定RM/HiTE完成，其余三项运行 | 五软件×两输入，16CPU/80GB/24h，每个完整管线；收取EarlGrey实际异常，保留失败尝试 |
 | 固定D | 两项GPU已完成：CB4 3952.27s/P100、sim 3029.51s/TITAN X；CPU12731959运行/12731960等待 | 全部108384165/100000000bp实际处理；GPU硬件不同，CPU/native未齐前不形成速度排名 |
 | 长输入评分 | 12732389，afterany所有上述native和D作业 | `outputs/TE-LONG-BENCH-20260915/score-12732389/result.json`；Slurm终态进入完整14cell分母 |
 | 模拟库条目覆盖 | 已收回12733209结果；本地计数核对通过 | 366/366生成条目名称被实际固定RM库覆盖；包含非TE条目，不用于声称新家族发现 |
