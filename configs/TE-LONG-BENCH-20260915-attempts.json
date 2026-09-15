@@ -6,7 +6,7 @@
       "fixed_rm": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-fixed_rm",
       "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm",
       "hite": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite",
-      "edta": "outputs/TE-LONG-BENCH-20260915/native-12738345/c_briggsae-edta",
+      "edta": "outputs/TE-LONG-BENCH-20260915/native-12738464/c_briggsae-edta",
       "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12738271/c_briggsae-earlgrey",
       "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731957/c_briggsae",
       "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731959/c_briggsae"
@@ -15,7 +15,7 @@
       "fixed_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-fixed_rm",
       "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm",
       "hite": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite",
-      "edta": "outputs/TE-LONG-BENCH-20260915/native-12738345/sim100-edta",
+      "edta": "outputs/TE-LONG-BENCH-20260915/native-12738464/sim100-edta",
       "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12738272/sim100-earlgrey",
       "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731958/sim100",
       "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731960/sim100"
@@ -69,6 +69,14 @@
     {
       "path": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta",
       "reason": "TIR-Learner TIR/TSD check uses positional Series access incompatible with pandas 3.0.3 (KeyError: 0). Copied recovery uses named TIR_type column, preserves completed stages and original elapsed time within the same total budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12738345/c_briggsae-edta",
+      "reason": "Recovery-generated get_fasta_sequence overlay had an extra indentation level and failed at import. Driver/text checks had not compiled the generated module. Corrected overlay is compiled and its actual helper tested; all prior elapsed time and attempts remain in the unchanged total budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12738345/sim100-edta",
+      "reason": "Recovery-generated get_fasta_sequence overlay had an extra indentation level and failed at import. Driver/text checks had not compiled the generated module. Corrected overlay is compiled and its actual helper tested; all prior elapsed time and attempts remain in the unchanged total budget."
     }
   ],
   "slurm_jobs": {
@@ -76,7 +84,7 @@
       "fixed_rm": "12732198_0",
       "rm2_rm": "12731966_1",
       "hite": "12731946_2",
-      "edta": "12738345_0",
+      "edta": "12738464_0",
       "earlgrey": "12738271_4",
       "D_gpu": "12731957",
       "D_cpu": "12731959"
@@ -85,7 +93,7 @@
       "fixed_rm": "12731947_0",
       "rm2_rm": "12731947_1",
       "hite": "12731947_2",
-      "edta": "12738345_1",
+      "edta": "12738464_1",
       "earlgrey": "12738272_4",
       "D_gpu": "12731958",
       "D_cpu": "12731960"

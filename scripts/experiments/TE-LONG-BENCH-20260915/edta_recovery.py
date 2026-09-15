@@ -79,7 +79,7 @@ def patched_source(name: str, source: str) -> str:
 
 def _canonicalize_split_seqids(df_in: pd.DataFrame) -> pd.DataFrame:
     """Map TIR-Learner chunk IDs and local coordinates to the source genome."""
-        df = df_in.copy()
+    df = df_in.copy()
     seqids = []
     offsets = []
     for raw_seqid in df["seqid"].astype(str):
@@ -132,7 +132,10 @@ def _canonicalize_split_seqids(df_in: pd.DataFrame) -> pd.DataFrame:
 
 def extract_and_patch(image: Path, patch_dir: Path) -> list[str]:
     """Extract only the three modules overlaid into the container."""
-    patch_dir.mkdir(parents=True, exist_ok=False)
+    # A retry may resume from a prior recovery directory that already carries
+    # this overlay.  The source is copied into a new output before this call,
+    # so replacing the files here never mutates the preserved failed cell.
+    patch_dir.mkdir(parents=True, exist_ok=True)
     written = []
     for name, target in PATCH_TARGETS.items():
         source = subprocess.check_output(
@@ -140,6 +143,8 @@ def extract_and_patch(image: Path, patch_dir: Path) -> list[str]:
             text=True,
         )
         patched = patched_source(name, source)
+        # Catch a malformed overlay before EDTA imports it inside the image.
+        compile(patched, name, "exec")
         path = patch_dir / name
         path.write_text(patched)
         path.chmod(0o644)
@@ -182,6 +187,8 @@ def run(args: argparse.Namespace) -> None:
     prior_seconds = float(prior.get("wall_seconds", 0.0))
     if cfg["native_timeout_seconds"] - prior_seconds <= 0:
         raise TimeoutError("the unchanged EDTA cell budget is already exhausted")
+    prior_steps = list(prior.get("prior_steps", []))
+    prior_steps.extend(prior.get("steps", []))
 
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -202,7 +209,7 @@ def run(args: argparse.Namespace) -> None:
         "knowledge_condition": cfg["method_information"],
         "resumed_from": str(failed),
         "prior_wall_seconds": prior_seconds,
-        "prior_steps": prior.get("steps", []),
+        "prior_steps": prior_steps,
         "timing_scope": "preserved failed EDTA attempt plus copy and resume; unchanged total native budget",
         "resume_mode": "EDTA --overwrite 0 reusing complete stages; compatibility patch only",
     }

@@ -1,0 +1,88 @@
+{
+  "protocol": "TE-LONG-BENCH-20260915",
+  "status": "ALL_CELLS_TERMINAL_WITH_FAILURES",
+  "source": "/home/users/j/jwang/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/score-12732389/result.json",
+  "datasets": {
+    "c_briggsae": {
+      "scored_methods": 6,
+      "method_states": {
+        "fixed_rm": {
+          "status": "COMPLETED",
+          "job": "12732200",
+          "failure_reason": null
+        },
+        "rm2_rm": {
+          "status": "COMPLETED",
+          "job": "12731986",
+          "failure_reason": null
+        },
+        "hite": {
+          "status": "COMPLETED",
+          "job": "12731950",
+          "failure_reason": null
+        },
+        "edta": {
+          "status": "FAILED",
+          "job": "12738346",
+          "failure_reason": "edta_resume: exit 2"
+        },
+        "earlgrey": {
+          "status": "COMPLETED",
+          "job": "12738271",
+          "failure_reason": null
+        },
+        "D_gpu": {
+          "status": "COMPLETED",
+          "job": "12731957",
+          "failure_reason": null
+        },
+        "D_cpu": {
+          "status": "COMPLETED",
+          "job": "12731959",
+          "failure_reason": null
+        }
+      }
+    },
+    "sim100": {
+      "scored_methods": 6,
+      "method_states": {
+        "fixed_rm": {
+          "status": "COMPLETED",
+          "job": "12732285",
+          "failure_reason": null
+        },
+        "rm2_rm": {
+          "status": "COMPLETED",
+          "job": "12732420",
+          "failure_reason": null
+        },
+        "hite": {
+          "status": "COMPLETED",
+          "job": "12732618",
+          "failure_reason": null
+        },
+        "edta": {
+          "status": "FAILED",
+          "job": "12738345",
+          "failure_reason": "edta_resume: exit 2"
+        },
+        "earlgrey": {
+          "status": "COMPLETED",
+          "job": "12738272",
+          "failure_reason": null
+        },
+        "D_gpu": {
+          "status": "COMPLETED",
+          "job": "12731958",
+          "failure_reason": null
+        },
+        "D_cpu": {
+          "status": "COMPLETED",
+          "job": "12731960",
+          "failure_reason": null
+        }
+      }
+    }
+  },
+  "note": "Failure-denominator snapshot. Accuracy was not read or used to choose the compatibility repair."
+}

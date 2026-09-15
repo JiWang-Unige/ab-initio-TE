@@ -61,14 +61,20 @@ The patch was applied to the exact three module sources extracted from the
 EDTA image.  The source patch test passed for all three modules, including the
 active GRF parser, the single coordinate-normalization call, and both pandas
 family accesses.  `py_compile` and `bash -n` also passed for the recovery
-driver and Slurm wrapper.
+driver and Slurm wrapper. Those initial checks verified replacement text and
+the driver, but did not compile the generated modules or exercise the actual
+generated helper; the first recovery exposed that validation gap. The
+corrected validation below covers the generated overlay itself.
 
 ## Execution
 
-The Slurm recovery array is `12738345` (two cells on `public-cpu`, constrained
-to `E5-2630V4`).  Final cell statuses will be appended after completion.  A
-failed recovery remains recorded as failed; the recovery does not overwrite
-either original failure.
+The first Slurm recovery array was `12738345` (two cells on `public-cpu`,
+constrained to `E5-2630V4`) and failed at overlay import as described below.
+The corrected retry is array `12738464`, submitted with
+`EDTA_RECOVERY_SOURCE_ARRAY_JOB_ID=12738345`; it copies both failed outputs
+into new directories before replacing the overlay.  Final cell statuses will
+be appended after completion.  A failed recovery remains recorded as failed;
+the recovery does not overwrite either original failure.
 
 At the first runtime inspection both cells had passed EDTA dependency checks,
 recognized the existing `panel.fa.mod`, and entered `EDTA_raw`; their
@@ -76,3 +82,23 @@ recognized the existing `panel.fa.mod`, and entered `EDTA_raw`; their
 three overlays plus the offset oracle.  The empty `.time` files at that point
 were expected because `/usr/bin/time` writes them only when the still-running
 resume command exits.
+
+## First recovery attempt
+
+Array `12738345` failed in 3:41 (CB4) and 3:47 (sim100), both with exit 2.
+The first error in both `edta_resume.stderr` files was an
+`IndentationError` at line 12 of the overlaid `get_fasta_sequence.py`:
+the helper's `df = df_in.copy()` line had acquired one extra indentation
+level.  This is a recovery-overlay generation error, not a new EDTA or
+biological failure.  The downstream missing-result messages in this attempt
+follow from that import failure; the original CB4 empty-LTR condition remains
+a separate condition and is not adjudicated by this recovery.
+
+The driver now compiles every generated overlay before binding it into the
+container.  The helper itself was imported in the EDTA image with a minimal
+dependency stub and exercised on dotted accession IDs, normal and overlap
+chunks, and an already canonical ID; the coordinate oracle passed all five
+cases.  The `edta_compat` directory is now allowed to exist in a copied prior
+recovery, so a retry replaces only the overlay in the new output.  Retry
+metadata also concatenates nested `prior_steps` with the immediately previous
+attempt, preserving the full timing chain.

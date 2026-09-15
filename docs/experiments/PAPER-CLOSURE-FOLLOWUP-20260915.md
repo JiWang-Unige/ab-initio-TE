@@ -12,7 +12,7 @@
 
 ## 当前执行图
 
-**最近核实，2026-09-15 20:39 UTC：** SSH恢复且实际连接正常，使用任务专用控制连接 `/tmp/te-closure-baobab.sock`。前三项补实验已收敛，不重复训练或评分。Tiberius两物种smoke的五臂均完成；full完成cow c00–c14后被UID 0取消，保留结果并只恢复24个缺失core。EarlGrey两输入已完成最终输出资格化，两项CPU推理也已完成。EDTA已定位真实运行错误并提交12738345_[0,1]，均运行中；最终比较尚未完成。
+**最近核实，2026-09-15 20:52 UTC：** SSH恢复且实际连接正常，使用任务专用控制连接 `/tmp/te-closure-baobab.sock`。前三项补实验已收敛，不重复训练或评分。Tiberius两物种smoke的五臂均完成；full完成cow c00–c14后被UID 0取消，保留结果并只恢复24个缺失core（目前至少indices15/16实际运行）。EarlGrey两输入已完成最终输出资格化，两项CPU推理也已完成。EDTA原运行错误已定位，首轮恢复12738345又因本项目overlay缩进错误失败；该错误修正并验证实际模块后已重试12738464_[0,1]，CB4运行、sim100等资源；最终比较尚未完成。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
@@ -23,13 +23,13 @@
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
 | Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条/219080 repeat rows；platypus已核实1139条/387011 repeat rows，manifest PREPARED_WITH_NATIVE_RM |
 | Tiberius smoke | 原12732021失败保留；12735505_0和_20均COMPLETED（36m38s/34m46s） | 两物种五arm均合格；checkpoint bind修复实际通过 |
-| Tiberius full | 原12732547完成cow c00–c14；复用platypus c00后合计16core/80cell；缺失24core恢复12738295_[15–19,21–39%2]等资源 | UID 0取消原因未公开，无模型失败证据；部分输出保留，未重跑完整core |
+| Tiberius full | 原12732547完成cow c00–c14；复用platypus c00后合计16core/80cell；缺失24core恢复12738295_[15–19,21–39%2]，15/16运行、其余等资源 | UID 0取消原因未公开，无模型失败证据；部分输出保留，未重跑完整core |
 | Tiberius score | 12732548，afterok12738295 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
-| native方法 | 两输入固定RM/HiTE/RM2已完成；EarlGrey12738271_4/12738272_4均COMPLETED；EDTA原两项FAILED保留，恢复12738345_[0,1]均RUNNING | EarlGrey修复Perl路径/模块后合格，累计耗时8725.85s/9014.24s包括失败及续跑；EDTA恢复见下文 |
+| native方法 | 两输入固定RM/HiTE/RM2已完成；EarlGrey12738271_4/12738272_4均COMPLETED；EDTA原两项FAILED保留，当前恢复12738464_[0,1]，CB4 RUNNING、sim100 PENDING；12738345失败保留 | EarlGrey修复Perl路径/模块后合格，累计耗时8725.85s/9014.24s包括失败及续跑；EDTA恢复见下文 |
 | 固定D | 两GPU完成；CPU CB4 12731959 COMPLETED（Slurm 7h15m16s；实测26112.05s）；sim CPU12731960 COMPLETED（Slurm 6h37m45s；实测23861.16s） | CB4全部108384165bp/367序列；CPU E5-2630v4、16线程；GPU硬件不同，完整分母齐前不排名 |
-| 长输入评分 | 12732389已解除hold，afterany12738345；其余选定12cell已核实全部COMPLETED | `outputs/TE-LONG-BENCH-20260915/score-12732389/result.json`；失败进入完整分母，不提前选完成方法评分 |
+| 长输入评分 | 新12738470，afterany12738464；其余选定12cell均COMPLETED | `outputs/TE-LONG-BENCH-20260915/score-12738470/result.json`；旧12732389保留12/14完成与2失败的完整分母快照 |
 | 模拟库条目覆盖 | 已收回12733209结果；本地计数核对通过 | 366/366生成条目名称被实际固定RM库覆盖；包含非TE条目，不用于声称新家族发现 |
 
 ## 真实失败与修正
@@ -62,3 +62,15 @@ Tiberius full的UID 0取消记录没有披露管理员/控制器的具体原因�
 EarlGrey在最终RepeatMasker后遇到缺失 `/usr/bin/perl` 及RepeatMasker Perl模块目录问题，已在复制的工作目录中修复并完成。原始失败输出、阶段计时及最终状态均保留，见 [EarlGrey报告](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/RECOVERY.md)。CB4完整CPU计时与节点硬件证据见 [CPU报告](../../reports/TE-LONG-BENCH-20260915/cpu-completed/RESULTS.md)。
 
 EDTA原CB4在TIR-Learner的分段ID/坐标还原处失败，sim100因pandas 3的Series索引语义失败。三处源码兼容补丁在原镜像源码上验证，并做分段坐标oracle；恢复12738345_[0,1]使用同E5-2630V4、16CPU/80GB，复制原工作目录并以overwrite0复用已完成阶段，原耗时31097.63s/14614.03s从84600s预算扣除。原失败和具体修复见 [EDTA诊断](../../reports/TE-LONG-BENCH-20260915/edta-recovery/DIAGNOSIS.md)。attempts已同步远程；12732389已解除hold，等待剩余两项EDTA终态后按完整14cell固定评分。
+
+### 20:44 UTC 新终态：EDTA恢复补丁错误
+
+12738345_[0,1]分别在3m41s/3m47s FAILED：本次是生成的 `get_fasta_sequence.py` overlay 第12行缩进错误，属于本项目恢复补丁引入的问题，不能归因于原EDTA或生物学输入。原源码接口诊断保持成立，但此前验证只保证driver语法与文本替换，未充分验证实际生成模块，相关报告正在更正。下一步先编译并在容器中导入实际overlay，对真实helper运行坐标样例，再继续同预算恢复；不使用 `--force` 绕过生物学候选检查。
+
+评分12732389已按协议afterany完成（25s）：`ALL_CELLS_TERMINAL_WITH_FAILURES`，两输入各6/7个可评分方法，保留完整14cell分母。此文件保留为本次失败快照，不覆盖；修复EDTA后提交新的score作业，并更新本入口及automation指向。未以该评分的准确性决定修复或选择方法。Tiberius恢复至少index15已实际运行。
+
+### 当前继续入口（20:52 UTC）
+
+实际生成的三个overlay现已编译并在EDTA容器中导入；真实helper的dotted accession、普通分段、overlap分段及已规范ID样例通过，见已更正EDTA报告。新恢复为12738464_[0,1]，输入为上一失败12738345的复制工作目录，累计原耗时31318.23/14840.21秒继续从84600秒扣除；不覆盖任何原目录。当前CB4运行、sim100等资源，未形成EDTA完整输出。原CB4空LTR是独立未决条件，不自动加force绕过。
+
+attempts已同步到新恢复。新score12738470已提交并核实afterany12738464；旧score12732389不可覆盖，其状态摘要保存在 `reports/TE-LONG-BENCH-20260915/score-12732389-status.json`。未来Omni回放应使用最新完整终态bundle，不误用旧失败快照。

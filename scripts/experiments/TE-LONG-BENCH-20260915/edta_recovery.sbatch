@@ -16,10 +16,18 @@ conda activate te_benchmark
 export OMP_NUM_THREADS=16 OPENBLAS_NUM_THREADS=16 MKL_NUM_THREADS=16
 
 DATASETS=(c_briggsae sim100)
-FAILED=(
-  outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta
-  outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta
-)
+if [[ -n "${EDTA_RECOVERY_SOURCE_ARRAY_JOB_ID:-}" ]]; then
+  SOURCE_ARRAY_JOB_ID=$EDTA_RECOVERY_SOURCE_ARRAY_JOB_ID
+  FAILED=(
+    outputs/TE-LONG-BENCH-20260915/native-$SOURCE_ARRAY_JOB_ID/c_briggsae-edta
+    outputs/TE-LONG-BENCH-20260915/native-$SOURCE_ARRAY_JOB_ID/sim100-edta
+  )
+else
+  FAILED=(
+    outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta
+    outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta
+  )
+fi
 DATASET=${DATASETS[$SLURM_ARRAY_TASK_ID]}
 FAILED_CELL=${FAILED[$SLURM_ARRAY_TASK_ID]}
 python3 scripts/experiments/TE-LONG-BENCH-20260915/edta_recovery.py \
