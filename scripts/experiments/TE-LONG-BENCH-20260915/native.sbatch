@@ -15,6 +15,11 @@ export OMP_NUM_THREADS=16 OPENBLAS_NUM_THREADS=16 MKL_NUM_THREADS=16
 TE_METHODS=(fixed_rm rm2_rm hite edta earlgrey)
 TE_METHOD=${TE_METHODS[$SLURM_ARRAY_TASK_ID]}
 TE_DATASET=${1:?dataset required}
+TE_RESUME_ARGS=()
+if [[ -n "${2:-}" ]]; then
+  TE_RESUME_ARGS=(--resume-from "$2")
+fi
 python3 scripts/experiments/TE-LONG-BENCH-20260915/native.py --root "$TASK_ROOT" \
   --dataset "$TE_DATASET" --method "$TE_METHOD" \
-  --output "outputs/TE-LONG-BENCH-20260915/native-$SLURM_ARRAY_JOB_ID/$TE_DATASET-$TE_METHOD"
+  --output "outputs/TE-LONG-BENCH-20260915/native-$SLURM_ARRAY_JOB_ID/$TE_DATASET-$TE_METHOD" \
+  "${TE_RESUME_ARGS[@]}"

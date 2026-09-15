@@ -7,7 +7,7 @@
       "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm",
       "hite": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite",
       "edta": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta",
-      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-earlgrey",
+      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12735632/c_briggsae-earlgrey",
       "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731957/c_briggsae",
       "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731959/c_briggsae"
     },
@@ -16,7 +16,7 @@
       "rm2_rm": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm",
       "hite": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite",
       "edta": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta",
-      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-earlgrey",
+      "earlgrey": "outputs/TE-LONG-BENCH-20260915/native-12735633/sim100-earlgrey",
       "D_gpu": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731958/sim100",
       "D_cpu": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731960/sim100"
     }
@@ -45,6 +45,14 @@
     {
       "path": "outputs/TE-LONG-BENCH-20260915/native-12732043/c_briggsae-earlgrey",
       "reason": "Stopped before completion after detecting same incomplete Dfam4 initial library; replaced by complete Dfam3.9 library for both reference-assisted arms"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-earlgrey",
+      "reason": "Installed EarlGrey uses GNU find -printf, unavailable in its BusyBox image; exit 1 after completed refined library. Original work preserved; copied continuation uses portable equivalent directory selection and counts prior wall time against the unchanged 84600-second budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-earlgrey",
+      "reason": "Installed EarlGrey uses GNU find -printf, unavailable in its BusyBox image; exit 1 after completed refined library. Original work preserved; copied continuation uses portable equivalent directory selection and counts prior wall time against the unchanged 84600-second budget."
     }
   ],
   "slurm_jobs": {
@@ -53,7 +61,7 @@
       "rm2_rm": "12731966_1",
       "hite": "12731946_2",
       "edta": "12731946_3",
-      "earlgrey": "12732198_4",
+      "earlgrey": "12735632_4",
       "D_gpu": "12731957",
       "D_cpu": "12731959"
     },
@@ -62,7 +70,7 @@
       "rm2_rm": "12731947_1",
       "hite": "12731947_2",
       "edta": "12731947_3",
-      "earlgrey": "12731947_4",
+      "earlgrey": "12735633_4",
       "D_gpu": "12731958",
       "D_cpu": "12731960"
     }

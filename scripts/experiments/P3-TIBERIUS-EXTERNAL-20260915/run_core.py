@@ -90,6 +90,10 @@ def run(index):
     image=ROOT/'software_outputs/tiberius/GAP-BRIDGE-DOWNSTREAM-C-R1/container-20260905-r1/tiberius_2.0.7.sif'
     if not (nosm/'weights.h5').exists():
         raise ValueError('official nosm checkpoint has not been staged')
+    # The source checkout is mounted at /opt/Tiberius below, which hides the
+    # image's model_weights tree.  Ensure the nested bind target exists in
+    # that checkout before Singularity applies the checkpoint bind.
+    (source/'model_weights/tiberius_nosm_weights_v2').mkdir(parents=True, exist_ok=True)
     status={'status':'RUNNING','species':species,'core':core,'slurm_job_id':os.getenv('SLURM_JOB_ID'),
             'model':'frozen_P3_human','steps':[]}
     (out/'status.json').write_text(json.dumps(status,indent=2)+'\n')

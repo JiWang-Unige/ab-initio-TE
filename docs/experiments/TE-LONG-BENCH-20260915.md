@@ -35,3 +35,11 @@
 ## 执行资格修正（首次正式比较前）
 
 现有 Dfam4 安装只有 curated 组件，FamDB 请求全 lineage 时报告缺少 uncurated 分区但仍以 exit0 输出部分 FASTA。该输出不能代表完整库。保留 CB4 初次固定 RM 和 EarlGrey 尝试，固定 RM/EarlGrey 的初始参考库统一改为已安装完整分区的 Dfam3.9 lineage curated+uncurated，RepeatMasker 引擎仍固定4.2.4。EarlGrey 使用官方 `-l` 显式传入同一库；RM2/EarlGrey 内部 Dfam4 curated 分类组件与 HiTE/EDTA 原生证据另行披露。导出 stderr 明示缺失时禁止继续评分。
+
+## EarlGrey 容器兼容性恢复
+
+CB4 `12732198_4` 与模拟 `12731947_4` 均在 TEstrainer 已生成精炼库后退出。原镜像的 EarlGrey 脚本用 `find -printf` 选择输出目录，但镜像内 BusyBox find 不支持此参数；脚本将该错误重定向后，由 `pipefail` 触发 exit1。已在同一镜像、同一工作目录复现，非生物学无候选结果。
+
+`native.py` 对实际安装脚本的这一处目录选择替换为 Python 按目录修改时间选取，保持处理阶段、模型、库和参数不变。原始镜像与两次失败目录保留；续跑复制各自工作目录并复用已完成精炼库，不再运行发现和精炼阶段。CB4/模拟续跑为 `12735632_4` / `12735633_4`。截至恢复核查，两者均已进入最终 RepeatMasker 阶段，尚未形成最终 benchmark 结果。
+
+原失败耗时6359.03/7942.04秒从84600秒总预算扣除，复制及续跑耗时继续计入；`wall_seconds` 报原尝试加续跑总时间，另存 `attempt_wall_seconds`。这是有失败恢复记录的全流程成本，不能伪称一次无中断运行的耗时。最终评分12732389已实际更新为等待全部14个选定cell终态，旧失败记录仍在attempts配置。详见[恢复记录](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/RECOVERY.md)。

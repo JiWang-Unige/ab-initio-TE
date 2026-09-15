@@ -36,4 +36,18 @@
 
 准备12732000识别到 Dfam4 导出忽略缺失 uncurated 分区却返回exit0。原注释保留为不完整库尝试，不用于本批五臂比较。12732197首次修复缺少引擎启动所需库路径挂载而失败，12732214在相同40个core重新运行完整 Dfam3.9 lineage curated+uncurated + RepeatMasker4.2.4；`run_core.py`要求 `complete_library_export=true` 后才允许推理。原始参考基因和区域几何均不改变。
 
-执行依赖为 reference12732214 → 两core smoke12732021 → 全40core12732547 → 全200cell评分12732548。后两级只在前级全部成功后启动；full runner同时检查两份smoke五arm资格。已完成smoke复用。P3导出后释放PyTorch未使用的GPU缓存，再启动同GPU的TensorFlow子进程，模型与阈值不变。
+执行依赖为 reference12732214 → 两core smoke → 全40core12732547 → 全200cell评分12732548。原 smoke 作业 12732021 已失败并保留；恢复重试为 12735505_[0,20]。full 12732547 已实际更新为 `afterok:12735505`，score 12732548 继续依赖 full。后两级只在前级全部成功后启动；full runner 同时检查两份 smoke 五臂资格。已完成 smoke 可复用。P3 导出后释放 PyTorch 未使用的 GPU 缓存，再启动同 GPU 的 TensorFlow 子进程，模型与阈值不变。
+
+## Smoke 故障与有界恢复记录（2026-09-15）
+
+原 smoke 12732021_[0,20] 的两个 cell 都在第一个 `U_soft` arm 的容器启动阶段失败，Slurm 的作业级退出码为 1；两份模式 stderr 给出同一原因：
+
+```text
+FATAL: container creation failed: mount hook function failure: mount .../tiberius_nosm_weights_v2 -> /opt/Tiberius/model_weights/tiberius_nosm_weights_v2 error: destination ... doesn't exist in container
+```
+
+问题来自挂载顺序：将宿主机 Tiberius checkout 挂到 `/opt/Tiberius` 后，镜像内的 `model_weights` 目录被遮蔽；随后 checkpoint 的嵌套 bind target 在被遮蔽的 checkout 中不存在。故障发生在模型调用前，不能解释为物种差异、模型失败或 Tiberius 结果。
+
+失败 cell 的完整目录保留在 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1-failed-12732021/{cow,platypus}/c00`，原 `run-r1` 路径未用失败文件覆盖。修复仅在启动容器前确保 checkout 中的 `model_weights/tiberius_nosm_weights_v2` 目录存在；staged 官方 `weights.h5` 仍绑定到原定的 `/opt/Tiberius/model_weights/tiberius_nosm_weights_v2`。在 Baobab 上用同一镜像和两个 bind 做了无模型轻量验证，容器内 checkpoint 文件可见。
+
+在相同输入、固定 P3 checkpoint、Tiberius checkpoint、阈值、GPU/CPU/内存及 6 小时预算下，重试作业为 `12735505_[0,20]`。恢复时该作业等待 3090 资源，尚未产生科学结果；两物种的五臂 smoke 仍须全部完成并通过输入观察与 GTF/GFF3 一致性检查，才可放行 full。

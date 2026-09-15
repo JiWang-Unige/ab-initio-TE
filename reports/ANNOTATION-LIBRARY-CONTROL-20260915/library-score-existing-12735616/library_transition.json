@@ -1,0 +1,68 @@
+{
+  "NONTE:any": {
+    "(False, False)": 91479,
+    "(False, True)": 741,
+    "(True, False)": 231,
+    "(True, True)": 4791
+  },
+  "NONTE:ge50": {
+    "(False, False)": 95669,
+    "(False, True)": 289,
+    "(True, False)": 104,
+    "(True, True)": 1180
+  },
+  "NONTE:ge80": {
+    "(False, False)": 96101,
+    "(False, True)": 189,
+    "(True, False)": 73,
+    "(True, True)": 879
+  },
+  "TE:any": {
+    "(False, False)": 42250,
+    "(False, True)": 196,
+    "(True, False)": 6081,
+    "(True, True)": 48715
+  },
+  "TE:ge50": {
+    "(False, False)": 50713,
+    "(False, True)": 182,
+    "(True, False)": 3654,
+    "(True, True)": 42693
+  },
+  "TE:ge80": {
+    "(False, False)": 52891,
+    "(False, True)": 206,
+    "(True, False)": 3395,
+    "(True, True)": 40750
+  },
+  "UNKNOWN:any": {
+    "(False, False)": 96196,
+    "(False, True)": 125,
+    "(True, False)": 779,
+    "(True, True)": 142
+  },
+  "UNKNOWN:ge50": {
+    "(False, False)": 96874,
+    "(False, True)": 61,
+    "(True, False)": 271,
+    "(True, True)": 36
+  },
+  "UNKNOWN:ge80": {
+    "(False, False)": 96949,
+    "(False, True)": 48,
+    "(True, False)": 222,
+    "(True, True)": 23
+  },
+  "UNRECOGNIZED:any": {
+    "(False, False)": 97037,
+    "(True, False)": 205
+  },
+  "UNRECOGNIZED:ge50": {
+    "(False, False)": 97177,
+    "(True, False)": 65
+  },
+  "UNRECOGNIZED:ge80": {
+    "(False, False)": 97187,
+    "(True, False)": 55
+  }
+}

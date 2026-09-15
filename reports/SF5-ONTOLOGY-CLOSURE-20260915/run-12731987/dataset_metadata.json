@@ -1,0 +1,461 @@
+{
+  "protocol": "SF5_ONTOLOGY_CLOSURE_20260915",
+  "seed": 42,
+  "window": 4096,
+  "step": 4096,
+  "max_n_frac": 0.2,
+  "ontology": {
+    "0": "BG",
+    "1": "SINE",
+    "2": "LINE",
+    "3": "LTR",
+    "4": "DNA",
+    "5": "KNOWN_OTHER_TE",
+    "6": "AMBIGUOUS_TE",
+    "7": "UNCLASSIFIED"
+  },
+  "source_mode": "existing_comparator_plus_unknown",
+  "source_semantics": "BG is uncovered by the repository TE-plus-unknown comparator; Unknown/Unspecified source rows are unresolved candidates, not independent truth.",
+  "species_order": [
+    "mouse",
+    "zebrafish",
+    "chicken",
+    "western_clawed_frog",
+    "fruit_fly",
+    "c_elegans"
+  ],
+  "species": {
+    "mouse": {
+      "source": {
+        "records": 760726,
+        "bp": 243069772,
+        "class_records": {
+          "DNA": 33310,
+          "LINE": 224812,
+          "LTR": 214732,
+          "RC": 90,
+          "Retroposon": 3858,
+          "SINE": 283069,
+          "Unknown": 840,
+          "Unspecified": 15
+        },
+        "class_bp": {
+          "DNA": 5811448,
+          "LINE": 130993081,
+          "LTR": 65609911,
+          "RC": 15306,
+          "Retroposon": 1701124,
+          "SINE": 38474410,
+          "Unknown": 462305,
+          "Unspecified": 2187
+        }
+      },
+      "splits": {
+        "train": {
+          "chrom": "chr1",
+          "windows": 900,
+          "class_bp": {
+            "BG": 1546876,
+            "SINE": 162011,
+            "LINE": 1340854,
+            "LTR": 601654,
+            "DNA": 28462,
+            "KNOWN_OTHER_TE": 6301,
+            "UNCLASSIFIED": 242
+          }
+        },
+        "val": {
+          "chrom": "chr2",
+          "windows": 240,
+          "class_bp": {
+            "BG": 594358,
+            "SINE": 89307,
+            "LINE": 152799,
+            "LTR": 129682,
+            "DNA": 13757,
+            "KNOWN_OTHER_TE": 3137
+          }
+        },
+        "test": {
+          "chrom": "chrX",
+          "windows": 360,
+          "class_bp": {
+            "BG": 350374,
+            "SINE": 25267,
+            "LINE": 647088,
+            "LTR": 441925,
+            "DNA": 9906
+          }
+        }
+      }
+    },
+    "zebrafish": {
+      "source": {
+        "records": 388011,
+        "bp": 106901506,
+        "class_records": {
+          "DNA": 289539,
+          "DNA?": 366,
+          "LINE": 26714,
+          "LTR": 27935,
+          "RC": 12519,
+          "SINE": 24250,
+          "Unknown": 6688
+        },
+        "class_bp": {
+          "DNA": 73938013,
+          "DNA?": 76736,
+          "LINE": 8815233,
+          "LTR": 14944056,
+          "RC": 2307462,
+          "SINE": 5771671,
+          "Unknown": 1048335
+        }
+      },
+      "splits": {
+        "train": {
+          "chrom": "chr4",
+          "windows": 900,
+          "class_bp": {
+            "BG": 2493896,
+            "SINE": 102997,
+            "LINE": 76070,
+            "LTR": 77968,
+            "DNA": 774459,
+            "KNOWN_OTHER_TE": 41462,
+            "AMBIGUOUS_TE": 110854,
+            "UNCLASSIFIED": 8694
+          }
+        },
+        "val": {
+          "chrom": "chr7",
+          "windows": 240,
+          "class_bp": {
+            "BG": 508213,
+            "SINE": 24868,
+            "LINE": 41125,
+            "LTR": 43827,
+            "DNA": 317793,
+            "KNOWN_OTHER_TE": 5862,
+            "AMBIGUOUS_TE": 39874,
+            "UNCLASSIFIED": 1478
+          }
+        },
+        "test": {
+          "chrom": "chr5",
+          "windows": 360,
+          "class_bp": {
+            "BG": 725707,
+            "SINE": 34464,
+            "LINE": 54456,
+            "LTR": 78954,
+            "DNA": 503208,
+            "KNOWN_OTHER_TE": 15770,
+            "AMBIGUOUS_TE": 59161,
+            "UNCLASSIFIED": 2840
+          }
+        }
+      }
+    },
+    "chicken": {
+      "source": {
+        "records": 154412,
+        "bp": 53051140,
+        "class_records": {
+          "DNA": 18933,
+          "DNA?": 907,
+          "LINE": 114206,
+          "LTR": 16566,
+          "LTR?": 75,
+          "RC?": 35,
+          "SINE": 2511,
+          "Unknown": 1179
+        },
+        "class_bp": {
+          "DNA": 5869836,
+          "DNA?": 132837,
+          "LINE": 39692045,
+          "LTR": 6814766,
+          "LTR?": 12408,
+          "RC?": 5767,
+          "SINE": 324505,
+          "Unknown": 198976
+        }
+      },
+      "splits": {
+        "train": {
+          "chrom": "chr1",
+          "windows": 900,
+          "class_bp": {
+            "BG": 3110555,
+            "SINE": 2311,
+            "LINE": 444793,
+            "LTR": 103191,
+            "DNA": 24352,
+            "AMBIGUOUS_TE": 779,
+            "UNCLASSIFIED": 419
+          }
+        },
+        "val": {
+          "chrom": "chr2",
+          "windows": 240,
+          "class_bp": {
+            "BG": 854395,
+            "SINE": 83,
+            "LINE": 114896,
+            "LTR": 12083,
+            "DNA": 1583
+          }
+        },
+        "test": {
+          "chrom": "chr3",
+          "windows": 360,
+          "class_bp": {
+            "BG": 1358511,
+            "SINE": 1733,
+            "LINE": 92331,
+            "LTR": 10598,
+            "DNA": 9325,
+            "AMBIGUOUS_TE": 1082,
+            "UNCLASSIFIED": 980
+          }
+        }
+      }
+    },
+    "western_clawed_frog": {
+      "source": {
+        "records": 808028,
+        "bp": 186972782,
+        "class_records": {
+          "DNA": 632182,
+          "DNA?": 12,
+          "LINE": 112659,
+          "LTR": 29453,
+          "RC": 3033,
+          "SINE": 20303,
+          "Unknown": 10386
+        },
+        "class_bp": {
+          "DNA": 133039672,
+          "DNA?": 1326,
+          "LINE": 32675121,
+          "LTR": 13997346,
+          "RC": 2997875,
+          "SINE": 1939500,
+          "Unknown": 2321942
+        }
+      },
+      "splits": {
+        "train": {
+          "chrom": "chr1",
+          "windows": 900,
+          "class_bp": {
+            "BG": 2056901,
+            "SINE": 3139,
+            "LINE": 343358,
+            "LTR": 269941,
+            "DNA": 977189,
+            "KNOWN_OTHER_TE": 16067,
+            "AMBIGUOUS_TE": 1759,
+            "UNCLASSIFIED": 18046
+          }
+        },
+        "val": {
+          "chrom": "chr2",
+          "windows": 240,
+          "class_bp": {
+            "BG": 762306,
+            "SINE": 1033,
+            "LINE": 51717,
+            "LTR": 39917,
+            "DNA": 108734,
+            "KNOWN_OTHER_TE": 3459,
+            "AMBIGUOUS_TE": 277,
+            "UNCLASSIFIED": 15597
+          }
+        },
+        "test": {
+          "chrom": "chr5",
+          "windows": 360,
+          "class_bp": {
+            "BG": 1188543,
+            "SINE": 12578,
+            "LINE": 65212,
+            "LTR": 83036,
+            "DNA": 121802,
+            "KNOWN_OTHER_TE": 524,
+            "UNCLASSIFIED": 2865
+          }
+        }
+      }
+    },
+    "fruit_fly": {
+      "source": {
+        "records": 20799,
+        "bp": 13571336,
+        "class_records": {
+          "DNA": 2506,
+          "LINE": 4591,
+          "LTR": 10201,
+          "RC": 3401,
+          "Unknown": 100
+        },
+        "class_bp": {
+          "DNA": 1115929,
+          "LINE": 3695032,
+          "LTR": 8144185,
+          "RC": 599684,
+          "Unknown": 16506
+        }
+      },
+      "splits": {
+        "train": {
+          "chrom": "chr3R",
+          "windows": 900,
+          "class_bp": {
+            "BG": 974314,
+            "LINE": 770037,
+            "LTR": 1716117,
+            "DNA": 178740,
+            "KNOWN_OTHER_TE": 47192
+          }
+        },
+        "val": {
+          "chrom": "chr3L",
+          "windows": 240,
+          "class_bp": {
+            "BG": 940481,
+            "LINE": 1124,
+            "LTR": 32670,
+            "DNA": 1177,
+            "KNOWN_OTHER_TE": 7588
+          }
+        },
+        "test": {
+          "chrom": "chr2R",
+          "windows": 360,
+          "class_bp": {
+            "BG": 341036,
+            "LINE": 280379,
+            "LTR": 628669,
+            "DNA": 193137,
+            "KNOWN_OTHER_TE": 31123,
+            "UNCLASSIFIED": 216
+          }
+        }
+      }
+    },
+    "c_elegans": {
+      "source": {
+        "records": 24534,
+        "bp": 5587211,
+        "class_records": {
+          "DNA": 17230,
+          "DNA?": 373,
+          "LINE": 408,
+          "LTR": 404,
+          "RC": 2311,
+          "SINE": 395,
+          "Unknown": 3413
+        },
+        "class_bp": {
+          "DNA": 3534749,
+          "DNA?": 150029,
+          "LINE": 264483,
+          "LTR": 284241,
+          "RC": 793379,
+          "SINE": 64699,
+          "Unknown": 495631
+        }
+      },
+      "splits": {
+        "train": {
+          "chrom": "chrV",
+          "windows": 900,
+          "class_bp": {
+            "BG": 2991352,
+            "SINE": 4579,
+            "LINE": 10031,
+            "LTR": 9728,
+            "DNA": 361663,
+            "KNOWN_OTHER_TE": 98689,
+            "AMBIGUOUS_TE": 105283,
+            "UNCLASSIFIED": 105075
+          }
+        },
+        "val": {
+          "chrom": "chrX",
+          "windows": 240,
+          "class_bp": {
+            "BG": 835183,
+            "SINE": 3092,
+            "LINE": 7981,
+            "LTR": 677,
+            "DNA": 64114,
+            "KNOWN_OTHER_TE": 25202,
+            "AMBIGUOUS_TE": 25440,
+            "UNCLASSIFIED": 21351
+          }
+        },
+        "test": {
+          "chrom": "chrIV",
+          "windows": 360,
+          "class_bp": {
+            "BG": 1232019,
+            "SINE": 1671,
+            "LINE": 3120,
+            "LTR": 11528,
+            "DNA": 102363,
+            "KNOWN_OTHER_TE": 35914,
+            "AMBIGUOUS_TE": 57640,
+            "UNCLASSIFIED": 30305
+          }
+        }
+      }
+    }
+  },
+  "splits": {
+    "train": {
+      "windows": 5400,
+      "class_bp": {
+        "AMBIGUOUS_TE": 218675,
+        "BG": 13173894,
+        "DNA": 2344865,
+        "KNOWN_OTHER_TE": 209711,
+        "LINE": 2985143,
+        "LTR": 2778599,
+        "SINE": 275037,
+        "UNCLASSIFIED": 132476
+      },
+      "expected_windows": 5400
+    },
+    "val": {
+      "windows": 1440,
+      "class_bp": {
+        "AMBIGUOUS_TE": 65591,
+        "BG": 4494936,
+        "DNA": 507158,
+        "KNOWN_OTHER_TE": 45248,
+        "LINE": 369642,
+        "LTR": 258856,
+        "SINE": 118383,
+        "UNCLASSIFIED": 38426
+      },
+      "expected_windows": 1440
+    },
+    "test": {
+      "windows": 2160,
+      "class_bp": {
+        "AMBIGUOUS_TE": 117883,
+        "BG": 5196190,
+        "DNA": 939741,
+        "KNOWN_OTHER_TE": 83331,
+        "LINE": 1142586,
+        "LTR": 1254710,
+        "SINE": 75713,
+        "UNCLASSIFIED": 37206
+      },
+      "expected_windows": 2160
+    }
+  }
+}

@@ -1,0 +1,1084 @@
+{
+  "claim_policy": {
+    "annotation_support_is_descriptive": true,
+    "fp_rescue_claim": false,
+    "independent_biological_truth": false,
+    "model_scores_read": false,
+    "same_base_f1_computed": false,
+    "same_engine_same_query_panel": true,
+    "target_annotation_read": false
+  },
+  "engine_control": "RepeatMasker 4.2.2; -pa 4 -xsmall -gff -lib; identical fixed panel FASTA with 4096-bp halo",
+  "external_evidence_layer": {
+    "independent_manual_or_experimental_truth_available": false,
+    "new_target_annotation_used_for_selection": false,
+    "same_sequence_qualification_is_reported": true,
+    "source_target_chain_sequence_is_not_biological_truth": true
+  },
+  "libraries": {
+    "dfam2018_consensus": {
+      "label": "dfam2018_consensus",
+      "old_te_to_library_te_transition_counts_repeated_by_layer": {
+        "(False, False)": 106545,
+        "(False, True)": 34092,
+        "(True, False)": 39893,
+        "(True, True)": 111196
+      },
+      "record_count": 97242,
+      "source_only_matched_pairs": {
+        "NONTE:any": {
+          "difference_pp": -0.3249097472924189,
+          "fp_fraction_of_all_cases": 0.0222745467388745,
+          "fp_supported": 473,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 154,
+          "tn_fraction_of_matched_pairs": 0.02779783393501805,
+          "unmatched_fp": 15695
+        },
+        "NONTE:ge50": {
+          "difference_pp": -0.5595667870036103,
+          "fp_fraction_of_all_cases": 0.016435130680480338,
+          "fp_supported": 349,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 110,
+          "tn_fraction_of_matched_pairs": 0.019855595667870037,
+          "unmatched_fp": 15695
+        },
+        "NONTE:ge80": {
+          "difference_pp": -0.1985559566787004,
+          "fp_fraction_of_all_cases": 0.014645632210972452,
+          "fp_supported": 311,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 82,
+          "tn_fraction_of_matched_pairs": 0.0148014440433213,
+          "unmatched_fp": 15695
+        },
+        "TE:any": {
+          "difference_pp": -0.6678700361010814,
+          "fp_fraction_of_all_cases": 0.3347774899929362,
+          "fp_supported": 7109,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 1772,
+          "tn_fraction_of_matched_pairs": 0.31985559566787003,
+          "unmatched_fp": 15695
+        },
+        "TE:ge50": {
+          "difference_pp": 2.6534296028880884,
+          "fp_fraction_of_all_cases": 0.3071815399105251,
+          "fp_supported": 6523,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 1305,
+          "tn_fraction_of_matched_pairs": 0.2355595667870036,
+          "unmatched_fp": 15695
+        },
+        "TE:ge80": {
+          "difference_pp": 2.851985559566786,
+          "fp_fraction_of_all_cases": 0.28782670120084763,
+          "fp_supported": 6112,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 1163,
+          "tn_fraction_of_matched_pairs": 0.20992779783393503,
+          "unmatched_fp": 15695
+        },
+        "UNKNOWN:any": {
+          "difference_pp": -0.054151624548736454,
+          "fp_fraction_of_all_cases": 0.0047562985636920175,
+          "fp_supported": 101,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 24,
+          "tn_fraction_of_matched_pairs": 0.004332129963898917,
+          "unmatched_fp": 15695
+        },
+        "UNKNOWN:ge50": {
+          "difference_pp": -0.09025270758122746,
+          "fp_fraction_of_all_cases": 0.004238285848834471,
+          "fp_supported": 90,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 22,
+          "tn_fraction_of_matched_pairs": 0.003971119133574007,
+          "unmatched_fp": 15695
+        },
+        "UNKNOWN:ge80": {
+          "difference_pp": 0.018050541516245484,
+          "fp_fraction_of_all_cases": 0.004002825523899223,
+          "fp_supported": 85,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 13,
+          "tn_fraction_of_matched_pairs": 0.0023465703971119133,
+          "unmatched_fp": 15695
+        },
+        "UNRECOGNIZED:any": {
+          "difference_pp": 0.05415162454873646,
+          "fp_fraction_of_all_cases": 0.0010831174947021427,
+          "fp_supported": 23,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 4,
+          "tn_fraction_of_matched_pairs": 0.0007220216606498195,
+          "unmatched_fp": 15695
+        },
+        "UNRECOGNIZED:ge50": {
+          "difference_pp": 0.054151624548736475,
+          "fp_fraction_of_all_cases": 0.0008476571697668943,
+          "fp_supported": 18,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 2,
+          "tn_fraction_of_matched_pairs": 0.00036101083032490973,
+          "unmatched_fp": 15695
+        },
+        "UNRECOGNIZED:ge80": {
+          "difference_pp": 0.054151624548736475,
+          "fp_fraction_of_all_cases": 0.0008476571697668943,
+          "fp_supported": 18,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 2,
+          "tn_fraction_of_matched_pairs": 0.00036101083032490973,
+          "unmatched_fp": 15695
+        },
+        "old_te:any": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "old_te:ge50": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "old_te:ge80": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        }
+      },
+      "state_counts": {
+        "FN": 24588,
+        "FP": 21402,
+        "TN": 25477,
+        "TP": 25775
+      },
+      "support_by_state": {
+        "NONTE:any": {
+          "FN": {
+            "fraction": 0.016268098259313486,
+            "n": 24588,
+            "supported": 400
+          },
+          "FP": {
+            "fraction": 0.024156620876553594,
+            "n": 21402,
+            "supported": 517
+          },
+          "TN": {
+            "fraction": 0.1390666090984025,
+            "n": 25477,
+            "supported": 3543
+          },
+          "TP": {
+            "fraction": 0.02180407371483996,
+            "n": 25775,
+            "supported": 562
+          }
+        },
+        "NONTE:ge50": {
+          "FN": {
+            "fraction": 0.01216040344883683,
+            "n": 24588,
+            "supported": 299
+          },
+          "FP": {
+            "fraction": 0.01794224838800112,
+            "n": 21402,
+            "supported": 384
+          },
+          "TN": {
+            "fraction": 0.021666601248184637,
+            "n": 25477,
+            "supported": 552
+          },
+          "TP": {
+            "fraction": 0.001901066925315228,
+            "n": 25775,
+            "supported": 49
+          }
+        },
+        "NONTE:ge80": {
+          "FN": {
+            "fraction": 0.009313486253456972,
+            "n": 24588,
+            "supported": 229
+          },
+          "FP": {
+            "fraction": 0.016026539575740587,
+            "n": 21402,
+            "supported": 343
+          },
+          "TN": {
+            "fraction": 0.014091141029163558,
+            "n": 25477,
+            "supported": 359
+          },
+          "TP": {
+            "fraction": 0.0008147429679922405,
+            "n": 25775,
+            "supported": 21
+          }
+        },
+        "TE:any": {
+          "FN": {
+            "fraction": 0.6873271514559948,
+            "n": 24588,
+            "supported": 16900
+          },
+          "FP": {
+            "fraction": 0.3357162881973647,
+            "n": 21402,
+            "supported": 7185
+          },
+          "TN": {
+            "fraction": 0.3661341602229462,
+            "n": 25477,
+            "supported": 9328
+          },
+          "TP": {
+            "fraction": 0.8296023278370515,
+            "n": 25775,
+            "supported": 21383
+          }
+        },
+        "TE:ge50": {
+          "FN": {
+            "fraction": 0.6519847079876362,
+            "n": 24588,
+            "supported": 16031
+          },
+          "FP": {
+            "fraction": 0.3075880758807588,
+            "n": 21402,
+            "supported": 6583
+          },
+          "TN": {
+            "fraction": 0.10719472465360914,
+            "n": 25477,
+            "supported": 2731
+          },
+          "TP": {
+            "fraction": 0.8148205625606207,
+            "n": 25775,
+            "supported": 21002
+          }
+        },
+        "TE:ge80": {
+          "FN": {
+            "fraction": 0.6362046526761022,
+            "n": 24588,
+            "supported": 15643
+          },
+          "FP": {
+            "fraction": 0.28796374170638256,
+            "n": 21402,
+            "supported": 6163
+          },
+          "TN": {
+            "fraction": 0.08250578953565961,
+            "n": 25477,
+            "supported": 2102
+          },
+          "TP": {
+            "fraction": 0.7851406401551891,
+            "n": 25775,
+            "supported": 20237
+          }
+        },
+        "UNKNOWN:any": {
+          "FN": {
+            "fraction": 0.005124450951683748,
+            "n": 24588,
+            "supported": 126
+          },
+          "FP": {
+            "fraction": 0.004812634333239884,
+            "n": 21402,
+            "supported": 103
+          },
+          "TN": {
+            "fraction": 0.015975193311614396,
+            "n": 25477,
+            "supported": 407
+          },
+          "TP": {
+            "fraction": 0.011057225994180407,
+            "n": 25775,
+            "supported": 285
+          }
+        },
+        "UNKNOWN:ge50": {
+          "FN": {
+            "fraction": 0.004433056775662925,
+            "n": 24588,
+            "supported": 109
+          },
+          "FP": {
+            "fraction": 0.004298663676291935,
+            "n": 21402,
+            "supported": 92
+          },
+          "TN": {
+            "fraction": 0.003140087137418063,
+            "n": 25477,
+            "supported": 80
+          },
+          "TP": {
+            "fraction": 0.001008729388942774,
+            "n": 25775,
+            "supported": 26
+          }
+        },
+        "UNKNOWN:ge80": {
+          "FN": {
+            "fraction": 0.0039856840735318045,
+            "n": 24588,
+            "supported": 98
+          },
+          "FP": {
+            "fraction": 0.0040650406504065045,
+            "n": 21402,
+            "supported": 87
+          },
+          "TN": {
+            "fraction": 0.0019625544608862897,
+            "n": 25477,
+            "supported": 50
+          },
+          "TP": {
+            "fraction": 0.0003879728419010669,
+            "n": 25775,
+            "supported": 10
+          }
+        },
+        "UNRECOGNIZED:any": {
+          "FN": {
+            "fraction": 0.0009354156499105254,
+            "n": 24588,
+            "supported": 23
+          },
+          "FP": {
+            "fraction": 0.0010746659190729838,
+            "n": 21402,
+            "supported": 23
+          },
+          "TN": {
+            "fraction": 0.004710130706127095,
+            "n": 25477,
+            "supported": 120
+          },
+          "TP": {
+            "fraction": 0.001513094083414161,
+            "n": 25775,
+            "supported": 39
+          }
+        },
+        "UNRECOGNIZED:ge50": {
+          "FN": {
+            "fraction": 0.0006913941760208231,
+            "n": 24588,
+            "supported": 17
+          },
+          "FP": {
+            "fraction": 0.0008410428931875525,
+            "n": 21402,
+            "supported": 18
+          },
+          "TN": {
+            "fraction": 0.0009027750520076933,
+            "n": 25477,
+            "supported": 23
+          },
+          "TP": {
+            "fraction": 0.00027158098933074683,
+            "n": 25775,
+            "supported": 7
+          }
+        },
+        "UNRECOGNIZED:ge80": {
+          "FN": {
+            "fraction": 0.0006507239303725395,
+            "n": 24588,
+            "supported": 16
+          },
+          "FP": {
+            "fraction": 0.0008410428931875525,
+            "n": 21402,
+            "supported": 18
+          },
+          "TN": {
+            "fraction": 0.0006280174274836127,
+            "n": 25477,
+            "supported": 16
+          },
+          "TP": {
+            "fraction": 0.00019398642095053346,
+            "n": 25775,
+            "supported": 5
+          }
+        },
+        "old_te:any": {
+          "FN": {
+            "fraction": 1.0,
+            "n": 24588,
+            "supported": 24588
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 1.0,
+            "n": 25775,
+            "supported": 25775
+          }
+        },
+        "old_te:ge50": {
+          "FN": {
+            "fraction": 1.0,
+            "n": 24588,
+            "supported": 24588
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 1.0,
+            "n": 25775,
+            "supported": 25775
+          }
+        },
+        "old_te:ge80": {
+          "FN": {
+            "fraction": 1.0,
+            "n": 24588,
+            "supported": 24588
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 1.0,
+            "n": 25775,
+            "supported": 25775
+          }
+        }
+      }
+    },
+    "dfam39_human_curated": {
+      "label": "dfam39_human_curated",
+      "old_te_to_library_te_transition_counts_repeated_by_layer": {
+        "(False, False)": 117527,
+        "(False, True)": 23110,
+        "(True, False)": 41457,
+        "(True, True)": 109632
+      },
+      "record_count": 97242,
+      "source_only_matched_pairs": {
+        "NONTE:any": {
+          "difference_pp": -0.3971119133574008,
+          "fp_fraction_of_all_cases": 0.025759359547916177,
+          "fp_supported": 547,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 181,
+          "tn_fraction_of_matched_pairs": 0.03267148014440433,
+          "unmatched_fp": 15695
+        },
+        "NONTE:ge50": {
+          "difference_pp": -0.7761732851985559,
+          "fp_fraction_of_all_cases": 0.018177537085001177,
+          "fp_supported": 386,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 132,
+          "tn_fraction_of_matched_pairs": 0.023826714801444042,
+          "unmatched_fp": 15695
+        },
+        "NONTE:ge80": {
+          "difference_pp": -0.34296028880866447,
+          "fp_fraction_of_all_cases": 0.015352013185778196,
+          "fp_supported": 326,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 94,
+          "tn_fraction_of_matched_pairs": 0.01696750902527076,
+          "unmatched_fp": 15695
+        },
+        "TE:any": {
+          "difference_pp": 1.8050541516245495,
+          "fp_fraction_of_all_cases": 0.243607252178008,
+          "fp_supported": 5173,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 1261,
+          "tn_fraction_of_matched_pairs": 0.22761732851985558,
+          "unmatched_fp": 15695
+        },
+        "TE:ge50": {
+          "difference_pp": 4.981949458483756,
+          "fp_fraction_of_all_cases": 0.219919943489522,
+          "fp_supported": 4670,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 854,
+          "tn_fraction_of_matched_pairs": 0.15415162454873646,
+          "unmatched_fp": 15695
+        },
+        "TE:ge80": {
+          "difference_pp": 4.494584837545126,
+          "fp_fraction_of_all_cases": 0.2003767365198964,
+          "fp_supported": 4255,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 762,
+          "tn_fraction_of_matched_pairs": 0.13754512635379063,
+          "unmatched_fp": 15695
+        },
+        "UNKNOWN:any": {
+          "difference_pp": -0.054151624548736475,
+          "fp_fraction_of_all_cases": 0.0011302095596891924,
+          "fp_supported": 24,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 11,
+          "tn_fraction_of_matched_pairs": 0.0019855595667870036,
+          "unmatched_fp": 15695
+        },
+        "UNKNOWN:ge50": {
+          "difference_pp": -0.054151624548736475,
+          "fp_fraction_of_all_cases": 0.0009889333647280433,
+          "fp_supported": 21,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 10,
+          "tn_fraction_of_matched_pairs": 0.0018050541516245488,
+          "unmatched_fp": 15695
+        },
+        "UNKNOWN:ge80": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0009889333647280433,
+          "fp_supported": 21,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 7,
+          "tn_fraction_of_matched_pairs": 0.001263537906137184,
+          "unmatched_fp": 15695
+        },
+        "UNRECOGNIZED:any": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "UNRECOGNIZED:ge50": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "UNRECOGNIZED:ge80": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "old_te:any": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "old_te:ge50": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        },
+        "old_te:ge80": {
+          "difference_pp": 0.0,
+          "fp_fraction_of_all_cases": 0.0,
+          "fp_supported": 0,
+          "matched_pairs": 5540,
+          "matched_tn_supported": 0,
+          "tn_fraction_of_matched_pairs": 0.0,
+          "unmatched_fp": 15695
+        }
+      },
+      "state_counts": {
+        "FN": 24588,
+        "FP": 21402,
+        "TN": 25477,
+        "TP": 25775
+      },
+      "support_by_state": {
+        "NONTE:any": {
+          "FN": {
+            "fraction": 0.017528875874410283,
+            "n": 24588,
+            "supported": 431
+          },
+          "FP": {
+            "fraction": 0.027660966264835062,
+            "n": 21402,
+            "supported": 592
+          },
+          "TN": {
+            "fraction": 0.15680810142481455,
+            "n": 25477,
+            "supported": 3995
+          },
+          "TP": {
+            "fraction": 0.01994180407371484,
+            "n": 25775,
+            "supported": 514
+          }
+        },
+        "NONTE:ge50": {
+          "FN": {
+            "fraction": 0.01268911664226452,
+            "n": 24588,
+            "supported": 312
+          },
+          "FP": {
+            "fraction": 0.019577609569199142,
+            "n": 21402,
+            "supported": 419
+          },
+          "TN": {
+            "fraction": 0.02751501354162578,
+            "n": 25477,
+            "supported": 701
+          },
+          "TP": {
+            "fraction": 0.0014354995150339476,
+            "n": 25775,
+            "supported": 37
+          }
+        },
+        "NONTE:ge80": {
+          "FN": {
+            "fraction": 0.009679518464291525,
+            "n": 24588,
+            "supported": 238
+          },
+          "FP": {
+            "fraction": 0.016680684048219794,
+            "n": 21402,
+            "supported": 357
+          },
+          "TN": {
+            "fraction": 0.017466734701887976,
+            "n": 25477,
+            "supported": 445
+          },
+          "TP": {
+            "fraction": 0.0010863239573229873,
+            "n": 25775,
+            "supported": 28
+          }
+        },
+        "TE:any": {
+          "FN": {
+            "fraction": 0.673011224987799,
+            "n": 24588,
+            "supported": 16548
+          },
+          "FP": {
+            "fraction": 0.24460330810204653,
+            "n": 21402,
+            "supported": 5235
+          },
+          "TN": {
+            "fraction": 0.23456450916512933,
+            "n": 25477,
+            "supported": 5976
+          },
+          "TP": {
+            "fraction": 0.8206401551891368,
+            "n": 25775,
+            "supported": 21152
+          }
+        },
+        "TE:ge50": {
+          "FN": {
+            "fraction": 0.6372620790629575,
+            "n": 24588,
+            "supported": 15669
+          },
+          "FP": {
+            "fraction": 0.22035323801513879,
+            "n": 21402,
+            "supported": 4716
+          },
+          "TN": {
+            "fraction": 0.0640577776033285,
+            "n": 25477,
+            "supported": 1632
+          },
+          "TP": {
+            "fraction": 0.8092337536372454,
+            "n": 25775,
+            "supported": 20858
+          }
+        },
+        "TE:ge80": {
+          "FN": {
+            "fraction": 0.6229461525947617,
+            "n": 24588,
+            "supported": 15317
+          },
+          "FP": {
+            "fraction": 0.2004952808148771,
+            "n": 21402,
+            "supported": 4291
+          },
+          "TN": {
+            "fraction": 0.049456372414334496,
+            "n": 25477,
+            "supported": 1260
+          },
+          "TP": {
+            "fraction": 0.7793598448108633,
+            "n": 25775,
+            "supported": 20088
+          }
+        },
+        "UNKNOWN:any": {
+          "FN": {
+            "fraction": 0.001586139580283065,
+            "n": 24588,
+            "supported": 39
+          },
+          "FP": {
+            "fraction": 0.0011681151294271564,
+            "n": 21402,
+            "supported": 25
+          },
+          "TN": {
+            "fraction": 0.006672685167013384,
+            "n": 25477,
+            "supported": 170
+          },
+          "TP": {
+            "fraction": 0.0012803103782735208,
+            "n": 25775,
+            "supported": 33
+          }
+        },
+        "UNKNOWN:ge50": {
+          "FN": {
+            "fraction": 0.0010980966325036604,
+            "n": 24588,
+            "supported": 27
+          },
+          "FP": {
+            "fraction": 0.0010279413138958977,
+            "n": 21402,
+            "supported": 22
+          },
+          "TN": {
+            "fraction": 0.001884052282450838,
+            "n": 25477,
+            "supported": 48
+          },
+          "TP": {
+            "fraction": 0.0,
+            "n": 25775,
+            "supported": 0
+          }
+        },
+        "UNKNOWN:ge80": {
+          "FN": {
+            "fraction": 0.0008134049129656743,
+            "n": 24588,
+            "supported": 20
+          },
+          "FP": {
+            "fraction": 0.0009812167087188113,
+            "n": 21402,
+            "supported": 21
+          },
+          "TN": {
+            "fraction": 0.0011775326765317738,
+            "n": 25477,
+            "supported": 30
+          },
+          "TP": {
+            "fraction": 0.0,
+            "n": 25775,
+            "supported": 0
+          }
+        },
+        "UNRECOGNIZED:any": {
+          "FN": {
+            "fraction": 0.0,
+            "n": 24588,
+            "supported": 0
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 0.0,
+            "n": 25775,
+            "supported": 0
+          }
+        },
+        "UNRECOGNIZED:ge50": {
+          "FN": {
+            "fraction": 0.0,
+            "n": 24588,
+            "supported": 0
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 0.0,
+            "n": 25775,
+            "supported": 0
+          }
+        },
+        "UNRECOGNIZED:ge80": {
+          "FN": {
+            "fraction": 0.0,
+            "n": 24588,
+            "supported": 0
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 0.0,
+            "n": 25775,
+            "supported": 0
+          }
+        },
+        "old_te:any": {
+          "FN": {
+            "fraction": 1.0,
+            "n": 24588,
+            "supported": 24588
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 1.0,
+            "n": 25775,
+            "supported": 25775
+          }
+        },
+        "old_te:ge50": {
+          "FN": {
+            "fraction": 1.0,
+            "n": 24588,
+            "supported": 24588
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 1.0,
+            "n": 25775,
+            "supported": 25775
+          }
+        },
+        "old_te:ge80": {
+          "FN": {
+            "fraction": 1.0,
+            "n": 24588,
+            "supported": 24588
+          },
+          "FP": {
+            "fraction": 0.0,
+            "n": 21402,
+            "supported": 0
+          },
+          "TN": {
+            "fraction": 0.0,
+            "n": 25477,
+            "supported": 0
+          },
+          "TP": {
+            "fraction": 1.0,
+            "n": 25775,
+            "supported": 25775
+          }
+        }
+      }
+    }
+  },
+  "library_to_library_transition": {
+    "NONTE:any": {
+      "(False, False)": 91479,
+      "(False, True)": 741,
+      "(True, False)": 231,
+      "(True, True)": 4791
+    },
+    "NONTE:ge50": {
+      "(False, False)": 95669,
+      "(False, True)": 289,
+      "(True, False)": 104,
+      "(True, True)": 1180
+    },
+    "NONTE:ge80": {
+      "(False, False)": 96101,
+      "(False, True)": 189,
+      "(True, False)": 73,
+      "(True, True)": 879
+    },
+    "TE:any": {
+      "(False, False)": 42250,
+      "(False, True)": 196,
+      "(True, False)": 6081,
+      "(True, True)": 48715
+    },
+    "TE:ge50": {
+      "(False, False)": 50713,
+      "(False, True)": 182,
+      "(True, False)": 3654,
+      "(True, True)": 42693
+    },
+    "TE:ge80": {
+      "(False, False)": 52891,
+      "(False, True)": 206,
+      "(True, False)": 3395,
+      "(True, True)": 40750
+    },
+    "UNKNOWN:any": {
+      "(False, False)": 96196,
+      "(False, True)": 125,
+      "(True, False)": 779,
+      "(True, True)": 142
+    },
+    "UNKNOWN:ge50": {
+      "(False, False)": 96874,
+      "(False, True)": 61,
+      "(True, False)": 271,
+      "(True, True)": 36
+    },
+    "UNKNOWN:ge80": {
+      "(False, False)": 96949,
+      "(False, True)": 48,
+      "(True, False)": 222,
+      "(True, True)": 23
+    },
+    "UNRECOGNIZED:any": {
+      "(False, False)": 97037,
+      "(True, False)": 205
+    },
+    "UNRECOGNIZED:ge50": {
+      "(False, False)": 97177,
+      "(True, False)": 65
+    },
+    "UNRECOGNIZED:ge80": {
+      "(False, False)": 97187,
+      "(True, False)": 55
+    }
+  },
+  "panel": {
+    "center_bp": 20480000,
+    "halo_bp": 4096,
+    "panel_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANNOTATION-LIBRARY-CONTROL-20260915/run-12732075/panel/panel.fa",
+    "query_count": 2500,
+    "tile_bp": 8192
+  },
+  "protocol": "ANNOTATION_LIBRARY_CONTROL_20260915",
+  "seed": 42,
+  "source_assembly": "hg19",
+  "source_denominator": {
+    "all_allowed_interval_rows": 97242,
+    "matched_control_rows": 21235,
+    "matched_pairs": 5540,
+    "selection_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/no-reuse/matched_controls_no_reuse.tsv",
+    "selection_uses_model_scores": false,
+    "selection_uses_new_library_support": false,
+    "state_counts": {
+      "FN": 24588,
+      "FP": 21402,
+      "TN": 25477,
+      "TP": 25775
+    },
+    "unmatched_fp": 15695
+  },
+  "status": "ANNOTATION_LIBRARY_CONTROL_COMPLETED"
+}

@@ -12,23 +12,23 @@
 
 ## 当前执行图
 
-**最近核实，2026-09-15 13:20 UTC：** 用户报告恢复后，直接 `ssh baobab` 成功读取 Slurm；随后新的连接再次返回Connection refused，因此下表为13:20实际快照，不能视为持续在线状态。库控制已TIMEOUT，Tiberius两项smoke已FAILED，CB4 EarlGrey已FAILED；不能将这些作业继续记作运行。下一次可连接时先读取对应错误和产物，再修复及调整被阻塞的依赖，不重启已完成项。之前12:17的连接故障不表示计算作业被取消。
+**最近核实，2026-09-15 15:08 UTC：** SSH已恢复，本轮使用任务专用控制连接 `/tmp/te-closure-baobab.sock` 复用会话（10分钟空闲保留；过期后可重新建立，不修改用户SSH配置）。库控制两项评分及SF5完整评价均已收回并完成解释；连同先前NTv2六臂，前三项补实验已收敛。Tiberius和EarlGrey已完成实际接口修复、保留失败并提交原协议重试，尚无两方向最终科学比较。下表为该时点实际状态。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
-| 库控制 | selected12732075已TIMEOUT（2h00m29s）；12732016为重复的顺序版本已取消，输入panel.tsv逐字一致 | 核实两份已生成native注释及评分中断点，符合条件则只重评分；区分全库与人lineage内容混杂 |
-| source-only 匹配/蛋白 | 12732331已完成；12732397为DependencyNeverSatisfied，需修复评分依赖 | 5540个唯一配对；15695 FP未匹配；强蛋白命中仅4/21235且matched为0/5540，不能支持广泛FP rescue |
+| 库控制 | 原注释12732075两份完成；评分恢复12735616已COMPLETED（46s），旧TIMEOUT保留 | 同输入/引擎库配置敏感性已完成；差异含taxon/curation/RepBase混杂，不是单纯版本效应，见该方向RESULTS.md |
+| source-only 匹配/蛋白 | 12732331完成；no-reuse12735617已COMPLETED（52s）；旧阻塞12732397已取消 | 5540唯一配对；>=50%/80%TE支持差在两库均为正，但不能直接FP rescue；强蛋白matched支持仍0/5540 |
 | NTv2 label-free | 12732191完成41分33秒；权重核查12733074完成；旧尝试保留 | 六臂已完整评价：适配transductive ARI小幅增，但NMI和inductive ARI较冻结NTv2下降，不能称稳定提升；本项闭合，见独立RESULTS.md |
-| SF5 ontology | prep12731940完成；train/eval12731987仍RUNNING（3h30m47s） | 5400 TRAIN、1440 VAL、2160 TEST，完整六物种、八类本体；按物种报分母 |
+| SF5 ontology | train/eval及legacy12731987已COMPLETED（3h55m09s），结果本地收回 | 5400/1440/2160完整六物种；TEST材料F1=0.884305，main4 macro=0.833687；状态/物种差异明显，无稳定整体提升，见RESULTS.md |
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
 | Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条、219080 repeat rows；platypus实际manifest仍需收取核实 |
-| Tiberius smoke | 12732021_0及_20均FAILED（21m12s/19m55s） | 先收取实际异常再修复；两物种各一core×五arm，实际模型5/6通道、相同大写序列、GTF/GFF3坐标一致 |
-| Tiberius full | 12732547_[0–39%2]为DependencyNeverSatisfied | 修复smoke后更新依赖，保留两物种五arm全部合格才扩展的条件；已合格smoke复用 |
+| Tiberius smoke | 原12732021两项FAILED保留；重试12735505_0运行、_20等资源 | 根因是源码bind遮蔽镜像checkpoint嵌套目标；目标目录修复并实际挂载验证，尚非Tiberius阳性/阴性结果 |
+| Tiberius full | 12732547_[0–39%2]已实际更新afterok12735505，PENDING Dependency | 保留两物种五arm全部合格才扩展条件；已合格smoke复用 |
 | Tiberius score | 12732548，afterok12732547 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
-| native方法 | CB4固定RM/HiTE完成，RM2/EDTA运行，EarlGrey12732198_4已FAILED（1h46m01s）；模拟固定RM/HiTE完成，其余三项运行 | 五软件×两输入，16CPU/80GB/24h，每个完整管线；收取EarlGrey实际异常，保留失败尝试 |
-| 固定D | 两项GPU已完成：CB4 3952.27s/P100、sim 3029.51s/TITAN X；CPU12731959运行/12731960等待 | 全部108384165/100000000bp实际处理；GPU硬件不同，CPU/native未齐前不形成速度排名 |
+| native方法 | 两输入固定RM/HiTE/RM2均完成；EDTA两项运行；EarlGrey续跑12735632_4/12735633_4运行，已进入最终RM | GNU find/BusyBox兼容性已复现修复，复用精炼库；原失败耗时计入相同总预算，不是一次无中断计时 |
+| 固定D | 两项GPU已完成：CB4 3952.27s/P100、sim 3029.51s/TITAN X；CPU12731959/12731960均运行 | 全部108384165/100000000bp实际处理；GPU硬件不同，CPU/native未齐前不形成速度排名 |
 | 长输入评分 | 12732389，afterany所有上述native和D作业 | `outputs/TE-LONG-BENCH-20260915/score-12732389/result.json`；Slurm终态进入完整14cell分母 |
 | 模拟库条目覆盖 | 已收回12733209结果；本地计数核对通过 | 366/366生成条目名称被实际固定RM库覆盖；包含非TE条目，不用于声称新家族发现 |
 
@@ -38,7 +38,11 @@
 - EarlGrey 使用 `/usr/local/share/RepeatMasker/Libraries/famdb`，需要其真实路径挂载；仅设置 FAMDB_DIR 无效。支持的 `-l` 显式传相同初始库。
 - 新 Tiberius 12732197 缺少 RepeatMasker 启动所需 FamDB 挂载，已在12732214修正；旧注释/日志保留，未将错误库的 mask 用于正式推理。
 - native EDTA 在 CB4 LTR 阶段出现空候选文件警告但继续执行；最终必须结合完整输出检查它是无候选还是实际未完成，不能只凭进程exit0认可科学输出。
-- 库控制旧评分循环重复为chr级旧注释union构建starts数组，并重复计算同一overlap。本地已缓存该索引并复用单次结果，独立逐碱基集合oracle验证半开区间语义不变；远程部署及当前作业状态待SSH恢复后核实。若12732075仅在评分阶段超时而两份native输出已合格，只重评分现有结果，不重跑RM；检查12732397的依赖是否需要调整。
+- 库控制旧评分循环重复为chr级旧注释union构建starts数组，并重复计算同一overlap。已缓存该索引并复用单次结果，独立逐碱基集合oracle验证半开区间语义不变；12732075仅在评分阶段超时，修复后仅对现有结果重评分。
+
+上述库评分修复已部署并完成；新旧legacy区间表逐字一致，两份native注释未重跑。Tiberius失败保留于 `run-r1-failed-12732021`，恢复细节见该方向 `SMOKE-RECOVERY-12735505.md`。EarlGrey原失败工作目录未覆盖，新目录复制后续跑；`native.py --resume-from`仅用于已确认的库汇总中断，最终评分12732389已更新等待两续跑及其余选定cell，完整14分母不变。
+
+SF5报告修正了一个解释问题：三个status的one-vs-rest TP之和不是合并Unknown的精确TP，状态间错分在合并后会成为TP。目前JSON可给出status精确标签micro F1及二值合并F1下界，不能假造未保存的联合混淆矩阵。未新增训练、模型选择或测试集调优。
 
 ## 完成动作
 

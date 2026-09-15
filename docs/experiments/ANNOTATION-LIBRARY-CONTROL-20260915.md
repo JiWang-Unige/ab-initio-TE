@@ -99,6 +99,7 @@ excluded from case/control selection and is not read by this protocol.
 - Source-only controls: [`matching_sensitivity.py`](../../scripts/experiments/ANNOTATION-LIBRARY-CONTROL-20260915/matching_sensitivity.py)
 - Protein evidence: [`protein_support.py`](../../scripts/experiments/ANNOTATION-LIBRARY-CONTROL-20260915/protein_support.py)
 - Slurm entry point: [`run_library_control.sbatch`](../../scripts/experiments/ANNOTATION-LIBRARY-CONTROL-20260915/run_library_control.sbatch)
+- Existing-annotation score recovery: [`score_existing_run.sbatch`](../../scripts/experiments/ANNOTATION-LIBRARY-CONTROL-20260915/score_existing_run.sbatch)
 - Orthogonal entry point: [`run_source_only_controls_and_protein.sbatch`](../../scripts/experiments/ANNOTATION-LIBRARY-CONTROL-20260915/run_source_only_controls_and_protein.sbatch)
 - No-reuse library score: [`score_no_reuse_library.sbatch`](../../scripts/experiments/ANNOTATION-LIBRARY-CONTROL-20260915/score_no_reuse_library.sbatch)
 - Fixed source qualification: `HG19-CHR1-REVISION-20260914-MATCHED/match-12708406`
@@ -122,7 +123,34 @@ startup/input-contract failures; they do not contribute annotations.
 
 ## Results
 
-The library result remains pending until `12732075` and its dependent
-no-reuse score `12732397` have completed.  The independent source-only and
-protein layer is in
+The fixed library-control experiment is complete.  Both RepeatMasker
+annotations from `12732075` are complete and end with `ProcessRepeats` and
+`done`; the parent job's `TIMEOUT` occurred during scoring.  Its legacy
+interval-support table contains all 97,242 qualified rows.  The repaired
+existing-annotation scorer `12735616` completed in 46 seconds and produced
+both library tables and summaries.  The legacy table is byte-identical to the
+table from the preserved partial attempt, providing a direct regression check
+for the performance repair.  The no-reuse library score `12735617`, submitted
+after `12735616`, completed in 52 seconds.  The stale dependent job `12732397`
+was cancelled after its dependency became unsatisfiable and is not a result.
+
+Across the full qualified denominator, any-TE support was 82.96%, 33.57%,
+68.73%, and 36.61% for TP, FP, FN, and TN under the 2018 global Dfam/RepBase
+library, and 82.06%, 24.46%, 67.30%, and 23.46% under the curated human-lineage
+Dfam 3.9 library.  At the >=50% and >=80% layers, the corresponding FP/TN
+fractions were 30.76%/10.72% and 28.80%/8.25% for the legacy library, versus
+22.04%/6.41% and 20.05%/4.95% for the curated library.  The matched-pair
+FP-minus-TN differences remain modest and are reported in the compact result
+file.
+
+This closes the experiment as descriptive evidence that library contents and
+reference coverage materially affect external TE support.  It does not prove
+that individual model FPs are true TEs, provide independent biological truth,
+justify relabelling the frozen source states, or support a new F1 value.  The
+release date, taxonomic scope, curation, and RepBase content of the two
+libraries are confounded.  The independent source-only and protein layer is in
 [`reports/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/`](../../reports/ANNOTATION-LIBRARY-CONTROL-20260915/orthogonal-run-12732331/).
+
+The complete compact result is in
+[`reports/ANNOTATION-LIBRARY-CONTROL-20260915/RESULTS.md`](../../reports/ANNOTATION-LIBRARY-CONTROL-20260915/RESULTS.md),
+with machine-readable summaries in the two score subdirectories.

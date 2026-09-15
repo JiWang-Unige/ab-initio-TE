@@ -1,0 +1,13 @@
+{
+  "status": "COMPLETED",
+  "job_id": "12731987",
+  "run_dir": "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_ONTOLOGY_CLOSURE_base_seed42_12731987",
+  "data_dir": "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/data/animal_sf5_ontology_w4096_20260915",
+  "split_windows": {
+    "train": 5400,
+    "val": 1440,
+    "test": 2160
+  },
+  "full_validation": true,
+  "full_test": true
+}

@@ -12,6 +12,15 @@ import subprocess
 import time
 
 
+def portable_earlgrey(source):
+    """Keep newest-directory semantics without GNU find's unsupported -printf."""
+    old = 'latestStrainDir="$(find . -maxdepth 1 -type d -name "TS_${species}-families.fa_*" -printf \'%T@\\t%p\\n\' 2>/dev/null | sort -nr | head -n 1 | cut -f2-)"'
+    new = 'latestStrainDir="$(python3 -c \'import glob,os,sys; print(max((p for p in glob.glob("TS_"+sys.argv[1]+"-families.fa_*") if os.path.isdir(p)), key=os.path.getmtime, default=""))\' "$species")"'
+    if source.count(old) != 1:
+        raise ValueError('EarlGrey compatibility patch does not match installed source')
+    return source.replace(old, new)
+
+
 def write(path, obj):
     path.write_text(json.dumps(obj, indent=2, allow_nan=False) + '\n')
 
@@ -23,20 +32,29 @@ def run(args):
     out = args.output.resolve()
     out.mkdir(parents=True, exist_ok=False)
     work = out / 'work'
-    work.mkdir()
-    for name in ('home', 'tmp', 'mask', 'hite', 'eg'):
-        (work / name).mkdir()
     runtime = {k: root / v for k, v in cfg['runtimes'].items()}
     started = time.monotonic()
+    prior_seconds = 0.0
+    prior = None
+    if args.resume_from:
+        prior = json.loads((args.resume_from / 'status.json').read_text())
+        if (args.method != 'earlgrey' or prior['method'] != args.method or
+                prior['dataset'] != args.dataset or prior['status'] != 'FAILED' or
+                prior['input'] != dataset['input']):
+            raise ValueError('resume must match the failed EarlGrey cell and common input')
+        prior_seconds = float(prior['wall_seconds'])
     status = {'protocol': cfg['protocol'], 'dataset': args.dataset, 'method': args.method,
               'status': 'RUNNING', 'cpus': cfg['cpus'], 'memory_gb': cfg['memory_gb'],
               'job': os.getenv('SLURM_JOB_ID'), 'hostname': os.uname().nodename,
               'input': dataset['input'], 'scope': dataset['scope'], 'steps': [],
               'knowledge_condition': cfg['method_information']}
+    if prior:
+        status.update(resumed_from=str(args.resume_from.resolve()), prior_wall_seconds=prior_seconds,
+                      prior_steps=prior['steps'], timing_scope='original failed attempt plus copy and continuation; same total native budget')
     write(out / 'status.json', status)
 
     def command(name, argv, allow_nonzero=False):
-        remaining = int(cfg['native_timeout_seconds'] - (time.monotonic()-started))
+        remaining = int(cfg['native_timeout_seconds'] - prior_seconds - (time.monotonic()-started))
         if remaining <= 0:
             raise TimeoutError('cell budget exhausted')
         before = time.monotonic()
@@ -60,6 +78,8 @@ def run(args):
             cmd += ['--bind', f'{runtime["famdb4"]}:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro']
         if which == 'earlgrey':
             cmd += ['--bind', f'{runtime["famdb4"]}:/usr/local/share/RepeatMasker/Libraries/famdb:ro']
+            if (work / 'earlGrey.compat.sh').exists():
+                cmd += ['--bind', f'{work / "earlGrey.compat.sh"}:/usr/local/bin/earlGrey:ro']
         if which == 'edta':
             cmd += ['--bind', f'{runtime["edta_source"]}:/opt/edta230:ro']
         return cmd + [str(runtime[which]), 'env', 'HOME=/work/home', 'TMPDIR=/work/tmp',
@@ -67,8 +87,22 @@ def run(args):
                       f'OMP_NUM_THREADS={cfg["cpus"]}', *map(str, argv)]
 
     try:
+        if prior:
+            # Copy preserves every original failed artifact. This runs inside Slurm.
+            shutil.copytree(args.resume_from / 'work', work, symlinks=True)
+            strained = work / 'eg/longbench_EarlGrey/longbench_strainer'
+            completed = list(strained.glob('TS_longbench-families.fa_*/longbench-families.fa.strained'))
+            if len(completed) != 1 or not completed[0].stat().st_size:
+                raise ValueError('the interrupted directory-selection step requires one completed strained library')
+            shutil.copy2(completed[0], strained / 'longbench-families.fa.strained')
+            status['reused_strained_library'] = str(completed[0].relative_to(work))
+        else:
+            work.mkdir()
+            for name in ('home', 'tmp', 'mask', 'hite', 'eg'):
+                (work / name).mkdir()
         source = root / dataset['input']
-        shutil.copy2(source, work / 'panel.fa')
+        if not prior:
+            shutil.copy2(source, work / 'panel.fa')
         lengths, name = {}, None
         with (work / 'panel.fa').open() as handle:
             for line in handle:
@@ -133,6 +167,11 @@ def run(args):
                     '--overwrite', '1', '--sensitive', '1', '--anno', '1', '--threads', '16']))
             raw, fmt = work / 'panel.fa.mod.EDTA.TEanno.gff3', 'gff3'
         elif args.method == 'earlgrey':
+            command('earlgrey_source', container('earlgrey', ['cat', '/usr/local/bin/earlGrey']))
+            patched = portable_earlgrey((out / 'earlgrey_source.stdout').read_text())
+            (work / 'earlGrey.compat.sh').write_text(patched)
+            (work / 'earlGrey.compat.sh').chmod(0o755)
+            status['runtime_compatibility_fix'] = 'GNU find -printf replaced by Python mtime selection; biological stages and parameters unchanged'
             command('earlgrey_help', container('earlgrey', ['earlGrey', '-h']))
             # Use EarlGrey's supported starting-library interface so its initial
             # reference information equals the fixed-RM arm, including uncurated entries.
@@ -164,7 +203,8 @@ def run(args):
     except Exception as exc:
         status.update(status='FAILED', failure_reason=str(exc))
     finally:
-        status['wall_seconds'] = time.monotonic()-started
+        status['attempt_wall_seconds'] = time.monotonic()-started
+        status['wall_seconds'] = prior_seconds + status['attempt_wall_seconds']
         write(out / 'status.json', status)
     if status['status'] != 'COMPLETED':
         raise SystemExit(1)
@@ -176,4 +216,5 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', choices=['sim100', 'c_briggsae'], required=True)
     parser.add_argument('--method', choices=['fixed_rm', 'rm2_rm', 'hite', 'edta', 'earlgrey'], required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--resume-from', type=Path, help='preserved failed EarlGrey attempt after library compilation')
     run(parser.parse_args())

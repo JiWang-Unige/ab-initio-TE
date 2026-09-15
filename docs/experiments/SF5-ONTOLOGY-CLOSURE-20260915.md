@@ -1,8 +1,8 @@
 # SF5 ontology closure: protocol and run record
 
-Status: protocol implemented; Slurm run is recorded below. This is a new
-seed-42 experiment and does not modify the historical SF5 checkpoints or
-their reported scores.
+Status: protocol implemented and Slurm run completed. This is a new seed-42
+experiment and does not modify the historical SF5 checkpoints or their
+reported scores.
 
 ## Question
 
@@ -104,12 +104,50 @@ not an independent biological truth set.
 | stage | job | status | output |
 |---|---|---|---|
 | source/window preparation | 12731940 | COMPLETED | `reports/SF5-ONTOLOGY-CLOSURE-20260915/prep-12731940/` |
-| ontology training + full validation/test | 12731987 | RUNNING | remote run/report pending completion |
-| collapsed legacy baseline | pending | pending | pending |
+| ontology training + full validation/test | 12731987 | COMPLETED | `reports/SF5-ONTOLOGY-CLOSURE-20260915/run-12731987/` |
+| collapsed legacy baseline | 12731987 | COMPLETED | `legacy_collapsed_full_test.json` in the run report |
 
 The protocol is scientifically interpretable only when all expected window
 counts and per-class supports are present. A failed or incomplete job remains
-in the denominator and is not presented as a classifier result.
+in the denominator and is not presented as a classifier result. Run 12731987
+contains all expected counts and complete pooled/per-species metrics.
+
+## Observed closure results
+
+Run 12731987 completed with 5,400/1,440/2,160 TRAIN/VAL/TEST windows (900/240/360
+per species), using the complete validation set for checkpoint selection and
+the complete test set once. The best validation `ontology_macro_f1` was
+0.698268. On TEST (8,847,360 valid base positions), the new eight-label model
+achieved material F1 0.884305, main4 macro F1 0.833687, ontology macro F1
+0.767866, status macro F1 0.630650 and accuracy 0.889600. Pooled main-class
+F1 values were SINE 0.743758, LINE 0.926764, LTR 0.876197 and DNA 0.788030.
+The compact per-species and per-class tables are in
+`reports/SF5-ONTOLOGY-CLOSURE-20260915/run-12731987/RESULTS.md`.
+
+The source supports on TEST are BG 5,196,190; SINE 75,713; LINE 1,142,586;
+LTR 1,254,710; DNA 939,741; KNOWN_OTHER_TE 83,331; AMBIGUOUS_TE 117,883; and
+UNCLASSIFIED 37,206. A support is a valid base position with that source
+label, not a count of windows or independently validated biological elements.
+`material` merges IDs 1--7 and therefore remains comparator-relative.
+The scorer includes a class in a macro average only when its source support is
+positive. All four main4 classes have positive support in every species in the
+complete VAL and TEST files, so the reported main4 macro is the arithmetic mean
+of all four class F1 values; status macros can have fewer than three classes.
+
+The retained old six-label checkpoint was evaluated once on the same complete
+TEST after mapping source IDs 5--7 to `Unknown`; its material F1 was 0.884531,
+main4 macro F1 0.834947, six-label macro F1 0.770027 and accuracy 0.884760.
+These differences are descriptive only: the old checkpoint was not retrained
+or reselected on the repaired validation set, so they do not identify a causal
+effect of splitting `Unknown`. The sum of the new three status-class TP/FP/FN
+counts gives exact-label status micro F1 0.629434 (TP/FP/FN
+128,481/41,342/109,939). Because the compact JSON has no joint status confusion
+matrix, this is not the exact F1 after collapsing the three predictions to one
+binary `Unknown`: with source-labeled status support 238,420, predicted status total
+169,823 and exact TP 128,481, the collapsed binary F1 is bounded by 0.629434 and
+0.831970. The old checkpoint's collapsed `Unknown` F1 is 0.363488. These values
+remain source-relative descriptive comparisons, not independent biological
+truth or a causal ontology ablation.
 
 ## Limits on claims
 
