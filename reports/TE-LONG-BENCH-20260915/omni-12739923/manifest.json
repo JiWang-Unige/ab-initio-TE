@@ -1,0 +1,24 @@
+{
+  "run_id": "927332fe-b141-45e2-885d-bc31e8b4497a",
+  "ob_version": "0.6.0",
+  "timestamp": "2026-09-16T02:09:16.156627+00:00",
+  "hostname": "JideMacBook-Air.local",
+  "platform": "darwin",
+  "os": "Darwin 24.6.0 Darwin Kernel Version 24.6.0: Wed Nov  5 21:34:00 PST 2025; root:xnu-11417.140.69.705.2~1/RELEASE_ARM64_T8132",
+  "kernel": "24.6.0",
+  "cpu_count": 10,
+  "cpu_model": "Apple M4",
+  "memory_total_mb": 16384,
+  "python_version": "3.12.14",
+  "python_executable": "/Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-venv/bin/python",
+  "gpu_devices": null,
+  "snakemake_cmd": [
+    "/Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-venv/bin/snakemake",
+    "--snakefile",
+    "Snakefile",
+    "--cores",
+    "1",
+    "--scheduler",
+    "greedy"
+  ]
+}

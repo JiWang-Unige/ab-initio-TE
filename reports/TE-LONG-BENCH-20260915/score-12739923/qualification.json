@@ -1,0 +1,15 @@
+{
+  "score_job": "12739923",
+  "native_cells": 14,
+  "qualified_completed": 13,
+  "failed": 1,
+  "failed_cell": "c_briggsae/edta",
+  "earlgrey_recovery_array": "12739911",
+  "both_earlgrey_exact_combined_library": true,
+  "real_precision_and_f1": null,
+  "real_scope": "CB4 sparse reference-positive recall and whole-genome cost only",
+  "historical_bundles_preserved": [
+    "12732389",
+    "12738470"
+  ]
+}

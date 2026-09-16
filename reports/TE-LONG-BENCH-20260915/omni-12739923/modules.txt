@@ -1,0 +1,11 @@
+# Modules used in this benchmark
+# Generated: 2026-09-16 04:09:16.143579
+#
+# Format: stage/module - repository@commit
+#
+
+data/bundle:
+  Repository: https://github.com/JiWang-Unige/ab-initio-TE.git
+  Commit: 4edaeb16e735be4c25fdbace12822f026604f649
+  Module dir: .modules/ab-initio-TE/4edaeb1
+  Entrypoint: benchmarks/te_omnibenchmark/long_panel.py

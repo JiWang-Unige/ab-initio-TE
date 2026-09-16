@@ -65,6 +65,20 @@ affect which intervals receive external TE support.  They do not establish
 that an individual model FP is a true TE, do not provide biological truth,
 and do not justify relabelling FP/FN or recomputing model F1.
 
+## Pair-summary field denominators
+
+`difference_pp` uses only the 5,540 matched pairs in the no-reuse summary.
+In contrast, `fp_supported` and `fp_fraction_of_all_cases` count all 21,235
+eligible FP cases, including unmatched cases; `matched_tn_supported` and
+`tn_fraction_of_matched_pairs` use matched controls. Do not divide every count
+by 5,540 or subtract the two differently scoped fractions. The reported
+matched differences above use the correctly scoped `difference_pp` field.
+
+The matched population is approximately 26.1% of eligible FP cases; 15,695
+remain unmatched. Control uniqueness removes reuse, not spatial/homology
+correlation or selection into the matchable subgroup. These remain descriptive
+contrasts, with no uncomputed significance claim.
+
 ## Provenance and compact artifacts
 
 - Preserved annotation attempt: `12732075` (`TIMEOUT`, 2:00:29); both native

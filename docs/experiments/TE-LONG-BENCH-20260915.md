@@ -61,3 +61,7 @@ EDTA模拟完整完成；CB4已执行到原生候选检查，但完整LTR候选�
 score12738470及Omni回放作为原生终态快照保留；恢复后需新score/replay。CB4参考原生表仅1571bp严格TE阳性，不能用其来源召回作真实全基因组准确性排名。具体结果与限制见 [RESULTS](../../reports/TE-LONG-BENCH-20260915/RESULTS.md)。
 
 EarlGrey修复执行记录：12739911_[0,1]，原预算内复用初始mask/discovery/strainer，恢复final RM的起始库；新score12739923 afterany12739911。新结果必须包含exact strained+lineage库验证。旧12738470/Omni回放不可当作最终合格排名，见持续跟进入口。
+
+## 冻结执行闭合（2026-09-16）
+
+12739911两项EarlGrey恢复均完成，实际final library精确等于strained+lineage，最终GFF坐标和全输入分母通过。新score12739923和对应干净Omni回放均完成：14项保留，13合格完成、1项CB4 EDTA原生失败。本协议预定执行与结果处理结束；不追加新配置或替换truth。模拟EarlGrey F1=0.974942，固定D=0.450648；真实CB4仍只报告稀疏参考召回，不能据此宣布充分的真实准确性benchmark。见[最终结果](../../reports/TE-LONG-BENCH-20260915/RESULTS.md)。

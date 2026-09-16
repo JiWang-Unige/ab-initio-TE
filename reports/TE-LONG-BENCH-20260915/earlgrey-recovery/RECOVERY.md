@@ -57,3 +57,11 @@ final canonical GFF passes coordinate validation.
 Recovery array `12739911` was submitted for CB4 and sim100. Its new outputs are
 under `native-12739911/{c_briggsae,sim100}-earlgrey`; final runtime acceptance
 and scoring remain pending at submission time.
+
+## 2026-09-16 qualified recovery completed
+
+Recovery array `12739911_[0,1]` and score `12739923` are `COMPLETED`. Both native status records report `final_library.exact_concatenation=true` and qualified full-input final GFF coordinates. CB4 has 164,486 final rows and a 496,935-byte combined library (465,375 strained + 31,560 lineage; 396 records). sim100 has 148,589 rows and a 3,635,244-byte combined library (1,405 strained + 3,633,839 lineage; 1,008 records).
+
+Cumulative selected-protocol wall times are 10,915.88 s for CB4 and 11,704.95 s for sim100, including the preserved prior attempts and this recovery within the original 84,600-second budget. CB4 recovers 1,568/1,571 sparse reference-positive bases; absolute precision/F1 remain null. Qualified sim100 precision/recall/F1 are 0.979105/0.970814/0.974942. The old low EarlGrey scores remain protocol-ineligible.
+
+Evidence: [CB4 native status](../score-12739923/c_briggsae-earlgrey-status.json), [sim100 native status](../score-12739923/sim100-earlgrey-status.json), [new score](../score-12739923/result.json), [completed Omni replay](../omni-12739923/README.md). The frozen benchmark now has 13 qualified completions and one native failure (CB4 EDTA); no benchmark cells remain pending.

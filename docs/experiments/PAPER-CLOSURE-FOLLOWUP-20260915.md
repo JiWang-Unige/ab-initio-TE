@@ -12,7 +12,11 @@
 
 ## 当前执行图
 
-**最近核实，2026-09-16 01:22 UTC：** SSH已恢复。前三项补实验保持完成；Tiberius现有34/40core的五臂完整成功记录（170cell），剩余6core运行/排队。EDTA模拟已完成，CB4因完整LTR候选为空而未通过原生默认检查，已收敛为失败、不加force。score12738470与Omni实际回放均完成，但随后来源核实发现两项EarlGrey续跑遗漏初始lineage库，旧EarlGrey结果均判为协议不合格；已在同预算内启动12739911_[0,1]恢复最终RM/merge，新score12739923依赖afterany12739911。当前benchmark资格为11合格完成、1原生失败、2待恢复；不能称最终公平比较已完成。固定D的模拟材料F1=0.450648，且CB4真值仅1571bp，相关阴性与参考覆盖限制已写入RESULTS.md。
+**最近核实，2026-09-16 02:07–02:14 UTC：** 连接短暂恢复后已取回两项EarlGrey恢复12739911及新score12739923的完成证据；两组合库均精确包含原始lineage库，当前benchmark为13合格完成+1项CB4 EDTA原生失败。新Omni实际回放4/4工作流job完成，本轮冻结benchmark执行与结果处理结束。模拟D F1=0.450648、EarlGrey=0.974942；CB4参考不足以真实准确性排名。
+
+Tiberius恢复12738295最新Slurm快照还剩index37/38运行、39待调度；尚未核实完整200cell，不读取部分效用。旧score12732548在02:01 UTC被UID0取消，记录未给出原因；确认正式result.json尚不存在后，按同一脚本及`afterok:12738295`提交替代score **12740044**，sbatch已接受。随后SSH再次拒绝连接（最近02:14 UTC），尚未取得替代score的scontrol回读；不要重复提交。旧取消记录与全部推理产物保留。
+
+Pro对34bb71c的第四轮审阅已完成，见[稿件入口](../manuscript/20260916/README.md)。前三项收束，已补充库支持字段分母和NTv2投影头容量匹配的解释，未改指标或新增训练。剩余工作是Tiberius完整评分和稿件/图表整合。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
@@ -23,13 +27,13 @@
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
 | Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条/219080 repeat rows；platypus已核实1139条/387011 repeat rows，manifest PREPARED_WITH_NATIVE_RM |
 | Tiberius smoke | 原12732021失败保留；12735505_0和_20均COMPLETED（36m38s/34m46s） | 两物种五arm均合格；checkpoint bind修复实际通过 |
-| Tiberius full | 当前34/40core五臂成功记录、170cell；恢复12738295余下6core运行/排队 | 全200cell后由score执行完整不变量和科学评分；不读取部分效用结论 |
-| Tiberius score | 12732548，afterok12738295 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
+| Tiberius full | 恢复12738295最新Slurm仅37/38运行、39待调度；完整core计数待连接恢复后核实 | 全200cell后由score执行完整不变量和科学评分；不读取部分效用结论 |
+| Tiberius score | 替代12740044已提交afterok12738295；旧12732548被UID0取消，原因未知 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
-| native方法 | fixed RM/HiTE/RM2及模拟EDTA已完成；CB4 EDTA默认完整LTR门失败；EarlGrey恢复12739911_[0,1]运行中 | 恢复resume RepSub，只重建final RM/merge；exact strained+lineage组合库检查后才合格；旧输出/累计耗时保留，EDTA不再恢复 |
+| native方法 | fixed RM/HiTE/RM2、模拟EDTA及两EarlGrey恢复均合格完成；CB4 EDTA原生失败 | EarlGrey exact strained+lineage检查通过，全部原生cell终态；旧输出/累计耗时保留，EDTA不再恢复 |
 | 固定D | 两GPU完成；CPU CB4 12731959 COMPLETED（Slurm 7h15m16s；实测26112.05s）；sim CPU12731960 COMPLETED（Slurm 6h37m45s；实测23861.16s） | CB4全部108384165bp/367序列；CPU E5-2630v4、16线程；GPU硬件不同，完整分母齐前不排名 |
-| 长输入评分 | 新12739923已核实afterany12739911；旧12738470及Omni回放为历史记录，其中两EarlGrey协议不合格 | 新bundle全14cell保留，确认final_library.exact_concatenation后再重放；旧bundle及qualification.json不覆盖 |
+| 长输入评分 | 12739923 COMPLETED；对应Omni 4/4 workflow jobs完成 | 全14cell保留：13合格完成+1失败；旧12738470及其Omni回放保留为含不合格EarlGrey的历史记录 |
 | 模拟库条目覆盖 | 已收回12733209结果；本地计数核对通过 | 366/366生成条目名称被实际固定RM库覆盖；包含非TE条目，不用于声称新家族发现 |
 
 ## 真实失败与修正
@@ -83,7 +87,7 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 - 固定D在100Mb模拟上precision0.887689、recall0.301975、F1 0.450648，低于已合格fixed RM/RM2/HiTE/EDTA；不因该阴性重训、调阈值或换输入。两CPU流程也不显示速度优势。
 - CB4源Label-A原生表明确仅23个SINE条目、1571bp严格TE阳性，不能用于真实全基因组准确性排名。fixed RM与来源近似同库同引擎，100%来源召回非独立敏感度；D检出972bp、漏599bp，覆盖缺口与漏检并存。不在看过结果后偷偷更换参考。
 
-结果入口：[benchmark解释](../../reports/TE-LONG-BENCH-20260915/RESULTS.md)、[参考资格](../../reports/TE-LONG-BENCH-20260915/reference-qualification/RESULTS.md)、[EDTA终态](../../reports/TE-LONG-BENCH-20260915/edta-recovery/FINAL-STATUS.md)、[EarlGrey资格](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/OUTPUT-QUALIFICATION.md)、[当前回放](../../reports/TE-LONG-BENCH-20260915/omni-12738470/README.md)。
+结果入口：[benchmark解释](../../reports/TE-LONG-BENCH-20260915/RESULTS.md)、[参考资格](../../reports/TE-LONG-BENCH-20260915/reference-qualification/RESULTS.md)、[EDTA终态](../../reports/TE-LONG-BENCH-20260915/edta-recovery/FINAL-STATUS.md)、[EarlGrey资格](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/OUTPUT-QUALIFICATION.md)、[当时回放（历史）](../../reports/TE-LONG-BENCH-20260915/omni-12738470/README.md)。
 
 ### 01:22 UTC：EarlGrey恢复与新评分依赖
 
@@ -94,3 +98,7 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 ### Pro审阅已发送（01:27 UTC）
 
 提交`34bb71c7f7697671710d6c06d6b4353086211c58`已成功推送到GitHub main。已在内置浏览器的原[科研梳理与论文初稿对话](https://chatgpt.com/c/6aa7c372-9118-83eb-a6f1-828ffb3ecab9)使用6 Pro发送新的固定提交审阅请求，页面显示“Pro思考中”。入口为`PAPER-CLOSURE-REVIEW-20260916.md`，要求实际读取GitHub并区分已完成前三项与pending Tiberius/EarlGrey，形成中文收敛表、英文结果/讨论修订和现实投稿定位。回复尚未完成，不能把已发请求写成审阅完成；后续读取此同一对话、归档并核实建议，不重复发送请求，不自动执行越出当前冻结范围的新实验。
+
+### 第四轮Pro完成后的收敛（2026-09-16）
+
+已实际读取完整可见回复和生成文档预览，Pro报告固定GitHub34bb71c、21分16秒完成；它未查询后来的HPC状态。新归档位于`docs/manuscript/20260916/`，为Agent依据页面整理的审阅/编辑稿，非成功下载的原附件。前三项无需为阳性重训；模拟D召回不足进入正文，SF5/聚类放补充；明确D、P3及各任务模型身份。库控制匹配差值与全FP字段分母不同、容量控制只匹配head两项已核对源码并加注，原指标未变。随后已取回EarlGrey→新score→新Omni的合格完成结果；剩余为Tiberius完整200cell→固定评分→稿件/图表整合。Pro建议不自动授权额外实验，不重复发送同一审阅请求。

@@ -1,0 +1,1309 @@
+{
+  "protocol": "TE-LONG-BENCH-20260915",
+  "cells": [
+    {
+      "cell_id": "c_briggsae|fixed_rm",
+      "dataset": "c_briggsae",
+      "method": "fixed_rm",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 1571,
+        "predicted_bp": 1608,
+        "overlap_bp": 1571,
+        "reference_positive_recall": 1.0,
+        "prediction_outside_reference_bp": 37,
+        "precision": null,
+        "f1": null
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-fixed_rm",
+      "native_wall_seconds": 283.0294780249242,
+      "native_steps": [
+        {
+          "name": "rm_version",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-fixed_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-help"
+          ],
+          "exit_code": 0,
+          "seconds": 3.652680726023391,
+          "peak_rss_kb": 45716
+        },
+        {
+          "name": "library_export",
+          "argv": [
+            "python3",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-1/RepeatMasker/famdb.py",
+            "-i",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions",
+            "families",
+            "-f",
+            "fasta_acc",
+            "--include-class-in-name",
+            "-ad",
+            "6238"
+          ],
+          "exit_code": 0,
+          "seconds": 8.54718510992825,
+          "peak_rss_kb": 68800
+        },
+        {
+          "name": "repeatmasker",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-fixed_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-pa",
+            "4",
+            "-nolow",
+            "-gff",
+            "-lib",
+            "/work/lineage.fa",
+            "-dir",
+            "/work/mask",
+            "/work/panel.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 266.41660838690586,
+          "peak_rss_kb": 240768
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu243.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "c_briggsae|rm2_rm",
+      "dataset": "c_briggsae",
+      "method": "rm2_rm",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 1571,
+        "predicted_bp": 27438314,
+        "overlap_bp": 550,
+        "reference_positive_recall": 0.35009548058561424,
+        "prediction_outside_reference_bp": 27437764,
+        "precision": null,
+        "f1": null
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm",
+      "native_wall_seconds": 18113.921632262878,
+      "native_steps": [
+        {
+          "name": "rm2_version",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatModeler",
+            "-version"
+          ],
+          "exit_code": 0,
+          "seconds": 5.509345277911052,
+          "peak_rss_kb": 48656
+        },
+        {
+          "name": "rm_version",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-help"
+          ],
+          "exit_code": 0,
+          "seconds": 0.46962812589481473,
+          "peak_rss_kb": 48720
+        },
+        {
+          "name": "build_database",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "BuildDatabase",
+            "-name",
+            "/work/paneldb",
+            "/work/panel.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 27.68208775902167,
+          "peak_rss_kb": 130240
+        },
+        {
+          "name": "repeatmodeler",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatModeler",
+            "-database",
+            "/work/paneldb",
+            "-threads",
+            "16",
+            "-LTRStruct",
+            "-srand",
+            "42"
+          ],
+          "exit_code": 0,
+          "seconds": 16847.192909323145,
+          "peak_rss_kb": 1354796
+        },
+        {
+          "name": "mask_discovered",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-pa",
+            "4",
+            "-nolow",
+            "-gff",
+            "-lib",
+            "/work/paneldb-families.fa",
+            "-dir",
+            "/work/mask",
+            "/work/panel.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 1225.3270811848342,
+          "peak_rss_kb": 651776
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu244.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "c_briggsae|hite",
+      "dataset": "c_briggsae",
+      "method": "hite",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 1571,
+        "predicted_bp": 15407514,
+        "overlap_bp": 0,
+        "reference_positive_recall": 0.0,
+        "prediction_outside_reference_bp": 15407514,
+        "precision": null,
+        "f1": null
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite",
+      "native_wall_seconds": 2440.2318340851925,
+      "native_steps": [
+        {
+          "name": "hite_help",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite/work:/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "OMP_NUM_THREADS=16",
+            "python",
+            "/HiTE/main.py",
+            "-h"
+          ],
+          "exit_code": 0,
+          "seconds": 38.13698844984174,
+          "peak_rss_kb": 155044
+        },
+        {
+          "name": "hite",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-hite/work:/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "OMP_NUM_THREADS=16",
+            "python",
+            "/HiTE/main.py",
+            "--genome",
+            "/work/panel.fa",
+            "--thread",
+            "16",
+            "--plant",
+            "0",
+            "--annotate",
+            "1",
+            "--out_dir",
+            "/work/hite"
+          ],
+          "exit_code": 0,
+          "seconds": 2396.1513974529225,
+          "peak_rss_kb": 3310068
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu241.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "c_briggsae|edta",
+      "dataset": "c_briggsae",
+      "method": "edta",
+      "status": "FAILED",
+      "metrics": null,
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12738464/c_briggsae-edta",
+      "native_wall_seconds": 32657.084249940002,
+      "native_steps": [
+        {
+          "name": "edta_resume",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/c_briggsae-edta/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0:/opt/edta230:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/c_briggsae-edta/work/edta_compat/TIR-Learner3.0/bin/run_GRF.py:/usr/local/share/TIR-Learner3.0/bin/run_GRF.py:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/c_briggsae-edta/work/edta_compat/TIR-Learner3.0/bin/get_fasta_sequence.py:/usr/local/share/TIR-Learner3.0/bin/get_fasta_sequence.py:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/c_briggsae-edta/work/edta_compat/TIR-Learner3.0/bin/check_TIR_TSD.py:/usr/local/share/TIR-Learner3.0/bin/check_TIR_TSD.py:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "OMP_NUM_THREADS=16",
+            "perl",
+            "/opt/edta230/EDTA.pl",
+            "--genome",
+            "/work/panel.fa",
+            "--overwrite",
+            "0",
+            "--sensitive",
+            "1",
+            "--anno",
+            "1",
+            "--threads",
+            "16"
+          ],
+          "exit_code": 255,
+          "seconds": 1229.7112082480453,
+          "peak_rss_kb": 2067536
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu244.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": "edta_resume: exit 255"
+    },
+    {
+      "cell_id": "c_briggsae|earlgrey",
+      "dataset": "c_briggsae",
+      "method": "earlgrey",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 1571,
+        "predicted_bp": 28417739,
+        "overlap_bp": 1568,
+        "reference_positive_recall": 0.9980903882877148,
+        "prediction_outside_reference_bp": 28416171,
+        "precision": null,
+        "f1": null
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12739911/c_briggsae-earlgrey",
+      "native_wall_seconds": 10915.877335360274,
+      "native_steps": [
+        {
+          "name": "earlgrey_repair",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12739911/c_briggsae-earlgrey/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/RepeatMasker/Libraries/famdb:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12739911/c_briggsae-earlgrey/work/earlGrey.compat.sh:/usr/local/bin/earlGrey:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12739911/c_briggsae-earlgrey/work/LTR_FINDER_parallel.compat:/usr/local/share/earlgrey-7.3.0-1/scripts/LTR_FINDER_parallel:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B2R2-EARLGREY-ACQUIRE-20260809A/earlgrey_7_3_0.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "PERL5LIB=/usr/local/share/RepeatMasker",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "earlGrey",
+            "-g",
+            "/work/panel.fa",
+            "-s",
+            "longbench",
+            "-o",
+            "/work/eg",
+            "-t",
+            "16",
+            "-q",
+            "yes",
+            "-l",
+            "/work/lineage.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 2102.8564836550504,
+          "peak_rss_kb": 1415520
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu238.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "c_briggsae|D_gpu",
+      "dataset": "c_briggsae",
+      "method": "D_gpu",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 1571,
+        "predicted_bp": 9027536,
+        "overlap_bp": 972,
+        "reference_positive_recall": 0.6187141947803947,
+        "prediction_outside_reference_bp": 9026564,
+        "precision": null,
+        "f1": null
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731957/c_briggsae",
+      "native_wall_seconds": 3952.2700108650606,
+      "native_steps": null,
+      "native_hardware": {
+        "hostname": "gpu006.baobab",
+        "cpu_model": "Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz",
+        "accelerator": "Tesla P100-PCIE-12GB",
+        "cpus": null,
+        "cpus_allocated": "4"
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "c_briggsae|D_cpu",
+      "dataset": "c_briggsae",
+      "method": "D_cpu",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 1571,
+        "predicted_bp": 9027524,
+        "overlap_bp": 972,
+        "reference_positive_recall": 0.6187141947803947,
+        "prediction_outside_reference_bp": 9026552,
+        "precision": null,
+        "f1": null
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731959/c_briggsae",
+      "native_wall_seconds": 26112.050487178145,
+      "native_steps": null,
+      "native_hardware": {
+        "hostname": "cpu240.baobab",
+        "cpu_model": "Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz",
+        "accelerator": null,
+        "cpus": null,
+        "cpus_allocated": "16"
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|fixed_rm",
+      "dataset": "sim100",
+      "method": "fixed_rm",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 53122085,
+        "overlap_bp": 52526122,
+        "reference_positive_recall": 0.9641166477481745,
+        "prediction_outside_reference_bp": 595963,
+        "precision": 0.9887812573621687,
+        "f1": 0.9762931986456049,
+        "tp": 52526122,
+        "fp": 595963,
+        "fn": 1954964,
+        "tn": 44922951,
+        "recall": 0.9641166477481745
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-fixed_rm",
+      "native_wall_seconds": 1299.696459444007,
+      "native_steps": [
+        {
+          "name": "rm_version",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-fixed_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-help"
+          ],
+          "exit_code": 0,
+          "seconds": 0.6095418999902904,
+          "peak_rss_kb": 44308
+        },
+        {
+          "name": "library_export",
+          "argv": [
+            "python3",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/L1-PANEL-PREP-20260908-kqZrej/labela-12664906-1/RepeatMasker/famdb.py",
+            "-i",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/famdb_fullpartitions",
+            "families",
+            "-f",
+            "fasta_acc",
+            "--include-class-in-name",
+            "-ad",
+            "7227"
+          ],
+          "exit_code": 0,
+          "seconds": 32.91456414409913,
+          "peak_rss_kb": 229820
+        },
+        {
+          "name": "repeatmasker",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-fixed_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-pa",
+            "4",
+            "-nolow",
+            "-gff",
+            "-lib",
+            "/work/lineage.fa",
+            "-dir",
+            "/work/mask",
+            "/work/panel.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 1260.5620634378865,
+          "peak_rss_kb": 1108284
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu238.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|rm2_rm",
+      "dataset": "sim100",
+      "method": "rm2_rm",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 50628811,
+        "overlap_bp": 49769486,
+        "reference_positive_recall": 0.9135186108441378,
+        "prediction_outside_reference_bp": 859325,
+        "precision": 0.9830269567262798,
+        "f1": 0.9469990442479456,
+        "tp": 49769486,
+        "fp": 859325,
+        "fn": 4711600,
+        "tn": 44659589,
+        "recall": 0.9135186108441378
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm",
+      "native_wall_seconds": 12766.882132122992,
+      "native_steps": [
+        {
+          "name": "rm2_version",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatModeler",
+            "-version"
+          ],
+          "exit_code": 0,
+          "seconds": 3.5189057420939207,
+          "peak_rss_kb": 46628
+        },
+        {
+          "name": "rm_version",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-help"
+          ],
+          "exit_code": 0,
+          "seconds": 1.0779619829263538,
+          "peak_rss_kb": 46148
+        },
+        {
+          "name": "build_database",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "BuildDatabase",
+            "-name",
+            "/work/paneldb",
+            "/work/panel.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 19.35286070802249,
+          "peak_rss_kb": 206456
+        },
+        {
+          "name": "repeatmodeler",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatModeler",
+            "-database",
+            "/work/paneldb",
+            "-threads",
+            "16",
+            "-LTRStruct",
+            "-srand",
+            "42"
+          ],
+          "exit_code": 0,
+          "seconds": 11585.242806793889,
+          "peak_rss_kb": 10103392
+        },
+        {
+          "name": "mask_discovered",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-rm2_rm/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "RepeatMasker",
+            "-pa",
+            "4",
+            "-nolow",
+            "-gff",
+            "-lib",
+            "/work/paneldb-families.fa",
+            "-dir",
+            "/work/mask",
+            "/work/panel.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 1151.3067427261267,
+          "peak_rss_kb": 1153300
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu241.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|hite",
+      "dataset": "sim100",
+      "method": "hite",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 25751380,
+        "overlap_bp": 25569536,
+        "reference_positive_recall": 0.46932867674480644,
+        "prediction_outside_reference_bp": 181844,
+        "precision": 0.9929384755302434,
+        "f1": 0.6373862670505478,
+        "tp": 25569536,
+        "fp": 181844,
+        "fn": 28911550,
+        "tn": 45337070,
+        "recall": 0.46932867674480644
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite",
+      "native_wall_seconds": 2164.981364865089,
+      "native_steps": [
+        {
+          "name": "hite_help",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite/work:/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "python",
+            "/HiTE/main.py",
+            "-h"
+          ],
+          "exit_code": 0,
+          "seconds": 32.75387099198997,
+          "peak_rss_kb": 154144
+        },
+        {
+          "name": "hite",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-hite/work:/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/hite/hite_3_3_3.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "python",
+            "/HiTE/main.py",
+            "--genome",
+            "/work/panel.fa",
+            "--thread",
+            "16",
+            "--plant",
+            "0",
+            "--annotate",
+            "1",
+            "--out_dir",
+            "/work/hite"
+          ],
+          "exit_code": 0,
+          "seconds": 2128.007421230199,
+          "peak_rss_kb": 12629452
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu238.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|edta",
+      "dataset": "sim100",
+      "method": "edta",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 40921474,
+        "overlap_bp": 40260818,
+        "reference_positive_recall": 0.7389870679156433,
+        "prediction_outside_reference_bp": 660656,
+        "precision": 0.9838555180099329,
+        "f1": 0.8440196573341429,
+        "tp": 40260818,
+        "fp": 660656,
+        "fn": 14220268,
+        "tn": 44858258,
+        "recall": 0.7389870679156433
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12738464/sim100-edta",
+      "native_wall_seconds": 18627.472424580017,
+      "native_steps": [
+        {
+          "name": "edta_resume",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/sim100-edta/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0:/opt/edta230:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/sim100-edta/work/edta_compat/TIR-Learner3.0/bin/run_GRF.py:/usr/local/share/TIR-Learner3.0/bin/run_GRF.py:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/sim100-edta/work/edta_compat/TIR-Learner3.0/bin/get_fasta_sequence.py:/usr/local/share/TIR-Learner3.0/bin/get_fasta_sequence.py:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12738464/sim100-edta/work/edta_compat/TIR-Learner3.0/bin/check_TIR_TSD.py:/usr/local/share/TIR-Learner3.0/bin/check_TIR_TSD.py:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "OMP_NUM_THREADS=16",
+            "perl",
+            "/opt/edta230/EDTA.pl",
+            "--genome",
+            "/work/panel.fa",
+            "--overwrite",
+            "0",
+            "--sensitive",
+            "1",
+            "--anno",
+            "1",
+            "--threads",
+            "16"
+          ],
+          "exit_code": 0,
+          "seconds": 3670.9793195398524,
+          "peak_rss_kb": 1412444
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu244.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|earlgrey",
+      "dataset": "sim100",
+      "method": "earlgrey",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 54019766,
+        "overlap_bp": 52891017,
+        "reference_positive_recall": 0.9708142932393088,
+        "prediction_outside_reference_bp": 1128749,
+        "precision": 0.9791048891252139,
+        "f1": 0.9749419663543287,
+        "tp": 52891017,
+        "fp": 1128749,
+        "fn": 1590069,
+        "tn": 44390165,
+        "recall": 0.9708142932393088
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/native-12739911/sim100-earlgrey",
+      "native_wall_seconds": 11704.954274751013,
+      "native_steps": [
+        {
+          "name": "earlgrey_repair",
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12739911/sim100-earlgrey/work:/work",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/RepeatMasker/Libraries/famdb:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12739911/sim100-earlgrey/work/earlGrey.compat.sh:/usr/local/bin/earlGrey:ro",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TE-LONG-BENCH-20260915/native-12739911/sim100-earlgrey/work/LTR_FINDER_parallel.compat:/usr/local/share/earlgrey-7.3.0-1/scripts/LTR_FINDER_parallel:ro",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B2R2-EARLGREY-ACQUIRE-20260809A/earlgrey_7_3_0.sif",
+            "env",
+            "HOME=/work/home",
+            "TMPDIR=/work/tmp",
+            "PERL5LIB=/usr/local/share/RepeatMasker",
+            "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+            "OMP_NUM_THREADS=16",
+            "earlGrey",
+            "-g",
+            "/work/panel.fa",
+            "-s",
+            "longbench",
+            "-o",
+            "/work/eg",
+            "-t",
+            "16",
+            "-q",
+            "yes",
+            "-l",
+            "/work/lineage.fa"
+          ],
+          "exit_code": 0,
+          "seconds": 2657.9011806969065,
+          "peak_rss_kb": 2171816
+        }
+      ],
+      "native_hardware": {
+        "hostname": "cpu239.baobab",
+        "cpu_model": null,
+        "accelerator": null,
+        "cpus": 16,
+        "cpus_allocated": null
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|D_gpu",
+      "dataset": "sim100",
+      "method": "D_gpu",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 18533442,
+        "overlap_bp": 16451937,
+        "reference_positive_recall": 0.3019752029172106,
+        "prediction_outside_reference_bp": 2081505,
+        "precision": 0.887689237649434,
+        "f1": 0.45064831481208784,
+        "tp": 16451937,
+        "fp": 2081505,
+        "fn": 38029149,
+        "tn": 43437409,
+        "recall": 0.3019752029172106
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/D-gpu-12731958/sim100",
+      "native_wall_seconds": 3029.5142681228463,
+      "native_steps": null,
+      "native_hardware": {
+        "hostname": "gpu002.baobab",
+        "cpu_model": "Intel(R) Xeon(R) CPU E5-2643 v3 @ 3.40GHz",
+        "accelerator": "NVIDIA TITAN X (Pascal)",
+        "cpus": null,
+        "cpus_allocated": "4"
+      },
+      "failure_reason": null
+    },
+    {
+      "cell_id": "sim100|D_cpu",
+      "dataset": "sim100",
+      "method": "D_cpu",
+      "status": "COMPLETED",
+      "metrics": {
+        "reference_positive_bp": 54481086,
+        "predicted_bp": 18533436,
+        "overlap_bp": 16451937,
+        "reference_positive_recall": 0.3019752029172106,
+        "prediction_outside_reference_bp": 2081499,
+        "precision": 0.8876895250292498,
+        "f1": 0.45064835184430846,
+        "tp": 16451937,
+        "fp": 2081499,
+        "fn": 38029149,
+        "tn": 43437415,
+        "recall": 0.3019752029172106
+      },
+      "source_attempt": "outputs/TE-LONG-BENCH-20260915/D-cpu-12731960/sim100",
+      "native_wall_seconds": 23861.162314932095,
+      "native_steps": null,
+      "native_hardware": {
+        "hostname": "cpu241.baobab",
+        "cpu_model": "Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz",
+        "accelerator": null,
+        "cpus": null,
+        "cpus_allocated": "16"
+      },
+      "failure_reason": null
+    }
+  ],
+  "expected_cells": 14,
+  "replay_scope": "Recompute metrics from Slurm-validated block counts, not native callers",
+  "real_absolute_precision_f1": null,
+  "L3_insertion_identity": null,
+  "source_comparisons": {
+    "c_briggsae": {
+      "D_gpu_minus_fixed_rm": {
+        "metric": "reference_positive_recall",
+        "delta": -0.3812858052196053,
+        "ci95": [
+          -0.4918883841661259,
+          -0.1724581724581724
+        ],
+        "resampling_units": 7,
+        "unit": "large assembly sequences; small scaffolds grouped",
+        "replicates": 10000,
+        "valid_replicates": 9969,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_rm2_rm": {
+        "metric": "reference_positive_recall",
+        "delta": 0.26861871419478045,
+        "ci95": [
+          0.15436241610738255,
+          0.5313390313390314
+        ],
+        "resampling_units": 7,
+        "unit": "large assembly sequences; small scaffolds grouped",
+        "replicates": 10000,
+        "valid_replicates": 9969,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_hite": {
+        "metric": "reference_positive_recall",
+        "delta": 0.6187141947803947,
+        "ci95": [
+          0.5081116158338741,
+          0.8275418275418276
+        ],
+        "resampling_units": 7,
+        "unit": "large assembly sequences; small scaffolds grouped",
+        "replicates": 10000,
+        "valid_replicates": 9969,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_earlgrey": {
+        "metric": "reference_positive_recall",
+        "delta": -0.3793761935073201,
+        "ci95": [
+          -0.4918883841661259,
+          -0.1647361647361647
+        ],
+        "resampling_units": 7,
+        "unit": "large assembly sequences; small scaffolds grouped",
+        "replicates": 10000,
+        "valid_replicates": 9969,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_D_cpu": {
+        "metric": "reference_positive_recall",
+        "delta": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "resampling_units": 7,
+        "unit": "large assembly sequences; small scaffolds grouped",
+        "replicates": 10000,
+        "valid_replicates": 9969,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      }
+    },
+    "sim100": {
+      "D_gpu_minus_fixed_rm": {
+        "metric": "synthetic_bp_f1",
+        "delta": -0.525644883833517,
+        "ci95": [
+          -0.5323396057937431,
+          -0.5190475704031856
+        ],
+        "resampling_units": 100,
+        "unit": "1Mb synthetic blocks",
+        "replicates": 10000,
+        "valid_replicates": 10000,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_rm2_rm": {
+        "metric": "synthetic_bp_f1",
+        "delta": -0.49635072943585773,
+        "ci95": [
+          -0.5028618643443876,
+          -0.4898597177029683
+        ],
+        "resampling_units": 100,
+        "unit": "1Mb synthetic blocks",
+        "replicates": 10000,
+        "valid_replicates": 10000,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_hite": {
+        "metric": "synthetic_bp_f1",
+        "delta": -0.18673795223845996,
+        "ci95": [
+          -0.19346295097476987,
+          -0.17997379943708525
+        ],
+        "resampling_units": 100,
+        "unit": "1Mb synthetic blocks",
+        "replicates": 10000,
+        "valid_replicates": 10000,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_edta": {
+        "metric": "synthetic_bp_f1",
+        "delta": -0.393371342522055,
+        "ci95": [
+          -0.399072711410914,
+          -0.38775135118598353
+        ],
+        "resampling_units": 100,
+        "unit": "1Mb synthetic blocks",
+        "replicates": 10000,
+        "valid_replicates": 10000,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_earlgrey": {
+        "metric": "synthetic_bp_f1",
+        "delta": -0.524293651542241,
+        "ci95": [
+          -0.5310928719179094,
+          -0.5176077871914428
+        ],
+        "resampling_units": 100,
+        "unit": "1Mb synthetic blocks",
+        "replicates": 10000,
+        "valid_replicates": 10000,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      },
+      "D_gpu_minus_D_cpu": {
+        "metric": "synthetic_bp_f1",
+        "delta": -3.7032220623345324e-08,
+        "ci95": [
+          -1.8459061374709318e-07,
+          7.448179107083508e-08
+        ],
+        "resampling_units": 100,
+        "unit": "1Mb synthetic blocks",
+        "replicates": 10000,
+        "valid_replicates": 10000,
+        "seed": 42,
+        "scope": "within this input; no across-species uncertainty claim"
+      }
+    }
+  },
+  "source_engineering_attempts": [
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-fixed_rm",
+      "reason": "RepeatMasker -version prints version but rejects option; changed probe to supported -help before annotation"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-rm2_rm",
+      "reason": "Same unsupported RepeatMasker version probe; no discovery had begun"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-earlgrey",
+      "reason": "EarlGrey taxon library lookup uses a different container path; failed before masking"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-earlgrey",
+      "reason": "Environment variable did not override EarlGrey derived library path. Added actual required bind and supported -l same-lineage library, making reference information explicit and equal to fixed RM; no prior annotation results existed"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731966/c_briggsae-fixed_rm",
+      "reason": "Completed native annotation but Dfam4 export omitted uncurated partitions with exit0; this is an incomplete-reference attempt, excluded from planned full-library comparison"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12732043/c_briggsae-earlgrey",
+      "reason": "Stopped before completion after detecting same incomplete Dfam4 initial library; replaced by complete Dfam3.9 library for both reference-assisted arms"
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12732198/c_briggsae-earlgrey",
+      "reason": "Installed EarlGrey uses GNU find -printf, unavailable in its BusyBox image; exit 1 after completed refined library. Original work preserved; copied continuation uses portable equivalent directory selection and counts prior wall time against the unchanged 84600-second budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-earlgrey",
+      "reason": "Installed EarlGrey uses GNU find -printf, unavailable in its BusyBox image; exit 1 after completed refined library. Original work preserved; copied continuation uses portable equivalent directory selection and counts prior wall time against the unchanged 84600-second budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12735632/c_briggsae-earlgrey",
+      "reason": "Final RepeatMasker completed; merge failed because LTR_FINDER_parallel shebang points to absent /usr/bin/perl and rmOutToGFF3 lacks RepeatMasker module path. Resume preserved copy with /usr/local/bin/perl and PERL5LIB; all prior wall time remains in the same budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12735633/sim100-earlgrey",
+      "reason": "Final RepeatMasker completed; merge failed because LTR_FINDER_parallel shebang points to absent /usr/bin/perl and rmOutToGFF3 lacks RepeatMasker module path. Resume preserved copy with /usr/local/bin/perl and PERL5LIB; all prior wall time remains in the same budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731946/c_briggsae-edta",
+      "reason": "TIR-Learner GRF split-ID parser rejects dotted accession IDs; unresolved chunk IDs cause FASTA KeyError before TIR completion. Copied recovery restores original coordinates and named pandas column access; unchanged total wall budget includes original failure."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12731947/sim100-edta",
+      "reason": "TIR-Learner TIR/TSD check uses positional Series access incompatible with pandas 3.0.3 (KeyError: 0). Copied recovery uses named TIR_type column, preserves completed stages and original elapsed time within the same total budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12738345/c_briggsae-edta",
+      "reason": "Recovery-generated get_fasta_sequence overlay had an extra indentation level and failed at import. Driver/text checks had not compiled the generated module. Corrected overlay is compiled and its actual helper tested; all prior elapsed time and attempts remain in the unchanged total budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12738345/sim100-edta",
+      "reason": "Recovery-generated get_fasta_sequence overlay had an extra indentation level and failed at import. Driver/text checks had not compiled the generated module. Corrected overlay is compiled and its actual helper tested; all prior elapsed time and attempts remain in the unchanged total budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12738271/c_briggsae-earlgrey",
+      "reason": "Native COMPLETED but resumed final RepeatMasker omitted the requested starting lineage library: RepSub was initialized only in the skipped initial-mask stage. Preserved as protocol-invalid; bounded copied recovery restores RepSub and rebuilds only final annotation/merge, retaining all prior wall time and the original 84600-second budget."
+    },
+    {
+      "path": "outputs/TE-LONG-BENCH-20260915/native-12738272/sim100-earlgrey",
+      "reason": "Native COMPLETED but resumed final RepeatMasker omitted the requested starting lineage library: RepSub was initialized only in the skipped initial-mask stage. Preserved as protocol-invalid; bounded copied recovery restores RepSub and rebuilds only final annotation/merge, retaining all prior wall time and the original 84600-second budget."
+    }
+  ],
+  "status_counts": {
+    "COMPLETED": 13,
+    "FAILED": 1
+  },
+  "scored_cells": 13
+}

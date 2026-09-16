@@ -1,6 +1,6 @@
 # 长输入 benchmark：冻结运行结果
 
-2026-09-16。14个预定cell曾均到原生终态，Slurm评分12738470和Omnibenchmark聚合回放也已完成；但随后来源核查发现两项EarlGrey续跑遗漏初始参考库。当前科学资格为11个合格输出、1个EDTA失败、2个EarlGrey协议不合格待修复，不能宣布benchmark已闭合。**该模型在本次TE_Bench派生模拟中没有达到最佳传统方法的准确性，CPU也没有显示速度优势。真实CB4参考过于稀疏，不能据此完成全基因组准确性排名。**
+2026-09-16。冻结的14个cell已全部到可解释终态：13个合格完成，1个CB4 EDTA原生失败。两项EarlGrey起始库恢复12739911已完成，最终组合库和坐标检查通过；新Slurm评分12739923及对应Omnibenchmark回放均已完成。本轮预定执行与结果处理已闭合。**该模型在本次TE_Bench派生模拟中没有达到最佳传统方法的准确性，CPU也没有显示速度优势。真实CB4参考过于稀疏，不能据此完成全基因组准确性排名。**
 
 这里的完成指冻结方案的执行、分母保留和结果处理；不等于证明模型优势或完成了充分的真实TE真值benchmark。
 
@@ -19,13 +19,13 @@
 | RepeatModeler2 2.0.9 → RM | 0.983027 | 0.913519 | 0.946999 | 12766.88 |
 | HiTE 3.3.3 | 0.992938 | 0.469329 | 0.637386 | 2164.98 |
 | EDTA 2.3.0 | 0.983856 | 0.738987 | 0.844020 | 18627.47 |
-| EarlGrey 7.3.0 | — | — | — | 9014.24（协议不合格尝试） |
+| EarlGrey 7.3.0 | 0.979105 | 0.970814 | 0.974942 | 11704.95 |
 | 固定D，GPU（TITAN X） | 0.887689 | 0.301975 | 0.450648 | 3029.51 |
 | 固定D，CPU（16 CPU） | 0.887690 | 0.301975 | 0.450648 | 23861.16 |
 
-固定D的主要局限是召回：约38.03 Mb严格TE材料未被检出。相对fixed RM、RM2、HiTE、EDTA的F1差分别为−0.525645、−0.496351、−0.186738、−0.393371。按固定100个1Mb块、seed42、10000次配对bootstrap，它们的条件95%区间均低于0；这是此单一模拟输入内的块重采样范围，不代表跨生成seed、跨物种或生物学不确定性。完整区间保存在JSON中。
+固定D的主要局限是召回：约38.03 Mb严格TE材料未被检出。相对fixed RM、RM2、HiTE、EDTA、EarlGrey的F1差分别为−0.525645、−0.496351、−0.186738、−0.393371、−0.524294。按固定100个1Mb块、seed42、10000次配对bootstrap，它们的条件95%区间均低于0；这是此单一模拟输入内的块重采样范围，不代表跨生成seed、跨物种或生物学不确定性。完整区间保存在JSON中。
 
-EarlGrey的低值触发了输出来源检查。标准最终GFF与adapter选择正确，但实际组合库只有1405 bytes，与de novo strained library相同；初始lineage库约3.63MB并未加入。`RepSub=$startCust`仅在被续跑跳过的initial-mask函数中赋值，导致最终RM实际缺少原协议要求的起始库。原始模拟F1=0.123734保留在旧JSON中作为不合格尝试记录，不能作为该参考辅助方法的有效分数或模型胜过EarlGrey的证据。现已启动12739911_[0,1]，仅在新复制目录修复变量恢复，重建受影响final RM/merge；不改阈值/库/输入，不替换成初始RM中间预测。两输入的历史输出均保留，详情见[输出资格报告](earlgrey-recovery/OUTPUT-QUALIFICATION.md)。
+EarlGrey的低值触发了输出来源检查。标准最终GFF与adapter选择正确，但实际组合库只有1405 bytes，与de novo strained library相同；初始lineage库约3.63MB并未加入。`RepSub=$startCust`仅在被续跑跳过的initial-mask函数中赋值，导致最终RM实际缺少原协议要求的起始库。原始模拟F1=0.123734保留在旧JSON中作为不合格尝试记录，不能作为该参考辅助方法的有效分数或模型胜过EarlGrey的证据。恢复12739911_[0,1]现已完成：仅在新复制目录修复变量恢复，重建受影响final RM/merge；不改阈值/库/输入，不替换成初始RM中间预测。两输入均满足`final_library.exact_concatenation=true`。模拟最终库3,635,244 bytes/1,008条，精确包含strained 1,405 bytes与lineage 3,633,839 bytes；最终GFF 148,589行。合格模拟F1=0.974942；D−EarlGrey的条件95%区间为[−0.531093, −0.517608]。两输入的历史输出均保留，详情见[输出资格报告](earlgrey-recovery/OUTPUT-QUALIFICATION.md)。
 
 ## CB4：稀疏参考诊断与完整运行成本
 
@@ -35,7 +35,7 @@ EarlGrey的低值触发了输出来源检查。标准最终GFF与adapter选择�
 | RM2 → RM | 0.350095 | 27438314 | 18113.92 | 完成 |
 | HiTE | 0.000000 | 15407514 | 2440.23 | 完成 |
 | EDTA | — | — | 32657.08 | 失败，不计零分 |
-| EarlGrey | — | — | 8725.85 | 初始库遗漏，协议不合格待恢复 |
+| EarlGrey | 0.998090 | 28417739 | 10915.88 | 完成，组合库资格通过 |
 | 固定D，GPU（P100） | 0.618714 | 9027536 | 3952.27 | 完成 |
 | 固定D，CPU | 0.618714 | 9027524 | 26112.05 | 完成 |
 
@@ -49,8 +49,8 @@ CPU固定D在两输入上分别耗时约7h15m和6h38m，均慢于本批其余已
 
 EarlGrey/EDTA时间包含选定协议下保存的失败尝试、复制和续跑，不只报最终几分钟。更早的无效库/probe工程尝试也在attempts中披露，但不能把这里的selected-protocol wall time解读为整个项目的全部计算消耗。训练成本没有计入D推理时间，native所用预置数据库构建成本也未计入；本表比较部署时的这条固定注释流程。
 
-Omnibenchmark 0.6.0从固定GitHub commit `4edaeb16e735be4c25fdbace12822f026604f649` 干净回放实际block counts，全部4个工作流job完成，按当时原生状态保留13完成+1失败，指标与Slurm一致。随后发现的两项EarlGrey初始库遗漏使该bundle不能作为最终合格比较，需要用修复后的新bundle重放；新score12739923已提交afterany12739911。它复现聚合计算，不宣称由Omni重跑了所有native callers；也不把算术一致性当作标签或原生产物的独立验证。详见[回放证据](omni-12738470/README.md)。
+Omnibenchmark 0.6.0从固定GitHub commit `4edaeb16e735be4c25fdbace12822f026604f649` 干净回放新`score-12739923`的实际block counts，全部4个工作流job完成，保留13合格完成+1失败，指标与Slurm一致。旧`12738470` bundle及回放保留为历史记录，其中两项EarlGrey协议不合格，不参与当前排名。新的Omni执行复现聚合计算，不宣称重跑了所有native callers；也不把算术一致性当作标签或原生产物的独立验证。详见[新回放证据](omni-12739923/README.md)。
 
-本批在EarlGrey协议恢复完成后可进入补充材料的方法/运行成本表，也可作为正文中“适用边界与参考依赖”的结果。不能写成普遍优于传统工具、无脊椎动物普适泛化、新家族发现或真实全基因组accuracy benchmark已充分闭合。当前最明确的真实比较缺口是独立且覆盖广泛的真实TE真值，而不是继续在这份稀疏参考上调参。任何新的真实truth或方法配置应单独预先规定，不覆盖本次结果。
+本批结果可进入补充材料的方法/运行成本表，也可作为正文中“适用边界与参考依赖”的结果。不能写成普遍优于传统工具、无脊椎动物普适泛化、新家族发现或真实全基因组accuracy benchmark已充分闭合。当前最明确的真实比较缺口是独立且覆盖广泛的真实TE真值，而不是继续在这份稀疏参考上调参。任何新的真实truth或方法配置应单独预先规定，不覆盖本次结果。
 
-证据：[Slurm实际结果](score-12738470/result.json)、[Omni collector](omni-12738470/collector_summary.json)、[固定协议](../../docs/experiments/TE-LONG-BENCH-20260915.md)。原始FASTA、GFF、模型权重和概率数组保留Baobab。
+证据：[Slurm实际结果](score-12739923/result.json)、[资格摘要](score-12739923/qualification.json)、[Omni collector](omni-12739923/collector_summary.json)、[固定协议](../../docs/experiments/TE-LONG-BENCH-20260915.md)。原始FASTA、GFF、模型权重和概率数组保留Baobab。
