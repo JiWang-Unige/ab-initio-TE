@@ -4,12 +4,12 @@
   "annotation_array": 12743580,
   "score": 12743581,
   "preparation_status": "COMPLETED",
-  "as_of_utc": "2026-09-16 16:18",
+  "as_of_utc": "2026-09-16 20:24",
   "replay_status": "COMPLETED",
   "replay_elapsed": "00:05:13",
   "score_status": "COMPLETED",
   "score_elapsed": "00:02:53",
-  "remaining_status": "The first successful SSH query after the user's restoration message showed replay12743579 and score12743581 COMPLETED exit0. Subsequent result retrieval returned Connection refused. Compact replay and scientific score files have not yet been retrieved or reviewed; scientific qualification remains pending.",
+  "remaining_status": "Finite diagnostic complete. Historical replay counts, six native denominators and local compact aggregation/transitions passed. No duplicate native work or new training submitted.",
   "annotation_completed_indices": [
     0,
     1,
@@ -18,7 +18,10 @@
     4,
     5
   ],
-  "connection_check_utc": "2026-09-16 16:18",
-  "connection_status": "Initial reconnection succeeded and refreshed terminal job states; subsequent normal and IPv4-only SSH attempts returned Connection refused. No duplicate jobs submitted.",
-  "persistent_connection_block_notification_utc": "2026-09-16 16:04"
+  "connection_check_utc": "2026-09-16 20:24",
+  "connection_status": "SSH restored; compact replay, scores, tile counts and native qualification metadata retrieved successfully.",
+  "persistent_connection_block_notification_utc": "2026-09-16 16:04",
+  "scientific_qualification": "PASS_FOR_COMPARATOR_SENSITIVITY",
+  "result": "score-12743581/score/result.json",
+  "interpretation": "RESULTS.md"
 }

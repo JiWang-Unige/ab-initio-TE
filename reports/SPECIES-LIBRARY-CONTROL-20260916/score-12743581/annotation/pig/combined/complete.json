@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETED",
+  "command": [
+    "RepeatMasker",
+    "-pa",
+    "4",
+    "-xsmall",
+    "-gff",
+    "-lib",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1/prepared/pig/combined.fa",
+    "-dir",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1/annotation/pig/combined",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1/prepared/pig/panel.fa"
+  ],
+  "exit_code": 0,
+  "seconds": 579.8846372500993,
+  "job_id": "12743603"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETED",
+  "command": [
+    "RepeatMasker",
+    "-pa",
+    "4",
+    "-xsmall",
+    "-gff",
+    "-lib",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1/prepared/zebrafish/curated.fa",
+    "-dir",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1/annotation/zebrafish/curated",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1/prepared/zebrafish/panel.fa"
+  ],
+  "exit_code": 0,
+  "seconds": 272.0559472560417,
+  "job_id": "12743594"
+}

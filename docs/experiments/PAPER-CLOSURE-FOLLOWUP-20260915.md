@@ -12,13 +12,15 @@
 
 ## 当前执行图
 
+**最新收束，2026-09-16 20:24 UTC：** 三物种库对照实际结果已全部取回并通过资格复核：原D计数精确复现、1500个DEV窗口齐全、六cell输入分母通过、逐窗口四格及转换独立复算一致。受控curated→combined下，猪F1为0.857443→0.648572、鸡0.827195→0.539633；斑马鱼相同库维持0.927805。扩库支持部分FP，同时暴露更多模型阴性阳性bp；新增阳性检出率仅6.96%/8.01%。[完整结论](../../reports/SPECIES-LIBRARY-CONTROL-20260916/RESULTS.md)。本项按参考敏感性边界收束，不再扩库、重训或追加候选搜索。新结果、图与复现/发布现状已整合英文工作稿；尚未发布权重或形成投稿定稿。以下连接阻塞和pending为历史记录。
+
 **最新连接/作业更新，2026-09-16 16:18 UTC记录：** 用户告知Baobab恢复后，首次成功查询显示三物种固定D重放12743579 COMPLETED（5m13s、exit0），依赖评分12743581 COMPLETED（2m53s、exit0）；六个注释cell此前均已完成。随后取回`replay/complete.json`和`score/result.json`时SSH再次Connection refused，普通连接及IPv4连接均未成功。尚未取得或审阅新科学计数，不能据此声称重放验证或库敏感性结论已通过。下一步只取回既有compact结果并复核，不重复提交或训练。下文等待GPU等状态是历史快照。
 
 **最近核实，2026-09-16 09:56 UTC：** 外部Tiberius完整40core/200cell已合格完成，替代score12740044 COMPLETED（35s），正式result.json及资格元数据已取回。两物种P相对无mask流程和同checkpoint无mask均有正向F1效应；P−R_TE的区间均跨0，未建立RM优势；所有对照的原正确locus损失比例均超过1%。[完整结果](../../reports/P3-TIBERIUS-EXTERNAL-20260915/full-r1-score-12740044/RESULTS.md)。原人类1%门失败保留。
 
 前三项、长输入benchmark和外部Tiberius的本轮冻结执行与评分均已结束。benchmark为13合格完成+1项CB4 EDTA原生失败，新Omni完成；不追求所有实验为阳性。
 
-用户09-16新增讨论是斑马鱼高F1是否来自注释完整度，以及Plant/Fungi是否应扩展。已完成原六物种D DEV汇总计数的回顾性诊断，未改变原结果；[诊断入口](../../reports/SPECIES-ANNOTATION-DIAGNOSTIC-20260916/RESULTS.md)。只读Dfam元数据作业12743207已完成，历史三物种probe也明确curated-only。内置浏览器Pro已完成固定e3df4e2的聚焦讨论，见第五次审阅归档。新三物种库诊断独立获本轮用户请求授权：准备12743578已完成（3m58），原D推理重放12743579等GPU，六个注释cell12743580前三项运行，其余按最多3项并行排队；score12743581依赖afterok两者。新协议见SPECIES-LIBRARY-CONTROL-20260916.md。只用已观察三物种DEV，0新训练、原校准/阈值不变，原汇总必须精确复现。剩余为该有限诊断收束、稿件/图表整合，不扩大Gap或Plant/Fungi。
+用户09-16新增讨论是斑马鱼高F1是否来自注释完整度，以及Plant/Fungi是否应扩展。已完成原六物种D DEV汇总计数的回顾性诊断，未改变原结果；[诊断入口](../../reports/SPECIES-ANNOTATION-DIAGNOSTIC-20260916/RESULTS.md)。只读Dfam元数据作业12743207已完成，历史三物种probe也明确curated-only。内置浏览器Pro已完成固定e3df4e2的聚焦讨论，见第五次审阅归档。新三物种库诊断独立获本轮用户请求授权：准备12743578、原D推理重放12743579、六个注释cell12743580和score12743581现均已完成，实际输出已资格化。新协议见SPECIES-LIBRARY-CONTROL-20260916.md。只用已观察三物种DEV，0新训练、原校准/阈值不变，原汇总必须精确复现。有限诊断、科学工作稿/图表整合已完成；投稿前仍需作者信息、完整书目、补充材料排版和版本化发布包，不扩大Gap或Plant/Fungi。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|

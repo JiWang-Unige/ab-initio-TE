@@ -1,0 +1,1308 @@
+{
+  "status": "COMPLETED",
+  "scope": "Retrospective comparator sensitivity, not biological truth",
+  "original_scores_overwritten": false,
+  "protocol": "SPECIES-LIBRARY-CONTROL-20260916",
+  "species": [
+    {
+      "species": "zebrafish",
+      "old": {
+        "tp": 2088058,
+        "fp": 169312,
+        "fn": 155491,
+        "tn": 1679036,
+        "callable_bp": 4091897,
+        "precision": 0.9249959023110965,
+        "recall": 0.9306941814063343,
+        "f1": 0.9278362929881653
+      },
+      "arms": {
+        "curated": {
+          "tp": 2098779,
+          "fp": 158591,
+          "fn": 168030,
+          "tn": 1666497,
+          "callable_bp": 4091897,
+          "precision": 0.9297452344985536,
+          "recall": 0.9258737723381194,
+          "f1": 0.927805464814721
+        },
+        "combined": {
+          "tp": 2098779,
+          "fp": 158591,
+          "fn": 168030,
+          "tn": 1666497,
+          "callable_bp": 4091897,
+          "precision": 0.9297452344985536,
+          "recall": 0.9258737723381194,
+          "f1": 0.927805464814721
+        }
+      },
+      "added_predicted_positive": 0,
+      "added_predicted_negative": 0,
+      "lost_predicted_positive": 0,
+      "lost_predicted_negative": 0,
+      "old_positive_missing_from_curated": 8151,
+      "new_curated_positive_vs_old": 31411,
+      "unknown_bp": {
+        "curated": 147,
+        "combined": 147
+      },
+      "class_membership_transitions": [
+        {
+          "curated_classes": [],
+          "combined_classes": [],
+          "bp": 1825088
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 143817
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 59558
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 80
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 251673
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 257
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "bp": 2255
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "SINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "LTR"
+          ],
+          "bp": 3
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 1675549
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 6127
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "combined_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "bp": 19105
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "SINE",
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "DNA"
+          ],
+          "bp": 78
+        },
+        {
+          "curated_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "combined_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "bp": 9150
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "LTR",
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR",
+            "DNA"
+          ],
+          "bp": 76
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "LTR",
+            "DNA"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR",
+            "DNA"
+          ],
+          "bp": 11
+        },
+        {
+          "curated_classes": [
+            "RC"
+          ],
+          "combined_classes": [
+            "RC"
+          ],
+          "bp": 84859
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "RC"
+          ],
+          "combined_classes": [
+            "LINE",
+            "RC"
+          ],
+          "bp": 37
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "RC"
+          ],
+          "combined_classes": [
+            "SINE",
+            "RC"
+          ],
+          "bp": 939
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "SINE",
+            "RC"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "RC"
+          ],
+          "bp": 13
+        },
+        {
+          "curated_classes": [
+            "LTR",
+            "RC"
+          ],
+          "combined_classes": [
+            "LTR",
+            "RC"
+          ],
+          "bp": 20
+        },
+        {
+          "curated_classes": [
+            "DNA",
+            "RC"
+          ],
+          "combined_classes": [
+            "DNA",
+            "RC"
+          ],
+          "bp": 10589
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "DNA",
+            "RC"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA",
+            "RC"
+          ],
+          "bp": 27
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "DNA",
+            "RC"
+          ],
+          "combined_classes": [
+            "SINE",
+            "DNA",
+            "RC"
+          ],
+          "bp": 158
+        },
+        {
+          "curated_classes": [
+            "LTR",
+            "DNA",
+            "RC"
+          ],
+          "combined_classes": [
+            "LTR",
+            "DNA",
+            "RC"
+          ],
+          "bp": 23
+        },
+        {
+          "curated_classes": [
+            "Retroposon"
+          ],
+          "combined_classes": [
+            "Retroposon"
+          ],
+          "bp": 2085
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "Retroposon"
+          ],
+          "combined_classes": [
+            "LINE",
+            "Retroposon"
+          ],
+          "bp": 207
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "Retroposon"
+          ],
+          "combined_classes": [
+            "SINE",
+            "Retroposon"
+          ],
+          "bp": 72
+        },
+        {
+          "curated_classes": [
+            "DNA",
+            "Retroposon"
+          ],
+          "combined_classes": [
+            "DNA",
+            "Retroposon"
+          ],
+          "bp": 41
+        }
+      ],
+      "original_exclusive_class_recall": {
+        "LINE": {
+          "positive_bp": 142694,
+          "tp": 131840,
+          "fn": 10854,
+          "recall": 0.92393513392294
+        },
+        "SINE": {
+          "positive_bp": 64943,
+          "tp": 64209,
+          "fn": 734,
+          "recall": 0.9886977811311458
+        },
+        "LTR": {
+          "positive_bp": 250414,
+          "tp": 235423,
+          "fn": 14991,
+          "recall": 0.9401351362144289
+        },
+        "DNA": {
+          "positive_bp": 1658476,
+          "tp": 1536543,
+          "fn": 121933,
+          "recall": 0.9264788878464325
+        },
+        "RC": {
+          "positive_bp": 88040,
+          "tp": 82505,
+          "fn": 5535,
+          "recall": 0.9371308496138119
+        },
+        "Retroposon": {
+          "positive_bp": 2062,
+          "tp": 1963,
+          "fn": 99,
+          "recall": 0.9519883608147429
+        }
+      },
+      "mixed_class_positive_bp": 36920
+    },
+    {
+      "species": "pig",
+      "old": {
+        "tp": 1003627,
+        "fp": 103233,
+        "fn": 136930,
+        "tn": 2851703,
+        "callable_bp": 4095493,
+        "precision": 0.9067334622264785,
+        "recall": 0.8799446235479682,
+        "f1": 0.8931382115557549
+      },
+      "arms": {
+        "curated": {
+          "tp": 902840,
+          "fp": 204020,
+          "fn": 96189,
+          "tn": 2892444,
+          "callable_bp": 4095493,
+          "precision": 0.815676779357823,
+          "recall": 0.9037175097019206,
+          "f1": 0.8574431036013769
+        },
+        "combined": {
+          "tp": 961907,
+          "fp": 144953,
+          "fn": 897465,
+          "tn": 2091168,
+          "callable_bp": 4095493,
+          "precision": 0.8690412518294997,
+          "recall": 0.5173289691358157,
+          "f1": 0.6485716558920543
+        }
+      },
+      "added_predicted_positive": 59990,
+      "added_predicted_negative": 801514,
+      "lost_predicted_positive": 923,
+      "lost_predicted_negative": 238,
+      "old_positive_missing_from_curated": 163443,
+      "new_curated_positive_vs_old": 21915,
+      "unknown_bp": {
+        "curated": 48,
+        "combined": 3621
+      },
+      "class_membership_transitions": [
+        {
+          "curated_classes": [],
+          "combined_classes": [],
+          "bp": 2234960
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 364064
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 237422
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 169457
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 61975
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 5698
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "bp": 6061
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "LTR"
+          ],
+          "bp": 2185
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 13364
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 495
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "bp": 568
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "DNA"
+          ],
+          "bp": 138
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "bp": 77
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [],
+          "bp": 816
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 659260
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 3611
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 4648
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 219
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 554
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "bp": 9
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 3
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 7
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [],
+          "bp": 38
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 2752
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 55386
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 3445
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 72
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 69
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "bp": 106
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "LTR"
+          ],
+          "bp": 5
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 11
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "bp": 41
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 44
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 154
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [],
+          "bp": 212
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 649
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 624
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 96
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 172484
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 2394
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "bp": 1333
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "LTR"
+          ],
+          "bp": 358
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 24
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 6
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "bp": 17
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 9
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 1
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 118
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR"
+          ],
+          "bp": 24
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [],
+          "bp": 95
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 382
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 998
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE"
+          ],
+          "bp": 209
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 34
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 83590
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 2177
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "bp": 1278
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "SINE",
+            "DNA"
+          ],
+          "bp": 296
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "bp": 62
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "SINE",
+            "LTR",
+            "DNA"
+          ],
+          "bp": 43
+        },
+        {
+          "curated_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 62
+        },
+        {
+          "curated_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "combined_classes": [
+            "SINE",
+            "DNA"
+          ],
+          "bp": 4
+        },
+        {
+          "curated_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "combined_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "bp": 13
+        },
+        {
+          "curated_classes": [
+            "RC"
+          ],
+          "combined_classes": [
+            "RC"
+          ],
+          "bp": 187
+        }
+      ],
+      "original_exclusive_class_recall": {
+        "LINE": {
+          "positive_bp": 739509,
+          "tp": 682151,
+          "fn": 57358,
+          "recall": 0.9224377255719673
+        },
+        "SINE": {
+          "positive_bp": 117107,
+          "tp": 96257,
+          "fn": 20850,
+          "recall": 0.8219576968071934
+        },
+        "LTR": {
+          "positive_bp": 185276,
+          "tp": 154018,
+          "fn": 31258,
+          "recall": 0.831289535611736
+        },
+        "DNA": {
+          "positive_bp": 98064,
+          "tp": 70819,
+          "fn": 27245,
+          "recall": 0.7221712351117637
+        },
+        "RC": {
+          "positive_bp": 178,
+          "tp": 1,
+          "fn": 177,
+          "recall": 0.0056179775280898875
+        },
+        "Retroposon": {
+          "positive_bp": 0,
+          "tp": 0,
+          "fn": 0,
+          "recall": null
+        }
+      },
+      "mixed_class_positive_bp": 423
+    },
+    {
+      "species": "chicken",
+      "old": {
+        "tp": 129421,
+        "fp": 23887,
+        "fn": 28484,
+        "tn": 3912591,
+        "callable_bp": 4094383,
+        "precision": 0.8441894747827902,
+        "recall": 0.8196130584845318,
+        "f1": 0.831719754637499
+      },
+      "arms": {
+        "curated": {
+          "tp": 129851,
+          "fp": 23457,
+          "fn": 30796,
+          "tn": 3910279,
+          "callable_bp": 4094383,
+          "precision": 0.8469942860124716,
+          "recall": 0.8083001861223676,
+          "f1": 0.8271949801723177
+        },
+        "combined": {
+          "tp": 148836,
+          "fp": 4472,
+          "fn": 249475,
+          "tn": 3691600,
+          "callable_bp": 4094383,
+          "precision": 0.9708299632113132,
+          "recall": 0.3736678123375955,
+          "f1": 0.5396333338771869
+        }
+      },
+      "added_predicted_positive": 19053,
+      "added_predicted_negative": 218855,
+      "lost_predicted_positive": 68,
+      "lost_predicted_negative": 176,
+      "old_positive_missing_from_curated": 2898,
+      "new_curated_positive_vs_old": 5640,
+      "unknown_bp": {
+        "curated": 60,
+        "combined": 3725
+      },
+      "class_membership_transitions": [
+        {
+          "curated_classes": [],
+          "combined_classes": [],
+          "bp": 3695828
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 135717
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 1451
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 55205
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 25
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 44202
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 39
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "LTR",
+            "DNA"
+          ],
+          "bp": 16
+        },
+        {
+          "curated_classes": [],
+          "combined_classes": [
+            "RC"
+          ],
+          "bp": 1253
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [],
+          "bp": 244
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE"
+          ],
+          "bp": 154595
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 13
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "LTR"
+          ],
+          "bp": 4
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 1
+        },
+        {
+          "curated_classes": [
+            "LINE"
+          ],
+          "combined_classes": [
+            "LINE",
+            "DNA"
+          ],
+          "bp": 26
+        },
+        {
+          "curated_classes": [
+            "SINE"
+          ],
+          "combined_classes": [
+            "SINE"
+          ],
+          "bp": 1026
+        },
+        {
+          "curated_classes": [
+            "LTR"
+          ],
+          "combined_classes": [
+            "LTR"
+          ],
+          "bp": 57
+        },
+        {
+          "curated_classes": [
+            "DNA"
+          ],
+          "combined_classes": [
+            "DNA"
+          ],
+          "bp": 4681
+        }
+      ],
+      "original_exclusive_class_recall": {
+        "LINE": {
+          "positive_bp": 152412,
+          "tp": 128230,
+          "fn": 24182,
+          "recall": 0.8413379523922001
+        },
+        "SINE": {
+          "positive_bp": 825,
+          "tp": 644,
+          "fn": 181,
+          "recall": 0.7806060606060606
+        },
+        "LTR": {
+          "positive_bp": 57,
+          "tp": 0,
+          "fn": 57,
+          "recall": 0.0
+        },
+        "DNA": {
+          "positive_bp": 4611,
+          "tp": 547,
+          "fn": 4064,
+          "recall": 0.11862936456300152
+        },
+        "RC": {
+          "positive_bp": 0,
+          "tp": 0,
+          "fn": 0,
+          "recall": null
+        },
+        "Retroposon": {
+          "positive_bp": 0,
+          "tp": 0,
+          "fn": 0,
+          "recall": null
+        }
+      },
+      "mixed_class_positive_bp": 0
+    }
+  ]
+}

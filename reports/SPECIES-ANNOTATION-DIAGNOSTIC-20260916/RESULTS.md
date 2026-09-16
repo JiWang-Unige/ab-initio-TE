@@ -59,7 +59,7 @@
 
 ## 最小下一步与停止原则
 
-本轮[Pro聚焦讨论已完成](../../docs/manuscript/20260916/pro-species-review.md)，六种Dfam元数据已核实。历史三物种probe日志均明确curated-only，数目与本次查询相符。原D评估未保存逐位置缓存；新有限协议仅用同checkpoint、校准、原DEV重放推理，并在逐种原TP/FP/FN/callable精确复现后继续评分。三物种两库对照已提交，见[执行协议](../../docs/experiments/SPECIES-LIBRARY-CONTROL-20260916.md)；当前不预填结果。进一步的class/divergence/长度/GC共同支持分层需要空间/原注释证据，不能由当前汇总计数生成置信区间。
+本轮[Pro聚焦讨论已完成](../../docs/manuscript/20260916/pro-species-review.md)，六种Dfam元数据已核实。历史三物种probe日志均明确curated-only，数目与本次查询相符。原D评估未保存逐位置缓存；新有限协议仅用同checkpoint、校准、原DEV重放推理，并在逐种原TP/FP/FN/callable精确复现后继续评分。三物种两库对照现已完成，见[受控扩库结果](../SPECIES-LIBRARY-CONTROL-20260916/RESULTS.md)：猪/鸡新增参考支持以模型阴性为主，precision上升但F1下降。原汇总推演不替代该实测结果。进一步的class/divergence/长度/GC共同支持分层需要空间/原注释证据，不能由当前汇总计数生成置信区间。
 
 任何真实补注实验均保留原评价，输出全TP/FP/FN/TN转换，不只救回FP；匹配背景须不复用，并报告未匹配比例；独立证据审查须同时覆盖FP、TN和FN且隐藏模型分数。新RepeatMasker覆盖是比较器支持，只有超出同源参考共享来源的证据才可能支撑生物遗漏判断。若仅证实组成/边界/库敏感性，就以此结束，不扩为“斑马鱼注释更完整”的强结论。
 
@@ -98,3 +98,5 @@ Slurm12743207已完成（1分18秒），同一已安装Dfam3.9（2025-03-10，Fa
 - [Hoen等，2015](https://link.springer.com/article/10.1186/s13100-015-0044-6)已讨论不完整参考会惩罚实际检出但未标注的TE。因此“参考会漏注”本身不是新发现；本项目应提供可测的贡献边界与受控差异。
 - [Ou等，2019](https://link.springer.com/article/10.1186/s13059-019-1905-y)提供人工curated水稻库和跨物种方法比较，是未来植物域设计的起点，不是独立于RepeatMasker生成流程的完美真值。
 - [Lorrain等，2021](https://academic.oup.com/g3journal/article/11/4/jkab068/6173990)研究真菌TE与RIP差异，提示未来真菌面板应覆盖不同基因组防御背景；不据此推断当前D的真菌表现。
+
+后续更新：上述metadata审计后的三物种实验已完成；原预测计数精确复现、斑马鱼相同库位置对照通过。新增结果作为独立报告保留，未改写本页原分数、参考比例或算术上界。

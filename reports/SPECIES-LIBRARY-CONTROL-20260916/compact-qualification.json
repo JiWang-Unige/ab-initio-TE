@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "species": "zebrafish",
+      "historical_counts_exact": true,
+      "unique_tiles": 500,
+      "spatial_blocks": 175,
+      "block_aggregates_and_transitions_exact": true,
+      "native_cells": [
+        {
+          "arm": "curated",
+          "input_bp": 8192000,
+          "sequences": 500,
+          "seconds": 272.0559472560417,
+          "job_id": "12743594"
+        },
+        {
+          "arm": "combined",
+          "input_bp": 8192000,
+          "sequences": 500,
+          "seconds": 281.80994896707125,
+          "job_id": "12743595"
+        }
+      ]
+    },
+    {
+      "species": "pig",
+      "historical_counts_exact": true,
+      "unique_tiles": 500,
+      "spatial_blocks": 334,
+      "block_aggregates_and_transitions_exact": true,
+      "native_cells": [
+        {
+          "arm": "curated",
+          "input_bp": 8192000,
+          "sequences": 500,
+          "seconds": 126.83967836597003,
+          "job_id": "12743596"
+        },
+        {
+          "arm": "combined",
+          "input_bp": 8192000,
+          "sequences": 500,
+          "seconds": 579.8846372500993,
+          "job_id": "12743603"
+        }
+      ]
+    },
+    {
+      "species": "chicken",
+      "historical_counts_exact": true,
+      "unique_tiles": 500,
+      "spatial_blocks": 215,
+      "block_aggregates_and_transitions_exact": true,
+      "native_cells": [
+        {
+          "arm": "curated",
+          "input_bp": 8192000,
+          "sequences": 500,
+          "seconds": 64.45556664187461,
+          "job_id": "12743605"
+        },
+        {
+          "arm": "combined",
+          "input_bp": 8192000,
+          "sequences": 500,
+          "seconds": 80.12601972208358,
+          "job_id": "12743580"
+        }
+      ]
+    }
+  ],
+  "scope": "Independent compact-count, historical-metric and native-denominator checks. Original raw-mask reproduction and identical-library position equality were enforced by the HPC scorer; arrays were not copied or rescored locally.",
+  "historical_pointwise_prediction_identity_proven": false
+}

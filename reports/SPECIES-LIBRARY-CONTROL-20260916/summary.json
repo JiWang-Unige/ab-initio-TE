@@ -1,0 +1,62 @@
+{
+  "scope": "Descriptive retrospective comparator sensitivity; no biological relabelling or new inference",
+  "species": [
+    {
+      "species": "zebrafish",
+      "curated_records": 1966,
+      "combined_records": 1966,
+      "f1_delta": 0.0,
+      "precision_delta": 0.0,
+      "recall_delta": 0.0,
+      "added_positive_bp": 0,
+      "added_predicted_positive": 0,
+      "added_predicted_negative": 0,
+      "added_positive_detection_fraction": null,
+      "curated_fp_new_support_fraction": 0.0,
+      "lost_predicted_positive": 0,
+      "lost_predicted_negative": 0,
+      "unknown_bp": {
+        "curated": 147,
+        "combined": 147
+      }
+    },
+    {
+      "species": "pig",
+      "curated_records": 784,
+      "combined_records": 3831,
+      "f1_delta": -0.20887144770932253,
+      "precision_delta": 0.05336447247167664,
+      "recall_delta": -0.38638854056610483,
+      "added_positive_bp": 861504,
+      "added_predicted_positive": 59990,
+      "added_predicted_negative": 801514,
+      "added_positive_detection_fraction": 0.06963403536141445,
+      "curated_fp_new_support_fraction": 0.29403980001960595,
+      "lost_predicted_positive": 923,
+      "lost_predicted_negative": 238,
+      "unknown_bp": {
+        "curated": 48,
+        "combined": 3621
+      }
+    },
+    {
+      "species": "chicken",
+      "curated_records": 218,
+      "combined_records": 395,
+      "f1_delta": -0.2875616462951308,
+      "precision_delta": 0.12383567719884159,
+      "recall_delta": -0.43463237378477215,
+      "added_positive_bp": 237908,
+      "added_predicted_positive": 19053,
+      "added_predicted_negative": 218855,
+      "added_positive_detection_fraction": 0.08008557929956117,
+      "curated_fp_new_support_fraction": 0.8122522061644711,
+      "lost_predicted_positive": 68,
+      "lost_predicted_negative": 176,
+      "unknown_bp": {
+        "curated": 60,
+        "combined": 3725
+      }
+    }
+  ]
+}

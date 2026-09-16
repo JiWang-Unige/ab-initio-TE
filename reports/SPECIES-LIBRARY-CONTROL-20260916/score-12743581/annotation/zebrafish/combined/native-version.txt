@@ -1,0 +1,2 @@
+RepeatMasker version 4.2.2
+Search Engine: NCBI/RMBLAST [ 2.14.1+ ]
