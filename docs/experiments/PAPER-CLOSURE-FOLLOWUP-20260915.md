@@ -112,3 +112,5 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 10:32 UTC更新：三物种注释0/1/2/4/5已COMPLETED并有complete.json，只有猪combined/index3仍运行；原D重放12743579继续等GPU，score12743581等依赖。三张已完成数据图（物种计数、模拟benchmark、外部Tiberius）已生成PDF/SVG/PNG；无待运行结果被画成已完成。
 
 11:16 UTC已读Slurm：12743580六个原生注释cell全部COMPLETED/exit0，猪combined用时9m41s；原D重放12743579仍PENDING资源，12743581仍依赖等待。后续读取六cell compact输入资格时SSH connection refused，未得到资格包，不将Slurm完成冒充统一评分。未重复提交；下次恢复后继续原作业。
+
+12:27 UTC：一次SSH核实仍connection refused，未读到新的Slurm状态，沿用11:16的最后已知状态，不密集重试。利用本地已合格证据补齐Figure1研究结构图（PDF/SVG/PNG），清楚区分六条实验与L1/L2/L3；不新增科学结果或实验。

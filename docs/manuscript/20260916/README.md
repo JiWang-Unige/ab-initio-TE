@@ -19,3 +19,5 @@
 - [当前完整英文工作稿](manuscript-en.md)：约4,200词，整合摘要、引言、结果、讨论、方法和可用性；新三物种库对照尚待资格化结果，其他主图及发布信息仍待完成。
 
 定量图草稿已生成并目视检查：物种排序诊断、[模拟benchmark](figures/long_benchmark.pdf)、[外部Tiberius效应与gain/loss](figures/external_tiberius.pdf)，各有PDF/SVG/PNG及绘图脚本。不是新模拟或新的bootstrap结果；图直接使用已合格JSON。
+
+12:27 UTC补充：[Figure 1研究结构图](figures/study_overview.pdf)已生成并目视检查，明确各模型、端点与结论边界；它不是新的实验结果。HPC连接当前仍被拒绝，因此不更新未核实的模型作业状态。
