@@ -12,6 +12,8 @@
 
 ## 当前执行图
 
+**最新连接/作业更新，2026-09-16 16:18 UTC记录：** 用户告知Baobab恢复后，首次成功查询显示三物种固定D重放12743579 COMPLETED（5m13s、exit0），依赖评分12743581 COMPLETED（2m53s、exit0）；六个注释cell此前均已完成。随后取回`replay/complete.json`和`score/result.json`时SSH再次Connection refused，普通连接及IPv4连接均未成功。尚未取得或审阅新科学计数，不能据此声称重放验证或库敏感性结论已通过。下一步只取回既有compact结果并复核，不重复提交或训练。下文等待GPU等状态是历史快照。
+
 **最近核实，2026-09-16 09:56 UTC：** 外部Tiberius完整40core/200cell已合格完成，替代score12740044 COMPLETED（35s），正式result.json及资格元数据已取回。两物种P相对无mask流程和同checkpoint无mask均有正向F1效应；P−R_TE的区间均跨0，未建立RM优势；所有对照的原正确locus损失比例均超过1%。[完整结果](../../reports/P3-TIBERIUS-EXTERNAL-20260915/full-r1-score-12740044/RESULTS.md)。原人类1%门失败保留。
 
 前三项、长输入benchmark和外部Tiberius的本轮冻结执行与评分均已结束。benchmark为13合格完成+1项CB4 EDTA原生失败，新Omni完成；不追求所有实验为阳性。
