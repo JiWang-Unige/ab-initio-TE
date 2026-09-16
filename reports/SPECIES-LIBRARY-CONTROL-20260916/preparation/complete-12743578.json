@@ -1,0 +1,130 @@
+{
+  "status": "PREPARED",
+  "species": [
+    {
+      "species": "zebrafish",
+      "taxid": 7955,
+      "tiles": 500,
+      "curated_records": 1966,
+      "combined_records": 1966,
+      "added_records": 0,
+      "identical_libraries": true,
+      "exposure": {
+        "TRAIN": {
+          "tiles": 1500,
+          "positive_bp": 6590012,
+          "negative_bp": 5683116,
+          "unknown_bp": 14872
+        },
+        "CAL": {
+          "tiles": 500,
+          "positive_bp": 2248339,
+          "negative_bp": 1844768,
+          "unknown_bp": 2893
+        },
+        "DEV": {
+          "tiles": 500,
+          "positive_bp": 2243549,
+          "negative_bp": 1848348,
+          "unknown_bp": 4103
+        }
+      },
+      "source": {
+        "species_code": "zebrafish",
+        "assembly": "danRer11",
+        "cohort_role": "train",
+        "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa",
+        "self_out": "/home/users/j/jwang/ab-initio-TE/software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/zebrafish/zebrafish.repeatmasker.out.gz",
+        "primary_regex": "^chr(?:[1-9]|1[0-9]|2[0-5])$",
+        "train_chromosomes": "5",
+        "validation_chromosomes": "3",
+        "test_chromosomes": "0",
+        "explicit_contigs": "."
+      }
+    },
+    {
+      "species": "pig",
+      "taxid": 9823,
+      "tiles": 500,
+      "curated_records": 784,
+      "combined_records": 3831,
+      "added_records": 3047,
+      "identical_libraries": false,
+      "exposure": {
+        "TRAIN": {
+          "tiles": 1500,
+          "positive_bp": 3266685,
+          "negative_bp": 9020106,
+          "unknown_bp": 1209
+        },
+        "CAL": {
+          "tiles": 500,
+          "positive_bp": 1115519,
+          "negative_bp": 2979288,
+          "unknown_bp": 1193
+        },
+        "DEV": {
+          "tiles": 500,
+          "positive_bp": 1140557,
+          "negative_bp": 2954936,
+          "unknown_bp": 507
+        }
+      },
+      "source": {
+        "species_code": "pig",
+        "assembly": "susScr11",
+        "cohort_role": "train",
+        "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/pig/susScr11.fa",
+        "self_out": "/home/users/j/jwang/ab-initio-TE/software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/pig/pig.repeatmasker.out.gz",
+        "primary_regex": "^chr(?:[1-9]|1[0-8])$",
+        "train_chromosomes": "5",
+        "validation_chromosomes": "3",
+        "test_chromosomes": "0",
+        "explicit_contigs": "."
+      }
+    },
+    {
+      "species": "chicken",
+      "taxid": 9031,
+      "tiles": 500,
+      "curated_records": 218,
+      "combined_records": 395,
+      "added_records": 177,
+      "identical_libraries": false,
+      "exposure": {
+        "TRAIN": {
+          "tiles": 1500,
+          "positive_bp": 450199,
+          "negative_bp": 11833582,
+          "unknown_bp": 4219
+        },
+        "CAL": {
+          "tiles": 500,
+          "positive_bp": 158773,
+          "negative_bp": 3935680,
+          "unknown_bp": 1547
+        },
+        "DEV": {
+          "tiles": 500,
+          "positive_bp": 157905,
+          "negative_bp": 3936478,
+          "unknown_bp": 1617
+        }
+      },
+      "source": {
+        "species_code": "chicken",
+        "assembly": "galGal6",
+        "cohort_role": "train",
+        "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+        "self_out": "/home/users/j/jwang/ab-initio-TE/software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/chicken/chicken.repeatmasker.out.gz",
+        "primary_regex": "^chr[0-9]+$",
+        "train_chromosomes": "5",
+        "validation_chromosomes": "3",
+        "test_chromosomes": "0",
+        "explicit_contigs": "."
+      }
+    }
+  ],
+  "historical_invocation": "species curated, multistage",
+  "new_invocation": "explicit consensus libraries; both arms identical settings"
+}

@@ -29,10 +29,16 @@ Pro建议以Mobile DNA或BMC Bioinformatics的受控评价与应用边界研究�
 
 若外部预定P−R_TE出现可信效用增益，可重新评估Bioinformatics的适配性；仅增加实验数量或P−U阳性不会自动形成算法创新。该刊对新方法要求真实数据上的既有方法比较、独立评价及序列同源处理。[Bioinformatics scope](https://academic.oup.com/bioinformatics/pages/scope_guidelines)。不为维持某个期刊目标扩张实验。
 
-## 剩余工作
+## 审阅时剩余工作（历史快照）
 
 Pro审阅时EarlGrey恢复、新评分及Omni仍待完成。审阅后的现场证据已经补齐这部分：12739911两输出资格通过，score12739923与新Omni均完成，13合格完成+1项CB4 EDTA原生失败。旧EarlGrey遗漏库分数不进入排名；EDTA保留null，不加force。剩余仅为外部Tiberius完整200cell后的固定评分，以及稿件/图表/可用性整理。
 
 外部Tiberius最终须逐物种、按染色体重采样、保留gain/loss和参考支持限制。牛470参考loci中220含NM；鸭嘴兽639无NM，其相应空子集应为null。新外部结果不能改写人类16/510损失及原1%门失败。Gap不新增；single seed42与封存范围保持。
 
 结束条件是所有已批准运行达到可解释终态、稿件与证据一致，而不是全部支线阳性。benchmark冻结执行已完成；外部Tiberius仍未完成。替代score12740044已按afterok12738295提交，旧score12732548的UID0取消记录保留，原因未知。
+
+## 2026-09-16 后续核实
+
+09:56 UTC已核实12740044完成且全部40core/200cell合格，完整结果已进入[当前英文段落](results-discussion-en.md)。cow/platypus相对无mask两种对照均有正向F1效应；P−R_TE的95%区间均跨0，未建立优于RepeatMasker，原人类loss gate失败和外部局部损失保留。此结果晚于本页原固定提交审阅。
+
+用户新增物种排序问题的[第五次聚焦Pro讨论](pro-species-review.md)已完成，固定读取e3df4e2；本地计数诊断和库审计支持有限标签敏感性研究，不支持由高F1直接推出更完整注释。新三物种诊断另有协议和运行，不能混称为前五项冻结实验尚未执行。

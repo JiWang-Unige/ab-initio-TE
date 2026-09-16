@@ -1,0 +1,2087 @@
+{
+  "completed_cores": 40,
+  "completed_cells": 200,
+  "native_score_job": "12740044",
+  "qualification": [
+    {
+      "species": "cow",
+      "core": "c00",
+      "status": "COMPLETED",
+      "job": "12735652",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c01",
+      "status": "COMPLETED",
+      "job": "12735805",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c02",
+      "status": "COMPLETED",
+      "job": "12735806",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c03",
+      "status": "COMPLETED",
+      "job": "12736017",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c04",
+      "status": "COMPLETED",
+      "job": "12736018",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c05",
+      "status": "COMPLETED",
+      "job": "12736120",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c06",
+      "status": "COMPLETED",
+      "job": "12736121",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c07",
+      "status": "COMPLETED",
+      "job": "12736295",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c08",
+      "status": "COMPLETED",
+      "job": "12736301",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c09",
+      "status": "COMPLETED",
+      "job": "12736383",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c10",
+      "status": "COMPLETED",
+      "job": "12736390",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c11",
+      "status": "COMPLETED",
+      "job": "12736681",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c12",
+      "status": "COMPLETED",
+      "job": "12736685",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c13",
+      "status": "COMPLETED",
+      "job": "12737494",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c14",
+      "status": "COMPLETED",
+      "job": "12737654",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c15",
+      "status": "COMPLETED",
+      "job": "12738350",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c16",
+      "status": "COMPLETED",
+      "job": "12738409",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c17",
+      "status": "COMPLETED",
+      "job": "12738682",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c18",
+      "status": "COMPLETED",
+      "job": "12738694",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "cow",
+      "core": "c19",
+      "status": "COMPLETED",
+      "job": "12738898",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c00",
+      "status": "COMPLETED",
+      "job": "12735505",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c01",
+      "status": "COMPLETED",
+      "job": "12738941",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c02",
+      "status": "COMPLETED",
+      "job": "12739036",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c03",
+      "status": "COMPLETED",
+      "job": "12739062",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c04",
+      "status": "COMPLETED",
+      "job": "12739138",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c05",
+      "status": "COMPLETED",
+      "job": "12739154",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c06",
+      "status": "COMPLETED",
+      "job": "12739233",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c07",
+      "status": "COMPLETED",
+      "job": "12739246",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c08",
+      "status": "COMPLETED",
+      "job": "12739369",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c09",
+      "status": "COMPLETED",
+      "job": "12739382",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c10",
+      "status": "COMPLETED",
+      "job": "12739567",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c11",
+      "status": "COMPLETED",
+      "job": "12739581",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c12",
+      "status": "COMPLETED",
+      "job": "12739790",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c13",
+      "status": "COMPLETED",
+      "job": "12739799",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c14",
+      "status": "COMPLETED",
+      "job": "12739881",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c15",
+      "status": "COMPLETED",
+      "job": "12739892",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c16",
+      "status": "COMPLETED",
+      "job": "12739954",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 3
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c17",
+      "status": "COMPLETED",
+      "job": "12739969",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c18",
+      "status": "COMPLETED",
+      "job": "12740030",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 4
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 4
+        }
+      }
+    },
+    {
+      "species": "platypus",
+      "core": "c19",
+      "status": "COMPLETED",
+      "job": "12738295",
+      "steps": [
+        {
+          "mode": "U_soft",
+          "exit_code": 0
+        },
+        {
+          "mode": "U_nosm",
+          "exit_code": 0
+        },
+        {
+          "mode": "P",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_TE",
+          "exit_code": 0
+        },
+        {
+          "mode": "R_all",
+          "exit_code": 0
+        }
+      ],
+      "same_uppercase_letters": true,
+      "complete_library_export": true,
+      "observations": {
+        "U_soft": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "U_nosm": {
+          "passed": true,
+          "model_calls": 3
+        },
+        "P": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_TE": {
+          "passed": true,
+          "model_calls": 2
+        },
+        "R_all": {
+          "passed": true,
+          "model_calls": 2
+        }
+      }
+    }
+  ]
+}

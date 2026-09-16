@@ -51,3 +51,7 @@ FATAL: container creation failed: mount hook function failure: mount .../tiberiu
 失败 cell 的完整目录保留在 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1-failed-12732021/{cow,platypus}/c00`，原 `run-r1` 路径未用失败文件覆盖。修复仅在启动容器前确保 checkout 中的 `model_weights/tiberius_nosm_weights_v2` 目录存在；staged 官方 `weights.h5` 仍绑定到原定的 `/opt/Tiberius/model_weights/tiberius_nosm_weights_v2`。在 Baobab 上用同一镜像和两个 bind 做了无模型轻量验证，容器内 checkpoint 文件可见。
 
 在相同输入、固定 P3 checkpoint、Tiberius checkpoint、阈值、GPU/CPU/内存及 6 小时预算下，重试作业 `12735505_[0,20]` 已完成；cow 与 platypus 两个 smoke cell 均通过输入观察、GTF/GFF3 一致性检查，且各自五臂均 exit 0。原 full 中断的 c15/c16 部分输出已保留；其余实际缺失的 24 个 core 由 `12738295_[15-19,21-39%2]` 补跑。未完成所有固定 core 和输入资格检查前不运行评分。
+
+## 完整结果（2026-09-16取回）
+
+40core/200cell全部完成并通过输入/输出资格，替代score12740044 COMPLETED（35s）。牛/鸭嘴兽P F1为0.616466/0.589170；P−U_nosm为+0.067861/+0.056828，配对染色体区间均为正。主比较P−R_TE为−0.000917/−0.002563，区间分别[−0.020464,+0.016219]/[−0.015224,+0.009415]，未建立优势或等效。全部gain/loss、NM空子集及旧人类失败保留。该实验按原范围结束，不增加训练或选择新core。见[完整结果与资格](../../reports/P3-TIBERIUS-EXTERNAL-20260915/full-r1-score-12740044/RESULTS.md)。

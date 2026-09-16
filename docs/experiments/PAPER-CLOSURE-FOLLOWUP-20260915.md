@@ -12,11 +12,11 @@
 
 ## 当前执行图
 
-**最近核实，2026-09-16 02:07–02:14 UTC：** 连接短暂恢复后已取回两项EarlGrey恢复12739911及新score12739923的完成证据；两组合库均精确包含原始lineage库，当前benchmark为13合格完成+1项CB4 EDTA原生失败。新Omni实际回放4/4工作流job完成，本轮冻结benchmark执行与结果处理结束。模拟D F1=0.450648、EarlGrey=0.974942；CB4参考不足以真实准确性排名。
+**最近核实，2026-09-16 09:56 UTC：** 外部Tiberius完整40core/200cell已合格完成，替代score12740044 COMPLETED（35s），正式result.json及资格元数据已取回。两物种P相对无mask流程和同checkpoint无mask均有正向F1效应；P−R_TE的区间均跨0，未建立RM优势；所有对照的原正确locus损失比例均超过1%。[完整结果](../../reports/P3-TIBERIUS-EXTERNAL-20260915/full-r1-score-12740044/RESULTS.md)。原人类1%门失败保留。
 
-Tiberius恢复12738295最新Slurm快照还剩index37/38运行、39待调度；尚未核实完整200cell，不读取部分效用。旧score12732548在02:01 UTC被UID0取消，记录未给出原因；确认正式result.json尚不存在后，按同一脚本及`afterok:12738295`提交替代score **12740044**，sbatch已接受。随后SSH再次拒绝连接（最近02:14 UTC），尚未取得替代score的scontrol回读；不要重复提交。旧取消记录与全部推理产物保留。
+前三项、长输入benchmark和外部Tiberius的本轮冻结执行与评分均已结束。benchmark为13合格完成+1项CB4 EDTA原生失败，新Omni完成；不追求所有实验为阳性。
 
-Pro对34bb71c的第四轮审阅已完成，见[稿件入口](../manuscript/20260916/README.md)。前三项收束，已补充库支持字段分母和NTv2投影头容量匹配的解释，未改指标或新增训练。剩余工作是Tiberius完整评分和稿件/图表整合。
+用户09-16新增讨论是斑马鱼高F1是否来自注释完整度，以及Plant/Fungi是否应扩展。已完成原六物种D DEV汇总计数的回顾性诊断，未改变原结果；[诊断入口](../../reports/SPECIES-ANNOTATION-DIAGNOSTIC-20260916/RESULTS.md)。只读Dfam元数据作业12743207已完成，历史三物种probe也明确curated-only。内置浏览器Pro已完成固定e3df4e2的聚焦讨论，见第五次审阅归档。新三物种库诊断独立获本轮用户请求授权：准备12743578已完成（3m58），原D推理重放12743579等GPU，六个注释cell12743580前三项运行，其余按最多3项并行排队；score12743581依赖afterok两者。新协议见SPECIES-LIBRARY-CONTROL-20260916.md。只用已观察三物种DEV，0新训练、原校准/阈值不变，原汇总必须精确复现。剩余为该有限诊断收束、稿件/图表整合，不扩大Gap或Plant/Fungi。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
@@ -27,8 +27,8 @@ Pro对34bb71c的第四轮审阅已完成，见[稿件入口](../manuscript/20260
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
 | Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条/219080 repeat rows；platypus已核实1139条/387011 repeat rows，manifest PREPARED_WITH_NATIVE_RM |
 | Tiberius smoke | 原12732021失败保留；12735505_0和_20均COMPLETED（36m38s/34m46s） | 两物种五arm均合格；checkpoint bind修复实际通过 |
-| Tiberius full | 恢复12738295最新Slurm仅37/38运行、39待调度；完整core计数待连接恢复后核实 | 全200cell后由score执行完整不变量和科学评分；不读取部分效用结论 |
-| Tiberius score | 替代12740044已提交afterok12738295；旧12732548被UID0取消，原因未知 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
+| Tiberius full | 40/40core、200/200cell合格完成；实际模型调用和输入不变量通过 | 完整产物已由score统一评分，无partial推断 |
+| Tiberius score | 12740044 COMPLETED，35s；旧12732548取消记录保留 | 正式result.json已取回，计数/gain-loss复核通过；两物种未建立P优于R_TE |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
 | native方法 | fixed RM/HiTE/RM2、模拟EDTA及两EarlGrey恢复均合格完成；CB4 EDTA原生失败 | EarlGrey exact strained+lineage检查通过，全部原生cell终态；旧输出/累计耗时保留，EDTA不再恢复 |
@@ -102,3 +102,9 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 ### 第四轮Pro完成后的收敛（2026-09-16）
 
 已实际读取完整可见回复和生成文档预览，Pro报告固定GitHub34bb71c、21分16秒完成；它未查询后来的HPC状态。新归档位于`docs/manuscript/20260916/`，为Agent依据页面整理的审阅/编辑稿，非成功下载的原附件。前三项无需为阳性重训；模拟D召回不足进入正文，SF5/聚类放补充；明确D、P3及各任务模型身份。库控制匹配差值与全FP字段分母不同、容量控制只匹配head两项已核对源码并加注，原指标未变。随后已取回EarlGrey→新score→新Omni的合格完成结果；剩余为Tiberius完整200cell→固定评分→稿件/图表整合。Pro建议不自动授权额外实验，不重复发送同一审阅请求。
+
+## 2026-09-16 10:25 UTC 新诊断执行入口
+
+三物种库准备已合格：500原DEV中心/物种均与原材料序列一致；斑马鱼1966→1966且序列完全相同，猪784→3831，鸡218→395；curated原序列均是combined不变子集。TRAIN正类材料暴露分别6,590,012、3,266,685、450,199 bp，说明相同窗口数不是相同TE监督量。以上不等于已验证完整度因果。运行输出在outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1。重放无原逐位置缓存可比，只能先复现原混淆计数；失败则不评分或改模型。全部六cell完成且原计数复现后读score/result.json，保留完整四格转移、新FN、原阳性损失、class缺支持。候选独立证据另判断，不自动把扩库支持称TP。
+
+当前完整英文工作稿在docs/manuscript/20260916/manuscript-en.md；已有摘要/引言/结果/讨论/方法/可用性与图表安排。新诊断仍标pending，正式图组、发布材料仍未完成。

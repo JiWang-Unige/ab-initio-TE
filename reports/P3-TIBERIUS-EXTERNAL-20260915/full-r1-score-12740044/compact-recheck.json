@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scope": "Independent recomputation from saved per-core counts and correct-locus sets; not a second native GTF parse or bootstrap rerun",
+  "checked": [
+    {
+      "species": "cow",
+      "cores": 20,
+      "chromosomes": 10,
+      "arms": 5,
+      "reference_loci": 470
+    },
+    {
+      "species": "platypus",
+      "cores": 20,
+      "chromosomes": 10,
+      "arms": 5,
+      "reference_loci": 639
+    }
+  ]
+}

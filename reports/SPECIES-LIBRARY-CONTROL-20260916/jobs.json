@@ -1,0 +1,9 @@
+{
+  "preparation": 12743578,
+  "replay": 12743579,
+  "annotation_array": 12743580,
+  "score": 12743581,
+  "preparation_status": "COMPLETED",
+  "as_of_utc": "2026-09-16 10:25",
+  "remaining_status": "Replay pending resources; first three annotation cells running; score dependency pending"
+}
