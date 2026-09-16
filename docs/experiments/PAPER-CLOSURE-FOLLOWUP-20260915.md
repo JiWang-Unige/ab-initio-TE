@@ -114,3 +114,5 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 11:16 UTC已读Slurm：12743580六个原生注释cell全部COMPLETED/exit0，猪combined用时9m41s；原D重放12743579仍PENDING资源，12743581仍依赖等待。后续读取六cell compact输入资格时SSH connection refused，未得到资格包，不将Slurm完成冒充统一评分。未重复提交；下次恢复后继续原作业。
 
 12:27 UTC：一次SSH核实仍connection refused，未读到新的Slurm状态，沿用11:16的最后已知状态，不密集重试。利用本地已合格证据补齐Figure1研究结构图（PDF/SVG/PNG），清楚区分六条实验与L1/L2/L3；不新增科学结果或实验。
+
+16:04 UTC：本轮一次SSH仍立即返回connection refused；距11:16首次中断近5小时。当前阻塞是无法核实/收回结果，不是已知的作业失败。六项原生注释的COMPLETED来自11:16证据，模型重放/评分最后已知为排队，当前状态未知。首次就持续连接阻塞提醒用户；后续相同拒绝保持静默，不重复提交、改路由或降低SSH安全设置，连接恢复再接续。

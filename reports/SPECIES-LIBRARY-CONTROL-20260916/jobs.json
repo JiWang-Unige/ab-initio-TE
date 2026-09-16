@@ -13,5 +13,8 @@
     3,
     4,
     5
-  ]
+  ],
+  "connection_check_utc": "2026-09-16 16:04",
+  "connection_status": "Connection refused; Slurm state not refreshed since 11:16",
+  "persistent_connection_block_notification_utc": "2026-09-16 16:04"
 }
