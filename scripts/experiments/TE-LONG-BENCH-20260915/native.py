@@ -13,14 +13,41 @@ import time
 
 
 def portable_earlgrey(source):
-    """Keep newest-directory semantics without GNU find's unsupported -printf."""
+    """Apply the bounded EarlGrey runtime and resume compatibility patches.
+
+    The installed image's resume path skips ``firstMaskCustomLib`` when the
+    initial masked genome already exists.  That function is also the only
+    place where EarlGrey restores ``RepSub`` for ``-l`` custom libraries.  On
+    a continuation this left the final ``cat $latestFile $RepSub`` command
+    with an empty second operand, so the final RepeatMasker run used only the
+    de novo library.  Restore the variable immediately before that command;
+    this does not alter a fresh-run biological parameter or any threshold.
+    """
     old = 'latestStrainDir="$(find . -maxdepth 1 -type d -name "TS_${species}-families.fa_*" -printf \'%T@\\t%p\\n\' 2>/dev/null | sort -nr | head -n 1 | cut -f2-)"'
     new = 'latestStrainDir="$(python3 -c \'import glob,os,sys; print(max((p for p in glob.glob("TS_"+sys.argv[1]+"-families.fa_*") if os.path.isdir(p)), key=os.path.getmtime, default=""))\' "$species")"'
-    if source.count(new) == 1 and old not in source:
-        return source  # A preserved continuation already carries this exact patch.
-    if source.count(old) != 1:
+    if old in source:
+        if source.count(old) != 1:
+            raise ValueError('EarlGrey compatibility patch does not match installed source')
+        source = source.replace(old, new, 1)
+    elif source.count(new) != 1:
         raise ValueError('EarlGrey compatibility patch does not match installed source')
-    return source.replace(old, new)
+
+    resume_old = '''novoMask()
+{
+	if [ -z "$RepSpec" ] && [ -z "$startCust" ]; then'''
+    resume_new = '''novoMask()
+{
+	# Rehydrate the starting custom library on resumed runs.  The initial-mask
+	# skip branch does not call firstMaskCustomLib, which normally sets RepSub.
+	if [ -n "$startCust" ]; then
+		RepSub="$startCust"
+	fi
+	if [ -z "$RepSpec" ] && [ -z "$startCust" ]; then'''
+    if source.count(resume_new) == 1:
+        return source
+    if source.count(resume_old) != 1:
+        raise ValueError('EarlGrey resume-library patch does not match installed source')
+    return source.replace(resume_old, resume_new, 1)
 
 
 def write(path, obj):

@@ -1,0 +1,58 @@
+==================================================
+file name: assembly.fa
+sequences:           367
+total length:  108384165 bp  (105424746 bp excl N/X-runs)
+GC level:         37.35 %
+bases masked:    2517191 bp ( 2.32 %)
+==================================================
+               number of      length   percentage
+               elements*    occupied  of sequence
+--------------------------------------------------
+Retroelements           23         1571 bp    0.00 %
+   SINEs:               23         1571 bp    0.00 %
+   Penelope:             0            0 bp    0.00 %
+   LINEs:                0            0 bp    0.00 %
+    CRE/SLACS            0            0 bp    0.00 %
+     L2/CR1/Rex          0            0 bp    0.00 %
+     R1/LOA/Jockey       0            0 bp    0.00 %
+     R2/R4/NeSL          0            0 bp    0.00 %
+     RTE/Bov-B           0            0 bp    0.00 %
+     L1/CIN4             0            0 bp    0.00 %
+   LTR elements:         0            0 bp    0.00 %
+     BEL/Pao             0            0 bp    0.00 %
+     Ty1/Copia           0            0 bp    0.00 %
+     Gypsy/DIRS1         0            0 bp    0.00 %
+       Retroviral        0            0 bp    0.00 %
+
+DNA transposons          0            0 bp    0.00 %
+   hobo-Activator        0            0 bp    0.00 %
+   Tc1-IS630-Pogo        0            0 bp    0.00 %
+   En-Spm                0            0 bp    0.00 %
+   MULE-MuDR             0            0 bp    0.00 %
+   PiggyBac              0            0 bp    0.00 %
+   Tourist/Harbinger     0            0 bp    0.00 %
+   Other (Mirage,        0            0 bp    0.00 %
+    P-element, Transib)
+
+Rolling-circles          0            0 bp    0.00 %
+
+Unclassified:            1           37 bp    0.00 %
+
+Total interspersed repeats:        1608 bp    0.00 %
+
+
+Small RNA:              16         4389 bp    0.00 %
+
+Satellites:              0            0 bp    0.00 %
+Simple repeats:      25582      2151867 bp    1.99 %
+Low complexity:       7135       359327 bp    0.33 %
+==================================================
+
+* most repeats fragmented by insertions or deletions
+  have been counted as one element
+
+
+The query species was assumed to be Caenorhabditis briggsae
+RepeatMasker version 4.2.2 , default mode
+run with rmblastn version 2.14.1+
+FamDB: CONS-Dfam_3.9

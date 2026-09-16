@@ -1,0 +1,13 @@
+# CB4 reference qualification and interpretation
+
+The frozen real-input comparison is technically coordinate-valid but is not an adequate genome-wide TE accuracy benchmark. The scored Label-A positives total **1,571 bp**, all from the SINE category in the original RepeatMasker table. The native table reports 23 SINE elements; that native element count is not an independently validated insertion count. LINE, LTR and DNA-transposon positive coverage is zero. The callable input is 105,416,539 bp, so the positive fraction is about 0.00149%.
+
+This is a source coverage limitation, not a conversion error: the saved `CB4-Label-A.tbl` itself reports 1,571 bp of retroelements, exactly matching the scoring denominator. Its 2,517,191 bp total masked sequence is mainly simple/low-complexity sequence and must not be substituted for TE truth. The source also has 37 bp of unclassified interspersed repeat excluded from the strict known-TE truth.
+
+`CB4-Label-A-metadata.txt` identifies the exact GCA_000004555.3 CB4 input, RepeatMasker 4.2.2, Dfam3.9 and `-species Caenorhabditis briggsae`. The historical preparation record (`docs/experiments/CROSS-SPECIES-L1-PANEL-METADATA-20260908.md`) already documents its curated selection: 16 ancestral families and no lineage-specific families, successful coordinate checks, and `LABEL_GENERATION_COMPLETED_NOT_SCIENTIFIC_PASS`. No new labels, thresholds or evaluation loci were selected after observing scores.
+
+The current fixed-RM comparator uses RepeatMasker 4.2.4 with a Dfam3.9 lineage library. It recovers all 1,571 source-positive bp. Because the reference itself comes from RepeatMasker/Dfam, that 100% is agreement with a closely related reference-generation procedure, not independent biological sensitivity. The fixed D model recovers 972 bp and misses 599 of these known-positive bp; sparse reference coverage does not excuse those misses. The other predicted bases remain unlabelled, not confirmed false positives or rescued TEs.
+
+Use this input for full-genome runtime/output-completion reporting and a clearly labelled sparse-reference coverage diagnostic. Do not use its recall or seven-block bootstrap to rank general TE accuracy, claim superiority on nematodes, or infer absence of LINE/LTR/DNA TEs in CB4. Absolute real-data precision and F1 remain null. An independent, substantially broader real TE truth set would be needed for a publishable real-genome accuracy comparison; replacing this frozen reference after viewing results is outside this run.
+
+The original `.tbl` and metadata copies have trailing whitespace normalized only. Original files remain on Baobab.

@@ -1,0 +1,97 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-09-16 03:00:16
+  Workflow ID: b770e39f-218e-4cd4-8354-304d705a351f
+  Platform: macOS-15.7.3-arm64-arm-64bit
+  Host: JideMacBook-Air.local
+  User: jiwang
+  Snakemake version: 9.27.0
+  Python version: 3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]
+  Command: /Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-venv/bin/snakemake --snakefile Snakefile --cores 1 --scheduler greedy
+  Snakefile: /Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-long-12738470/Snakefile
+  Base directory: /Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-long-12738470
+  Run directory: /Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-long-12738470
+  Working directory: /Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-long-12738470
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                                          count
+-----------------------------------------  -------
+data_bundle_default                              1
+data_bundle_default_metrics_score_default        1
+collector_summary_default                        1
+all                                              1
+total                                            4
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 03:00:16 2026]
+localrule data_bundle_default:
+    output: data/bundle/.default/block_bundle.json
+    log: .logs/data_bundle_default.log
+    jobid: 1
+    benchmark: data/bundle/.default/performance.txt
+    reason: Missing output files: data/bundle/.default/block_bundle.json
+    resources: tmpdir=/var/folders/h3/p_y5qy0d7_l09rt4l9fyb4m40000gn/T, cores=2
+=== Rule: data_bundle_default ===
+Started: 2026-09-16T03:00:16+02:00
+---
+Benchmark: unable to collect cpu and memory benchmark statistics:
+[Wed Sep 16 03:00:16 2026]
+Finished jobid: 1 (Rule: data_bundle_default)
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 03:00:16 2026]
+localrule data_bundle_default_metrics_score_default:
+    input: data/bundle/.default/block_bundle.json
+    output: data/bundle/.default/metrics/score/.default/metrics.json
+    log: .logs/data_bundle_default_metrics_score_default.log
+    jobid: 2
+    benchmark: data/bundle/.default/metrics/score/.default/performance.txt
+    reason: Missing output files: data/bundle/.default/metrics/score/.default/metrics.json; Input files updated by another job: data/bundle/.default/block_bundle.json
+    resources: tmpdir=/var/folders/h3/p_y5qy0d7_l09rt4l9fyb4m40000gn/T, cores=2
+=== Rule: data_bundle_default_metrics_score_default ===
+Started: 2026-09-16T03:00:16+02:00
+---
+Benchmark: unable to collect cpu and memory benchmark statistics:
+[Wed Sep 16 03:00:16 2026]
+Finished jobid: 2 (Rule: data_bundle_default_metrics_score_default)
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 03:00:16 2026]
+localrule collector_summary_default:
+    input: data/bundle/.default/metrics/score/.default/metrics.json
+    output: collector_summary.json
+    log: .logs/collector_summary_default.log
+    jobid: 3
+    reason: Missing output files: collector_summary.json; Input files updated by another job: data/bundle/.default/metrics/score/.default/metrics.json
+    resources: tmpdir=/var/folders/h3/p_y5qy0d7_l09rt4l9fyb4m40000gn/T, cores=2
+[Wed Sep 16 03:00:16 2026]
+Finished jobid: 3 (Rule: collector_summary_default)
+3 of 4 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Wed Sep 16 03:00:16 2026]
+localrule all:
+    input: data/bundle/.default/block_bundle.json, data/bundle/.default/metrics/score/.default/metrics.json, collector_summary.json
+    jobid: 0
+    reason: Input files updated by another job: collector_summary.json, data/bundle/.default/metrics/score/.default/metrics.json, data/bundle/.default/block_bundle.json
+    resources: tmpdir=/var/folders/h3/p_y5qy0d7_l09rt4l9fyb4m40000gn/T
+[Wed Sep 16 03:00:16 2026]
+Finished jobid: 0 (Rule: all)
+4 of 4 steps (100%) done
+Complete log(s): /Users/jiwang/Desktop/TE/manuscript-review-20260914/omnibenchmark-long-12738470/.snakemake/log/2026-09-16T030016.379892.snakemake.log
+Elapsed time: 0:00:00.460759

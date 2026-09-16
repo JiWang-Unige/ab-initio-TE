@@ -1,0 +1,8 @@
+assembly=GCA_000004555.3_CB4
+species=Caenorhabditis briggsae
+source=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/L1-PANEL-PREP-20260908-kqZrej/GCA_000004555.3_CB4_genomic.fna.gz
+version=RepeatMasker version 4.2.2
+library=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/repeatmasker_dfam/raw_runs/self_labelA/RMDFAM_FULLPARTITIONS_RERUN_20260617/rm_lib_overlay/famdb
+Dfam=3.9
+command=-pa 4 -xsmall -gff -species Caenorhabditis briggsae; no -a
+job=12522308_2

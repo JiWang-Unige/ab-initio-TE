@@ -1,0 +1,18 @@
+{
+  "score_job": "12738470",
+  "native_status_counts": {
+    "COMPLETED": 13,
+    "FAILED": 1
+  },
+  "qualified_completed_cells": 11,
+  "protocol_ineligible_cells": [
+    "sim100|earlgrey",
+    "c_briggsae|earlgrey"
+  ],
+  "native_failed_cells": [
+    "c_briggsae|edta"
+  ],
+  "reason": "EarlGrey resume skipped firstMaskCustomLib, so RepSub was unset and final combined library omitted the explicit initial lineage library. Actual sim100 combined library equals de novo strained library.",
+  "action": "Preserve source bundle and restore source-state in copies; rerun affected final annotation/merge within original cumulative budget, then rescore/replay.",
+  "not_a_final_qualified_benchmark": true
+}

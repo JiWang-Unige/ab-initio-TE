@@ -12,7 +12,7 @@
 
 ## 当前执行图
 
-**最近核实，2026-09-15 20:52 UTC：** SSH恢复且实际连接正常，使用任务专用控制连接 `/tmp/te-closure-baobab.sock`。前三项补实验已收敛，不重复训练或评分。Tiberius两物种smoke的五臂均完成；full完成cow c00–c14后被UID 0取消，保留结果并只恢复24个缺失core（目前至少indices15/16实际运行）。EarlGrey两输入已完成最终输出资格化，两项CPU推理也已完成。EDTA原运行错误已定位，首轮恢复12738345又因本项目overlay缩进错误失败；该错误修正并验证实际模块后已重试12738464_[0,1]，CB4运行、sim100等资源；最终比较尚未完成。
+**最近核实，2026-09-16 01:22 UTC：** SSH已恢复。前三项补实验保持完成；Tiberius现有34/40core的五臂完整成功记录（170cell），剩余6core运行/排队。EDTA模拟已完成，CB4因完整LTR候选为空而未通过原生默认检查，已收敛为失败、不加force。score12738470与Omni实际回放均完成，但随后来源核实发现两项EarlGrey续跑遗漏初始lineage库，旧EarlGrey结果均判为协议不合格；已在同预算内启动12739911_[0,1]恢复最终RM/merge，新score12739923依赖afterany12739911。当前benchmark资格为11合格完成、1原生失败、2待恢复；不能称最终公平比较已完成。固定D的模拟材料F1=0.450648，且CB4真值仅1571bp，相关阴性与参考覆盖限制已写入RESULTS.md。
 
 | 工作 | 作业/输出 | 后续验收 |
 |---|---|---|
@@ -23,13 +23,13 @@
 | Tiberius 数据 | acquire12731819、prep12732000完成 | cow470参考loci（220含NM转录本）；platypus639（0含NM），均是注释相对效用 |
 | Tiberius 参考修复 | 12732214_0 cow及_1 platypus均COMPLETED（39m52s/2h34m01s） | cow完整Dfam3.9库1718条/219080 repeat rows；platypus已核实1139条/387011 repeat rows，manifest PREPARED_WITH_NATIVE_RM |
 | Tiberius smoke | 原12732021失败保留；12735505_0和_20均COMPLETED（36m38s/34m46s） | 两物种五arm均合格；checkpoint bind修复实际通过 |
-| Tiberius full | 原12732547完成cow c00–c14；复用platypus c00后合计16core/80cell；缺失24core恢复12738295_[15–19,21–39%2]，15/16运行、其余等资源 | UID 0取消原因未公开，无模型失败证据；部分输出保留，未重跑完整core |
+| Tiberius full | 当前34/40core五臂成功记录、170cell；恢复12738295余下6core运行/排队 | 全200cell后由score执行完整不变量和科学评分；不读取部分效用结论 |
 | Tiberius score | 12732548，afterok12738295 | 200cell全部完成后生成 `outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/result.json` |
 | 长输入模拟 | model/smoke12731809、sim10012731886完成 | 100,000,000bp，163602片段，插入材料55000087bp，坐标/大小写材料mismatch0；L3/strand未资格化 |
 | 长输入真实 | prepare12731942完成 | CB4全基因组108384165bp，367序列，真实只报reference-positive recall |
-| native方法 | 两输入固定RM/HiTE/RM2已完成；EarlGrey12738271_4/12738272_4均COMPLETED；EDTA原两项FAILED保留，当前恢复12738464_[0,1]，CB4 RUNNING、sim100 PENDING；12738345失败保留 | EarlGrey修复Perl路径/模块后合格，累计耗时8725.85s/9014.24s包括失败及续跑；EDTA恢复见下文 |
+| native方法 | fixed RM/HiTE/RM2及模拟EDTA已完成；CB4 EDTA默认完整LTR门失败；EarlGrey恢复12739911_[0,1]运行中 | 恢复resume RepSub，只重建final RM/merge；exact strained+lineage组合库检查后才合格；旧输出/累计耗时保留，EDTA不再恢复 |
 | 固定D | 两GPU完成；CPU CB4 12731959 COMPLETED（Slurm 7h15m16s；实测26112.05s）；sim CPU12731960 COMPLETED（Slurm 6h37m45s；实测23861.16s） | CB4全部108384165bp/367序列；CPU E5-2630v4、16线程；GPU硬件不同，完整分母齐前不排名 |
-| 长输入评分 | 新12738470，afterany12738464；其余选定12cell均COMPLETED | `outputs/TE-LONG-BENCH-20260915/score-12738470/result.json`；旧12732389保留12/14完成与2失败的完整分母快照 |
+| 长输入评分 | 新12739923已核实afterany12739911；旧12738470及Omni回放为历史记录，其中两EarlGrey协议不合格 | 新bundle全14cell保留，确认final_library.exact_concatenation后再重放；旧bundle及qualification.json不覆盖 |
 | 模拟库条目覆盖 | 已收回12733209结果；本地计数核对通过 | 366/366生成条目名称被实际固定RM库覆盖；包含非TE条目，不用于声称新家族发现 |
 
 ## 真实失败与修正
@@ -74,3 +74,19 @@ EDTA原CB4在TIR-Learner的分段ID/坐标还原处失败，sim100因pandas 3的
 实际生成的三个overlay现已编译并在EDTA容器中导入；真实helper的dotted accession、普通分段、overlap分段及已规范ID样例通过，见已更正EDTA报告。新恢复为12738464_[0,1]，输入为上一失败12738345的复制工作目录，累计原耗时31318.23/14840.21秒继续从84600秒扣除；不覆盖任何原目录。当前CB4运行、sim100等资源，未形成EDTA完整输出。原CB4空LTR是独立未决条件，不自动加force绕过。
 
 attempts已同步到新恢复。新score12738470已提交并核实afterany12738464；旧score12732389不可覆盖，其状态摘要保存在 `reports/TE-LONG-BENCH-20260915/score-12732389-status.json`。未来Omni回放应使用最新完整终态bundle，不误用旧失败快照。
+
+## 2026-09-16 结果核实与剩余任务
+
+- EDTA：12738464_1模拟完成123471行GFF转换；_0 CB4（raw job12738465）运行22m22后FAILED，Slurm exit1:0、native EDTA exit255。LTR.raw.fa有13记录，但LTR.intact.raw.fa为空；TIR与Helitron已完成。属于默认候选门不通过，不是新接口错误，不加force、不增加预算。
+- score12738470原生终态bundle及其Omni干净GitHub回放均收回。Omni固定commit4edaeb16…、4job成功，只证明按block统计重现指标，不证明上游产物满足全部知识条件。
+- EarlGrey输出路径和adapter正确，但实际sim组合库只有1405bytes，与strained库一致；起始lineage库3.63MB未加入。RepSub变量只在续跑跳过的初始函数赋值，导致final RM漏库。两输入均须有界恢复，不能用该低分声称方法天然保守或D胜出。原12738271/12738272及评分12738470保留；具体修复/新jobs由本入口后续更新。
+- 固定D在100Mb模拟上precision0.887689、recall0.301975、F1 0.450648，低于已合格fixed RM/RM2/HiTE/EDTA；不因该阴性重训、调阈值或换输入。两CPU流程也不显示速度优势。
+- CB4源Label-A原生表明确仅23个SINE条目、1571bp严格TE阳性，不能用于真实全基因组准确性排名。fixed RM与来源近似同库同引擎，100%来源召回非独立敏感度；D检出972bp、漏599bp，覆盖缺口与漏检并存。不在看过结果后偷偷更换参考。
+
+结果入口：[benchmark解释](../../reports/TE-LONG-BENCH-20260915/RESULTS.md)、[参考资格](../../reports/TE-LONG-BENCH-20260915/reference-qualification/RESULTS.md)、[EDTA终态](../../reports/TE-LONG-BENCH-20260915/edta-recovery/FINAL-STATUS.md)、[EarlGrey资格](../../reports/TE-LONG-BENCH-20260915/earlgrey-recovery/OUTPUT-QUALIFICATION.md)、[当前回放](../../reports/TE-LONG-BENCH-20260915/omni-12738470/README.md)。
+
+### 01:22 UTC：EarlGrey恢复与新评分依赖
+
+`12739911_0`/`_1`已分别在cpu238/cpu239启动，16CPU/80GB/E5-2630V4，输出`native-12739911/{c_briggsae,sim100}-earlgrey`。恢复仅复制旧工作目录，保留初始mask、RepeatModeler和TEstrainer；恢复`RepSub`后重建最终RM/merge/summary。两cell原耗时8725.850726/9014.238390秒继续计入原84600秒预算。只有新status记录`final_library.exact_concatenation=true`并完成输出/坐标检查，才可将EarlGrey重新纳入合格比较。
+
+`attempts.json`已更新并同步远程；新评分`12739923`已核实`afterany:12739911_*`依赖，输出应为`score-12739923/result.json`。它允许EDTA的真实失败保留在完整分母中；不得用旧不合格EarlGrey结果填补新cell。原12738470及其Omni回放保留为历史快照。Tiberius另按原200cell完整性门处理，不与benchmark混合。

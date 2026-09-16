@@ -53,3 +53,11 @@ CB4 `12732198_4` 与模拟 `12731947_4` 均在 TEstrainer 已生成精炼库后�
 原CB4 12731946_3在TIR-Learner序列提取时因带点accession的split ID未被解析，导致原基因组FASTA查找失败；sim100 12731947_3在pandas 3下因Series位置索引 `x[0]` 变为标签索引而失败。两者不是生物学无候选或零分。`edta_recovery.py` 对原镜像的三处源码实施兼容补丁：split ID识别、分段坐标还原以及按 `TIR_type` 列读取。源码匹配、坐标边界oracle与语法检查已执行，原始镜像和失败目录保留。
 
 恢复12738345_[0,1]在复制的工作目录使用EDTA `--overwrite 0`，保持sensitive/anno设置、输入和原模型，复用已完成阶段。16CPU/80GB、E5-2630V4；原耗时31097.63/14614.03秒及复制/续跑仍共同计入84600秒预算。待完整输出与坐标资格核实后计分，不因恢复运行而宣布完成。详见[EDTA诊断](../../reports/TE-LONG-BENCH-20260915/edta-recovery/DIAGNOSIS.md)。
+
+## 2026-09-16 输出来源核实
+
+EDTA模拟完整完成；CB4已执行到原生候选检查，但完整LTR候选为空，保留失败，不加force。EarlGrey标准最终GFF和adapter虽正确，续跑时跳过initial-mask函数使RepSub未恢复，实际final RM组合库丢失初始lineage库；两EarlGrey旧完成输出均不满足原协议知识条件。必须在新复制目录恢复同一lineage库，仅重跑受影响final RM/merge，累计耗时仍计入原预算，不把初始RM预测伪装成EarlGrey结果。
+
+score12738470及Omni回放作为原生终态快照保留；恢复后需新score/replay。CB4参考原生表仅1571bp严格TE阳性，不能用其来源召回作真实全基因组准确性排名。具体结果与限制见 [RESULTS](../../reports/TE-LONG-BENCH-20260915/RESULTS.md)。
+
+EarlGrey修复执行记录：12739911_[0,1]，原预算内复用初始mask/discovery/strainer，恢复final RM的起始库；新score12739923 afterany12739911。新结果必须包含exact strained+lineage库验证。旧12738470/Omni回放不可当作最终合格排名，见持续跟进入口。
