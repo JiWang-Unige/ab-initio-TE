@@ -108,3 +108,5 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 三物种库准备已合格：500原DEV中心/物种均与原材料序列一致；斑马鱼1966→1966且序列完全相同，猪784→3831，鸡218→395；curated原序列均是combined不变子集。TRAIN正类材料暴露分别6,590,012、3,266,685、450,199 bp，说明相同窗口数不是相同TE监督量。以上不等于已验证完整度因果。运行输出在outputs/SPECIES-LIBRARY-CONTROL-20260916/run-r1。重放无原逐位置缓存可比，只能先复现原混淆计数；失败则不评分或改模型。全部六cell完成且原计数复现后读score/result.json，保留完整四格转移、新FN、原阳性损失、class缺支持。候选独立证据另判断，不自动把扩库支持称TP。
 
 当前完整英文工作稿在docs/manuscript/20260916/manuscript-en.md；已有摘要/引言/结果/讨论/方法/可用性与图表安排。新诊断仍标pending，正式图组、发布材料仍未完成。
+
+10:32 UTC更新：三物种注释0/1/2/4/5已COMPLETED并有complete.json，只有猪combined/index3仍运行；原D重放12743579继续等GPU，score12743581等依赖。三张已完成数据图（物种计数、模拟benchmark、外部Tiberius）已生成PDF/SVG/PNG；无待运行结果被画成已完成。

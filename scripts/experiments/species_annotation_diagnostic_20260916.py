@@ -72,7 +72,7 @@ def run():
     for name, items in [('species_counts',rows), ('prevalence_sensitivity',curves),
                         ('analytical_label_thinning',thinning)]:
         with (OUT/(name+'.tsv')).open('w') as f:
-            writer=csv.DictWriter(f, fieldnames=list(items[0]), delimiter='\t')
+            writer=csv.DictWriter(f, fieldnames=list(items[0]), delimiter='\t', lineterminator='\n')
             writer.writeheader();writer.writerows(items)
     print(json.dumps(rows, indent=2))
 

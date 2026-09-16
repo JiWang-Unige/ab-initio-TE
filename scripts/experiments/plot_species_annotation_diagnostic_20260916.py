@@ -52,3 +52,5 @@ for ax in axs:ax.grid(axis='y',alpha=.18);ax.set_axisbelow(True)
 fig.suptitle('Frozen six-species D: retrospective internal DEV diagnostic',x=.05,ha='left',fontsize=14,fontweight='bold')
 fig.subplots_adjust(left=.05,right=.98,top=.84,bottom=.28,wspace=.34)
 for ext in ('png','pdf','svg'):fig.savefig(OUT/f'species_annotation_diagnostic.{ext}',dpi=180)
+svg=OUT/'species_annotation_diagnostic.svg'
+svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')

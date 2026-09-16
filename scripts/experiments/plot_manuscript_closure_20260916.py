@@ -15,6 +15,8 @@ plt.rcParams.update({'font.size':10,'axes.spines.top':False,'axes.spines.right':
 
 def save(fig,name):
     for ext in ('png','pdf','svg'): fig.savefig(OUT/(name+'.'+ext),dpi=180)
+    svg=OUT/(name+'.svg')
+    svg.write_text('\n'.join(line.rstrip() for line in svg.read_text().splitlines())+'\n')
     plt.close(fig)
 
 

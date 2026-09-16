@@ -4,6 +4,13 @@
   "annotation_array": 12743580,
   "score": 12743581,
   "preparation_status": "COMPLETED",
-  "as_of_utc": "2026-09-16 10:25",
-  "remaining_status": "Replay pending resources; first three annotation cells running; score dependency pending"
+  "as_of_utc": "2026-09-16 10:32:30",
+  "remaining_status": "Replay pending resources; annotation cells 0,1,2,4,5 completed, 3 running; score dependency pending",
+  "annotation_completed_indices": [
+    0,
+    1,
+    2,
+    4,
+    5
+  ]
 }
