@@ -4,12 +4,13 @@
   "annotation_array": 12743580,
   "score": 12743581,
   "preparation_status": "COMPLETED",
-  "as_of_utc": "2026-09-16 10:32:30",
-  "remaining_status": "Replay pending resources; annotation cells 0,1,2,4,5 completed, 3 running; score dependency pending",
+  "as_of_utc": "2026-09-16 11:16",
+  "remaining_status": "Slurm reports all six native annotation cells completed exit0; replay pending resources; score dependency pending. Follow-up compact qualification retrieval was interrupted by SSH connection refusal.",
   "annotation_completed_indices": [
     0,
     1,
     2,
+    3,
     4,
     5
   ]
