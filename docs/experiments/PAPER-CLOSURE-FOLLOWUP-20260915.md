@@ -90,3 +90,7 @@ attempts已同步到新恢复。新score12738470已提交并核实afterany127384
 `12739911_0`/`_1`已分别在cpu238/cpu239启动，16CPU/80GB/E5-2630V4，输出`native-12739911/{c_briggsae,sim100}-earlgrey`。恢复仅复制旧工作目录，保留初始mask、RepeatModeler和TEstrainer；恢复`RepSub`后重建最终RM/merge/summary。两cell原耗时8725.850726/9014.238390秒继续计入原84600秒预算。只有新status记录`final_library.exact_concatenation=true`并完成输出/坐标检查，才可将EarlGrey重新纳入合格比较。
 
 `attempts.json`已更新并同步远程；新评分`12739923`已核实`afterany:12739911_*`依赖，输出应为`score-12739923/result.json`。它允许EDTA的真实失败保留在完整分母中；不得用旧不合格EarlGrey结果填补新cell。原12738470及其Omni回放保留为历史快照。Tiberius另按原200cell完整性门处理，不与benchmark混合。
+
+### Pro审阅已发送（01:27 UTC）
+
+提交`34bb71c7f7697671710d6c06d6b4353086211c58`已成功推送到GitHub main。已在内置浏览器的原[科研梳理与论文初稿对话](https://chatgpt.com/c/6aa7c372-9118-83eb-a6f1-828ffb3ecab9)使用6 Pro发送新的固定提交审阅请求，页面显示“Pro思考中”。入口为`PAPER-CLOSURE-REVIEW-20260916.md`，要求实际读取GitHub并区分已完成前三项与pending Tiberius/EarlGrey，形成中文收敛表、英文结果/讨论修订和现实投稿定位。回复尚未完成，不能把已发请求写成审阅完成；后续读取此同一对话、归档并核实建议，不重复发送请求，不自动执行越出当前冻结范围的新实验。
