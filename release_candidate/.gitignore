@@ -3,6 +3,7 @@ bundle/model/pytorch_model.bin
 notebook-smoke-output/
 run-*/
 
-# The tiny documented input is part of the source candidate despite the
+# The small documented inputs are part of the source candidate despite the
 # repository-wide biological-data ignore rule.
 !examples/tiny.fa
+!examples/human_hs1_example.fa
