@@ -48,8 +48,9 @@ backbone that are directly comparable:
 
 The GENERanno H0 binary checkpoint and the current SF5 eight-state checkpoint
 (`SF5_ONTOLOGY_CLOSURE_base_seed42_12731987/best_model`) can be extracted as a
-secondary panel, but they are different backbones or objectives and cannot be
-used as a clean before/after causal comparison.
+secondary panel, within the GENERanno backbone. They differ in task-training species,
+objectives and exposure, so they cannot isolate the causal effect of the
+training objective. They must not be substituted for either NTv2 checkpoint.
 
 The checkpoints should be extracted on the already fixed six-species SF5
 512-bp panel. No sequence, coordinate, chromosome split, or pooling change
@@ -169,3 +170,20 @@ The complete numbers and per-species rows are recorded in
 The matched run did not add a logistic linear probe, k-mer/permutation
 control, new contrastive training, or UMAP evidence, so it does not close the
 entire explanatory-control suite by itself.
+
+## GENERanno three-checkpoint diagnostic completed
+
+The separate same-backbone GENERanno run `12854214` completed on the identical
+SIB records. Known-five 5-NN macro-F1 was 0.3654 / 0.4329 / 0.7674 for
+pretrained / human binary FT / six-species class FT; full-eight values were
+0.2748 / 0.3123 / 0.6857 and conditional TE-four values 0.4746 / 0.4990 /
+0.9030. TE-four K-means ARI was 0.0417 / 0.0693 / 0.2429. The class-trained
+checkpoint therefore supplies a positive matched geometry result, without
+proving label-free family discovery or a causal objective advantage. The
+pretrained binary 5-NN score (0.5221) does not establish strong TE/BG separation.
+
+GEN pooling excludes structural specials and retains N/UNK sequence tokens,
+including the one all-N TEST BG record. This tokenizer-specific contract is
+explicitly separate from NTv2. Saved split metadata supports train/test
+chromosome separation for SF5, but homology exclusion remains unresolved.
+See [results and figure](../../../reports/GENERANNO-MATCHED-REPRESENTATION-20260917/run-12854214/RESULTS.md).

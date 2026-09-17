@@ -1,0 +1,29 @@
+{
+  "final_job_id": "12854214",
+  "final_status": "COMPLETED",
+  "final_elapsed": "00:23:09",
+  "cpus": 4,
+  "memory": "48G",
+  "scientific_training": false,
+  "attempts": [
+    {
+      "job_id": "12853107",
+      "status": "FAILED",
+      "elapsed": "00:01:24",
+      "reason": "Masked-LM output did not expose hidden states through the generic output path; extraction switched to the native encoder output."
+    },
+    {
+      "job_id": "12854043",
+      "status": "FAILED",
+      "elapsed": "00:06:05",
+      "reason": "All-N test record had no poolable token when tokenizer-declared UNK was excluded; GENERanno N/UNK is now retained as sequence content for all three arms, with structural specials excluded."
+    },
+    {
+      "job_id": "12854214",
+      "status": "COMPLETED",
+      "elapsed": "00:23:09",
+      "reason": "All three frozen checkpoints, original records, input-symbol audit and common CPU evaluator completed."
+    }
+  ],
+  "pooling_contract_note": "The historical pooling string is retained as a schema identifier; explicit excluded token IDs and preserved_unknown_token_id in feature_metadata define the actual GENERanno contract."
+}

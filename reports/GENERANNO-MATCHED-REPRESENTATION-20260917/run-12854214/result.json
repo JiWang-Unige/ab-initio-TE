@@ -1,0 +1,722 @@
+{
+  "feature_metadata": {
+    "binary_finetuned": {
+      "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+      "device": "cuda",
+      "dtype_saved": "float32",
+      "feature_dim": 1280,
+      "max_length": 2048,
+      "model_class": "GenerannoForTokenClassification",
+      "model_id": "binary_finetuned",
+      "model_kind": "token_classifier",
+      "model_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model",
+      "pooling": "attention_mask_mean_excluding_padding_and_special_tokens",
+      "pooling_excluded_token_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "preserved_unknown_token_id": 37,
+      "schema": "matched_generanno_embedding_v1",
+      "splits": {
+        "test": {
+          "elapsed_seconds": 158.7560362815857,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 120,
+            "BG": 360,
+            "DNA": 260,
+            "KNOWN_OTHER_TE": 125,
+            "LINE": 306,
+            "LTR": 280,
+            "SINE": 75,
+            "UNCLASSIFIED": 54
+          },
+          "n": 1580
+        },
+        "train": {
+          "elapsed_seconds": 185.21694612503052,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 121,
+            "BG": 360,
+            "DNA": 299,
+            "KNOWN_OTHER_TE": 213,
+            "LINE": 316,
+            "LTR": 316,
+            "SINE": 126,
+            "UNCLASSIFIED": 92
+          },
+          "n": 1843
+        },
+        "val": {
+          "elapsed_seconds": 81.49533796310425,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 60,
+            "BG": 180,
+            "DNA": 105,
+            "KNOWN_OTHER_TE": 60,
+            "LINE": 138,
+            "LTR": 140,
+            "SINE": 66,
+            "UNCLASSIFIED": 60
+          },
+          "n": 809
+        }
+      },
+      "tokenizer_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+      "tokenizer_special_token_ids": [
+        1,
+        2,
+        3,
+        4,
+        37
+      ]
+    },
+    "multiclass_finetuned": {
+      "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+      "device": "cuda",
+      "dtype_saved": "float32",
+      "feature_dim": 1280,
+      "max_length": 2048,
+      "model_class": "GenerannoForTokenClassification",
+      "model_id": "multiclass_finetuned",
+      "model_kind": "token_classifier",
+      "model_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_ONTOLOGY_CLOSURE_base_seed42_12731987/best_model",
+      "pooling": "attention_mask_mean_excluding_padding_and_special_tokens",
+      "pooling_excluded_token_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "preserved_unknown_token_id": 37,
+      "schema": "matched_generanno_embedding_v1",
+      "splits": {
+        "test": {
+          "elapsed_seconds": 158.75533437728882,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 120,
+            "BG": 360,
+            "DNA": 260,
+            "KNOWN_OTHER_TE": 125,
+            "LINE": 306,
+            "LTR": 280,
+            "SINE": 75,
+            "UNCLASSIFIED": 54
+          },
+          "n": 1580
+        },
+        "train": {
+          "elapsed_seconds": 185.17775678634644,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 121,
+            "BG": 360,
+            "DNA": 299,
+            "KNOWN_OTHER_TE": 213,
+            "LINE": 316,
+            "LTR": 316,
+            "SINE": 126,
+            "UNCLASSIFIED": 92
+          },
+          "n": 1843
+        },
+        "val": {
+          "elapsed_seconds": 81.43030524253845,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 60,
+            "BG": 180,
+            "DNA": 105,
+            "KNOWN_OTHER_TE": 60,
+            "LINE": 138,
+            "LTR": 140,
+            "SINE": 66,
+            "UNCLASSIFIED": 60
+          },
+          "n": 809
+        }
+      },
+      "tokenizer_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+      "tokenizer_special_token_ids": [
+        1,
+        2,
+        3,
+        4,
+        37
+      ]
+    },
+    "pretrained": {
+      "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+      "device": "cuda",
+      "dtype_saved": "float32",
+      "feature_dim": 1280,
+      "max_length": 2048,
+      "model_class": "GenerannoForMaskedLM",
+      "model_id": "pretrained",
+      "model_kind": "pretrained",
+      "model_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+      "pooling": "attention_mask_mean_excluding_padding_and_special_tokens",
+      "pooling_excluded_token_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "preserved_unknown_token_id": 37,
+      "schema": "matched_generanno_embedding_v1",
+      "splits": {
+        "test": {
+          "elapsed_seconds": 158.8504180908203,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 120,
+            "BG": 360,
+            "DNA": 260,
+            "KNOWN_OTHER_TE": 125,
+            "LINE": 306,
+            "LTR": 280,
+            "SINE": 75,
+            "UNCLASSIFIED": 54
+          },
+          "n": 1580
+        },
+        "train": {
+          "elapsed_seconds": 185.6584882736206,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 121,
+            "BG": 360,
+            "DNA": 299,
+            "KNOWN_OTHER_TE": 213,
+            "LINE": 316,
+            "LTR": 316,
+            "SINE": 126,
+            "UNCLASSIFIED": 92
+          },
+          "n": 1843
+        },
+        "val": {
+          "elapsed_seconds": 81.36638736724854,
+          "feature_dim": 1280,
+          "labels": {
+            "AMBIGUOUS_TE": 60,
+            "BG": 180,
+            "DNA": 105,
+            "KNOWN_OTHER_TE": 60,
+            "LINE": 138,
+            "LTR": 140,
+            "SINE": 66,
+            "UNCLASSIFIED": 60
+          },
+          "n": 809
+        }
+      },
+      "tokenizer_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base",
+      "tokenizer_special_token_ids": [
+        1,
+        2,
+        3,
+        4,
+        37
+      ]
+    }
+  },
+  "input_sequence_quality": {
+    "by_split": {
+      "test": {
+        "all_n_labels": {
+          "BG": 1
+        },
+        "all_n_records": 1,
+        "n_records": 1580,
+        "non_acgt_bases": 1557,
+        "non_acgt_fraction": 0.0019246934335443039,
+        "records_with_non_acgt": 10,
+        "records_with_non_acgt_by_label": {
+          "BG": 4,
+          "DNA": 1,
+          "LINE": 1,
+          "LTR": 3,
+          "SINE": 1
+        },
+        "total_bases": 808960
+      },
+      "train": {
+        "all_n_labels": {},
+        "all_n_records": 0,
+        "n_records": 1843,
+        "non_acgt_bases": 528,
+        "non_acgt_fraction": 0.0005595496473141617,
+        "records_with_non_acgt": 6,
+        "records_with_non_acgt_by_label": {
+          "AMBIGUOUS_TE": 1,
+          "BG": 1,
+          "DNA": 2,
+          "KNOWN_OTHER_TE": 2
+        },
+        "total_bases": 943616
+      },
+      "val": {
+        "all_n_labels": {},
+        "all_n_records": 0,
+        "n_records": 809,
+        "non_acgt_bases": 452,
+        "non_acgt_fraction": 0.0010912391841779974,
+        "records_with_non_acgt": 5,
+        "records_with_non_acgt_by_label": {
+          "BG": 3,
+          "DNA": 1,
+          "LTR": 1
+        },
+        "total_bases": 414208
+      }
+    },
+    "data_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SIB-RETREAT-EMBED-REPLICATION-20260917/data_512"
+  },
+  "interpretation": {
+    "coordinate_split_check": "binary human-only training; SF5 train/test chromosomes disjoint by species",
+    "homologous_copy_exposure": "unresolved",
+    "independent_generalization": "not_claimed",
+    "kmeans": "unsupervised train-fitted geometry diagnostic with predeclared K",
+    "knn": "supervised train-fitted 5-NN readout"
+  },
+  "models": [
+    {
+      "binary_known_full_k2_ari": 0.03389302968346103,
+      "binary_known_full_k2_nmi": 0.024122970355672006,
+      "binary_known_knn_macro_f1": 0.5221008157312165,
+      "conditional_te_four_kmeans_k4_ari": 0.04174644709690841,
+      "conditional_te_four_kmeans_k4_nmi": 0.05797438550862807,
+      "conditional_te_four_knn_macro_f1": 0.47456100966555764,
+      "feature_dim": 1280,
+      "full_eight_kmeans_k8_ari": 0.02873100579653593,
+      "full_eight_kmeans_k8_nmi": 0.08301083458643646,
+      "full_eight_knn_macro_f1": 0.2748254658941182,
+      "knn_by_species": {
+        "conditional_te_four": {
+          "c_elegans": {
+            "accuracy": 0.6629213483146067,
+            "balanced_accuracy": 0.4125,
+            "macro_f1": 0.38995726495726496,
+            "n": 89
+          },
+          "chicken": {
+            "accuracy": 0.5730337078651685,
+            "balanced_accuracy": 0.3289473684210526,
+            "macro_f1": 0.33405483405483405,
+            "n": 89
+          },
+          "fruit_fly": {
+            "accuracy": 0.5166666666666667,
+            "balanced_accuracy": 0.3875,
+            "macro_f1": 0.3901986090746171,
+            "n": 180
+          },
+          "mouse": {
+            "accuracy": 0.4852941176470588,
+            "balanced_accuracy": 0.41666666666666663,
+            "macro_f1": 0.36755494505494507,
+            "n": 136
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.4482758620689655,
+            "balanced_accuracy": 0.519927536231884,
+            "macro_f1": 0.44296713489425943,
+            "n": 203
+          },
+          "zebrafish": {
+            "accuracy": 0.40625,
+            "balanced_accuracy": 0.40189393939393936,
+            "macro_f1": 0.4032046364800353,
+            "n": 224
+          }
+        },
+        "full_eight": {
+          "c_elegans": {
+            "accuracy": 0.2586750788643533,
+            "balanced_accuracy": 0.24062499999999998,
+            "macro_f1": 0.2241531829923795,
+            "n": 317
+          },
+          "chicken": {
+            "accuracy": 0.38666666666666666,
+            "balanced_accuracy": 0.1506578947368421,
+            "macro_f1": 0.15916241496598638,
+            "n": 150
+          },
+          "fruit_fly": {
+            "accuracy": 0.3205574912891986,
+            "balanced_accuracy": 0.19915780141843972,
+            "macro_f1": 0.20510164998400293,
+            "n": 287
+          },
+          "mouse": {
+            "accuracy": 0.29591836734693877,
+            "balanced_accuracy": 0.13958333333333334,
+            "macro_f1": 0.14782630904971045,
+            "n": 196
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.3258426966292135,
+            "balanced_accuracy": 0.2382246376811594,
+            "macro_f1": 0.2214031429874578,
+            "n": 267
+          },
+          "zebrafish": {
+            "accuracy": 0.2369146005509642,
+            "balanced_accuracy": 0.24993686868686868,
+            "macro_f1": 0.2203791823414742,
+            "n": 363
+          }
+        },
+        "known_five": {
+          "c_elegans": {
+            "accuracy": 0.4563758389261745,
+            "balanced_accuracy": 0.32999999999999996,
+            "macro_f1": 0.3109117305458769,
+            "n": 149
+          },
+          "chicken": {
+            "accuracy": 0.42953020134228187,
+            "balanced_accuracy": 0.27543859649122804,
+            "macro_f1": 0.27548778193720724,
+            "n": 149
+          },
+          "fruit_fly": {
+            "accuracy": 0.38333333333333336,
+            "balanced_accuracy": 0.30666666666666664,
+            "macro_f1": 0.3076918115980045,
+            "n": 240
+          },
+          "mouse": {
+            "accuracy": 0.33163265306122447,
+            "balanced_accuracy": 0.24666666666666667,
+            "macro_f1": 0.25306317199521083,
+            "n": 196
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.3650190114068441,
+            "balanced_accuracy": 0.4111594202898551,
+            "macro_f1": 0.3676407349959738,
+            "n": 263
+          },
+          "zebrafish": {
+            "accuracy": 0.30633802816901406,
+            "balanced_accuracy": 0.30575757575757573,
+            "macro_f1": 0.30904420271983735,
+            "n": 284
+          }
+        }
+      },
+      "known_five_kmeans_k5_ari": 0.024698529444686826,
+      "known_five_kmeans_k5_nmi": 0.04488176219414977,
+      "known_five_knn_macro_f1": 0.36541087361521063,
+      "model_id": "pretrained",
+      "model_kind": "pretrained",
+      "test_labels": {
+        "AMBIGUOUS_TE": 120,
+        "BG": 360,
+        "DNA": 260,
+        "KNOWN_OTHER_TE": 125,
+        "LINE": 306,
+        "LTR": 280,
+        "SINE": 75,
+        "UNCLASSIFIED": 54
+      }
+    },
+    {
+      "binary_known_full_k2_ari": 0.003313872096623763,
+      "binary_known_full_k2_nmi": 0.00017590730689348263,
+      "binary_known_knn_macro_f1": 0.6191799400028009,
+      "conditional_te_four_kmeans_k4_ari": 0.06927745560526762,
+      "conditional_te_four_kmeans_k4_nmi": 0.09810350866446807,
+      "conditional_te_four_knn_macro_f1": 0.4990030948130699,
+      "feature_dim": 1280,
+      "full_eight_kmeans_k8_ari": 0.06336419534121465,
+      "full_eight_kmeans_k8_nmi": 0.12997105363107633,
+      "full_eight_knn_macro_f1": 0.3123141310658165,
+      "knn_by_species": {
+        "conditional_te_four": {
+          "c_elegans": {
+            "accuracy": 0.6179775280898876,
+            "balanced_accuracy": 0.3827380952380952,
+            "macro_f1": 0.35297619047619044,
+            "n": 89
+          },
+          "chicken": {
+            "accuracy": 0.47191011235955055,
+            "balanced_accuracy": 0.27960526315789475,
+            "macro_f1": 0.3165942513368984,
+            "n": 89
+          },
+          "fruit_fly": {
+            "accuracy": 0.4444444444444444,
+            "balanced_accuracy": 0.33333333333333337,
+            "macro_f1": 0.33315571420514367,
+            "n": 180
+          },
+          "mouse": {
+            "accuracy": 0.5367647058823529,
+            "balanced_accuracy": 0.6791666666666667,
+            "macro_f1": 0.4866300366300366,
+            "n": 136
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.4187192118226601,
+            "balanced_accuracy": 0.4077898550724638,
+            "macro_f1": 0.41478457958921694,
+            "n": 203
+          },
+          "zebrafish": {
+            "accuracy": 0.5178571428571429,
+            "balanced_accuracy": 0.5393939393939394,
+            "macro_f1": 0.5368183584092675,
+            "n": 224
+          }
+        },
+        "full_eight": {
+          "c_elegans": {
+            "accuracy": 0.31230283911671924,
+            "balanced_accuracy": 0.25558035714285715,
+            "macro_f1": 0.23447203263887878,
+            "n": 317
+          },
+          "chicken": {
+            "accuracy": 0.4,
+            "balanced_accuracy": 0.15339912280701756,
+            "macro_f1": 0.17726846326699566,
+            "n": 150
+          },
+          "fruit_fly": {
+            "accuracy": 0.2961672473867596,
+            "balanced_accuracy": 0.17938829787234042,
+            "macro_f1": 0.18348009060083365,
+            "n": 287
+          },
+          "mouse": {
+            "accuracy": 0.413265306122449,
+            "balanced_accuracy": 0.29583333333333334,
+            "macro_f1": 0.24531588938368598,
+            "n": 196
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.2808988764044944,
+            "balanced_accuracy": 0.19882246376811594,
+            "macro_f1": 0.2023217930383653,
+            "n": 267
+          },
+          "zebrafish": {
+            "accuracy": 0.36363636363636365,
+            "balanced_accuracy": 0.35422979797979803,
+            "macro_f1": 0.3237678235489462,
+            "n": 363
+          }
+        },
+        "known_five": {
+          "c_elegans": {
+            "accuracy": 0.4697986577181208,
+            "balanced_accuracy": 0.3076190476190476,
+            "macro_f1": 0.2879452114549935,
+            "n": 149
+          },
+          "chicken": {
+            "accuracy": 0.436241610738255,
+            "balanced_accuracy": 0.2692982456140351,
+            "macro_f1": 0.29632303275920296,
+            "n": 149
+          },
+          "fruit_fly": {
+            "accuracy": 0.3625,
+            "balanced_accuracy": 0.29,
+            "macro_f1": 0.2898934781693402,
+            "n": 240
+          },
+          "mouse": {
+            "accuracy": 0.44387755102040816,
+            "balanced_accuracy": 0.5233333333333333,
+            "macro_f1": 0.39337473261369565,
+            "n": 196
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.3726235741444867,
+            "balanced_accuracy": 0.35347826086956524,
+            "macro_f1": 0.3507590982742628,
+            "n": 263
+          },
+          "zebrafish": {
+            "accuracy": 0.49295774647887325,
+            "balanced_accuracy": 0.5115151515151515,
+            "macro_f1": 0.5045934087638504,
+            "n": 284
+          }
+        }
+      },
+      "known_five_kmeans_k5_ari": 0.07984855631997896,
+      "known_five_kmeans_k5_nmi": 0.12734037304810247,
+      "known_five_knn_macro_f1": 0.4328988475869913,
+      "model_id": "binary_finetuned",
+      "model_kind": "token_classifier",
+      "test_labels": {
+        "AMBIGUOUS_TE": 120,
+        "BG": 360,
+        "DNA": 260,
+        "KNOWN_OTHER_TE": 125,
+        "LINE": 306,
+        "LTR": 280,
+        "SINE": 75,
+        "UNCLASSIFIED": 54
+      }
+    },
+    {
+      "binary_known_full_k2_ari": 0.16859184538050306,
+      "binary_known_full_k2_nmi": 0.13907313338099148,
+      "binary_known_knn_macro_f1": 0.716443056187513,
+      "conditional_te_four_kmeans_k4_ari": 0.24294249366257709,
+      "conditional_te_four_kmeans_k4_nmi": 0.31005944610838815,
+      "conditional_te_four_knn_macro_f1": 0.9029517155023903,
+      "feature_dim": 1280,
+      "full_eight_kmeans_k8_ari": 0.24747446667071307,
+      "full_eight_kmeans_k8_nmi": 0.39714516179800347,
+      "full_eight_knn_macro_f1": 0.6856789941011462,
+      "knn_by_species": {
+        "conditional_te_four": {
+          "c_elegans": {
+            "accuracy": 0.898876404494382,
+            "balanced_accuracy": 0.8184523809523809,
+            "macro_f1": 0.8263305322128851,
+            "n": 89
+          },
+          "chicken": {
+            "accuracy": 0.9325842696629213,
+            "balanced_accuracy": 0.6861842105263157,
+            "macro_f1": 0.6774657231313578,
+            "n": 89
+          },
+          "fruit_fly": {
+            "accuracy": 0.8722222222222222,
+            "balanced_accuracy": 0.6541666666666667,
+            "macro_f1": 0.6553608841399539,
+            "n": 180
+          },
+          "mouse": {
+            "accuracy": 0.9338235294117647,
+            "balanced_accuracy": 0.8999999999999999,
+            "macro_f1": 0.9000329884019724,
+            "n": 136
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.8768472906403941,
+            "balanced_accuracy": 0.8891304347826088,
+            "macro_f1": 0.8930643080700063,
+            "n": 203
+          },
+          "zebrafish": {
+            "accuracy": 0.8660714285714286,
+            "balanced_accuracy": 0.8734848484848485,
+            "macro_f1": 0.8709790163012975,
+            "n": 224
+          }
+        },
+        "full_eight": {
+          "c_elegans": {
+            "accuracy": 0.6182965299684543,
+            "balanced_accuracy": 0.6554315476190475,
+            "macro_f1": 0.6796047626692598,
+            "n": 317
+          },
+          "chicken": {
+            "accuracy": 0.7733333333333333,
+            "balanced_accuracy": 0.393859649122807,
+            "macro_f1": 0.36965118215118214,
+            "n": 150
+          },
+          "fruit_fly": {
+            "accuracy": 0.7038327526132404,
+            "balanced_accuracy": 0.44330673758865247,
+            "macro_f1": 0.4522774424446794,
+            "n": 287
+          },
+          "mouse": {
+            "accuracy": 0.7142857142857143,
+            "balanced_accuracy": 0.4354166666666667,
+            "macro_f1": 0.41586225202237065,
+            "n": 196
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.7153558052434457,
+            "balanced_accuracy": 0.4716485507246377,
+            "macro_f1": 0.4762292975534332,
+            "n": 267
+          },
+          "zebrafish": {
+            "accuracy": 0.6336088154269972,
+            "balanced_accuracy": 0.5839015151515152,
+            "macro_f1": 0.5696143564534668,
+            "n": 363
+          }
+        },
+        "known_five": {
+          "c_elegans": {
+            "accuracy": 0.7248322147651006,
+            "balanced_accuracy": 0.7295238095238096,
+            "macro_f1": 0.7724238529059871,
+            "n": 149
+          },
+          "chicken": {
+            "accuracy": 0.7986577181208053,
+            "balanced_accuracy": 0.6473684210526316,
+            "macro_f1": 0.6176046176046176,
+            "n": 149
+          },
+          "fruit_fly": {
+            "accuracy": 0.7041666666666667,
+            "balanced_accuracy": 0.5633333333333332,
+            "macro_f1": 0.5682710727969349,
+            "n": 240
+          },
+          "mouse": {
+            "accuracy": 0.75,
+            "balanced_accuracy": 0.7366666666666666,
+            "macro_f1": 0.6891861404018609,
+            "n": 196
+          },
+          "western_clawed_frog": {
+            "accuracy": 0.7414448669201521,
+            "balanced_accuracy": 0.7679710144927536,
+            "macro_f1": 0.7678218199646771,
+            "n": 263
+          },
+          "zebrafish": {
+            "accuracy": 0.7323943661971831,
+            "balanced_accuracy": 0.7454545454545454,
+            "macro_f1": 0.7433888702792357,
+            "n": 284
+          }
+        }
+      },
+      "known_five_kmeans_k5_ari": 0.33342554262235774,
+      "known_five_kmeans_k5_nmi": 0.42141694543247205,
+      "known_five_knn_macro_f1": 0.7674104232601907,
+      "model_id": "multiclass_finetuned",
+      "model_kind": "token_classifier",
+      "test_labels": {
+        "AMBIGUOUS_TE": 120,
+        "BG": 360,
+        "DNA": 260,
+        "KNOWN_OTHER_TE": 125,
+        "LINE": 306,
+        "LTR": 280,
+        "SINE": 75,
+        "UNCLASSIFIED": 54
+      }
+    }
+  ],
+  "pooling": "attention_mask_mean_excluding_padding_and_special_tokens",
+  "run_root": "outputs/GENERANNO-MATCHED-REPRESENTATION-20260917/run-12854214",
+  "status": "PASS_MATCHED_GENERANNO_REPRESENTATION"
+}

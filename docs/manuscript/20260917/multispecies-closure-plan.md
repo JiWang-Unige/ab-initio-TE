@@ -23,7 +23,7 @@
 | 图 | 正文的问题 | 补充材料 | 尚缺的关键闭合 |
 |---|---|---|---|
 | 1 模型选择与统一输出 | 可直接比较的基座结果、模型谱系和 material/class 接口 | 四基座×五窗口、NTv2/v3尺寸矩阵、历史配方差异 | 逐行协议表已找回；不重跑整个网格 |
-| 2 表示中的 TE 信息 | 同基座、同样本的 pretrained 与 FT probe / cluster | 全状态和 Known、k-mer/组成混杂、监督 contrastive、UMAP | NTv2 pretrained→D 已完成；GENERanno 三件套追加配对读出，单列训练暴露差异 |
+| 2 表示中的 TE 信息 | 同基座、同样本的 pretrained 与 FT probe / cluster | 全状态和 Known、k-mer/组成混杂、监督 contrastive、UMAP | NTv2两权重与GENERanno三权重均已完成；单列训练暴露差异，不追加表示训练 |
 | 3 动物泛化与类别图谱 | 固定流程逐物种结果、最弱物种、完整类别分母 | 所有物种与来源状态、阈值、稀疏 positive-only 面板 | 完整外部 screen；再冻结真正前瞻性确认面板 |
 | 4 标签与上下文 | 库变化对 apparent FP/FN 的影响；同一 TE 序列的配对干预 | hg19 匹配背景/序列控制、历史 human-library RM、模拟失效 | 固定 D 背景干预已完成；不能将 context 认定为模拟下降的主要原因 |
 | 5 公平 benchmark | 真实/模拟质量和完整CPU成本、GPU单列 | 工具版本、知识条件、失败/null、全部成本、Omni评分复现 | 既有长输入有限比较已完成；最终流程若变，仅增加其独立一行 |

@@ -1,0 +1,93 @@
+experiment_id: GENERANNO-MATCHED-REPRESENTATION-20260917
+status: completed_12854214
+purpose: matched_pretrained_binary_class_representation_diagnostic
+seed: 42
+
+# This is an inference-only comparison.  The SIB 512-bp panel, record order,
+# tokenizer and pooling contract are shared by all three checkpoints.  It is a
+# secondary representation diagnostic, not an independent generalization test.
+remote:
+  project_root: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE
+  data_dir: /home/users/j/jwang/ab-initio-TE/outputs/SIB-RETREAT-EMBED-REPLICATION-20260917/data_512
+  tokenizer_checkpoint: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  pretrained_checkpoint: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/GENERanno-eukaryote-0.5b-base
+  binary_finetuned_checkpoint: /home/users/j/jwang/ab-initio-TE/software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model
+  multiclass_finetuned_checkpoint: /home/users/j/jwang/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_ONTOLOGY_CLOSURE_base_seed42_12731987/best_model
+
+inputs:
+  train_features: train_features.npy
+  validation_features: val_features.npy
+  test_features: test_features.npy
+  train_labels: train_labels.npy
+  validation_labels: val_labels.npy
+  test_labels: test_labels.npy
+  train_records: train_records.jsonl
+  validation_records: val_records.jsonl
+  test_records: test_records.jsonl
+  split_counts:
+    train: 1843
+    validation: 809
+    test: 1580
+  labels:
+    0: BG
+    1: SINE
+    2: LINE
+    3: LTR
+    4: DNA
+    5: KNOWN_OTHER_TE
+    6: AMBIGUOUS_TE
+    7: UNCLASSIFIED
+
+checkpoints:
+  - id: pretrained
+    kind: AutoModelForMaskedLM
+    objective: untouched_pretraining
+  - id: binary_finetuned
+    kind: AutoModelForTokenClassification
+    objective: binary_TE_background
+  - id: multiclass_finetuned
+    kind: AutoModelForTokenClassification
+    objective: eight_state_SF5
+
+pooling:
+  method: attention_mask_mean_excluding_padding_and_special_tokens
+  include_special_tokens: false
+  preserve_unknown_token_as_sequence_content: true
+  note: "GENERanno declares N as unk_token; N is retained because it is an observed ambiguity symbol and the fixed panel contains all-N windows"
+  tokenizer_max_length: 2048
+  dtype: float32
+  tokenizer_source: pretrained_GENERanno_checkpoint_for_all_three_models
+
+evaluation:
+  evaluator: scripts/experiments/EMBEDDING-INTERPRETABILITY-CLOSURE-20260917/evaluate_matched_embeddings.py
+  raw_kmeans_k: [2, 4, 5, 8]
+  classification: [balanced_accuracy, macro_f1]
+  probes: [supervised_knn5]
+  primary_known_labels: [BG, SINE, LINE, LTR, DNA]
+  full_labels: [BG, SINE, LINE, LTR, DNA, KNOWN_OTHER_TE, AMBIGUOUS_TE, UNCLASSIFIED]
+  conditional_te_labels: [SINE, LINE, LTR, DNA]
+  select_k_from_train_only: true
+  use_test_labels_for_selection: false
+  bg_is_retained_as_its_own_class: true
+  no_te_bg_relabeling: true
+  umap_is_primary_endpoint: false
+
+resources:
+  extraction_gpu: 1
+  extraction_cpus: 4
+  extraction_memory_gb: 48
+  extraction_walltime: 02:00:00
+  extraction_batch_size: 4
+  evaluation_cpu_only: true
+
+scientific_scope:
+  train_coordinate_exposure:
+    binary_finetuned: "not_detected_at_species_chrom_level: checkpoint training is human-only (chr1,3,5,7,9), while SIB has no human records"
+    multiclass_finetuned: "not_detected_at_species_chrom_level: SIB test uses each SF5 test chromosome, disjoint from the six SF5 training chromosomes"
+  exact_coordinate_overlap: not_detected_from_saved_split_metadata
+  homologous_copy_exposure: unresolved
+  supervised_readout_is_not_unsupervised_geometry: true
+  no_new_training: true
+  no_seed_sweep: true
+  no_target_tuning: true
+  no_umap_selection: true
