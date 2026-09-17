@@ -1,0 +1,22 @@
+{
+  "core": {
+    "chrom": "NC_041729.1",
+    "chromosome": "2",
+    "end": 59739887,
+    "halo_end": 59839887,
+    "halo_start": 54639887,
+    "id": "c02",
+    "index": 0,
+    "record_id": "NC_041729.1|base_mask_core=0|core=54739887-59739887|halo=54639887-59839887",
+    "start": 54739887
+  },
+  "library_policy": null,
+  "lowercase_bp": 2465475,
+  "mask_fasta": "mask.fasta",
+  "masked_acgt_bp": 2465475,
+  "method": "RED",
+  "panel_input_bp": 5200000,
+  "panel_record": "NC_041729.1|base_mask_core=0|core=54739887-59739887|halo=54639887-59839887",
+  "repeatmasker_summary": null,
+  "status": "MASK_COMPLETED"
+}

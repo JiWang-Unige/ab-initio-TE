@@ -1,0 +1,60 @@
+{
+  "experiment": "PLATYPUS-STRONG-MASK-CONTROLS-20260917",
+  "status": "FROZEN_BEFORE_NATIVE_RUN",
+  "scope": "Fixed 20-core platypus regional masks and the identical Tiberius softmask receiver",
+  "source": {
+    "preparation": "outputs/P3-TIBERIUS-EXTERNAL-20260915/prepared/platypus",
+    "assembly": "GCF_004115215.2_mOrnAna1.pri.v4",
+    "species": "platypus",
+    "core_count": 20,
+    "core_bp": 100000000,
+    "halo_bp": 100000,
+    "sequence_contract": "The frozen prepared c00-c19 sequence.txt files; 5,200,000 bases per core after stripping the terminal newline",
+    "pooled_discovery_input": "One FASTA with the twenty fixed core+halo sequences as independent contigs; 104,000,000 bp total. Contigs are not concatenated and retain their fixed record IDs.",
+    "halo_overlap": "No overlap among the twenty fixed halo intervals was observed; contig boundaries are still retained explicitly.",
+    "truth_contract": "Reference-relative CDS-chain/locus endpoint from reference.json; annotations are comparators, not independent biological truth"
+  },
+  "methods": {
+    "RM2": {
+      "name": "RepeatModeler2 followed by RepeatMasker",
+      "repeatmodeler_version": "2.0.9",
+      "repeatmasker_version": "4.2.4",
+      "repeatmodeler_commit": "14798c73c2c32da17576deac4689a6e586932eb",
+      "repeatmasker_commit": "3f49a049c7a7e843b2da1b708fe06bb39c90035b",
+      "repeatmodeler_image": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+      "repeatmasker_image": "container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+      "discovery": "One pooled FASTA of the twenty fixed 5.2 Mb halo contigs; this 104 Mb regional-panel discovery cost is not a whole-genome runtime claim",
+      "discovery_parameters": ["BuildDatabase", "RepeatModeler -threads 4 -srand 42 -LTRStruct"],
+      "mask_parameters": ["RepeatMasker -pa 4 -gff -xsmall -lib consensi.fa.classified"],
+      "library_policy": "Use the complete discovered classified library, including Unknown entries; do not filter by downstream outcome. Report classified and Unknown rows separately."
+    },
+    "RED": {
+      "name": "Red 2.0 ab initio repeat mask",
+      "repository": "refs/repos/Red",
+      "commit": "8fce7b1b7ac724ad92d723318008e06f984f20d7",
+      "build": "src_2.0/make CXX=g++",
+      "parameters": ["Red -gnm genome -msk masked -rpt repeats -cor 4 -frm 2 on the pooled panel"],
+      "semantic_scope": "All detected repeats; Red does not provide RepeatMasker family classification, so its output is reported as an all-repeat mask rather than a TE-family map"
+    }
+  },
+  "receiver": {
+    "source": "refs/repos/Tiberius-gap-c-r1",
+    "image": "software_outputs/tiberius/GAP-BRIDGE-DOWNSTREAM-C-R1/container-20260905-r1/tiberius_2.0.7.sif",
+    "model_config": "mammalia_softmasking_v2.yaml",
+    "channels": 6,
+    "seq_len": 400050,
+    "batch_size": 1,
+    "checkpoint": "frozen existing Tiberius weights; no training, threshold, or calibration change"
+  },
+  "endpoint": {
+    "primary": "RM2 minus D and RM2 minus R_TE reference-relative locus F1, with Red reported in the same table",
+    "metrics": ["TP", "FP", "FN", "precision", "recall", "F1", "masked ACGT bp", "lowercase coverage", "all gain/loss sets"],
+    "bootstrap": "10,000 chromosome-cluster paired resamples, seed 42; spatial uncertainty, not training seeds",
+    "controls": "Reuse qualified D, U_soft, U_nosm, R_TE, R_all, and P3 results from D-TIBERIUS-PLATYPUS-20260917 on identical cores"
+  },
+  "resources": {
+    "mask_cpu": "Requested ceiling 16 CPUs/80 GB; actual Baobab account-compatible run uses 4 CPUs/64 GB, at most two pooled method jobs concurrently, at most 24 h",
+    "tiberius_gpu": "one RTX3090, 8 CPUs, 96 GB per cell, at most one new GPU cell concurrently",
+    "scheduling": "Execution-only concurrency or wall-limit changes are recorded after submission; scientific inputs, weights, thresholds, cores, and endpoints remain frozen"
+  }
+}

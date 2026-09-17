@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "encoding_calls": 3,
+  "model_calls": 3,
+  "expected_channels": 6,
+  "masked_positions": 5118682,
+  "positions": 10801350
+}

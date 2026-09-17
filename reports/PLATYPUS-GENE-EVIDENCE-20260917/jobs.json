@@ -1,0 +1,61 @@
+{
+  "experiment": "PLATYPUS-GENE-EVIDENCE-20260917",
+  "status": "RUNNING_NOT_RNA_RESULTS",
+  "active_job": 12858354,
+  "partition": "shared-cpu",
+  "cpus": 8,
+  "memory_gb": 32,
+  "wall_limit_hours": 4,
+  "run_root": "outputs/PLATYPUS-GENE-EVIDENCE-20260917/run-12858354",
+  "assay_run": "SRR23268362",
+  "candidate_union": 1083,
+  "arm_transcript_records": {
+    "D": 762,
+    "U_soft": 754,
+    "R_TE": 766
+  },
+  "preserved_attempts": [
+    {
+      "job": 12856366,
+      "status": "CANCELLED_BEFORE_START",
+      "reason": "correct HISAT2/STAR-format mismatch and full-assembly alignment before execution"
+    },
+    {
+      "job": 12857054,
+      "status": "CANCELLED_BEFORE_START",
+      "reason": "complete junction accounting and endpoint corrections before execution"
+    },
+    {
+      "job": 12857953,
+      "status": "FAILED",
+      "elapsed_seconds": 6,
+      "exit_code": 78,
+      "reason": "SRA Toolkit installation not configured; no RNA inference or evidence score produced"
+    }
+  ],
+  "rna_supported_gene_results_available": false,
+  "verification": {
+    "hand_computable_fixture": "PASS",
+    "historical_gain_loss_join": {
+      "D_minus_U_soft": {
+        "gains": 49,
+        "losses": 18,
+        "matched_gains": 49,
+        "matched_losses": 18
+      },
+      "D_minus_R_TE": {
+        "gains": 13,
+        "losses": 9,
+        "matched_gains": 13,
+        "matched_losses": 9
+      }
+    },
+    "reference_join_is_not_rna_validation": true,
+    "official_ena_fastq_identity": {
+      "status": "PASS",
+      "read1_md5": "09b0452420729cfa89a672777b44ff0f",
+      "read2_md5": "2878bdc28e2d3c536f3e26899437747c",
+      "basis": "native job ena-md5.txt matches ENA official file report"
+    }
+  }
+}

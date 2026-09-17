@@ -92,3 +92,10 @@ Gap暂不作为本稿新的研发任务：本稿输出TE材料/类别图，不�
 ## 本轮已执行部分的终态
 
 GEN三权重配对 `12854214` 与D→Tiberius统一评分 `12853263` 已完成。D在鸭嘴兽100Mb/639参考loci的F1为0.598402；相对固定接收器未mask提升0.040977，染色体bootstrap区间[0.017171,0.068708]；相对RM_TE提升0.006669但区间跨零。GEN类别微调后的条件TE四类5-NN为0.9030、K-means ARI为0.2429，完整八状态readout为0.6857。本轮只完成所列有限实验，没有关闭整个独立外部确认、库薄弱强替代或最终HF发布任务。详细分母和限制见[当前总表](current-results-and-paper-decisions.md)。
+
+
+## 补齐批次（2026-09-17）
+
+已按来源资格在查看新D输出之前固定家蚕与D.simulans，各4×4MiB；原生推理、结构LTR提取和正类评分均完成。[新报告](../../../reports/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/RESULTS.md)保留全部区域、历史层与结构层分母及模型漏检。它是有限外部正类证据补充，未将缺少可靠负类的问题抹去。
+
+鸭嘴兽强对照采用一次20-contig/104Mb联合输入，RM2共享发现库与Red各生成mask，再沿用固定20core/100Mb的同一Tiberius接收器与评分。Red mask与首个Tiberius原生资格已完成，RM2和其余Tiberius单元在执行链中；见[协议](../../experiments/PLATYPUS-STRONG-MASK-CONTROLS-20260917.md)。独立RNA证据使用晚于annotation105的SRR23268362，正在运行准备/执行链，未计作已获得RNA支持的阳性结果；见[协议](../../experiments/PLATYPUS-GENE-EVIDENCE-20260917.md)。

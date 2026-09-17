@@ -4,7 +4,8 @@ Status: `PASS_MATCHED_GENERANNO_REPRESENTATION`
 
 The three frozen GENERanno checkpoints were evaluated on the same SIB
 train/validation/test panel with the same tokenizer and mean pooling
-excluding structural specials while retaining N/UNK. kNN is a supervised
+excluding structural BOS/EOS/PAD/MASK while retaining N/UNK as sequence
+content. kNN is a supervised
 train-fitted readout; K-means is an
 annotation-filtered, train-fitted geometry diagnostic with K fixed in advance.
 These results are a paired representation diagnostic, not an independent

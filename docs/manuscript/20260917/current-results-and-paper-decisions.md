@@ -16,7 +16,7 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 |---|---|---|
 | 1. 基座、参数量和窗口 | 已找回四基座×五窗口20个quick-screen单元、495行NTv2/v3迁移矩阵，以及TE_final的hg38正式三基座结果 | 正文用同协议主表；完整尺寸/窗口矩阵放补充。不能跨协议排名“最佳model” |
 | 2. 预训练已含TE信息 | 旧Dfam/片段结果存在；本轮NTv2同样本配对已完成 | 用readout/cluster分别回答。没有随机或组成对照时，不写成已证明预训练机制 |
-| 3. 六物种模型外部泛化 | D六物种DEV已完成；已有鸭嘴兽/海胆/CB4外部结果；本轮蛙/蜂/甲虫固定screen完成 | 完整报告参考覆盖及最弱物种。不能称独立全基因组泛化已闭合；先完成合格外部面板，再决定adapter或MoE |
+| 3. 六物种模型外部泛化 | D六物种DEV已完成；已有鸭嘴兽/海胆/CB4外部结果；本轮蛙/蜂/甲虫screen及家蚕/D. simulans长区间正类评价完成 | 完整报告参考覆盖及最弱物种。不能称独立全基因组泛化已闭合；先完成合格外部面板，再决定adapter或MoE |
 | 4. 标签、库和序列证据 | hg19匹配对照、库扩展、历史human-library RM、长输入模拟均有结果；本轮192窗口组成保留干预完成 | 组织成“标签来源和序列结构如何影响测量”，不组织成“所有FP其实是TP”或“已经排除记忆” |
 | 5. embedding解释 | NTv2 pretrained→D和GENERanno pretrained/binary/SF5三权重的同基座配对均完成 | GENERanno类别微调的读出与类别几何均改善；NTv2几何不是全部改善。完整状态保留，Known/TE-only单列，不称已排除记忆 |
 | 6. 多分类TE map | 当前SF5全2160窗口结果及完整/已知/条件TE重新计分完成 | 正文报告端到端完整分母；条件分类放解释图，不当成检出准确率；四大类不称细粒度family |
@@ -31,6 +31,8 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 **GENERanno三权重表示配对。** 同一1580条TEST记录，pretrained→binary FT→multiclass FT的监督5-NN macro-F1：Known五类0.3654→0.4329→0.7674，完整八状态0.2748→0.3123→0.6857，条件TE四类0.4746→0.4990→0.9030。条件TE四类的K-means ARI为0.0417→0.0693→0.2429，类别微调后几何与读出均改善。预训练binary readout只有0.5221，不能写“微调前已很好分开TE/BG”。binary FT为human-only，class FT为六物种，因此不能把差异只归因于loss。保留全部状态和唯一的全N/BG测试窗口；同源拷贝隔离未闭合。[报告与图](../../../reports/GENERANNO-MATCHED-REPRESENTATION-20260917/run-12854214/RESULTS.md)。
 
 **外部动物screen。** 固定D和同一CAL阈值，每种预定4×1MiB。蛙参考阳性1,390,306 bp，恢复率0.885797，参考一致性F1为0.837062；蜂637阳性bp、恢复率0.857143；甲虫3,622阳性bp、恢复率0.579514。蜂和甲虫没有充分负类，不能报告其生物学precision/F1。三者不是新的盲法确认种。见 [报告](../../../reports/ANIMAL-GENERALIZATION-CLOSURE-20260917/RESULTS.md)。
+
+**新增非哺乳长区间证据。** 固定D、阈值及forward流程，在家蚕与D. simulans各16,777,216 bp完成推理。历史RM已注释TE正类的回收率分别为0.614051/0.736130；原生LTRharvest/LTR_FINDER→LTR_retriever结构层分别有32/25个候选、178,955/173,135可调用阳性bp，回收率0.831432/0.852006。两层类别与完整性不同，不能将差异只归因于注释质量。探索性分解发现家蚕旧TE层外137,134 bp有结构支持，D检出109,380 bp、漏掉27,754 bp；D.simulans对应分母仅1,754 bp。可支撑“库覆盖差异与模型漏检并存”的具体候选例子，不能称已确认生物TP或全基因组F1。[报告与图](../../../reports/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/RESULTS.md)。
 
 **SF5分母重评分。** 完整八状态上的main4 macro-F1为0.833687；只按参考排除ambiguous/unclassified后为0.838882，保留98.2471%的位置。条件true-TE四类为0.902870，但这个分母不能测量全基因组检出precision。删除未知状态带来的总体变化很小，不能把它当作分类性能问题已由映射完全解释。见 [报告](../../../reports/SF5-READOUT-CLOSURE-20260917/RESULTS.md)。
 
@@ -56,8 +58,8 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 ## 剩余工作的优先顺序
 
 1. 本轮D自身20core下游用途、GEN三权重表示配对和CPU部署smoke均已完成；以这些固定结果和现有benchmark行冻结binary D v1候选，不再追加旧网格或表示训练。
-2. 冻结一个有限、证据合格的外部确认面板，优先补非哺乳动物与库覆盖不足对象。已有古老稀疏UCSC昆虫标签不能单独承担这一确认；先按assembly、标签独立性和项目历史资格选择，再运行。候选名单及规则见 [收束方案](multispecies-closure-plan.md)，不是按分数搜索物种。[候选资产资格审阅](external-panel-reference-qualification.md)已完成：青鳉/家蚕有条件性资产，但尚无独立完整真值；oryLat2旧assembly与2017 RefSeq assembly不能混配。尚未冻结或运行新的确认面板。
-3. 若主张“缺乏合适库时帮助基因注释”，需要在同一目标输入上明确限定库知识条件，并与合格同库/异库或库缺失对照配对；当前D/P3改善未mask与D推理时不读库是支持线索，尚不等于该因果主张完成。下一批需强de novo替代及独立gene证据，尤其保留全部loss的验证。
+2. 冻结一个有限、证据合格的外部确认面板，优先补非哺乳动物与库覆盖不足对象。已有古老稀疏UCSC昆虫标签不能单独承担这一确认；先按assembly、标签独立性和项目历史资格选择，再运行。候选名单及规则见 [收束方案](multispecies-closure-plan.md)，不是按分数搜索物种。[候选资产资格审阅](external-panel-reference-qualification.md)已完成：青鳉/家蚕有条件性资产，但尚无独立完整真值；oryLat2旧assembly与2017 RefSeq assembly不能混配。现已完成家蚕与D. simulans的预选长区间评价，各4×4 MiB，附加原生LTR结构支持；它补充了来源依赖正类证据，仍不是独立全基因组确认。见[新报告](../../../reports/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/RESULTS.md)。
+3. 若主张“缺乏合适库时帮助基因注释”，需要在同一目标输入上明确限定库知识条件，并与合格同库/异库或库缺失对照配对；当前D/P3改善未mask与D推理时不读库是支持线索，尚不等于该因果主张完成。强de novo替代与独立RNA证据现已启动：RM2/Red→固定Tiberius→统一score使用成功依赖；SRR23268362全assembly RNA管线正在运行，盲法候选集完整覆盖49/18和13/9两组gain/loss。两条线均尚无完整新下游结果，见[强对照状态](../../../reports/PLATYPUS-STRONG-MASK-CONTROLS-20260917/SUBMISSION-12856282-12857412.md)与[RNA状态](../../../reports/PLATYPUS-GENE-EVIDENCE-20260917/STATUS.md)。
 4. D若在开发面板出现稳定、可定位的跨类群缺口，才进行共享adapter/专家对照。没有专家互补证据就不追加MoE。模型变化后，最终benchmark与下游必须补该模型自己的行。
 5. 最终输出流程和适用域确定后，导出新GitHub与HF权重、真实序列notebook和可迁移benchmark命令。NTv2权重许可与代码许可分开。
 

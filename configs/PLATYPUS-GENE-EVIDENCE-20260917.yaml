@@ -1,0 +1,110 @@
+experiment_id: PLATYPUS-GENE-EVIDENCE-20260917
+status: protocol_frozen_pending_slurm
+purpose: blind_external_rna_support_for_tiberius_predictions
+
+# The primary evidence source is raw RNA-seq deposited after the current
+# RefSeq Annotation Release 105.  Candidate selection never reads the NCBI
+# reference annotation or historical D-vs-control scores.
+assembly:
+  accession: GCF_004115215.2
+  name: mOrnAna1.pri.v4
+  taxon: Ornithorhynchus anatinus
+  taxid: 9258
+  refseq_annotation_release: 105
+  refseq_input_query_date: 2021-03-03
+  refseq_submission_date: 2021-03-08
+  refseq_annotation_url: https://www.ncbi.nlm.nih.gov/refseq/annotation_euk/Ornithorhynchus_anatinus/105/
+
+external_rna:
+  bioproject: PRJNA929280
+  bioproject_url: https://www.ncbi.nlm.nih.gov/bioproject/929280
+  run: SRR23268362
+  experiment: SRX19212274
+  biosample: SAMN32954940
+  sample: platypus adult male fibroblast
+  library_layout: paired
+  submitted_date: 2023-01-29
+  ncbi_public_date: 2024-07-29
+  ena_public_date: 2024-07-31
+  study: Lister_et_al_PNAS_2024
+  study_pmc: PMC11317591
+  platform: Illumina_HiSeq_2000
+  library_kit: TruSeq_Total_RNA_STRANDED
+  individual_id: unavailable_in_public_metadata
+  strandedness: stranded_kit_but_FR_RF_orientation_not_established
+  total_bases: 5552048376
+  archive_bytes: 3571074142
+  ncbi_sra_url: https://www.ncbi.nlm.nih.gov/sra/SRX19212274
+  fastq_download: ENA_official_fastq_ftp_same_SRR_accession
+  fastq_read1_url: https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR232/062/SRR23268362/SRR23268362_1.fastq.gz
+  fastq_read2_url: https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR232/062/SRR23268362/SRR23268362_2.fastq.gz
+  fastq_filereport_url: https://www.ebi.ac.uk/ena/portal/api/filereport?accession=SRR23268362&result=read_run&fields=run_accession,fastq_ftp,fastq_bytes,fastq_md5&format=tsv
+  independence_boundary: >
+    NCBI's Annotation Release 105 input table has no target run/BioSample; its
+    old fibroblast entry is a separate 2012 PRJNA152927/SRR414997 run. The
+    target is the newer PRJNA929280/SRR23268362 UNSW HiSeq2000 paired-end
+    study, deposited 2023-01-29 and made public in 2024. This supports an
+    independent public sequencing study/run relative to the 2021 annotation
+    inputs, although public metadata do not provide an individual ID and do
+    not establish different individuals. Raw reads are used; no RefSeq or
+    UniProt protein sequence is used as truth.
+
+inputs:
+  geometry: /home/users/j/jwang/ab-initio-TE/outputs/P3-TIBERIUS-EXTERNAL-20260915/prepared/platypus/geometry.json
+  prepared_regions: /home/users/j/jwang/ab-initio-TE/outputs/P3-TIBERIUS-EXTERNAL-20260915/prepared/platypus
+  d_gtf_template: /home/users/j/jwang/ab-initio-TE/outputs/D-TIBERIUS-PLATYPUS-20260917/run/platypus/{core}/D.gtf
+  u_soft_gtf_template: /home/users/j/jwang/ab-initio-TE/outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/platypus/{core}/U_soft.gtf
+  r_te_gtf_template: /home/users/j/jwang/ab-initio-TE/outputs/P3-TIBERIUS-EXTERNAL-20260915/run-r1/platypus/{core}/R_TE.gtf
+
+candidate_contract:
+  arms: [D, U_soft, R_TE]
+  core_count: 20
+  candidate_unit: exact_predicted_transcript_exon_chain
+  selection: >
+    Union all transcript exon chains emitted by the three arms on all 20
+    preselected cores. Candidate creation does not read reference.json,
+    reference-relative gain/loss labels, model scores, RNA coverage, or RNA
+    junctions.
+  coordinate_contract: >
+    Preserve native panel contig and local 1-based GTF coordinates; record
+    absolute assembly coordinates only as a derived audit field.
+  receiver_training_boundary: >
+    The inspected Tiberius mammalia_softmasking_v2 configuration does not list
+    platypus among its named training species. This is a model-configuration
+    audit, not proof that no platypus-like sequence or unlisted pretraining
+    source was seen by the receiver; RNA support therefore remains an external
+    assay evidence line, not a no-exposure claim.
+
+alignment:
+  tool: HISAT2_from_Tiberius_2.0.7_container
+  reference: full_GCF_004115215.2_assembly_then_project_to_20_cores
+  mode: unstranded_paired_end_dta
+  min_unique_junction_reads: 3
+  min_splice_overhang: 8
+  unique_alignment_filter: primary_SAM_records_with_NH_i_1; adjacent_mates_template_deduplicated
+  junction_extraction: primary_SAM_CIGAR_N_operations; not_STAR_SJ_out_tab
+  exact_chain_assembly: StringTie_de_novo_without_reference_GTF
+
+endpoints:
+  primary:
+    - exact_raw_rna_junction_support_rate_by_arm
+    - exact_de_novo_stringtie_intron_chain_support_rate_by_arm
+  secondary:
+    - per_candidate_unique_junction_count
+    - per_candidate_supported_intron_fraction
+    - arm_union_overlap_and_support
+  interpretation: >
+    Absence of RNA support is an unobserved-expression result, not evidence of
+    a false gene. A supported prediction is evidence of transcription/splicing
+    for this tissue and run, not a complete biological truth set. Full
+    exon-chain equality is secondary because UTR boundaries can differ from
+    coding-boundary predictions; one-exon candidates are reported separately.
+  reference_join: >
+    Any join to the NCBI 639-locus reference is post-hoc only and is reported
+    separately from the blind RNA-support endpoints.
+
+resources:
+  cpus: 8
+  memory_gb: 32
+  walltime: 04:00:00
+  gpu: 0

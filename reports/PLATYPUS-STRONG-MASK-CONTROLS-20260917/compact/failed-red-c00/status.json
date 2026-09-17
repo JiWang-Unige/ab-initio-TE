@@ -1,0 +1,19 @@
+{
+  "core": {
+    "chrom": "NC_041728.1",
+    "chromosome": "1",
+    "end": 64668672,
+    "halo_end": 64768672,
+    "halo_start": 59568672,
+    "id": "c00",
+    "index": 0,
+    "record_id": "NC_041728.1|base_mask_core=0|core=59668672-64668672|halo=59568672-64768672",
+    "start": 59668672
+  },
+  "method": "RED",
+  "slurm_job_id": "12856827",
+  "status": "FAILED",
+  "steps": [],
+  "error": "engineering: dynamic loader omitted sys.modules registration before model inference",
+  "failure_preserved": true
+}
