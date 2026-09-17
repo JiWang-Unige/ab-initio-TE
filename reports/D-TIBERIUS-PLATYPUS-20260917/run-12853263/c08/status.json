@@ -1,0 +1,56 @@
+{
+  "status": "COMPLETED",
+  "protocol": "D-TIBERIUS-PLATYPUS-20260917",
+  "core": {
+    "id": "c08",
+    "chrom": "NC_041732.1",
+    "chromosome": "5",
+    "index": 0,
+    "start": 34264343,
+    "end": 39264343,
+    "halo_start": 34164343,
+    "halo_end": 39364343,
+    "record_id": "NC_041732.1|base_mask_core=0|core=34264343-39264343|halo=34164343-39364343"
+  },
+  "job_id": "12854038",
+  "steps": [
+    {
+      "mode": "D",
+      "argv": [
+        "singularity",
+        "exec",
+        "--nv",
+        "--cleanenv",
+        "--env",
+        "CUDA_VISIBLE_DEVICES=0",
+        "--env",
+        "TIB_OBSERVATION=/work/te/outputs/D-TIBERIUS-PLATYPUS-20260917/run/platypus/c08/D.observation.json",
+        "--env",
+        "TIB_EXPECTED_CHANNELS=6",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/work/te",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/refs/repos/Tiberius-gap-c-r1:/opt/Tiberius",
+        "--pwd",
+        "/work/te",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tiberius/GAP-BRIDGE-DOWNSTREAM-C-R1/container-20260905-r1/tiberius_2.0.7.sif",
+        "/usr/bin/python3",
+        "/work/te/scripts/experiments/P3-TIBERIUS-EXTERNAL-20260915/observed_tiberius.py",
+        "--genome",
+        "/work/te/outputs/D-TIBERIUS-PLATYPUS-20260917/run/platypus/c08/D.fasta",
+        "--model_cfg",
+        "/opt/Tiberius/model_cfg/mammalia_softmasking_v2.yaml",
+        "--seq_len",
+        "400050",
+        "--batch_size",
+        "1",
+        "--out",
+        "/work/te/outputs/D-TIBERIUS-PLATYPUS-20260917/run/platypus/c08/D.gtf",
+        "/work/te/outputs/D-TIBERIUS-PLATYPUS-20260917/run/platypus/c08/D.gff3"
+      ],
+      "exit_code": 0,
+      "seconds": 199.82754213409498
+    }
+  ],
+  "wall_seconds": 300.473556678975
+}

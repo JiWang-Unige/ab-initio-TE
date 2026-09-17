@@ -55,6 +55,8 @@ def main():
     fig.tight_layout(rect=(0, .16, 1, 1))
     for suffix in ("png", "pdf", "svg"):
         fig.savefig(args.report_dir / f"paired-generanno-readout.{suffix}", dpi=180)
+    svg = args.report_dir / "paired-generanno-readout.svg"
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
 
 
 if __name__ == "__main__":

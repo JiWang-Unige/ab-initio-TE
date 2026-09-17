@@ -74,8 +74,16 @@ advantage in that hardware-matched experiment. This result is retained as an
 applicability limit. It does not establish that the simulation failure is
 caused exclusively by sequence context.
 
-D-specific downstream gene-annotation evaluation is being completed
-separately. Earlier P3/Tiberius improvements cannot be claimed for this model.
+D-specific Tiberius evaluation is complete on 20 preselected platypus cores
+(100 Mb, 639 comparator reference loci). Exact CDS-chain/locus F1 is 0.598402,
+versus 0.557425 for the same softmask-compatible receiver on unmasked input.
+The paired difference is +0.040977 with a ten-chromosome bootstrap 95% interval
+[0.017171, 0.068708]; 49 correct loci are gained and 18 are lost. Species-matched
+RepeatMasker masking gives 0.591733; D minus RepeatMasker has interval
+[-0.003782, 0.019625], establishing neither superiority nor equivalence. This
+is a retrospective regional extension with comparator gene annotations, not
+an independent whole-genome or nonmammalian utility validation. Earlier P3
+results remain separate. See the [D utility report](https://github.com/JiWang-Unige/ab-initio-TE/blob/main/reports/D-TIBERIUS-PLATYPUS-20260917/RESULTS.md).
 Training-coordinate and homology exposure must be considered when interpreting
 any cached representation analysis.
 

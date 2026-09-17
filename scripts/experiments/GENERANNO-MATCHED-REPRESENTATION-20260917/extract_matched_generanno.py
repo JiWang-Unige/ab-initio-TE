@@ -4,7 +4,8 @@
 The three checkpoints are loaded for inference only: untouched GENERanno,
 binary token-classification fine tuning, and the eight-state SF5 token-classifier
 checkpoint.  Every checkpoint uses the untouched GENERanno tokenizer and the
-same special-token-free mean pooling.  The output schema intentionally matches
+same mean pooling excluding structural specials while retaining N/UNK.
+The output schema intentionally matches
 ``evaluate_matched_embeddings.py`` so that the predeclared readouts and
 K-means diagnostics are reused without changing their denominator.
 """

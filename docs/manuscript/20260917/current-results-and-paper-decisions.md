@@ -20,7 +20,7 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 | 4. 标签、库和序列证据 | hg19匹配对照、库扩展、历史human-library RM、长输入模拟均有结果；本轮192窗口组成保留干预完成 | 组织成“标签来源和序列结构如何影响测量”，不组织成“所有FP其实是TP”或“已经排除记忆” |
 | 5. embedding解释 | NTv2 pretrained→D和GENERanno pretrained/binary/SF5三权重的同基座配对均完成 | GENERanno类别微调的读出与类别几何均改善；NTv2几何不是全部改善。完整状态保留，Known/TE-only单列，不称已排除记忆 |
 | 6. 多分类TE map | 当前SF5全2160窗口结果及完整/已知/条件TE重新计分完成 | 正文报告端到端完整分母；条件分类放解释图，不当成检出准确率；四大类不称细粒度family |
-| 7. Tiberius应用 | P3在人/牛/鸭嘴兽已有结果；本轮追加固定D在鸭嘴兽20core的同对照实验 | D结果不能借用P3。当前非哺乳vertebrates/insecta模型不消费softmask，需另有合格接收器才能测此用途 |
+| 7. Tiberius应用 | P3在人/牛/鸭嘴兽已有结果；本轮D在鸭嘴兽20core/100Mb的同对照实验已完整完成 | D相对同一接收器未mask的F1提升0.04098，区间全正；相对RM区间跨零。非哺乳用途仍需合格mask接收器 |
 | 8. 公平benchmark | fixed RM、RM2→RM、HiTE、EDTA、EarlGrey与D的100Mb模拟/完整CB4有限比较已闭合；13合格+1原生失败；CPU资源匹配，GPU单列 | 当前真实参考太稀疏，真实准确率排名仍缺证据；Omnibenchmark已回放评分图，不等于所有原生caller均已移植 |
 | 9. 可用模型与代码 | 独立可安装FASTA接口、相对bundle、真实序列notebook和模型卡已准备；CPU/GPU真实权重loader parity均通过 | 新GitHub/HF权重尚未发布；当前研究仓库保存代码和结果，最终模型确定后导出 |
 
@@ -35,6 +35,8 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 **SF5分母重评分。** 完整八状态上的main4 macro-F1为0.833687；只按参考排除ambiguous/unclassified后为0.838882，保留98.2471%的位置。条件true-TE四类为0.902870，但这个分母不能测量全基因组检出precision。删除未知状态带来的总体变化很小，不能把它当作分类性能问题已由映射完全解释。见 [报告](../../../reports/SF5-READOUT-CLOSURE-20260917/RESULTS.md)。
 
 **序列干预。** 6物种各32个固定D DEV窗口。只打乱BG且保留TE序列及二核苷酸组成时，物种pooled recall变化为−1.50至+0.53个百分点；21/192个窗口绝对变化≥10个百分点。打乱TE内部二核苷酸顺序后，原TE位置预测阳性大幅减少。该结果支持局部高阶序列敏感性与异质上下文效应，不能证明具体进化机制或模拟低召回的主要原因。见 [完整分布](../../../reports/D-CONTEXT-PAIR-20260917/RESULTS.md)。
+
+**D自身的基因注释用途。** 鸭嘴兽20core/100Mb、639参考loci，所有输入/输出资格通过。D F1=0.598402；同一softmask接收器的未mask输入为0.557425，配对差+0.040977，十染色体bootstrap 95% CI=[0.017171,0.068708]，新增49、损失18个正确loci。官方nosm流程为0.532342，D差+0.066060，CI=[0.040500,0.088310]。R_TE为0.591733，D差+0.006669，CI=[−0.003782,0.019625]；P3为0.589170，D差区间同样跨零。因此D自身已有相对未mask的用途证据，但未建立对RM/P3的优越性或等效性。这是既有鸭嘴兽面板的回顾性扩展，参考gene annotation不是独立真值。[完整报告与gain/loss](../../../reports/D-TIBERIUS-PLATYPUS-20260917/RESULTS.md)。
 
 **可部署入口。** GPU真实权重合成序列smoke逐碱基概率最大差7.77×10⁻⁹，mask一致。另完成CPU作业12853594：固定取human DEV前两条4096-bp记录，预测阳性3,418/8,192 bp，新旧loader的margin、概率、mask和softmasked FASTA完全一致；总作业43秒，不是速度benchmark。真实序列已放入便携包供notebook复现。两次smoke均不作为生物学准确率证据。见 [报告](../../../reports/PORTABLE-D-SMOKE-20260917/portable-d-release-candidate.md)。
 
@@ -53,9 +55,9 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 
 ## 剩余工作的优先顺序
 
-1. 完成本轮已启动的D自身20core下游用途；GEN三权重表示配对和CPU部署smoke已完成，保留全部方向。
+1. 本轮D自身20core下游用途、GEN三权重表示配对和CPU部署smoke均已完成；以这些固定结果和现有benchmark行冻结binary D v1候选，不再追加旧网格或表示训练。
 2. 冻结一个有限、证据合格的外部确认面板，优先补非哺乳动物与库覆盖不足对象。已有古老稀疏UCSC昆虫标签不能单独承担这一确认；先按assembly、标签独立性和项目历史资格选择，再运行。候选名单及规则见 [收束方案](multispecies-closure-plan.md)，不是按分数搜索物种。[候选资产资格审阅](external-panel-reference-qualification.md)已完成：青鳉/家蚕有条件性资产，但尚无独立完整真值；oryLat2旧assembly与2017 RefSeq assembly不能混配。尚未冻结或运行新的确认面板。
-3. 若主张“缺乏合适库时帮助基因注释”，需要在同一目标输入上明确限定库知识条件，并与合格同库/异库或库缺失对照配对；当前P3改善未mask与D推理时不读库是支持线索，尚不等于该因果主张完成。
+3. 若主张“缺乏合适库时帮助基因注释”，需要在同一目标输入上明确限定库知识条件，并与合格同库/异库或库缺失对照配对；当前D/P3改善未mask与D推理时不读库是支持线索，尚不等于该因果主张完成。下一批需强de novo替代及独立gene证据，尤其保留全部loss的验证。
 4. D若在开发面板出现稳定、可定位的跨类群缺口，才进行共享adapter/专家对照。没有专家互补证据就不追加MoE。模型变化后，最终benchmark与下游必须补该模型自己的行。
 5. 最终输出流程和适用域确定后，导出新GitHub与HF权重、真实序列notebook和可迁移benchmark命令。NTv2权重许可与代码许可分开。
 
