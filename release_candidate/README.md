@@ -65,3 +65,7 @@ gap recovery or downstream gene-annotation utility.
 
 See `notebooks/portable_d_smoke.ipynb` for a step-by-step local smoke and
 `bundle/README.md` for the weight staging rule.
+
+The [benchmark score replay](benchmark/README.md) reproduces the recorded
+long-input benchmark aggregation with standard Python and an explicit public
+input bundle. It does not rerun annotation tools or measure inference speed.
