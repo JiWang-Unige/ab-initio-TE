@@ -1,0 +1,145 @@
+{
+  "canonical_paths": {
+    "excluded_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/western_clawed_frog/slurm-12849284_0/truth_repeatmasker_panel_excluded_non_te.tsv",
+    "hard_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/western_clawed_frog/slurm-12849284_0/truth_repeatmasker_panel_hard_non_te.tsv",
+    "known_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/western_clawed_frog/slurm-12849284_0/truth_repeatmasker_panel.tsv",
+    "unknown_or_ambiguous": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/western_clawed_frog/slurm-12849284_0/truth_repeatmasker_panel_unknown_or_ambiguous.tsv"
+  },
+  "panel_buckets": {
+    "excluded_non_te": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    },
+    "hard_non_te": {
+      "class_counts": {
+        "Low_complexity/Low_complexity": 74,
+        "Satellite/Satellite": 169,
+        "Simple_repeat/Simple_repeat": 760,
+        "snRNA/snRNA": 2
+      },
+      "overlap_bp": 63730,
+      "rows": 1005,
+      "union_bp": 63696
+    },
+    "known_te": {
+      "class_counts": {
+        "DNA/Crypton": 1,
+        "DNA/DNA": 213,
+        "DNA/Kolobok-T2": 1335,
+        "DNA/MULE-MuDR": 2,
+        "DNA/Maverick": 1,
+        "DNA/PIF-Harbinger": 1058,
+        "DNA/PiggyBac": 233,
+        "DNA/TcMar-Tc1": 201,
+        "DNA/TcMar-Tc2": 74,
+        "DNA/TcMar-Tigger": 337,
+        "DNA/hAT": 6,
+        "DNA/hAT-Ac": 181,
+        "DNA/hAT-Blackjack": 13,
+        "DNA/hAT-Charlie": 436,
+        "DNA/hAT-Tip100": 620,
+        "LINE/CR1": 299,
+        "LINE/L1": 79,
+        "LINE/L2": 166,
+        "LINE/Penelope": 145,
+        "LINE/Rex-Babar": 12,
+        "LTR/Copia": 8,
+        "LTR/DIRS": 46,
+        "LTR/ERV1": 1,
+        "LTR/Gypsy": 118,
+        "LTR/LTR": 2,
+        "LTR/Ngaro": 1,
+        "LTR/Pao": 2,
+        "RC/Helitron": 17,
+        "SINE/MIR": 6,
+        "SINE/tRNA-V-Core-L2": 87
+      },
+      "overlap_bp": 1414468,
+      "rows": 5700,
+      "union_bp": 1390306
+    },
+    "unknown_or_ambiguous": {
+      "class_counts": {
+        "DNA/TcMar-Tigger?": 73,
+        "Unknown/Unknown": 52
+      },
+      "overlap_bp": 21355,
+      "rows": 125,
+      "union_bp": 21301
+    }
+  },
+  "panel_rows_retained_all_buckets": 6830,
+  "policy": {
+    "excluded_non_te_classes": [
+      "artefact",
+      "artifact"
+    ],
+    "hard_non_te_classes": [
+      "low_complexity",
+      "rna",
+      "rrna",
+      "satellite",
+      "scrna",
+      "simple_repeat",
+      "snrna",
+      "srprna",
+      "tandem_repeat",
+      "trna"
+    ],
+    "primary_truth": "known_te only",
+    "strict_te_classes": [
+      "DNA",
+      "LINE",
+      "LTR",
+      "RC",
+      "Retroposon",
+      "SINE"
+    ],
+    "unknown_classes": [
+      "unclassified",
+      "unknown"
+    ],
+    "unrecognised_classes": "unknown_or_ambiguous"
+  },
+  "raw_class_counts": {
+    "DNA/Crypton": 1,
+    "DNA/DNA": 213,
+    "DNA/Kolobok-T2": 1335,
+    "DNA/MULE-MuDR": 2,
+    "DNA/Maverick": 1,
+    "DNA/PIF-Harbinger": 1058,
+    "DNA/PiggyBac": 233,
+    "DNA/TcMar-Tc1": 201,
+    "DNA/TcMar-Tc2": 74,
+    "DNA/TcMar-Tigger": 337,
+    "DNA/TcMar-Tigger?": 73,
+    "DNA/hAT": 6,
+    "DNA/hAT-Ac": 181,
+    "DNA/hAT-Blackjack": 13,
+    "DNA/hAT-Charlie": 436,
+    "DNA/hAT-Tip100": 620,
+    "LINE/CR1": 299,
+    "LINE/L1": 79,
+    "LINE/L2": 166,
+    "LINE/Penelope": 145,
+    "LINE/Rex-Babar": 12,
+    "LTR/Copia": 8,
+    "LTR/DIRS": 46,
+    "LTR/ERV1": 1,
+    "LTR/Gypsy": 118,
+    "LTR/LTR": 2,
+    "LTR/Ngaro": 1,
+    "LTR/Pao": 2,
+    "Low_complexity/Low_complexity": 74,
+    "RC/Helitron": 17,
+    "SINE/MIR": 6,
+    "SINE/tRNA-V-Core-L2": 87,
+    "Satellite/Satellite": 169,
+    "Simple_repeat/Simple_repeat": 760,
+    "Unknown/Unknown": 52,
+    "snRNA/snRNA": 2
+  },
+  "raw_repeatmasker_rows_seen": 6830
+}

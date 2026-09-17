@@ -1,0 +1,92 @@
+{
+  "canonical_paths": {
+    "excluded_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/red_flour_beetle/slurm-12849284_2/truth_repeatmasker_panel_excluded_non_te.tsv",
+    "hard_non_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/red_flour_beetle/slurm-12849284_2/truth_repeatmasker_panel_hard_non_te.tsv",
+    "known_te": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/red_flour_beetle/slurm-12849284_2/truth_repeatmasker_panel.tsv",
+    "unknown_or_ambiguous": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/red_flour_beetle/slurm-12849284_2/truth_repeatmasker_panel_unknown_or_ambiguous.tsv"
+  },
+  "panel_buckets": {
+    "excluded_non_te": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    },
+    "hard_non_te": {
+      "class_counts": {
+        "Low_complexity": 2841,
+        "Simple_repeat": 242,
+        "rRNA": 4,
+        "tRNA": 3
+      },
+      "overlap_bp": 122025,
+      "rows": 3090,
+      "union_bp": 121979
+    },
+    "known_te": {
+      "class_counts": {
+        "DNA/Mariner": 1,
+        "DNA/Tip100": 2,
+        "LINE/CR1": 15,
+        "LINE/L1": 3,
+        "LINE/L2": 5,
+        "LINE/RTE": 7
+      },
+      "overlap_bp": 3622,
+      "rows": 33,
+      "union_bp": 3622
+    },
+    "unknown_or_ambiguous": {
+      "class_counts": {},
+      "overlap_bp": 0,
+      "rows": 0,
+      "union_bp": 0
+    }
+  },
+  "panel_rows_retained_all_buckets": 3123,
+  "policy": {
+    "excluded_non_te_classes": [
+      "artefact",
+      "artifact"
+    ],
+    "hard_non_te_classes": [
+      "low_complexity",
+      "rna",
+      "rrna",
+      "satellite",
+      "scrna",
+      "simple_repeat",
+      "snrna",
+      "srprna",
+      "tandem_repeat",
+      "trna"
+    ],
+    "primary_truth": "known_te only",
+    "strict_te_classes": [
+      "DNA",
+      "LINE",
+      "LTR",
+      "RC",
+      "Retroposon",
+      "SINE"
+    ],
+    "unknown_classes": [
+      "unclassified",
+      "unknown"
+    ],
+    "unrecognised_classes": "unknown_or_ambiguous"
+  },
+  "raw_class_counts": {
+    "DNA/Mariner": 1,
+    "DNA/Tip100": 2,
+    "LINE/CR1": 15,
+    "LINE/L1": 3,
+    "LINE/L2": 5,
+    "LINE/RTE": 7,
+    "Low_complexity": 2841,
+    "Simple_repeat": 242,
+    "rRNA": 4,
+    "tRNA": 3
+  },
+  "raw_repeatmasker_rows_seen": 3123
+}

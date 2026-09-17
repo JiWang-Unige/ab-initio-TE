@@ -1,0 +1,32 @@
+{
+  "protocol": "PORTABLE-D-SMOKE-20260917",
+  "job_id": "12853594",
+  "selection": "first two records in the frozen human DEV JSONL stream; no score-based selection",
+  "source_split": "DEV",
+  "source_species": "human",
+  "source_assembly": "hs1",
+  "source_tile_id": "human|hs1|chr4:2326528-2334720",
+  "records": [
+    {
+      "fixture_name": "human_dev_record_001_chr4_2326528_2330624",
+      "source_half": 0,
+      "source_interval": "chr4:2326528-2330624",
+      "length_bp": 4096
+    },
+    {
+      "fixture_name": "human_dev_record_002_chr4_2330624_2334720",
+      "source_half": 1,
+      "source_interval": "chr4:2330624-2334720",
+      "length_bp": 4096
+    }
+  ],
+  "inference_input": "sequence-only FASTA; labels and reference annotation were not passed to either loader",
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "gpu": 0,
+    "cpus": 16,
+    "memory_gb": 32,
+    "walltime_minutes": 30,
+    "elapsed_seconds": 43
+  }
+}

@@ -1,0 +1,82 @@
+experiment_id: EMBEDDING-INTERPRETABILITY-CLOSURE-20260917
+status: completed_matched_ntv2_12849477
+purpose: matched_checkpoint_embedding_interpretability
+seed: 42
+
+# The manifest and model paths are explicit inputs to the wrapper. Do not
+# silently substitute local data or a different split.
+remote:
+  project_root: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE
+  data_dir: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/SIB-RETREAT-EMBED-REPLICATION-20260917/data_512
+  pretrained_checkpoint: /home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species
+  six_species_checkpoint: /home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model
+  generanno_binary_secondary_checkpoint: /home/users/j/jwang/ab-initio-TE/software_outputs/tefm_supp/PIPE-TEFM-SUPP-20260617/runs/TFSUPP_generanno_H0_w4096_seed42/best_model
+  sf5_eight_class_secondary_checkpoint: /home/users/j/jwang/ab-initio-TE/software_outputs/tefm_lock/PIPE-TEFM-LOCK-20260619/runs/SF5_ONTOLOGY_CLOSURE_base_seed42_12731987/best_model
+
+inputs:
+  train_features: train_features.npy
+  validation_features: val_features.npy
+  test_features: test_features.npy
+  train_labels: train_labels.npy
+  validation_labels: val_labels.npy
+  test_labels: test_labels.npy
+  train_records: train_records.jsonl
+  validation_records: val_records.jsonl
+  test_records: test_records.jsonl
+  labels:
+    0: BG
+    1: SINE
+    2: LINE
+    3: LTR
+    4: DNA
+    5: KNOWN_OTHER_TE
+    6: AMBIGUOUS_TE
+    7: UNCLASSIFIED
+
+checkpoints:
+  - id: pretrained
+    kind: raw_hidden_state
+  - id: six_species_D
+    kind: raw_hidden_state
+
+# GENERanno pretrained / binary / class-finetuned weights are a separate
+# matched comparison, not three completed arms of this NTv2 extraction.
+
+pooling:
+  method: attention_mask_mean_excluding_padding_and_special_tokens
+  include_special_tokens: false
+  tokenizer_max_length: 2048
+  dtype: float32
+
+evaluation:
+  raw_kmeans_k: [2, 4, 5, 8]
+  classification: [balanced_accuracy, macro_f1]
+  probes: [supervised_knn5]
+  primary_known_labels: [BG, SINE, LINE, LTR, DNA]
+  full_labels: [BG, SINE, LINE, LTR, DNA, KNOWN_OTHER_TE, AMBIGUOUS_TE, UNCLASSIFIED]
+  conditional_te_labels: [SINE, LINE, LTR, DNA]
+  select_k_from_train_only: true
+  use_test_labels_for_selection: false
+  bg_is_retained_as_its_own_class: true
+  no_te_bg_relabeling: true
+  conditional_te_probe_fit_and_test_labels: [SINE, LINE, LTR, DNA]
+  umap_is_primary_endpoint: false
+
+resources:
+  extraction_gpu: 1
+  extraction_cpus: 4
+  extraction_memory_gb: 48
+  extraction_walltime: 02:00:00
+  evaluation_cpu_only: true
+
+observed_runs:
+  gpu_extraction_job: "12849477"
+  cpu_readout_job: "12849665"
+  output_root: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EMBEDDING-INTERPRETABILITY-CLOSURE-20260917/run-12849477
+  interpretation_scope: paired_representation_diagnostic
+  d_training_coordinate_or_homology_exposure: unresolved
+
+stopping:
+  no_new_training: true
+  no_seed_sweep: true
+  fail_on_split_or_pooling_mismatch: true

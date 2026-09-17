@@ -1,0 +1,66 @@
+{
+  "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+  "device": "cuda",
+  "dtype_saved": "float32",
+  "feature_dim": 1024,
+  "max_length": 2048,
+  "model_id": "pretrained",
+  "model_kind": "pretrained",
+  "model_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "pooling": "attention_mask_mean_excluding_padding_and_special_tokens",
+  "schema": "matched_ntv2_embedding_v1",
+  "special_token_ids": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "splits": {
+    "test": {
+      "elapsed_seconds": 29.612329244613647,
+      "feature_dim": 1024,
+      "labels": {
+        "AMBIGUOUS_TE": 120,
+        "BG": 360,
+        "DNA": 260,
+        "KNOWN_OTHER_TE": 125,
+        "LINE": 306,
+        "LTR": 280,
+        "SINE": 75,
+        "UNCLASSIFIED": 54
+      },
+      "n": 1580
+    },
+    "train": {
+      "elapsed_seconds": 33.41164255142212,
+      "feature_dim": 1024,
+      "labels": {
+        "AMBIGUOUS_TE": 121,
+        "BG": 360,
+        "DNA": 299,
+        "KNOWN_OTHER_TE": 213,
+        "LINE": 316,
+        "LTR": 316,
+        "SINE": 126,
+        "UNCLASSIFIED": 92
+      },
+      "n": 1843
+    },
+    "val": {
+      "elapsed_seconds": 14.753289699554443,
+      "feature_dim": 1024,
+      "labels": {
+        "AMBIGUOUS_TE": 60,
+        "BG": 180,
+        "DNA": 105,
+        "KNOWN_OTHER_TE": 60,
+        "LINE": 138,
+        "LTR": 140,
+        "SINE": 66,
+        "UNCLASSIFIED": 60
+      },
+      "n": 809
+    }
+  },
+  "tokenizer_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species"
+}

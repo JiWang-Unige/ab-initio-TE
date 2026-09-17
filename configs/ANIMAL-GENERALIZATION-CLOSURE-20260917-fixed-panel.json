@@ -1,0 +1,96 @@
+{
+  "schema_version": "ANIMAL-GENERALIZATION-CLOSURE-20260917-FIXED-PANEL-V1",
+  "status": "PREPARE_THEN_RUN",
+  "sealed_inputs_allowed": false,
+  "execution_authorized": true,
+  "remote_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "remote_data_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "prep_root": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep",
+  "output_root": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917",
+  "selection_rule": {
+    "description": "First four usable rows in the frozen source chrom.sizes file; centered 1,048,576-bp interval per row.",
+    "assembly_order_source": "source chrom.sizes row order",
+    "score_or_label_selection": false,
+    "start_policy": "centered_from_assembly_length",
+    "length_bp": 1048576,
+    "window_bp": 4096,
+    "phase_offset_bp": 3,
+    "phase_offset_source": "inherited from the existing D-EXTERNAL-RC0 contract; one fixed diagnostic arm only, not a phase search"
+  },
+  "model": {
+    "seed": 42,
+    "model_relpath": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "calibration_relpath": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "model_code_relpath": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_scope": "six-species-shared",
+    "calibration_fit_split": "CAL",
+    "threshold_policy": "existing frozen CAL threshold; no external threshold fitting"
+  },
+  "candidates": [
+    {
+      "id": "western_clawed_frog",
+      "species": "Xenopus tropicalis",
+      "assembly": "xenTro10",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/xenTro10.fa.gz",
+      "sizes": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/xenTro10.chrom.sizes.txt",
+      "label_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/rmsk.txt.gz",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/xenTro10/database/rmsk.txt.gz",
+      "label_format": "ucsc_rmsk_table",
+      "kingdom_group": "vertebrate",
+      "tiberius_config": "vertebrates.yaml",
+      "panel_role": "historical-candidate external screen",
+      "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+      "pretraining_exclusion": "not established",
+      "sealed": false
+    },
+    {
+      "id": "western_honey_bee",
+      "species": "Apis mellifera",
+      "assembly": "apiMel2",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_honey_bee/apiMel2.fa.gz",
+      "sizes": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/sources/apiMel2.chrom.sizes",
+      "label_source": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/sources/apiMel2.rmsk.txt.gz",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/apiMel2/database/rmsk.txt.gz",
+      "label_sizes_url": "https://hgdownload.soe.ucsc.edu/goldenPath/apiMel2/bigZips/apiMel2.chrom.sizes",
+      "label_format": "ucsc_rmsk_table",
+      "kingdom_group": "insect",
+      "tiberius_config": "insecta.yaml",
+      "panel_role": "historical-candidate external screen",
+      "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+      "pretraining_exclusion": "not established",
+      "sealed": false
+    },
+    {
+      "id": "red_flour_beetle",
+      "species": "Tribolium castaneum",
+      "assembly": "triCas2",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.fa.gz",
+      "sizes": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.chrom.sizes",
+      "label_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.fa.out.gz",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/triCas2/bigZips/triCas2.fa.out.gz",
+      "label_format": "repeatmasker_out",
+      "kingdom_group": "insect",
+      "tiberius_config": "insecta.yaml",
+      "panel_role": "historical-candidate external screen",
+      "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+      "pretraining_exclusion": "not established",
+      "sealed": false
+    }
+  ],
+  "feedback_audit": {
+    "status": "HISTORICAL_CANDIDATE_SCREEN",
+    "finding": "These candidates occurred in prior planning or transfer screens; results are external screens and not untouched independent tests.",
+    "task_training": "none of the three is in the six-species D supervised training table",
+    "pretraining_exclusion": "not provable from current records",
+    "claim_boundary": "same-assembly source-dependent comparator; no full-genome biological accuracy claim"
+  },
+  "resource_contract": {
+    "preparation_cpus": 16,
+    "preparation_memory_gb": 96,
+    "preparation_walltime_hours_per_species": 2,
+    "inference_gpus": 1,
+    "inference_walltime_hours_per_species": 2,
+    "max_parallel_species": 1,
+    "new_training_gpu_hours": 0
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "calibration_threshold": 0.42330056285498807,
+  "device": "cpu",
+  "historical_material_positive_bp": 3418,
+  "historical_windows": 2,
+  "input_bp": 8192,
+  "input_fasta": "/home/users/j/jwang/portable_d_smoke_20260917/human_dev_first2.fa",
+  "labels_read": false,
+  "margin_max_abs_diff_by_window": [
+    0.0,
+    0.0
+  ],
+  "margin_tolerance": 3e-06,
+  "material_mask_equal": true,
+  "material_mask_nonempty": true,
+  "material_positive_bp_by_window": [
+    2934,
+    484
+  ],
+  "model_id": "ntv2-500m-multi-species/cross-species-l1-upstream-20260904/seed42/D",
+  "portable_material_positive_bp": 3418,
+  "portable_summary": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/prediction/summary.json",
+  "portable_windows": 2,
+  "probability_max_abs_diff_by_window": [
+    0.0,
+    0.0
+  ],
+  "probability_tolerance": 1e-06,
+  "probability_track_exact_from_portable_margins": true,
+  "probability_track_max_abs_diff": 0.0,
+  "protocol": "PORTABLE-D-SMOKE-20260917",
+  "reference_annotation_read": false,
+  "scope": "sequence-only external fixture loader parity; no accuracy/generalization endpoint",
+  "softmask_canonical_only": true,
+  "softmask_equal": true,
+  "status": "PASS",
+  "tail_windows_included": [],
+  "window_lengths_bp": [
+    4096,
+    4096
+  ]
+}

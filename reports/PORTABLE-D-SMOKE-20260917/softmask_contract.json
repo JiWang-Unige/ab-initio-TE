@@ -1,0 +1,10 @@
+{
+  "canonical_positive_bases_lowercase_only": true,
+  "contigs": 3,
+  "iupac_and_n_preserved_uppercase": true,
+  "mismatched_contigs": [],
+  "protocol": "PORTABLE-D-SOFTMASK-CONTRACT-20260917",
+  "source_material_bed": "/home/users/j/jwang/portable_d_smoke_20260917/output_retry/prediction/material_runs.bed",
+  "source_softmasked_fasta": "/home/users/j/jwang/portable_d_smoke_20260917/output_retry/prediction/softmasked.fa",
+  "status": "PASS"
+}

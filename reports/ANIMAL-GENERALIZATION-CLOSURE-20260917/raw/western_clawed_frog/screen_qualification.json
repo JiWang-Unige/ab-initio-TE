@@ -1,0 +1,15 @@
+{
+  "assembly": "xenTro10",
+  "candidate": "western_clawed_frog",
+  "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+  "label_audit": {
+    "known_te_rows": 5773,
+    "panel_rows": 6830,
+    "source_rows": 2420413
+  },
+  "label_status": "same-assembly source-dependent fixed panel; not independent truth",
+  "pretraining_exclusion": "not established",
+  "species": "Xenopus tropicalis",
+  "status": "COMPLETED",
+  "summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/western_clawed_frog/slurm-12849284_0/summary.json"
+}

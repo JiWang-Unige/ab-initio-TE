@@ -1,0 +1,251 @@
+{
+  "candidates": [
+    {
+      "assembly": "xenTro10",
+      "assembly_report": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_clawed_frog/synthetic_assembly_report.txt",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/xenTro10.fa.gz",
+      "fasta_accession_column": "GenBank-Accession",
+      "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+      "id": "western_clawed_frog",
+      "kingdom_group": "vertebrate",
+      "label_audit": {
+        "known_te_rows": 5773,
+        "panel_rows": 6830,
+        "source_rows": 2420413
+      },
+      "label_format": "ucsc_rmsk_table",
+      "label_id": "same-assembly-western_clawed_frog-source-dependent",
+      "label_out": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_clawed_frog/truth_trimmed.out",
+      "label_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/rmsk.txt.gz",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/xenTro10/database/rmsk.txt.gz",
+      "label_status": "same-assembly source-dependent fixed panel; not independent truth",
+      "panel_role": "historical-candidate external screen",
+      "panel_selection_rows": [
+        "chr1",
+        "chr10",
+        "chr2",
+        "chr3"
+      ],
+      "panel_selection_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/xenTro10.chrom.sizes.txt",
+      "pretraining_exclusion": "not established",
+      "regions": [
+        {
+          "end_bp": 109259871,
+          "length_bp": 217471166,
+          "molecule": "1",
+          "role": "assembled-molecule",
+          "seqid": "chr1",
+          "start_bp": 108211295
+        },
+        {
+          "end_bp": 26740571,
+          "length_bp": 52432566,
+          "molecule": "2",
+          "role": "assembled-molecule",
+          "seqid": "chr10",
+          "start_bp": 25691995
+        },
+        {
+          "end_bp": 91041768,
+          "length_bp": 181034961,
+          "molecule": "3",
+          "role": "assembled-molecule",
+          "seqid": "chr2",
+          "start_bp": 89993192
+        },
+        {
+          "end_bp": 77460966,
+          "length_bp": 153873357,
+          "molecule": "4",
+          "role": "assembled-molecule",
+          "seqid": "chr3",
+          "start_bp": 76412390
+        }
+      ],
+      "sealed": false,
+      "sizes": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_clawed_frog/xenTro10.chrom.sizes.txt",
+      "species": "Xenopus tropicalis",
+      "tiberius_config": "vertebrates.yaml"
+    },
+    {
+      "assembly": "apiMel2",
+      "assembly_report": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_honey_bee/synthetic_assembly_report.txt",
+      "downloaded_label_source": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_honey_bee/rmsk.txt.gz",
+      "downloaded_sizes_source": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_honey_bee/apiMel2.chrom.sizes",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/western_honey_bee/apiMel2.fa.gz",
+      "fasta_accession_column": "GenBank-Accession",
+      "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+      "id": "western_honey_bee",
+      "kingdom_group": "insect",
+      "label_audit": {
+        "known_te_rows": 5,
+        "panel_rows": 6107,
+        "source_rows": 465237
+      },
+      "label_format": "ucsc_rmsk_table",
+      "label_id": "same-assembly-western_honey_bee-source-dependent",
+      "label_out": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_honey_bee/truth_trimmed.out",
+      "label_sizes_url": "https://hgdownload.soe.ucsc.edu/goldenPath/apiMel2/bigZips/apiMel2.chrom.sizes",
+      "label_source": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/sources/apiMel2.rmsk.txt.gz",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/apiMel2/database/rmsk.txt.gz",
+      "label_status": "same-assembly source-dependent fixed panel; not independent truth",
+      "panel_role": "historical-candidate external screen",
+      "panel_selection_rows": [
+        "Group1",
+        "Group2",
+        "Group3",
+        "Group4"
+      ],
+      "panel_selection_source": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_honey_bee/apiMel2.chrom.sizes",
+      "pretraining_exclusion": "not established",
+      "regions": [
+        {
+          "end_bp": 13240941,
+          "length_bp": 25433307,
+          "molecule": "1",
+          "role": "assembled-molecule",
+          "seqid": "Group1",
+          "start_bp": 12192365
+        },
+        {
+          "end_bp": 7641037,
+          "length_bp": 14233499,
+          "molecule": "2",
+          "role": "assembled-molecule",
+          "seqid": "Group2",
+          "start_bp": 6592461
+        },
+        {
+          "end_bp": 6419628,
+          "length_bp": 11790680,
+          "molecule": "3",
+          "role": "assembled-molecule",
+          "seqid": "Group3",
+          "start_bp": 5371052
+        },
+        {
+          "end_bp": 5857159,
+          "length_bp": 10665743,
+          "molecule": "4",
+          "role": "assembled-molecule",
+          "seqid": "Group4",
+          "start_bp": 4808583
+        }
+      ],
+      "sealed": false,
+      "sizes": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/western_honey_bee/apiMel2.chrom.sizes",
+      "species": "Apis mellifera",
+      "tiberius_config": "insecta.yaml"
+    },
+    {
+      "assembly": "triCas2",
+      "assembly_report": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/red_flour_beetle/synthetic_assembly_report.txt",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.fa.gz",
+      "fasta_accession_column": "GenBank-Accession",
+      "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+      "id": "red_flour_beetle",
+      "kingdom_group": "insect",
+      "label_audit": {
+        "known_te_rows": 33,
+        "panel_rows": 3123,
+        "source_rows": 112424
+      },
+      "label_format": "repeatmasker_out",
+      "label_id": "same-assembly-red_flour_beetle-source-dependent",
+      "label_out": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep/red_flour_beetle/truth_trimmed.out",
+      "label_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.fa.out.gz",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/triCas2/bigZips/triCas2.fa.out.gz",
+      "label_status": "same-assembly source-dependent fixed panel; not independent truth",
+      "panel_role": "historical-candidate external screen",
+      "panel_selection_rows": [
+        "chrUn_1",
+        "chrUn_2",
+        "chrUn_4",
+        "chrUn_6"
+      ],
+      "panel_selection_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.chrom.sizes",
+      "pretraining_exclusion": "not established",
+      "regions": [
+        {
+          "end_bp": 1164779,
+          "length_bp": 1280983,
+          "molecule": "1",
+          "role": "assembled-molecule",
+          "seqid": "chrUn_1",
+          "start_bp": 116203
+        },
+        {
+          "end_bp": 1104452,
+          "length_bp": 1160328,
+          "molecule": "2",
+          "role": "assembled-molecule",
+          "seqid": "chrUn_2",
+          "start_bp": 55876
+        },
+        {
+          "end_bp": 1111980,
+          "length_bp": 1175385,
+          "molecule": "3",
+          "role": "assembled-molecule",
+          "seqid": "chrUn_4",
+          "start_bp": 63404
+        },
+        {
+          "end_bp": 1223643,
+          "length_bp": 1398711,
+          "molecule": "4",
+          "role": "assembled-molecule",
+          "seqid": "chrUn_6",
+          "start_bp": 175067
+        }
+      ],
+      "sealed": false,
+      "sizes": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/red_flour_beetle/triCas2.chrom.sizes",
+      "species": "Tribolium castaneum",
+      "tiberius_config": "insecta.yaml"
+    }
+  ],
+  "execution_authorized": true,
+  "feedback_audit": {
+    "claim_boundary": "same-assembly source-dependent comparator; no full-genome biological accuracy claim",
+    "finding": "These candidates occurred in prior planning or transfer screens; results are external screens and not untouched independent tests.",
+    "pretraining_exclusion": "not provable from current records",
+    "status": "HISTORICAL_CANDIDATE_SCREEN",
+    "task_training": "none of the three is in the six-species D supervised training table"
+  },
+  "model": {
+    "calibration_fit_split": "CAL",
+    "calibration_relpath": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "calibration_scope": "six-species-shared",
+    "model_code_relpath": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "model_relpath": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "seed": 42,
+    "threshold_policy": "existing frozen CAL threshold; no external threshold fitting"
+  },
+  "output_root": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917",
+  "prep_root": "/home/users/j/jwang/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/prep",
+  "remote_data_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "remote_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+  "resource_contract": {
+    "inference_gpus": 1,
+    "inference_walltime_hours_per_species": 2,
+    "max_parallel_species": 1,
+    "new_training_gpu_hours": 0,
+    "preparation_cpus": 16,
+    "preparation_memory_gb": 96,
+    "preparation_walltime_hours_per_species": 2
+  },
+  "schema_version": "ANIMAL-GENERALIZATION-CLOSURE-20260917-FIXED-PANEL-V1",
+  "sealed_inputs_allowed": false,
+  "selection_rule": {
+    "assembly_order_source": "source chrom.sizes row order",
+    "description": "First four usable rows in the frozen source chrom.sizes file; centered 1,048,576-bp interval per row.",
+    "length_bp": 1048576,
+    "phase_offset_bp": 3,
+    "phase_offset_source": "inherited from the existing D-EXTERNAL-RC0 contract; one fixed diagnostic arm only, not a phase search",
+    "score_or_label_selection": false,
+    "start_policy": "centered_from_assembly_length",
+    "window_bp": 4096
+  },
+  "status": "PREPARE_THEN_RUN"
+}

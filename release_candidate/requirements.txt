@@ -1,0 +1,5 @@
+# The checkpoint is not installed by this file. Use the official torch wheel
+# appropriate for the target CPU/CUDA runtime, then install these requirements.
+numpy>=1.24
+torch>=2.0
+transformers>=4.57,<5

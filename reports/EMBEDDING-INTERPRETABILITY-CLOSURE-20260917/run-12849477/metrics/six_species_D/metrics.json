@@ -1,0 +1,388 @@
+{
+  "protocol": "EMBEDDING-INTERPRETABILITY-CLOSURE-20260917",
+  "feature_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EMBEDDING-INTERPRETABILITY-CLOSURE-20260917/run-12849477/features/six_species_D",
+  "seed": 42,
+  "feature_dim": 1024,
+  "counts": {
+    "train": 1843,
+    "test": 1580,
+    "test_labels": {
+      "BG": 360,
+      "SINE": 75,
+      "LINE": 306,
+      "LTR": 280,
+      "DNA": 260,
+      "KNOWN_OTHER_TE": 125,
+      "AMBIGUOUS_TE": 120,
+      "UNCLASSIFIED": 54
+    }
+  },
+  "pooling_contract": "attention_mask_mean_excluding_padding_and_special_tokens",
+  "supervised_knn5": {
+    "known_five": {
+      "n": 1281,
+      "accuracy": 0.624512099921936,
+      "balanced_accuracy": 0.6484009911656972,
+      "macro_f1": 0.6394449342773465,
+      "by_species": {
+        "c_elegans": {
+          "n": 149,
+          "accuracy": 0.6778523489932886,
+          "balanced_accuracy": 0.590952380952381,
+          "macro_f1": 0.5385172798216276
+        },
+        "chicken": {
+          "n": 149,
+          "accuracy": 0.7583892617449665,
+          "balanced_accuracy": 0.5819298245614035,
+          "macro_f1": 0.5516483516483517
+        },
+        "fruit_fly": {
+          "n": 240,
+          "accuracy": 0.5541666666666667,
+          "balanced_accuracy": 0.44333333333333336,
+          "macro_f1": 0.4364143249466004
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.6479591836734694,
+          "balanced_accuracy": 0.5766666666666667,
+          "macro_f1": 0.5272487380678694
+        },
+        "western_clawed_frog": {
+          "n": 263,
+          "accuracy": 0.6121673003802282,
+          "balanced_accuracy": 0.6331884057971015,
+          "macro_f1": 0.6453163942258738
+        },
+        "zebrafish": {
+          "n": 284,
+          "accuracy": 0.5809859154929577,
+          "balanced_accuracy": 0.594848484848485,
+          "macro_f1": 0.5887376633389994
+        }
+      }
+    },
+    "full_eight": {
+      "n": 1580,
+      "accuracy": 0.5829113924050633,
+      "balanced_accuracy": 0.6072063282577989,
+      "macro_f1": 0.5944198723542691,
+      "by_species": {
+        "c_elegans": {
+          "n": 317,
+          "accuracy": 0.5930599369085173,
+          "balanced_accuracy": 0.5721726190476191,
+          "macro_f1": 0.5456890375961956
+        },
+        "chicken": {
+          "n": 150,
+          "accuracy": 0.7466666666666667,
+          "balanced_accuracy": 0.3571271929824561,
+          "macro_f1": 0.3413997879109226
+        },
+        "fruit_fly": {
+          "n": 287,
+          "accuracy": 0.5574912891986062,
+          "balanced_accuracy": 0.35407801418439716,
+          "macro_f1": 0.3526201770284178
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.6479591836734694,
+          "balanced_accuracy": 0.3708333333333333,
+          "macro_f1": 0.339933327725499
+        },
+        "western_clawed_frog": {
+          "n": 267,
+          "accuracy": 0.5468164794007491,
+          "balanced_accuracy": 0.393659420289855,
+          "macro_f1": 0.4116180187027419
+        },
+        "zebrafish": {
+          "n": 363,
+          "accuracy": 0.5179063360881543,
+          "balanced_accuracy": 0.4690656565656566,
+          "macro_f1": 0.45284022846294225
+        }
+      }
+    },
+    "conditional_te_four": {
+      "n": 921,
+      "accuracy": 0.7100977198697068,
+      "balanced_accuracy": 0.7190773360626301,
+      "macro_f1": 0.7196583454106409,
+      "by_species": {
+        "c_elegans": {
+          "n": 89,
+          "accuracy": 0.8426966292134831,
+          "balanced_accuracy": 0.6303571428571428,
+          "macro_f1": 0.5698025551684088
+        },
+        "chicken": {
+          "n": 89,
+          "accuracy": 0.8426966292134831,
+          "balanced_accuracy": 0.6348684210526315,
+          "macro_f1": 0.6030321378667909
+        },
+        "fruit_fly": {
+          "n": 180,
+          "accuracy": 0.7444444444444445,
+          "balanced_accuracy": 0.5583333333333333,
+          "macro_f1": 0.5558997050147492
+        },
+        "mouse": {
+          "n": 136,
+          "accuracy": 0.6911764705882353,
+          "balanced_accuracy": 0.6458333333333333,
+          "macro_f1": 0.6168300653594772
+        },
+        "western_clawed_frog": {
+          "n": 203,
+          "accuracy": 0.7044334975369458,
+          "balanced_accuracy": 0.7030797101449275,
+          "macro_f1": 0.7241288200083036
+        },
+        "zebrafish": {
+          "n": 224,
+          "accuracy": 0.59375,
+          "balanced_accuracy": 0.6102272727272727,
+          "macro_f1": 0.6050791253660621
+        }
+      }
+    },
+    "binary_te_vs_bg_known": {
+      "n": 1281,
+      "accuracy": 0.7946916471506635,
+      "balanced_accuracy": 0.7049402823018458,
+      "macro_f1": 0.7211060954621576,
+      "full_test_n": 1580,
+      "known_test_n": 1281,
+      "excluded_unknown_test_counts": {
+        "KNOWN_OTHER_TE": 125,
+        "AMBIGUOUS_TE": 120,
+        "UNCLASSIFIED": 54
+      },
+      "by_species": {
+        "c_elegans": {
+          "n": 149,
+          "accuracy": 0.7248322147651006,
+          "balanced_accuracy": 0.6854868913857678,
+          "macro_f1": 0.6899142175524084
+        },
+        "chicken": {
+          "n": 149,
+          "accuracy": 0.7986577181208053,
+          "balanced_accuracy": 0.7717228464419476,
+          "macro_f1": 0.7803655660377358
+        },
+        "fruit_fly": {
+          "n": 240,
+          "accuracy": 0.7375,
+          "balanced_accuracy": 0.5416666666666666,
+          "macro_f1": 0.5321637426900585
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.8214285714285714,
+          "balanced_accuracy": 0.7409313725490196,
+          "macro_f1": 0.7635053607749853
+        },
+        "western_clawed_frog": {
+          "n": 263,
+          "accuracy": 0.7718631178707225,
+          "balanced_accuracy": 0.7054597701149425,
+          "macro_f1": 0.6934731934731935
+        },
+        "zebrafish": {
+          "n": 284,
+          "accuracy": 0.8802816901408451,
+          "balanced_accuracy": 0.783779761904762,
+          "macro_f1": 0.8056360708534622
+        }
+      }
+    }
+  },
+  "unsupervised_kmeans": {
+    "known_five": {
+      "k2": {
+        "n": 1281,
+        "ari": 0.11751358050968341,
+        "nmi": 0.11318266247967373,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k4": {
+        "n": 1281,
+        "ari": 0.10583115142194459,
+        "nmi": 0.13987305729043675,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k5": {
+        "n": 1281,
+        "ari": 0.1105080135292845,
+        "nmi": 0.15003407441227337,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k8": {
+        "n": 1281,
+        "ari": 0.09163580746029308,
+        "nmi": 0.15557837643144032,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    "full_eight": {
+      "k2": {
+        "n": 1580,
+        "ari": 0.07804872439244823,
+        "nmi": 0.08495383331787999,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "k4": {
+        "n": 1580,
+        "ari": 0.08210548138945127,
+        "nmi": 0.12613234706055704,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "k5": {
+        "n": 1580,
+        "ari": 0.10106890453681537,
+        "nmi": 0.15457210670072785,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "k8": {
+        "n": 1580,
+        "ari": 0.10958961537648562,
+        "nmi": 0.19738615367238027,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "conditional_te_four": {
+      "k2": {
+        "n": 921,
+        "ari": 0.01752759840690171,
+        "nmi": 0.015272977013906602,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k4": {
+        "n": 921,
+        "ari": 0.04236824276092172,
+        "nmi": 0.061159202162095264,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k5": {
+        "n": 921,
+        "ari": 0.05297705901408453,
+        "nmi": 0.08191208081439245,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k8": {
+        "n": 921,
+        "ari": 0.047452891249853475,
+        "nmi": 0.08264364198323673,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    "binary_te_vs_bg_known_from_full_k2": {
+      "n": 1281,
+      "full_test_n": 1580,
+      "excluded_unknown_test_counts": {
+        "KNOWN_OTHER_TE": 125,
+        "AMBIGUOUS_TE": 120,
+        "UNCLASSIFIED": 54
+      },
+      "ari": 0.21810609286502475,
+      "nmi": 0.1851078273827617,
+      "fit_scope": "full_eight_train",
+      "k": 2
+    }
+  },
+  "umap_is_primary_endpoint": false,
+  "test_records_species": [
+    "c_elegans",
+    "chicken",
+    "fruit_fly",
+    "mouse",
+    "western_clawed_frog",
+    "zebrafish"
+  ]
+}

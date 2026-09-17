@@ -1,0 +1,8 @@
+# Never stage the approximately 2 GB derived checkpoint or run products.
+bundle/model/pytorch_model.bin
+notebook-smoke-output/
+run-*/
+
+# The tiny documented input is part of the source candidate despite the
+# repository-wide biological-data ignore rule.
+!examples/tiny.fa

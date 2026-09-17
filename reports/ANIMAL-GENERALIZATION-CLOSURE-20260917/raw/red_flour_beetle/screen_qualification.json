@@ -1,0 +1,15 @@
+{
+  "assembly": "triCas2",
+  "candidate": "red_flour_beetle",
+  "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+  "label_audit": {
+    "known_te_rows": 33,
+    "panel_rows": 3123,
+    "source_rows": 112424
+  },
+  "label_status": "same-assembly source-dependent fixed panel; not independent truth",
+  "pretraining_exclusion": "not established",
+  "species": "Tribolium castaneum",
+  "status": "COMPLETED",
+  "summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/red_flour_beetle/slurm-12849284_2/summary.json"
+}

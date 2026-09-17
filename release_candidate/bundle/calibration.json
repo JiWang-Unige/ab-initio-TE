@@ -1,0 +1,53 @@
+{
+  "arm": "D",
+  "calibration_loss": 0.12823226869935955,
+  "calibration_protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
+  "calibration_scope": "six-species-shared",
+  "evaluation_contract": {
+    "conf_status": "sealed_not_evaluated",
+    "dev_split": "DEV",
+    "forbidden_split": "CONF",
+    "screen_species": [
+      "c_elegans"
+    ],
+    "screen_split": "SCREEN"
+  },
+  "experiment": "CROSS-SPECIES-L1-UPSTREAM-20260904",
+  "fit_split": "CAL",
+  "model_id": "ntv2-500m-multi-species/cross-species-l1-upstream-20260904/seed42/D",
+  "platt_intercept": -0.8050313412075021,
+  "platt_slope": 0.6984053956932976,
+  "portable_path_fields": "model_dir/tokenizer_dir/model_code_dir intentionally removed; resolved by manifest",
+  "protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "run_role": "upstream_coverage_pilot",
+  "schema": "portable-d-calibration/v1",
+  "seed": 42,
+  "source_artifact": "CROSS-SPECIES-L1-UPSTREAM-20260904 seed42 arm D",
+  "source_paths_relative": {
+    "calibration_json": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "model_dir": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model"
+  },
+  "species": [
+    "human",
+    "mouse",
+    "chicken",
+    "zebrafish",
+    "pig",
+    "c_elegans"
+  ],
+  "threshold": 0.42330056285498807,
+  "threshold_selection": {
+    "candidate_count": 3729202,
+    "macro_species_f1": 0.8907220950065249,
+    "minimum_species_f1": 0.8185237810617638,
+    "species_f1": {
+      "c_elegans": 0.8185237810617638,
+      "chicken": 0.8232767062361407,
+      "human": 0.9393271481264247,
+      "mouse": 0.9399153963205146,
+      "pig": 0.895378193600045,
+      "zebrafish": 0.9279113446942613
+    },
+    "threshold": 0.42330056285498807
+  }
+}

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "portable-d-te"
+version = "0.1.0"
+description = "Portable FASTA inference for the frozen NTv2 D TE-material model"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.24",
+  "torch>=2.0",
+  "transformers>=4.57,<5",
+]
+
+[project.scripts]
+portable-d = "portable_d.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["portable_d*"]

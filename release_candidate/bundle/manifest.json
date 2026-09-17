@@ -1,0 +1,26 @@
+{
+  "base_model_id": "InstaDeepAI/nucleotide-transformer-v2-500m-multi-species",
+  "bundle_version": "0.1.0",
+  "calibration_json": "calibration.json",
+  "calibration_protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
+  "calibration_protocol_alias": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+  "checkpoint_role": "CROSS-SPECIES-L1-UPSTREAM-20260904 seed42 arm D",
+  "checkpoint_seed": 42,
+  "checkpoint_step": 4000,
+  "inference_semantics": "Copied sequence_tokens, infer_half_margins and six-base tail projection from the frozen L1 evaluator; no labels, fitting, gap filling or smoothing.",
+  "kmer_bp": 6,
+  "label_order": [
+    "background",
+    "TE_material"
+  ],
+  "license_notice": "NTv2 base and derived weights carry the upstream CC-BY-NC-SA-4.0 terms recorded for this release candidate; verify current upstream terms before redistribution.",
+  "model_code_dir": "model_code",
+  "model_dir": "model",
+  "model_family": "NTv2-500M multi-species",
+  "model_id": "ntv2-500m-multi-species/cross-species-l1-upstream-20260904/seed42/D",
+  "schema": "portable-d-bundle/v1",
+  "tokenizer_dir": "tokenizer",
+  "weights_filename": "pytorch_model.bin",
+  "weights_included": false,
+  "window_bp": 4096
+}

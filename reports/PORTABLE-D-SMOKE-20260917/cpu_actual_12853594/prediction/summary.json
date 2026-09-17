@@ -1,0 +1,56 @@
+{
+  "ambiguity_policy": "uppercase IUPAC; <unk> tokenization; no prediction censoring",
+  "batch_size": 1,
+  "bundle_root": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/portable_d_bundle_8f9_zqny/bundle",
+  "calibration_json": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/portable_d_bundle_8f9_zqny/bundle/calibration.json",
+  "calibration_protocol": "CROSS-SPECIES-L1-X0-PLATT-V1",
+  "calibration_scope": "six-species-shared",
+  "contigs": [
+    {
+      "ambiguity_runs": 0,
+      "ambiguous_bp": 0,
+      "length_bp": 4096,
+      "material_runs": 7,
+      "name": "human_dev_record_001_chr4_2326528_2330624",
+      "threshold_positive_bp": 2934,
+      "windows": 1
+    },
+    {
+      "ambiguity_runs": 0,
+      "ambiguous_bp": 0,
+      "length_bp": 4096,
+      "material_runs": 4,
+      "name": "human_dev_record_002_chr4_2330624_2334720",
+      "threshold_positive_bp": 484,
+      "windows": 1
+    }
+  ],
+  "coordinates": "0-based half-open",
+  "device": "cpu",
+  "fit_split": "CAL",
+  "input_fasta": "/home/users/j/jwang/portable_d_smoke_20260917/human_dev_first2.fa",
+  "interpretation": "TE-material connected runs, not insertion IDs; no scientific evaluation",
+  "labels_used": false,
+  "model_id": "ntv2-500m-multi-species/cross-species-l1-upstream-20260904/seed42/D",
+  "outputs": {
+    "ambiguity_qc_bed": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/prediction/ambiguity_qc.bed",
+    "material_bed": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/prediction/material_runs.bed",
+    "probability_bedgraph": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/prediction/material_probability.bedGraph",
+    "softmasked_fasta": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/prediction/softmasked.fa",
+    "summary_json": "/home/users/j/jwang/portable_d_smoke_20260917/cpu_actual_parity/prediction/summary.json"
+  },
+  "platt_intercept": -0.8050313412075021,
+  "platt_slope": 0.6984053956932976,
+  "protocol": "portable-d-te/v1",
+  "scientific_metrics_computed": false,
+  "seed": 42,
+  "softmask_policy": "lowercase threshold-positive ACGT only; keep IUPAC/N uppercase",
+  "status": "COMPLETED",
+  "tail_policy": "actual sequence length; NTv2 tokenizer padding only",
+  "threshold": 0.42330056285498807,
+  "threshold_rule": "probability >= frozen CAL threshold",
+  "total_bp": 8192,
+  "upstream_inference_protocol": "CROSS-SPECIES-L1-FASTA-INFERENCE-V1",
+  "window_alignment": "nonoverlapping, contig origin 0",
+  "window_bp": 4096
+}

@@ -1,0 +1,112 @@
+{
+  "schema_version": "ANIMAL-GENERALIZATION-CLOSURE-20260917-V1",
+  "status": "READINESS_ONLY",
+  "execution_authorized": false,
+  "sealed_inputs_allowed": false,
+  "model": {
+    "name": "D-NTv2-500M-six-species-seed42",
+    "model_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "tokenizer_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "model_code_dir": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "calibration_protocol": "CROSS-SPECIES-L1-UPSTREAM-20260904-V1",
+    "calibration_scope": "six-species-shared",
+    "fit_split": "CAL",
+    "platt_slope": 0.6984053956932976,
+    "platt_intercept": -0.8050313412075021,
+    "threshold": 0.42330056285498807,
+    "window_bp": 4096,
+    "batch_size": 12
+  },
+  "training_species": [
+    "human",
+    "mouse",
+    "chicken",
+    "zebrafish",
+    "pig",
+    "c_elegans"
+  ],
+  "candidate_panel": [
+    {
+      "species": "western_clawed_frog",
+      "scientific_name": "Xenopus tropicalis",
+      "assembly": "xenTro10",
+      "kingdom_group": "vertebrate",
+      "tiberius_config": "vertebrates.yaml",
+      "panel_role": "candidate_after_exposure_audit",
+      "label_status": "source_manifest_exists_but_current_claim_contract_missing",
+      "sealed": false
+    },
+    {
+      "species": "western_honey_bee",
+      "scientific_name": "Apis mellifera",
+      "assembly": "apiMel2",
+      "kingdom_group": "insect",
+      "tiberius_config": "insecta.yaml",
+      "panel_role": "candidate_stress_after_label_audit",
+      "label_status": "old_UCSC_snapshot_requires_requalification",
+      "sealed": false
+    },
+    {
+      "species": "red_flour_beetle",
+      "scientific_name": "Tribolium castaneum",
+      "assembly": "triCas2",
+      "kingdom_group": "insect",
+      "tiberius_config": "insecta.yaml",
+      "panel_role": "candidate_stress_after_label_audit",
+      "label_status": "old_RepeatMasker_snapshot_requires_requalification",
+      "sealed": false
+    },
+    {
+      "species": "rice",
+      "scientific_name": "Oryza sativa",
+      "assembly": "project_local",
+      "kingdom_group": "angiosperm",
+      "tiberius_config": "angiosperms.yaml",
+      "panel_role": "separate_cross_kingdom_stress",
+      "label_status": "local_external_TE_BED_requires_requalification",
+      "sealed": false
+    }
+  ],
+  "historical_external_already_measured": [
+    "platypus",
+    "sea_urchin",
+    "c_briggsae"
+  ],
+  "sealed_or_reserved_do_not_open": [
+    "horse",
+    "opossum",
+    "fruit_fly_dm6",
+    "cattle",
+    "reserved_worm_chromosome",
+    "old_CONF",
+    "human_chr19_to_chr22"
+  ],
+  "resources": {
+    "preparation_cpus": 16,
+    "preparation_memory_gb": 96,
+    "preparation_walltime_hours_per_species": 2,
+    "inference_gpus": 1,
+    "inference_walltime_hours_per_species": 2,
+    "max_parallel_species": 2,
+    "new_training_gpu_hours": 0
+  },
+  "data_contract": {
+    "test_split_only": true,
+    "target_specific_calibration": false,
+    "unknown_is_negative": false,
+    "coordinates": "0-based half-open",
+    "required_record_fields": [
+      "sequence",
+      "labels",
+      "split",
+      "assembly",
+      "chrom",
+      "start",
+      "end",
+      "tile_id",
+      "half"
+    ],
+    "label_symbols": ["1", "0", "?", "H"]
+  }
+}

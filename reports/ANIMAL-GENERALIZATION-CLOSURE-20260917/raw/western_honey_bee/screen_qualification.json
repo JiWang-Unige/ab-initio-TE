@@ -1,0 +1,15 @@
+{
+  "assembly": "apiMel2",
+  "candidate": "western_honey_bee",
+  "historical_exposure": "historical TEFM/transfer candidate; not untouched",
+  "label_audit": {
+    "known_te_rows": 5,
+    "panel_rows": 6107,
+    "source_rows": 465237
+  },
+  "label_status": "same-assembly source-dependent fixed panel; not independent truth",
+  "pretraining_exclusion": "not established",
+  "species": "Apis mellifera",
+  "status": "COMPLETED",
+  "summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/ANIMAL-GENERALIZATION-CLOSURE-20260917/western_honey_bee/slurm-12849284_1/summary.json"
+}
