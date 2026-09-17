@@ -1,0 +1,119 @@
+{
+  "class_overlap_note": "Cross-class interval overlap is reported as classes_overlap_excess_bp; class-specific bp must not be added to strict-known union.",
+  "denominator": "A/C/G/T callable bases; N/non-callable excluded; strict-known source classes unioned independently from original .class; Unknown/?/ARTEFACT retained as uncertain metadata.",
+  "diagnostic": "class_breakdown_existing_predictions",
+  "experiment": "EXTERNAL-ANIMAL-CLOSURE-20260918",
+  "protocol": "Existing material_runs.bed from frozen D inference; no threshold change, recalibration, new species, or repeated expert training.",
+  "resource": "private-teodoro-gpu CPU-only, 4 CPUs, 16G, 30 min",
+  "slurm_job": "12889181_[0-1]",
+  "species": {
+    "torafugu": {
+      "assembly": "fr3 / Fugu rubripes v3",
+      "callable_bp": 101522896,
+      "class_union_sum_bp": 2296009,
+      "classes": {
+        "DNA": {
+          "missed_bp": 150090,
+          "recall": 0.7624568128474953,
+          "recovered_bp": 481753,
+          "reference_bp_callable": 631843,
+          "uncertain_overlap_bp": 181
+        },
+        "LINE": {
+          "missed_bp": 130293,
+          "recall": 0.8888229963598882,
+          "recovered_bp": 1041649,
+          "reference_bp_callable": 1171942,
+          "uncertain_overlap_bp": 15
+        },
+        "LTR": {
+          "missed_bp": 47946,
+          "recall": 0.8393063622561325,
+          "recovered_bp": 250423,
+          "reference_bp_callable": 298369,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "missed_bp": 0,
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "missed_bp": 0,
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "missed_bp": 52432,
+          "recall": 0.7207260951082325,
+          "recovered_bp": 135312,
+          "reference_bp_callable": 187744,
+          "uncertain_overlap_bp": 4
+        }
+      },
+      "classes_overlap_excess_bp": 440,
+      "n_or_noncallable_bp_excluded": 3334704,
+      "panel_total_bp": 104857600,
+      "strict_known_union_bp": 2295569,
+      "uncertain_bp": 320484
+    },
+    "zebra_finch": {
+      "assembly": "taeGut2 / WashU taeGut2",
+      "callable_bp": 104279300,
+      "class_union_sum_bp": 4482814,
+      "classes": {
+        "DNA": {
+          "missed_bp": 41930,
+          "recall": 0.17559623286997897,
+          "recovered_bp": 8931,
+          "reference_bp_callable": 50861,
+          "uncertain_overlap_bp": 18
+        },
+        "LINE": {
+          "missed_bp": 1485616,
+          "recall": 0.34829112508060733,
+          "recovered_bp": 793954,
+          "reference_bp_callable": 2279570,
+          "uncertain_overlap_bp": 12
+        },
+        "LTR": {
+          "missed_bp": 1903242,
+          "recall": 0.07341622031097708,
+          "recovered_bp": 150800,
+          "reference_bp_callable": 2054042,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "missed_bp": 0,
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "missed_bp": 0,
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "missed_bp": 58227,
+          "recall": 0.38670332100989036,
+          "recovered_bp": 36714,
+          "reference_bp_callable": 94941,
+          "uncertain_overlap_bp": 2
+        }
+      },
+      "classes_overlap_excess_bp": 3272,
+      "n_or_noncallable_bp_excluded": 578300,
+      "panel_total_bp": 104857600,
+      "strict_known_union_bp": 4479542,
+      "uncertain_bp": 76795
+    }
+  }
+}

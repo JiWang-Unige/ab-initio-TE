@@ -1,0 +1,105 @@
+{
+  "schema_version": "EXTERNAL-ANIMAL-CLOSURE-20260918-V1",
+  "status": "QUALIFIED_PANEL_PREPARE_THEN_INFER",
+  "purpose": "A fixed, label-rich nonmammalian vertebrate external screen for the frozen six-species D checkpoint.",
+  "selection": {
+    "contigs": 20,
+    "length_bp": 5242880,
+    "start_policy": "centered_from_assembly_length",
+    "sort": "descending_length_then_lexicographic_source_contig",
+    "labels_used_in_selection": false,
+    "scores_used_in_selection": false,
+    "panel_bp_per_species": 104857600,
+    "regions_are_disjoint": true
+  },
+  "model": {
+    "name": "D-NTv2-500M-six-species-seed42",
+    "model_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "model_code_dir": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "calibration_scope": "six-species-shared",
+    "seed": 42,
+    "window_bp": 4096,
+    "batch_size": 12,
+    "threshold_policy": "existing six-species CAL threshold; no external fitting or route selection",
+    "threshold": 0.42330056285498807
+  },
+  "quality_gate": {
+    "source_positive_classes": ["DNA", "LINE", "SINE", "LTR", "RC", "Retroposon"],
+    "minimum_full_assembly_known_te_bp": 5000000,
+    "minimum_selected_panel_known_te_bp": 500000,
+    "minimum_selected_panel_positive_fraction": 0.005,
+    "maximum_selected_panel_positive_fraction": 0.8,
+    "minimum_selected_regions_with_positive_and_background": 12,
+    "minimum_broad_class_count": 3,
+    "purpose": "exclude label-sparse panels before inference; this is a source-coverage qualification, not a biological-truth guarantee",
+    "unknown_or_unclassified_is_not_negative": true
+  },
+  "species": {
+    "torafugu": {
+      "scientific_name": "Takifugu rubripes",
+      "assembly": "fr3 / Fugu rubripes v3",
+      "kingdom_group": "nonmammalian_vertebrate_fish",
+      "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.gz",
+      "sizes": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.chrom.sizes",
+      "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.out.gz",
+      "legacy_te_bed": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/rmsk_te.bed.gz",
+      "assembly_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/fr3/bigZips/fr3.fa.gz",
+      "repeat_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/fr3/database/rmsk.txt.gz",
+      "selection_role": "primary_label_rich_fish_external_screen",
+      "task_supervision": "not_in_current_D_six_species",
+      "pretraining_exposure": "unknown",
+      "historical_project_exposure": "legacy_source_manifest_and_prior_transfer_assets; no current D score used for selection"
+    },
+    "zebra_finch": {
+      "scientific_name": "Taeniopygia guttata",
+      "assembly": "taeGut2 / WashU taeGut2",
+      "kingdom_group": "nonmammalian_vertebrate_bird",
+      "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.fa.gz",
+      "sizes": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.chrom.sizes",
+      "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.fa.out.gz",
+      "legacy_te_bed": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/rmsk_te.bed.gz",
+      "assembly_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/taeGut2/bigZips/taeGut2.fa.gz",
+      "repeat_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/taeGut2/database/rmsk.txt.gz",
+      "selection_role": "primary_label_rich_bird_external_screen",
+      "task_supervision": "not_in_current_D_six_species",
+      "pretraining_exposure": "unknown",
+      "historical_project_exposure": "legacy_source_manifest_and_prior_transfer_assets; no current D score used for selection"
+    }
+  },
+  "deferred_candidates": {
+    "western_clawed_frog_xenTro10": "old self Label-A strict-TE mass was too sparse for the project external gate",
+    "green_anole_anoCar2": "legacy UCSC layer exists but independent same-assembly Label-A qualification is unresolved",
+    "medaka_oryLat2": "legacy assembly and low known-TE coverage; retained as a future source-sensitivity candidate",
+    "three_spined_stickleback_gasAcu1": "assembly exists but no matched TE label asset",
+    "turkey": "no matched project assembly and TE label asset located before panel freeze"
+  },
+  "scientific_boundary": {
+    "primary_endpoint": "callable positive-base recovery against the documented same-assembly RepeatMasker TE layer",
+    "secondary_endpoint": "predicted coverage and per-region source coverage",
+    "not_claimed": [
+      "whole-genome biological precision or F1",
+      "independent biological ground truth",
+      "unseen foundation-model pretraining exposure",
+      "insertion identity or gap reconstruction",
+      "Tiberius utility for nonmammalian clade checkpoints"
+    ],
+    "unknown_policy": "Unknown, ambiguous and non-TE repeat classes remain outside the positive layer and are not converted into negatives"
+  },
+  "resources": {
+    "prepare_partition": "private-teodoro-gpu (CPU-only allocation; no gres)",
+    "prepare_cpus": 4,
+    "prepare_memory_gb": 96,
+    "prepare_time": "04:00:00",
+    "inference_partition": "private-teodoro-gpu",
+    "inference_gpus_per_species": 1,
+    "inference_cpus": 4,
+    "inference_memory_gb": 64,
+    "inference_time_per_species": "07:00:00",
+    "inference_parallel_species": 2,
+    "score_partition": "public-short-cpu",
+    "score_cpus": 4,
+    "score_memory_gb": 16,
+    "score_time": "00:30:00"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "PREPARED",
+  "genome": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+  "gene_reference_url": "https://hgdownload.soe.ucsc.edu/goldenPath/galGal6/database/ncbiRefSeq.txt.gz",
+  "download_headers": {
+    "Date": "Thu, 17 Sep 2026 23:17:03 GMT",
+    "Server": "Apache",
+    "Last-Modified": "Sun, 10 May 2020 10:27:32 GMT",
+    "ETag": "\"329738-5a548ad94ed00\"",
+    "Accept-Ranges": "bytes",
+    "Content-Length": "3315512",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Range",
+    "Connection": "close",
+    "Content-Type": "application/x-gzip"
+  },
+  "geometry_rejections": {
+    "D_train_cal_overlap": 563
+  },
+  "input_core_bp": 50000000,
+  "input_with_halos_bp": 52000000,
+  "inputs": [
+    {
+      "id": "c00",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 498647,
+      "reference_loci": 67
+    },
+    {
+      "id": "c01",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 197384,
+      "reference_loci": 72
+    },
+    {
+      "id": "c02",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 182512,
+      "reference_loci": 88
+    },
+    {
+      "id": "c03",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 203835,
+      "reference_loci": 108
+    },
+    {
+      "id": "c04",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 197751,
+      "reference_loci": 61
+    },
+    {
+      "id": "c05",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 221302,
+      "reference_loci": 114
+    },
+    {
+      "id": "c06",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 188667,
+      "reference_loci": 134
+    },
+    {
+      "id": "c07",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 180114,
+      "reference_loci": 98
+    },
+    {
+      "id": "c08",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 169393,
+      "reference_loci": 182
+    },
+    {
+      "id": "c09",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 147288,
+      "reference_loci": 140
+    }
+  ],
+  "gene_reference_loci": 1064,
+  "D_train_cal_bp_overlap": 0,
+  "selection_used_labels_or_outcomes": false
+}

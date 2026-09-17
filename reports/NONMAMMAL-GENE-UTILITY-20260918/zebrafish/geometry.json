@@ -1,0 +1,102 @@
+[
+  {
+    "chrom": "chr16",
+    "index": 0,
+    "start": 25100000,
+    "end": 30100000,
+    "halo_start": 25000000,
+    "halo_end": 30200000,
+    "id": "c00",
+    "record_id": "chr16|base_mask_core=0|core=25100000-30100000|halo=25000000-30200000"
+  },
+  {
+    "chrom": "chr20",
+    "index": 1,
+    "start": 25100000,
+    "end": 30100000,
+    "halo_start": 25000000,
+    "halo_end": 30200000,
+    "id": "c01",
+    "record_id": "chr20|base_mask_core=1|core=25100000-30100000|halo=25000000-30200000"
+  },
+  {
+    "chrom": "chr8",
+    "index": 2,
+    "start": 25100000,
+    "end": 30100000,
+    "halo_start": 25000000,
+    "halo_end": 30200000,
+    "id": "c02",
+    "record_id": "chr8|base_mask_core=2|core=25100000-30100000|halo=25000000-30200000"
+  },
+  {
+    "chrom": "chr17",
+    "index": 3,
+    "start": 24100000,
+    "end": 29100000,
+    "halo_start": 24000000,
+    "halo_end": 29200000,
+    "id": "c03",
+    "record_id": "chr17|base_mask_core=3|core=24100000-29100000|halo=24000000-29200000"
+  },
+  {
+    "chrom": "chr14",
+    "index": 4,
+    "start": 24100000,
+    "end": 29100000,
+    "halo_start": 24000000,
+    "halo_end": 29200000,
+    "id": "c04",
+    "record_id": "chr14|base_mask_core=4|core=24100000-29100000|halo=24000000-29200000"
+  },
+  {
+    "chrom": "chr13",
+    "index": 5,
+    "start": 23100000,
+    "end": 28100000,
+    "halo_start": 23000000,
+    "halo_end": 28200000,
+    "id": "c05",
+    "record_id": "chr13|base_mask_core=5|core=23100000-28100000|halo=23000000-28200000"
+  },
+  {
+    "chrom": "chr18",
+    "index": 6,
+    "start": 23100000,
+    "end": 28100000,
+    "halo_start": 23000000,
+    "halo_end": 28200000,
+    "id": "c06",
+    "record_id": "chr18|base_mask_core=6|core=23100000-28100000|halo=23000000-28200000"
+  },
+  {
+    "chrom": "chr12",
+    "index": 7,
+    "start": 22100000,
+    "end": 27100000,
+    "halo_start": 22000000,
+    "halo_end": 27200000,
+    "id": "c07",
+    "record_id": "chr12|base_mask_core=7|core=22100000-27100000|halo=22000000-27200000"
+  },
+  {
+    "chrom": "chr19",
+    "index": 8,
+    "start": 22100000,
+    "end": 27100000,
+    "halo_start": 22000000,
+    "halo_end": 27200000,
+    "id": "c08",
+    "record_id": "chr19|base_mask_core=8|core=22100000-27100000|halo=22000000-27200000"
+  },
+  {
+    "chrom": "chr15",
+    "index": 9,
+    "start": 21100000,
+    "end": 26100000,
+    "halo_start": 21000000,
+    "halo_end": 26200000,
+    "id": "c09",
+    "record_id": "chr15|base_mask_core=9|core=21100000-26100000|halo=21000000-26200000"
+  }
+]

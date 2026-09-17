@@ -1,0 +1,175 @@
+{
+  "labels_used_in_selection": false,
+  "panel_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/torafugu/prepared/panel.fa",
+  "regions": [
+    {
+      "assembly_length_bp": 23260604,
+      "end": 14251742,
+      "panel_id": "core00",
+      "source_seqid": "chr1",
+      "start": 9008862
+    },
+    {
+      "assembly_length_bp": 16952093,
+      "end": 11097486,
+      "panel_id": "core01",
+      "source_seqid": "chr13",
+      "start": 5854606
+    },
+    {
+      "assembly_length_bp": 14900632,
+      "end": 10071756,
+      "panel_id": "core02",
+      "source_seqid": "chr21",
+      "start": 4828876
+    },
+    {
+      "assembly_length_bp": 14690302,
+      "end": 9966591,
+      "panel_id": "core03",
+      "source_seqid": "chr8",
+      "start": 4723711
+    },
+    {
+      "assembly_length_bp": 14304132,
+      "end": 9773506,
+      "panel_id": "core04",
+      "source_seqid": "chr7",
+      "start": 4530626
+    },
+    {
+      "assembly_length_bp": 14185242,
+      "end": 9714061,
+      "panel_id": "core05",
+      "source_seqid": "chr19",
+      "start": 4471181
+    },
+    {
+      "assembly_length_bp": 13922460,
+      "end": 9582670,
+      "panel_id": "core06",
+      "source_seqid": "chr9",
+      "start": 4339790
+    },
+    {
+      "assembly_length_bp": 13818948,
+      "end": 9530914,
+      "panel_id": "core07",
+      "source_seqid": "chr4",
+      "start": 4288034
+    },
+    {
+      "assembly_length_bp": 13411851,
+      "end": 9327365,
+      "panel_id": "core08",
+      "source_seqid": "chr20",
+      "start": 4084485
+    },
+    {
+      "assembly_length_bp": 13093193,
+      "end": 9168036,
+      "panel_id": "core09",
+      "source_seqid": "chr3",
+      "start": 3925156
+    },
+    {
+      "assembly_length_bp": 12328026,
+      "end": 8785453,
+      "panel_id": "core10",
+      "source_seqid": "chr14",
+      "start": 3542573
+    },
+    {
+      "assembly_length_bp": 12184708,
+      "end": 8713794,
+      "panel_id": "core11",
+      "source_seqid": "chr5",
+      "start": 3470914
+    },
+    {
+      "assembly_length_bp": 11609757,
+      "end": 8426318,
+      "panel_id": "core12",
+      "source_seqid": "chr22",
+      "start": 3183438
+    },
+    {
+      "assembly_length_bp": 11516971,
+      "end": 8379925,
+      "panel_id": "core13",
+      "source_seqid": "chr15",
+      "start": 3137045
+    },
+    {
+      "assembly_length_bp": 11407286,
+      "end": 8325083,
+      "panel_id": "core14",
+      "source_seqid": "chr2",
+      "start": 3082203
+    },
+    {
+      "assembly_length_bp": 11238946,
+      "end": 8240913,
+      "panel_id": "core15",
+      "source_seqid": "chr11",
+      "start": 2998033
+    },
+    {
+      "assembly_length_bp": 11184067,
+      "end": 8213473,
+      "panel_id": "core16",
+      "source_seqid": "chr17",
+      "start": 2970593
+    },
+    {
+      "assembly_length_bp": 10661439,
+      "end": 7952159,
+      "panel_id": "core17",
+      "source_seqid": "chr12",
+      "start": 2709279
+    },
+    {
+      "assembly_length_bp": 10310320,
+      "end": 7776600,
+      "panel_id": "core18",
+      "source_seqid": "chr16",
+      "start": 2533720
+    },
+    {
+      "assembly_length_bp": 9412079,
+      "end": 7327479,
+      "panel_id": "core19",
+      "source_seqid": "chr6",
+      "start": 2084599
+    }
+  ],
+  "scores_used_in_selection": false,
+  "selection": {
+    "contigs": 20,
+    "labels_used_in_selection": false,
+    "length_bp": 5242880,
+    "panel_bp_per_species": 104857600,
+    "regions_are_disjoint": true,
+    "scores_used_in_selection": false,
+    "sort": "descending_length_then_lexicographic_source_contig",
+    "start_policy": "centered_from_assembly_length"
+  },
+  "source": {
+    "assembly": "fr3 / Fugu rubripes v3",
+    "assembly_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/fr3/bigZips/fr3.fa.gz",
+    "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.gz",
+    "historical_project_exposure": "legacy_source_manifest_and_prior_transfer_assets; no current D score used for selection",
+    "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.out.gz",
+    "kingdom_group": "nonmammalian_vertebrate_fish",
+    "legacy_te_bed": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/rmsk_te.bed.gz",
+    "pretraining_exposure": "unknown",
+    "repeat_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/fr3/database/rmsk.txt.gz",
+    "scientific_name": "Takifugu rubripes",
+    "selection_role": "primary_label_rich_fish_external_screen",
+    "sizes": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.chrom.sizes",
+    "task_supervision": "not_in_current_D_six_species"
+  },
+  "species": "torafugu",
+  "status": "PREPARED",
+  "total_bp": 104857600
+}

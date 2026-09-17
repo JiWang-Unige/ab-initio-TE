@@ -1,0 +1,80 @@
+{
+  "experiment": "D-BACKBONE-LORA-CLADE-20260918",
+  "purpose": "Finite clade-conditioned last-two-layer LoRA comparison on the frozen D binary model.",
+  "seed": 42,
+  "data": {
+    "project_root": "/home/users/j/jwang/ab-initio-TE",
+    "data_root": "outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202",
+    "worm_train_override": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/materialization/12306000/TRAIN/c_elegans.jsonl.gz",
+    "species": ["human", "mouse", "chicken", "zebrafish", "pig", "c_elegans"],
+    "splits": {"TRAIN": 256, "CAL": 128, "DEV": 128},
+    "selection": "first complete 8192-bp tiles in source order; each tile has two 4096-bp halves"
+  },
+  "model": {
+    "checkpoint": "outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "native_model_code": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "backbone": "NTv2-500M",
+    "layers": "last_two_encoder_layers (indices 27,28 of 29)",
+    "targets": ["self_attention.query", "self_attention.value"],
+    "hidden_size": 1024,
+    "binary_head": "frozen D token-classification head",
+    "arms": {
+      "D_recalibrated": {
+        "kind": "frozen_D_logits",
+        "trainable_parameters": 0
+      },
+      "shared_lora_rank16": {
+        "kind": "shared_query_value_lora",
+        "rank": 16,
+        "alpha": 16,
+        "dropout": 0.0,
+        "trainable_parameters": 131072
+      },
+      "clade_lora_two_rank8": {
+        "kind": "fixed_taxonomy_routed_query_value_lora",
+        "experts": 2,
+        "rank_per_expert": 8,
+        "alpha_per_expert": 8,
+        "dropout": 0.0,
+        "trainable_parameters": 131072,
+        "route": {
+          "expert0_vertebrate": ["human", "mouse", "pig", "chicken", "zebrafish"],
+          "expert1_worm_only": ["c_elegans"],
+          "unknown_taxonomy_fallback": "frozen_D_logits"
+        }
+      }
+    }
+  },
+  "training": {
+    "steps_per_arm": 1024,
+    "maximum_steps_per_arm": 1500,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "te_bp_weight": 3.0,
+    "batch_contract": "one tile per species per optimizer step, both halves, source-order modulo 256",
+    "calibration": "fit one arm-specific Platt model and global threshold on CAL only",
+    "dev_policy": "evaluate after fixed steps and CAL fit; DEV never selects parameters",
+    "multi_seed": false
+  },
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "gpu": 1,
+    "cpus": 4,
+    "memory_gb": 32,
+    "walltime_hours": 4,
+    "total_gpu_hour_cap": 8,
+    "formal_job": "one job, both arms sequentially, seed42"
+  },
+  "scientific_boundary": {
+    "claim": "controlled clade-conditioned last-two-layer LoRA comparison with matched trainable capacity",
+    "not_claimed": [
+      "sparse backbone MoE",
+      "learned routing",
+      "species-independent invertebrate generalization",
+      "multi-seed stability",
+      "external-species performance selected by this experiment"
+    ]
+  }
+}

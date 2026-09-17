@@ -1,0 +1,16 @@
+{
+  "status": "PASS_NATIVE_LOWERCASE_HINT_MECHANISM",
+  "scope": "100 kb engineering input control, not a scientific utility result",
+  "observations": {
+    "uppercase": {
+      "masked_bp": 0,
+      "native_repeat_hint_lines": []
+    },
+    "lowercase_control": {
+      "masked_bp": 200,
+      "native_repeat_hint_lines": [
+        "native_mask_control\tsoftmask\tnep\t1001\t1200\t0\t.\t.\tsrc=RM \"1.15;1;0:0\""
+      ]
+    }
+  }
+}

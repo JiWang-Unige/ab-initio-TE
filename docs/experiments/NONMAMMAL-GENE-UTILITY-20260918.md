@@ -14,7 +14,9 @@ AUGUSTUS 3.5.0 固定原生 chicken/zebrafish 参数，`--softmasking=1 --UTR=of
 
 原生机制 smoke 在 100 kb 输入中仅将固定 200 bp 改为 lowercase，使用 `--printHints=true` 核对 native `nonexonpart` hints；这是工程验证，不进入用途评分。
 
-所有耗时 CPU/GPU 步骤进入 private-teodoro-gpu。准备 2 h，D 每物种 4 h GPU，原生预测每 core 24 h CPU、最多同时 4 cores。先运行第一个 core 验证原生输入、输出和坐标解析，再运行其余固定 core；不按烟测效果决定是否完成。
+首次 smoke 12888475/76 原生预测成功，但 GFF3 模式未打印内部 hints。查阅 [v3.5.0 官方 augustus.cc](https://github.com/Gaius-Augustus/Augustus/blob/v3.5.0/src/augustus.cc) 的 `sfc.prepare(..., Constant::printHints && !(Gene::gff3))`，确认是输出观察开关冲突。只将机制 smoke 设为 GFF3 off 后重跑；正式四组仍输出 GFF3，参数、输入与评分不变。原失败记录保留。
+
+所有耗时 CPU/GPU 步骤进入 private-teodoro-gpu。准备 2 h，D 每物种 1 h GPU / 32 GB host memory，原生预测每 core 24 h CPU、最多同时 4 cores。D 资源申请依据刚完成的相同 checkpoint 100 MiB 推理（12887633：31m52s、MaxRSS 4.4 GiB）缩小，以减少私有分区等待；不改推理参数。先运行第一个 core 验证原生输入、输出和坐标解析，再运行其余固定 core；不按烟测效果决定是否完成。
 
 完成标准是两物种全部 80 个原生预测格、固定分母和完整配对评分。无论结果方向都保存。该批不训练基因模型、不调整 D、不更改阈值。全基因组 EDTA/RM2 另批执行，不能把此处 panel Red 计时冒充全基因组 benchmark。
 

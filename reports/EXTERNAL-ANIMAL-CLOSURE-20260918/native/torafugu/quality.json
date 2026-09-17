@@ -1,0 +1,302 @@
+{
+  "assembly": "fr3 / Fugu rubripes v3",
+  "claim_boundary": "Source coverage qualification of a same-assembly RepeatMasker layer; not independent biological truth and not a model score.",
+  "gate": {
+    "failed_reasons": [],
+    "thresholds": {
+      "maximum_selected_panel_positive_fraction": 0.8,
+      "minimum_broad_class_count": 3,
+      "minimum_full_assembly_known_te_bp": 5000000,
+      "minimum_selected_panel_known_te_bp": 500000,
+      "minimum_selected_panel_positive_fraction": 0.005,
+      "minimum_selected_regions_with_positive_and_background": 12,
+      "purpose": "exclude label-sparse panels before inference; this is a source-coverage qualification, not a biological-truth guarantee",
+      "source_positive_classes": [
+        "DNA",
+        "LINE",
+        "SINE",
+        "LTR",
+        "RC",
+        "Retroposon"
+      ],
+      "unknown_or_unclassified_is_not_negative": true
+    }
+  },
+  "quality_metrics": {
+    "broad_class_count": 4,
+    "full_assembly_known_te_bp_union": 18582705,
+    "mixed_positive_background_regions": 20,
+    "selected_panel_bp": 104857600,
+    "selected_panel_known_te_bp_union": 2295569,
+    "selected_panel_positive_fraction": 0.021892251968383788
+  },
+  "scientific_name": "Takifugu rubripes",
+  "selection": {
+    "config": {
+      "contigs": 20,
+      "labels_used_in_selection": false,
+      "length_bp": 5242880,
+      "panel_bp_per_species": 104857600,
+      "regions_are_disjoint": true,
+      "scores_used_in_selection": false,
+      "sort": "descending_length_then_lexicographic_source_contig",
+      "start_policy": "centered_from_assembly_length"
+    },
+    "labels_used_in_selection": false,
+    "regions": [
+      {
+        "assembly_length_bp": 23260604,
+        "end": 14251742,
+        "panel_id": "core00",
+        "source_seqid": "chr1",
+        "start": 9008862
+      },
+      {
+        "assembly_length_bp": 16952093,
+        "end": 11097486,
+        "panel_id": "core01",
+        "source_seqid": "chr13",
+        "start": 5854606
+      },
+      {
+        "assembly_length_bp": 14900632,
+        "end": 10071756,
+        "panel_id": "core02",
+        "source_seqid": "chr21",
+        "start": 4828876
+      },
+      {
+        "assembly_length_bp": 14690302,
+        "end": 9966591,
+        "panel_id": "core03",
+        "source_seqid": "chr8",
+        "start": 4723711
+      },
+      {
+        "assembly_length_bp": 14304132,
+        "end": 9773506,
+        "panel_id": "core04",
+        "source_seqid": "chr7",
+        "start": 4530626
+      },
+      {
+        "assembly_length_bp": 14185242,
+        "end": 9714061,
+        "panel_id": "core05",
+        "source_seqid": "chr19",
+        "start": 4471181
+      },
+      {
+        "assembly_length_bp": 13922460,
+        "end": 9582670,
+        "panel_id": "core06",
+        "source_seqid": "chr9",
+        "start": 4339790
+      },
+      {
+        "assembly_length_bp": 13818948,
+        "end": 9530914,
+        "panel_id": "core07",
+        "source_seqid": "chr4",
+        "start": 4288034
+      },
+      {
+        "assembly_length_bp": 13411851,
+        "end": 9327365,
+        "panel_id": "core08",
+        "source_seqid": "chr20",
+        "start": 4084485
+      },
+      {
+        "assembly_length_bp": 13093193,
+        "end": 9168036,
+        "panel_id": "core09",
+        "source_seqid": "chr3",
+        "start": 3925156
+      },
+      {
+        "assembly_length_bp": 12328026,
+        "end": 8785453,
+        "panel_id": "core10",
+        "source_seqid": "chr14",
+        "start": 3542573
+      },
+      {
+        "assembly_length_bp": 12184708,
+        "end": 8713794,
+        "panel_id": "core11",
+        "source_seqid": "chr5",
+        "start": 3470914
+      },
+      {
+        "assembly_length_bp": 11609757,
+        "end": 8426318,
+        "panel_id": "core12",
+        "source_seqid": "chr22",
+        "start": 3183438
+      },
+      {
+        "assembly_length_bp": 11516971,
+        "end": 8379925,
+        "panel_id": "core13",
+        "source_seqid": "chr15",
+        "start": 3137045
+      },
+      {
+        "assembly_length_bp": 11407286,
+        "end": 8325083,
+        "panel_id": "core14",
+        "source_seqid": "chr2",
+        "start": 3082203
+      },
+      {
+        "assembly_length_bp": 11238946,
+        "end": 8240913,
+        "panel_id": "core15",
+        "source_seqid": "chr11",
+        "start": 2998033
+      },
+      {
+        "assembly_length_bp": 11184067,
+        "end": 8213473,
+        "panel_id": "core16",
+        "source_seqid": "chr17",
+        "start": 2970593
+      },
+      {
+        "assembly_length_bp": 10661439,
+        "end": 7952159,
+        "panel_id": "core17",
+        "source_seqid": "chr12",
+        "start": 2709279
+      },
+      {
+        "assembly_length_bp": 10310320,
+        "end": 7776600,
+        "panel_id": "core18",
+        "source_seqid": "chr16",
+        "start": 2533720
+      },
+      {
+        "assembly_length_bp": 9412079,
+        "end": 7327479,
+        "panel_id": "core19",
+        "source_seqid": "chr6",
+        "start": 2084599
+      }
+    ],
+    "scores_used_in_selection": false
+  },
+  "source": {
+    "assembly": "fr3 / Fugu rubripes v3",
+    "assembly_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/fr3/bigZips/fr3.fa.gz",
+    "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.gz",
+    "historical_project_exposure": "legacy_source_manifest_and_prior_transfer_assets; no current D score used for selection",
+    "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.out.gz",
+    "kingdom_group": "nonmammalian_vertebrate_fish",
+    "legacy_te_bed": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/rmsk_te.bed.gz",
+    "pretraining_exposure": "unknown",
+    "repeat_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/fr3/database/rmsk.txt.gz",
+    "scientific_name": "Takifugu rubripes",
+    "selection_role": "primary_label_rich_fish_external_screen",
+    "sizes": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.chrom.sizes",
+    "task_supervision": "not_in_current_D_six_species"
+  },
+  "source_summary": {
+    "class_counts": {
+      "ARTEFACT": 3,
+      "DNA": 271,
+      "DNA/CMC-Chapaev-3": 225,
+      "DNA/Harbinger": 291,
+      "DNA/MULE-MuDR?": 255,
+      "DNA/MuDR?": 105,
+      "DNA/PIF-Harbinger": 1218,
+      "DNA/PiggyBac": 280,
+      "DNA/TcMar-Tc1": 3017,
+      "DNA/TcMar-Tc2": 3808,
+      "DNA/TcMar-Tc4?": 58,
+      "DNA/TcMar-Tigger": 855,
+      "DNA/hAT": 28,
+      "DNA/hAT-Ac": 292,
+      "DNA/hAT-Ac?": 83,
+      "DNA/hAT-Charlie": 3233,
+      "DNA/hAT-Tip100": 577,
+      "DNA/hAT-Tol2": 250,
+      "LINE/CR1": 1,
+      "LINE/Dong-R4": 1707,
+      "LINE/L1": 1511,
+      "LINE/L2": 14444,
+      "LINE/Penelope": 2844,
+      "LINE/R2-Hero": 244,
+      "LINE/RTE": 4453,
+      "LINE/Rex-Babar": 3192,
+      "LTR": 381,
+      "LTR/Copia": 125,
+      "LTR/DIRS": 242,
+      "LTR/ERV1": 1214,
+      "LTR/Gypsy": 4589,
+      "LTR/Pao": 122,
+      "Low_complexity": 36817,
+      "SINE/Deu": 4,
+      "SINE/Mermaid": 3821,
+      "SINE/V": 1818,
+      "Satellite": 102,
+      "Simple_repeat": 109941,
+      "Unknown": 6825,
+      "rRNA": 152,
+      "scRNA": 1,
+      "snRNA": 92,
+      "tRNA": 831
+    },
+    "known_te_full_assembly_bp_estimate": null,
+    "known_te_intervals_by_region": {
+      "core00": 470,
+      "core01": 419,
+      "core02": 283,
+      "core03": 590,
+      "core04": 262,
+      "core05": 371,
+      "core06": 682,
+      "core07": 295,
+      "core08": 253,
+      "core09": 236,
+      "core10": 285,
+      "core11": 321,
+      "core12": 1335,
+      "core13": 330,
+      "core14": 213,
+      "core15": 359,
+      "core16": 686,
+      "core17": 369,
+      "core18": 192,
+      "core19": 257
+    },
+    "known_te_panel_bp_by_region": {
+      "core00": 118914,
+      "core01": 92533,
+      "core02": 61954,
+      "core03": 128137,
+      "core04": 58232,
+      "core05": 85417,
+      "core06": 252191,
+      "core07": 72722,
+      "core08": 49702,
+      "core09": 50094,
+      "core10": 63986,
+      "core11": 86453,
+      "core12": 515852,
+      "core13": 72673,
+      "core14": 47975,
+      "core15": 91019,
+      "core16": 259799,
+      "core17": 94374,
+      "core18": 38483,
+      "core19": 55059
+    },
+    "known_te_rows": 55558,
+    "rows_seen": 210322,
+    "unknown_or_uncertain_rows": 7326
+  },
+  "species": "torafugu",
+  "status": "QUALIFIED"
+}

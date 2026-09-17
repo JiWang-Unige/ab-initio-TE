@@ -15,6 +15,6 @@
   "RED": {"scope": "all native repeats, trained on the fixed 52 Mb halo panel per species", "threads": 4},
   "augustus": {"version": "3.5.0", "softmasking": true, "UTR": false, "stopCodonExcludedFromCDS": false, "alternatives-from-evidence": false, "alternatives-from-sampling": false, "extrinsic_evidence": "none", "training": "existing native same-species parameters; no fitting"},
   "score": {"primary": "exact complete CDS-chain gene-locus F1, D minus U", "comparisons": ["D_minus_U", "D_minus_R_TE", "D_minus_RED"], "reference": "all complete protein-coding ncbiRefSeq genePredExtended isoforms on the exact assembly", "ownership": "first CDS base inside core, entire CDS chain within halo", "bootstrap": {"unit": "chromosome", "replicates": 10000, "seed": 42}, "inference": "regional paired sensitivity, not biological replicates; no noninferiority claim"},
-  "resources": {"partition": "private-teodoro-gpu", "prepare": "4 CPU, 32 GB, 2 h", "D_mask": "1 RTX3090, 4 CPU, 64 GB, 4 h per species", "predict": "1 CPU, 8 GB, 24 h per core, at most 4 cores at once"},
+  "resources": {"partition": "private-teodoro-gpu", "prepare": "4 CPU, 32 GB, 2 h", "D_mask": "1 RTX3090, 4 CPU, 32 GB, 1 h per species; prior same-checkpoint 100 MiB run used 4.4 GiB RSS and 32 minutes", "predict": "1 CPU, 8 GB, 24 h per core, at most 4 cores at once"},
   "stopping": "Complete both species and all four arms irrespective of effect direction. No outcome-based region replacement, parameter optimization or additional seeds."
 }

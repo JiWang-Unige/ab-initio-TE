@@ -1,0 +1,125 @@
+experiment_id: UNIFIED-NTV2-REPRESENTATION-20260918
+status: protocol_frozen_preparation
+purpose: >-
+  Same-backbone NTv2-500M representation comparison for the pretrained,
+  six-species binary D, and a matched eight-state class head. The class data
+  are reconstructed on the exact D coordinates and split files.
+seed: 42
+
+remote:
+  project_root: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE
+  binary_d_checkpoint: outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model
+  pretrained_checkpoint: .backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species
+  binary_training_data: outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202
+  class_data_root: outputs/UNIFIED-NTV2-REPRESENTATION-20260918/matched_class_data
+
+training_contract:
+  species: [human, mouse, chicken, zebrafish, pig, c_elegans]
+  source_splits:
+    train: TRAIN
+    val: CAL
+    test: DEV
+  source_windows_per_species:
+    train: {human: 3000, mouse: 3000, chicken: 3000, zebrafish: 3000, pig: 3000, c_elegans: 6000}
+    val: 1000
+    test: 1000
+  source_window_bp: 4096
+  source_step_bp: 4096
+  binary_label_semantics:
+    "1": TE
+    "0": background
+    H: hard_negative_as_background
+    "?": ignored
+  class_label_semantics:
+    0: BG
+    1: SINE
+    2: LINE
+    3: LTR
+    4: DNA
+    5: KNOWN_OTHER_TE
+    6: AMBIGUOUS_TE
+    7: UNCLASSIFIED
+  class_source: comparator_plus_unknown BED, mapped with frozen SF5 ontology rules
+  class_source_manifest: software_outputs/repeatmasker_dfam/02_ready_by_design/B_animal_production/SPLIT_MANIFEST.tsv
+  class_unknown_policy: unresolved comparator Unknown/Unspecified stays UNCLASSIFIED, never BG
+  class_overlap_policy: stable start/end/label sort followed by ordered paint, matching SF5 preparation
+  class_head_initialization: binary_D_checkpoint_encoder_with_fresh_native_8_class_linear_head
+  d_training_override:
+    c_elegans_train: outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/materialization/12306000/TRAIN/c_elegans.jsonl.gz
+  class_training_seed: 42
+  class_training_no_extra_species: true
+  class_training_scope: last2
+  class_training_steps: 900
+  class_validation_every_steps: 150
+  class_training_warmup_steps: 90
+  class_training_learning_rate: 2.0e-5
+  class_training_weight_decay: 0.01
+  class_training_gradient_clip: 1.0
+  class_loss_weights: [1.0, 3.0, 3.0, 3.0, 3.0, 3.0, 2.0, 2.0]
+  class_tile_sampling: one_paired_8192bp_tile_per_species_per_step
+  class_base_token_projection: six_bp_majority_label_ties_lowest_numeric
+  class_validation_selection: pooled_all_eight_macro_f1_on_CAL_only
+  class_test_evaluation: one_DEV_pass_after_validation_selection
+  class_report_metrics: token_majority_macro_f1_for_selection_plus_expanded_base_pair_confusion_for_report
+
+representation_contract:
+  input_panel: outputs/SIB-RETREAT-EMBED-REPLICATION-20260917/data_512
+  split_counts: {train: 1843, val: 809, test: 1580}
+  sequence_bp: 512
+  pooling: attention_mask_mean_excluding_structural_special_tokens_and_padding
+  special_token_policy: retain_sequence_N_or_UNK_tokens; exclude_BOS_EOS_PAD_MASK
+  tokenizer: native_NTv2_tokenizer_from_pretrained_checkpoint
+  hidden_state: final_encoder_hidden_state
+  dtype_saved: float32
+  no_sequence_or_split_changes: true
+  comparison_arms: [pretrained, binary_D, class_D_last2]
+  training_exposure_status: >-
+    coordinate overlap confirmed on full SIB TEST: 3 chicken records in D
+    TRAIN, 9 zebrafish records in D CAL, and 7 zebrafish plus 149 c_elegans
+    records in D DEV; all overlapping bases match exactly; homology and
+    pretraining exposure remain unresolved
+  exposure_audit_job: 12889831
+  bounded_context_diagnostic:
+    source_window_bp: 4096
+    target_span_bp: 512
+    context_lengths_bp: [512, 2048, 4096]
+    selected_half_records: {TRAIN: 64, CAL: 32, DEV: 32}
+    selection: source_order_evenly_spaced_per_species
+    target_label: central_512_dominant_class_ties_lowest_numeric_unknown_retained
+    pooling: exact_target_span_overlap_weighted_native_token_mean
+    offset_policy: explicit_D_six_bp_spans_verified_by_content_count_and_input_ids
+    no_training_or_test_tuning: true
+
+evaluation:
+  supervised:
+    - knn5_cosine_distance_weighted
+    - linear_probe_logistic_regression
+  unsupervised:
+    - kmeans_train_fit_K2_K4_K5_K8
+    - full8_K2_known_support_binary_diagnostic
+  endpoints:
+    known_five: [BG, SINE, LINE, LTR, DNA]
+    full_eight: [BG, SINE, LINE, LTR, DNA, KNOWN_OTHER_TE, AMBIGUOUS_TE, UNCLASSIFIED]
+    conditional_te_four: [SINE, LINE, LTR, DNA]
+  fit_policy: train_only
+  test_label_selection: false
+  umap_is_primary_endpoint: false
+  confounders: [gc_fraction, N_fraction, sequence_length_bp, TE_fraction]
+  per_species_metrics: true
+  context_length_readout: train_to_DEV_5NN_and_linear_plus_composition_baseline
+
+resources:
+  historical:
+    materialization: {job: 12887930, partition: shared-cpu, gpu: none, cpus: 4, memory_gb: 32, walltime: "00:20:00"}
+    native_loader_smoke: {job: 12888482, partition: debug-cpu, gpu: none, cpus: 4, memory_gb: 48, walltime: "00:20:00"}
+  execution:
+    class_training: {job: 12889091, dependency: "afterany:12888288", partition: private-teodoro-gpu, gpu: nvidia_geforce_rtx_3090, cpus: 8, memory_gb: 64, walltime: "02:00:00"}
+    extraction: {job: 12889676, dependency: "afterok:12889091", partition: private-teodoro-gpu, gpu: nvidia_geforce_rtx_3090, cpus: 4, memory_gb: 48, walltime: "00:45:00"}
+    evaluation: {jobs: [12889677, 12889678, 12889679, 12889680], dependency: "afterok:12889676", partition: debug-cpu, cpus: 4, memory_gb: 16, walltime: "00:15:00"}
+    legacy_linear: {job: 12889615, partition: debug-cpu, gpu: none, cpus: 4, memory_gb: 16, walltime: "00:15:00"}
+
+stopping:
+  no_multi_seed: true
+  no_test_tuning: true
+  fail_on_record_order_or_pooling_mismatch: true
+  fail_on_missing_class_source: true

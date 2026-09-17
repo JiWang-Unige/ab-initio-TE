@@ -1,0 +1,175 @@
+{
+  "labels_used_in_selection": false,
+  "panel_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/zebra_finch/prepared/panel.fa",
+  "regions": [
+    {
+      "assembly_length_bp": 156412533,
+      "end": 80827706,
+      "panel_id": "core00",
+      "source_seqid": "chr2",
+      "start": 75584826
+    },
+    {
+      "assembly_length_bp": 118548696,
+      "end": 61895788,
+      "panel_id": "core01",
+      "source_seqid": "chr1",
+      "start": 56652908
+    },
+    {
+      "assembly_length_bp": 112617285,
+      "end": 58930082,
+      "panel_id": "core02",
+      "source_seqid": "chr3",
+      "start": 53687202
+    },
+    {
+      "assembly_length_bp": 73657157,
+      "end": 39450018,
+      "panel_id": "core03",
+      "source_seqid": "chr1A",
+      "start": 34207138
+    },
+    {
+      "assembly_length_bp": 72861351,
+      "end": 39052115,
+      "panel_id": "core04",
+      "source_seqid": "chrZ",
+      "start": 33809235
+    },
+    {
+      "assembly_length_bp": 69780378,
+      "end": 37511629,
+      "panel_id": "core05",
+      "source_seqid": "chr4",
+      "start": 32268749
+    },
+    {
+      "assembly_length_bp": 62374962,
+      "end": 33808921,
+      "panel_id": "core06",
+      "source_seqid": "chr5",
+      "start": 28566041
+    },
+    {
+      "assembly_length_bp": 39844632,
+      "end": 22543756,
+      "panel_id": "core07",
+      "source_seqid": "chr7",
+      "start": 17300876
+    },
+    {
+      "assembly_length_bp": 36305782,
+      "end": 20774331,
+      "panel_id": "core08",
+      "source_seqid": "chr6",
+      "start": 15531451
+    },
+    {
+      "assembly_length_bp": 27993427,
+      "end": 16618153,
+      "panel_id": "core09",
+      "source_seqid": "chr8",
+      "start": 11375273
+    },
+    {
+      "assembly_length_bp": 27241186,
+      "end": 16242033,
+      "panel_id": "core10",
+      "source_seqid": "chr9",
+      "start": 10999153
+    },
+    {
+      "assembly_length_bp": 21576510,
+      "end": 13409695,
+      "panel_id": "core11",
+      "source_seqid": "chr12",
+      "start": 8166815
+    },
+    {
+      "assembly_length_bp": 21403021,
+      "end": 13322950,
+      "panel_id": "core12",
+      "source_seqid": "chr11",
+      "start": 8080070
+    },
+    {
+      "assembly_length_bp": 20806668,
+      "end": 13024774,
+      "panel_id": "core13",
+      "source_seqid": "chr10",
+      "start": 7781894
+    },
+    {
+      "assembly_length_bp": 20704505,
+      "end": 12973692,
+      "panel_id": "core14",
+      "source_seqid": "chr4A",
+      "start": 7730812
+    },
+    {
+      "assembly_length_bp": 16962381,
+      "end": 11102630,
+      "panel_id": "core15",
+      "source_seqid": "chr13",
+      "start": 5859750
+    },
+    {
+      "assembly_length_bp": 16419078,
+      "end": 10830979,
+      "panel_id": "core16",
+      "source_seqid": "chr14",
+      "start": 5588099
+    },
+    {
+      "assembly_length_bp": 15652063,
+      "end": 10447471,
+      "panel_id": "core17",
+      "source_seqid": "chr20",
+      "start": 5204591
+    },
+    {
+      "assembly_length_bp": 14428146,
+      "end": 9835513,
+      "panel_id": "core18",
+      "source_seqid": "chr15",
+      "start": 4592633
+    },
+    {
+      "assembly_length_bp": 11648728,
+      "end": 8445804,
+      "panel_id": "core19",
+      "source_seqid": "chr17",
+      "start": 3202924
+    }
+  ],
+  "scores_used_in_selection": false,
+  "selection": {
+    "contigs": 20,
+    "labels_used_in_selection": false,
+    "length_bp": 5242880,
+    "panel_bp_per_species": 104857600,
+    "regions_are_disjoint": true,
+    "scores_used_in_selection": false,
+    "sort": "descending_length_then_lexicographic_source_contig",
+    "start_policy": "centered_from_assembly_length"
+  },
+  "source": {
+    "assembly": "taeGut2 / WashU taeGut2",
+    "assembly_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/taeGut2/bigZips/taeGut2.fa.gz",
+    "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.fa.gz",
+    "historical_project_exposure": "legacy_source_manifest_and_prior transfer assets; no current D score used for selection",
+    "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.fa.out.gz",
+    "kingdom_group": "nonmammalian_vertebrate_bird",
+    "legacy_te_bed": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/rmsk_te.bed.gz",
+    "pretraining_exposure": "unknown",
+    "repeat_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/taeGut2/database/rmsk.txt.gz",
+    "scientific_name": "Taeniopygia guttata",
+    "selection_role": "primary_label_rich_bird_external_screen",
+    "sizes": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.chrom.sizes",
+    "task_supervision": "not_in_current_D_six_species"
+  },
+  "species": "zebra_finch",
+  "status": "PREPARED",
+  "total_bp": 104857600
+}

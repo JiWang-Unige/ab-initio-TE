@@ -13,7 +13,7 @@ LOG = ROOT / "outputs" / NAME / "logs"
 
 def submit(action, species, dependency=None, array=None):
     LOG.mkdir(parents=True, exist_ok=True)
-    cpu, mem, wall = {"prepare": (4, "32G", "02:00:00"), "native-smoke": (1, "8G", "00:30:00"), "d-mask": (4, "64G", "04:00:00"), "predict": (1, "8G", "24:00:00"), "score": (1, "8G", "00:30:00")}[action]
+    cpu, mem, wall = {"prepare": (4, "32G", "02:00:00"), "native-smoke": (1, "8G", "00:30:00"), "assess-native-smoke": (1, "4G", "00:05:00"), "d-mask": (4, "32G", "01:00:00"), "predict": (1, "8G", "24:00:00"), "score": (1, "8G", "00:30:00")}[action]
     argv = ["sbatch", "--parsable", "--partition=private-teodoro-gpu", "--job-name=ng_"+action+"_"+species, "--cpus-per-task="+str(cpu), "--mem="+mem, "--time="+wall, "--output="+str(LOG / "%x-%A_%a.out"), "--error="+str(LOG / "%x-%A_%a.err")]
     if action == "d-mask":
         argv += ["--gres=gpu:nvidia_geforce_rtx_3090:1"]
@@ -36,7 +36,7 @@ def submit(action, species, dependency=None, array=None):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("action", choices=("prepare", "native-smoke", "d-mask", "predict", "score"))
+    p.add_argument("action", choices=("prepare", "native-smoke", "assess-native-smoke", "d-mask", "predict", "score"))
     p.add_argument("species", choices=("chicken", "zebrafish"))
     p.add_argument("--dependency")
     p.add_argument("--array")

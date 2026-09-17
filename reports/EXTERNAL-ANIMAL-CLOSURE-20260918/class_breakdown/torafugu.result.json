@@ -1,0 +1,2251 @@
+{
+  "assembly": "fr3 / Fugu rubripes v3",
+  "callable_bp": 101522896,
+  "claim_boundary": "Class-specific recovery is against the documented same-assembly strict-known source layer on the fixed 104.86-Mb panel; it is not biological truth or completeness.",
+  "class_union_note": "Each broad class is independently unioned from the original .class field. Class rows can overlap across classes; class bp must not be summed as a strict-known total.",
+  "class_union_sum_bp": 2296009,
+  "classes": {
+    "DNA": {
+      "interval_union_bp": 633530,
+      "missed_bp": 150090,
+      "non_callable_bp_excluded": 1687,
+      "original_class_values": [
+        "DNA",
+        "DNA/CMC-Chapaev-3",
+        "DNA/Harbinger",
+        "DNA/MULE-MuDR?",
+        "DNA/MuDR?",
+        "DNA/PIF-Harbinger",
+        "DNA/PiggyBac",
+        "DNA/TcMar-Tc1",
+        "DNA/TcMar-Tc2",
+        "DNA/TcMar-Tc4?",
+        "DNA/TcMar-Tigger",
+        "DNA/hAT-Ac",
+        "DNA/hAT-Ac?",
+        "DNA/hAT-Charlie",
+        "DNA/hAT-Tip100",
+        "DNA/hAT-Tol2"
+      ],
+      "recall": 0.7624568128474953,
+      "recovered_bp": 481753,
+      "reference_bp_callable": 631843,
+      "source_rows": 2326,
+      "uncertain_overlap_bp": 181
+    },
+    "LINE": {
+      "interval_union_bp": 1176125,
+      "missed_bp": 130293,
+      "non_callable_bp_excluded": 4183,
+      "original_class_values": [
+        "LINE/Dong-R4",
+        "LINE/L1",
+        "LINE/L2",
+        "LINE/Penelope",
+        "LINE/R2-Hero",
+        "LINE/RTE",
+        "LINE/Rex-Babar"
+      ],
+      "recall": 0.8888229963598882,
+      "recovered_bp": 1041649,
+      "reference_bp_callable": 1171942,
+      "source_rows": 3878,
+      "uncertain_overlap_bp": 15
+    },
+    "LTR": {
+      "interval_union_bp": 298609,
+      "missed_bp": 47946,
+      "non_callable_bp_excluded": 240,
+      "original_class_values": [
+        "LTR",
+        "LTR/Copia",
+        "LTR/DIRS",
+        "LTR/ERV1",
+        "LTR/Gypsy",
+        "LTR/Pao"
+      ],
+      "recall": 0.8393063622561325,
+      "recovered_bp": 250423,
+      "reference_bp_callable": 298369,
+      "source_rows": 684,
+      "uncertain_overlap_bp": 0
+    },
+    "RC": {
+      "interval_union_bp": 0,
+      "missed_bp": 0,
+      "non_callable_bp_excluded": 0,
+      "original_class_values": [],
+      "recall": null,
+      "recovered_bp": 0,
+      "reference_bp_callable": 0,
+      "source_rows": 0,
+      "uncertain_overlap_bp": 0
+    },
+    "Retroposon": {
+      "interval_union_bp": 0,
+      "missed_bp": 0,
+      "non_callable_bp_excluded": 0,
+      "original_class_values": [],
+      "recall": null,
+      "recovered_bp": 0,
+      "reference_bp_callable": 0,
+      "source_rows": 0,
+      "uncertain_overlap_bp": 0
+    },
+    "SINE": {
+      "interval_union_bp": 187745,
+      "missed_bp": 52432,
+      "non_callable_bp_excluded": 1,
+      "original_class_values": [
+        "SINE/Deu",
+        "SINE/Mermaid",
+        "SINE/V"
+      ],
+      "recall": 0.7207260951082325,
+      "recovered_bp": 135312,
+      "reference_bp_callable": 187744,
+      "source_rows": 1320,
+      "uncertain_overlap_bp": 4
+    }
+  },
+  "classes_overlap_excess_bp": 440,
+  "inference": "/home/users/j/jwang/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/torafugu/inference-12887633",
+  "n_or_noncallable_bp_excluded": 3334704,
+  "panel_total_bp": 104857600,
+  "per_region": [
+    {
+      "callable_bp": 5123588,
+      "class_union_sum_bp": 118948,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 36007,
+          "missed_bp": 9492,
+          "non_callable_bp_excluded": 50,
+          "original_class_values": [
+            "DNA",
+            "DNA/Harbinger",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac?",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.7360180215257113,
+          "recovered_bp": 26465,
+          "reference_bp_callable": 35957,
+          "source_rows": 139,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 60931,
+          "missed_bp": 8222,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8650604782458847,
+          "recovered_bp": 52709,
+          "reference_bp_callable": 60931,
+          "source_rows": 207,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 7817,
+          "missed_bp": 2887,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.6306767302034029,
+          "recovered_bp": 4930,
+          "reference_bp_callable": 7817,
+          "source_rows": 31,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 14193,
+          "missed_bp": 3959,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7210596773057141,
+          "recovered_bp": 10234,
+          "reference_bp_callable": 14193,
+          "source_rows": 93,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 34,
+      "n_or_noncallable_bp": 119292,
+      "panel_id": "core00",
+      "source_seqid": "chr1",
+      "strict_known_union_bp": 118914,
+      "uncertain_bp": 18454
+    },
+    {
+      "callable_bp": 5184535,
+      "class_union_sum_bp": 92536,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 33237,
+          "missed_bp": 8726,
+          "non_callable_bp_excluded": 569,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.7328884535325089,
+          "recovered_bp": 23942,
+          "reference_bp_callable": 32668,
+          "source_rows": 122,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 45923,
+          "missed_bp": 9954,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.7832458680835311,
+          "recovered_bp": 35969,
+          "reference_bp_callable": 45923,
+          "source_rows": 211,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 4698,
+          "missed_bp": 797,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/Copia",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8303533418475947,
+          "recovered_bp": 3901,
+          "reference_bp_callable": 4698,
+          "source_rows": 19,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 8678,
+          "missed_bp": 2100,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7580087577782899,
+          "recovered_bp": 6578,
+          "reference_bp_callable": 8678,
+          "source_rows": 67,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 3,
+      "n_or_noncallable_bp": 58345,
+      "panel_id": "core01",
+      "source_seqid": "chr13",
+      "strict_known_union_bp": 92533,
+      "uncertain_bp": 16447
+    },
+    {
+      "callable_bp": 5149263,
+      "class_union_sum_bp": 61983,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 25806,
+          "missed_bp": 7590,
+          "non_callable_bp_excluded": 251,
+          "original_class_values": [
+            "DNA",
+            "DNA/Harbinger",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.7029935433378987,
+          "recovered_bp": 17965,
+          "reference_bp_callable": 25555,
+          "source_rows": 103,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 25708,
+          "missed_bp": 4136,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8391162284113894,
+          "recovered_bp": 21572,
+          "reference_bp_callable": 25708,
+          "source_rows": 113,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 2941,
+          "missed_bp": 1759,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.4019041142468548,
+          "recovered_bp": 1182,
+          "reference_bp_callable": 2941,
+          "source_rows": 13,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 7528,
+          "missed_bp": 1558,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7930393198724761,
+          "recovered_bp": 5970,
+          "reference_bp_callable": 7528,
+          "source_rows": 54,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 29,
+      "n_or_noncallable_bp": 93617,
+      "panel_id": "core02",
+      "source_seqid": "chr21",
+      "strict_known_union_bp": 61954,
+      "uncertain_bp": 19179
+    },
+    {
+      "callable_bp": 5023877,
+      "class_union_sum_bp": 128148,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 43739,
+          "missed_bp": 14237,
+          "non_callable_bp_excluded": 50,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Ac?",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.6741284991645494,
+          "recovered_bp": 29452,
+          "reference_bp_callable": 43689,
+          "source_rows": 193,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 56462,
+          "missed_bp": 10926,
+          "non_callable_bp_excluded": 2,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8064824654622742,
+          "recovered_bp": 45534,
+          "reference_bp_callable": 56460,
+          "source_rows": 261,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 11948,
+          "missed_bp": 2553,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/Copia",
+            "LTR/Gypsy",
+            "LTR/Pao"
+          ],
+          "recall": 0.7863240709742216,
+          "recovered_bp": 9395,
+          "reference_bp_callable": 11948,
+          "source_rows": 29,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 15999,
+          "missed_bp": 3554,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.77786111631977,
+          "recovered_bp": 12445,
+          "reference_bp_callable": 15999,
+          "source_rows": 107,
+          "uncertain_overlap_bp": 2
+        }
+      },
+      "classes_overlap_excess_bp": 11,
+      "n_or_noncallable_bp": 219003,
+      "panel_id": "core03",
+      "source_seqid": "chr8",
+      "strict_known_union_bp": 128137,
+      "uncertain_bp": 15025
+    },
+    {
+      "callable_bp": 5137891,
+      "class_union_sum_bp": 58264,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 21984,
+          "missed_bp": 3986,
+          "non_callable_bp_excluded": 51,
+          "original_class_values": [
+            "DNA",
+            "DNA/Harbinger",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac?",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.8182647152692291,
+          "recovered_bp": 17947,
+          "reference_bp_callable": 21933,
+          "source_rows": 81,
+          "uncertain_overlap_bp": 35
+        },
+        "LINE": {
+          "interval_union_bp": 24778,
+          "missed_bp": 2796,
+          "non_callable_bp_excluded": 838,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8832080200501253,
+          "recovered_bp": 21144,
+          "reference_bp_callable": 23940,
+          "source_rows": 117,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 4935,
+          "missed_bp": 860,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8257345491388045,
+          "recovered_bp": 4075,
+          "reference_bp_callable": 4935,
+          "source_rows": 16,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 6567,
+          "missed_bp": 1630,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7517892492766864,
+          "recovered_bp": 4937,
+          "reference_bp_callable": 6567,
+          "source_rows": 48,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 32,
+      "n_or_noncallable_bp": 104989,
+      "panel_id": "core04",
+      "source_seqid": "chr7",
+      "strict_known_union_bp": 58232,
+      "uncertain_bp": 14926
+    },
+    {
+      "callable_bp": 5086600,
+      "class_union_sum_bp": 85417,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 26270,
+          "missed_bp": 4697,
+          "non_callable_bp_excluded": 185,
+          "original_class_values": [
+            "DNA",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.8199348284454667,
+          "recovered_bp": 21388,
+          "reference_bp_callable": 26085,
+          "source_rows": 115,
+          "uncertain_overlap_bp": 56
+        },
+        "LINE": {
+          "interval_union_bp": 39941,
+          "missed_bp": 6156,
+          "non_callable_bp_excluded": 1026,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8418090710522934,
+          "recovered_bp": 32759,
+          "reference_bp_callable": 38915,
+          "source_rows": 156,
+          "uncertain_overlap_bp": 4
+        },
+        "LTR": {
+          "interval_union_bp": 9492,
+          "missed_bp": 2830,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.7018541930046355,
+          "recovered_bp": 6662,
+          "reference_bp_callable": 9492,
+          "source_rows": 31,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 9714,
+          "missed_bp": 4183,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.569384393658637,
+          "recovered_bp": 5531,
+          "reference_bp_callable": 9714,
+          "source_rows": 69,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 156280,
+      "panel_id": "core05",
+      "source_seqid": "chr19",
+      "strict_known_union_bp": 85417,
+      "uncertain_bp": 20259
+    },
+    {
+      "callable_bp": 5093798,
+      "class_union_sum_bp": 252316,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 43693,
+          "missed_bp": 8203,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "DNA",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.8122582564712884,
+          "recovered_bp": 35490,
+          "reference_bp_callable": 43693,
+          "source_rows": 141,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 155714,
+          "missed_bp": 8099,
+          "non_callable_bp_excluded": 454,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.9478358881875564,
+          "recovered_bp": 147161,
+          "reference_bp_callable": 155260,
+          "source_rows": 385,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 43688,
+          "missed_bp": 5467,
+          "non_callable_bp_excluded": 1,
+          "original_class_values": [
+            "LTR",
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8748597981092774,
+          "recovered_bp": 38220,
+          "reference_bp_callable": 43687,
+          "source_rows": 96,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 9221,
+          "missed_bp": 2431,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7363626504717493,
+          "recovered_bp": 6790,
+          "reference_bp_callable": 9221,
+          "source_rows": 60,
+          "uncertain_overlap_bp": 1
+        }
+      },
+      "classes_overlap_excess_bp": 125,
+      "n_or_noncallable_bp": 149082,
+      "panel_id": "core06",
+      "source_seqid": "chr9",
+      "strict_known_union_bp": 252191,
+      "uncertain_bp": 17300
+    },
+    {
+      "callable_bp": 4978928,
+      "class_union_sum_bp": 72722,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 21241,
+          "missed_bp": 5324,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "DNA",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.749352667011911,
+          "recovered_bp": 15917,
+          "reference_bp_callable": 21241,
+          "source_rows": 85,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 36164,
+          "missed_bp": 4244,
+          "non_callable_bp_excluded": 1,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8826424798827531,
+          "recovered_bp": 31919,
+          "reference_bp_callable": 36163,
+          "source_rows": 147,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 8609,
+          "missed_bp": 1448,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8318039261238239,
+          "recovered_bp": 7161,
+          "reference_bp_callable": 8609,
+          "source_rows": 13,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 6708,
+          "missed_bp": 2008,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7006559332140727,
+          "recovered_bp": 4700,
+          "reference_bp_callable": 6708,
+          "source_rows": 50,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 263952,
+      "panel_id": "core07",
+      "source_seqid": "chr4",
+      "strict_known_union_bp": 72722,
+      "uncertain_bp": 11624
+    },
+    {
+      "callable_bp": 4983333,
+      "class_union_sum_bp": 49702,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 12997,
+          "missed_bp": 5255,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "DNA",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac?",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.5956759252135108,
+          "recovered_bp": 7742,
+          "reference_bp_callable": 12997,
+          "source_rows": 54,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 26507,
+          "missed_bp": 5389,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.7966952125853548,
+          "recovered_bp": 21118,
+          "reference_bp_callable": 26507,
+          "source_rows": 127,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 2411,
+          "missed_bp": 598,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.7519701368726669,
+          "recovered_bp": 1813,
+          "reference_bp_callable": 2411,
+          "source_rows": 10,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 7787,
+          "missed_bp": 2253,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7106716322075254,
+          "recovered_bp": 5534,
+          "reference_bp_callable": 7787,
+          "source_rows": 62,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 259547,
+      "panel_id": "core08",
+      "source_seqid": "chr20",
+      "strict_known_union_bp": 49702,
+      "uncertain_bp": 19354
+    },
+    {
+      "callable_bp": 5154060,
+      "class_union_sum_bp": 50094,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 18132,
+          "missed_bp": 4867,
+          "non_callable_bp_excluded": 3,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/Harbinger",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.7315351094930774,
+          "recovered_bp": 13262,
+          "reference_bp_callable": 18129,
+          "source_rows": 73,
+          "uncertain_overlap_bp": 15
+        },
+        "LINE": {
+          "interval_union_bp": 22506,
+          "missed_bp": 3533,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8430196392073225,
+          "recovered_bp": 18973,
+          "reference_bp_callable": 22506,
+          "source_rows": 97,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 2266,
+          "missed_bp": 352,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8446601941747572,
+          "recovered_bp": 1914,
+          "reference_bp_callable": 2266,
+          "source_rows": 9,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 7190,
+          "missed_bp": 2317,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.6777468706536857,
+          "recovered_bp": 4873,
+          "reference_bp_callable": 7190,
+          "source_rows": 57,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 88820,
+      "panel_id": "core09",
+      "source_seqid": "chr3",
+      "strict_known_union_bp": 50094,
+      "uncertain_bp": 18306
+    },
+    {
+      "callable_bp": 5055404,
+      "class_union_sum_bp": 63986,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 22290,
+          "missed_bp": 7118,
+          "non_callable_bp_excluded": 50,
+          "original_class_values": [
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.6799460431654676,
+          "recovered_bp": 15122,
+          "reference_bp_callable": 22240,
+          "source_rows": 78,
+          "uncertain_overlap_bp": 44
+        },
+        "LINE": {
+          "interval_union_bp": 27545,
+          "missed_bp": 6018,
+          "non_callable_bp_excluded": 1,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.7815132152192855,
+          "recovered_bp": 21526,
+          "reference_bp_callable": 27544,
+          "source_rows": 115,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 3243,
+          "missed_bp": 956,
+          "non_callable_bp_excluded": 5,
+          "original_class_values": [
+            "LTR",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.7047560222359481,
+          "recovered_bp": 2282,
+          "reference_bp_callable": 3238,
+          "source_rows": 10,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 10908,
+          "missed_bp": 2834,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7401906857352402,
+          "recovered_bp": 8074,
+          "reference_bp_callable": 10908,
+          "source_rows": 82,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 187476,
+      "panel_id": "core10",
+      "source_seqid": "chr14",
+      "strict_known_union_bp": 63986,
+      "uncertain_bp": 15622
+    },
+    {
+      "callable_bp": 4984440,
+      "class_union_sum_bp": 86453,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 23518,
+          "missed_bp": 8328,
+          "non_callable_bp_excluded": 1,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/Harbinger",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.645873198112004,
+          "recovered_bp": 15189,
+          "reference_bp_callable": 23517,
+          "source_rows": 97,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 30350,
+          "missed_bp": 5019,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8346293245469523,
+          "recovered_bp": 25331,
+          "reference_bp_callable": 30350,
+          "source_rows": 125,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 24130,
+          "missed_bp": 3314,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR/Copia",
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy",
+            "LTR/Pao"
+          ],
+          "recall": 0.8626605884790717,
+          "recovered_bp": 20816,
+          "reference_bp_callable": 24130,
+          "source_rows": 36,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 8455,
+          "missed_bp": 1751,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Deu",
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7929036073329391,
+          "recovered_bp": 6704,
+          "reference_bp_callable": 8455,
+          "source_rows": 63,
+          "uncertain_overlap_bp": 1
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 258440,
+      "panel_id": "core11",
+      "source_seqid": "chr5",
+      "strict_known_union_bp": 86453,
+      "uncertain_bp": 23752
+    },
+    {
+      "callable_bp": 5017775,
+      "class_union_sum_bp": 516012,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 112824,
+          "missed_bp": 16082,
+          "non_callable_bp_excluded": 60,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/Harbinger",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.8573835621297577,
+          "recovered_bp": 96682,
+          "reference_bp_callable": 112764,
+          "source_rows": 341,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 295412,
+          "missed_bp": 20003,
+          "non_callable_bp_excluded": 823,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.9320986187535855,
+          "recovered_bp": 274586,
+          "reference_bp_callable": 294589,
+          "source_rows": 675,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 81380,
+          "missed_bp": 5449,
+          "non_callable_bp_excluded": 177,
+          "original_class_values": [
+            "LTR/DIRS",
+            "LTR/ERV1",
+            "LTR/Gypsy",
+            "LTR/Pao"
+          ],
+          "recall": 0.9328965678607933,
+          "recovered_bp": 75754,
+          "reference_bp_callable": 81203,
+          "source_rows": 162,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 26396,
+          "missed_bp": 7747,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7065085619033187,
+          "recovered_bp": 18649,
+          "reference_bp_callable": 26396,
+          "source_rows": 157,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 160,
+      "n_or_noncallable_bp": 225105,
+      "panel_id": "core12",
+      "source_seqid": "chr22",
+      "strict_known_union_bp": 515852,
+      "uncertain_bp": 17690
+    },
+    {
+      "callable_bp": 5033600,
+      "class_union_sum_bp": 72673,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 26760,
+          "missed_bp": 7629,
+          "non_callable_bp_excluded": 54,
+          "original_class_values": [
+            "DNA",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.7143338575600988,
+          "recovered_bp": 19077,
+          "reference_bp_callable": 26706,
+          "source_rows": 97,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 31336,
+          "missed_bp": 5948,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8101863671176921,
+          "recovered_bp": 25388,
+          "reference_bp_callable": 31336,
+          "source_rows": 157,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 7177,
+          "missed_bp": 1905,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/Copia",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.7345687613208861,
+          "recovered_bp": 5272,
+          "reference_bp_callable": 7177,
+          "source_rows": 24,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 7400,
+          "missed_bp": 2157,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7085135135135135,
+          "recovered_bp": 5243,
+          "reference_bp_callable": 7400,
+          "source_rows": 52,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 209280,
+      "panel_id": "core13",
+      "source_seqid": "chr15",
+      "strict_known_union_bp": 72673,
+      "uncertain_bp": 15753
+    },
+    {
+      "callable_bp": 5151309,
+      "class_union_sum_bp": 47975,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 16741,
+          "missed_bp": 3765,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "DNA",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Charlie"
+          ],
+          "recall": 0.7751030404396392,
+          "recovered_bp": 12976,
+          "reference_bp_callable": 16741,
+          "source_rows": 59,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 17663,
+          "missed_bp": 3080,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8256241861518429,
+          "recovered_bp": 14583,
+          "reference_bp_callable": 17663,
+          "source_rows": 87,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 7827,
+          "missed_bp": 1596,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/Copia",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.7960904561134534,
+          "recovered_bp": 6231,
+          "reference_bp_callable": 7827,
+          "source_rows": 24,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 5744,
+          "missed_bp": 2027,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.6471100278551533,
+          "recovered_bp": 3717,
+          "reference_bp_callable": 5744,
+          "source_rows": 43,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 91571,
+      "panel_id": "core14",
+      "source_seqid": "chr2",
+      "strict_known_union_bp": 47975,
+      "uncertain_bp": 10675
+    },
+    {
+      "callable_bp": 5128533,
+      "class_union_sum_bp": 91019,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 32640,
+          "missed_bp": 7750,
+          "non_callable_bp_excluded": 158,
+          "original_class_values": [
+            "DNA",
+            "DNA/Harbinger",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.7614063173449911,
+          "recovered_bp": 24732,
+          "reference_bp_callable": 32482,
+          "source_rows": 122,
+          "uncertain_overlap_bp": 22
+        },
+        "LINE": {
+          "interval_union_bp": 45118,
+          "missed_bp": 5644,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8749058025621703,
+          "recovered_bp": 39474,
+          "reference_bp_callable": 45118,
+          "source_rows": 166,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 7770,
+          "missed_bp": 1223,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8425997425997426,
+          "recovered_bp": 6547,
+          "reference_bp_callable": 7770,
+          "source_rows": 24,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 5491,
+          "missed_bp": 1408,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.743580404297942,
+          "recovered_bp": 4083,
+          "reference_bp_callable": 5491,
+          "source_rows": 47,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 114347,
+      "panel_id": "core15",
+      "source_seqid": "chr11",
+      "strict_known_union_bp": 91019,
+      "uncertain_bp": 13421
+    },
+    {
+      "callable_bp": 5073257,
+      "class_union_sum_bp": 259839,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 54213,
+          "missed_bp": 11147,
+          "non_callable_bp_excluded": 1,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.7943813177894193,
+          "recovered_bp": 43065,
+          "reference_bp_callable": 54212,
+          "source_rows": 184,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 164002,
+          "missed_bp": 8573,
+          "non_callable_bp_excluded": 981,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.9474116831573847,
+          "recovered_bp": 154448,
+          "reference_bp_callable": 163021,
+          "source_rows": 378,
+          "uncertain_overlap_bp": 11
+        },
+        "LTR": {
+          "interval_union_bp": 33374,
+          "missed_bp": 3717,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.8886258764307545,
+          "recovered_bp": 29657,
+          "reference_bp_callable": 33374,
+          "source_rows": 63,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 8250,
+          "missed_bp": 2653,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Deu",
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.6784242424242424,
+          "recovered_bp": 5597,
+          "reference_bp_callable": 8250,
+          "source_rows": 61,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 40,
+      "n_or_noncallable_bp": 169623,
+      "panel_id": "core16",
+      "source_seqid": "chr17",
+      "strict_known_union_bp": 259799,
+      "uncertain_bp": 15459
+    },
+    {
+      "callable_bp": 5029292,
+      "class_union_sum_bp": 94380,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 30313,
+          "missed_bp": 6201,
+          "non_callable_bp_excluded": 204,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/Harbinger",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100",
+            "DNA/hAT-Tol2"
+          ],
+          "recall": 0.7940482912086088,
+          "recovered_bp": 23908,
+          "reference_bp_callable": 30109,
+          "source_rows": 112,
+          "uncertain_overlap_bp": 9
+        },
+        "LINE": {
+          "interval_union_bp": 33400,
+          "missed_bp": 6805,
+          "non_callable_bp_excluded": 50,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.795952023988006,
+          "recovered_bp": 26545,
+          "reference_bp_callable": 33350,
+          "source_rows": 162,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 21062,
+          "missed_bp": 5882,
+          "non_callable_bp_excluded": 57,
+          "original_class_values": [
+            "LTR",
+            "LTR/ERV1",
+            "LTR/Gypsy"
+          ],
+          "recall": 0.7199714353725304,
+          "recovered_bp": 15123,
+          "reference_bp_callable": 21005,
+          "source_rows": 31,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 9605,
+          "missed_bp": 2446,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7453409682457054,
+          "recovered_bp": 7159,
+          "reference_bp_callable": 9605,
+          "source_rows": 64,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 6,
+      "n_or_noncallable_bp": 213588,
+      "panel_id": "core17",
+      "source_seqid": "chr12",
+      "strict_known_union_bp": 94374,
+      "uncertain_bp": 13761
+    },
+    {
+      "callable_bp": 5072228,
+      "class_union_sum_bp": 38483,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 12649,
+          "missed_bp": 3173,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "DNA",
+            "DNA/MULE-MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Ac",
+            "DNA/hAT-Charlie"
+          ],
+          "recall": 0.7491501304450945,
+          "recovered_bp": 9476,
+          "reference_bp_callable": 12649,
+          "source_rows": 54,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 17091,
+          "missed_bp": 2767,
+          "non_callable_bp_excluded": 7,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8380355888550691,
+          "recovered_bp": 14317,
+          "reference_bp_callable": 17084,
+          "source_rows": 89,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 4605,
+          "missed_bp": 1829,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR/Copia",
+            "LTR/ERV1",
+            "LTR/Gypsy",
+            "LTR/Pao"
+          ],
+          "recall": 0.6028230184581976,
+          "recovered_bp": 2776,
+          "reference_bp_callable": 4605,
+          "source_rows": 16,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 4138,
+          "missed_bp": 1481,
+          "non_callable_bp_excluded": 1,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.6420111191684795,
+          "recovered_bp": 2656,
+          "reference_bp_callable": 4137,
+          "source_rows": 33,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 170652,
+      "panel_id": "core18",
+      "source_seqid": "chr16",
+      "strict_known_union_bp": 38483,
+      "uncertain_bp": 12677
+    },
+    {
+      "callable_bp": 5061185,
+      "class_union_sum_bp": 55059,
+      "classes": {
+        "DNA": {
+          "interval_union_bp": 18476,
+          "missed_bp": 6520,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "DNA",
+            "DNA/CMC-Chapaev-3",
+            "DNA/MULE-MuDR?",
+            "DNA/MuDR?",
+            "DNA/PIF-Harbinger",
+            "DNA/PiggyBac",
+            "DNA/TcMar-Tc1",
+            "DNA/TcMar-Tc2",
+            "DNA/TcMar-Tc4?",
+            "DNA/TcMar-Tigger",
+            "DNA/hAT-Charlie",
+            "DNA/hAT-Tip100"
+          ],
+          "recall": 0.6471097640181858,
+          "recovered_bp": 11956,
+          "reference_bp_callable": 18476,
+          "source_rows": 76,
+          "uncertain_overlap_bp": 0
+        },
+        "LINE": {
+          "interval_union_bp": 19574,
+          "missed_bp": 2981,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LINE/Dong-R4",
+            "LINE/L1",
+            "LINE/L2",
+            "LINE/Penelope",
+            "LINE/R2-Hero",
+            "LINE/RTE",
+            "LINE/Rex-Babar"
+          ],
+          "recall": 0.8477061407990191,
+          "recovered_bp": 16593,
+          "reference_bp_callable": 19574,
+          "source_rows": 103,
+          "uncertain_overlap_bp": 0
+        },
+        "LTR": {
+          "interval_union_bp": 9236,
+          "missed_bp": 2524,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "LTR/Copia",
+            "LTR/ERV1",
+            "LTR/Gypsy",
+            "LTR/Pao"
+          ],
+          "recall": 0.7267215244694673,
+          "recovered_bp": 6712,
+          "reference_bp_callable": 9236,
+          "source_rows": 27,
+          "uncertain_overlap_bp": 0
+        },
+        "RC": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "Retroposon": {
+          "interval_union_bp": 0,
+          "missed_bp": 0,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [],
+          "recall": null,
+          "recovered_bp": 0,
+          "reference_bp_callable": 0,
+          "source_rows": 0,
+          "uncertain_overlap_bp": 0
+        },
+        "SINE": {
+          "interval_union_bp": 7773,
+          "missed_bp": 1935,
+          "non_callable_bp_excluded": 0,
+          "original_class_values": [
+            "SINE/Mermaid",
+            "SINE/V"
+          ],
+          "recall": 0.7510613662678503,
+          "recovered_bp": 5838,
+          "reference_bp_callable": 7773,
+          "source_rows": 51,
+          "uncertain_overlap_bp": 0
+        }
+      },
+      "classes_overlap_excess_bp": 0,
+      "n_or_noncallable_bp": 181695,
+      "panel_id": "core19",
+      "source_seqid": "chr6",
+      "strict_known_union_bp": 55059,
+      "uncertain_bp": 10800
+    }
+  ],
+  "reference": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/torafugu/fr3.fa.out.gz",
+  "source_info": {
+    "broad_class_rows": {
+      "ARTEFACT": 3,
+      "DNA": 14846,
+      "LINE": 28396,
+      "LTR": 6673,
+      "Low_complexity": 36817,
+      "SINE": 5643,
+      "Satellite": 102,
+      "Simple_repeat": 109941,
+      "Unknown": 6825,
+      "rRNA": 152,
+      "scRNA": 1,
+      "snRNA": 92,
+      "tRNA": 831
+    },
+    "rows_seen": 210322
+  },
+  "species": "torafugu",
+  "status": "COMPLETED_CLASS_BREAKDOWN_EXISTING_PREDICTIONS",
+  "strict_known_union_bp": 2295569,
+  "threshold_policy": "Existing material_runs.bed is scored unchanged; no threshold change or recalibration was performed.",
+  "uncertain_bp": 320484
+}

@@ -6,9 +6,9 @@
 
 目标基座为 **NTv2-500M（500M 参数）**。4096 bp 等数值是输入窗口，不是模型参数量。新实验要实际统一 encoder、训练物种、划分及输出定义；不能只将现有 GENERanno SF5 改名为 NTv2，或把历史 D/SF5 的最佳数值拼为单一模型。
 
-旧 D 保留为已测量 binary 基线。新统一候选可以同时提供 TE 材料概率和 broad-class 标签；Unknown/ambiguous 的来源状态需显式保留，不能为了分类分数删除难例，也不能把未分类 TE 自动变为 BG。新候选若改变材料概率，需要自己的 CAL、逐物种评价、benchmark 和下游行，不能继承旧 D 的分数。
+论文采用同一 NTv2-500M 基座的两套权重：旧 D 保留为已测量 binary 模型，新 NTv2-class 提供八状态 broad-class 标签。后者实际重新训练，不沿用 GENERanno SF5 的分数。Unknown/ambiguous 的来源状态需显式保留，不能为了分类分数删除难例，也不能把未分类 TE 自动变为 BG。若将新分类模型的非 BG 概率之和用作材料预测，它需要自己的 CAL、逐物种评价、benchmark 和下游行，不能继承旧 D 的分数。
 
-保留 C. elegans 是当前基线定义的一部分。是否增加类群专家要通过受控比较决定，而非删除表现较低物种来提高均值。可以最终限定为脊椎动物适用域，但必须明确说明这一范围及原六物种结果。
+保留 C. elegans 是当前基线定义的一部分。是否增加类群专家要通过受控比较决定，而非删除表现较低物种来提高均值。适用域按实际测量的物种/分支界定；本轮草雀结果表明，不能直接把“脊椎动物”作为整体已支持范围。
 
 ## 本批工作和完成标准
 
@@ -52,3 +52,32 @@ Slurm **12858354 COMPLETED**，34m34s。SRR23268362 全组装比对率 91.84%，
 D 对 U_soft 的 49 个 reference-relative gain 中 22 个获全部内含子支持；18 个 loss 中也有 8 个获支持。支持“有用但有取舍”的基因注释效果，不能说所有变化都是改进。事后十染色体配对 bootstrap 的严格支持率差为 +2.25 个百分点，区间 [+1.00,+3.86]；StringTie 支持率差区间跨零。该区间衡量区域敏感性，不是生物学重复。所有预测的 RNA 分母含 halo（104 Mb），reference locus 比较为 100 Mb。[完整结果与图](../../../reports/PLATYPUS-GENE-EVIDENCE-20260917/run-12858354/RESULTS.md)
 
 本批仍是执行中的研究批次，不是最终论文数据冻结。工作进展及新结果按各实验原生报告更新，不以提交作业代替结果分析。
+
+## 本轮新增完整外部结果与解释
+
+固定 D/CAL，两个预先按来源资格选定的非哺乳物种，各 20×5 MiB=104,857,600 bp；完整推理与评分已结束。
+
+| 物种 / assembly | 可调用 strict-known TE 阳性 bp | positive-only recovery | source-comparator P / R / F1 |
+| --- | ---: | ---: | --- |
+| 河豚 Takifugu rubripes / fr3 | 2,289,458 | 0.833708 | 0.599147 / 0.833769 / 0.697250 |
+| 斑胸草雀 Taeniopygia guttata / taeGut2 | 4,476,142 | 0.221228 | 0.810570 / 0.221227 / 0.347588 |
+
+comparator 列另外排除 Unknown/ambiguous/ARTEFACT 区间，故其阳性分母与 positive-only 口径有细小差异；它不是完整生物真值。草雀约 348.6 万 bp 的 comparator FN 不能由“FP 因漏注释而升高”解释。其 20 个区间均低召回，不是一个孤立区域造成。该结果直接限制“普遍脊椎动物泛化”，不取消鸭嘴兽的既有基因用途阳性，也不证明所有草雀 FN 的成因。已启动的有限共享/类群 LoRA 对照保持原合同，不按此分数重选训练或测试物种。
+
+## 已落实的新执行链
+
+- **NTv2 class**：exact-D 坐标重建 TRAIN/CAL/DEV 为 21,000/6,000/6,000 条半窗；原生 D→8-class loader smoke 12888482 已 PASS，初始化 encoder 差为 0。保留旧 binary D，另训同基座 class 权重；不把旧 GENERanno SF5 数值迁移到新模型。
+- **BG readout 诊断**：GENERanno pretrained 的 known binary 混淆矩阵为 `[[67,293],[116,805]]`，BG recall=0.186、TE recall=0.874；NTv2 pretrained 为 `[[55,305],[74,847]]`，BG recall=0.153、TE recall=0.920，macro-F1=0.5211。D 后 macro-F1=0.7211。分母为 360 BG+921 TE，不是全部 1,580 条，也不是实际标注 F1。参见 [诊断](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/LEGACY-BINARY-DIAGNOSTIC.md)。另固定中心512 bp、改变512/2048/4096上下文的有限诊断，检验长度而不同时变更目标标签。
+- **鸡/斑马鱼 AUGUSTUS 用途**：各 50 Mb 核心/52 Mb含halo；1,064/984 个完整 gene loci。两者 native lowercase→`softmask/nep` 提示观察成功，受控200 bp对应原生1001–1200坐标。D mask 12889043/47，首core 12889048/49，其余core 12889053/54，最终评分12889062/63，均 private。结果尚未产生；这是D训练物种及既有同物种基因参数的用途测量，不是新物种泛化或Tiberius结果。
+- **LoRA**：共享 rank16 对固定类群2×rank8、各131,072参数，末两层query/value，单seed、每臂1024步。首次接口失败保留；修复job12888288依赖两个较短D masks，随后与CPU基因预测并行。host memory根据已测RSS缩为32GB，不改训练。
+- **整基因组 benchmark**：鸡与斑马鱼 full assembly native EDTA/RM2 已执行中；D CPU pilot/GPU独立。准确率使用实际D TRAIN/CAL/DEV均未覆盖的chr10/20；SF5旧split只作回顾性分层。尚不能写为整基因组比较完成。
+- **多分类 TE map 比较**：`UNIFIED-NTV2-CLASS-MAP-BENCH-20260918` 使用新 class 的 CAL-selected checkpoint，在同一鸡/斑马鱼 chr10/20 上生成原生8状态逐碱基输出，再和整基因组 EDTA/RM2 的 native 类别投影比较。该项不新增训练、不调整阈值、不把条件true-TE或token-majority分数替代完整bp分母；是质量对比，不冒充新class的完整基因组CPU计时。native class composition 只能说明输出构成，不能代替此项准确率。
+- **鸭嘴兽 Red 强对照**：639同分母loci，Red F1=0.60103；D−Red差−0.002626，95%区间[−0.017075,+0.014020]。不支持D优于Red，也不建立等效。RM2对照仍未完成。
+
+## 读出与执行审计的新结果
+
+旧缓存上的固定线性读出已完成（12889615）：同一1,281条known-five binary分母，NTv2 pretrained macro-F1=0.586682，binary D=0.703148，GC/N/长度组成基线=0.424161。预训练表示存在可读出的信息，但当前证据仍不足以称为“微调前已经很好区分”；该结果也说明0.521的5-NN分数不是表示能力的上限。所有窗口长度同为512，因此组成基线不能检验长度变化效应；长度诊断另行执行。
+
+实际坐标审计12889831已完成：完整1,580条SIB TEST中，3条鸡序列完整落在D TRAIN、9条斑马鱼落在CAL、156条落在DEV（虫149、斑马鱼7），重叠DNA全部相同。必须区分梯度训练与CAL/DEV角色，不能把168条统称训练泄漏；也不能将该完整面板称为未接触的独立测试。保持固定面板作回顾性表示诊断，独立class-map质量比较仍使用已核实的chr10/20。[坐标审计](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/EXPOSURE-AUDIT.md)
+
+CPU benchmark旧pilot12888135申请16核但实际Torch intra-op=1，故在41m08s停止并保留原输出及成本。修复后真实推理进程显式设置16线程、interop=1，并在启动时记录affinity/dtype；新pilot另用输出目录。该工程失败不能混入16线程公平速度比较，GPU/native任务继续运行。

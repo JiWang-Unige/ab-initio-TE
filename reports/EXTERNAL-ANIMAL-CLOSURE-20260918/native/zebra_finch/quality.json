@@ -1,0 +1,290 @@
+{
+  "assembly": "taeGut2 / WashU taeGut2",
+  "claim_boundary": "Source coverage qualification of a same-assembly RepeatMasker layer; not independent biological truth and not a model score.",
+  "gate": {
+    "failed_reasons": [],
+    "thresholds": {
+      "maximum_selected_panel_positive_fraction": 0.8,
+      "minimum_broad_class_count": 3,
+      "minimum_full_assembly_known_te_bp": 5000000,
+      "minimum_selected_panel_known_te_bp": 500000,
+      "minimum_selected_panel_positive_fraction": 0.005,
+      "minimum_selected_regions_with_positive_and_background": 12,
+      "purpose": "exclude label-sparse panels before inference; this is a source-coverage qualification, not a biological-truth guarantee",
+      "source_positive_classes": [
+        "DNA",
+        "LINE",
+        "SINE",
+        "LTR",
+        "RC",
+        "Retroposon"
+      ],
+      "unknown_or_unclassified_is_not_negative": true
+    }
+  },
+  "quality_metrics": {
+    "broad_class_count": 4,
+    "full_assembly_known_te_bp_union": 81160964,
+    "mixed_positive_background_regions": 20,
+    "selected_panel_bp": 104857600,
+    "selected_panel_known_te_bp_union": 4479542,
+    "selected_panel_positive_fraction": 0.04272024154663086
+  },
+  "scientific_name": "Taeniopygia guttata",
+  "selection": {
+    "config": {
+      "contigs": 20,
+      "labels_used_in_selection": false,
+      "length_bp": 5242880,
+      "panel_bp_per_species": 104857600,
+      "regions_are_disjoint": true,
+      "scores_used_in_selection": false,
+      "sort": "descending_length_then_lexicographic_source_contig",
+      "start_policy": "centered_from_assembly_length"
+    },
+    "labels_used_in_selection": false,
+    "regions": [
+      {
+        "assembly_length_bp": 156412533,
+        "end": 80827706,
+        "panel_id": "core00",
+        "source_seqid": "chr2",
+        "start": 75584826
+      },
+      {
+        "assembly_length_bp": 118548696,
+        "end": 61895788,
+        "panel_id": "core01",
+        "source_seqid": "chr1",
+        "start": 56652908
+      },
+      {
+        "assembly_length_bp": 112617285,
+        "end": 58930082,
+        "panel_id": "core02",
+        "source_seqid": "chr3",
+        "start": 53687202
+      },
+      {
+        "assembly_length_bp": 73657157,
+        "end": 39450018,
+        "panel_id": "core03",
+        "source_seqid": "chr1A",
+        "start": 34207138
+      },
+      {
+        "assembly_length_bp": 72861351,
+        "end": 39052115,
+        "panel_id": "core04",
+        "source_seqid": "chrZ",
+        "start": 33809235
+      },
+      {
+        "assembly_length_bp": 69780378,
+        "end": 37511629,
+        "panel_id": "core05",
+        "source_seqid": "chr4",
+        "start": 32268749
+      },
+      {
+        "assembly_length_bp": 62374962,
+        "end": 33808921,
+        "panel_id": "core06",
+        "source_seqid": "chr5",
+        "start": 28566041
+      },
+      {
+        "assembly_length_bp": 39844632,
+        "end": 22543756,
+        "panel_id": "core07",
+        "source_seqid": "chr7",
+        "start": 17300876
+      },
+      {
+        "assembly_length_bp": 36305782,
+        "end": 20774331,
+        "panel_id": "core08",
+        "source_seqid": "chr6",
+        "start": 15531451
+      },
+      {
+        "assembly_length_bp": 27993427,
+        "end": 16618153,
+        "panel_id": "core09",
+        "source_seqid": "chr8",
+        "start": 11375273
+      },
+      {
+        "assembly_length_bp": 27241186,
+        "end": 16242033,
+        "panel_id": "core10",
+        "source_seqid": "chr9",
+        "start": 10999153
+      },
+      {
+        "assembly_length_bp": 21576510,
+        "end": 13409695,
+        "panel_id": "core11",
+        "source_seqid": "chr12",
+        "start": 8166815
+      },
+      {
+        "assembly_length_bp": 21403021,
+        "end": 13322950,
+        "panel_id": "core12",
+        "source_seqid": "chr11",
+        "start": 8080070
+      },
+      {
+        "assembly_length_bp": 20806668,
+        "end": 13024774,
+        "panel_id": "core13",
+        "source_seqid": "chr10",
+        "start": 7781894
+      },
+      {
+        "assembly_length_bp": 20704505,
+        "end": 12973692,
+        "panel_id": "core14",
+        "source_seqid": "chr4A",
+        "start": 7730812
+      },
+      {
+        "assembly_length_bp": 16962381,
+        "end": 11102630,
+        "panel_id": "core15",
+        "source_seqid": "chr13",
+        "start": 5859750
+      },
+      {
+        "assembly_length_bp": 16419078,
+        "end": 10830979,
+        "panel_id": "core16",
+        "source_seqid": "chr14",
+        "start": 5588099
+      },
+      {
+        "assembly_length_bp": 15652063,
+        "end": 10447471,
+        "panel_id": "core17",
+        "source_seqid": "chr20",
+        "start": 5204591
+      },
+      {
+        "assembly_length_bp": 14428146,
+        "end": 9835513,
+        "panel_id": "core18",
+        "source_seqid": "chr15",
+        "start": 4592633
+      },
+      {
+        "assembly_length_bp": 11648728,
+        "end": 8445804,
+        "panel_id": "core19",
+        "source_seqid": "chr17",
+        "start": 3202924
+      }
+    ],
+    "scores_used_in_selection": false
+  },
+  "source": {
+    "assembly": "taeGut2 / WashU taeGut2",
+    "assembly_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/taeGut2/bigZips/taeGut2.fa.gz",
+    "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.fa.gz",
+    "historical_project_exposure": "legacy_source_manifest_and_prior transfer assets; no current D score used for selection",
+    "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.fa.out.gz",
+    "kingdom_group": "nonmammalian_vertebrate_bird",
+    "legacy_te_bed": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/rmsk_te.bed.gz",
+    "pretraining_exposure": "unknown",
+    "repeat_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/taeGut2/database/rmsk.txt.gz",
+    "scientific_name": "Taeniopygia guttata",
+    "selection_role": "primary_label_rich_bird_external_screen",
+    "sizes": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebra_finch/taeGut2.chrom.sizes",
+    "task_supervision": "not_in_current_D_six_species"
+  },
+  "source_summary": {
+    "class_counts": {
+      "ARTEFACT": 26,
+      "DNA": 1480,
+      "DNA/PiggyBac?": 685,
+      "DNA/TcMar-Pogo": 64,
+      "DNA/TcMar-Tigger": 254,
+      "DNA/TcMar?": 179,
+      "DNA/hAT-Charlie": 189,
+      "DNA/hAT-Tip100?": 33,
+      "DNA?": 1704,
+      "LINE/CR1": 138165,
+      "LINE/L1": 83,
+      "LINE/Penelope": 86,
+      "LINE/R2": 159,
+      "LTR/ERV1": 15328,
+      "LTR/ERVK": 41131,
+      "LTR/ERVL": 33605,
+      "LTR/ERVL?": 1948,
+      "LTR?": 80,
+      "Low_complexity": 56760,
+      "SINE/Deu": 1548,
+      "SINE/MIR": 2457,
+      "SINE/tRNA": 1361,
+      "SINE/tRNA-CR1": 2785,
+      "SINE?": 504,
+      "Satellite": 406,
+      "Simple_repeat": 280015,
+      "Unknown": 2487,
+      "rRNA": 214,
+      "scRNA": 5,
+      "snRNA": 96,
+      "tRNA": 469
+    },
+    "known_te_full_assembly_bp_estimate": null,
+    "known_te_intervals_by_region": {
+      "core00": 1706,
+      "core01": 992,
+      "core02": 604,
+      "core03": 628,
+      "core04": 1190,
+      "core05": 756,
+      "core06": 805,
+      "core07": 342,
+      "core08": 378,
+      "core09": 394,
+      "core10": 336,
+      "core11": 400,
+      "core12": 752,
+      "core13": 341,
+      "core14": 526,
+      "core15": 649,
+      "core16": 919,
+      "core17": 719,
+      "core18": 567,
+      "core19": 1081
+    },
+    "known_te_panel_bp_by_region": {
+      "core00": 886818,
+      "core01": 349589,
+      "core02": 214426,
+      "core03": 221822,
+      "core04": 424515,
+      "core05": 266563,
+      "core06": 279010,
+      "core07": 101246,
+      "core08": 99953,
+      "core09": 106084,
+      "core10": 84516,
+      "core11": 103251,
+      "core12": 164511,
+      "core13": 79544,
+      "core14": 137939,
+      "core15": 138753,
+      "core16": 215910,
+      "core17": 170418,
+      "core18": 133960,
+      "core19": 300714
+    },
+    "known_te_rows": 241540,
+    "rows_seen": 584306,
+    "unknown_or_uncertain_rows": 7620
+  },
+  "species": "zebra_finch",
+  "status": "QUALIFIED"
+}

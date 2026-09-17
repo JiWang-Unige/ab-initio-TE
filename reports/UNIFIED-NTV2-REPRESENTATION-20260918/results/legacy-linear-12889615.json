@@ -1,0 +1,384 @@
+{
+  "protocol": "UNIFIED-NTV2-REPRESENTATION-20260918",
+  "diagnostic": "legacy_known_five_binary_linear_and_composition",
+  "denominator": {
+    "split": "fixed SIB test known-five support",
+    "test_full_n": 1580,
+    "test_known_n": 1281,
+    "BG": 360,
+    "TE": 921,
+    "excluded": {
+      "KNOWN_OTHER_TE": null,
+      "AMBIGUOUS_TE": null,
+      "UNCLASSIFIED": null
+    }
+  },
+  "models": {
+    "GENERanno_pretrained": {
+      "feature_dim": 1280,
+      "linear_probe": {
+        "n": 1281,
+        "accuracy": 0.7142857142857143,
+        "macro_precision": 0.6093935437930216,
+        "macro_recall": 0.5500407166123779,
+        "macro_f1": 0.5396429833863556,
+        "confusion_rows_true_cols_pred": [
+          [
+            63,
+            297
+          ],
+          [
+            69,
+            852
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 0.4772727272727273,
+            "recall": 0.175,
+            "f1": 0.25609756097560976
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.741514360313316,
+            "recall": 0.9250814332247557,
+            "f1": 0.8231884057971014
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized"
+      },
+      "composition_baseline": {
+        "n": 1281,
+        "accuracy": 0.7205308352849337,
+        "macro_precision": 0.8600469116497264,
+        "macro_recall": 0.5027777777777778,
+        "macro_f1": 0.42416122551481666,
+        "confusion_rows_true_cols_pred": [
+          [
+            2,
+            358
+          ],
+          [
+            0,
+            921
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 1.0,
+            "recall": 0.005555555555555556,
+            "f1": 0.011049723756906077
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7200938232994527,
+            "recall": 1.0,
+            "f1": 0.8372727272727273
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized",
+        "features": [
+          "GC_fraction",
+          "N_fraction",
+          "sequence_length_bp"
+        ]
+      }
+    },
+    "GENERanno_binary_FT": {
+      "feature_dim": 1280,
+      "linear_probe": {
+        "n": 1281,
+        "accuracy": 0.7353629976580797,
+        "macro_precision": 0.66486562150056,
+        "macro_recall": 0.5799267100977199,
+        "macro_f1": 0.579435016430022,
+        "confusion_rows_true_cols_pred": [
+          [
+            81,
+            279
+          ],
+          [
+            60,
+            861
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 0.574468085106383,
+            "recall": 0.225,
+            "f1": 0.32335329341317365
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7552631578947369,
+            "recall": 0.9348534201954397,
+            "f1": 0.8355167394468704
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized"
+      },
+      "composition_baseline": {
+        "n": 1281,
+        "accuracy": 0.7205308352849337,
+        "macro_precision": 0.8600469116497264,
+        "macro_recall": 0.5027777777777778,
+        "macro_f1": 0.42416122551481666,
+        "confusion_rows_true_cols_pred": [
+          [
+            2,
+            358
+          ],
+          [
+            0,
+            921
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 1.0,
+            "recall": 0.005555555555555556,
+            "f1": 0.011049723756906077
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7200938232994527,
+            "recall": 1.0,
+            "f1": 0.8372727272727273
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized",
+        "features": [
+          "GC_fraction",
+          "N_fraction",
+          "sequence_length_bp"
+        ]
+      }
+    },
+    "GENERanno_class_FT": {
+      "feature_dim": 1280,
+      "linear_probe": {
+        "n": 1281,
+        "accuracy": 0.7884465261514442,
+        "macro_precision": 0.7381389200937775,
+        "macro_recall": 0.7352832066594281,
+        "macro_f1": 0.7366750686660544,
+        "confusion_rows_true_cols_pred": [
+          [
+            221,
+            139
+          ],
+          [
+            132,
+            789
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 0.6260623229461756,
+            "recall": 0.6138888888888889,
+            "f1": 0.6199158485273493
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.8502155172413793,
+            "recall": 0.8566775244299675,
+            "f1": 0.8534342888047594
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized"
+      },
+      "composition_baseline": {
+        "n": 1281,
+        "accuracy": 0.7205308352849337,
+        "macro_precision": 0.8600469116497264,
+        "macro_recall": 0.5027777777777778,
+        "macro_f1": 0.42416122551481666,
+        "confusion_rows_true_cols_pred": [
+          [
+            2,
+            358
+          ],
+          [
+            0,
+            921
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 1.0,
+            "recall": 0.005555555555555556,
+            "f1": 0.011049723756906077
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7200938232994527,
+            "recall": 1.0,
+            "f1": 0.8372727272727273
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized",
+        "features": [
+          "GC_fraction",
+          "N_fraction",
+          "sequence_length_bp"
+        ]
+      }
+    },
+    "NTv2_pretrained": {
+      "feature_dim": 1024,
+      "linear_probe": {
+        "n": 1281,
+        "accuracy": 0.6752537080405933,
+        "macro_precision": 0.5897934635170066,
+        "macro_recall": 0.5846543612015924,
+        "macro_f1": 0.586681889255665,
+        "confusion_rows_true_cols_pred": [
+          [
+            136,
+            224
+          ],
+          [
+            192,
+            729
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 0.4146341463414634,
+            "recall": 0.37777777777777777,
+            "f1": 0.3953488372093023
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7649527806925498,
+            "recall": 0.7915309446254072,
+            "f1": 0.7780149413020278
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized"
+      },
+      "composition_baseline": {
+        "n": 1281,
+        "accuracy": 0.7205308352849337,
+        "macro_precision": 0.8600469116497264,
+        "macro_recall": 0.5027777777777778,
+        "macro_f1": 0.42416122551481666,
+        "confusion_rows_true_cols_pred": [
+          [
+            2,
+            358
+          ],
+          [
+            0,
+            921
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 1.0,
+            "recall": 0.005555555555555556,
+            "f1": 0.011049723756906077
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7200938232994527,
+            "recall": 1.0,
+            "f1": 0.8372727272727273
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized",
+        "features": [
+          "GC_fraction",
+          "N_fraction",
+          "sequence_length_bp"
+        ]
+      }
+    },
+    "NTv2_binary_D": {
+      "feature_dim": 1024,
+      "linear_probe": {
+        "n": 1281,
+        "accuracy": 0.775175644028103,
+        "macro_precision": 0.721756150179199,
+        "macro_recall": 0.6922140788997466,
+        "macro_f1": 0.7031477309301577,
+        "confusion_rows_true_cols_pred": [
+          [
+            181,
+            179
+          ],
+          [
+            109,
+            812
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 0.6241379310344828,
+            "recall": 0.5027777777777778,
+            "f1": 0.556923076923077
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.8193743693239153,
+            "recall": 0.8816503800217155,
+            "f1": 0.8493723849372385
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized"
+      },
+      "composition_baseline": {
+        "n": 1281,
+        "accuracy": 0.7205308352849337,
+        "macro_precision": 0.8600469116497264,
+        "macro_recall": 0.5027777777777778,
+        "macro_f1": 0.42416122551481666,
+        "confusion_rows_true_cols_pred": [
+          [
+            2,
+            358
+          ],
+          [
+            0,
+            921
+          ]
+        ],
+        "per_class": {
+          "BG": {
+            "support": 360,
+            "precision": 1.0,
+            "recall": 0.005555555555555556,
+            "f1": 0.011049723756906077
+          },
+          "TE": {
+            "support": 921,
+            "precision": 0.7200938232994527,
+            "recall": 1.0,
+            "f1": 0.8372727272727273
+          }
+        },
+        "fit_scope": "known_five_TRAIN_only_standardized",
+        "features": [
+          "GC_fraction",
+          "N_fraction",
+          "sequence_length_bp"
+        ]
+      }
+    }
+  },
+  "composition_features": [
+    "GC_fraction",
+    "N_fraction",
+    "sequence_length_bp"
+  ],
+  "no_threshold_or_hyperparameter_tuning": true
+}

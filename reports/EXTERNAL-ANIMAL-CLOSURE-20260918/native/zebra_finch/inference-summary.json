@@ -1,0 +1,215 @@
+{
+  "ambiguity_policy": "uppercase IUPAC; existing <unk> tokenization; no prediction censoring",
+  "batch_size": 12,
+  "calibration_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+  "calibration_scope": "six-species-shared",
+  "contigs": [
+    {
+      "ambiguity_runs": 210,
+      "ambiguous_bp": 21000,
+      "length_bp": 5242880,
+      "material_runs": 875,
+      "name": "core01",
+      "threshold_positive_bp": 103027,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 246,
+      "ambiguous_bp": 24600,
+      "length_bp": 5242880,
+      "material_runs": 269,
+      "name": "core13",
+      "threshold_positive_bp": 22725,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 360,
+      "ambiguous_bp": 36000,
+      "length_bp": 5242880,
+      "material_runs": 596,
+      "name": "core12",
+      "threshold_positive_bp": 49451,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 325,
+      "ambiguous_bp": 32500,
+      "length_bp": 5242880,
+      "material_runs": 397,
+      "name": "core11",
+      "threshold_positive_bp": 36229,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 332,
+      "ambiguous_bp": 33200,
+      "length_bp": 5242880,
+      "material_runs": 466,
+      "name": "core15",
+      "threshold_positive_bp": 36339,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 431,
+      "ambiguous_bp": 43100,
+      "length_bp": 5242880,
+      "material_runs": 608,
+      "name": "core16",
+      "threshold_positive_bp": 53522,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 400,
+      "ambiguous_bp": 40000,
+      "length_bp": 5242880,
+      "material_runs": 465,
+      "name": "core18",
+      "threshold_positive_bp": 38562,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 497,
+      "ambiguous_bp": 49700,
+      "length_bp": 5242880,
+      "material_runs": 842,
+      "name": "core19",
+      "threshold_positive_bp": 75838,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 174,
+      "ambiguous_bp": 17400,
+      "length_bp": 5242880,
+      "material_runs": 582,
+      "name": "core03",
+      "threshold_positive_bp": 77325,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 255,
+      "ambiguous_bp": 25500,
+      "length_bp": 5242880,
+      "material_runs": 1445,
+      "name": "core00",
+      "threshold_positive_bp": 166313,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 559,
+      "ambiguous_bp": 55900,
+      "length_bp": 5242880,
+      "material_runs": 571,
+      "name": "core17",
+      "threshold_positive_bp": 41717,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 153,
+      "ambiguous_bp": 15300,
+      "length_bp": 5242880,
+      "material_runs": 664,
+      "name": "core02",
+      "threshold_positive_bp": 79850,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 165,
+      "ambiguous_bp": 16500,
+      "length_bp": 5242880,
+      "material_runs": 598,
+      "name": "core05",
+      "threshold_positive_bp": 72708,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 226,
+      "ambiguous_bp": 22600,
+      "length_bp": 5242880,
+      "material_runs": 333,
+      "name": "core14",
+      "threshold_positive_bp": 28643,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 185,
+      "ambiguous_bp": 18500,
+      "length_bp": 5242880,
+      "material_runs": 686,
+      "name": "core06",
+      "threshold_positive_bp": 92112,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 306,
+      "ambiguous_bp": 30600,
+      "length_bp": 5242880,
+      "material_runs": 338,
+      "name": "core08",
+      "threshold_positive_bp": 34253,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 205,
+      "ambiguous_bp": 20500,
+      "length_bp": 5242880,
+      "material_runs": 296,
+      "name": "core07",
+      "threshold_positive_bp": 32358,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 212,
+      "ambiguous_bp": 21200,
+      "length_bp": 5242880,
+      "material_runs": 430,
+      "name": "core09",
+      "threshold_positive_bp": 44058,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 271,
+      "ambiguous_bp": 27100,
+      "length_bp": 5242880,
+      "material_runs": 341,
+      "name": "core10",
+      "threshold_positive_bp": 31446,
+      "windows": 1280
+    },
+    {
+      "ambiguity_runs": 271,
+      "ambiguous_bp": 27100,
+      "length_bp": 5242880,
+      "material_runs": 1047,
+      "name": "core04",
+      "threshold_positive_bp": 111446,
+      "windows": 1280
+    }
+  ],
+  "coordinates": "0-based half-open",
+  "device": "cuda",
+  "fit_split": "CAL",
+  "input_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/zebra_finch/prepared/panel.fa",
+  "interpretation": "TE material connected runs, not insertion IDs; no scientific evaluation",
+  "labels_used": false,
+  "model_code_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "model_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "outputs": {
+    "ambiguity_qc_bed": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/zebra_finch/inference-12887634/ambiguity_qc.bed",
+    "material_bed": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/zebra_finch/inference-12887634/material_runs.bed",
+    "probability_bedgraph_gz": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/zebra_finch/inference-12887634/material_probability.bedGraph.gz",
+    "summary_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/EXTERNAL-ANIMAL-CLOSURE-20260918/zebra_finch/inference-12887634/summary.json"
+  },
+  "platt_intercept": -0.8050313412075021,
+  "platt_slope": 0.6984053956932976,
+  "protocol": "CROSS-SPECIES-L1-FASTA-INFERENCE-V1",
+  "scientific_metrics_computed": false,
+  "seed": 42,
+  "status": "COMPLETED",
+  "tail_policy": "actual sequence length; existing NTv2 tokenizer padding only",
+  "threshold": 0.42330056285498807,
+  "threshold_rule": "probability >= frozen CAL threshold",
+  "tokenizer_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "total_bp": 104857600,
+  "window_alignment": "nonoverlapping, contig origin 0",
+  "window_bp": 4096
+}

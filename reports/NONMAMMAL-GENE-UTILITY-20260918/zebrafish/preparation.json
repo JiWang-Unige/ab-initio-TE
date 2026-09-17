@@ -1,0 +1,97 @@
+{
+  "status": "PREPARED",
+  "genome": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa",
+  "gene_reference_url": "https://hgdownload.soe.ucsc.edu/goldenPath/danRer11/database/ncbiRefSeq.txt.gz",
+  "download_headers": {
+    "Date": "Thu, 17 Sep 2026 23:17:03 GMT",
+    "Server": "Apache",
+    "Last-Modified": "Sun, 10 May 2020 10:27:05 GMT",
+    "ETag": "\"45cf3b-5a548abf8f040\"",
+    "Accept-Ranges": "bytes",
+    "Content-Length": "4575035",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Range",
+    "Connection": "close",
+    "Content-Type": "application/x-gzip"
+  },
+  "geometry_rejections": {
+    "D_train_cal_overlap": 487
+  },
+  "input_core_bp": 50000000,
+  "input_with_halos_bp": 52000000,
+  "inputs": [
+    {
+      "id": "c00",
+      "length": 5200000,
+      "N_bp": 701,
+      "R_TE_mask_bp": 2167295,
+      "reference_loci": 134
+    },
+    {
+      "id": "c01",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 1903884,
+      "reference_loci": 134
+    },
+    {
+      "id": "c02",
+      "length": 5200000,
+      "N_bp": 1201,
+      "R_TE_mask_bp": 1984790,
+      "reference_loci": 109
+    },
+    {
+      "id": "c03",
+      "length": 5200000,
+      "N_bp": 700,
+      "R_TE_mask_bp": 1788441,
+      "reference_loci": 106
+    },
+    {
+      "id": "c04",
+      "length": 5200000,
+      "N_bp": 702,
+      "R_TE_mask_bp": 2052322,
+      "reference_loci": 66
+    },
+    {
+      "id": "c05",
+      "length": 5200000,
+      "N_bp": 100,
+      "R_TE_mask_bp": 1986728,
+      "reference_loci": 93
+    },
+    {
+      "id": "c06",
+      "length": 5200000,
+      "N_bp": 1700,
+      "R_TE_mask_bp": 2450744,
+      "reference_loci": 50
+    },
+    {
+      "id": "c07",
+      "length": 5200000,
+      "N_bp": 200,
+      "R_TE_mask_bp": 2142523,
+      "reference_loci": 79
+    },
+    {
+      "id": "c08",
+      "length": 5200000,
+      "N_bp": 0,
+      "R_TE_mask_bp": 2482634,
+      "reference_loci": 97
+    },
+    {
+      "id": "c09",
+      "length": 5200000,
+      "N_bp": 200,
+      "R_TE_mask_bp": 2061906,
+      "reference_loci": 116
+    }
+  ],
+  "gene_reference_loci": 984,
+  "D_train_cal_bp_overlap": 0,
+  "selection_used_labels_or_outcomes": false
+}

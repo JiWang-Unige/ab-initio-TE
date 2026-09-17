@@ -257,15 +257,31 @@ def native_smoke(species):
     env["LD_LIBRARY_PATH"] = "/opt/ebsofts/bzip2/1.0.8-GCCcore-12.2.0/lib:" + env.get("LD_LIBRARY_PATH", "")
     env["AUGUSTUS_CONFIG_PATH"] = "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/config"
     binary = "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus"
-    results = {}
     for arm in ("uppercase", "lowercase_control"):
         content = sequence if arm == "uppercase" else sequence[:1000] + sequence[1000:1200].lower() + sequence[1200:]
         b.write_fasta(out / (arm + ".fa"), "native_mask_control", content)
-        run([binary, "--species="+CFG["species"][species]["augustus_species"], "--gff3=on", "--softmasking=1", "--printHints=true", "--UTR=off", "--stopCodonExcludedFromCDS=false", "--alternatives-from-evidence=false", "--alternatives-from-sampling=false", str(out / (arm + ".fa"))], out, arm, env)
-        lines = [line for line in (out / (arm + ".stdout")).read_text().splitlines() if "nonexonpart" in line]
+        # Native v3.5.0 augustus.cc calls prepare(..., printHints && !gff3).
+        # GFF3 must be off only for this observation; scientific predictions stay GFF3.
+        run([binary, "--species="+CFG["species"][species]["augustus_species"], "--gff3=off", "--softmasking=1", "--printHints=true", "--UTR=off", "--stopCodonExcludedFromCDS=false", "--alternatives-from-evidence=false", "--alternatives-from-sampling=false", str(out / (arm + ".fa"))], out, arm, env)
+    assess_native_smoke(species)
+
+
+def assess_native_smoke(species):
+    out = BASE / species / "native_smoke"
+    results = {}
+    for arm in ("uppercase", "lowercase_control"):
+        command = json.loads((out / (arm + ".command.json")).read_text())
+        if command["exit_code"]:
+            raise ValueError("Native AUGUSTUS smoke did not complete")
+        # AUGUSTUS abbreviates nonexonpart to 'nep' in its native hint output.
+        lines = [line for line in (out / (arm + ".stdout")).read_text().splitlines() if len(line.split("\t")) == 9 and line.split("\t")[1:3] in (["softmask", "nep"], ["softmask", "nonexonpart"])]
+        content = next(b.fasta(out / (arm + ".fa")))[1]
         results[arm] = {"masked_bp": sum(v in "acgt" for v in content), "native_repeat_hint_lines": lines}
     if not results["lowercase_control"]["native_repeat_hint_lines"] or results["uppercase"]["native_repeat_hint_lines"]:
         raise ValueError("Native lowercase-to-repeat-hint observation not established; inspect smoke output")
+    coordinates = [list(map(int, line.split("\t")[3:5])) for line in results["lowercase_control"]["native_repeat_hint_lines"]]
+    if coordinates != [[1001, 1200]] or results["lowercase_control"]["masked_bp"] != 200:
+        raise ValueError("Native hint coordinates differ from the controlled lowercase interval")
     dump(out / "result.json", {"status": "PASS_NATIVE_LOWERCASE_HINT_MECHANISM", "scope": "100 kb engineering input control, not a scientific utility result", "observations": results})
 
 
@@ -347,12 +363,13 @@ def score(species):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("action", choices=("prepare", "native-smoke", "d-mask", "predict", "score"))
+    p.add_argument("action", choices=("prepare", "native-smoke", "assess-native-smoke", "d-mask", "predict", "score"))
     p.add_argument("species", choices=tuple(CFG["species"]))
     p.add_argument("--index", type=int)
     a = p.parse_args()
     if a.action == "prepare": prepare(a.species)
     elif a.action == "native-smoke": native_smoke(a.species)
+    elif a.action == "assess-native-smoke": assess_native_smoke(a.species)
     elif a.action == "d-mask": d_mask(a.species)
     elif a.action == "predict": predict(a.species, a.index)
     else: score(a.species)
