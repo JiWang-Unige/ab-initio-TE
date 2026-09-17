@@ -59,8 +59,12 @@ binary材料检出与broad-class分类回答不同问题：Tiberius只需要材�
 
 1. 本轮D自身20core下游用途、GEN三权重表示配对和CPU部署smoke均已完成；以这些固定结果和现有benchmark行冻结binary D v1候选，不再追加旧网格或表示训练。
 2. 冻结一个有限、证据合格的外部确认面板，优先补非哺乳动物与库覆盖不足对象。已有古老稀疏UCSC昆虫标签不能单独承担这一确认；先按assembly、标签独立性和项目历史资格选择，再运行。候选名单及规则见 [收束方案](multispecies-closure-plan.md)，不是按分数搜索物种。[候选资产资格审阅](external-panel-reference-qualification.md)已完成：青鳉/家蚕有条件性资产，但尚无独立完整真值；oryLat2旧assembly与2017 RefSeq assembly不能混配。现已完成家蚕与D. simulans的预选长区间评价，各4×4 MiB，附加原生LTR结构支持；它补充了来源依赖正类证据，仍不是独立全基因组确认。见[新报告](../../../reports/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/RESULTS.md)。
-3. 若主张“缺乏合适库时帮助基因注释”，需要在同一目标输入上明确限定库知识条件，并与合格同库/异库或库缺失对照配对；当前D/P3改善未mask与D推理时不读库是支持线索，尚不等于该因果主张完成。强de novo替代与独立RNA证据现已启动：RM2/Red→固定Tiberius→统一score使用成功依赖；SRR23268362全assembly RNA管线正在运行，盲法候选集完整覆盖49/18和13/9两组gain/loss。两条线均尚无完整新下游结果，见[强对照状态](../../../reports/PLATYPUS-STRONG-MASK-CONTROLS-20260917/SUBMISSION-12856282-12857412.md)与[RNA状态](../../../reports/PLATYPUS-GENE-EVIDENCE-20260917/STATUS.md)。
+3. 若主张“缺乏合适库时帮助基因注释”，需要在同一目标输入上明确限定库知识条件，并与合格同库/异库或库缺失对照配对；当前D/P3改善未mask与D推理时不读库是支持线索，尚不等于该因果主张完成。强de novo替代与独立RNA证据现已启动：RM2/Red→固定Tiberius→统一score使用成功依赖；SRR23268362全assembly RNA管线正在运行，盲法候选集完整覆盖49/18和13/9两组gain/loss。独立 RNA 管线已于 2026-09-18 完成：D 的多外显子预测中 281/689 获全部内含子的严格支持，U_soft 为 262/680、R_TE 为 283/687；D 相对 U_soft 的 49 个 gain 中 22 个、18 个 loss 中 8 个获支持。其盲法全部预测分母包含 halo（104 Mb），reference gain/loss 仍为 100 Mb。强 de novo 对照尚待完整结果，见[强对照状态](../../../reports/PLATYPUS-STRONG-MASK-CONTROLS-20260917/SUBMISSION-12856282-12857412.md)与[RNA状态](../../../reports/PLATYPUS-GENE-EVIDENCE-20260917/STATUS.md)。
 4. D若在开发面板出现稳定、可定位的跨类群缺口，才进行共享adapter/专家对照。没有专家互补证据就不追加MoE。模型变化后，最终benchmark与下游必须补该模型自己的行。
 5. 最终输出流程和适用域确定后，导出新GitHub与HF权重、真实序列notebook和可迁移benchmark命令。NTv2权重许可与代码许可分开。
 
 本稿停止新增Gap方向、跨kingdom首训、基座网格和多seed扩张。可以以“有明确适用域、可复用且有下游用途的TE注释方法”收束；是否达到Nature Communications需要看独立外部及下游证据闭合后的实质贡献，不能仅根据已有几张高分表判断。
+
+## 2026-09-18 作者更新
+
+作者已明确授权统一 NTv2-500M binary/class 设计、扩大可靠非哺乳外部及下游面板、开展受控 adapter/MoE 对照、并补整基因组 de novo benchmark。因此上文“本轮不再追加表示训练/最终模型已冻结”的执行建议不再限制新批次；历史结果与封存限制不变。新实验和主张边界见 [更新后的收束记录](../20260918/closure-scope-and-decisions.md)。

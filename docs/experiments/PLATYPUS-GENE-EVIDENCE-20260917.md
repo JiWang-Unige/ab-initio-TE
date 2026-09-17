@@ -143,3 +143,7 @@ recorded in `reports/PLATYPUS-GENE-EVIDENCE-20260917/STATUS.md` and `jobs.json`.
 The observed 1,083-candidate union covers all 49/18 historical D-versus-U_soft
 gains/losses and all 13/9 D-versus-R_TE gains/losses in the post-hoc join.
 That complete join checks coordinates and coverage, not RNA support.
+
+## 2026-09-18 completion
+
+Native job 12858354 completed in 34m34s, exit 0. The [completed evidence report](../../reports/PLATYPUS-GENE-EVIDENCE-20260917/run-12858354/RESULTS.md) includes all three frozen arms, gains and losses, and the single-tissue boundary. The blind all-prediction endpoint includes 104 Mb of inference inputs (core plus halo); it is distinct from the 100-Mb reference-scored locus endpoint. No candidate selection or threshold was changed. A chromosome-bootstrap sensitivity analysis was added after the native counts and is marked exploratory.

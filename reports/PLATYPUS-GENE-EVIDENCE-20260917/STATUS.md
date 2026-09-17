@@ -1,10 +1,16 @@
 # Platypus independent RNA evidence — execution status
 
-Job **12858354** is running on `shared-cpu` (8 CPU, 32 GB, 4 h ceiling).
-It downloads official ENA paired FASTQ for **SRR23268362**, aligns to the
-complete `GCF_004115215.2` assembly, extracts template-counted junctions,
-assembles transcripts with StringTie without a reference GTF, and scores the
-frozen 1,083-candidate union. **No RNA-supported gene result is available yet.**
+Job **12858354 completed** on `shared-cpu` (8 CPU, 32 GB) in **34m34s**, exit 0.
+The full-assembly alignment, junction extraction, reference-free StringTie
+assembly and blind 1,083-candidate scoring all completed. D has 281/689
+multi-exon candidates with all introns supported versus 262/680 for U_soft
+and 283/687 for R_TE. Among reference-relative D versus U_soft gains/losses,
+22/49 gains and 8/18 losses have strict full-junction support.
+
+See [completed results](run-12858354/RESULTS.md). All candidate outputs from
+20 inference regions include halos (104 Mb); the separate gene-reference
+comparison uses 100 Mb. The post-hoc chromosome bootstrap is explicitly
+exploratory and does not represent independent biological replication.
 
 The selected sequencing run is absent from annotation105's listed RNA inputs
 and belongs to a later public study. The data support temporal/study-level
@@ -34,8 +40,8 @@ fixed, and the junction endpoint is explicitly strand-agnostic.
 
 Both official ENA FASTQ files have downloaded successfully. The native job MD5
 values match the ENA file report: read 1 `09b0452420729cfa89a672777b44ff0f`,
-read 2 `2878bdc28e2d3c536f3e26899437747c`. The whole-assembly HISAT2 index build
-is running; this establishes input identity, not gene support.
+read 2 `2878bdc28e2d3c536f3e26899437747c`. The full-assembly alignment and downstream processing completed;
+file identity verification is separate from biological support.
 
 `verify_contract.py` passes hand-computable QNAME/mate, NH, splice-coordinate,
 per-template-anchor, UTR, single-exon and missing-output cases. On the actual

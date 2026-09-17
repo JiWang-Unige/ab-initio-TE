@@ -1,0 +1,7 @@
+{
+  "primary_nh1_alignment_records": 48355766,
+  "primary_nh1_templates": 25216245,
+  "junction_template_records": 15750551,
+  "distinct_junctions": 194293,
+  "template_deduplication": "adjacent SAM records; only trailing /1,/2 suffixes normalized"
+}

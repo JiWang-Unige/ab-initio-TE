@@ -1,7 +1,7 @@
 {
   "experiment": "PLATYPUS-GENE-EVIDENCE-20260917",
-  "status": "RUNNING_NOT_RNA_RESULTS",
-  "active_job": 12858354,
+  "status": "COMPLETED",
+  "active_job": null,
   "partition": "shared-cpu",
   "cpus": 8,
   "memory_gb": 32,
@@ -33,7 +33,7 @@
       "reason": "SRA Toolkit installation not configured; no RNA inference or evidence score produced"
     }
   ],
-  "rna_supported_gene_results_available": false,
+  "rna_supported_gene_results_available": true,
   "verification": {
     "hand_computable_fixture": "PASS",
     "historical_gain_loss_join": {
@@ -57,5 +57,8 @@
       "read2_md5": "2878bdc28e2d3c536f3e26899437747c",
       "basis": "native job ena-md5.txt matches ENA official file report"
     }
-  }
+  },
+  "completed_job": 12858354,
+  "elapsed": "00:34:34",
+  "exit_code": 0
 }

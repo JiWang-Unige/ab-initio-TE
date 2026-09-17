@@ -1,0 +1,74 @@
+{
+  "status": "COMPLETED",
+  "analysis": "posthoc_chromosome_cluster_bootstrap",
+  "chromosomes": [
+    "NC_041728.1",
+    "NC_041729.1",
+    "NC_041730.1",
+    "NC_041731.1",
+    "NC_041732.1",
+    "NC_041734.1",
+    "NC_041735.1",
+    "NC_041736.1",
+    "NC_041738.1",
+    "NC_041739.1"
+  ],
+  "replicates": 10000,
+  "seed": 42,
+  "scope": "104 Mb prediction input, including halos; single RNA run",
+  "not_biological_replication": true,
+  "comparisons": {
+    "D_minus_U_soft": {
+      "all_introns_strict": {
+        "rate_difference": 0.022543327926235812,
+        "rate_difference_ci95": [
+          0.009970725879437023,
+          0.03863575508986553
+        ],
+        "count_difference": 19,
+        "count_difference_ci95": [
+          8.0,
+          29.0
+        ]
+      },
+      "stringtie_exact_intron_chain": {
+        "rate_difference": 0.012507470332109638,
+        "rate_difference_ci95": [
+          -0.0016236037377272555,
+          0.0317868911000259
+        ],
+        "count_difference": 11,
+        "count_difference_ci95": [
+          2.0,
+          22.0
+        ]
+      }
+    },
+    "D_minus_R_TE": {
+      "all_introns_strict": {
+        "rate_difference": -0.0040985078473749215,
+        "rate_difference_ci95": [
+          -0.01291318079862432,
+          0.005549151251626005
+        ],
+        "count_difference": -2,
+        "count_difference_ci95": [
+          -8.0,
+          4.0
+        ]
+      },
+      "stringtie_exact_intron_chain": {
+        "rate_difference": 0.0021041823793739867,
+        "rate_difference_ci95": [
+          -0.004765684252917064,
+          0.009510512373041534
+        ],
+        "count_difference": 2,
+        "count_difference_ci95": [
+          -2.0,
+          6.0
+        ]
+      }
+    }
+  }
+}
