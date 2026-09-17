@@ -1,0 +1,18 @@
+{
+  "protocol": "D-TIBERIUS-PLATYPUS-20260917",
+  "smoke_job_id": "12849490_0",
+  "smoke_dependency": "afterany:12849647",
+  "dependency_purpose": "respect the current two-GPU concurrency ceiling; no scientific dependency",
+  "status": "SMOKE_SUBMITTED_NOT_A_RESULT",
+  "full_array_submitted": false,
+  "score_submitted": false,
+  "frozen_cores": 20,
+  "reused_control_cells": 100,
+  "scheduling_note": "Same GPU and memory; added shared partition and reduced requested wall limit within the original ceiling to avoid a long private-only queue. Wait for portable parity retry to retain two-GPU ceiling.",
+  "smoke_partitions": [
+    "private-teodoro-gpu",
+    "shared-gpu"
+  ],
+  "smoke_gpu": "nvidia_geforce_rtx_3090",
+  "smoke_requested_wall_hours": 1
+}

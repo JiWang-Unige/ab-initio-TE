@@ -1,0 +1,60 @@
+{
+  "validation_date": "2026-09-17",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "local_glm_window_exact",
+      "status": "PASS",
+      "source": "reports/tefm_supp/PIPE-TEFM-SUPP-20260617/summaries/window_sweep.tsv",
+      "derived": "docs/manuscript/20260917/tables/local_glm_window_matrix.tsv",
+      "source_rows": 20,
+      "derived_rows": 20,
+      "mismatch_count": 0
+    },
+    {
+      "name": "local_ntv_transfer_aggregate",
+      "status": "PASS",
+      "source": "reports/tefm_final/PIPE-TEFM-FINAL-20260623/summaries/matrix_eval.tsv",
+      "derived": "docs/manuscript/20260917/tables/local_ntv2_ntv3_size_transfer_summary.tsv",
+      "source_rows": 495,
+      "derived_groups": 90,
+      "max_abs_diff": 4.996003610813204e-16,
+      "tolerance": 5e-15,
+      "mismatch_count": 0
+    },
+    {
+      "name": "remote_v2_backbone_exact",
+      "status": "PASS",
+      "source": "reports/HISTORICAL-EVIDENCE-INVENTORY-20260917/source/hg38_backbone_finetune_eval_metrics.csv",
+      "derived": "docs/manuscript/20260917/tables/remote_v2_hg38_backbone_summary.tsv",
+      "source_rows": 5,
+      "derived_rows": 5,
+      "mismatch_count": 0
+    },
+    {
+      "name": "remote_v2_window_exact",
+      "status": "PASS",
+      "source": "reports/HISTORICAL-EVIDENCE-INVENTORY-20260917/source/fig2_backbone_comparison.csv",
+      "derived": "docs/manuscript/20260917/tables/remote_v2_hg38_window_summary.tsv",
+      "source_rows": 5,
+      "derived_rows": 5,
+      "mismatch_count": 0
+    },
+    {
+      "name": "archive_human_library_exact",
+      "status": "PASS",
+      "source": "reports/HISTORICAL-EVIDENCE-INVENTORY-20260917/source/repeatmasker_human_library_comparison.tsv",
+      "derived": "docs/manuscript/20260917/tables/archived_human_library_rm_summary.tsv",
+      "source_rows": 7,
+      "derived_rows": 7,
+      "mismatch_count": 0
+    },
+    {
+      "name": "remote_source_copy_sha256",
+      "status": "PASS",
+      "files": 4,
+      "mismatch_count": 0
+    }
+  ],
+  "mismatches": []
+}

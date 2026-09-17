@@ -1,0 +1,31 @@
+{
+  "source": "reports/P3-TIBERIUS-EXTERNAL-20260915/full-r1-score-12740044/result.json",
+  "reference_loci": 639,
+  "metrics": {
+    "U_soft": {
+      "tp": 381,
+      "fp": 347,
+      "fn": 258
+    },
+    "U_nosm": {
+      "tp": 358,
+      "fp": 348,
+      "fn": 281
+    },
+    "P": {
+      "tp": 408,
+      "fp": 338,
+      "fn": 231
+    },
+    "R_TE": {
+      "tp": 408,
+      "fp": 332,
+      "fn": 231
+    },
+    "R_all": {
+      "tp": 405,
+      "fp": 329,
+      "fn": 234
+    }
+  }
+}

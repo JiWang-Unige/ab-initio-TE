@@ -1,0 +1,379 @@
+{
+  "protocol": "SF5-READOUT-CLOSURE-20260917",
+  "status": "COMPLETED",
+  "source": "reports/SF5-READOUT-CLOSURE-20260917/source/frozen-confusion-12779829.json",
+  "original": "reports/SF5-ONTOLOGY-CLOSURE-20260915/run-12731987/test_results.json",
+  "source_job": "12779829",
+  "no_training": true,
+  "no_inference": true,
+  "exact_original_counts_reproduced": true,
+  "selection": "posthoc descriptive reference-label subsets; all predictions retained",
+  "groups": {
+    "all_eight": {
+      "positions": 8847360,
+      "coverage_fraction": 1.0,
+      "accuracy": 0.8896004005714699,
+      "main4_macro_f1": 0.8336872338267862,
+      "material": {
+        "tp": 3285864,
+        "fp": 494487,
+        "fn": 365306,
+        "precision": 0.8691954794673827,
+        "recall": 0.8999482357709995,
+        "f1": 0.884304572374888
+      },
+      "classes": {
+        "BG": {
+          "support": 5196190,
+          "tp": 4701703,
+          "fp": 365306,
+          "fn": 494487,
+          "precision": 0.9279050027343547,
+          "recall": 0.9048366206778428,
+          "f1": 0.9162256329629778
+        },
+        "SINE": {
+          "support": 75713,
+          "tp": 58353,
+          "fp": 22848,
+          "fn": 17360,
+          "precision": 0.7186241548749399,
+          "recall": 0.7707130875807325,
+          "f1": 0.7437577271626497
+        },
+        "LINE": {
+          "support": 1142586,
+          "tp": 1081061,
+          "fp": 109333,
+          "fn": 61525,
+          "precision": 0.9081539389479449,
+          "recall": 0.9461528497636064,
+          "f1": 0.9267640528422876
+        },
+        "LTR": {
+          "support": 1254710,
+          "tp": 1140829,
+          "fp": 208507,
+          "fn": 113881,
+          "precision": 0.8454743666514493,
+          "recall": 0.9092371942520583,
+          "f1": 0.8761972714767712
+        },
+        "DNA": {
+          "support": 939741,
+          "tp": 760188,
+          "fp": 229409,
+          "fn": 179553,
+          "precision": 0.768179369985964,
+          "recall": 0.8089335253011202,
+          "f1": 0.7880298838254365
+        },
+        "KNOWN_OTHER_TE": {
+          "support": 83331,
+          "tp": 54177,
+          "fp": 12728,
+          "fn": 29154,
+          "precision": 0.8097601076152754,
+          "recall": 0.6501422039817115,
+          "f1": 0.721225272238345
+        },
+        "AMBIGUOUS_TE": {
+          "support": 117883,
+          "tp": 55983,
+          "fp": 23384,
+          "fn": 61900,
+          "precision": 0.7053687300767322,
+          "recall": 0.4749030818693111,
+          "f1": 0.5676349809885931
+        },
+        "UNCLASSIFIED": {
+          "support": 37206,
+          "tp": 18321,
+          "fp": 5230,
+          "fn": 18885,
+          "precision": 0.7779287503715341,
+          "recall": 0.49242057732623773,
+          "f1": 0.603091001859868
+        }
+      },
+      "predicted_uncertain_positions": 102918
+    },
+    "known_reference_bg_main4_other": {
+      "positions": 8692271,
+      "coverage_fraction": 0.9824705900969328,
+      "accuracy": 0.8969245206459854,
+      "main4_macro_f1": 0.8388821332225835,
+      "material": {
+        "tp": 3171448,
+        "fp": 494487,
+        "fn": 324633,
+        "precision": 0.8651129930017853,
+        "recall": 0.9071437418068975,
+        "f1": 0.8856299678749671
+      },
+      "classes": {
+        "BG": {
+          "support": 5196190,
+          "tp": 4701703,
+          "fp": 324633,
+          "fn": 494487,
+          "precision": 0.9354135895411687,
+          "recall": 0.9048366206778428,
+          "f1": 0.9198710768747372
+        },
+        "SINE": {
+          "support": 75713,
+          "tp": 58353,
+          "fp": 21696,
+          "fn": 17360,
+          "precision": 0.7289660083199041,
+          "recall": 0.7707130875807325,
+          "f1": 0.7492584840975334
+        },
+        "LINE": {
+          "support": 1142586,
+          "tp": 1081061,
+          "fp": 109272,
+          "fn": 61525,
+          "precision": 0.9082004783535363,
+          "recall": 0.9461528497636064,
+          "f1": 0.926788285405537
+        },
+        "LTR": {
+          "support": 1254710,
+          "tp": 1140829,
+          "fp": 208177,
+          "fn": 113881,
+          "precision": 0.845681190446892,
+          "recall": 0.9092371942520583,
+          "f1": 0.8763083224130435
+        },
+        "DNA": {
+          "support": 939741,
+          "tp": 760188,
+          "fp": 193032,
+          "fn": 179553,
+          "precision": 0.797494807074967,
+          "recall": 0.8089335253011202,
+          "f1": 0.8031734409742197
+        },
+        "KNOWN_OTHER_TE": {
+          "support": 83331,
+          "tp": 54177,
+          "fp": 12635,
+          "fn": 29154,
+          "precision": 0.8108872657606419,
+          "recall": 0.6501422039817115,
+          "f1": 0.7216720060209267
+        },
+        "AMBIGUOUS_TE": {
+          "support": 0,
+          "tp": 0,
+          "fp": 21306,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        },
+        "UNCLASSIFIED": {
+          "support": 0,
+          "tp": 0,
+          "fp": 5209,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "predicted_uncertain_positions": 26515
+    },
+    "known_reference_bg_main4": {
+      "positions": 8608940,
+      "coverage_fraction": 0.9730518482349537,
+      "accuracy": 0.8993132720172285,
+      "main4_macro_f1": 0.839960764727405,
+      "material": {
+        "tp": 3109214,
+        "fp": 494487,
+        "fn": 303536,
+        "precision": 0.8627835661171668,
+        "recall": 0.9110582374917588,
+        "f1": 0.8862640101099545
+      },
+      "classes": {
+        "BG": {
+          "support": 5196190,
+          "tp": 4701703,
+          "fp": 303536,
+          "fn": 494487,
+          "precision": 0.9393563424244077,
+          "recall": 0.9048366206778428,
+          "f1": 0.9217734103722135
+        },
+        "SINE": {
+          "support": 75713,
+          "tp": 58353,
+          "fp": 21402,
+          "fn": 17360,
+          "precision": 0.7316531878879067,
+          "recall": 0.7707130875807325,
+          "f1": 0.7506753801425373
+        },
+        "LINE": {
+          "support": 1142586,
+          "tp": 1081061,
+          "fp": 109170,
+          "fn": 61525,
+          "precision": 0.9082783090005218,
+          "recall": 0.9461528497636064,
+          "f1": 0.9268288082605708
+        },
+        "LTR": {
+          "support": 1254710,
+          "tp": 1140829,
+          "fp": 207587,
+          "fn": 113881,
+          "precision": 0.8460512186150269,
+          "recall": 0.9092371942520583,
+          "f1": 0.8765069381966144
+        },
+        "DNA": {
+          "support": 939741,
+          "tp": 760188,
+          "fp": 186787,
+          "fn": 179553,
+          "precision": 0.8027540325774176,
+          "recall": 0.8089335253011202,
+          "f1": 0.8058319323098972
+        },
+        "KNOWN_OTHER_TE": {
+          "support": 0,
+          "tp": 0,
+          "fp": 12635,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        },
+        "AMBIGUOUS_TE": {
+          "support": 0,
+          "tp": 0,
+          "fp": 21265,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        },
+        "UNCLASSIFIED": {
+          "support": 0,
+          "tp": 0,
+          "fp": 4424,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "predicted_uncertain_positions": 25689
+    },
+    "conditional_true_main4": {
+      "positions": 3412750,
+      "coverage_fraction": 0.38573653609664355,
+      "accuracy": 0.8909035235513881,
+      "main4_macro_f1": 0.9028703614599987,
+      "material": {
+        "tp": 3109214,
+        "fp": 0,
+        "fn": 303536,
+        "precision": 1.0,
+        "recall": 0.9110582374917588,
+        "f1": 0.9534594180525989
+      },
+      "classes": {
+        "BG": {
+          "support": 0,
+          "tp": 0,
+          "fp": 303536,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        },
+        "SINE": {
+          "support": 75713,
+          "tp": 58353,
+          "fp": 8866,
+          "fn": 17360,
+          "precision": 0.86810276856246,
+          "recall": 0.7707130875807325,
+          "f1": 0.8165141465871883
+        },
+        "LINE": {
+          "support": 1142586,
+          "tp": 1081061,
+          "fp": 22006,
+          "fn": 61525,
+          "precision": 0.9800501692100299,
+          "recall": 0.9461528497636064,
+          "f1": 0.9628032469842848
+        },
+        "LTR": {
+          "support": 1254710,
+          "tp": 1140829,
+          "fp": 13459,
+          "fn": 113881,
+          "precision": 0.988339998336637,
+          "recall": 0.9092371942520583,
+          "f1": 0.9471398481858433
+        },
+        "DNA": {
+          "support": 939741,
+          "tp": 760188,
+          "fp": 17963,
+          "fn": 179553,
+          "precision": 0.9769157914080944,
+          "recall": 0.8089335253011202,
+          "f1": 0.8850242040826781
+        },
+        "KNOWN_OTHER_TE": {
+          "support": 0,
+          "tp": 0,
+          "fp": 823,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        },
+        "AMBIGUOUS_TE": {
+          "support": 0,
+          "tp": 0,
+          "fp": 5278,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        },
+        "UNCLASSIFIED": {
+          "support": 0,
+          "tp": 0,
+          "fp": 388,
+          "fn": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "predicted_uncertain_positions": 5666
+    }
+  },
+  "merged_ambiguous_unclassified": {
+    "tp": 76403,
+    "fp": 26515,
+    "fn": 78686,
+    "precision": 0.7423677102159001,
+    "recall": 0.49263971010194146,
+    "f1": 0.592255248888596
+  },
+  "per_species_available": false,
+  "limitation": "Class/status labels are comparator-relative; subset F1 is not improved model performance or evidence of corrected annotation."
+}

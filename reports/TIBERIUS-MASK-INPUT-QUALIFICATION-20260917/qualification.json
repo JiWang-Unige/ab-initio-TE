@@ -1,0 +1,42 @@
+[
+  {
+    "target_species": "\"Vertebrata\"",
+    "weights_url": "\"https://bioinf.uni-greifswald.de/bioinf/tiberius/models/vertebrates_weights.tar.gz\"",
+    "softmasking": "False",
+    "tiberius_version": "1.1.7",
+    "date": "\"2025-11-10\"",
+    "source": "https://raw.githubusercontent.com/Gaius-Augustus/Tiberius/main/model_cfg/vertebrates.yaml",
+    "retrieved_date": "2026-09-17",
+    "apis_mellifera_in_training_species": false
+  },
+  {
+    "target_species": "\"Insecta\"",
+    "weights_url": "\"https://bioinf.uni-greifswald.de/bioinf/tiberius/models/insecta_unmasked_v2.tar.gz\"",
+    "softmasking": "False",
+    "tiberius_version": "1.1.7",
+    "date": "\"2026-02-15\"",
+    "source": "https://raw.githubusercontent.com/Gaius-Augustus/Tiberius/main/model_cfg/insecta.yaml",
+    "retrieved_date": "2026-09-17",
+    "apis_mellifera_in_training_species": true
+  },
+  {
+    "target_species": "\"Insecta\"",
+    "weights_url": "\"https://bioinf.uni-greifswald.de/bioinf/tiberius/models/insecta_weights.tar.gz\"",
+    "softmasking": "True",
+    "tiberius_version": "1.1.6",
+    "date": "\"2025-12-03\"",
+    "source": "https://raw.githubusercontent.com/Gaius-Augustus/Tiberius/main/model_cfg/superseded/insecta_softmasking.yaml",
+    "retrieved_date": "2026-09-17",
+    "apis_mellifera_in_training_species": true
+  },
+  {
+    "target_species": "\"Mammalia\"",
+    "weights_url": "\"https://bioinf.uni-greifswald.de/bioinf/tiberius/models/tiberius_weights_v2.tar.gz\"",
+    "softmasking": "True",
+    "tiberius_version": "1.1.5",
+    "date": "\"2025-05-12\"",
+    "source": "https://raw.githubusercontent.com/Gaius-Augustus/Tiberius/main/model_cfg/mammalia_softmasking_v2.yaml",
+    "retrieved_date": "2026-09-17",
+    "apis_mellifera_in_training_species": false
+  }
+]
