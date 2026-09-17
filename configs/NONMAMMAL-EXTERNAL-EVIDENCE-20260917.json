@@ -1,0 +1,56 @@
+{
+  "experiment": "NONMAMMAL-EXTERNAL-EVIDENCE-20260917",
+  "status": "TWO_SPECIES_FIXED_BEFORE_THEIR_MODEL_RUNS",
+  "model": {
+    "seed": 42,
+    "model_relpath": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "calibration_relpath": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "model_code_relpath": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "calibration_scope": "six-species-shared",
+    "calibration_fit_split": "CAL",
+    "threshold_policy": "existing frozen CAL threshold; no external threshold fitting"
+  },
+  "panel": {
+    "contigs": 4,
+    "length_bp": 4194304,
+    "selection": "Four longest eligible FASTA contigs, length descending then ID lexicographic; centered window",
+    "labels_used": false,
+    "scores_used": false
+  },
+  "species": {
+    "silkworm": {
+      "species": "Bombyx mori",
+      "assembly": "GCF_014905235.1 / Bmori_2016v1.0",
+      "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/silkworm/GCF_014905235.1.fa.gz",
+      "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/silkworm/GCF_014905235.1.repeatMasker.out.gz",
+      "historical_label_method": "NCBI RepeatMasker open-4.0.8, Dfam_Consensus-20181026 + RepBase-20181026; source-dependent positive layer",
+      "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/905/235/GCF_014905235.1_Bmori_2016v1.0/",
+      "task_supervision": "outside D six supervised species",
+      "pretraining_exposure": "unknown",
+      "historical_project_role": "preliminary candidate asset; no untouched-claim"
+    },
+    "d_simulans": {
+      "species": "Drosophila simulans",
+      "assembly": "GCA_004382185.1 / ASM438218v1 (wXD1)",
+      "fasta": "/home/users/j/jwang/ab-initio-TE/outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/d_simulans/sources/GCA_004382185.1.fa.gz",
+      "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/d_simulans/sources/GCA_004382185.1.repeatMasker.out.gz",
+      "source_url": "https://hgdownload.soe.ucsc.edu/hubs/GCA/004/382/185/GCA_004382185.1/",
+      "downloads": {
+        "GCA_004382185.1.fa.gz": "https://hgdownload.soe.ucsc.edu/hubs/GCA/004/382/185/GCA_004382185.1/GCA_004382185.1.fa.gz",
+        "GCA_004382185.1.repeatMasker.out.gz": "https://hgdownload.soe.ucsc.edu/hubs/GCA/004/382/185/GCA_004382185.1/GCA_004382185.1.repeatMasker.out.gz",
+        "GCA_004382185.1_assembly_report.txt": "https://hgdownload.soe.ucsc.edu/hubs/GCA/004/382/185/GCA_004382185.1/GCA_004382185.1_assembly_report.txt"
+      },
+      "historical_label_method": "UCSC source-dependent RepeatMasker layer; exact native metadata retained from track provenance",
+      "task_supervision": "outside D and SF5 supervised species; D.simulans is distinct from sealed D.melanogaster dm6",
+      "pretraining_exposure": "unknown",
+      "selection_rationale": "PacBio long-read assembly and original-paper custom-library/structural evidence availability, before D inference; medaka was not inferred or selected by score"
+    }
+  },
+  "structural_layer": {
+    "method": "EDTA 2.3.0 EDTA_raw.pl --type ltr --species others --threads 4 --convert_seq_name 0 --overwrite 1",
+    "evidence": "LTRharvest + LTR_FINDER candidates screened by LTR_retriever; retained structural pass list and EDTA cleanup separately",
+    "external_library": "No user supplied library; native software may use bundled protein/classification evidence and self-derived RM filtering. This is orthogonal algorithm support, not independently established biological truth.",
+    "endpoint": "callable positive bp recovery within intact structural LTR candidate spans; report count and positive denominator even if zero",
+    "budget": "4 CPU, 24 GB, 2 hours, one structural job at a time"
+  }
+}

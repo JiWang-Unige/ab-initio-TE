@@ -1,0 +1,44 @@
+{
+  "experiment": "NONMAMMAL-EXTERNAL-EVIDENCE-20260917",
+  "jobs": {
+    "silkworm": {
+      "prepare": 12856134,
+      "frozen_D_inference": 12856138,
+      "structural_LTR": 12856425,
+      "score": 12856610
+    },
+    "d_simulans": {
+      "prepare": 12856365,
+      "frozen_D_inference": 12856371,
+      "structural_LTR": 12856477,
+      "score": 12856612
+    }
+  },
+  "status": "BOTH_SPECIES_NATIVE_AND_SCORING_COMPLETED",
+  "scheduling": "preparation moved to shared-cpu 15min; structural jobs shared-cpu sequential; root GPU inference sequential",
+  "reference_qualification": "source-dependent RepeatMasker layers plus predeclared orthogonal structural algorithm support; independent biological truth unresolved",
+  "preserved_attempts": [
+    {
+      "job": 12856147,
+      "state": "cancelled during dependency checks",
+      "reason": "container cwd did not resolve to bound /work; explicit --pwd /work added before retry; native outputs preserved"
+    },
+    {
+      "job": 12856372,
+      "state": "cancelled before execution",
+      "reason": "dependent job captured the same cwd issue"
+    }
+  ],
+  "source_decomposition_job": 12857055,
+  "completed_jobs": [
+    12856134,
+    12856138,
+    12856425,
+    12856610,
+    12856365,
+    12856371,
+    12856477,
+    12856612,
+    12857055
+  ]
+}

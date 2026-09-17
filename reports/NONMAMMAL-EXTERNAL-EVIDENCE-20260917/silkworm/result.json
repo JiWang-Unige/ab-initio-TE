@@ -1,0 +1,272 @@
+{
+  "claim_boundary": "Regional positive-layer recovery; no reliable negatives, biological precision/F1, or whole-genome generalization claim. Structural support is algorithmic and selected toward intact LTRs.",
+  "frozen_threshold": 0.42330056285498807,
+  "inference": "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/inference-12856138",
+  "layers": {
+    "historical_repeatmasker": {
+      "claim_boundary": "Recovery of this documented positive layer on a fixed regional panel. Unannotated sequence is unknown, not negative; neither whole-genome biological precision/F1 nor biological insertion recovery is estimated.",
+      "coordinates": "0-based half-open",
+      "per_region": [
+        {
+          "assembly_length_bp": 21465692,
+          "callable_bp": 4194304,
+          "end": 12829998,
+          "panel_id": "p00",
+          "positive_recovery": 0.6158332408471138,
+          "predicted_bp": 895022,
+          "predicted_bp_without_this_reference_support": 279097,
+          "predicted_fraction_of_callable": 0.21338987350463867,
+          "recovered_positive_bp": 615925,
+          "reference_positive_bp": 1000149,
+          "seqid": "NC_051380.1",
+          "start": 8635694,
+          "unknown_bp": 3194155
+        },
+        {
+          "assembly_length_bp": 20666287,
+          "callable_bp": 4194304,
+          "end": 12430295,
+          "panel_id": "p01",
+          "positive_recovery": 0.6307190067840361,
+          "predicted_bp": 839065,
+          "predicted_bp_without_this_reference_support": 289792,
+          "predicted_fraction_of_callable": 0.20004868507385254,
+          "recovered_positive_bp": 549273,
+          "reference_positive_bp": 870868,
+          "seqid": "NC_051358.1",
+          "start": 8235991,
+          "unknown_bp": 3323436
+        },
+        {
+          "assembly_length_bp": 20440007,
+          "callable_bp": 4150830,
+          "end": 12317155,
+          "panel_id": "p02",
+          "positive_recovery": 0.5676057561978668,
+          "predicted_bp": 756256,
+          "predicted_bp_without_this_reference_support": 253317,
+          "predicted_fraction_of_callable": 0.1821939226612509,
+          "recovered_positive_bp": 502939,
+          "reference_positive_bp": 886071,
+          "seqid": "NC_051368.1",
+          "start": 8122851,
+          "unknown_bp": 3264759
+        },
+        {
+          "assembly_length_bp": 19061979,
+          "callable_bp": 4194304,
+          "end": 11628141,
+          "panel_id": "p03",
+          "positive_recovery": 0.6398060807506445,
+          "predicted_bp": 881337,
+          "predicted_bp_without_this_reference_support": 263832,
+          "predicted_fraction_of_callable": 0.2101271152496338,
+          "recovered_positive_bp": 617505,
+          "reference_positive_bp": 965144,
+          "seqid": "NC_051362.1",
+          "start": 7433837,
+          "unknown_bp": 3229160
+        }
+      ],
+      "prediction": "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/inference-12856138/material_runs.bed",
+      "primary": {
+        "callable_bp": 16733742,
+        "positive_recovery": 0.6140514615961605,
+        "predicted_bp": 3371680,
+        "predicted_bp_without_this_reference_support": 1086038,
+        "predicted_fraction_of_callable": 0.2014898998681825,
+        "recovered_positive_bp": 2285642,
+        "reference_positive_bp": 3722232,
+        "unknown_bp": 13011510
+      },
+      "reference": "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/score-12856610/historical_rm_positive.bed",
+      "reference_contigs_matched": [
+        "NC_051358.1",
+        "NC_051362.1",
+        "NC_051368.1",
+        "NC_051380.1"
+      ],
+      "reference_layer": "historical_repeatmasker_known_TE",
+      "reference_rows_overlapping_panel": 12448,
+      "species": "silkworm",
+      "status": "COMPLETED_POSITIVE_ONLY"
+    },
+    "structural_ltr": {
+      "claim_boundary": "Recovery of this documented positive layer on a fixed regional panel. Unannotated sequence is unknown, not negative; neither whole-genome biological precision/F1 nor biological insertion recovery is estimated.",
+      "coordinates": "0-based half-open",
+      "per_region": [
+        {
+          "assembly_length_bp": 21465692,
+          "callable_bp": 4194304,
+          "end": 12829998,
+          "panel_id": "p00",
+          "positive_recovery": 0.8771622004820644,
+          "predicted_bp": 895022,
+          "predicted_bp_without_this_reference_support": 845529,
+          "predicted_fraction_of_callable": 0.21338987350463867,
+          "recovered_positive_bp": 49493,
+          "reference_positive_bp": 56424,
+          "seqid": "NC_051380.1",
+          "start": 8635694,
+          "unknown_bp": 4137880
+        },
+        {
+          "assembly_length_bp": 20666287,
+          "callable_bp": 4194304,
+          "end": 12430295,
+          "panel_id": "p01",
+          "positive_recovery": 0.8738034460753031,
+          "predicted_bp": 839065,
+          "predicted_bp_without_this_reference_support": 800726,
+          "predicted_fraction_of_callable": 0.20004868507385254,
+          "recovered_positive_bp": 38339,
+          "reference_positive_bp": 43876,
+          "seqid": "NC_051358.1",
+          "start": 8235991,
+          "unknown_bp": 4150428
+        },
+        {
+          "assembly_length_bp": 20440007,
+          "callable_bp": 4150830,
+          "end": 12317155,
+          "panel_id": "p02",
+          "positive_recovery": 0.780761278693739,
+          "predicted_bp": 756256,
+          "predicted_bp_without_this_reference_support": 726801,
+          "predicted_fraction_of_callable": 0.1821939226612509,
+          "recovered_positive_bp": 29455,
+          "reference_positive_bp": 37726,
+          "seqid": "NC_051368.1",
+          "start": 8122851,
+          "unknown_bp": 4113104
+        },
+        {
+          "assembly_length_bp": 19061979,
+          "callable_bp": 4194304,
+          "end": 11628141,
+          "panel_id": "p03",
+          "positive_recovery": 0.7696743140560482,
+          "predicted_bp": 881337,
+          "predicted_bp_without_this_reference_support": 849835,
+          "predicted_fraction_of_callable": 0.2101271152496338,
+          "recovered_positive_bp": 31502,
+          "reference_positive_bp": 40929,
+          "seqid": "NC_051362.1",
+          "start": 7433837,
+          "unknown_bp": 4153375
+        }
+      ],
+      "prediction": "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/inference-12856138/material_runs.bed",
+      "primary": {
+        "callable_bp": 16733742,
+        "positive_recovery": 0.8314324830264591,
+        "predicted_bp": 3371680,
+        "predicted_bp_without_this_reference_support": 3222891,
+        "predicted_fraction_of_callable": 0.2014898998681825,
+        "recovered_positive_bp": 148789,
+        "reference_positive_bp": 178955,
+        "unknown_bp": 16554787
+      },
+      "reference": "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/score-12856610/structural_ltr_positive.bed",
+      "reference_contigs_matched": [
+        "NC_051358.1",
+        "NC_051362.1",
+        "NC_051368.1",
+        "NC_051380.1"
+      ],
+      "reference_layer": "LTR_retriever_native_structural_pass_not_manual_truth",
+      "reference_rows_overlapping_panel": 32,
+      "species": "silkworm",
+      "status": "COMPLETED_POSITIVE_ONLY"
+    }
+  },
+  "legacy_source": {
+    "known_te_rows": 12448,
+    "panel_rows_by_source_class": {
+      "DNA": 989,
+      "LINE": 5339,
+      "LTR": 289,
+      "Low_complexity": 807,
+      "RC": 882,
+      "SINE": 4949,
+      "Simple_repeat": 4617,
+      "Unknown": 82,
+      "rRNA": 7,
+      "tRNA": 2
+    },
+    "selected_classes": [
+      "DNA",
+      "LINE",
+      "LTR",
+      "RC",
+      "Retroposon",
+      "SINE"
+    ],
+    "unknown_policy": "Unknown and non-TE repeat classes are not used as reference positives; not converted into negatives"
+  },
+  "panel": {
+    "labels_used_in_selection": false,
+    "regions": [
+      {
+        "assembly_length_bp": 21465692,
+        "end": 12829998,
+        "panel_id": "p00",
+        "seqid": "NC_051380.1",
+        "start": 8635694
+      },
+      {
+        "assembly_length_bp": 20666287,
+        "end": 12430295,
+        "panel_id": "p01",
+        "seqid": "NC_051358.1",
+        "start": 8235991
+      },
+      {
+        "assembly_length_bp": 20440007,
+        "end": 12317155,
+        "panel_id": "p02",
+        "seqid": "NC_051368.1",
+        "start": 8122851
+      },
+      {
+        "assembly_length_bp": 19061979,
+        "end": 11628141,
+        "panel_id": "p03",
+        "seqid": "NC_051362.1",
+        "start": 7433837
+      }
+    ],
+    "scores_used_in_selection": false,
+    "selection": {
+      "contigs": 4,
+      "labels_used": false,
+      "length_bp": 4194304,
+      "scores_used": false,
+      "selection": "Four longest eligible FASTA contigs, length descending then ID lexicographic; centered window"
+    },
+    "source": {
+      "assembly": "GCF_014905235.1 / Bmori_2016v1.0",
+      "fasta": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/silkworm/GCF_014905235.1.fa.gz",
+      "historical_label_method": "NCBI RepeatMasker open-4.0.8, Dfam_Consensus-20181026 + RepBase-20181026; source-dependent positive layer",
+      "historical_project_role": "preliminary candidate asset; no untouched-claim",
+      "historical_rm_out": "/home/users/j/jwang/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/silkworm/GCF_014905235.1.repeatMasker.out.gz",
+      "pretraining_exposure": "unknown",
+      "source_url": "https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/014/905/235/GCF_014905235.1_Bmori_2016v1.0/",
+      "species": "Bombyx mori",
+      "task_supervision": "outside D six supervised species"
+    },
+    "species": "silkworm",
+    "status": "PREPARED",
+    "total_bp": 16777216
+  },
+  "species": "silkworm",
+  "structure": {
+    "directory": "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/structure-12856425",
+    "insertion_candidates": 32,
+    "native_exit": "0",
+    "pass_lists": [
+      "outputs/NONMAMMAL-EXTERNAL-EVIDENCE-20260917/silkworm/structure-12856425/panel.fa.EDTA.raw/LTR/panel.fa.pass.list"
+    ],
+    "status": "STRUCTURAL_POSITIVE_LAYER"
+  }
+}

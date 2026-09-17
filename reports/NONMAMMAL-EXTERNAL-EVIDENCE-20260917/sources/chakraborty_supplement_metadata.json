@@ -1,0 +1,46 @@
+{
+  "library_filename": "File_S1.fasta",
+  "record_count": 2316,
+  "total_bp": 7121885,
+  "min_bp": 40,
+  "max_bp": 17900,
+  "class_counts": {
+    "DNA": 436,
+    "LTR": 1335,
+    "Low_complexity": 2,
+    "Non-LTR_retrotransposon": 437,
+    "Non-LTR_retrotransposon_484": 1,
+    "Other": 16,
+    "RC": 43,
+    "SINE": 1,
+    "Satellite": 21,
+    "rDNA": 24
+  },
+  "193xp_records": [
+    {
+      "header": "193XP_SAT#Satellite/Satellite",
+      "length": 193
+    }
+  ],
+  "table_s14_193xp_rows": [
+    [
+      "193XP probe"
+    ],
+    [
+      "193XP probe",
+      "5’-/56-FAM/ACATTGGTCAAATGTCAATATGTGGTTATGAATCC-3’."
+    ]
+  ],
+  "table_s17_project_rows": [
+    [
+      "PRJNA383250",
+      "Genome assemblies",
+      "this paper"
+    ]
+  ],
+  "193xp_class": "Satellite/Satellite",
+  "193xp_te_eligible": false,
+  "te_specific_independent_support": false,
+  "coordinate_status": "library FASTA and probe table contain no genome coordinates",
+  "te_coordinate_status": "no independent genome-coordinate support for a TE-class record was found"
+}

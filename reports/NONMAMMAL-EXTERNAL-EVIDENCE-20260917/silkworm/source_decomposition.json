@@ -1,0 +1,70 @@
+{
+  "declared_after_silkworm_primary": true,
+  "interpretation": "Outside-old-layer means absent from this historical known-TE annotation, not proven new TE or corrected model TP. Structural calls provide algorithmic support; retain model misses in both strata.",
+  "per_region": [
+    {
+      "category": "structural_inside_old_TE_layer",
+      "panel_id": "p00",
+      "positive_bp": 15327,
+      "recovered_bp": 15115
+    },
+    {
+      "category": "structural_outside_old_TE_layer",
+      "panel_id": "p00",
+      "positive_bp": 41097,
+      "recovered_bp": 34378
+    },
+    {
+      "category": "structural_inside_old_TE_layer",
+      "panel_id": "p01",
+      "positive_bp": 7501,
+      "recovered_bp": 7495
+    },
+    {
+      "category": "structural_outside_old_TE_layer",
+      "panel_id": "p01",
+      "positive_bp": 36375,
+      "recovered_bp": 30844
+    },
+    {
+      "category": "structural_inside_old_TE_layer",
+      "panel_id": "p02",
+      "positive_bp": 15262,
+      "recovered_bp": 13459
+    },
+    {
+      "category": "structural_outside_old_TE_layer",
+      "panel_id": "p02",
+      "positive_bp": 22464,
+      "recovered_bp": 15996
+    },
+    {
+      "category": "structural_inside_old_TE_layer",
+      "panel_id": "p03",
+      "positive_bp": 3731,
+      "recovered_bp": 3340
+    },
+    {
+      "category": "structural_outside_old_TE_layer",
+      "panel_id": "p03",
+      "positive_bp": 37198,
+      "recovered_bp": 28162
+    }
+  ],
+  "species": "silkworm",
+  "status": "EXPLORATORY_SOURCE_DECOMPOSITION",
+  "totals": {
+    "structural_inside_old_TE_layer": {
+      "missed_bp": 2412,
+      "positive_bp": 41821,
+      "positive_recovery": 0.9423256258817341,
+      "recovered_bp": 39409
+    },
+    "structural_outside_old_TE_layer": {
+      "missed_bp": 27754,
+      "positive_bp": 137134,
+      "positive_recovery": 0.7976140125716452,
+      "recovered_bp": 109380
+    }
+  }
+}
