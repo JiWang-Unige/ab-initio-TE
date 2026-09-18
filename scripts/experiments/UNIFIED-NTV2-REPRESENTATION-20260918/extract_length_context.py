@@ -43,6 +43,32 @@ TARGET_START = (WINDOW_BP - TARGET_BP) // 2
 TARGET_END = TARGET_START + TARGET_BP
 
 
+def context_coordinates(context_length: int) -> tuple[int, int, int, int]:
+    """Return source/context bounds for the fixed central target.
+
+    The source record is always 4,096 bp and the target is its central
+    ``[TARGET_START, TARGET_END)`` span.  Contexts must be centered on that
+    same target; source and context-local coordinates are deliberately kept
+    separate so target pooling cannot silently use a source offset as a local
+    token offset.
+    """
+    if context_length not in CONTEXTS:
+        raise ValueError(f"unsupported context length: {context_length}")
+    context_start = TARGET_START - (context_length - TARGET_BP) // 2
+    context_end = context_start + context_length
+    target_start = TARGET_START - context_start
+    target_end = target_start + TARGET_BP
+    if context_start < 0 or context_end > WINDOW_BP:
+        raise RuntimeError(
+            f"context {context_length} exceeds source: [{context_start},{context_end})"
+        )
+    if target_start < 0 or target_end > context_length:
+        raise RuntimeError(
+            f"target {target_start}:{target_end} is outside context {context_length}"
+        )
+    return context_start, context_end, target_start, target_end
+
+
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser()
     ap.add_argument("--binary-data-root", type=Path, required=True)
@@ -330,6 +356,15 @@ def main() -> None:
         "models": [{"id": mid, "path": str(path), "kind": kind} for mid, path, kind in models],
         "context_lengths_bp": list(CONTEXTS),
         "target_span_in_4096_bp": [TARGET_START, TARGET_END],
+        "context_coordinates": {
+            str(context_length): {
+                "source_start": context_coordinates(context_length)[0],
+                "source_end": context_coordinates(context_length)[1],
+                "target_start_local": context_coordinates(context_length)[2],
+                "target_end_local": context_coordinates(context_length)[3],
+            }
+            for context_length in CONTEXTS
+        },
         "target_span_definition": "exact central 512 bp of every selected 4096-bp record",
         "target_pooling": "overlap-weighted mean over native six-bp token spans; overlap weights sum to 512 bp",
         "offset_mapping": "native slow tokenizer has no offsets; explicit D six-bp spans verified by content count and input IDs; failure blocks run",
@@ -363,12 +398,22 @@ def main() -> None:
         try:
             with torch.inference_mode():
                 for context_length in CONTEXTS:
-                    left_flank = (context_length - TARGET_BP) // 2
-                    target_start = TARGET_START - left_flank
-                    target_end = target_start + TARGET_BP
+                    source_start, source_end, target_start, target_end = context_coordinates(context_length)
                     context_sequences = [
-                        row["sequence_4096"][left_flank : left_flank + context_length] for row in rows
+                        row["sequence_4096"][source_start:source_end] for row in rows
                     ]
+                    if any(len(sequence) != context_length for sequence in context_sequences):
+                        raise RuntimeError(
+                            f"context {context_length}: source slice did not preserve requested length"
+                        )
+                    if any(
+                        sequence[target_start:target_end]
+                        != row["sequence_4096"][TARGET_START:TARGET_END]
+                        for sequence, row in zip(context_sequences, rows)
+                    ):
+                        raise RuntimeError(
+                            f"context {context_length}: local target is not the fixed source target"
+                        )
                     features: list[np.ndarray] = []
                     overlap_counts: list[int] = []
                     started = time.time()
@@ -393,9 +438,8 @@ def main() -> None:
                             # The context string is reconstructed from the
                             # frozen source sequence, so this is not a new
                             # sequence input or a target-label operation.
-                            left = (context_length - TARGET_BP) // 2
-                            context = row["sequence_4096"][left : left + context_length]
-                            handle.write(json.dumps(composition(context, TARGET_START - left, TARGET_END - left, context_length)) + "\n")
+                            context = row["sequence_4096"][source_start:source_end]
+                            handle.write(json.dumps(composition(context, target_start, target_end, context_length)) + "\n")
                     model_meta["contexts"][str(context_length)] = {
                         "n": int(len(rows)),
                         "feature_dim": int(matrix.shape[1]),

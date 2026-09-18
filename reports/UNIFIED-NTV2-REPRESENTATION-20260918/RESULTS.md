@@ -2,17 +2,18 @@
 
 ## Current status
 
-`CLASS_TRAIN_RUNNING`. The exact-D-coordinate eight-state class
+`CLASS_TRAIN_AND_REPRESENTATION_LENGTH_PASS`. The exact-D-coordinate eight-state class
 materialization is complete (Slurm `12887930`, `PASS`).  Native loader smoke
 is also complete (CPU Slurm `12888482`, `PASS`; 49 seconds): both native
 token-classification loaders initialized successfully, the class logits had
 shape `(1,688,8)`, and the D encoder versus the fresh class-head encoder had
 maximum hidden-state difference `0.0`.  This is a loader check, not a
-scientific score. Class fine-tuning `12889091` is now running after the
-LoRA job completed; the three-arm representation extraction/evaluation
-remain dependency-gated. No final scientific result is claimed for those
-stages yet. A separate legacy CPU readout is
-complete and is recorded below.
+scientific score. Class fine-tuning `12889091`, the three-arm supervised /
+fixed-K representation readouts, and the repaired length-only context
+diagnostic `12897975`/`12897980` all completed. The original length branch had
+a deterministic source-slice indexing bug and is retained separately as a
+blocked engineering attempt. A separate legacy CPU readout is complete and
+is also recorded below.
 
 The full SIB TEST exposure audit (`12889831`, PASS) found exact coordinate and
 sequence overlap for 3 chicken records in D TRAIN, 9 zebrafish records in D
@@ -48,10 +49,31 @@ exposure caveats.
 
 ## Results table
 
-Pending the frozen class training and the three-arm extraction.  Existing
-historical results must not be copied into this table because the old
-GENERanno class arm used a different backbone and the old NTv2 run used a
+The class result, the three-arm supervised/fixed-K representation readout, and
+the repaired context-length diagnostic are complete. The first bounded
+context-length attempt is explicitly blocked by a repaired engineering bug;
+its retry result is in `LENGTH-RETRY-RESULTS-12897975.md`.
+Existing historical results must not be copied into this table because the
+old GENERanno class arm used a different backbone and the old NTv2 run used a
 different special-token naming contract.
+
+The matched SIB representation readout is in
+`REPRESENTATION-RESULTS-12889676.md`: KNN known-five macro-F1 is
+`.4885/.6394/.7261` for pretrained/binary-D/class-D-last2, full-eight is
+`.4730/.5934/.6512`, and conditional TE-four is `.6342/.7197/.8417`.
+The supervised and fixed-K endpoints are held to the exact SIB panel and
+train-only fitting rules.
+
+## Completed matched class DEV result
+
+Class training `12889091` selected step 900 with CAL token macro-F1
+`0.6022688433`. Its one-pass DEV result is token macro-F1 `0.6066181` and
+expanded bp macro-F1 `0.6067215` (bp accuracy `0.9053371`). Pooled bp F1 is
+BG `0.9495`, SINE `0.9061`, LINE `0.8827`, LTR `0.7797`, DNA `0.7589`,
+KNOWN_OTHER_TE `0.4028`, AMBIGUOUS_TE `0`, and UNCLASSIFIED `0.1740`. The
+full per-class and per-species token/bp tables are in
+`CLASS-TRAIN-RESULTS-12889091.md`; raw outputs are under
+`results/class_training-12889091/`.
 
 ## Completed legacy readout diagnostic
 
@@ -83,10 +105,12 @@ fixed-panel diagnostic, not an independent biological validation.
 |---|---:|---|---|
 | matched class materialization | 12887930 | PASS | exact D coordinates; 21,000/6,000/6,000 half-records |
 | native D→class loader smoke | 12888482 | PASS | historical CPU-only debug-cpu smoke, 4 CPU/48G/49s; no scientific score |
-| class fine-tuning | 12889091 | RUNNING | dependency `12888288` completed; fixed `last2`, seed42, 900 steps; token selection + base-pair report |
-| matched three-arm extraction + length diagnostic | 12889676 | PENDING (`afterok:12889091`) | pretrained, binary D, class D-last2; target-centered 512/2048/4096; offset failure isolated |
-| train-only evaluator | 12889677/78/79 | PENDING (`afterok:12889676`) | pretrained/binary_D/class_D_last2; kNN/logistic/K-means |
-| context-length evaluator | 12889680 | PENDING (`afterok:12889676`) | train→DEV readouts plus composition baseline; BLOCKED is nonfatal |
+| class fine-tuning | 12889091 | PASS | fixed `last2`, seed42, 900 steps; best CAL token macro-F1 .6022688; DEV token/bp macro-F1 .6066181/.6067215 |
+| matched three-arm extraction + length diagnostic | 12889676 | PASS | pretrained, binary D, class D-last2; SIB extraction PASS; original length branch `BLOCKED_NATIVE_OFFSET` |
+| train-only evaluator | 12889677/78/79 | PASS | pretrained/binary_D/class_D_last2; kNN/logistic/K-means |
+| original context-length evaluator | 12889680 | BLOCKED_NATIVE_OFFSET; scheduler COMPLETED, 3s | original blocked input preserved; not a length result |
+| repaired length-only retry | 12897975 | PASS | `length_retry.sbatch` only; private GPU 1/4CPU/32G/5m20s; all 3 models × 3 contexts × 768 records verified |
+| repaired length evaluator | 12897980 | PASS | private CPU-only, 4 CPU/16G/20s; unchanged train-to-DEV probes |
 | legacy binary linear/composition diagnostic | 12889615 | PASS | completed caches; debug-cpu 4 CPU/16G/8s; fixed known-five 1,281-record denominator |
 | SIB TEST coordinate/sequence exposure audit | 12889831 | PASS | full 1,580-record panel; exact-match overlaps: chicken TRAIN=3, zebrafish CAL/DEV=9/7, *C. elegans* DEV=149 |
 
@@ -95,8 +119,8 @@ Superseded extraction/evaluation submissions `12889459–12889463` and
 were replaced by `12889676–12889680` after the length-diagnostic wrapper was
 changed so a native offset mismatch is recorded as a bounded
 `BLOCKED_NATIVE_OFFSET` status instead of failing the primary three-arm
-extraction. The class job `12889091` remains the single active training
-submission; no duplicate GPU job was created.
+extraction. The class job `12889091` is complete and remains the single
+training submission; no duplicate GPU job was created.
 
 The first legacy linear attempt (`12889536`, `FAILED`) tried to recover
 sequences from feature metadata and produced no result.  It was replaced by

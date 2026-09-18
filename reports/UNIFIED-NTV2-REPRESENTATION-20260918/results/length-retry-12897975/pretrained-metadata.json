@@ -1,0 +1,38 @@
+{
+  "model_id": "pretrained",
+  "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "model_kind": "pretrained",
+  "pooling": "target_512_overlap_weighted_mean_final_encoder_hidden_state",
+  "contexts": {
+    "512": {
+      "n": 768,
+      "feature_dim": 1024,
+      "elapsed_seconds": 10.166738748550415,
+      "target_token_count": {
+        "min": 87,
+        "max": 87,
+        "mean": 87.0
+      }
+    },
+    "2048": {
+      "n": 768,
+      "feature_dim": 1024,
+      "elapsed_seconds": 27.306792974472046,
+      "target_token_count": {
+        "min": 86,
+        "max": 86,
+        "mean": 86.0
+      }
+    },
+    "4096": {
+      "n": 768,
+      "feature_dim": 1024,
+      "elapsed_seconds": 52.08926033973694,
+      "target_token_count": {
+        "min": 86,
+        "max": 86,
+        "mean": 86.0
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "assembly": "galGal6",
+  "batch_size": 8,
+  "contigs": [
+    {
+      "acgt_bp": 20618240,
+      "chromosome": "chr10",
+      "label_counts": {
+        "AMBIGUOUS_TE": 0,
+        "BG": 19646492,
+        "DNA": 43023,
+        "KNOWN_OTHER_TE": 0,
+        "LINE": 772813,
+        "LTR": 126991,
+        "NONCALLABLE": 501600,
+        "SINE": 28921,
+        "UNCLASSIFIED": 0
+      },
+      "length_bp": 21119840,
+      "non_acgt_bp": 501600,
+      "run_count": 18094,
+      "wall_seconds": 325.0018117427826,
+      "windows": 5157
+    },
+    {
+      "acgt_bp": 13897287,
+      "chromosome": "chr20",
+      "label_counts": {
+        "AMBIGUOUS_TE": 0,
+        "BG": 13281701,
+        "DNA": 21503,
+        "KNOWN_OTHER_TE": 0,
+        "LINE": 490980,
+        "LTR": 85799,
+        "NONCALLABLE": 0,
+        "SINE": 17304,
+        "UNCLASSIFIED": 0
+      },
+      "length_bp": 13897287,
+      "non_acgt_bp": 0,
+      "run_count": 11444,
+      "wall_seconds": 217.2262258529663,
+      "windows": 3393
+    }
+  ],
+  "device": "cuda",
+  "input_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/prepared/chicken.fa",
+  "label_counts": {
+    "AMBIGUOUS_TE": 0,
+    "BG": 32928193,
+    "DNA": 64526,
+    "KNOWN_OTHER_TE": 0,
+    "LINE": 1263793,
+    "LTR": 212790,
+    "NONCALLABLE": 501600,
+    "SINE": 46225,
+    "UNCLASSIFIED": 0
+  },
+  "label_map": {
+    "0": "BG",
+    "1": "SINE",
+    "2": "LINE",
+    "3": "LTR",
+    "4": "DNA",
+    "5": "KNOWN_OTHER_TE",
+    "6": "AMBIGUOUS_TE",
+    "7": "UNCLASSIFIED"
+  },
+  "labels_used": false,
+  "model": {
+    "base_model": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "class_model": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-REPRESENTATION-20260918/class_training/last2-seed42-12889091/best_model",
+    "model_loader": "UNIFIED-NTV2-REPRESENTATION-20260918/extract_matched_ntv2.py:native_token_classifier",
+    "prediction": "native 8-class argmax projected to base spans; non-ACGT output as NONCALLABLE",
+    "token_projection": "UNIFIED-NTV2-REPRESENTATION-20260918/train_matched_class.py:sequence_tokens, six-base tokens plus tail",
+    "window_alignment": "nonoverlapping, contig origin 0",
+    "window_bp": 4096
+  },
+  "noncallable_label": "NONCALLABLE",
+  "outputs": {
+    "predicted_classes_bed_gz": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/chicken/predicted_classes.bed.gz",
+    "summary_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/chicken/summary.json"
+  },
+  "protocol": "UNIFIED-NTV2-CLASS-MAP-BENCH-20260918",
+  "species": "chicken",
+  "status": "COMPLETED",
+  "target_chromosomes": [
+    "chr10",
+    "chr20"
+  ],
+  "timing": {
+    "bp_per_second": 62218.29617056439,
+    "wall_seconds": 562.8107647895813
+  }
+}

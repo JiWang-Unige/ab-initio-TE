@@ -1,0 +1,250 @@
+{
+  "models": [
+    {
+      "N_input_tokens_retained": true,
+      "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+      "device": "cuda",
+      "dtype_saved": "float32",
+      "feature_dim": 1024,
+      "max_length": 2048,
+      "model_id": "pretrained",
+      "model_kind": "pretrained",
+      "model_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "pooling": "attention_mask_mean_excluding_structural_special_tokens_and_padding",
+      "schema": "unified_ntv2_embedding_v1",
+      "splits": {
+        "test": {
+          "elapsed_seconds": 12.978965044021606,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 120,
+            "BG": 360,
+            "DNA": 260,
+            "KNOWN_OTHER_TE": 125,
+            "LINE": 306,
+            "LTR": 280,
+            "SINE": 75,
+            "UNCLASSIFIED": 54
+          },
+          "n": 1580,
+          "pooled_content_tokens": {
+            "max": 512,
+            "mean": 87.8386075949367,
+            "min": 87
+          }
+        },
+        "train": {
+          "elapsed_seconds": 14.858243227005005,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 121,
+            "BG": 360,
+            "DNA": 299,
+            "KNOWN_OTHER_TE": 213,
+            "LINE": 316,
+            "LTR": 316,
+            "SINE": 126,
+            "UNCLASSIFIED": 92
+          },
+          "n": 1843,
+          "pooled_content_tokens": {
+            "max": 177,
+            "mean": 87.244167118828,
+            "min": 87
+          }
+        },
+        "val": {
+          "elapsed_seconds": 6.433872699737549,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 60,
+            "BG": 180,
+            "DNA": 105,
+            "KNOWN_OTHER_TE": 60,
+            "LINE": 138,
+            "LTR": 140,
+            "SINE": 66,
+            "UNCLASSIFIED": 60
+          },
+          "n": 809,
+          "pooled_content_tokens": {
+            "max": 177,
+            "mean": 87.48207663782448,
+            "min": 87
+          }
+        }
+      },
+      "structural_special_token_ids": [
+        1,
+        2,
+        3
+      ],
+      "tokenizer_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "unk_token_id_retained": 0
+    },
+    {
+      "N_input_tokens_retained": true,
+      "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+      "device": "cuda",
+      "dtype_saved": "float32",
+      "feature_dim": 1024,
+      "max_length": 2048,
+      "model_id": "binary_D",
+      "model_kind": "token_classifier",
+      "model_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "pooling": "attention_mask_mean_excluding_structural_special_tokens_and_padding",
+      "schema": "unified_ntv2_embedding_v1",
+      "splits": {
+        "test": {
+          "elapsed_seconds": 13.211941242218018,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 120,
+            "BG": 360,
+            "DNA": 260,
+            "KNOWN_OTHER_TE": 125,
+            "LINE": 306,
+            "LTR": 280,
+            "SINE": 75,
+            "UNCLASSIFIED": 54
+          },
+          "n": 1580,
+          "pooled_content_tokens": {
+            "max": 512,
+            "mean": 87.8386075949367,
+            "min": 87
+          }
+        },
+        "train": {
+          "elapsed_seconds": 14.151526689529419,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 121,
+            "BG": 360,
+            "DNA": 299,
+            "KNOWN_OTHER_TE": 213,
+            "LINE": 316,
+            "LTR": 316,
+            "SINE": 126,
+            "UNCLASSIFIED": 92
+          },
+          "n": 1843,
+          "pooled_content_tokens": {
+            "max": 177,
+            "mean": 87.244167118828,
+            "min": 87
+          }
+        },
+        "val": {
+          "elapsed_seconds": 6.579708576202393,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 60,
+            "BG": 180,
+            "DNA": 105,
+            "KNOWN_OTHER_TE": 60,
+            "LINE": 138,
+            "LTR": 140,
+            "SINE": 66,
+            "UNCLASSIFIED": 60
+          },
+          "n": 809,
+          "pooled_content_tokens": {
+            "max": 177,
+            "mean": 87.48207663782448,
+            "min": 87
+          }
+        }
+      },
+      "structural_special_token_ids": [
+        1,
+        2,
+        3
+      ],
+      "tokenizer_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "unk_token_id_retained": 0
+    },
+    {
+      "N_input_tokens_retained": true,
+      "data_contract": "SIB-RETREAT-EMBED-REPLICATION-20260917/data_512",
+      "device": "cuda",
+      "dtype_saved": "float32",
+      "feature_dim": 1024,
+      "max_length": 2048,
+      "model_id": "class_D_last2",
+      "model_kind": "token_classifier",
+      "model_path": "/home/users/j/jwang/ab-initio-TE/outputs/UNIFIED-NTV2-REPRESENTATION-20260918/class_training/last2-seed42-12889091/best_model",
+      "pooling": "attention_mask_mean_excluding_structural_special_tokens_and_padding",
+      "schema": "unified_ntv2_embedding_v1",
+      "splits": {
+        "test": {
+          "elapsed_seconds": 13.38985300064087,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 120,
+            "BG": 360,
+            "DNA": 260,
+            "KNOWN_OTHER_TE": 125,
+            "LINE": 306,
+            "LTR": 280,
+            "SINE": 75,
+            "UNCLASSIFIED": 54
+          },
+          "n": 1580,
+          "pooled_content_tokens": {
+            "max": 512,
+            "mean": 87.8386075949367,
+            "min": 87
+          }
+        },
+        "train": {
+          "elapsed_seconds": 14.306037425994873,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 121,
+            "BG": 360,
+            "DNA": 299,
+            "KNOWN_OTHER_TE": 213,
+            "LINE": 316,
+            "LTR": 316,
+            "SINE": 126,
+            "UNCLASSIFIED": 92
+          },
+          "n": 1843,
+          "pooled_content_tokens": {
+            "max": 177,
+            "mean": 87.244167118828,
+            "min": 87
+          }
+        },
+        "val": {
+          "elapsed_seconds": 6.645078659057617,
+          "feature_dim": 1024,
+          "labels": {
+            "AMBIGUOUS_TE": 60,
+            "BG": 180,
+            "DNA": 105,
+            "KNOWN_OTHER_TE": 60,
+            "LINE": 138,
+            "LTR": 140,
+            "SINE": 66,
+            "UNCLASSIFIED": 60
+          },
+          "n": 809,
+          "pooled_content_tokens": {
+            "max": 177,
+            "mean": 87.48207663782448,
+            "min": 87
+          }
+        }
+      },
+      "structural_special_token_ids": [
+        1,
+        2,
+        3
+      ],
+      "tokenizer_path": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "unk_token_id_retained": 0
+    }
+  ]
+}

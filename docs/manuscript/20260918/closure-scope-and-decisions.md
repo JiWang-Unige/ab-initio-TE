@@ -103,7 +103,9 @@ D−U=+0.013201，染色体配对bootstrap 95%区间[+0.005109,+0.025163]；D−
 
 两次修正后的1 MiB CPU试跑均完成，实际Torch intra/inter=16/1、FP32。鸡12889857为2,467.58 bp/s，线性估计约5天，完整CPU作业12891439已提交。斑马鱼12891218为2,397.31 bp/s，对固定1,679,203,469 bp完整输入估计约8.11天，超过预先设定7天门槛，因此**未提交**斑马鱼完整CPU运行。它是按预算规则未执行的完整计时单元，不是实测8.11天，也不是运行到7天超时。不得以缩短输入或沿用鸡速率补齐此单元。
 
-LoRA 12888288已完成固定训练及CAL/DEV结果，class 12889091已接续启动；后续配对表示、class-map仍按既有依赖等待。四个整基因组native任务、D GPU和鸭嘴兽RM2仍运行中。完整benchmark和最终论文数据冻结尚未完成。
+LoRA 12888288已完成固定训练及CAL/DEV结果，class 12889091也已完成900步及一次DEV评价；后续配对表示、class-map按既有依赖推进。四个整基因组native任务、D GPU和鸭嘴兽RM2仍运行中。完整benchmark和最终论文数据冻结尚未完成。
+
+鸭嘴兽RM2首个GPU接收器12857410已原地补充调度依赖`afterok:12856283,afterany:12898018`：科学前提仍是其原始RM2 mask成功，另等待修复后的class-map GPU数组结束以保持最多两条GPU执行链。它不依赖class-map分数或成功与否，未改输入、模型、mask或评价。旧public RM2继续运行，无重启。
 
 ## 有限类群 LoRA 的终态结果
 
@@ -118,3 +120,58 @@ LoRA 12888288已完成固定训练及CAL/DEV结果，class 12889091已接续启�
 类群LoRA的平均bp-F1相对匹配D低0.001138，相对共享LoRA高0.000546；后一个小差异没有多seed或不确定性分析支持稳定改善。最低物种的bp-F1也未提升。局部改善应保留：C. elegans的bp-F1由0.832674升至0.836074（+0.003400），而其余五物种均略降。线虫segment指标的有限上升属于区间拓扑结果，不能据此宣称恢复生物学insertion或普遍泛化。目前没有支持替换D或扩大MoE主张的证据。
 
 该路由按已知taxonomy固定：五个脊椎物种使用expert0，C. elegans使用worm-only expert1；未知taxonomy回退D。两臂匹配的是总可训练参数；单次输入的活动LoRA参数为共享131,072、类群65,536，因此不是活动容量完全相同的对照。没有学习到的gate，也没有本次适配器的外部物种测试，不能将其称为通用稀疏MoE或据此解释草雀结果。本次结果只约束这个固定方案，不否定其他MoE设计。本轮不按DEV分数改rank、路由、训练步数或物种构成。[终态分析](../../../reports/D-BACKBONE-LORA-CLADE-20260918/RESULTS.md)
+
+## 统一 NTv2 class 的训练终态
+
+作业12889091已完成（1h02m05s），实际执行固定900步，CAL按八状态token-majority macro-F1选中第900步（0.6022688），重载该checkpoint后仅评价一次DEV。6,000条4,096-bp半窗共24,576,000 bp；DEV token macro-F1为0.6066181，原始逐碱基标签上的macro-F1为0.6067215，bp accuracy为0.9053371。pooled DEV八类均有真实support，保留完整类别分母。
+
+| 类别 | DEV bp-F1 |
+| --- | ---: |
+| BG | 0.9495 |
+| SINE | 0.9061 |
+| LINE | 0.8827 |
+| LTR | 0.7797 |
+| DNA | 0.7589 |
+| KNOWN_OTHER_TE | 0.4028 |
+| AMBIGUOUS_TE | 0.0000 |
+| UNCLASSIFIED | 0.1740 |
+
+这首次给出同D基座、同六物种和坐标体系下实际训练出的class结果，支持继续既定TE map与表示对照。BG和四个主要TE类别的pooled结果有用，但其他类别和未确定来源状态尚弱，不能概括为完整八状态均可靠。来源状态分类失败不自动等于binary材料漏检；是否被错分为BG或其他TE类需按完整混淆矩阵区分。逐物种macro按该物种真实support非零的类别计算，不能默认所有物种都有相同八类分母。
+
+此处是comparator-derived DEV标签一致性，不是独立生物验证。三权重配对读出/聚类已有下述终态，512/2048/4096上下文诊断和固定chr10/20的独立class-map比较仍需各自结果；训练完成不代替这些结果。新权重暂未公开发布，不能继承旧SF5或binary D的性能主张。[完整训练与逐类别结果](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/CLASS-TRAIN-RESULTS-12889091.md)
+
+## 同基座三权重的配对表示结果
+
+主抽取12889676和三个CPU读出12889677–79均完成。三臂使用完全相同的SIB TRAIN/VAL/TEST（1,843/809/1,580条），同tokenizer、池化和1,024维表示；读出和K-means仅在TRAIN拟合。
+
+| 固定端点 | 预训练 | binary D | class D last2 |
+| --- | ---: | ---: | ---: |
+| known-five 5-NN macro-F1，TEST 1,281条 | 0.4885 | 0.6394 | 0.7261 |
+| full-eight 5-NN macro-F1，TEST 1,580条 | 0.4730 | 0.5934 | 0.6512 |
+| 条件TE-four 5-NN macro-F1，TEST 921条 | 0.6342 | 0.7197 | 0.8417 |
+| known-five K=5聚类ARI | 0.0386 | 0.1105 | 0.2200 |
+| 条件TE-four K=4聚类ARI | 0.0713 | 0.0424 | 0.2287 |
+| known-five binary线性读出macro-F1 | 0.5873 | 0.7031 | 0.6995 |
+
+这支持同一NTv2基座上类别微调增强ontology-aligned类别信息的可读出性，而不是只沿用旧GENERanno的证据。监督读出与无监督分区需分开命名：K-means不使用训练类别作为优化目标，但端点按注释筛选，ARI也使用标签评分，不能称为完全无标签的生物发现。保留两个不均改善端点：binary D的TE-four K=4 ARI低于预训练，class的binary线性读出略低于binary D。
+
+已知SIB TEST对D TRAIN/CAL/DEV的精确暴露仍完整保留，本结果是固定面板上的回顾性表示诊断，不能证明无记忆或未见物种泛化。预训练binary读出仍属有限信息而非良好分离。[完整配对结果及全部固定K](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/REPRESENTATION-RESULTS-12889676.md)
+
+长度分支的首次原生覆盖检查报`covered=0,target=512`，记录为`BLOCKED_NATIVE_OFFSET`，未产生长度性能结论。主SIB结果已独立完成；后续只允许修复明确的offset/坐标工程问题，保留原失败，不跳过覆盖断言、不改变固定中心目标或样本。
+
+该故障已定位为source/local坐标混淆并修复：三个上下文均围绕固定中心`[1792,2304)`取窗，通过长度与目标序列相等检查；length-only重试12897975（5m20s）与CPU评价12897980（20s）均已完成，主SIB抽取和训练未重做。
+
+原class-map数组12890969两个单元在27/25秒后因`<unk>`错误按5字符而非6原始bp展开而失败，未产生科学分数。修复复用训练器的`token_span_lengths()`；新数组12898018使用原checkpoint及原chr10/20，fresh输出`ntv2-span-r1`，排在length-only GPU之后。评分12898022明确读取新目录并等待四个native对照完成；旧从未启动的12890970取消，原失败与52秒GPU成本保留。鸭嘴兽接收器和鸡完整CPU短暂hold以重接新数组，均已release回正常依赖等待。
+
+## 固定中心目标的上下文诊断终态
+
+修复后的3模型×3上下文均完成768条记录的1,024维表示；每条target pooling权重恰为512 bp，中心DNA与标签保持一致。TRAIN/CAL/DEV为384/192/192条（六物种各64/32/32），其中DEV的known-five/binary支持186条、条件TE-four仅65条。它是与SIB不同的有限上下文面板，来源为同一D坐标体系，不能把其数值直接与SIB的921条TE-four或1,281条binary混算。
+
+| 端点 | 512 bp上下文 | 2048 bp上下文 | 4096 bp上下文 |
+| --- | ---: | ---: | ---: |
+| 预训练binary线性读出macro-F1 | 0.7410 | 0.8635 | 0.8991 |
+| binary D的binary线性读出macro-F1 | 0.8571 | 0.8998 | 0.9223 |
+| class D的known-five线性读出macro-F1 | 0.7559 | 0.8421 | 0.8688 |
+| class D的TE-four 5-NN macro-F1 | 0.8615 | 0.9064 | 0.9211 |
+
+因此，预训练NTv2的TE/BG信息并非不存在：在这个固定中心、小样本面板上，较长上下文下有更强的可读出信号。该结果支持上下文设置敏感性，不能直接证明旧UMAP与SIB读出差异完全由长度造成。并非所有端点单调改善，例如class D的binary线性读出为0.8527→0.9413→0.9347；不据此重选论文窗口。三个上下文的target token数为87/86/86，中心DNA相同但分词边界并非完全相同，因此未单独隔离flanking序列与分词设置的贡献。[完整长度诊断](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/LENGTH-RETRY-RESULTS-12897975.md)

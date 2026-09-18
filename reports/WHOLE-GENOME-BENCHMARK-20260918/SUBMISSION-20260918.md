@@ -215,6 +215,14 @@ condition the scientific endpoint or select a result. Output is the fresh
 `d/chicken/cpu` directory. Full-genome CPU timing and the 1-Mb pilot timing
 will remain separate fields.
 
+After original class-map array `12890969` failed its native span-projection
+assertion, CPU job `12891439` was briefly held while that engineering retry
+was arranged. Its current dependency is `afterany:12898018:12889063`, and it
+has been released back to normal dependency waiting. The completed chicken
+gene score needs no further scheduler gate. This preserves the scheduling
+priority for repaired short class-map work before the five-day-estimate
+128-GB CPU allocation; it changes no CPU scientific input or timing rule.
+
 The replacement zebrafish pilot `12891218` completed in 7 minutes 40 seconds
 under the same realized Torch 16-intra/1-inter, affinity `[0,1,...,15]`, FP32
 contract. Its end-to-end throughput was 2,397.31 bp/s. Applied to the frozen

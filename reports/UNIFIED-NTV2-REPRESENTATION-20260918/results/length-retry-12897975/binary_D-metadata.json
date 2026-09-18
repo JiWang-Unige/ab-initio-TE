@@ -1,0 +1,38 @@
+{
+  "model_id": "binary_D",
+  "model_path": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "model_kind": "token_classifier",
+  "pooling": "target_512_overlap_weighted_mean_final_encoder_hidden_state",
+  "contexts": {
+    "512": {
+      "n": 768,
+      "feature_dim": 1024,
+      "elapsed_seconds": 9.913375616073608,
+      "target_token_count": {
+        "min": 87,
+        "max": 87,
+        "mean": 87.0
+      }
+    },
+    "2048": {
+      "n": 768,
+      "feature_dim": 1024,
+      "elapsed_seconds": 27.53328013420105,
+      "target_token_count": {
+        "min": 86,
+        "max": 86,
+        "mean": 86.0
+      }
+    },
+    "4096": {
+      "n": 768,
+      "feature_dim": 1024,
+      "elapsed_seconds": 53.15694999694824,
+      "target_token_count": {
+        "min": 86,
+        "max": 86,
+        "mean": 86.0
+      }
+    }
+  }
+}

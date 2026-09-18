@@ -103,11 +103,18 @@ The native NTv2 tokenizer is a slow tokenizer without an offset API.  The
 diagnostic reconstructs the same six-bp token spans used by D, verifies that
 the native content-token count and input IDs match those spans, and pools only
 the exact target overlap with weights summing to 512 bp.  Any mismatch blocks
-the extraction; no target position is inferred from token count alone.  CPU
-readouts use train-to-DEV 5-NN and standardized linear probes plus a
-train-fitted composition baseline from target/context GC and N fractions and
-context length.  The primary SIB 512-bp panel remains the main representation
-comparison.
+the extraction; no target position is inferred from token count alone.  The
+first attempt exposed a source/context indexing bug and was retained as a
+blocked engineering attempt.  The repaired length-only run (`12897975`, with
+CPU evaluator `12897980`) used source slices `[1792,2304)`, `[1024,3072)`,
+and `[0,4096)` for contexts 512, 2,048, and 4,096 bp, respectively, with
+local target spans `[0,512)`, `[768,1280)`, and `[1792,2304)`.  All 3 models x
+3 contexts produced 768 finite 1,024-D rows and every target-pooling weight
+sum was exactly 512 bp.  CPU readouts use train-to-DEV 5-NN and standardized
+linear probes plus a train-fitted composition baseline from target/context GC
+and N fractions and context length.  The complete context table is in
+`reports/UNIFIED-NTV2-REPRESENTATION-20260918/LENGTH-RETRY-RESULTS-12897975.md`;
+the primary SIB 512-bp panel remains the main representation comparison.
 
 ## Exposure and interpretation boundary
 

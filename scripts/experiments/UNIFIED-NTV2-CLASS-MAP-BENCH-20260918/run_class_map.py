@@ -21,7 +21,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[3]
 REP = ROOT / "scripts/experiments/UNIFIED-NTV2-REPRESENTATION-20260918"
 sys.path.insert(0, str(REP))
-from train_matched_class import LABEL_NAMES, sequence_tokens  # noqa: E402
+from train_matched_class import LABEL_NAMES, sequence_tokens, token_span_lengths  # noqa: E402
 from extract_matched_ntv2 import native_token_classifier  # noqa: E402
 
 
@@ -121,10 +121,15 @@ def encode_and_predict(model: Any, tokenizer: Any, sequences: list[str], device:
             )
         token_labels = logits[row_index, positions].argmax(dim=-1).detach().cpu().numpy()
         labels: list[str] = []
-        for token, label_id in zip(tokens, token_labels.tolist()):
+        # ``sequence_tokens`` replaces an ambiguous 6-bp token with the
+        # literal ``<unk>`` for the native tokenizer.  Its string length is
+        # five, but it still represents the original six bases.  Expand by
+        # the frozen source-sequence spans so IUPAC/N tokens do not shorten
+        # the base-level map.
+        for span, label_id in zip(token_span_lengths(sequence), token_labels.tolist()):
             if int(label_id) not in range(len(LABEL_NAMES)):
                 raise RuntimeError(f"invalid class argmax {label_id}")
-            labels.extend([LABEL_NAMES[int(label_id)]] * len(token))
+            labels.extend([LABEL_NAMES[int(label_id)]] * span)
         if len(labels) != len(sequence):
             raise RuntimeError(f"projected label length {len(labels)} != sequence length {len(sequence)}")
         values = np.asarray(labels, dtype=object)

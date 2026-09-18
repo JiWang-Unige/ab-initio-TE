@@ -30,7 +30,8 @@ case "$SPECIES_ID" in
 esac
 FASTA="$ROOT/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/prepared/${SPECIES_ID}.fa"
 BASE_MODEL="$ROOT/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species"
-OUT="$ROOT/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2/${SPECIES_ID}"
+CLASSMAP_OUTPUT_ROOT="${CLASSMAP_OUTPUT_ROOT:-$ROOT/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2}"
+OUT="$CLASSMAP_OUTPUT_ROOT/${SPECIES_ID}"
 test -s "$FASTA"
 test -d "$CLASS_MODEL"
 python3 scripts/experiments/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/run_class_map.py \

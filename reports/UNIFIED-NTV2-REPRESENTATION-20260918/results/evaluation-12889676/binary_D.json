@@ -1,0 +1,3491 @@
+{
+  "protocol": "UNIFIED-NTV2-REPRESENTATION-20260918",
+  "feature_root": "/home/users/j/jwang/ab-initio-TE/outputs/UNIFIED-NTV2-REPRESENTATION-20260918/embeddings-12889676/binary_D",
+  "seed": 42,
+  "feature_dim": 1024,
+  "counts": {
+    "train": 1843,
+    "val": 809,
+    "test": 1580,
+    "test_labels": {
+      "BG": 360,
+      "SINE": 75,
+      "LINE": 306,
+      "LTR": 280,
+      "DNA": 260,
+      "KNOWN_OTHER_TE": 125,
+      "AMBIGUOUS_TE": 120,
+      "UNCLASSIFIED": 54
+    }
+  },
+  "pooling_contract": "attention_mask_mean_excluding_structural_special_tokens_and_padding",
+  "supervised_knn5": {
+    "known_five": {
+      "n": 1281,
+      "accuracy": 0.624512099921936,
+      "balanced_accuracy": 0.6484009911656972,
+      "macro_precision": 0.632652743626194,
+      "macro_recall": 0.6484009911656972,
+      "macro_f1": 0.6394449342773465,
+      "per_class": {
+        "BG": {
+          "support": 360,
+          "precision": 0.6542056074766355,
+          "recall": 0.5833333333333334,
+          "f1": 0.6167400881057269
+        },
+        "SINE": {
+          "support": 75,
+          "precision": 0.7023809523809523,
+          "recall": 0.7866666666666666,
+          "f1": 0.7421383647798742
+        },
+        "LINE": {
+          "support": 306,
+          "precision": 0.684375,
+          "recall": 0.7156862745098039,
+          "f1": 0.6996805111821086
+        },
+        "LTR": {
+          "support": 280,
+          "precision": 0.5719424460431655,
+          "recall": 0.5678571428571428,
+          "f1": 0.5698924731182796
+        },
+        "DNA": {
+          "support": 260,
+          "precision": 0.5503597122302158,
+          "recall": 0.5884615384615385,
+          "f1": 0.5687732342007435
+        }
+      },
+      "fit_scope": "train_only",
+      "by_species": {
+        "c_elegans": {
+          "n": 149,
+          "accuracy": 0.6778523489932886,
+          "balanced_accuracy": 0.590952380952381,
+          "macro_precision": 0.5382051282051281,
+          "macro_recall": 0.590952380952381,
+          "macro_f1": 0.5385172798216276,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.75,
+              "recall": 0.55,
+              "f1": 0.6346153846153846
+            },
+            "SINE": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 6,
+              "precision": 0.5,
+              "recall": 1.0,
+              "f1": 0.6666666666666666
+            },
+            "LTR": {
+              "support": 21,
+              "precision": 0.8,
+              "recall": 0.5714285714285714,
+              "f1": 0.6666666666666666
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.6410256410256411,
+              "recall": 0.8333333333333334,
+              "f1": 0.7246376811594203
+            }
+          }
+        },
+        "chicken": {
+          "n": 149,
+          "accuracy": 0.7583892617449665,
+          "balanced_accuracy": 0.5819298245614035,
+          "macro_precision": 0.5388083735909823,
+          "macro_recall": 0.5819298245614035,
+          "macro_f1": 0.5516483516483517,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8333333333333334,
+              "recall": 0.75,
+              "f1": 0.7894736842105263
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.9259259259259259,
+              "recall": 0.8333333333333334,
+              "f1": 0.8771929824561403
+            },
+            "LTR": {
+              "support": 19,
+              "precision": 0.43478260869565216,
+              "recall": 0.5263157894736842,
+              "f1": 0.47619047619047616
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.5,
+              "recall": 0.8,
+              "f1": 0.6153846153846154
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 240,
+          "accuracy": 0.5541666666666667,
+          "balanced_accuracy": 0.44333333333333336,
+          "macro_precision": 0.4386262300357885,
+          "macro_recall": 0.44333333333333336,
+          "macro_f1": 0.4364143249466004,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.4090909090909091,
+              "recall": 0.3,
+              "f1": 0.34615384615384615
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6842105263157895,
+              "recall": 0.65,
+              "f1": 0.6666666666666666
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.5689655172413793,
+              "recall": 0.55,
+              "f1": 0.559322033898305
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.5308641975308642,
+              "recall": 0.7166666666666667,
+              "f1": 0.6099290780141844
+            }
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.6479591836734694,
+          "balanced_accuracy": 0.5766666666666667,
+          "macro_precision": 0.5209353170159441,
+          "macro_recall": 0.5766666666666667,
+          "macro_f1": 0.5272487380678694,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8085106382978723,
+              "recall": 0.6333333333333333,
+              "f1": 0.7102803738317757
+            },
+            "SINE": {
+              "support": 6,
+              "precision": 0.2857142857142857,
+              "recall": 0.6666666666666666,
+              "f1": 0.4
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6842105263157895,
+              "recall": 0.8666666666666667,
+              "f1": 0.7647058823529411
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6595744680851063,
+              "recall": 0.5166666666666667,
+              "f1": 0.5794392523364486
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.16666666666666666,
+              "recall": 0.2,
+              "f1": 0.18181818181818182
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 263,
+          "accuracy": 0.6121673003802282,
+          "balanced_accuracy": 0.6331884057971015,
+          "macro_precision": 0.6699564272739145,
+          "macro_recall": 0.6331884057971015,
+          "macro_f1": 0.6453163942258738,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.47435897435897434,
+              "recall": 0.6166666666666667,
+              "f1": 0.5362318840579711
+            },
+            "SINE": {
+              "support": 23,
+              "precision": 0.9473684210526315,
+              "recall": 0.782608695652174,
+              "f1": 0.8571428571428571
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6129032258064516,
+              "recall": 0.6333333333333333,
+              "f1": 0.6229508196721312
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6333333333333333,
+              "recall": 0.6333333333333333,
+              "f1": 0.6333333333333333
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.6818181818181818,
+              "recall": 0.5,
+              "f1": 0.5769230769230769
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 284,
+          "accuracy": 0.5809859154929577,
+          "balanced_accuracy": 0.594848484848485,
+          "macro_precision": 0.5891588062079022,
+          "macro_recall": 0.594848484848485,
+          "macro_f1": 0.5887376633389994,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7222222222222222,
+              "recall": 0.65,
+              "f1": 0.6842105263157895
+            },
+            "SINE": {
+              "support": 44,
+              "precision": 0.7551020408163265,
+              "recall": 0.8409090909090909,
+              "f1": 0.7956989247311828
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.576271186440678,
+              "recall": 0.5666666666666667,
+              "f1": 0.5714285714285714
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.4666666666666667,
+              "recall": 0.5833333333333334,
+              "f1": 0.5185185185185185
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.425531914893617,
+              "recall": 0.3333333333333333,
+              "f1": 0.37383177570093457
+            }
+          }
+        }
+      }
+    },
+    "full_eight": {
+      "n": 1580,
+      "accuracy": 0.5822784810126582,
+      "balanced_accuracy": 0.6061646615911322,
+      "macro_precision": 0.5922524147455832,
+      "macro_recall": 0.6061646615911322,
+      "macro_f1": 0.5934012382328535,
+      "per_class": {
+        "BG": {
+          "support": 360,
+          "precision": 0.6139240506329114,
+          "recall": 0.5388888888888889,
+          "f1": 0.5739644970414202
+        },
+        "SINE": {
+          "support": 75,
+          "precision": 0.6666666666666666,
+          "recall": 0.8,
+          "f1": 0.7272727272727273
+        },
+        "LINE": {
+          "support": 306,
+          "precision": 0.6811145510835913,
+          "recall": 0.7189542483660131,
+          "f1": 0.699523052464229
+        },
+        "LTR": {
+          "support": 280,
+          "precision": 0.5574912891986062,
+          "recall": 0.5714285714285714,
+          "f1": 0.564373897707231
+        },
+        "DNA": {
+          "support": 260,
+          "precision": 0.4678111587982833,
+          "recall": 0.41923076923076924,
+          "f1": 0.4421906693711968
+        },
+        "KNOWN_OTHER_TE": {
+          "support": 125,
+          "precision": 0.4842105263157895,
+          "recall": 0.736,
+          "f1": 0.5841269841269842
+        },
+        "AMBIGUOUS_TE": {
+          "support": 120,
+          "precision": 0.5376344086021505,
+          "recall": 0.4166666666666667,
+          "f1": 0.4694835680751174
+        },
+        "UNCLASSIFIED": {
+          "support": 54,
+          "precision": 0.7291666666666666,
+          "recall": 0.6481481481481481,
+          "f1": 0.6862745098039216
+        }
+      },
+      "fit_scope": "train_only",
+      "by_species": {
+        "c_elegans": {
+          "n": 317,
+          "accuracy": 0.5930599369085173,
+          "balanced_accuracy": 0.5721726190476191,
+          "macro_precision": 0.5493475398996284,
+          "macro_recall": 0.5721726190476191,
+          "macro_f1": 0.5456890375961956,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.5283018867924528,
+              "recall": 0.4666666666666667,
+              "f1": 0.49557522123893805
+            },
+            "SINE": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 6,
+              "precision": 0.5454545454545454,
+              "recall": 1.0,
+              "f1": 0.7058823529411765
+            },
+            "LTR": {
+              "support": 21,
+              "precision": 0.8666666666666667,
+              "recall": 0.6190476190476191,
+              "f1": 0.7222222222222222
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.4897959183673469,
+              "recall": 0.4,
+              "f1": 0.44036697247706424
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 60,
+              "precision": 0.5287356321839081,
+              "recall": 0.7666666666666667,
+              "f1": 0.6258503401360545
+            },
+            "AMBIGUOUS_TE": {
+              "support": 60,
+              "precision": 0.6065573770491803,
+              "recall": 0.6166666666666667,
+              "f1": 0.6115702479338843
+            },
+            "UNCLASSIFIED": {
+              "support": 48,
+              "precision": 0.8292682926829268,
+              "recall": 0.7083333333333334,
+              "f1": 0.7640449438202247
+            }
+          }
+        },
+        "chicken": {
+          "n": 150,
+          "accuracy": 0.7466666666666667,
+          "balanced_accuracy": 0.3571271929824561,
+          "macro_precision": 0.3337121212121212,
+          "macro_recall": 0.3571271929824561,
+          "macro_f1": 0.3413997879109226,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8181818181818182,
+              "recall": 0.75,
+              "f1": 0.782608695652174
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.9090909090909091,
+              "recall": 0.8333333333333334,
+              "f1": 0.8695652173913043
+            },
+            "LTR": {
+              "support": 19,
+              "precision": 0.4090909090909091,
+              "recall": 0.47368421052631576,
+              "f1": 0.43902439024390244
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.5333333333333333,
+              "recall": 0.8,
+              "f1": 0.64
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 287,
+          "accuracy": 0.5574912891986062,
+          "balanced_accuracy": 0.35407801418439716,
+          "macro_precision": 0.3575332354427182,
+          "macro_recall": 0.35407801418439716,
+          "macro_f1": 0.3526201770284178,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.4358974358974359,
+              "recall": 0.2833333333333333,
+              "f1": 0.3434343434343434
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6964285714285714,
+              "recall": 0.65,
+              "f1": 0.6724137931034483
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.5689655172413793,
+              "recall": 0.55,
+              "f1": 0.559322033898305
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.4666666666666667,
+              "recall": 0.5833333333333334,
+              "f1": 0.5185185185185185
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 47,
+              "precision": 0.6923076923076923,
+              "recall": 0.7659574468085106,
+              "f1": 0.7272727272727273
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.6479591836734694,
+          "balanced_accuracy": 0.3708333333333333,
+          "macro_precision": 0.33943807938373155,
+          "macro_recall": 0.3708333333333333,
+          "macro_f1": 0.339933327725499,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8222222222222222,
+              "recall": 0.6166666666666667,
+              "f1": 0.7047619047619048
+            },
+            "SINE": {
+              "support": 6,
+              "precision": 0.26666666666666666,
+              "recall": 0.6666666666666666,
+              "f1": 0.38095238095238093
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.7027027027027027,
+              "recall": 0.8666666666666667,
+              "f1": 0.7761194029850746
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6739130434782609,
+              "recall": 0.5166666666666667,
+              "f1": 0.5849056603773585
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.25,
+              "recall": 0.3,
+              "f1": 0.2727272727272727
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 267,
+          "accuracy": 0.5468164794007491,
+          "balanced_accuracy": 0.393659420289855,
+          "macro_precision": 0.44831030849066233,
+          "macro_recall": 0.393659420289855,
+          "macro_f1": 0.4116180187027419,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.4696969696969697,
+              "recall": 0.5166666666666667,
+              "f1": 0.49206349206349204
+            },
+            "SINE": {
+              "support": 23,
+              "precision": 0.9473684210526315,
+              "recall": 0.782608695652174,
+              "f1": 0.8571428571428571
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6190476190476191,
+              "recall": 0.65,
+              "f1": 0.6341463414634146
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6607142857142857,
+              "recall": 0.6166666666666667,
+              "f1": 0.6379310344827587
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.6896551724137931,
+              "recall": 0.3333333333333333,
+              "f1": 0.449438202247191
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 4,
+              "precision": 0.2,
+              "recall": 0.25,
+              "f1": 0.2222222222222222
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 363,
+          "accuracy": 0.5151515151515151,
+          "balanced_accuracy": 0.46698232323232325,
+          "macro_precision": 0.45836396283645386,
+          "macro_recall": 0.46698232323232325,
+          "macro_f1": 0.4499403638190981,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.6206896551724138,
+              "recall": 0.6,
+              "f1": 0.6101694915254238
+            },
+            "SINE": {
+              "support": 44,
+              "precision": 0.7037037037037037,
+              "recall": 0.8636363636363636,
+              "f1": 0.7755102040816326
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.53125,
+              "recall": 0.5666666666666667,
+              "f1": 0.5483870967741935
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.4111111111111111,
+              "recall": 0.6166666666666667,
+              "f1": 0.49333333333333335
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.3584905660377358,
+              "recall": 0.31666666666666665,
+              "f1": 0.336283185840708
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 18,
+              "precision": 0.5,
+              "recall": 0.5555555555555556,
+              "f1": 0.5263157894736842
+            },
+            "AMBIGUOUS_TE": {
+              "support": 60,
+              "precision": 0.5416666666666666,
+              "recall": 0.21666666666666667,
+              "f1": 0.30952380952380953
+            },
+            "UNCLASSIFIED": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      }
+    },
+    "conditional_te_four": {
+      "n": 921,
+      "accuracy": 0.7100977198697068,
+      "balanced_accuracy": 0.7190773360626301,
+      "macro_precision": 0.7205074894360411,
+      "macro_recall": 0.7190773360626301,
+      "macro_f1": 0.7196583454106409,
+      "per_class": {
+        "SINE": {
+          "support": 75,
+          "precision": 0.7702702702702703,
+          "recall": 0.76,
+          "f1": 0.7651006711409396
+        },
+        "LINE": {
+          "support": 306,
+          "precision": 0.7220447284345048,
+          "recall": 0.738562091503268,
+          "f1": 0.7302100161550888
+        },
+        "LTR": {
+          "support": 280,
+          "precision": 0.667910447761194,
+          "recall": 0.6392857142857142,
+          "f1": 0.6532846715328468
+        },
+        "DNA": {
+          "support": 260,
+          "precision": 0.7218045112781954,
+          "recall": 0.7384615384615385,
+          "f1": 0.7300380228136882
+        }
+      },
+      "fit_scope": "train_only",
+      "by_species": {
+        "c_elegans": {
+          "n": 89,
+          "accuracy": 0.8426966292134831,
+          "balanced_accuracy": 0.6303571428571428,
+          "macro_precision": 0.5654761904761905,
+          "macro_recall": 0.6303571428571428,
+          "macro_f1": 0.5698025551684088,
+          "per_class": {
+            "SINE": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 6,
+              "precision": 0.5,
+              "recall": 1.0,
+              "f1": 0.6666666666666666
+            },
+            "LTR": {
+              "support": 21,
+              "precision": 0.8571428571428571,
+              "recall": 0.5714285714285714,
+              "f1": 0.6857142857142857
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.9047619047619048,
+              "recall": 0.95,
+              "f1": 0.926829268292683
+            }
+          }
+        },
+        "chicken": {
+          "n": 89,
+          "accuracy": 0.8426966292134831,
+          "balanced_accuracy": 0.6348684210526315,
+          "macro_precision": 0.5879344587884806,
+          "macro_recall": 0.6348684210526315,
+          "macro_f1": 0.6030321378667909,
+          "per_class": {
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.9622641509433962,
+              "recall": 0.85,
+              "f1": 0.9026548672566371
+            },
+            "LTR": {
+              "support": 19,
+              "precision": 0.7894736842105263,
+              "recall": 0.7894736842105263,
+              "f1": 0.7894736842105263
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.6,
+              "recall": 0.9,
+              "f1": 0.72
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 180,
+          "accuracy": 0.7444444444444445,
+          "balanced_accuracy": 0.5583333333333333,
+          "macro_precision": 0.5574585047524472,
+          "macro_recall": 0.5583333333333333,
+          "macro_f1": 0.5558997050147492,
+          "per_class": {
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.7368421052631579,
+              "recall": 0.7,
+              "f1": 0.717948717948718
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.7358490566037735,
+              "recall": 0.65,
+              "f1": 0.6902654867256637
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.7571428571428571,
+              "recall": 0.8833333333333333,
+              "f1": 0.8153846153846154
+            }
+          }
+        },
+        "mouse": {
+          "n": 136,
+          "accuracy": 0.6911764705882353,
+          "balanced_accuracy": 0.6458333333333333,
+          "macro_precision": 0.6237312030075188,
+          "macro_recall": 0.6458333333333333,
+          "macro_f1": 0.6168300653594772,
+          "per_class": {
+            "SINE": {
+              "support": 6,
+              "precision": 0.4,
+              "recall": 0.6666666666666666,
+              "f1": 0.5
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6842105263157895,
+              "recall": 0.8666666666666667,
+              "f1": 0.7647058823529411
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.7857142857142857,
+              "recall": 0.55,
+              "f1": 0.6470588235294118
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.625,
+              "recall": 0.5,
+              "f1": 0.5555555555555556
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 203,
+          "accuracy": 0.7044334975369458,
+          "balanced_accuracy": 0.7030797101449275,
+          "macro_precision": 0.7596262494567578,
+          "macro_recall": 0.7030797101449275,
+          "macro_f1": 0.7241288200083036,
+          "per_class": {
+            "SINE": {
+              "support": 23,
+              "precision": 1.0,
+              "recall": 0.6956521739130435,
+              "f1": 0.8205128205128205
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6949152542372882,
+              "recall": 0.6833333333333333,
+              "f1": 0.6890756302521008
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6666666666666666,
+              "recall": 0.7,
+              "f1": 0.6829268292682927
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.676923076923077,
+              "recall": 0.7333333333333333,
+              "f1": 0.704
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 224,
+          "accuracy": 0.59375,
+          "balanced_accuracy": 0.6102272727272727,
+          "macro_precision": 0.6095826275174101,
+          "macro_recall": 0.6102272727272727,
+          "macro_f1": 0.6050791253660621,
+          "per_class": {
+            "SINE": {
+              "support": 44,
+              "precision": 0.8043478260869565,
+              "recall": 0.8409090909090909,
+              "f1": 0.8222222222222222
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6071428571428571,
+              "recall": 0.5666666666666667,
+              "f1": 0.5862068965517241
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.4935064935064935,
+              "recall": 0.6333333333333333,
+              "f1": 0.5547445255474452
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.5333333333333333,
+              "recall": 0.4,
+              "f1": 0.45714285714285713
+            }
+          }
+        }
+      }
+    },
+    "binary_te_vs_bg_known": {
+      "n": 1281,
+      "accuracy": 0.7946916471506635,
+      "balanced_accuracy": 0.7049402823018458,
+      "macro_precision": 0.7537966787931305,
+      "macro_recall": 0.7049402823018458,
+      "macro_f1": 0.7211060954621576,
+      "per_class": {
+        "BG": {
+          "support": 360,
+          "precision": 0.6844106463878327,
+          "recall": 0.5,
+          "f1": 0.5778491171749599
+        },
+        "SINE": {
+          "support": 921,
+          "precision": 0.8231827111984283,
+          "recall": 0.9098805646036916,
+          "f1": 0.8643630737493554
+        }
+      },
+      "fit_scope": "known_five_train_only",
+      "full_test_n": 1580,
+      "known_test_n": 1281,
+      "excluded_unknown_test_counts": {
+        "KNOWN_OTHER_TE": 125,
+        "AMBIGUOUS_TE": 120,
+        "UNCLASSIFIED": 54
+      },
+      "by_species": {
+        "c_elegans": {
+          "n": 149,
+          "accuracy": 0.7248322147651006,
+          "balanced_accuracy": 0.6854868913857678,
+          "macro_precision": 0.7308857808857809,
+          "macro_recall": 0.6854868913857678,
+          "macro_f1": 0.6899142175524084,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7435897435897436,
+              "recall": 0.48333333333333334,
+              "f1": 0.5858585858585859
+            },
+            "SINE": {
+              "support": 89,
+              "precision": 0.7181818181818181,
+              "recall": 0.8876404494382022,
+              "f1": 0.7939698492462312
+            }
+          }
+        },
+        "chicken": {
+          "n": 149,
+          "accuracy": 0.7986577181208053,
+          "balanced_accuracy": 0.7717228464419476,
+          "macro_precision": 0.8062473617560152,
+          "macro_recall": 0.7717228464419476,
+          "macro_f1": 0.7803655660377358,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8260869565217391,
+              "recall": 0.6333333333333333,
+              "f1": 0.7169811320754716
+            },
+            "SINE": {
+              "support": 89,
+              "precision": 0.7864077669902912,
+              "recall": 0.9101123595505618,
+              "f1": 0.84375
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 240,
+          "accuracy": 0.7375,
+          "balanced_accuracy": 0.5416666666666666,
+          "macro_precision": 0.5978473581213307,
+          "macro_recall": 0.5416666666666666,
+          "macro_f1": 0.5321637426900585,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.42857142857142855,
+              "recall": 0.15,
+              "f1": 0.2222222222222222
+            },
+            "SINE": {
+              "support": 180,
+              "precision": 0.7671232876712328,
+              "recall": 0.9333333333333333,
+              "f1": 0.8421052631578947
+            }
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.8214285714285714,
+          "balanced_accuracy": 0.7409313725490196,
+          "macro_precision": 0.8210844357341173,
+          "macro_recall": 0.7409313725490196,
+          "macro_f1": 0.7635053607749853,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8205128205128205,
+              "recall": 0.5333333333333333,
+              "f1": 0.6464646464646465
+            },
+            "SINE": {
+              "support": 136,
+              "precision": 0.821656050955414,
+              "recall": 0.9485294117647058,
+              "f1": 0.8805460750853242
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 263,
+          "accuracy": 0.7718631178707225,
+          "balanced_accuracy": 0.7054597701149425,
+          "macro_precision": 0.6852331606217616,
+          "macro_recall": 0.7054597701149425,
+          "macro_f1": 0.6934731934731935,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.5,
+              "recall": 0.5833333333333334,
+              "f1": 0.5384615384615384
+            },
+            "SINE": {
+              "support": 203,
+              "precision": 0.8704663212435233,
+              "recall": 0.8275862068965517,
+              "f1": 0.8484848484848485
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 284,
+          "accuracy": 0.8802816901408451,
+          "balanced_accuracy": 0.783779761904762,
+          "macro_precision": 0.8366878531073447,
+          "macro_recall": 0.783779761904762,
+          "macro_f1": 0.8056360708534622,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7708333333333334,
+              "recall": 0.6166666666666667,
+              "f1": 0.6851851851851852
+            },
+            "SINE": {
+              "support": 224,
+              "precision": 0.902542372881356,
+              "recall": 0.9508928571428571,
+              "f1": 0.9260869565217391
+            }
+          }
+        }
+      }
+    }
+  },
+  "supervised_linear_probe": {
+    "known_five": {
+      "n": 1281,
+      "accuracy": 0.6479313036690086,
+      "balanced_accuracy": 0.6643873446814623,
+      "macro_precision": 0.669843462383281,
+      "macro_recall": 0.6643873446814623,
+      "macro_f1": 0.6656097576705291,
+      "per_class": {
+        "BG": {
+          "support": 360,
+          "precision": 0.6384364820846905,
+          "recall": 0.5444444444444444,
+          "f1": 0.5877061469265368
+        },
+        "SINE": {
+          "support": 75,
+          "precision": 0.7971014492753623,
+          "recall": 0.7333333333333333,
+          "f1": 0.7638888888888888
+        },
+        "LINE": {
+          "support": 306,
+          "precision": 0.7318611987381703,
+          "recall": 0.7581699346405228,
+          "f1": 0.7447833065810594
+        },
+        "LTR": {
+          "support": 280,
+          "precision": 0.5746753246753247,
+          "recall": 0.6321428571428571,
+          "f1": 0.6020408163265306
+        },
+        "DNA": {
+          "support": 260,
+          "precision": 0.6071428571428571,
+          "recall": 0.6538461538461539,
+          "f1": 0.6296296296296297
+        }
+      },
+      "fit_scope": "train_only_standardized",
+      "by_species": {
+        "c_elegans": {
+          "n": 149,
+          "accuracy": 0.6845637583892618,
+          "balanced_accuracy": 0.619047619047619,
+          "macro_precision": 0.5455555555555555,
+          "macro_recall": 0.619047619047619,
+          "macro_f1": 0.5742017184741643,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.6666666666666666,
+              "recall": 0.6333333333333333,
+              "f1": 0.6495726495726496
+            },
+            "SINE": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 6,
+              "precision": 0.75,
+              "recall": 1.0,
+              "f1": 0.8571428571428571
+            },
+            "LTR": {
+              "support": 21,
+              "precision": 0.5333333333333333,
+              "recall": 0.7619047619047619,
+              "f1": 0.6274509803921569
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.7777777777777778,
+              "recall": 0.7,
+              "f1": 0.7368421052631579
+            }
+          }
+        },
+        "chicken": {
+          "n": 149,
+          "accuracy": 0.6845637583892618,
+          "balanced_accuracy": 0.5380701754385965,
+          "macro_precision": 0.4789586851288979,
+          "macro_recall": 0.5380701754385965,
+          "macro_f1": 0.48977167516125764,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7659574468085106,
+              "recall": 0.6,
+              "f1": 0.6728971962616822
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.9074074074074074,
+              "recall": 0.8166666666666667,
+              "f1": 0.8596491228070176
+            },
+            "LTR": {
+              "support": 19,
+              "precision": 0.32142857142857145,
+              "recall": 0.47368421052631576,
+              "f1": 0.3829787234042553
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.4,
+              "recall": 0.8,
+              "f1": 0.5333333333333333
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 240,
+          "accuracy": 0.5958333333333333,
+          "balanced_accuracy": 0.4766666666666667,
+          "macro_precision": 0.4749604013295697,
+          "macro_recall": 0.4766666666666667,
+          "macro_f1": 0.47465753404736455,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.5294117647058824,
+              "recall": 0.45,
+              "f1": 0.4864864864864865
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6379310344827587,
+              "recall": 0.6166666666666667,
+              "f1": 0.6271186440677966
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.5151515151515151,
+              "recall": 0.5666666666666667,
+              "f1": 0.5396825396825397
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.6923076923076923,
+              "recall": 0.75,
+              "f1": 0.72
+            }
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.6989795918367347,
+          "balanced_accuracy": 0.7366666666666666,
+          "macro_precision": 0.6195681511470985,
+          "macro_recall": 0.7366666666666666,
+          "macro_f1": 0.6470252873563218,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8,
+              "recall": 0.5333333333333333,
+              "f1": 0.64
+            },
+            "SINE": {
+              "support": 6,
+              "precision": 0.5,
+              "recall": 1.0,
+              "f1": 0.6666666666666666
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.8153846153846154,
+              "recall": 0.8833333333333333,
+              "f1": 0.848
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6666666666666666,
+              "recall": 0.6666666666666666,
+              "f1": 0.6666666666666666
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.3157894736842105,
+              "recall": 0.6,
+              "f1": 0.41379310344827586
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 263,
+          "accuracy": 0.596958174904943,
+          "balanced_accuracy": 0.603768115942029,
+          "macro_precision": 0.6414257836989641,
+          "macro_recall": 0.603768115942029,
+          "macro_f1": 0.6176661573720397,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.4722222222222222,
+              "recall": 0.5666666666666667,
+              "f1": 0.5151515151515151
+            },
+            "SINE": {
+              "support": 23,
+              "precision": 0.8823529411764706,
+              "recall": 0.6521739130434783,
+              "f1": 0.75
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6440677966101694,
+              "recall": 0.6333333333333333,
+              "f1": 0.6386554621848739
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6507936507936508,
+              "recall": 0.6833333333333333,
+              "f1": 0.6666666666666666
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.5576923076923077,
+              "recall": 0.48333333333333334,
+              "f1": 0.5178571428571429
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 284,
+          "accuracy": 0.6654929577464789,
+          "balanced_accuracy": 0.6712121212121211,
+          "macro_precision": 0.6848437650380161,
+          "macro_recall": 0.6712121212121211,
+          "macro_f1": 0.6706641556210934,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.725,
+              "recall": 0.48333333333333334,
+              "f1": 0.58
+            },
+            "SINE": {
+              "support": 44,
+              "precision": 0.85,
+              "recall": 0.7727272727272727,
+              "f1": 0.8095238095238095
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6712328767123288,
+              "recall": 0.8166666666666667,
+              "f1": 0.7368421052631579
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6065573770491803,
+              "recall": 0.6166666666666667,
+              "f1": 0.6115702479338843
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.5714285714285714,
+              "recall": 0.6666666666666666,
+              "f1": 0.6153846153846154
+            }
+          }
+        }
+      }
+    },
+    "full_eight": {
+      "n": 1580,
+      "accuracy": 0.6145569620253165,
+      "balanced_accuracy": 0.6310898124206947,
+      "macro_precision": 0.6211890831520481,
+      "macro_recall": 0.6310898124206947,
+      "macro_f1": 0.6231696666176707,
+      "per_class": {
+        "BG": {
+          "support": 360,
+          "precision": 0.59,
+          "recall": 0.49166666666666664,
+          "f1": 0.5363636363636364
+        },
+        "SINE": {
+          "support": 75,
+          "precision": 0.8064516129032258,
+          "recall": 0.6666666666666666,
+          "f1": 0.7299270072992701
+        },
+        "LINE": {
+          "support": 306,
+          "precision": 0.752411575562701,
+          "recall": 0.7647058823529411,
+          "f1": 0.7585089141004863
+        },
+        "LTR": {
+          "support": 280,
+          "precision": 0.5819397993311036,
+          "recall": 0.6214285714285714,
+          "f1": 0.6010362694300518
+        },
+        "DNA": {
+          "support": 260,
+          "precision": 0.5111111111111111,
+          "recall": 0.5307692307692308,
+          "f1": 0.5207547169811321
+        },
+        "KNOWN_OTHER_TE": {
+          "support": 125,
+          "precision": 0.6387096774193548,
+          "recall": 0.792,
+          "f1": 0.7071428571428572
+        },
+        "AMBIGUOUS_TE": {
+          "support": 120,
+          "precision": 0.5333333333333333,
+          "recall": 0.5333333333333333,
+          "f1": 0.5333333333333333
+        },
+        "UNCLASSIFIED": {
+          "support": 54,
+          "precision": 0.5555555555555556,
+          "recall": 0.6481481481481481,
+          "f1": 0.5982905982905983
+        }
+      },
+      "fit_scope": "train_only_standardized",
+      "by_species": {
+        "c_elegans": {
+          "n": 317,
+          "accuracy": 0.6056782334384858,
+          "balanced_accuracy": 0.5954613095238095,
+          "macro_precision": 0.5353845082435799,
+          "macro_recall": 0.5954613095238095,
+          "macro_f1": 0.5552277723030143,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.4915254237288136,
+              "recall": 0.48333333333333334,
+              "f1": 0.48739495798319327
+            },
+            "SINE": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 6,
+              "precision": 0.6,
+              "recall": 1.0,
+              "f1": 0.75
+            },
+            "LTR": {
+              "support": 21,
+              "precision": 0.6071428571428571,
+              "recall": 0.8095238095238095,
+              "f1": 0.6938775510204082
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.48936170212765956,
+              "recall": 0.38333333333333336,
+              "f1": 0.42990654205607476
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 60,
+              "precision": 0.6571428571428571,
+              "recall": 0.7666666666666667,
+              "f1": 0.7076923076923077
+            },
+            "AMBIGUOUS_TE": {
+              "support": 60,
+              "precision": 0.6129032258064516,
+              "recall": 0.6333333333333333,
+              "f1": 0.6229508196721312
+            },
+            "UNCLASSIFIED": {
+              "support": 48,
+              "precision": 0.825,
+              "recall": 0.6875,
+              "f1": 0.75
+            }
+          }
+        },
+        "chicken": {
+          "n": 150,
+          "accuracy": 0.6866666666666666,
+          "balanced_accuracy": 0.33837719298245617,
+          "macro_precision": 0.3010477111540941,
+          "macro_recall": 0.33837719298245617,
+          "macro_f1": 0.30838751185155083,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7659574468085106,
+              "recall": 0.6,
+              "f1": 0.6728971962616822
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.9090909090909091,
+              "recall": 0.8333333333333334,
+              "f1": 0.8695652173913043
+            },
+            "LTR": {
+              "support": 19,
+              "precision": 0.3333333333333333,
+              "recall": 0.47368421052631576,
+              "f1": 0.391304347826087
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.4,
+              "recall": 0.8,
+              "f1": 0.5333333333333333
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 287,
+          "accuracy": 0.6097560975609756,
+          "balanced_accuracy": 0.3870567375886525,
+          "macro_precision": 0.3996923439463762,
+          "macro_recall": 0.3870567375886525,
+          "macro_f1": 0.3925599865873756,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.4583333333333333,
+              "recall": 0.36666666666666664,
+              "f1": 0.4074074074074074
+            },
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6290322580645161,
+              "recall": 0.65,
+              "f1": 0.639344262295082
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.5238095238095238,
+              "recall": 0.55,
+              "f1": 0.5365853658536586
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.7,
+              "recall": 0.7,
+              "f1": 0.7
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 47,
+              "precision": 0.8863636363636364,
+              "recall": 0.8297872340425532,
+              "f1": 0.8571428571428571
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.6887755102040817,
+          "balanced_accuracy": 0.44791666666666663,
+          "macro_precision": 0.39782371304110437,
+          "macro_recall": 0.44791666666666663,
+          "macro_f1": 0.40459998191956953,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.8378378378378378,
+              "recall": 0.5166666666666667,
+              "f1": 0.6391752577319587
+            },
+            "SINE": {
+              "support": 6,
+              "precision": 0.5555555555555556,
+              "recall": 0.8333333333333334,
+              "f1": 0.6666666666666666
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.8181818181818182,
+              "recall": 0.9,
+              "f1": 0.8571428571428571
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6666666666666666,
+              "recall": 0.6333333333333333,
+              "f1": 0.6495726495726496
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.30434782608695654,
+              "recall": 0.7,
+              "f1": 0.42424242424242425
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 267,
+          "accuracy": 0.5767790262172284,
+          "balanced_accuracy": 0.4193840579710145,
+          "macro_precision": 0.43372400895049734,
+          "macro_recall": 0.4193840579710145,
+          "macro_f1": 0.4026603009375102,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.5,
+              "recall": 0.5333333333333333,
+              "f1": 0.5161290322580645
+            },
+            "SINE": {
+              "support": 23,
+              "precision": 0.9230769230769231,
+              "recall": 0.5217391304347826,
+              "f1": 0.6666666666666666
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.7142857142857143,
+              "recall": 0.6666666666666666,
+              "f1": 0.6896551724137931
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6557377049180327,
+              "recall": 0.6666666666666666,
+              "f1": 0.6611570247933884
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.5714285714285714,
+              "recall": 0.4666666666666667,
+              "f1": 0.5137614678899083
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "AMBIGUOUS_TE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "UNCLASSIFIED": {
+              "support": 4,
+              "precision": 0.10526315789473684,
+              "recall": 0.5,
+              "f1": 0.17391304347826086
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 363,
+          "accuracy": 0.5840220385674931,
+          "balanced_accuracy": 0.5347222222222222,
+          "macro_precision": 0.5183441614474996,
+          "macro_recall": 0.5347222222222222,
+          "macro_f1": 0.5164069356898195,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.6,
+              "recall": 0.45,
+              "f1": 0.5142857142857142
+            },
+            "SINE": {
+              "support": 44,
+              "precision": 0.8461538461538461,
+              "recall": 0.75,
+              "f1": 0.7951807228915663
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.7258064516129032,
+              "recall": 0.75,
+              "f1": 0.7377049180327869
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.5873015873015873,
+              "recall": 0.6166666666666667,
+              "f1": 0.6016260162601627
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.4225352112676056,
+              "recall": 0.5,
+              "f1": 0.4580152671755725
+            },
+            "KNOWN_OTHER_TE": {
+              "support": 18,
+              "precision": 0.4117647058823529,
+              "recall": 0.7777777777777778,
+              "f1": 0.5384615384615384
+            },
+            "AMBIGUOUS_TE": {
+              "support": 60,
+              "precision": 0.5531914893617021,
+              "recall": 0.43333333333333335,
+              "f1": 0.48598130841121495
+            },
+            "UNCLASSIFIED": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          }
+        }
+      }
+    },
+    "conditional_te_four": {
+      "n": 921,
+      "accuracy": 0.7893593919652552,
+      "balanced_accuracy": 0.7844628492422611,
+      "macro_precision": 0.814950233793208,
+      "macro_recall": 0.7844628492422611,
+      "macro_f1": 0.7977694802799099,
+      "per_class": {
+        "SINE": {
+          "support": 75,
+          "precision": 0.9193548387096774,
+          "recall": 0.76,
+          "f1": 0.8321167883211679
+        },
+        "LINE": {
+          "support": 306,
+          "precision": 0.7903225806451613,
+          "recall": 0.8006535947712419,
+          "f1": 0.7954545454545454
+        },
+        "LTR": {
+          "support": 280,
+          "precision": 0.7411347517730497,
+          "recall": 0.7464285714285714,
+          "f1": 0.7437722419928826
+        },
+        "DNA": {
+          "support": 260,
+          "precision": 0.8089887640449438,
+          "recall": 0.8307692307692308,
+          "f1": 0.8197343453510436
+        }
+      },
+      "fit_scope": "train_only_standardized",
+      "by_species": {
+        "c_elegans": {
+          "n": 89,
+          "accuracy": 0.8876404494382022,
+          "balanced_accuracy": 0.6934523809523809,
+          "macro_precision": 0.5997023809523809,
+          "macro_recall": 0.6934523809523809,
+          "macro_f1": 0.6370689655172415,
+          "per_class": {
+            "SINE": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 6,
+              "precision": 0.6666666666666666,
+              "recall": 1.0,
+              "f1": 0.8
+            },
+            "LTR": {
+              "support": 21,
+              "precision": 0.75,
+              "recall": 0.8571428571428571,
+              "f1": 0.8
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.9821428571428571,
+              "recall": 0.9166666666666666,
+              "f1": 0.9482758620689655
+            }
+          }
+        },
+        "chicken": {
+          "n": 89,
+          "accuracy": 0.8764044943820225,
+          "balanced_accuracy": 0.6771929824561403,
+          "macro_precision": 0.6115037546538777,
+          "macro_recall": 0.6771929824561403,
+          "macro_f1": 0.6379559903992378,
+          "per_class": {
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.9811320754716981,
+              "recall": 0.8666666666666667,
+              "f1": 0.9203539823008849
+            },
+            "LTR": {
+              "support": 19,
+              "precision": 0.6956521739130435,
+              "recall": 0.8421052631578947,
+              "f1": 0.7619047619047619
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.7692307692307693,
+              "recall": 1.0,
+              "f1": 0.8695652173913043
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 180,
+          "accuracy": 0.7722222222222223,
+          "balanced_accuracy": 0.5791666666666666,
+          "macro_precision": 0.5767230244573298,
+          "macro_recall": 0.5791666666666666,
+          "macro_f1": 0.57758831406839,
+          "per_class": {
+            "SINE": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.7457627118644068,
+              "recall": 0.7333333333333333,
+              "f1": 0.7394957983193278
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.7017543859649122,
+              "recall": 0.6666666666666666,
+              "f1": 0.6837606837606838
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.859375,
+              "recall": 0.9166666666666666,
+              "f1": 0.8870967741935484
+            }
+          }
+        },
+        "mouse": {
+          "n": 136,
+          "accuracy": 0.8602941176470589,
+          "balanced_accuracy": 0.8791666666666667,
+          "macro_precision": 0.781522621221343,
+          "macro_recall": 0.8791666666666667,
+          "macro_f1": 0.819617398414729,
+          "per_class": {
+            "SINE": {
+              "support": 6,
+              "precision": 0.6666666666666666,
+              "recall": 1.0,
+              "f1": 0.8
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.8870967741935484,
+              "recall": 0.9166666666666666,
+              "f1": 0.9016393442622951
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.9056603773584906,
+              "recall": 0.8,
+              "f1": 0.8495575221238938
+            },
+            "DNA": {
+              "support": 10,
+              "precision": 0.6666666666666666,
+              "recall": 0.8,
+              "f1": 0.7272727272727273
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 203,
+          "accuracy": 0.6847290640394089,
+          "balanced_accuracy": 0.6797101449275362,
+          "macro_precision": 0.7329262686416087,
+          "macro_recall": 0.6797101449275362,
+          "macro_f1": 0.697973705675419,
+          "per_class": {
+            "SINE": {
+              "support": 23,
+              "precision": 0.9375,
+              "recall": 0.6521739130434783,
+              "f1": 0.7692307692307693
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.6607142857142857,
+              "recall": 0.6166666666666667,
+              "f1": 0.6379310344827587
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.6438356164383562,
+              "recall": 0.7833333333333333,
+              "f1": 0.706766917293233
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.6896551724137931,
+              "recall": 0.6666666666666666,
+              "f1": 0.6779661016949152
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 224,
+          "accuracy": 0.78125,
+          "balanced_accuracy": 0.7837121212121212,
+          "macro_precision": 0.802628400339668,
+          "macro_recall": 0.7837121212121212,
+          "macro_f1": 0.7889985264400432,
+          "per_class": {
+            "SINE": {
+              "support": 44,
+              "precision": 0.972972972972973,
+              "recall": 0.8181818181818182,
+              "f1": 0.8888888888888888
+            },
+            "LINE": {
+              "support": 60,
+              "precision": 0.7183098591549296,
+              "recall": 0.85,
+              "f1": 0.7786259541984732
+            },
+            "LTR": {
+              "support": 60,
+              "precision": 0.7692307692307693,
+              "recall": 0.6666666666666666,
+              "f1": 0.7142857142857143
+            },
+            "DNA": {
+              "support": 60,
+              "precision": 0.75,
+              "recall": 0.8,
+              "f1": 0.7741935483870968
+            }
+          }
+        }
+      }
+    },
+    "binary_te_vs_bg_known": {
+      "n": 1281,
+      "accuracy": 0.775175644028103,
+      "balanced_accuracy": 0.6922140788997466,
+      "macro_precision": 0.721756150179199,
+      "macro_recall": 0.6922140788997466,
+      "macro_f1": 0.7031477309301577,
+      "per_class": {
+        "BG": {
+          "support": 360,
+          "precision": 0.6241379310344828,
+          "recall": 0.5027777777777778,
+          "f1": 0.556923076923077
+        },
+        "SINE": {
+          "support": 921,
+          "precision": 0.8193743693239153,
+          "recall": 0.8816503800217155,
+          "f1": 0.8493723849372385
+        }
+      },
+      "fit_scope": "known_five_train_only_standardized",
+      "full_test_n": 1580,
+      "known_test_n": 1281,
+      "excluded_unknown_test_counts": {
+        "KNOWN_OTHER_TE": 125,
+        "AMBIGUOUS_TE": 120,
+        "UNCLASSIFIED": 54
+      },
+      "by_species": {
+        "c_elegans": {
+          "n": 149,
+          "accuracy": 0.785234899328859,
+          "balanced_accuracy": 0.7686329588014982,
+          "macro_precision": 0.7796296296296297,
+          "macro_recall": 0.7686329588014982,
+          "macro_f1": 0.7726926010678872,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7592592592592593,
+              "recall": 0.6833333333333333,
+              "f1": 0.7192982456140351
+            },
+            "SINE": {
+              "support": 89,
+              "precision": 0.8,
+              "recall": 0.8539325842696629,
+              "f1": 0.8260869565217391
+            }
+          }
+        },
+        "chicken": {
+          "n": 149,
+          "accuracy": 0.7718120805369127,
+          "balanced_accuracy": 0.7356741573033708,
+          "macro_precision": 0.7886467889908257,
+          "macro_recall": 0.7356741573033708,
+          "macro_f1": 0.7441414141414142,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.825,
+              "recall": 0.55,
+              "f1": 0.66
+            },
+            "SINE": {
+              "support": 89,
+              "precision": 0.7522935779816514,
+              "recall": 0.9213483146067416,
+              "f1": 0.8282828282828283
+            }
+          }
+        },
+        "fruit_fly": {
+          "n": 240,
+          "accuracy": 0.6916666666666667,
+          "balanced_accuracy": 0.5666666666666667,
+          "macro_precision": 0.5736497545008183,
+          "macro_recall": 0.5666666666666667,
+          "macro_f1": 0.5690993788819876,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.36538461538461536,
+              "recall": 0.31666666666666665,
+              "f1": 0.3392857142857143
+            },
+            "SINE": {
+              "support": 180,
+              "precision": 0.7819148936170213,
+              "recall": 0.8166666666666667,
+              "f1": 0.7989130434782609
+            }
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "accuracy": 0.8010204081632653,
+          "balanced_accuracy": 0.7169117647058824,
+          "macro_precision": 0.7890739833414993,
+          "macro_recall": 0.7169117647058824,
+          "macro_f1": 0.7364774020064122,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7692307692307693,
+              "recall": 0.5,
+              "f1": 0.6060606060606061
+            },
+            "SINE": {
+              "support": 136,
+              "precision": 0.8089171974522293,
+              "recall": 0.9338235294117647,
+              "f1": 0.8668941979522184
+            }
+          }
+        },
+        "western_clawed_frog": {
+          "n": 263,
+          "accuracy": 0.7452471482889734,
+          "balanced_accuracy": 0.6588669950738917,
+          "macro_precision": 0.6473499847700275,
+          "macro_recall": 0.6588669950738917,
+          "macro_f1": 0.6522605726915714,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.44776119402985076,
+              "recall": 0.5,
+              "f1": 0.47244094488188976
+            },
+            "SINE": {
+              "support": 203,
+              "precision": 0.8469387755102041,
+              "recall": 0.8177339901477833,
+              "f1": 0.8320802005012531
+            }
+          }
+        },
+        "zebrafish": {
+          "n": 284,
+          "accuracy": 0.852112676056338,
+          "balanced_accuracy": 0.7110119047619048,
+          "macro_precision": 0.8033804022250748,
+          "macro_recall": 0.7110119047619048,
+          "macro_f1": 0.7410334346504559,
+          "per_class": {
+            "BG": {
+              "support": 60,
+              "precision": 0.7368421052631579,
+              "recall": 0.4666666666666667,
+              "f1": 0.5714285714285714
+            },
+            "SINE": {
+              "support": 224,
+              "precision": 0.8699186991869918,
+              "recall": 0.9553571428571429,
+              "f1": 0.9106382978723404
+            }
+          }
+        }
+      }
+    }
+  },
+  "unsupervised_kmeans": {
+    "known_five": {
+      "fit_scope": "train_only_annotation_filtered_support",
+      "annotation_filtered_support": true,
+      "label_free_fit_but_label_scored": true,
+      "k2": {
+        "n": 1281,
+        "ari": 0.11751358050968341,
+        "nmi": 0.11318266247967373,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k4": {
+        "n": 1281,
+        "ari": 0.10583115142194459,
+        "nmi": 0.13987305729043675,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k5": {
+        "n": 1281,
+        "ari": 0.1105080135292845,
+        "nmi": 0.15003407441227337,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k8": {
+        "n": 1281,
+        "ari": 0.09072112675662478,
+        "nmi": 0.15348740538763533,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    "full_eight": {
+      "fit_scope": "train_only_annotation_filtered_support",
+      "annotation_filtered_support": false,
+      "label_free_fit_but_label_scored": true,
+      "k2": {
+        "n": 1580,
+        "ari": 0.07804872439244823,
+        "nmi": 0.08495383331787999,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "k4": {
+        "n": 1580,
+        "ari": 0.08210548138945127,
+        "nmi": 0.12613234706055704,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "k5": {
+        "n": 1580,
+        "ari": 0.10106890453681537,
+        "nmi": 0.15457210670072785,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "k8": {
+        "n": 1580,
+        "ari": 0.10958961537648562,
+        "nmi": 0.19738615367238027,
+        "labels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    "conditional_te_four": {
+      "fit_scope": "train_only_annotation_filtered_support",
+      "annotation_filtered_support": true,
+      "label_free_fit_but_label_scored": true,
+      "k2": {
+        "n": 921,
+        "ari": 0.01752759840690171,
+        "nmi": 0.015272977013906602,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k4": {
+        "n": 921,
+        "ari": 0.04236824276092172,
+        "nmi": 0.061159202162095264,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k5": {
+        "n": 921,
+        "ari": 0.05297705901408453,
+        "nmi": 0.08191208081439245,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k8": {
+        "n": 921,
+        "ari": 0.047452891249853475,
+        "nmi": 0.08264364198323673,
+        "labels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    "binary_te_vs_bg_known_from_full_k2": {
+      "n": 1281,
+      "full_test_n": 1580,
+      "excluded_unknown_test_counts": {
+        "KNOWN_OTHER_TE": 125,
+        "AMBIGUOUS_TE": 120,
+        "UNCLASSIFIED": 54
+      },
+      "ari": 0.21810609286502475,
+      "nmi": 0.1851078273827617,
+      "fit_scope": "full_eight_train",
+      "k": 2,
+      "label_free_fit_but_label_scored": true
+    }
+  },
+  "confounders": {
+    "train": {
+      "definition": "TE_fraction is window-level label != BG; sequence_length is raw bp",
+      "pooled": {
+        "gc_fraction": {
+          "mean": 0.40658276247965275,
+          "std": 0.07956643231003813,
+          "min": 0.16796875,
+          "max": 0.69921875
+        },
+        "N_fraction": {
+          "mean": 0.0005595496473141617,
+          "std": 0.01006289008881119,
+          "min": 0.0,
+          "max": 0.1953125
+        },
+        "sequence_length_bp": {
+          "mean": 512.0,
+          "std": 0.0,
+          "min": 512.0,
+          "max": 512.0
+        },
+        "TE_fraction": {
+          "mean": 0.8046663049376017,
+          "std": 0.39645736547032173,
+          "min": 0.0,
+          "max": 1.0
+        }
+      },
+      "by_label": {
+        "BG": {
+          "n": 360,
+          "gc_fraction": {
+            "mean": 0.4159396701388889,
+            "std": 0.09550314456560109
+          },
+          "N_fraction": {
+            "mean": 0.0005425347222222222,
+            "std": 0.010279565604110471
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          }
+        },
+        "SINE": {
+          "n": 126,
+          "gc_fraction": {
+            "mean": 0.42103794642857145,
+            "std": 0.0437296146095998
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "LINE": {
+          "n": 316,
+          "gc_fraction": {
+            "mean": 0.43371118473101267,
+            "std": 0.07384205639541508
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "LTR": {
+          "n": 316,
+          "gc_fraction": {
+            "mean": 0.436591426028481,
+            "std": 0.06782953795528224
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "DNA": {
+          "n": 299,
+          "gc_fraction": {
+            "mean": 0.3753462061036789,
+            "std": 0.06928281829499783
+          },
+          "N_fraction": {
+            "mean": 0.0008361204013377926,
+            "std": 0.010727006659177706
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "KNOWN_OTHER_TE": {
+          "n": 213,
+          "gc_fraction": {
+            "mean": 0.38014414612676056,
+            "std": 0.08045169057728159
+          },
+          "N_fraction": {
+            "mean": 0.0018339201877934272,
+            "std": 0.018836779805030568
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "AMBIGUOUS_TE": {
+          "n": 121,
+          "gc_fraction": {
+            "mean": 0.34755940082644626,
+            "std": 0.06238329433827701
+          },
+          "N_fraction": {
+            "mean": 0.0016141528925619835,
+            "std": 0.017682159010368226
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "UNCLASSIFIED": {
+          "n": 92,
+          "gc_fraction": {
+            "mean": 0.3942764945652174,
+            "std": 0.050055247253136814
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        }
+      },
+      "by_species": {
+        "c_elegans": {
+          "n": 333,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 1,
+            "LINE": 16,
+            "LTR": 16,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 60,
+            "AMBIGUOUS_TE": 60,
+            "UNCLASSIFIED": 60
+          },
+          "gc_fraction": {
+            "mean": 0.3612284159159159,
+            "std": 0.06347628116023679
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8198198198198198,
+            "std": 0.38433745959822596
+          }
+        },
+        "chicken": {
+          "n": 216,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 0,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 36,
+            "KNOWN_OTHER_TE": 0,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.48458297164351855,
+            "std": 0.07189179387684064
+          },
+          "N_fraction": {
+            "mean": 0.000904224537037037,
+            "std": 0.013258534341195727
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.7222222222222222,
+            "std": 0.44790320823880836
+          }
+        },
+        "fruit_fly": {
+          "n": 300,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 0,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 60,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.39529296875,
+            "std": 0.08023765946016968
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8,
+            "std": 0.4
+          }
+        },
+        "mouse": {
+          "n": 273,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 60,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 23,
+            "KNOWN_OTHER_TE": 10,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.40049793956043955,
+            "std": 0.05646855868442254
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.7802197802197802,
+            "std": 0.4140976633278411
+          }
+        },
+        "western_clawed_frog": {
+          "n": 303,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 5,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 29,
+            "AMBIGUOUS_TE": 1,
+            "UNCLASSIFIED": 28
+          },
+          "gc_fraction": {
+            "mean": 0.45161020008250824,
+            "std": 0.07062824629851447
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.801980198019802,
+            "std": 0.3985071643068932
+          }
+        },
+        "zebrafish": {
+          "n": 418,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 60,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 54,
+            "AMBIGUOUS_TE": 60,
+            "UNCLASSIFIED": 4
+          },
+          "gc_fraction": {
+            "mean": 0.3818452825956938,
+            "std": 0.06879987797651899
+          },
+          "N_fraction": {
+            "mean": 0.0019998504784688995,
+            "std": 0.018777450779314645
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8564593301435407,
+            "std": 0.3506233676662442
+          }
+        }
+      }
+    },
+    "val": {
+      "definition": "TE_fraction is window-level label != BG; sequence_length is raw bp",
+      "pooled": {
+        "gc_fraction": {
+          "mean": 0.42534909996909764,
+          "std": 0.09470802187267856,
+          "min": 0.099609375,
+          "max": 0.783203125
+        },
+        "N_fraction": {
+          "mean": 0.0010912391841779974,
+          "std": 0.014148229607871198,
+          "min": 0.0,
+          "max": 0.1953125
+        },
+        "sequence_length_bp": {
+          "mean": 512.0,
+          "std": 0.0,
+          "min": 512.0,
+          "max": 512.0
+        },
+        "TE_fraction": {
+          "mean": 0.7775030902348579,
+          "std": 0.4159231117768095,
+          "min": 0.0,
+          "max": 1.0
+        }
+      },
+      "by_label": {
+        "BG": {
+          "n": 180,
+          "gc_fraction": {
+            "mean": 0.4548285590277778,
+            "std": 0.11083131689002351
+          },
+          "N_fraction": {
+            "mean": 0.002734375,
+            "std": 0.021764275203420128
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          }
+        },
+        "SINE": {
+          "n": 66,
+          "gc_fraction": {
+            "mean": 0.4554036458333333,
+            "std": 0.04274701652456808
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "LINE": {
+          "n": 138,
+          "gc_fraction": {
+            "mean": 0.46433423913043476,
+            "std": 0.08721411601224692
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "LTR": {
+          "n": 140,
+          "gc_fraction": {
+            "mean": 0.4356724330357143,
+            "std": 0.07105273278133538
+          },
+          "N_fraction": {
+            "mean": 0.0013950892857142857,
+            "std": 0.016447860104006135
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "DNA": {
+          "n": 105,
+          "gc_fraction": {
+            "mean": 0.40591517857142856,
+            "std": 0.09599496816998382
+          },
+          "N_fraction": {
+            "mean": 0.0018601190476190475,
+            "std": 0.0189695666428303
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "KNOWN_OTHER_TE": {
+          "n": 60,
+          "gc_fraction": {
+            "mean": 0.3831380208333333,
+            "std": 0.09321691336637496
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "AMBIGUOUS_TE": {
+          "n": 60,
+          "gc_fraction": {
+            "mean": 0.3670247395833333,
+            "std": 0.051837340221511916
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "UNCLASSIFIED": {
+          "n": 60,
+          "gc_fraction": {
+            "mean": 0.32464192708333334,
+            "std": 0.0443952539872489
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        }
+      },
+      "by_species": {
+        "c_elegans": {
+          "n": 171,
+          "label_counts": {
+            "BG": 30,
+            "SINE": 4,
+            "LINE": 16,
+            "LTR": 1,
+            "DNA": 30,
+            "KNOWN_OTHER_TE": 30,
+            "AMBIGUOUS_TE": 30,
+            "UNCLASSIFIED": 30
+          },
+          "gc_fraction": {
+            "mean": 0.35454358552631576,
+            "std": 0.05841732843903767
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8245614035087719,
+            "std": 0.38034181383647025
+          }
+        },
+        "chicken": {
+          "n": 79,
+          "label_counts": {
+            "BG": 30,
+            "SINE": 0,
+            "LINE": 30,
+            "LTR": 19,
+            "DNA": 0,
+            "KNOWN_OTHER_TE": 0,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.5399525316455697,
+            "std": 0.08511931467466895
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.620253164556962,
+            "std": 0.4853237851311597
+          }
+        },
+        "fruit_fly": {
+          "n": 75,
+          "label_counts": {
+            "BG": 30,
+            "SINE": 0,
+            "LINE": 2,
+            "LTR": 30,
+            "DNA": 2,
+            "KNOWN_OTHER_TE": 11,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.39359375,
+            "std": 0.07404266392242494
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.6,
+            "std": 0.48989794855663565
+          }
+        },
+        "mouse": {
+          "n": 139,
+          "label_counts": {
+            "BG": 30,
+            "SINE": 30,
+            "LINE": 30,
+            "LTR": 30,
+            "DNA": 13,
+            "KNOWN_OTHER_TE": 6,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.4342682104316547,
+            "std": 0.04895622373499584
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.7841726618705036,
+            "std": 0.41139506346750493
+          }
+        },
+        "western_clawed_frog": {
+          "n": 159,
+          "label_counts": {
+            "BG": 30,
+            "SINE": 2,
+            "LINE": 30,
+            "LTR": 30,
+            "DNA": 30,
+            "KNOWN_OTHER_TE": 7,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 30
+          },
+          "gc_fraction": {
+            "mean": 0.46728822720125784,
+            "std": 0.11353320472975342
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8113207547169812,
+            "std": 0.39125361044014567
+          }
+        },
+        "zebrafish": {
+          "n": 186,
+          "label_counts": {
+            "BG": 30,
+            "SINE": 30,
+            "LINE": 30,
+            "LTR": 30,
+            "DNA": 30,
+            "KNOWN_OTHER_TE": 6,
+            "AMBIGUOUS_TE": 30,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.41205687163978494,
+            "std": 0.0737840292310683
+          },
+          "N_fraction": {
+            "mean": 0.00474630376344086,
+            "std": 0.02921120124494219
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8387096774193549,
+            "std": 0.36779852422552833
+          }
+        }
+      }
+    },
+    "test": {
+      "definition": "TE_fraction is window-level label != BG; sequence_length is raw bp",
+      "pooled": {
+        "gc_fraction": {
+          "mean": 0.4104529272151899,
+          "std": 0.08108483431169765,
+          "min": 0.0,
+          "max": 0.662109375
+        },
+        "N_fraction": {
+          "mean": 0.0019246934335443039,
+          "std": 0.033625123095066,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "sequence_length_bp": {
+          "mean": 512.0,
+          "std": 0.0,
+          "min": 512.0,
+          "max": 512.0
+        },
+        "TE_fraction": {
+          "mean": 0.7721518987341772,
+          "std": 0.41944408926027565,
+          "min": 0.0,
+          "max": 1.0
+        }
+      },
+      "by_label": {
+        "BG": {
+          "n": 360,
+          "gc_fraction": {
+            "mean": 0.4111545138888889,
+            "std": 0.0933944150071467
+          },
+          "N_fraction": {
+            "mean": 0.005821397569444445,
+            "std": 0.06694554680197627
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          }
+        },
+        "SINE": {
+          "n": 75,
+          "gc_fraction": {
+            "mean": 0.47375,
+            "std": 0.052254510371514025
+          },
+          "N_fraction": {
+            "mean": 0.0026041666666666665,
+            "std": 0.022401888716256837
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "LINE": {
+          "n": 306,
+          "gc_fraction": {
+            "mean": 0.4353809232026144,
+            "std": 0.06468767965460373
+          },
+          "N_fraction": {
+            "mean": 0.0006382761437908497,
+            "std": 0.011147013631391046
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "LTR": {
+          "n": 280,
+          "gc_fraction": {
+            "mean": 0.4422154017857143,
+            "std": 0.06675777891429278
+          },
+          "N_fraction": {
+            "mean": 0.0012834821428571429,
+            "std": 0.013596474618091915
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "DNA": {
+          "n": 260,
+          "gc_fraction": {
+            "mean": 0.38990384615384616,
+            "std": 0.08256772778956377
+          },
+          "N_fraction": {
+            "mean": 0.0007512019230769231,
+            "std": 0.012089450825894745
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "KNOWN_OTHER_TE": {
+          "n": 125,
+          "gc_fraction": {
+            "mean": 0.341609375,
+            "std": 0.0655204822460122
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "AMBIGUOUS_TE": {
+          "n": 120,
+          "gc_fraction": {
+            "mean": 0.364697265625,
+            "std": 0.05040107244178101
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        },
+        "UNCLASSIFIED": {
+          "n": 54,
+          "gc_fraction": {
+            "mean": 0.3718894675925926,
+            "std": 0.041694663104360284
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 1.0,
+            "std": 0.0
+          }
+        }
+      },
+      "by_species": {
+        "c_elegans": {
+          "n": 317,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 2,
+            "LINE": 6,
+            "LTR": 21,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 60,
+            "AMBIGUOUS_TE": 60,
+            "UNCLASSIFIED": 48
+          },
+          "gc_fraction": {
+            "mean": 0.35212933753943215,
+            "std": 0.0599703662914464
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8107255520504731,
+            "std": 0.3917264751110508
+          }
+        },
+        "chicken": {
+          "n": 150,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 0,
+            "LINE": 60,
+            "LTR": 19,
+            "DNA": 10,
+            "KNOWN_OTHER_TE": 0,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 1
+          },
+          "gc_fraction": {
+            "mean": 0.4398697916666667,
+            "std": 0.058883220151851316
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.6,
+            "std": 0.4898979485566356
+          }
+        },
+        "fruit_fly": {
+          "n": 287,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 0,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 47,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.3828669425087108,
+            "std": 0.05977190257248602
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.7909407665505227,
+            "std": 0.40663677939777443
+          }
+        },
+        "mouse": {
+          "n": 196,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 6,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 10,
+            "KNOWN_OTHER_TE": 0,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 0
+          },
+          "gc_fraction": {
+            "mean": 0.3938038105867347,
+            "std": 0.07519308798875197
+          },
+          "N_fraction": {
+            "mean": 0.008938536352040817,
+            "std": 0.08892135959002587
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.6938775510204082,
+            "std": 0.4608812159443353
+          }
+        },
+        "western_clawed_frog": {
+          "n": 267,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 23,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 0,
+            "AMBIGUOUS_TE": 0,
+            "UNCLASSIFIED": 4
+          },
+          "gc_fraction": {
+            "mean": 0.5009143843632958,
+            "std": 0.06795874352326156
+          },
+          "N_fraction": {
+            "mean": 0.0,
+            "std": 0.0
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.7752808988764045,
+            "std": 0.4173972049664429
+          }
+        },
+        "zebrafish": {
+          "n": 363,
+          "label_counts": {
+            "BG": 60,
+            "SINE": 44,
+            "LINE": 60,
+            "LTR": 60,
+            "DNA": 60,
+            "KNOWN_OTHER_TE": 18,
+            "AMBIGUOUS_TE": 60,
+            "UNCLASSIFIED": 1
+          },
+          "gc_fraction": {
+            "mean": 0.41349216597796146,
+            "std": 0.06827569889462629
+          },
+          "N_fraction": {
+            "mean": 0.0035511363636363635,
+            "std": 0.0247448216960304
+          },
+          "sequence_length_bp": {
+            "mean": 512.0,
+            "std": 0.0
+          },
+          "TE_fraction": {
+            "mean": 0.8347107438016529,
+            "std": 0.3714414058552766
+          }
+        }
+      }
+    }
+  },
+  "umap_is_primary_endpoint": false,
+  "test_records_species": [
+    "c_elegans",
+    "chicken",
+    "fruit_fly",
+    "mouse",
+    "western_clawed_frog",
+    "zebrafish"
+  ]
+}

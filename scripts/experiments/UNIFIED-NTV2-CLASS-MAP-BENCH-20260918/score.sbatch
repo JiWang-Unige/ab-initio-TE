@@ -17,6 +17,9 @@ cd "$ROOT"
 source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
 conda activate te_benchmark
 export PYTHONUNBUFFERED=1 OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK}"
+CLASSMAP_OUTPUT_ROOT="${CLASSMAP_OUTPUT_ROOT:-$ROOT/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2}"
+CLASSMAP_SCORE_OUTPUT="${CLASSMAP_SCORE_OUTPUT:-$ROOT/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score}"
 python3 scripts/experiments/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score_class_maps.py \
   --config configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json \
-  --output-dir outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score
+  --ntv2-root "$CLASSMAP_OUTPUT_ROOT" \
+  --output-dir "$CLASSMAP_SCORE_OUTPUT"

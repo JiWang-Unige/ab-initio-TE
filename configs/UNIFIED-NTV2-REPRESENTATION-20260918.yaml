@@ -1,5 +1,5 @@
 experiment_id: UNIFIED-NTV2-REPRESENTATION-20260918
-status: protocol_frozen_preparation
+status: class_representation_and_length_retry_complete
 purpose: >-
   Same-backbone NTv2-500M representation comparison for the pretrained,
   six-species binary D, and a matched eight-state class head. The class data
@@ -88,6 +88,19 @@ representation_contract:
     target_label: central_512_dominant_class_ties_lowest_numeric_unknown_retained
     pooling: exact_target_span_overlap_weighted_native_token_mean
     offset_policy: explicit_D_six_bp_spans_verified_by_content_count_and_input_ids
+    source_context_coordinate_contract: >-
+      for context length L, slice the 4096-bp source at
+      TARGET_START-(L-512)/2 and pool local target
+      [TARGET_START-source_start, TARGET_END-source_start); assert exact
+      length and target sequence identity before model inference
+    retry_job: 12897975
+    retry_evaluator_job: 12897980
+    retry_status: PASS
+    retry_target_tokens_by_context: {512: 87, 2048: 86, 4096: 86}
+    retry_dev_support: {full_eight: 192, known_five_binary: 186, conditional_te_four: 65}
+    retry_interpretation: >-
+      context-setting sensitivity under the native tokenizer; flanking
+      biological signal is not isolated from token boundary effects
     no_training_or_test_tuning: true
 
 evaluation:
@@ -116,6 +129,8 @@ resources:
     class_training: {job: 12889091, dependency: "afterany:12888288", partition: private-teodoro-gpu, gpu: nvidia_geforce_rtx_3090, cpus: 8, memory_gb: 64, walltime: "02:00:00"}
     extraction: {job: 12889676, dependency: "afterok:12889091", partition: private-teodoro-gpu, gpu: nvidia_geforce_rtx_3090, cpus: 4, memory_gb: 48, walltime: "00:45:00"}
     evaluation: {jobs: [12889677, 12889678, 12889679, 12889680], dependency: "afterok:12889676", partition: debug-cpu, cpus: 4, memory_gb: 16, walltime: "00:15:00"}
+    length_retry: {job: 12897975, partition: private-teodoro-gpu, gpu: 1, cpus: 4, memory_gb: 32, walltime: "00:45:00"}
+    length_retry_evaluation: {job: 12897980, dependency: "afterok:12897975", partition: private-teodoro-gpu, gpu: none, cpus: 4, memory_gb: 16, walltime: "00:15:00"}
     legacy_linear: {job: 12889615, partition: debug-cpu, gpu: none, cpus: 4, memory_gb: 16, walltime: "00:15:00"}
 
 stopping:

@@ -1,0 +1,72 @@
+{
+  "protocol": "UNIFIED-NTV2-REPRESENTATION-20260918",
+  "seed": 42,
+  "init_checkpoint": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+  "base_model": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+  "data_dir": "/home/users/j/jwang/ab-initio-TE/outputs/UNIFIED-NTV2-REPRESENTATION-20260918/matched_class_data",
+  "output_dir": "/home/users/j/jwang/ab-initio-TE/outputs/UNIFIED-NTV2-REPRESENTATION-20260918/class_training/last2-seed42-12889091",
+  "train_scope": "last2",
+  "max_steps": 900,
+  "eval_steps": 150,
+  "warmup_steps": 90,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.01,
+  "class_weights": [
+    1.0,
+    3.0,
+    3.0,
+    3.0,
+    3.0,
+    3.0,
+    2.0,
+    2.0
+  ],
+  "label_map": {
+    "0": "BG",
+    "1": "SINE",
+    "2": "LINE",
+    "3": "LTR",
+    "4": "DNA",
+    "5": "KNOWN_OTHER_TE",
+    "6": "AMBIGUOUS_TE",
+    "7": "UNCLASSIFIED"
+  },
+  "base_token_projection": "6-bp majority label; ties -> lowest numeric label; same rule for all splits",
+  "tile_sampling": "one tile per species per step; c_elegans TRAIN includes D upstream override",
+  "split_tile_counts": {
+    "train": {
+      "human": 1500,
+      "mouse": 1500,
+      "chicken": 1500,
+      "zebrafish": 1500,
+      "pig": 1500,
+      "c_elegans": 3000
+    },
+    "val": {
+      "human": 500,
+      "mouse": 500,
+      "chicken": 500,
+      "zebrafish": 500,
+      "pig": 500,
+      "c_elegans": 500
+    },
+    "test": {
+      "human": 500,
+      "mouse": 500,
+      "chicken": 500,
+      "zebrafish": 500,
+      "pig": 500,
+      "c_elegans": 500
+    }
+  },
+  "trainable": {
+    "scope": "last2",
+    "trainable_parameter_count": 33579016,
+    "trainable_parameter_tensors": 30,
+    "classifier_is_trainable": true,
+    "encoder_frozen_except_last_two": true
+  },
+  "best_validation_macro_f1": 0.6022688433228044,
+  "best_step": 900,
+  "elapsed_seconds": 3690.67706990242
+}

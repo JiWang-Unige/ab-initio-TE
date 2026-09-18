@@ -596,7 +596,7 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         target_names = list(species_cfg["target_chromosomes"])
         sequences = load_sequences((ROOT / "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/prepared" / f"{species}.fa").resolve(), target_names)
         source, source_stats = parse_source((ROOT / species_cfg["source_labels"]).resolve(), sequences)
-        ntv2_path = ROOT / "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2" / species / "predicted_classes.bed.gz"
+        ntv2_path = args.ntv2_root.resolve() / species / "predicted_classes.bed.gz"
         ntv2, ntv2_stats = load_class_map(ntv2_path, sequences)
         method_arrays: dict[str, dict[str, np.ndarray]] = {"NTv2_class": {chrom: np.where(values < 0, 0, values) for chrom, values in ntv2.items()}}
         method_stats: dict[str, object] = {"NTv2_class": ntv2_stats}
@@ -648,6 +648,12 @@ def run(args: argparse.Namespace) -> dict[str, object]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
+    parser.add_argument(
+        "--ntv2-root",
+        type=Path,
+        default=ROOT / "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2",
+        help="root containing one predicted_classes.bed.gz directory per species",
+    )
     parser.add_argument("--output-dir", type=Path, default=ROOT / "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score")
     run(parser.parse_args())
 
