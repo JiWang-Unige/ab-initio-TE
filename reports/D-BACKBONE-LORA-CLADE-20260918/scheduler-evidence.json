@@ -1,0 +1,28 @@
+{
+  "formal_job": {
+    "job_id": "12888288",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:44:57",
+    "partition": "private-teodoro-gpu",
+    "gpu": "nvidia_geforce_rtx_3090",
+    "cpus": 4,
+    "memory_gb": 32,
+    "source_results": "outputs/D-BACKBONE-LORA-CLADE-20260918/run-12888288/results.json"
+  },
+  "failed_attempt": {
+    "job_id": "12888116",
+    "state": "FAILED",
+    "exit_code": "1:0",
+    "elapsed": "00:06:21",
+    "partition": "private-teodoro-gpu",
+    "gpu": "nvidia_geforce_rtx_3090",
+    "cpus": 4,
+    "memory_gb": 64,
+    "scientific_result": false,
+    "error_type": "RuntimeError",
+    "error": "Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu",
+    "failure_stage": "first LoRA training forward pass",
+    "source_failure_bundle": "outputs/D-BACKBONE-LORA-CLADE-20260918/run-12888116/failure.json"
+  }
+}

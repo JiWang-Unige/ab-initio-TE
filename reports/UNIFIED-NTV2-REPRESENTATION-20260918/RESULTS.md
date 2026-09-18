@@ -2,15 +2,16 @@
 
 ## Current status
 
-`PROTOCOL_FROZEN_PREPARATION`.  The exact-D-coordinate eight-state class
+`CLASS_TRAIN_RUNNING`. The exact-D-coordinate eight-state class
 materialization is complete (Slurm `12887930`, `PASS`).  Native loader smoke
 is also complete (CPU Slurm `12888482`, `PASS`; 49 seconds): both native
 token-classification loaders initialized successfully, the class logits had
 shape `(1,688,8)`, and the D encoder versus the fresh class-head encoder had
 maximum hidden-state difference `0.0`.  This is a loader check, not a
-scientific score.  Class fine-tuning and the three-arm representation
-extraction/evaluation are queued behind the parent GPU lane; no scientific
-result is claimed for those stages yet.  A separate legacy CPU readout is
+scientific score. Class fine-tuning `12889091` is now running after the
+LoRA job completed; the three-arm representation extraction/evaluation
+remain dependency-gated. No final scientific result is claimed for those
+stages yet. A separate legacy CPU readout is
 complete and is recorded below.
 
 The full SIB TEST exposure audit (`12889831`, PASS) found exact coordinate and
@@ -82,7 +83,7 @@ fixed-panel diagnostic, not an independent biological validation.
 |---|---:|---|---|
 | matched class materialization | 12887930 | PASS | exact D coordinates; 21,000/6,000/6,000 half-records |
 | native D→class loader smoke | 12888482 | PASS | historical CPU-only debug-cpu smoke, 4 CPU/48G/49s; no scientific score |
-| class fine-tuning | 12889091 | PENDING | `afterany:12888288`; fixed `last2`, seed42, 900 steps; token selection + base-pair report |
+| class fine-tuning | 12889091 | RUNNING | dependency `12888288` completed; fixed `last2`, seed42, 900 steps; token selection + base-pair report |
 | matched three-arm extraction + length diagnostic | 12889676 | PENDING (`afterok:12889091`) | pretrained, binary D, class D-last2; target-centered 512/2048/4096; offset failure isolated |
 | train-only evaluator | 12889677/78/79 | PENDING (`afterok:12889676`) | pretrained/binary_D/class_D_last2; kNN/logistic/K-means |
 | context-length evaluator | 12889680 | PENDING (`afterok:12889676`) | train→DEV readouts plus composition baseline; BLOCKED is nonfatal |
@@ -94,7 +95,7 @@ Superseded extraction/evaluation submissions `12889459–12889463` and
 were replaced by `12889676–12889680` after the length-diagnostic wrapper was
 changed so a native offset mismatch is recorded as a bounded
 `BLOCKED_NATIVE_OFFSET` status instead of failing the primary three-arm
-extraction.  The class job `12889091` remains the single queued training
+extraction. The class job `12889091` remains the single active training
 submission; no duplicate GPU job was created.
 
 The first legacy linear attempt (`12889536`, `FAILED`) tried to recover

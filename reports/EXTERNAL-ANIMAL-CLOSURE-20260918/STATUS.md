@@ -1,9 +1,9 @@
 # EXTERNAL-ANIMAL-CLOSURE-20260918 status
 
-Updated 2026-09-18 after the fixed-D external inference and source-layer
-scoring chain completed on Baobab. At the 2026-09-18 heartbeat, the two
-nonmammal D masks had completed and the clade-conditioned LoRA comparison
-was running on its existing private allocation.
+Updated 2026-09-18 after the fixed-D external inference, source-layer scoring,
+and clade-conditioned LoRA comparison completed on Baobab. The two
+nonmammal D masks and the finite LoRA comparison are terminal; the remaining
+external status below records only the qualification and scoring evidence.
 
 ## Qualification completed
 
@@ -57,12 +57,22 @@ seed 42, first 256/128/128 complete tiles per species, shared rank-16 versus
 two fixed routes of rank-8 in query/value of layers 27–28, 1,024 steps/arm,
 AdamW `1e-4`, weight decay `0.01`, alpha equal to rank, and zero dropout.
 
-The smoke check passed with 131,072 trainable parameters per arm. The formal
-job `12888288` is now RUNNING after the two nonmammal D-mask jobs completed;
-its resource record is one private GPU, 4 CPUs, 32G, and four hours. The
-training log shows optimizer progress without a new error. No LoRA scientific
-result is recorded until training, CAL fitting, and fixed DEV evaluation
-produce the terminal result.
+The smoke check passed with 131,072 total trainable parameters per adapter
+arm. The formal job `12888288` completed (`44:57`, one RTX 3090, 4 CPUs, 32G,
+exit 0). Shared rank-16 has 131,072 active parameters per sample; the routed
+2×rank-8 arm has 131,072 total parameters but activates 65,536 for each
+sample, with fixed vertebrate versus worm routing and frozen-D fallback for
+unknown taxonomy. Both arms ran 1,024/1,024 steps with no skipped updates.
+
+On the matched CAL-refit D reference, DEV macro bp-F1 was 0.891834 for D,
+0.890150 for shared rank-16, and 0.890696 for fixed 2×rank-8. Thus both
+adapter arms were slightly below D; clade minus shared was only +0.000546.
+Chicken was the weakest species by bp-F1 for all arms, while *C. elegans* was
+weakest by IoU-0.8 segment F1. The *C. elegans* segment-level increase is a
+topology diagnostic, not insertion-level recovery or external generalization.
+Full per-species values and the matched historical full-CAL D column are in
+`reports/D-BACKBONE-LORA-CLADE-20260918/RESULTS.md` and
+`reports/D-BACKBONE-LORA-CLADE-20260918/compact-results.json`.
 
 ## Metric boundary
 
