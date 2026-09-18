@@ -68,7 +68,7 @@ comparator 列另外排除 Unknown/ambiguous/ARTEFACT 区间，故其阳性分�
 
 - **NTv2 class**：exact-D 坐标重建 TRAIN/CAL/DEV 为 21,000/6,000/6,000 条半窗；原生 D→8-class loader smoke 12888482 已 PASS，初始化 encoder 差为 0。保留旧 binary D，另训同基座 class 权重；不把旧 GENERanno SF5 数值迁移到新模型。
 - **BG readout 诊断**：GENERanno pretrained 的 known binary 混淆矩阵为 `[[67,293],[116,805]]`，BG recall=0.186、TE recall=0.874；NTv2 pretrained 为 `[[55,305],[74,847]]`，BG recall=0.153、TE recall=0.920，macro-F1=0.5211。D 后 macro-F1=0.7211。分母为 360 BG+921 TE，不是全部 1,580 条，也不是实际标注 F1。参见 [诊断](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/LEGACY-BINARY-DIAGNOSTIC.md)。另固定中心512 bp、改变512/2048/4096上下文的有限诊断，检验长度而不同时变更目标标签。
-- **鸡/斑马鱼 AUGUSTUS 用途**：各 50 Mb 核心/52 Mb含halo；1,064/984 个完整 gene loci。两者 native lowercase→`softmask/nep` 提示观察成功，受控200 bp对应原生1001–1200坐标。D mask 12889043/47，首core 12889048/49，其余core 12889053/54，最终评分12889062/63，均 private。结果尚未产生；这是D训练物种及既有同物种基因参数的用途测量，不是新物种泛化或Tiberius结果。
+- **鸡/斑马鱼 AUGUSTUS 用途**：各 50 Mb 核心/52 Mb含halo；1,064/984 个完整 gene loci。两者 native lowercase→`softmask/nep` 提示观察成功，受控200 bp对应原生1001–1200坐标。D mask 12889043/47均已完成；鸡最终评分12889062已完成，斑马鱼12889049/54/63仍执行中。全部新作业为private。这是D训练物种及既有同物种基因参数的用途测量，不是新物种泛化或Tiberius结果。
 - **LoRA**：共享 rank16 对固定类群2×rank8、各131,072参数，末两层query/value，单seed、每臂1024步。首次接口失败保留；修复job12888288依赖两个较短D masks，随后与CPU基因预测并行。host memory根据已测RSS缩为32GB，不改训练。
 - **整基因组 benchmark**：鸡与斑马鱼 full assembly native EDTA/RM2 已执行中；D CPU pilot/GPU独立。准确率使用实际D TRAIN/CAL/DEV均未覆盖的chr10/20；SF5旧split只作回顾性分层。尚不能写为整基因组比较完成。
 - **多分类 TE map 比较**：`UNIFIED-NTV2-CLASS-MAP-BENCH-20260918` 使用新 class 的 CAL-selected checkpoint，在同一鸡/斑马鱼 chr10/20 上生成原生8状态逐碱基输出，再和整基因组 EDTA/RM2 的 native 类别投影比较。该项不新增训练、不调整阈值、不把条件true-TE或token-majority分数替代完整bp分母；是质量对比，不冒充新class的完整基因组CPU计时。native class composition 只能说明输出构成，不能代替此项准确率。
@@ -81,3 +81,26 @@ comparator 列另外排除 Unknown/ambiguous/ARTEFACT 区间，故其阳性分�
 实际坐标审计12889831已完成：完整1,580条SIB TEST中，3条鸡序列完整落在D TRAIN、9条斑马鱼落在CAL、156条落在DEV（虫149、斑马鱼7），重叠DNA全部相同。必须区分梯度训练与CAL/DEV角色，不能把168条统称训练泄漏；也不能将该完整面板称为未接触的独立测试。保持固定面板作回顾性表示诊断，独立class-map质量比较仍使用已核实的chr10/20。[坐标审计](../../../reports/UNIFIED-NTV2-REPRESENTATION-20260918/EXPOSURE-AUDIT.md)
 
 CPU benchmark旧pilot12888135申请16核但实际Torch intra-op=1，故在41m08s停止并保留原输出及成本。修复后真实推理进程显式设置16线程、interop=1，并在启动时记录affinity/dtype；新pilot另用输出目录。该工程失败不能混入16线程公平速度比较，GPU/native任务继续运行。
+
+## Heartbeat 新完成结果：鸡的非哺乳动物基因用途
+
+鸡的全部10个固定5 Mb core、四臂原生预测和评分均已完成；分母为1,064个完整CDS loci，核心50 Mb，含halo输入52 Mb。完整结果在[鸡用途报告](../../../reports/NONMAMMAL-GENE-UTILITY-20260918/chicken/RESULTS.md)。
+
+| Arm | TP / FP / FN | Gene-level F1 |
+| --- | --- | ---: |
+| U | 280 / 916 / 784 | 0.247788 |
+| D | 285 / 835 / 779 | 0.260989 |
+| R_TE | 289 / 819 / 775 | 0.266114 |
+| RED | 33 / 591 / 1,031 | 0.039100 |
+
+D−U=+0.013201，染色体配对bootstrap 95%区间[+0.005109,+0.025163]；D−R_TE=−0.005125，区间[−0.010349,−0.001594]。这新增了“learned mask 改善未mask的非哺乳基因预测”的证据，但同组参考TE mask仍更好。R_TE来自同assembly既有UCSC注释，不能将它的分数冒充本轮新运行的RepeatMasker计时/输出。
+
+本组RED是在固定52 Mb输入panel上运行的原生默认方法，D−RED虽为正，不能据此概括优于所有RED设置或完整基因组训练的RED。保留其明显下降及实际mask覆盖诊断；不按结果调参或删臂。AUGUSTUS绝对F1和Tiberius鸭嘴兽分数不能跨物种、接收器直接排名。
+
+固定输入的事后mask/CDS重叠诊断显示：50 Mb核心内先合并isoform CDS，得到2,034,021 bp编码区；D、R_TE、RED分别遮盖283、1,192、1,023,600 bp，即0.0139%、0.0586%、50.3240%的CDS。对应全部核心遮盖比例为1.3553%、4.1827%、66.1640%。RED大幅遮盖编码序列与其低召回相符，支持overmasking这一解释，但没有单独隔离其因果贡献；不得把所有被mask碱基都当成TE真值。[诊断与逐核心计数](../../../reports/NONMAMMAL-GENE-UTILITY-20260918/chicken/POSTHOC-MASK-CDS-DIAGNOSTIC.md)
+
+## CPU 可行性终态与继续执行范围
+
+两次修正后的1 MiB CPU试跑均完成，实际Torch intra/inter=16/1、FP32。鸡12889857为2,467.58 bp/s，线性估计约5天，完整CPU作业12891439已提交。斑马鱼12891218为2,397.31 bp/s，对固定1,679,203,469 bp完整输入估计约8.11天，超过预先设定7天门槛，因此**未提交**斑马鱼完整CPU运行。它是按预算规则未执行的完整计时单元，不是实测8.11天，也不是运行到7天超时。不得以缩短输入或沿用鸡速率补齐此单元。
+
+LoRA 12888288已在private GPU开始固定训练；class和后续配对表示、class-map仍按既有依赖等待。四个整基因组native任务、D GPU和鸭嘴兽RM2仍运行中。完整benchmark和最终论文数据冻结尚未完成。

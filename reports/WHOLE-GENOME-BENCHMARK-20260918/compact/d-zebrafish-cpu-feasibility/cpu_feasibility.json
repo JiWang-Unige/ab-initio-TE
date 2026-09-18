@@ -1,0 +1,21 @@
+{
+  "decision_rule": "submit full CPU only when linear pilot estimate is <= 604800 seconds",
+  "full_assembly_bp": 1679203469,
+  "full_job_id": null,
+  "full_output_dir": null,
+  "interpretation": "resource-limited deployment datum; no full-genome CPU run was submitted and no scientific score is implied",
+  "labels_used": false,
+  "linear_estimated_days": 8.107102827933653,
+  "linear_estimated_seconds": 700453.6843334676,
+  "pilot_bp": 1048576,
+  "pilot_job_id": "12891218",
+  "pilot_output_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16",
+  "pilot_record": "chr1",
+  "pilot_throughput_bp_per_second": 2397.308353939038,
+  "pilot_wall_seconds": 437.43070793151855,
+  "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "scientific_metrics_computed": false,
+  "species": "zebrafish",
+  "status": "NOT_SUBMITTED_ESTIMATE_EXCEEDS_BUDGET",
+  "wall_budget_seconds": 604800
+}

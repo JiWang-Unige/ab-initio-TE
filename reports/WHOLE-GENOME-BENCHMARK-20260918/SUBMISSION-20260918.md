@@ -215,6 +215,30 @@ condition the scientific endpoint or select a result. Output is the fresh
 `d/chicken/cpu` directory. Full-genome CPU timing and the 1-Mb pilot timing
 will remain separate fields.
 
+The replacement zebrafish pilot `12891218` completed in 7 minutes 40 seconds
+under the same realized Torch 16-intra/1-inter, affinity `[0,1,...,15]`, FP32
+contract. Its end-to-end throughput was 2,397.31 bp/s. Applied to the frozen
+1,679,203,469-bp danRer11 assembly, the pre-specified linear estimate is
+700,454 seconds (8.11 days), exceeding the seven-day limit. Therefore no
+zebrafish full CPU job is submitted: the zfish CPU result is recorded as a
+resource-limited deployment datum, while the full zfish D GPU and native cells
+remain independent of this CPU gate. The compact terminal status, summary, and
+immediate runtime line are under
+`reports/WHOLE-GENOME-BENCHMARK-20260918/compact/d-zebrafish-cpu-pilot-fixed16/`.
+
+The machine-readable terminal resource-gate decision is stored at
+`outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_feasibility.json`
+and compacted under
+`reports/WHOLE-GENOME-BENCHMARK-20260918/compact/d-zebrafish-cpu-feasibility/`.
+It records pilot `12891218`, 2,397.308 bp/s over 1,048,576 bp, the frozen
+1,679,203,469-bp assembly, a linear estimate of 700,453.684 s (8.1071 d),
+the 604,800-s (7-d) budget, and `full_job_id: null`, with status
+`NOT_SUBMITTED_ESTIMATE_EXCEEDS_BUDGET`. The scorer reads this record under
+`result.cpu_feasibility` while preserving `result.cpu_full_status` as the
+independent native-run status (`MISSING` when no full-run directory exists).
+Thus an explicit budget gate is distinguishable from an unknown or missing
+CPU result without creating a placeholder full-run status.
+
 ## Metadata-only provenance adjustment
 
 Future benchmark cells now record lightweight file metadata (path, size, and

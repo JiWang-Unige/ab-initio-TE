@@ -492,9 +492,15 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
             summary = json.loads((EXP / "native" / species / method / "annotation_summary.json").read_text())
             native_composition[species + "/" + method] = {"annotation": summary["annotation"], "library": summary["library"]}
     optional_cpu = {}
+    cpu_feasibility = {}
     for species in config["species"]:
         path = EXP / "d" / species / "cpu" / "status.json"
         optional_cpu[species] = status(path)
+        # A resource-gate decision is deliberately separate from the native
+        # full-CPU run status.  This lets the result distinguish an explicit
+        # budget-limited non-submission from a missing/unknown run directory.
+        feasibility_path = EXP / "d" / species / "cpu_feasibility.json"
+        cpu_feasibility[species] = status(feasibility_path)
     result = {
         "protocol": "WHOLE-GENOME-BENCHMARK-20260918", "status": "COMPLETED",
         "accuracy_status": "COMPARATOR_RELATIVE", "species": list(config["species"]),
@@ -509,7 +515,8 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
                                    if key not in {"positive_intervals", "uncertain_intervals"}}
                         for species in labels},
         "cpu_full_status": optional_cpu,
-        "cpu_policy": "A CPU full-genome row is added only after a terminal native run; a pilot or extrapolation is never a measured whole-genome runtime",
+        "cpu_feasibility": cpu_feasibility,
+        "cpu_policy": "A CPU full-genome row is added only after a terminal native run; a pilot or extrapolation is never a measured whole-genome runtime. Explicit resource-gate decisions are reported separately under cpu_feasibility",
         "d_exposure_audit": config["d_exposure_audit"],
         "secondary_historical_strata": config["evaluation"]["secondary_historical_strata"],
         "truth_boundary": config["evaluation"]["truth_boundary"],
@@ -534,7 +541,9 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
                 handle.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" %
                              (species, method, stratum, value["tp_bp"], value["fp_bp"], value["fn_bp"],
                               value["precision"], value["recall"], value["f1"]))
-    print(json.dumps({"status": "COMPLETED", "metrics": metrics, "cpu_full_status": optional_cpu}, sort_keys=True))
+    print(json.dumps({"status": "COMPLETED", "metrics": metrics,
+                      "cpu_full_status": optional_cpu,
+                      "cpu_feasibility": cpu_feasibility}, sort_keys=True))
     return result
 
 

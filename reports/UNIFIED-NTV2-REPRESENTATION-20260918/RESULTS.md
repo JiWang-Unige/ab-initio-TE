@@ -71,10 +71,10 @@ hyperparameter on TEST.  Full confusion matrices and per-class metrics are in
 | NTv2 binary D | 0.7031 | `[[181,179],[109,812]]` | 0.4242 |
 
 The composition probe predicts almost every test record as TE
-(`[[2,358],[0,921]]`), whereas all embedding probes recover additional
-BG/TE structure; the improved class-F1 arm therefore cannot be attributed to
-these three simple composition covariates alone.  This is a fixed-panel
-diagnostic, not an independent biological validation.
+(`[[2,358],[0,921]]`), whereas the embedding probes outperform this tested
+linear composition baseline. This comparison does not exclude nonlinear
+composition effects or species and label-source confounding. It is a
+fixed-panel diagnostic, not an independent biological validation.
 
 ## Execution record
 

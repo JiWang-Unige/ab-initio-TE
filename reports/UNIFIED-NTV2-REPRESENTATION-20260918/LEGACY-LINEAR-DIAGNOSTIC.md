@@ -26,11 +26,11 @@ as BG, TE.
 The composition baseline has the identical confusion matrix for every arm,
 `[[2,358],[0,921]]`, and macro-F1 0.4242.  It calls nearly every record TE,
 so it has very poor BG recall.  The embedding probes recover BG as well as TE,
-especially after binary or class fine-tuning, which is evidence that the
-readout is not explained by these three covariates alone.  This does not
-establish that the representation is free of all GC, N, length, species, or
-label-source effects; those are addressed as fixed-panel confounders in the
-new three-arm evaluator.
+especially after binary or class fine-tuning, and outperform the tested
+linear composition baseline. This does not rule out nonlinear effects of
+those same covariates or species and label-source confounding. The new
+three-arm evaluator reports composition summaries; those summaries alone
+also do not establish independence from these effects.
 
 The previous GENERanno `.5221` number was cosine-weighted 5-NN macro-F1 on
 the same known-five denominator.  The new linear result is a complementary

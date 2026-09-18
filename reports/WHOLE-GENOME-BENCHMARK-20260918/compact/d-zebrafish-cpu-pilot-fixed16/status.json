@@ -1,0 +1,152 @@
+{
+  "callable_bp_per_second_end_to_end": 2397.308353939038,
+  "device": "cpu",
+  "finished_epoch": 1789691642.2864,
+  "host": {
+    "architecture": "x86_64",
+    "cpu_count_visible": 128,
+    "hostname": "gpu035.baobab",
+    "platform": "Linux-5.14.0-687.39.1.el9_8.x86_64-x86_64-with-glibc2.34",
+    "python": "3.9.25"
+  },
+  "inference_fasta_metadata": {
+    "exists": true,
+    "mtime_ns": 1789691204000000000,
+    "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/pilot.fa",
+    "size_bytes": 1061690
+  },
+  "input_contract": "first complete 1,048,576-bp prefix of the frozen pilot contig, fixed before any labels or outputs",
+  "labels_used": false,
+  "mode": "cpu_pilot",
+  "model": {
+    "batch_size": 12,
+    "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+    "model_code_dir": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "model_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "threshold_policy": "existing frozen CAL threshold; no refit on either whole genome",
+    "tokenizer_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+    "window_bp": 4096
+  },
+  "pilot_region": {
+    "end_bp": 1048576,
+    "length_bp": 1048576,
+    "record": "chr1",
+    "start_bp": 0
+  },
+  "prediction_summary": "prediction/summary.json",
+  "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "runtime_contract": {
+    "allocated_cpus": 16,
+    "dtype_policy": "load checkpoint dtype; no autocast or BF16/FP16 conversion",
+    "mkl_num_threads": 16,
+    "omp_num_threads": 16,
+    "openblas_num_threads": 1,
+    "torch_inter_op_threads": 1,
+    "torch_intra_op_threads": 16
+  },
+  "scientific_metrics_computed": false,
+  "slurm": {
+    "SLURMD_NODENAME": "gpu035",
+    "SLURM_CPUS_PER_TASK": "16",
+    "SLURM_JOB_ID": "12891218",
+    "SLURM_JOB_NAME": "wg-d-pilot",
+    "SLURM_JOB_NODELIST": "gpu035",
+    "SLURM_MEM_PER_NODE": "131072"
+  },
+  "source_fasta_metadata": {
+    "exists": true,
+    "mtime_ns": 1772726843000000000,
+    "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa",
+    "size_bytes": 1712826111
+  },
+  "source_stats": {
+    "first_record": "chr1_KZ114997v1_alt",
+    "first_record_bp": 304771,
+    "max_record_bp": 78093715,
+    "min_record_bp": 650,
+    "records": 1923,
+    "total_bp": 1679203469
+  },
+  "species": "zebrafish",
+  "started_epoch": 1789691204.8556924,
+  "status": "COMPLETED",
+  "timing": {
+    "argv": [
+      "/usr/bin/python3",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/infer_fasta.py",
+      "--fasta",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/pilot.fa",
+      "--model-dir",
+      "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "--tokenizer-dir",
+      "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "--model-code-dir",
+      "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "--calibration-json",
+      "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "--output-dir",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/prediction",
+      "--batch-size",
+      "12",
+      "--cpu"
+    ],
+    "elapsed_wall_seconds": null,
+    "max_rss_kb": 4524228,
+    "returncode": 0,
+    "stderr": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/inference.stderr",
+    "stdout": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/inference.stdout",
+    "system_seconds": 875.43,
+    "time_argv": [
+      "/usr/bin/time",
+      "-v",
+      "-o",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/inference.time",
+      "/usr/bin/python3",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/infer_fasta.py",
+      "--fasta",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/pilot.fa",
+      "--model-dir",
+      "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "--tokenizer-dir",
+      "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "--model-code-dir",
+      "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "--calibration-json",
+      "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "--output-dir",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/prediction",
+      "--batch-size",
+      "12",
+      "--cpu"
+    ],
+    "time_v": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16/inference.time",
+    "user_seconds": 5270.7,
+    "wall_seconds_observed": 437.39721603901125
+  },
+  "torch_runtime": {
+    "cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "inter_op_threads": 1,
+    "intra_op_threads": 16,
+    "model_dtype": "torch.float32"
+  },
+  "total_bp": 1048576,
+  "wall_seconds": 437.43070793151855,
+  "windows": 256
+}

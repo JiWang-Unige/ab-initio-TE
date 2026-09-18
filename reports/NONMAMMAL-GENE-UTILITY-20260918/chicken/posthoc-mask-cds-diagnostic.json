@@ -1,0 +1,366 @@
+{
+  "arms": {
+    "D": {
+      "masked_cds_bp": 283,
+      "masked_cds_fraction": 0.00013913327345194568,
+      "masked_core_bp": 677650,
+      "masked_core_fraction": 0.013553
+    },
+    "RED": {
+      "masked_cds_bp": 1023600,
+      "masked_cds_fraction": 0.5032396420685922,
+      "masked_core_bp": 33081990,
+      "masked_core_fraction": 0.6616398
+    },
+    "R_TE": {
+      "masked_cds_bp": 1192,
+      "masked_cds_fraction": 0.0005860313143276299,
+      "masked_core_bp": 2091349,
+      "masked_core_fraction": 0.04182698
+    },
+    "U": {
+      "masked_cds_bp": 0,
+      "masked_cds_fraction": 0.0,
+      "masked_core_bp": 0,
+      "masked_core_fraction": 0.0
+    }
+  },
+  "cds_union_bp": 2034021,
+  "core_bp": 50000000,
+  "core_count": 10,
+  "per_core": [
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 220379,
+          "masked_core_fraction": 0.0440758
+        },
+        "RED": {
+          "masked_cds_bp": 64015,
+          "masked_cds_fraction": 0.47800925925925924,
+          "masked_core_bp": 3253785,
+          "masked_core_fraction": 0.650757
+        },
+        "R_TE": {
+          "masked_cds_bp": 50,
+          "masked_cds_fraction": 0.0003733572281959379,
+          "masked_core_bp": 483691,
+          "masked_core_fraction": 0.0967382
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 133920,
+      "cds_union_intervals": 826,
+      "chrom": "chr1",
+      "core_bp": 5000000,
+      "id": "c00"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 59570,
+          "masked_core_fraction": 0.011914
+        },
+        "RED": {
+          "masked_cds_bp": 94715,
+          "masked_cds_fraction": 0.570328353535536,
+          "masked_core_bp": 3340455,
+          "masked_core_fraction": 0.668091
+        },
+        "R_TE": {
+          "masked_cds_bp": 22,
+          "masked_cds_fraction": 0.00013247346014656381,
+          "masked_core_bp": 188111,
+          "masked_core_fraction": 0.0376222
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 166071,
+      "cds_union_intervals": 980,
+      "chrom": "chr9",
+      "core_bp": 5000000,
+      "id": "c01"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 31,
+          "masked_cds_fraction": 0.0001709062441423263,
+          "masked_core_bp": 49523,
+          "masked_core_fraction": 0.0099046
+        },
+        "RED": {
+          "masked_cds_bp": 88102,
+          "masked_cds_fraction": 0.4857155458524914,
+          "masked_core_bp": 3254181,
+          "masked_core_fraction": 0.6508362
+        },
+        "R_TE": {
+          "masked_cds_bp": 20,
+          "masked_cds_fraction": 0.00011026209299504924,
+          "masked_core_bp": 168076,
+          "masked_core_fraction": 0.0336152
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 181386,
+      "cds_union_intervals": 1127,
+      "chrom": "chr10",
+      "core_bp": 5000000,
+      "id": "c02"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 13,
+          "masked_cds_fraction": 5.790516914990758e-05,
+          "masked_core_bp": 66748,
+          "masked_core_fraction": 0.0133496
+        },
+        "RED": {
+          "masked_cds_bp": 110459,
+          "masked_cds_fraction": 0.49201131377920315,
+          "masked_core_bp": 3256793,
+          "masked_core_fraction": 0.6513586
+        },
+        "R_TE": {
+          "masked_cds_bp": 99,
+          "masked_cds_fraction": 0.00044097013429545,
+          "masked_core_bp": 197254,
+          "masked_core_fraction": 0.0394508
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 224505,
+      "cds_union_intervals": 1467,
+      "chrom": "chr12",
+      "core_bp": 5000000,
+      "id": "c03"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 114,
+          "masked_cds_fraction": 0.001141769743101808,
+          "masked_core_bp": 53240,
+          "masked_core_fraction": 0.010648
+        },
+        "RED": {
+          "masked_cds_bp": 52219,
+          "masked_cds_fraction": 0.523000651009064,
+          "masked_core_bp": 3322587,
+          "masked_core_fraction": 0.6645174
+        },
+        "R_TE": {
+          "masked_cds_bp": 135,
+          "masked_cds_fraction": 0.0013520957484100355,
+          "masked_core_bp": 187138,
+          "masked_core_fraction": 0.0374276
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 99845,
+      "cds_union_intervals": 571,
+      "chrom": "chr11",
+      "core_bp": 5000000,
+      "id": "c04"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 63338,
+          "masked_core_fraction": 0.0126676
+        },
+        "RED": {
+          "masked_cds_bp": 87598,
+          "masked_cds_fraction": 0.5004055891324962,
+          "masked_core_bp": 3357791,
+          "masked_core_fraction": 0.6715582
+        },
+        "R_TE": {
+          "masked_cds_bp": 24,
+          "masked_cds_fraction": 0.0001371005518297211,
+          "masked_core_bp": 213938,
+          "masked_core_fraction": 0.0427876
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 175054,
+      "cds_union_intervals": 1039,
+      "chrom": "chr13",
+      "core_bp": 5000000,
+      "id": "c05"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 50611,
+          "masked_core_fraction": 0.0101222
+        },
+        "RED": {
+          "masked_cds_bp": 127908,
+          "masked_cds_fraction": 0.5034281351102434,
+          "masked_core_bp": 3358249,
+          "masked_core_fraction": 0.6716498
+        },
+        "R_TE": {
+          "masked_cds_bp": 29,
+          "masked_cds_fraction": 0.00011413997496792273,
+          "masked_core_bp": 179087,
+          "masked_core_fraction": 0.0358174
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 254074,
+      "cds_union_intervals": 1587,
+      "chrom": "chr14",
+      "core_bp": 5000000,
+      "id": "c06"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 18,
+          "masked_cds_fraction": 0.00010038536827487744,
+          "masked_core_bp": 46550,
+          "masked_core_fraction": 0.00931
+        },
+        "RED": {
+          "masked_cds_bp": 88623,
+          "masked_cds_fraction": 0.4942473607013591,
+          "masked_core_bp": 3346953,
+          "masked_core_fraction": 0.6693906
+        },
+        "R_TE": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 169211,
+          "masked_core_fraction": 0.0338422
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 179309,
+      "cds_union_intervals": 1090,
+      "chrom": "chr20",
+      "core_bp": 5000000,
+      "id": "c07"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 107,
+          "masked_cds_fraction": 0.00029704894367174703,
+          "masked_core_bp": 32456,
+          "masked_core_fraction": 0.0064912
+        },
+        "RED": {
+          "masked_cds_bp": 179534,
+          "masked_cds_fraction": 0.4984148135809667,
+          "masked_core_bp": 3249289,
+          "masked_core_fraction": 0.6498578
+        },
+        "R_TE": {
+          "masked_cds_bp": 255,
+          "masked_cds_fraction": 0.0007079203797784626,
+          "masked_core_bp": 164568,
+          "masked_core_fraction": 0.0329136
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 360210,
+      "cds_union_intervals": 2295,
+      "chrom": "chr15",
+      "core_bp": 5000000,
+      "id": "c08"
+    },
+    {
+      "arms": {
+        "D": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 35235,
+          "masked_core_fraction": 0.007047
+        },
+        "RED": {
+          "masked_cds_bp": 130427,
+          "masked_cds_fraction": 0.5023243095433415,
+          "masked_core_bp": 3341907,
+          "masked_core_fraction": 0.6683814
+        },
+        "R_TE": {
+          "masked_cds_bp": 558,
+          "masked_cds_fraction": 0.002149071624166657,
+          "masked_core_bp": 140275,
+          "masked_core_fraction": 0.028055
+        },
+        "U": {
+          "masked_cds_bp": 0,
+          "masked_cds_fraction": 0.0,
+          "masked_core_bp": 0,
+          "masked_core_fraction": 0.0
+        }
+      },
+      "cds_union_bp": 259647,
+      "cds_union_intervals": 1737,
+      "chrom": "chr18",
+      "core_bp": 5000000,
+      "id": "c09"
+    }
+  ],
+  "protocol": "NONMAMMAL-GENE-UTILITY-20260918",
+  "species": "chicken",
+  "status": "COMPLETED_POSTHOC_MASK_CDS_DIAGNOSTIC"
+}

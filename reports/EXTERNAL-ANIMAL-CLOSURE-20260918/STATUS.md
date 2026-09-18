@@ -1,8 +1,9 @@
 # EXTERNAL-ANIMAL-CLOSURE-20260918 status
 
 Updated 2026-09-18 after the fixed-D external inference and source-layer
-scoring chain completed on Baobab; the clade-conditioned LoRA comparison is
-still queued behind the nonmammal mask work.
+scoring chain completed on Baobab. At the 2026-09-18 heartbeat, the two
+nonmammal D masks had completed and the clade-conditioned LoRA comparison
+was running on its existing private allocation.
 
 ## Qualification completed
 
@@ -57,9 +58,11 @@ two fixed routes of rank-8 in query/value of layers 27–28, 1,024 steps/arm,
 AdamW `1e-4`, weight decay `0.01`, alpha equal to rank, and zero dropout.
 
 The smoke check passed with 131,072 trainable parameters per arm. The formal
-job remains pending behind the two nonmammal D-mask jobs; its current resource
-record is one private GPU, 4 CPUs, 32G, and four hours. No LoRA scientific
-result is recorded until the repaired job reaches `completed`.
+job `12888288` is now RUNNING after the two nonmammal D-mask jobs completed;
+its resource record is one private GPU, 4 CPUs, 32G, and four hours. The
+training log shows optimizer progress without a new error. No LoRA scientific
+result is recorded until training, CAL fitting, and fixed DEV evaluation
+produce the terminal result.
 
 ## Metric boundary
 
