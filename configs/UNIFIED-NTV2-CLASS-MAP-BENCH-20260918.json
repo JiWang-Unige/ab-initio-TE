@@ -1,0 +1,94 @@
+{
+  "experiment": "UNIFIED-NTV2-CLASS-MAP-BENCH-20260918",
+  "status": "IMPLEMENTATION_READY_WAITING_FOR_CLASS_CHECKPOINT_AND_NATIVE_COMPLETION",
+  "purpose": "Quality-only class-map comparison on D-independent chicken and zebrafish chromosomes using the matched NTv2 class checkpoint and completed native whole-genome outputs.",
+  "backbone": {
+    "name": "NTv2-500M",
+    "base_model": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "class_training_job": "12889091",
+    "class_training_protocol": "UNIFIED-NTV2-REPRESENTATION-20260918",
+    "class_checkpoint_env": "CLASS_MODEL",
+    "checkpoint_contract": "validation-selected best_model from class job 12889091; no test or chromosome score selection",
+    "token_projection": "representation trainer sequence_tokens: six-base tokens plus a final shorter token, non-ACGT token mapped to native <unk>",
+    "window_bp": 4096,
+    "window_alignment": "nonoverlapping, contig origin 0",
+    "prediction": "native 8-class token argmax projected back to covered bases; no threshold or calibration",
+    "label_map": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "KNOWN_OTHER_TE",
+      "6": "AMBIGUOUS_TE",
+      "7": "UNCLASSIFIED"
+    }
+  },
+  "species": {
+    "chicken": {
+      "scientific_name": "Gallus gallus",
+      "assembly": "galGal6",
+      "source_fasta": ".backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+      "source_labels": ".backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz",
+      "native_root": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken",
+      "target_chromosomes": ["chr10", "chr20"]
+    },
+    "zebrafish": {
+      "scientific_name": "Danio rerio",
+      "assembly": "danRer11",
+      "source_fasta": ".backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa",
+      "source_labels": ".backup/data/genome_data/current_eukaryotes/animals/zebrafish/rmsk.txt.gz",
+      "native_root": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish",
+      "target_chromosomes": ["chr10", "chr20"]
+    }
+  },
+  "native_methods": {
+    "RM2": {
+      "kind": "RepeatModeler2_2.0.9_then_RepeatMasker_4.2.4",
+      "annotation_preference": "annotation.out",
+      "coordinate_contract": "RepeatMasker .out fields 5/6 are 1-based inclusive and converted to 0-based half-open",
+      "class_field": "RepeatMasker .out field 10, raw .class value",
+      "non_te_policy": "Simple_repeat, Low_complexity, Satellite and RNA-like classes are skipped as non-TE; explicit Unknown/? remain UNCLASSIFIED/AMBIGUOUS",
+      "overlap_policy": "sort by (start,end,ontology_label_id), then ordered paint; later row wins; no reference labels are consulted"
+    },
+    "EDTA": {
+      "kind": "EDTA_2.3.0_native_annotation",
+      "annotation_preference": "annotation.gff3",
+      "coordinate_contract": "GFF3 fields 3/4 are 1-based inclusive and converted to 0-based half-open",
+      "class_attributes": ["classification", "class_family", "repeat_class", "class", "repclass"],
+      "parent_policy": "Skip region/chromosome/contig and structural child rows; suppress a repeat_region container only when a complete TE child or explicit match-part evidence replaces it; retain complete TE bodies such as LTR_retrotransposon even when they carry structural LTR/TIR children",
+      "non_te_policy": "Explicit simple/low-complexity/satellite/RNA-like classes are skipped; explicit Unknown/? remain UNCLASSIFIED/AMBIGUOUS",
+      "overlap_policy": "sort by (start,end,ontology_label_id), then ordered paint; later row wins; no reference labels are consulted"
+    }
+  },
+  "evaluation": {
+    "coordinate_convention": "0-based half-open",
+    "callable_mask": "only A/C/G/T bases; N and other IUPAC bases are excluded from class denominators and reported separately",
+    "source_mapping": "same frozen SF5 ontology policy as the matched class trainer: BG default, SINE/LINE/LTR/DNA main classes, RC/Retroposon KNOWN_OTHER_TE, ? AMBIGUOUS_TE, Unknown/Unspecified/unresolved UNCLASSIFIED",
+    "source_overlap_policy": "sort source intervals by (start,end,ontology_label_id), then ordered paint; later row wins",
+    "primary_known_endpoint": "macro metrics over reference BG/SINE/LINE/LTR/DNA positions only; source KNOWN_OTHER_TE, AMBIGUOUS_TE and UNCLASSIFIED positions are excluded from this denominator",
+    "full8_endpoint": "8-by-8 reference-row/prediction-column confusion on all callable bases; source Unknown/UNCLASSIFIED remains an explicit row",
+    "true_te_endpoint": "conditional readout on reference SINE/LINE/LTR/DNA bases, with per-class exact recall and any-main-TE recovery",
+    "unknown_reporting": "source Unknown/UNCLASSIFIED and AMBIGUOUS_TE bp/rows are reported in full even when excluded from primary known denominator",
+    "d_binary": "N/A for class metrics; WHOLE D output is binary material only and is not remapped into classes",
+    "truth_boundary": "same-assembly UCSC RepeatMasker is a comparator layer, not exhaustive biological truth; native unknown and source unknown are never silently treated as negative"
+  },
+  "resources": {
+    "prepare": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 16, "walltime": "01:00:00", "gpu": false},
+    "class_map": {"partition": "private-teodoro-gpu", "cpus": 8, "memory_gb": 96, "walltime": "04:00:00", "gpu": "nvidia_geforce_rtx_3090", "concurrency": 1},
+    "score": {"partition": "private-teodoro-gpu", "cpus": 8, "memory_gb": 32, "walltime": "01:00:00", "gpu": false}
+  },
+  "outputs": {
+    "prepared": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/prepared/{species}.fa",
+    "ntv2": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2/{species}",
+    "native_normalized": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/native/{species}/{method}",
+    "score": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score/result.json"
+  },
+  "gates": {
+    "class_checkpoint": "CLASS_MODEL must point to a complete validation-selected class checkpoint with pytorch_model.bin",
+    "native_cells": "EDTA and RM2 must have terminal COMPLETED status plus their native annotation output and annotation_summary.json",
+    "target_input": "all four target chromosomes must be present with exact source identifiers and lengths",
+    "no_score_selection": "target chromosomes are fixed by D exposure audit before native output or class score inspection",
+    "no_gpu_without_dependency": "class-map GPU job is submitted only with an afterok dependency on class checkpoint availability and target preparation"
+  }
+}

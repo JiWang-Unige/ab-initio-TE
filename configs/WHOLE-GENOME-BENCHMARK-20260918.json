@@ -1,0 +1,185 @@
+{
+  "experiment": "WHOLE-GENOME-BENCHMARK-20260918",
+  "status": "FROZEN_BEFORE_NATIVE_RUN",
+  "claim_eligible": false,
+  "scope": "Whole-assembly, same-input comparison of EDTA 2.3.0, RepeatModeler2 2.0.9 plus RepeatMasker 4.2.4, and the frozen D model on chicken and a second vertebrate assembly",
+  "selection_rule": {
+    "species": "Frozen before native execution from existing assembly and label assets; no model score, label density, or interim native output used",
+    "input": "The complete source FASTA for each assembly, preserving source contig identifiers",
+    "labels": "Existing same-assembly RepeatMasker/UCSC output is retained as a positive comparator layer; it is not treated as independent exhaustive biological truth",
+    "second_genome": "Danio rerio danRer11 from the existing same-assembly high-coverage UCSC reference and label assets, fixed before this benchmark; the D. simulans positive-only asset remains outside this primary matrix"
+  },
+  "species": {
+    "chicken": {
+      "scientific_name": "Gallus gallus",
+      "assembly": "galGal6",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+      "label_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz",
+      "label_format": "ucsc_rmsk_table",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/galGal6/database/rmsk.txt.gz",
+      "same_assembly": true,
+      "label_scope": "UCSC RepeatMasker table on galGal6; used for comparator agreement and label coverage strata",
+      "native_input_contract": "complete unmodified galGal6.fa; no train/test selection or contig truncation",
+      "cpu_pilot_record": "chr1",
+      "cpu_pilot_record_rule": "first source FASTA record with the fixed primary chromosome name chr1; fixed from assembly structure before labels or model output",
+      "status": "FROZEN"
+    },
+    "zebrafish": {
+      "scientific_name": "Danio rerio",
+      "assembly": "danRer11",
+      "fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa",
+      "label_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/rmsk.txt.gz",
+      "label_format": "ucsc_rmsk_table",
+      "label_source_url": "https://hgdownload.soe.ucsc.edu/goldenPath/danRer11/database/rmsk.txt.gz",
+      "chrom_sizes": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.chrom.sizes.txt",
+      "same_assembly": true,
+      "label_scope": "UCSC RepeatMasker table on danRer11; used for comparator agreement and label coverage strata",
+      "native_input_contract": "complete unmodified danRer11.fa; no train/test selection or contig truncation",
+      "cpu_pilot_record": "chr1",
+      "cpu_pilot_record_rule": "first primary chromosome record with the fixed name chr1; short alternate scaffolds precede it in this FASTA and are not eligible for the 1-Mb pilot",
+      "status": "FROZEN"
+    }
+  },
+  "methods": {
+    "RM2": {
+      "label": "RepeatModeler2 2.0.9 followed by RepeatMasker 4.2.4",
+      "kind": "de_novo_discovery_plus_library_mask",
+      "repeatmodeler_version": "2.0.9",
+      "repeatmasker_version": "4.2.4",
+      "repeatmodeler_commit": "14798c73c2c32da17576deac4689a6e586932eb",
+      "repeatmasker_commit": "3f49a049c7a7e843b2da1b708fe06bb39c90035b",
+      "repeatmodeler_image": "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+      "repeatmasker_image": "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+      "seed": 42,
+      "discovery_command": "BuildDatabase -name db genome.fa; RepeatModeler -database db -threads 16 -srand 42 -LTRStruct",
+      "mask_command": "RepeatMasker -e rmblast -pa 4 -gff -xsmall -lib RM_*/consensi.fa.classified genome.fa",
+      "mask_engine": "rmblast",
+      "mask_parallel_workers": 4,
+      "mask_engine_cores_per_worker": 4,
+      "mask_effective_search_cores_target": 16,
+      "mask_parallelism": "RepeatMasker 4.2.4 documents four RMBlast cores per -pa worker; -pa 4 therefore targets 16 search cores under the 16-CPU allocation",
+      "library_policy": "Use the one complete native consensi.fa.classified output, including Unknown entries; do not filter by score, class, or downstream label",
+      "classification_policy": "Preserve RepeatMasker raw class/family and Unknown rows in native output summaries"
+    },
+    "EDTA": {
+      "label": "EDTA 2.3.0",
+      "kind": "de_novo_discovery_plus_library_mask",
+      "version": "2.3.0",
+      "release_tag": "v2.3.0",
+      "commit": "a9f7a56d6a1c1a9cdcf2a1d7b8c27a74a38dbfc2",
+      "image": "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+      "source_overlay": "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0",
+      "parameters": "--overwrite 1 --sensitive 1 --anno 1 --species others --threads 16; no curated library, CDS, or exclude BED",
+      "library_policy": "Use EDTA's complete native non-redundant TElib output and retain novel/classified/unknown categories separately",
+      "classification_policy": "Preserve native GFF3 attributes; missing or Unknown classification remains Unknown"
+    },
+    "D": {
+      "label": "Frozen sequence-only D model",
+      "kind": "fixed_model_sequence_inference",
+      "model_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "tokenizer_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+      "model_code_dir": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+      "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "calibration_scope": "six-species-shared",
+      "fit_split": "CAL",
+      "window_bp": 4096,
+      "batch_size": 12,
+      "threshold_policy": "existing frozen CAL threshold; no refit on either whole genome",
+      "output_semantics": "binary material runs; no family classification or insertion identity"
+    }
+  },
+  "evaluation": {
+    "coordinate_convention": "zero_based_half_open",
+    "strict_te_classes": ["LINE", "SINE", "LTR", "DNA", "RC", "Retroposon"],
+    "unknown_class_tokens": ["Unknown", "unknown", "unclassified", "?", "-"],
+    "primary": "bp-level overlap agreement with the frozen same-assembly positive comparator, reported with label-source scope",
+    "secondary": ["native annotation union bp", "precision/recall/F1 against comparator-positive intervals", "class/family and Unknown row/bp composition", "callable bp per second", "discovery wall/RSS", "masking wall/RSS", "end-to-end wall/RSS"],
+    "truth_boundary": "No method receives labels. Same-assembly RepeatMasker output is a comparator layer; source-dependent or incomplete labels do not support an exhaustive whole-genome truth claim.",
+    "class_contract": "All native class/family labels remain in the audit. Unknown is never dropped from denominators by post-hoc filtering.",
+    "secondary_historical_strata": {
+      "source": "configs/SF5-ONTOLOGY-CLOSURE-20260915.yaml, pre-existing species-specific train/validation/test chromosome contract",
+      "use": "Retrospective reporting strata only. These chromosomes are not asserted to be independent of the D model because the SF5 split is not the D checkpoint exposure manifest.",
+      "chicken": {"train": ["chr1"], "validation": ["chr2"], "test": ["chr3"]},
+      "zebrafish": {"train": ["chr4"], "validation": ["chr7"], "test": ["chr5"]}
+    }
+  },
+  "d_exposure_audit": {
+    "source": {
+      "training_meta": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/training_meta.json",
+      "materialization_root": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202",
+      "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json"
+    },
+    "manifest_paths": {
+      "TRAIN": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/TRAIN/{species}.jsonl.gz",
+      "CAL": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/CAL/{species}.jsonl.gz",
+      "DEV": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/DEV/{species}.jsonl.gz"
+    },
+    "definition": "D-independent chromosomes are fixed before score inspection by excluding every chromosome observed in the D TRAIN, CAL, and model-selection DEV manifests. This is a conservative chromosome-level exposure audit; any unresolved homologous or historical exposure is reported as a retrospective annotation caveat.",
+    "exposure_chromosomes": {
+      "chicken": {
+        "train": ["chr2", "chr3", "chr4", "chr7", "chr8"],
+        "calibration": ["chr1", "chr5", "chr6"],
+        "selection_dev": ["chr1", "chr5", "chr6"],
+        "independent_test": ["chr10", "chr20"]
+      },
+      "zebrafish": {
+        "train": ["chr1", "chr3", "chr4", "chr7", "chr9"],
+        "calibration": ["chr2", "chr5", "chr6"],
+        "selection_dev": ["chr2", "chr5", "chr6"],
+        "independent_test": ["chr10", "chr20"]
+      }
+    },
+    "independent_test_rule": "Only chromosomes explicitly listed under independent_test are used for the D-independent accuracy stratum. Whole-assembly native discovery and timing still use the complete FASTA, and D class is N/A because the frozen D output is binary material inference.",
+    "independent_test_selection_rationale": "chr10 and chr20 were fixed before reading native outputs or scores because they are present primary assembly chromosomes, absent from every observed D TRAIN/CAL/DEV manifest for the corresponding species, and long enough to provide a non-trivial accuracy stratum. No chromosome was selected by model performance or label density."
+  },
+  "resources": {
+    "native": {
+      "partition": "private-teodoro-gpu",
+      "cpus": 16,
+      "memory_gb": 128,
+      "time": "7-00:00:00",
+      "gres": null,
+      "concurrency": 2,
+      "note": "CPU-only requests on the private partition; no GPU is allocated to EDTA/RM2"
+    },
+    "d_cpu_pilot": {
+      "partition": "private-teodoro-gpu",
+      "cpus": 16,
+      "memory_gb": 128,
+      "time": "02:00:00",
+      "gres": null,
+      "concurrency": 1,
+      "input_rule": "First complete 1,048,576-bp interval of the first source FASTA contig, fixed before labels and outputs are read",
+      "purpose": "Empirical feasibility check for full-genome CPU inference; pilot timing is not whole-genome runtime",
+      "full_run_gate": "Submit a full CPU inference only when the pre-specified linear feasibility estimate from the pilot is within the 7-day wall budget; otherwise record a resource-limited CPU result and retain the pilot as the measured CPU deployment datum"
+    },
+    "d_cpu": {
+      "partition": "private-teodoro-gpu",
+      "cpus": 16,
+      "memory_gb": 128,
+      "time": "7-00:00:00",
+      "gres": null,
+      "concurrency": 1
+    },
+    "d_gpu": {
+      "partition": "private-teodoro-gpu",
+      "cpus": 8,
+      "memory_gb": 96,
+      "time": "7-00:00:00",
+      "gres": "gpu:nvidia_geforce_rtx_3090:1",
+      "concurrency": 1
+    },
+    "score": {
+      "partition": "private-teodoro-gpu",
+      "cpus": 4,
+      "memory_gb": 32,
+      "time": "04:00:00",
+      "gres": null
+    }
+  },
+  "output_layout": {
+    "native": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/{species}/{method}",
+    "d": "outputs/WHOLE-GENOME-BENCHMARK-20260918/d/{species}/{cpu|gpu}",
+    "score": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score/result.json"
+  }
+}

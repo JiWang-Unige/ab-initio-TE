@@ -11,6 +11,7 @@ import gzip
 import importlib.util
 import itertools
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -115,9 +116,23 @@ class TrackWriter:
                 self.pending = (start, end, value)
 
 
+def configure_torch_runtime():
+    """Apply the benchmark's explicit Torch CPU-thread contract before loading weights."""
+    import torch
+
+    intra = int(os.environ.get("TEFM_TORCH_INTRA_THREADS", os.environ.get("SLURM_CPUS_PER_TASK", "1")))
+    inter = int(os.environ.get("TEFM_TORCH_INTER_THREADS", "1"))
+    if intra < 1 or inter < 1:
+        raise ValueError("Torch thread counts must be positive")
+    torch.set_num_threads(intra)
+    torch.set_num_interop_threads(inter)
+    return torch
+
+
 def run(args) -> dict:
     if args.batch_size < 1:
         raise ValueError("batch-size must be positive")
+    torch = configure_torch_runtime()
     calibration = load_calibration(args)
     records = read_fasta(args.fasta)
     first = next(records)  # Reject an empty/invalid first contig before loading weights.
@@ -135,6 +150,17 @@ def run(args) -> dict:
     model, tokenizer, device = core.load_final_model(
         args.model_dir, args.tokenizer_dir, args.cpu, args.model_code_dir
     )
+    parameter = next(model.parameters(), None)
+    model_dtype = str(parameter.dtype) if parameter is not None else None
+    affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None
+    # Emit this before the long sequence loop so a Slurm log proves the
+    # realized child-process contract even if a pilot is time-limited later.
+    print(json.dumps({"event": "runtime_contract_realized",
+                      "torch_intra_op_threads": torch.get_num_threads(),
+                      "torch_inter_op_threads": torch.get_num_interop_threads(),
+                      "cpu_affinity": affinity,
+                      "model_dtype": model_dtype,
+                      "device": str(device)}, sort_keys=True), flush=True)
     args.output_dir.mkdir(parents=True, exist_ok=True)
     contigs = []
     slope, intercept, threshold = (float(calibration[key]) for key in
@@ -182,6 +208,9 @@ def run(args) -> dict:
         "window_bp": WINDOW_BP, "window_alignment": "nonoverlapping, contig origin 0",
         "tail_policy": "actual sequence length; existing NTv2 tokenizer padding only",
         "coordinates": "0-based half-open", "device": str(device), "batch_size": args.batch_size,
+        "torch_runtime": {"intra_op_threads": torch.get_num_threads(),
+                           "inter_op_threads": torch.get_num_interop_threads(),
+                           "cpu_affinity": affinity, "model_dtype": model_dtype},
         "ambiguity_policy": "uppercase IUPAC; existing <unk> tokenization; no prediction censoring",
         "interpretation": "TE material connected runs, not insertion IDs; no scientific evaluation",
         "scientific_metrics_computed": False, "labels_used": False,

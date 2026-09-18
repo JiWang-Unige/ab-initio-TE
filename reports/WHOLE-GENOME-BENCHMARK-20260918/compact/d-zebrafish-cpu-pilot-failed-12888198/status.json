@@ -1,0 +1,14 @@
+{
+  "attempted_pilot_record": "chr1_KZ114997v1_alt",
+  "attempted_pilot_record_bp": 304771,
+  "error": "ValueError: first contig has only 304771 bp; need 1048576 (exact stderr message)",
+  "interpretation": "preserved engineering failure; no inference or scientific score was produced",
+  "labels_used": false,
+  "mode": "cpu_pilot",
+  "pilot_bp_requested": 1048576,
+  "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "scientific_metrics_computed": false,
+  "slurm_job_id": "12888198",
+  "species": "zebrafish",
+  "status": "FAILED_ENGINEERING"
+}

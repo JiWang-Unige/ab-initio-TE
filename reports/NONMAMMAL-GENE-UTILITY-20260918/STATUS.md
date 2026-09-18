@@ -43,3 +43,9 @@ Slurm scheduling snapshots are not a promised completion time. At submission,
 the available private GPU node's host-memory reservations were almost full
 with the standardized 128 GB native benchmark cells; these jobs were preserved
 rather than restarted to change resource requests.
+
+Chicken fixed-D masks completed as job `12889043` in 14m57s (10/10
+records, 52 Mb including halos). The native mask manifest is archived as
+`chicken/D_mask.json`. Its first four-arm gene-prediction core `12889048_0`
+is running; this is not yet a gene-accuracy result. Zebrafish D masks remain
+queued before the LoRA/class chain.
