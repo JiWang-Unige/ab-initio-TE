@@ -1,0 +1,13 @@
+species	method	stratum	tp_bp	fp_bp	fn_bp	precision	recall	f1
+chicken	EDTA	whole_assembly	NA	NA	NA	NA	NA	NA
+chicken	EDTA	d_independent_test	NA	NA	NA	NA	NA	NA
+chicken	RM2	whole_assembly	NA	NA	NA	NA	NA	NA
+chicken	RM2	d_independent_test	NA	NA	NA	NA	NA	NA
+chicken	D_gpu	whole_assembly	39494942	1132017	61079695	0.9721363097838556	0.39269286152133964	0.5594121188261924
+chicken	D_gpu	d_independent_test	478000	31106	1007993	0.9389007397280723	0.32167042509621513	0.47917421641733066
+zebrafish	EDTA	whole_assembly	NA	NA	NA	NA	NA	NA
+zebrafish	EDTA	d_independent_test	NA	NA	NA	NA	NA	NA
+zebrafish	RM2	whole_assembly	NA	NA	NA	NA	NA	NA
+zebrafish	RM2	d_independent_test	NA	NA	NA	NA	NA	NA
+zebrafish	D_gpu	whole_assembly	663521931	159339002	35889876	0.8063597436579237	0.9486856303528202	0.8717517085670207
+zebrafish	D_gpu	d_independent_test	40895981	9263408	2070554	0.8153205574334249	0.9518100773078397	0.878294233085945

@@ -1,0 +1,53 @@
+{
+  "experiment": "RECOVER-EDTA-CHICKEN-20260924",
+  "parent_protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "status": "AUTHORIZED_ENGINEERING_RECOVERY",
+  "scope": "Resume the preserved chicken EDTA TIR-Learner checkpoint after a runtime compatibility failure, then continue the unchanged EDTA filter/final/annotation stages in a fresh output directory.",
+  "species": "chicken",
+  "assembly": "galGal6",
+  "frozen_input": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+  "failed_native_output": "/home/users/j/jwang/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+  "failed_jobs": [
+    {"job": "12888133", "slurm_elapsed_seconds": 27, "reason": "container source-path engineering failure"},
+    {"job": "12888165", "slurm_elapsed_seconds": 166835, "reason": "TIR-Learner pandas/swifter nested-process compatibility failure"}
+  ],
+  "budget": {
+    "native_cell_seconds": 604800,
+    "historical_slurm_elapsed_seconds": 166862,
+    "remaining_before_fixture_seconds": 437938,
+    "fixture_wall_time_is_deducted": true,
+    "recovery_wall_time_must_be_set_from_sacct_after_fixture": true
+  },
+  "native_contract": {
+    "image": "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+    "source_overlay": "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0",
+    "parameters": "--species others --sensitive 1 --anno 1 --threads 16; no curated library, CDS, exclude BED, or --force",
+    "resources": {"partition": "private-teodoro-gpu", "cpus": 16, "memory_gb": 128, "gres": null, "max_concurrency": 2},
+    "input_and_science_unchanged": true
+  },
+  "checkpoint": {
+    "preserved_stage": "TIR-Learner Module4 Step7",
+    "source": "galGal6.fa.mod.EDTA.raw/TIR/TIR-Learner_v3_checkpoint_2026-09-19T18-34-43Z",
+    "resume_steps": ["Module4 Step8", "Module4 Step9", "Module4 Step10"],
+    "copy_to_fresh_output_before_resume": true,
+    "old_checkpoint_read_only": true
+  },
+  "compatibility_patch": {
+    "get_fasta_sequence": "Replace only the nested-Pool swifter apply in get_fasta_pieces_single_seqid with pandas DataFrame.apply(axis=1); no coordinate cast until fixture proves one is needed",
+    "check_TIR_TSD": "Replace family=x[0] at both call sites with family=x[\"TIR_type\"] for pandas 3 named-column semantics",
+    "scheduler": "Keep the outer TIR-Learner multiprocessing.Pool and 16 CPU allocation; do not globally change swifter scheduler",
+    "algorithm_or_input_change": false
+  },
+  "stages": [
+    "copy preserved normalized genome and EDTA.raw tree to fresh recovery output",
+    "extract exact image TIR-Learner modules and apply source-checked compatibility overlay",
+    "run EDTA_raw.pl --type tir --overwrite 0 to resume TIR-Learner from copied Module4 Step7 checkpoint",
+    "run EDTA.pl --step filter --overwrite 0 --sensitive 1 --anno 1 with unchanged native values",
+    "retain complete outputs and status separately from the preserved failure"
+  ],
+  "dependency": {
+    "chicken_rm2_recovery_job": "13180772",
+    "slurm_dependency": "afterany:13180772",
+    "reason": "Do not exceed the two native CPU recovery concurrency limit"
+  }
+}

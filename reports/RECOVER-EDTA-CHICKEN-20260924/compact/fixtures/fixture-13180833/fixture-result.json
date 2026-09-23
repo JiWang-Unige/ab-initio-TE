@@ -1,0 +1,69 @@
+{
+  "runtime": {
+    "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+    "pandas": "3.0.3",
+    "swifter": "1.4.0",
+    "numpy": "2.4.2"
+  },
+  "input": {
+    "rows": 8,
+    "dtypes": {
+      "TIR_type": "string",
+      "id": "string",
+      "seqid": "string",
+      "start": "int64",
+      "end": "int64"
+    },
+    "coordinate_values_are_integer": true
+  },
+  "swifter_vectorization_probe": {
+    "type": "TypeError",
+    "message": "slice indices must be integers or None or have an __index__ method",
+    "traceback_tail": "    scalar_lambda(df)\n  File \"/code/fixture.py\", line 126, in <lambda>\n    scalar_lambda = lambda x: str(record.seq[x[\"start\"]: x[\"end\"]])\n                                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/Bio/Seq.py\", line 527, in __getitem__\n    return self.__class__(self._data[index])\n                          ~~~~~~~~~~^^^^^^^\nTypeError: slice indices must be integers or None or have an __index__ method"
+  },
+  "scalar_pandas_apply": {
+    "status": "PASS",
+    "dtype": "str",
+    "values": [
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT"
+    ]
+  },
+  "original_nested_pool": {
+    "status": "unexpected_success"
+  },
+  "patched_nested_pool": {
+    "status": "PASS",
+    "values": [
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT",
+      "ACGTACGTACGT"
+    ],
+    "matches_scalar_pandas_apply": true,
+    "dtype": "str"
+  },
+  "original_check_TIR_family_access": {
+    "status": "expected_failure",
+    "type": "KeyError",
+    "message": "0",
+    "traceback_tail": "    return self._get_value(key)\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/users/j/jwang/.local/lib/python3.12/site-packages/pandas/core/series.py\", line 1046, in _get_value\n    loc = self.index.get_loc(label)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/users/j/jwang/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py\", line 3648, in get_loc\n    raise KeyError(key) from err\nKeyError: 0"
+  },
+  "patched_check_TIR_family_access": {
+    "status": "PASS"
+  },
+  "patch_scope": {
+    "get_fasta": "nested-pool swifter apply -> pandas apply(axis=1); no coordinate cast",
+    "check_TIR_TSD": "family=x[0] -> family=x[\"TIR_type\"] at two call sites"
+  }
+}

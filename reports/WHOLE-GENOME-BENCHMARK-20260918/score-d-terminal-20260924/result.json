@@ -1,0 +1,709 @@
+{
+  "accuracy_status": "COMPARATOR_RELATIVE",
+  "completion_scope": "Comparator-relative score completed for scoreable cells; failed or missing cells are explicit NA and are never encoded as zero metrics.",
+  "cpu_feasibility": {
+    "chicken": {
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu_feasibility.json",
+      "status": "MISSING"
+    },
+    "zebrafish": {
+      "decision_rule": "submit full CPU only when linear pilot estimate is <= 604800 seconds",
+      "full_assembly_bp": 1679203469,
+      "full_job_id": null,
+      "full_output_dir": null,
+      "interpretation": "resource-limited deployment datum; no full-genome CPU run was submitted and no scientific score is implied",
+      "labels_used": false,
+      "linear_estimated_days": 8.107102827933653,
+      "linear_estimated_seconds": 700453.6843334676,
+      "pilot_bp": 1048576,
+      "pilot_job_id": "12891218",
+      "pilot_output_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu_pilot_chr1_fixed16",
+      "pilot_record": "chr1",
+      "pilot_throughput_bp_per_second": 2397.308353939038,
+      "pilot_wall_seconds": 437.43070793151855,
+      "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+      "scientific_metrics_computed": false,
+      "species": "zebrafish",
+      "status": "NOT_SUBMITTED_ESTIMATE_EXCEEDS_BUDGET",
+      "wall_budget_seconds": 604800
+    }
+  },
+  "cpu_full_status": {
+    "chicken": {
+      "callable_bp_per_second_end_to_end": 2674.617564439482,
+      "device": "cpu",
+      "finished_epoch": 1790099732.8628702,
+      "host": {
+        "architecture": "x86_64",
+        "cpu_count_visible": 128,
+        "hostname": "gpu035.baobab",
+        "platform": "Linux-5.14.0-687.39.1.el9_8.x86_64-x86_64-with-glibc2.34",
+        "python": "3.9.25"
+      },
+      "inference_fasta_metadata": {
+        "exists": true,
+        "mtime_ns": 1772726832000000000,
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+        "size_bytes": 1086683182
+      },
+      "input_contract": "fixed source FASTA; no labels, score, or chromosome selection used by inference",
+      "labels_used": false,
+      "mode": "cpu",
+      "model": {
+        "batch_size": 12,
+        "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+        "model_code_dir": "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+        "model_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+        "threshold_policy": "existing frozen CAL threshold; no refit on either whole genome",
+        "tokenizer_dir": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+        "window_bp": 4096
+      },
+      "pilot_region": null,
+      "prediction_summary": "prediction/summary.json",
+      "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+      "runtime_contract": {
+        "allocated_cpus": 16,
+        "dtype_policy": "load checkpoint dtype; no autocast or BF16/FP16 conversion",
+        "mkl_num_threads": 16,
+        "omp_num_threads": 16,
+        "openblas_num_threads": 1,
+        "torch_inter_op_threads": 1,
+        "torch_intra_op_threads": 16
+      },
+      "scientific_metrics_computed": false,
+      "slurm": {
+        "SLURMD_NODENAME": "gpu035",
+        "SLURM_CPUS_PER_TASK": "16",
+        "SLURM_JOB_ID": "12891439",
+        "SLURM_JOB_NAME": "wg-d-cpu",
+        "SLURM_JOB_NODELIST": "gpu035",
+        "SLURM_MEM_PER_NODE": "131072"
+      },
+      "source_fasta_metadata": {
+        "exists": true,
+        "mtime_ns": 1772726832000000000,
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+        "size_bytes": 1086683182
+      },
+      "source_stats": {
+        "first_record": "chr1",
+        "first_record_bp": 197608386,
+        "max_record_bp": 197608386,
+        "min_record_bp": 87,
+        "records": 464,
+        "total_bp": 1065365425
+      },
+      "species": "chicken",
+      "started_epoch": 1789701408.405335,
+      "status": "COMPLETED",
+      "timing": {
+        "argv": [
+          "/usr/bin/python3",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/infer_fasta.py",
+          "--fasta",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+          "--model-dir",
+          "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+          "--tokenizer-dir",
+          "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+          "--model-code-dir",
+          "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+          "--calibration-json",
+          "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+          "--output-dir",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu/prediction",
+          "--batch-size",
+          "12",
+          "--cpu"
+        ],
+        "elapsed_wall_seconds": null,
+        "max_rss_kb": 5191352,
+        "returncode": 0,
+        "stderr": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu/inference.stderr",
+        "stdout": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu/inference.stdout",
+        "system_seconds": 868728.22,
+        "time_argv": [
+          "/usr/bin/time",
+          "-v",
+          "-o",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu/inference.time",
+          "/usr/bin/python3",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/scripts/experiments/CROSS-SPECIES-L1-FASTA-INFERENCE-V1/infer_fasta.py",
+          "--fasta",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+          "--model-dir",
+          "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+          "--tokenizer-dir",
+          "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/final_model",
+          "--model-code-dir",
+          "/home/users/j/jwang/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+          "--calibration-json",
+          "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+          "--output-dir",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu/prediction",
+          "--batch-size",
+          "12",
+          "--cpu"
+        ],
+        "time_v": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/cpu/inference.time",
+        "user_seconds": 5146750.33,
+        "wall_seconds_observed": 398324.39566860767
+      },
+      "torch_runtime": {
+        "cpu_affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "inter_op_threads": 1,
+        "intra_op_threads": 16,
+        "model_dtype": "torch.float32"
+      },
+      "total_bp": 1065365425,
+      "wall_seconds": 398324.4575355053,
+      "windows": 260335
+    },
+    "zebrafish": {
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/cpu/status.json",
+      "status": "MISSING"
+    }
+  },
+  "cpu_policy": "A CPU full-genome row is added only after a terminal native run; a pilot or extrapolation is never a measured whole-genome runtime. Explicit resource-gate decisions are reported separately under cpu_feasibility",
+  "d_exposure_audit": {
+    "definition": "D-independent chromosomes are fixed before score inspection by excluding every chromosome observed in the D TRAIN, CAL, and model-selection DEV manifests. This is a conservative chromosome-level exposure audit; any unresolved homologous or historical exposure is reported as a retrospective annotation caveat.",
+    "exposure_chromosomes": {
+      "chicken": {
+        "calibration": [
+          "chr1",
+          "chr5",
+          "chr6"
+        ],
+        "independent_test": [
+          "chr10",
+          "chr20"
+        ],
+        "selection_dev": [
+          "chr1",
+          "chr5",
+          "chr6"
+        ],
+        "train": [
+          "chr2",
+          "chr3",
+          "chr4",
+          "chr7",
+          "chr8"
+        ]
+      },
+      "zebrafish": {
+        "calibration": [
+          "chr2",
+          "chr5",
+          "chr6"
+        ],
+        "independent_test": [
+          "chr10",
+          "chr20"
+        ],
+        "selection_dev": [
+          "chr2",
+          "chr5",
+          "chr6"
+        ],
+        "train": [
+          "chr1",
+          "chr3",
+          "chr4",
+          "chr7",
+          "chr9"
+        ]
+      }
+    },
+    "independent_test_rule": "Only chromosomes explicitly listed under independent_test are used for the D-independent accuracy stratum. Whole-assembly native discovery and timing still use the complete FASTA, and D class is N/A because the frozen D output is binary material inference.",
+    "independent_test_selection_rationale": "chr10 and chr20 were fixed before reading native outputs or scores because they are present primary assembly chromosomes, absent from every observed D TRAIN/CAL/DEV manifest for the corresponding species, and long enough to provide a non-trivial accuracy stratum. No chromosome was selected by model performance or label density.",
+    "manifest_paths": {
+      "CAL": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/CAL/{species}.jsonl.gz",
+      "DEV": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/DEV/{species}.jsonl.gz",
+      "TRAIN": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202/TRAIN/{species}.jsonl.gz"
+    },
+    "source": {
+      "calibration_json": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/evaluate/seed42/12353905_1/calibration.json",
+      "materialization_root": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202",
+      "training_meta": "/home/users/j/jwang/ab-initio-TE/outputs/CROSS-SPECIES-L1-UPSTREAM-20260904/train/seed42/12307410_1/training_meta.json"
+    }
+  },
+  "label_audit": {
+    "chicken": {
+      "acgt_callable_bp": 1055580959,
+      "class_rows": {
+        "ARTEFACT": 7,
+        "DNA": 35941,
+        "DNA?": 1993,
+        "LINE": 215615,
+        "LOW_COMPLEXITY": 56312,
+        "LTR": 41167,
+        "LTR?": 163,
+        "RC?": 65,
+        "RRNA": 262,
+        "SATELLITE": 21447,
+        "SCRNA": 2,
+        "SIMPLE_REPEAT": 317006,
+        "SINE": 5797,
+        "SNRNA": 167,
+        "TRNA": 365,
+        "Unknown": 2638
+      },
+      "eligible_callable_bp": 1054707601,
+      "family_rows": {
+        "5S-Deu-L2": 1427,
+        "ARTEFACT": 7,
+        "CR1": 213614,
+        "Crypton": 389,
+        "Crypton-A?": 205,
+        "DNA": 6123,
+        "DNA?": 1993,
+        "ERV1": 4734,
+        "ERVK": 2382,
+        "ERVL": 34051,
+        "Helitron?": 65,
+        "Kolobok": 673,
+        "L1": 67,
+        "L2": 1811,
+        "LTR?": 163,
+        "Low_complexity": 56312,
+        "MIR": 2903,
+        "Merlin": 223,
+        "PIF-Harbinger": 5026,
+        "Penelope": 123,
+        "Satellite": 8510,
+        "Simple_repeat": 317006,
+        "TcMar-Mariner": 5885,
+        "TcMar-Pogo": 72,
+        "TcMar-Tigger": 241,
+        "TcMar?": 186,
+        "Unknown": 2638,
+        "W-chromosome": 11611,
+        "hAT": 677,
+        "hAT-Ac": 499,
+        "hAT-Ac?": 252,
+        "hAT-Blackjack": 235,
+        "hAT-Charlie": 14381,
+        "hAT-Tip100?": 26,
+        "hAT-hAT19": 1,
+        "hAT-hAT6": 780,
+        "hAT?": 67,
+        "macro": 1326,
+        "rRNA": 262,
+        "scRNA": 2,
+        "snRNA": 167,
+        "tRNA": 1713,
+        "tRNA-Deu": 119
+      },
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz",
+      "positive_rows": 297784,
+      "positive_union_bp": 100576813,
+      "raw_sequence_bp": 1065365425,
+      "rows": 698947,
+      "uncertain_callable_bp": 873358,
+      "uncertain_rows": 5602,
+      "uncertain_union_bp": 873358,
+      "unknown_is_negative": false,
+      "unknown_policy": "Unknown, '?' and ARTEFACT rows are retained as an audit stratum and excluded from both positive truth and negative callable truth",
+      "unknown_rows": 2638
+    },
+    "zebrafish": {
+      "acgt_callable_bp": 1674509851,
+      "class_rows": {
+        "ARTEFACT": 8,
+        "DNA": 2408885,
+        "DNA?": 3404,
+        "LINE": 141594,
+        "LOW_COMPLEXITY": 82330,
+        "LTR": 186721,
+        "RC": 104254,
+        "RRNA": 3578,
+        "SATELLITE": 142653,
+        "SATELLITE?": 4815,
+        "SCRNA": 1,
+        "SIMPLE_REPEAT": 917097,
+        "SINE": 214366,
+        "SNRNA": 1378,
+        "TRNA": 23163,
+        "Unknown": 55451
+      },
+      "eligible_callable_bp": 1597262566,
+      "family_rows": {
+        "5S-Deu-L2": 24307,
+        "ARTEFACT": 8,
+        "CMC-EnSpm": 207192,
+        "CMC-EnSpm?": 33903,
+        "CR1": 1,
+        "Copia": 358,
+        "DIRS": 27385,
+        "DNA": 619370,
+        "DNA?": 3404,
+        "Dada": 31443,
+        "ERV-Foamy": 331,
+        "ERV1": 17777,
+        "Gypsy": 45207,
+        "Gypsy?": 12266,
+        "Helitron": 104254,
+        "I": 9898,
+        "Kolobok-T2": 61772,
+        "Kolobok-T2?": 50728,
+        "L1": 11294,
+        "L1-Tx1": 8084,
+        "L2": 90825,
+        "LTR": 42129,
+        "Low_complexity": 82330,
+        "MULE-MuDR": 5767,
+        "Maverick": 21305,
+        "Ngaro": 37120,
+        "P": 2137,
+        "P?": 4543,
+        "PIF-Harbinger": 104354,
+        "PIF-Harbinger?": 5300,
+        "PIF-ISL2EU": 6736,
+        "Pao": 4148,
+        "PiggyBac": 71483,
+        "PiggyBac?": 19195,
+        "R2": 30,
+        "R2-Hero": 377,
+        "RTE": 8383,
+        "RTE-BovB": 128,
+        "RTE-X": 2799,
+        "Rex-Babar": 16082,
+        "Satellite": 142653,
+        "Satellite?": 4815,
+        "Simple_repeat": 917097,
+        "Sola": 6690,
+        "TcMar": 133628,
+        "TcMar-Fot1": 1530,
+        "TcMar-ISRm11": 3039,
+        "TcMar-Stowaway?": 2434,
+        "TcMar-Tc1": 201670,
+        "TcMar-Tigger": 4821,
+        "TcMar?": 10344,
+        "Unknown": 55451,
+        "hAT": 282345,
+        "hAT-Ac": 188551,
+        "hAT-Ac?": 56148,
+        "hAT-Charlie": 134836,
+        "hAT-Tip100": 35082,
+        "hAT-Tip100?": 2657,
+        "hAT-hAT5": 18416,
+        "hAT-hAT6": 7864,
+        "hAT-hobo?": 1404,
+        "hAT?": 72198,
+        "rRNA": 3578,
+        "scRNA": 1,
+        "snRNA": 1378,
+        "tRNA": 30862,
+        "tRNA-Deu-L2": 43,
+        "tRNA-V": 176010
+      },
+      "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/rmsk.txt.gz",
+      "positive_rows": 2784700,
+      "positive_union_bp": 706584400,
+      "raw_sequence_bp": 1679203469,
+      "rows": 4289698,
+      "uncertain_callable_bp": 77247285,
+      "uncertain_rows": 334798,
+      "uncertain_union_bp": 77255113,
+      "unknown_is_negative": false,
+      "unknown_policy": "Unknown, '?' and ARTEFACT rows are retained as an audit stratum and excluded from both positive truth and negative callable truth",
+      "unknown_rows": 55451
+    }
+  },
+  "labels_used_only_in_score": true,
+  "methods": [
+    "EDTA",
+    "RM2",
+    "D_gpu"
+  ],
+  "metrics": {
+    "chicken/D_gpu": {
+      "d_independent_test": {
+        "acgt_callable_bp": 34515527,
+        "callable_denominator_bp": 34478727,
+        "comparator_positive_union_bp": 1485993,
+        "comparator_relative": true,
+        "eligible_callable_bp": 34478727,
+        "f1": 0.47917421641733066,
+        "fn_bp": 1007993,
+        "fp_bp": 31106,
+        "precision": 0.9389007397280723,
+        "predicted_union_bp": 509106,
+        "raw_sequence_bp": 35017127,
+        "recall": 0.32167042509621513,
+        "stratum_chromosomes": [
+          "chr10",
+          "chr20"
+        ],
+        "tp_bp": 478000,
+        "uncertain_excluded_bp": 36800
+      },
+      "whole_assembly": {
+        "acgt_callable_bp": 1055580959,
+        "callable_denominator_bp": 1054707601,
+        "comparator_positive_union_bp": 100574637,
+        "comparator_relative": true,
+        "eligible_callable_bp": 1054707601,
+        "f1": 0.5594121188261924,
+        "fn_bp": 61079695,
+        "fp_bp": 1132017,
+        "precision": 0.9721363097838556,
+        "predicted_union_bp": 40626959,
+        "raw_sequence_bp": 1065365425,
+        "recall": 0.39269286152133964,
+        "tp_bp": 39494942,
+        "uncertain_excluded_bp": 873358
+      }
+    },
+    "zebrafish/D_gpu": {
+      "d_independent_test": {
+        "acgt_callable_bp": 100505689,
+        "callable_denominator_bp": 95765781,
+        "comparator_positive_union_bp": 42966535,
+        "comparator_relative": true,
+        "eligible_callable_bp": 95765781,
+        "f1": 0.878294233085945,
+        "fn_bp": 2070554,
+        "fp_bp": 9263408,
+        "precision": 0.8153205574334249,
+        "predicted_union_bp": 50159389,
+        "raw_sequence_bp": 100622199,
+        "recall": 0.9518100773078397,
+        "stratum_chromosomes": [
+          "chr10",
+          "chr20"
+        ],
+        "tp_bp": 40895981,
+        "uncertain_excluded_bp": 4739908
+      },
+      "whole_assembly": {
+        "acgt_callable_bp": 1674509851,
+        "callable_denominator_bp": 1597262566,
+        "comparator_positive_union_bp": 699411807,
+        "comparator_relative": true,
+        "eligible_callable_bp": 1597262566,
+        "f1": 0.8717517085670207,
+        "fn_bp": 35889876,
+        "fp_bp": 159339002,
+        "precision": 0.8063597436579237,
+        "predicted_union_bp": 822860933,
+        "raw_sequence_bp": 1679203469,
+        "recall": 0.9486856303528202,
+        "tp_bp": 663521931,
+        "uncertain_excluded_bp": 77247285
+      }
+    }
+  },
+  "metrics_na": {
+    "chicken/EDTA": {
+      "reason": "RuntimeError('EDTA failed')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+      "status": "NA"
+    },
+    "chicken/RM2": {
+      "reason": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+      "status": "NA"
+    },
+    "zebrafish/EDTA": {
+      "reason": "RuntimeError('EDTA failed')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+      "status": "NA"
+    },
+    "zebrafish/RM2": {
+      "reason": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+      "status": "NA"
+    }
+  },
+  "na_cells": [
+    "chicken/EDTA",
+    "chicken/RM2",
+    "zebrafish/EDTA",
+    "zebrafish/RM2"
+  ],
+  "native_cell_status": {
+    "chicken/EDTA": {
+      "error": "RuntimeError('EDTA failed')",
+      "metrics_status": "NA",
+      "na_reason": "RuntimeError('EDTA failed')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+      "scoreable": false,
+      "slurm": {
+        "SLURMD_NODENAME": "gpu034",
+        "SLURM_CPUS_PER_TASK": "16",
+        "SLURM_JOB_ID": "12888165",
+        "SLURM_JOB_NAME": "wg-native",
+        "SLURM_JOB_NODELIST": "gpu034",
+        "SLURM_MEM_PER_NODE": "131072"
+      },
+      "status": "FAILED",
+      "status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+      "wall_seconds": 166821.00464129448
+    },
+    "chicken/RM2": {
+      "error": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "metrics_status": "NA",
+      "na_reason": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+      "scoreable": false,
+      "slurm": {
+        "SLURMD_NODENAME": "gpu034",
+        "SLURM_CPUS_PER_TASK": "16",
+        "SLURM_JOB_ID": "12888134",
+        "SLURM_JOB_NAME": "wg-native",
+        "SLURM_JOB_NODELIST": "gpu034",
+        "SLURM_MEM_PER_NODE": "131072"
+      },
+      "status": "FAILED",
+      "status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+      "wall_seconds": 129468.85529088974
+    },
+    "zebrafish/EDTA": {
+      "error": "RuntimeError('EDTA failed')",
+      "metrics_status": "NA",
+      "na_reason": "RuntimeError('EDTA failed')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+      "scoreable": false,
+      "slurm": {
+        "SLURMD_NODENAME": "gpu035",
+        "SLURM_CPUS_PER_TASK": "16",
+        "SLURM_JOB_ID": "12888196",
+        "SLURM_JOB_NAME": "wg-native",
+        "SLURM_JOB_NODELIST": "gpu035",
+        "SLURM_MEM_PER_NODE": "131072"
+      },
+      "status": "FAILED",
+      "status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+      "wall_seconds": 209558.30159687996
+    },
+    "zebrafish/RM2": {
+      "error": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "metrics_status": "NA",
+      "na_reason": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+      "scoreable": false,
+      "slurm": {
+        "SLURMD_NODENAME": "gpu035",
+        "SLURM_CPUS_PER_TASK": "16",
+        "SLURM_JOB_ID": "12888197",
+        "SLURM_JOB_NAME": "wg-native",
+        "SLURM_JOB_NODELIST": "gpu035",
+        "SLURM_MEM_PER_NODE": "131072"
+      },
+      "status": "FAILED",
+      "status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+      "wall_seconds": 96771.56058168411
+    }
+  },
+  "native_class_evaluation": {
+    "reason": "Native class/family counts and Unknown coverage are retained for audit. This binary score does not claim class precision, recall, or a class confusion matrix; D has no class output.",
+    "status": "COMPOSITION_AUDIT_ONLY"
+  },
+  "native_composition": {
+    "chicken/EDTA": {
+      "reason": "RuntimeError('EDTA failed')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+      "status": "NA"
+    },
+    "chicken/RM2": {
+      "reason": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+      "status": "NA"
+    },
+    "zebrafish/EDTA": {
+      "reason": "RuntimeError('EDTA failed')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+      "status": "NA"
+    },
+    "zebrafish/RM2": {
+      "reason": "RuntimeError('expected exactly one non-empty RepeatModeler classified library, found []')",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+      "status": "NA"
+    }
+  },
+  "native_material_parsers": {
+    "D_gpu": "prediction/material_runs.bed: binary material output",
+    "EDTA": "annotation.gff3: EDTA repeat_region/material rows; child subfeatures are not double-counted and rRNA/target-site rows are excluded",
+    "RM2": "annotation.out: retain LINE/SINE/LTR/DNA/RC/Retroposon and Unknown class rows; exclude Simple_repeat, Low_complexity, Satellite, RNA and other non-TE classes"
+  },
+  "native_method_roots": {
+    "chicken": {
+      "EDTA": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+      "RM2": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2"
+    },
+    "zebrafish": {
+      "EDTA": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+      "RM2": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2"
+    }
+  },
+  "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "required_cells": [
+    {
+      "mode": "D_gpu",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/gpu",
+      "scoreable": true,
+      "species": "chicken",
+      "status": "COMPLETED"
+    },
+    {
+      "mode": "D_gpu",
+      "root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/gpu",
+      "scoreable": true,
+      "species": "zebrafish",
+      "status": "COMPLETED"
+    }
+  ],
+  "secondary_historical_strata": {
+    "chicken": {
+      "test": [
+        "chr3"
+      ],
+      "train": [
+        "chr1"
+      ],
+      "validation": [
+        "chr2"
+      ]
+    },
+    "source": "configs/SF5-ONTOLOGY-CLOSURE-20260915.yaml, pre-existing species-specific train/validation/test chromosome contract",
+    "use": "Retrospective reporting strata only. These chromosomes are not asserted to be independent of the D model because the SF5 split is not the D checkpoint exposure manifest.",
+    "zebrafish": {
+      "test": [
+        "chr5"
+      ],
+      "train": [
+        "chr4"
+      ],
+      "validation": [
+        "chr7"
+      ]
+    }
+  },
+  "species": [
+    "chicken",
+    "zebrafish"
+  ],
+  "status": "COMPLETED",
+  "strata_contract": "Each species has its own whole_assembly and D-independent_test strata; no chromosome from another species is scored under its name",
+  "truth_boundary": "No method receives labels. Same-assembly RepeatMasker output is a comparator layer; source-dependent or incomplete labels do not support an exhaustive whole-genome truth claim.",
+  "unknown_policy": "Unknown, '?', and ARTEFACT comparator rows remain reported and are excluded from both positive truth and negative callable truth; known non-TE rows remain eligible negatives"
+}

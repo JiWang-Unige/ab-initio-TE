@@ -1,0 +1,67 @@
+{
+  "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "observed_at": "2026-09-24",
+  "purpose": "Immutable terminal ledger for the whole-genome native cells and D timing cells; this file does not replace any output status.json.",
+  "slurm": [
+    {"job_id": "12888134", "cell": "chicken/RM2", "state": "FAILED", "exit_code": "1:0", "elapsed": "1-11:58:11", "resources": "16 CPU, 128G, private-teodoro-gpu"},
+    {"job_id": "12888165", "cell": "chicken/EDTA", "state": "FAILED", "exit_code": "1:0", "elapsed": "1-22:20:35", "resources": "16 CPU, 128G, private-teodoro-gpu"},
+    {"job_id": "12888197", "cell": "zebrafish/RM2", "state": "FAILED", "exit_code": "1:0", "elapsed": "1-02:53:12", "resources": "16 CPU, 128G, private-teodoro-gpu"},
+    {"job_id": "12888196", "cell": "zebrafish/EDTA", "state": "OUT_OF_MEMORY", "exit_code": "0:125", "elapsed": "2-10:13:00", "resources": "16 CPU, 128G, private-teodoro-gpu"},
+    {"job_id": "12888136", "cell": "chicken/D-gpu", "state": "COMPLETED", "exit_code": "0:0", "elapsed": "04:47:22", "resources": "8 CPU, 96G, 1 RTX3090"},
+    {"job_id": "12889199", "cell": "zebrafish/D-gpu", "state": "COMPLETED", "exit_code": "0:0", "elapsed": "07:31:56", "resources": "8 CPU, 96G, 1 RTX3090"},
+    {"job_id": "12891439", "cell": "chicken/D-cpu", "state": "COMPLETED", "exit_code": "0:0", "elapsed": "4-14:39:04", "resources": "16 CPU, 128G, private-teodoro-gpu"},
+    {"job_id": "12891298", "cell": "whole/score-original", "state": "CANCELLED by 0", "exit_code": "0:0", "elapsed": "00:00:00", "resources": "dependency chain never started"}
+  ],
+  "native_status_snapshots": [
+    {
+      "cell": "chicken/RM2",
+      "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+      "status_file_status": "FAILED",
+      "wall_seconds": 129468.85529088974,
+      "stages": {"builddatabase": {"returncode": 0, "wall_seconds": 27.696299626957625, "max_rss_kb": 628104}, "repeatmodeler": {"returncode": 0, "wall_seconds": 129437.29785350687, "max_rss_kb": 8602932}},
+      "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced."
+    },
+    {
+      "cell": "zebrafish/RM2",
+      "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+      "status_file_status": "FAILED",
+      "wall_seconds": 96771.56058168411,
+      "stages": {"builddatabase": {"returncode": 0, "wall_seconds": 32.25567356101237, "max_rss_kb": 365124}, "repeatmodeler": {"returncode": 0, "wall_seconds": 96736.45294453809, "max_rss_kb": 13870016}},
+      "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced."
+    },
+    {
+      "cell": "chicken/EDTA",
+      "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+      "status_file_status": "FAILED",
+      "wall_seconds": 166821.00464129448,
+      "stages": {"edta_all": {"returncode": 2, "wall_seconds": 166817.272345989, "max_rss_kb": 105540580}},
+      "failure": "The confirmed fatal event was TIR-Learner's nested swifter/Dask path attempting child processes from a daemon. Source review also found a pandas 3 positional-index compatibility issue at x[0] for TIR_type; an exploratory slice-index message is not treated as an independent biological coordinate failure. TIR output was absent and EDTA stopped before final annotation."
+    },
+    {
+      "cell": "zebrafish/EDTA",
+      "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+      "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+      "wall_seconds": 209558.30159687996,
+      "stages": {"edta_all": {"returncode": 2, "wall_seconds": 209554.33987208898, "max_rss_kb": 127086448}},
+      "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+      "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file."
+    }
+  ],
+  "d_timing": [
+    {"species": "chicken", "lane": "gpu", "job_id": "12888136", "input_bp": 1065365425, "child_inference_wall_seconds": 17223.321338176727, "raw_field": "callable_bp_per_second_end_to_end", "reported_as": "input_bp_per_second", "input_bp_per_second": 61864.51180660735, "slurm_elapsed": "04:47:22"},
+    {"species": "zebrafish", "lane": "gpu", "job_id": "12889199", "input_bp": 1679203469, "child_inference_wall_seconds": 27093.435520410538, "raw_field": "callable_bp_per_second_end_to_end", "reported_as": "input_bp_per_second", "input_bp_per_second": 61978.34157113474, "slurm_elapsed": "07:31:56"},
+    {"species": "chicken", "lane": "cpu", "job_id": "12891439", "input_bp": 1065365425, "child_inference_wall_seconds": 398324.4575355053, "raw_field": "callable_bp_per_second_end_to_end", "reported_as": "input_bp_per_second", "input_bp_per_second": 2674.617564439482, "slurm_elapsed": "4-14:39:04"}
+  ],
+  "score_original": {"job_id": "12891298", "status": "NOT_STARTED_CANCELLED", "reason": "native dependency chain did not produce required EDTA/RM2 terminal outputs", "scientific_score_available": false},
+  "recovery": {
+    "initial_jobs": {"chicken": "13180658", "zebrafish": "13180659"},
+    "initial_output_roots": {"chicken": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-recovery", "zebrafish": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-recovery"},
+    "initial_chicken_attempt": {"status": "FAILED_AFTER_CLASSIFIER", "classifier_returncode": 0, "classified_library_bytes": 939739, "mask_returncode": 1, "mask_wall_seconds": 25.953118858858943, "failure": "RepeatMasker could not find its default FamDB data directory; the first recovery wrapper had bound only /opt/famdb. The source library and classifier output are preserved."},
+    "initial_zebrafish_attempt": {"status": "FAILED_AFTER_CLASSIFIER", "slurm_state": "FAILED", "slurm_elapsed": "00:15:34", "slurm_elapsed_seconds": 934, "classifier_returncode": 0, "classified_library_bytes": 2703406, "mask_returncode": 1, "mask_wall_seconds": 19.771112251095474, "failure": "RepeatMasker could not find its default FamDB data directory; the first recovery wrapper had bound only /opt/famdb. The source library and classifier output are preserved."},
+    "mask_only_retry": {"job_id": "13180772", "species": "chicken", "output_root": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2", "classifier_rerun": false, "time_limit": "5-11:53:52", "dependency_for_edta": "afterany:13180772"},
+    "mask_only_retry_zebrafish": {"job_id": "13180877", "species": "zebrafish", "output_root": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2", "classifier_rerun": false, "submitted_at": "2026-09-24T01:23:06+02:00", "started_at": "2026-09-24T01:23:17+02:00", "requested_time_limit_seconds": 507074, "requested_time_limit": "5-20:51:14", "slurm_time_limit": "5-20:52:00", "cumulative_slurm_seconds_before_retry": 97726},
+    "engineering_probe": {"status": "PASS", "tool": "RepeatMasker 4.2.4", "scope": "tiny custom classified library and tiny FASTA under the exact dual default-FamDB binds used by the mask-only retry", "returncode": 0, "scientific_result": false},
+    "scope": "Terminal top-level consensi.fa+families.stk -> RepeatClassifier with fixed Dfam4.0 FamDB-v2 -> original RepeatMasker command; discovery is not rerun. The chicken retry reuses the already successful classified library and runs only RepeatMasker with both fixed FamDB library binds.",
+    "resource_policy": "Private CPU-only, 16 CPU/128G; time limits are 7 days minus the corresponding parent native Slurm elapsed."
+  }
+}

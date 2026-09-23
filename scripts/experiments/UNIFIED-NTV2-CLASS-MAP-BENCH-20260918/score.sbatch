@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# CPU-only class-map scorer.  The submitter must supply afterok dependencies
-# for the class-map array and all four terminal native cells; this script does
-# not infer or replace scheduler dependencies.
-# Example:
-# sbatch --dependency=afterok:<classmap_0>:<classmap_1>:<edta_chicken>:<rm2_chicken>:<edta_zebrafish>:<rm2_zebrafish> score.sbatch
+# CPU-only class-map scorer. The submitter must supply a dependency that keeps
+# completed class-map cells available; native cells may be absent or failed and
+# are recorded as explicit NA rows. This script does not infer or replace
+# scheduler dependencies.
+# Example (class maps must pass; native attempts only need to settle):
+# sbatch --dependency=afterok:<classmap-array>,afterany:<native-attempts> score.sbatch
 #SBATCH --job-name=classmap-score
 #SBATCH --partition=private-teodoro-gpu
 #SBATCH --cpus-per-task=8

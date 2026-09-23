@@ -407,8 +407,61 @@ def status(path: Path) -> Dict[str, object]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def native_method_roots(config: Dict[str, object], mapping_path: Optional[Path]) -> Dict[str, Dict[str, Path]]:
+    """Resolve explicit native roots while keeping the frozen legacy default."""
+    if mapping_path is None:
+        return {
+            species: {method: EXP / "native" / species / method for method in ("EDTA", "RM2")}
+            for species in config["species"]
+        }
+    mapping = json.loads(mapping_path.resolve().read_text(encoding="utf-8"))
+    result: Dict[str, Dict[str, Path]] = {}
+    for species in config["species"]:
+        if species not in mapping or not isinstance(mapping[species], dict):
+            raise RuntimeError("native_method_roots is missing species %s" % species)
+        result[species] = {}
+        for method in ("EDTA", "RM2"):
+            if method not in mapping[species]:
+                raise RuntimeError("native_method_roots is missing %s/%s" % (species, method))
+            raw = Path(str(mapping[species][method]))
+            result[species][method] = raw if raw.is_absolute() else (ROOT / raw).resolve()
+    return result
+
+
+def native_cell_record(root: Path, method: str) -> Dict[str, object]:
+    """Return a scoreable cell or an explicit NA record.
+
+    A failed/missing native cell is retained as NA.  A cell claiming
+    COMPLETED but lacking its required annotation is an engineering failure,
+    because silently turning that case into NA would hide a broken output.
+    """
+    state_path = root / "status.json"
+    state = status(state_path)
+    record: Dict[str, object] = {
+        "root": str(root), "status_path": str(state_path),
+        "status": state.get("status", "MISSING"),
+        "wall_seconds": state.get("wall_seconds"), "slurm": state.get("slurm"),
+        "error": state.get("error"),
+    }
+    if state.get("status") != "COMPLETED":
+        record.update({"scoreable": False, "metrics_status": "NA",
+                       "na_reason": state.get("error") or state.get("status", "MISSING")})
+        return record
+    required = [root / "annotation.gff3", root / "annotation_summary.json"]
+    if method == "RM2":
+        required.append(root / "annotation.out")
+    missing = [str(path) for path in required if not path.is_file()]
+    if missing:
+        raise RuntimeError("native cell declares COMPLETED but required output is missing: %s (%s)" %
+                           (root, ", ".join(missing)))
+    record.update({"scoreable": True, "metrics_status": "SCOREABLE",
+                   "required_outputs": [str(path) for path in required]})
+    return record
+
+
 def score(args: argparse.Namespace) -> Dict[str, object]:
     config = json.loads(args.config.resolve().read_text(encoding="utf-8"))
+    native_roots = native_method_roots(config, args.native_method_roots)
     labels = {}
     lengths = {}
     callable_intervals = {}
@@ -435,27 +488,35 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
         )
         labels[species]["eligible_callable_bp"] = sum_bp(eligible_intervals[species])
     required = []
+    native_cells = {}
+    na_cells = []
     outputs = {}
     for species in config["species"]:
         for method in ("EDTA", "RM2"):
-            native = EXP / "native" / species / method
-            state = status(native / "status.json")
-            if state.get("status") != "COMPLETED":
-                raise RuntimeError("native cell is not complete: %s" % native)
-            if not (native / "annotation.gff3").exists() or not (native / "annotation_summary.json").exists():
-                raise RuntimeError("native annotation summary missing: %s" % native)
+            native = native_roots[species][method]
+            cell = native_cell_record(native, method)
+            native_cells[species + "/" + method] = cell
+            if not cell["scoreable"]:
+                na_cells.append(species + "/" + method)
+                continue
             if method == "RM2":
-                if not (native / "annotation.out").exists():
-                    raise RuntimeError("RepeatMasker native .out missing: %s" % native)
                 outputs[(species, method)] = parse_repeatmasker_out(native / "annotation.out")
             else:
                 outputs[(species, method)] = parse_gff(native / "annotation.gff3")
         d = EXP / "d" / species / "gpu"
         d_state = status(d / "status.json")
         if d_state.get("status") != "COMPLETED":
-            raise RuntimeError("D GPU cell is not complete: %s" % d)
-        outputs[(species, "D_gpu")] = parse_bed(d / "prediction/material_runs.bed")
-        required.append({"species": species, "mode": "D_gpu", "status": d_state.get("status")})
+            na_cells.append(species + "/D_gpu")
+            required.append({"species": species, "mode": "D_gpu", "status": d_state.get("status", "MISSING"),
+                             "scoreable": False, "na_reason": d_state.get("error") or d_state.get("status", "MISSING"),
+                             "root": str(d)})
+        else:
+            prediction_path = d / "prediction/material_runs.bed"
+            if not prediction_path.is_file():
+                raise RuntimeError("D GPU cell declares COMPLETED but prediction is missing: %s" % prediction_path)
+            outputs[(species, "D_gpu")] = parse_bed(prediction_path)
+            required.append({"species": species, "mode": "D_gpu", "status": d_state.get("status"),
+                             "scoreable": True, "root": str(d)})
     strata_by_species = {species: {"whole_assembly": None} for species in config["species"]}
     # The independent stratum must follow the actual D checkpoint exposure
     # audit.  The historical SF5 chromosome split is retained in the config
@@ -489,8 +550,26 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
     native_composition = {}
     for species in config["species"]:
         for method in ("EDTA", "RM2"):
-            summary = json.loads((EXP / "native" / species / method / "annotation_summary.json").read_text())
-            native_composition[species + "/" + method] = {"annotation": summary["annotation"], "library": summary["library"]}
+            key = species + "/" + method
+            cell = native_cells[key]
+            if not cell["scoreable"]:
+                native_composition[key] = {"status": "NA", "root": cell["root"],
+                                           "reason": cell["na_reason"]}
+                continue
+            summary = json.loads((native_roots[species][method] / "annotation_summary.json").read_text())
+            native_composition[key] = {"status": "SCOREABLE", "annotation": summary["annotation"],
+                                       "library": summary["library"], "root": cell["root"]}
+    metrics_na = {}
+    for key in sorted(set(na_cells)):
+        cell = native_cells.get(key)
+        if cell is not None:
+            metrics_na[key] = {"status": "NA", "reason": cell.get("na_reason"), "root": cell.get("root")}
+        else:
+            d_species, _mode = key.split("/", 1)
+            d_path = EXP / "d" / d_species / "gpu"
+            d_state = status(d_path / "status.json")
+            metrics_na[key] = {"status": "NA", "reason": d_state.get("error") or d_state.get("status", "MISSING"),
+                               "root": str(d_path)}
     optional_cpu = {}
     cpu_feasibility = {}
     for species in config["species"]:
@@ -505,12 +584,17 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
         "protocol": "WHOLE-GENOME-BENCHMARK-20260918", "status": "COMPLETED",
         "accuracy_status": "COMPARATOR_RELATIVE", "species": list(config["species"]),
         "methods": ["EDTA", "RM2", "D_gpu"], "required_cells": required,
+        "native_method_roots": {species: {method: str(path) for method, path in methods.items()}
+                                for species, methods in native_roots.items()},
+        "native_cell_status": native_cells,
+        "na_cells": sorted(set(na_cells)),
+        "completion_scope": "Comparator-relative score completed for scoreable cells; failed or missing cells are explicit NA and are never encoded as zero metrics.",
         "native_material_parsers": {
             "EDTA": "annotation.gff3: EDTA repeat_region/material rows; child subfeatures are not double-counted and rRNA/target-site rows are excluded",
             "RM2": "annotation.out: retain LINE/SINE/LTR/DNA/RC/Retroposon and Unknown class rows; exclude Simple_repeat, Low_complexity, Satellite, RNA and other non-TE classes",
             "D_gpu": "prediction/material_runs.bed: binary material output",
         },
-        "metrics": metrics, "native_composition": native_composition,
+        "metrics": metrics, "metrics_na": metrics_na, "native_composition": native_composition,
         "label_audit": {species: {key: value for key, value in labels[species].items()
                                    if key not in {"positive_intervals", "uncertain_intervals"}}
                         for species in labels},
@@ -535,9 +619,15 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
     write_json(out / "result.json", result)
     with (out / "metrics.tsv").open("w", encoding="utf-8") as handle:
         handle.write("species\tmethod\tstratum\ttp_bp\tfp_bp\tfn_bp\tprecision\trecall\tf1\n")
-        for key, strata_values in metrics.items():
-            species, method = key.split("/", 1)
-            for stratum, value in strata_values.items():
+        all_keys = [(species, method) for species in config["species"] for method in ("EDTA", "RM2", "D_gpu")]
+        for species, method in all_keys:
+            key = species + "/" + method
+            if key not in metrics:
+                for stratum in strata_by_species[species]:
+                    handle.write("%s\t%s\t%s\tNA\tNA\tNA\tNA\tNA\tNA\n" %
+                                 (species, method, stratum))
+                continue
+            for stratum, value in metrics[key].items():
                 handle.write("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" %
                              (species, method, stratum, value["tp_bp"], value["fp_bp"], value["fn_bp"],
                               value["precision"], value["recall"], value["f1"]))
@@ -551,6 +641,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, default=ROOT / "configs/WHOLE-GENOME-BENCHMARK-20260918.json")
     parser.add_argument("--output-dir", type=Path, default=EXP / "score")
+    parser.add_argument("--native-method-roots", type=Path,
+                        help="JSON mapping species -> {EDTA, RM2} output roots; required to score recovery roots")
     score(parser.parse_args())
     return 0
 

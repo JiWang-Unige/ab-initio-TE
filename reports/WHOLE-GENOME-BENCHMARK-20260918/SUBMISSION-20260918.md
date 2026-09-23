@@ -255,3 +255,27 @@ compute registration hashes. The original completed/running manifests that
 already contain SHA-256 values are preserved and are not rewritten. Native
 software versions, image paths, commands, and preflight artifact records remain
 explicit in the frozen config and historical report.
+
+## 03:21 UTC heartbeat: full chicken CPU started
+
+After both repaired class-map cells and zebrafish gene-utility scoring
+reached terminal states, full chicken CPU job `12891439` started on gpu035.
+Its native `inference.stdout` records CPU device, FP32, Torch intra/inter-op
+threads 16/1, and affinity `[0,...,15]`; this is a CPU-only allocation on the
+private partition, with no GPU requested. Its inference is still running,
+so no full-assembly CPU runtime or accuracy is reported yet.
+
+At this snapshot all four native cells and chicken D GPU are still running.
+Chicken EDTA has finished SINE discovery and entered LINE discovery;
+zebrafish EDTA remains in SINE discovery. Both RM2 jobs have completed database
+construction and continue native discovery. The current native stderr and
+status records do not report a terminal failure. Zebrafish D GPU `12889199`
+and binary score `12891298` remain dependency-gated. No jobs were restarted
+or resubmitted during this heartbeat.
+# Current recovery schedule (2026-09-24)
+
+The September 18 entries below are historical. For the current chain, see
+[recovery-jobs-20260924.json](recovery-jobs-20260924.json): RM2 mask-only
+13180772/13180877 are running, chicken EDTA 13180896 waits for 13180772,
+and final binary/class scores 13180901/13180902 wait for all three attempts.
+D-only score 13180826 is complete; the full native comparison is pending.

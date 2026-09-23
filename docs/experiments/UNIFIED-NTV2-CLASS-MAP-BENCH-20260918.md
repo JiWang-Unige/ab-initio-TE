@@ -64,9 +64,28 @@ RNA-like classes are skipped; native Unknown and question-mark classes remain
 
 Native overlaps use the same fixed ordered paint rule, without inspecting the
 source comparator. Native output is normalized to the same per-base run
-format before scoring. If a native cell is not terminal-success, its
-`annotation.gff3`/`annotation.out` is absent, or its `annotation_summary.json`
-is missing, scoring stops with an explicit readiness error.
+format before scoring. A missing or non-terminal native cell is recorded as
+`NA` with its execution-state reason, so completed NTv2 and native cells can
+still be scored. A terminal-success native cell with a missing or empty
+`annotation.gff3`/`annotation.out`, or with a missing `annotation_summary.json`,
+remains an explicit readiness error; it is not silently converted to a zero or
+an `NA` metric.
+
+If an external native recovery writes a new output tree, its exact path is
+provided through the species-level `native_method_roots` mapping. This keeps
+the original failed/native directory preserved and prevents a recovery output
+from being mistaken for the earlier attempt. Without an override, the scorer
+uses the configured `native_root/{method}` path.
+
+The four-cell machine terminal ledger is read from
+`reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json`.
+Its `slurm` and `native_status_snapshots` entries are joined by cell, and the
+attempt root is derived from each snapshot's `status_path`. The scheduler
+terminal state and failure reason are attached only when that root matches the
+current method root; the original native `status.json` remains referenced as a
+separate observed-status input. This preserves an out-of-memory observation
+without allowing the old attempt's ledger entry to override a new recovery
+root.
 
 The EDTA schema rule was checked against a completed pinned TEanno example
 before this benchmark was submitted. The example contains complete
@@ -104,7 +123,8 @@ The implementation files are under
 `scripts/experiments/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/`. CPU target
 preparation is independent and can run before the class checkpoint. The class
 map GPU array is submitted only with an `afterok` dependency on target
-preparation and representation tail job `12889676`; scoring is submitted only
-after both native EDTA/RM2 cells and the class-map array are terminal-success.
-See the companion status report and compact result files under
+preparation and representation tail job `12889676`. A score job may run after
+the class-map cells and native attempts have settled; unavailable native cells
+remain `NA`, while a missing class map still blocks scoring. See the companion
+status report and compact result files under
 `reports/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/`.

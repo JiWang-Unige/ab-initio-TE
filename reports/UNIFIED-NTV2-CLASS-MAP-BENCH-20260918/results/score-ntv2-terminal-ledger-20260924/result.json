@@ -1,0 +1,1748 @@
+{
+  "elapsed_seconds": 72.32348990440369,
+  "evaluation_contract": {
+    "callable_mask": "only A/C/G/T bases; N and other IUPAC bases are excluded from class denominators and reported separately",
+    "coordinate_convention": "0-based half-open",
+    "d_binary": "N/A for class metrics; WHOLE D output is binary material only and is not remapped into classes",
+    "full8_endpoint": "8-by-8 reference-row/prediction-column confusion on all callable bases; source Unknown/UNCLASSIFIED remains an explicit row",
+    "primary_known_endpoint": "macro metrics over reference BG/SINE/LINE/LTR/DNA positions only; source KNOWN_OTHER_TE, AMBIGUOUS_TE and UNCLASSIFIED positions are excluded from this denominator",
+    "source_mapping": "same frozen SF5 ontology policy as the matched class trainer: BG default, SINE/LINE/LTR/DNA main classes, RC/Retroposon KNOWN_OTHER_TE, ? AMBIGUOUS_TE, Unknown/Unspecified/unresolved UNCLASSIFIED",
+    "source_overlap_policy": "sort source intervals by (start,end,ontology_label_id), then ordered paint; later row wins",
+    "true_te_endpoint": "conditional readout on reference SINE/LINE/LTR/DNA bases, with per-class exact recall and any-main-TE recovery",
+    "truth_boundary": "same-assembly UCSC RepeatMasker is a comparator layer, not exhaustive biological truth; native unknown and source unknown are never silently treated as negative",
+    "unknown_reporting": "source Unknown/UNCLASSIFIED and AMBIGUOUS_TE bp/rows are reported in full even when excluded from primary known denominator"
+  },
+  "model_contract": {
+    "base_model": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "checkpoint_contract": "validation-selected best_model from class job 12889091; no test or chromosome score selection",
+    "class_checkpoint_env": "CLASS_MODEL",
+    "class_training_job": "12889091",
+    "class_training_protocol": "UNIFIED-NTV2-REPRESENTATION-20260918",
+    "label_map": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "KNOWN_OTHER_TE",
+      "6": "AMBIGUOUS_TE",
+      "7": "UNCLASSIFIED"
+    },
+    "name": "NTv2-500M",
+    "prediction": "native 8-class token argmax projected back to covered bases; no threshold or calibration",
+    "token_projection": "representation trainer sequence_tokens: six-base tokens plus a final shorter token, non-ACGT token mapped to native <unk>",
+    "window_alignment": "nonoverlapping, contig origin 0",
+    "window_bp": 4096
+  },
+  "native_comparator_availability": {
+    "all_declared_cells_completed": false,
+    "na_cells": [
+      {
+        "method": "EDTA",
+        "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+        "native_status": {
+          "exit_code": null,
+          "job_id": null,
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+          "slurm_job_id": null,
+          "stages": [
+            {
+              "max_rss_kb": 105540580,
+              "name": "edta_all",
+              "returncode": 2,
+              "role": "combined_discovery_and_masking",
+              "wall_seconds_observed": 166817.272345989
+            }
+          ],
+          "status": "FAILED",
+          "wall_seconds": 166821.00464129448
+        },
+        "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+        "reason": "terminal ledger: FAILED: TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+        "species": "chicken",
+        "status": "NA",
+        "terminal_ledger_entry": {
+          "cell": "chicken/EDTA",
+          "failure": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+          "slurm": {
+            "cell": "chicken/EDTA",
+            "elapsed": "1-22:20:35",
+            "exit_code": "1:0",
+            "job_id": "12888165",
+            "resources": "16 CPU, 128G, private-teodoro-gpu",
+            "state": "FAILED"
+          },
+          "stages": {
+            "edta_all": {
+              "max_rss_kb": 105540580,
+              "returncode": 2,
+              "wall_seconds": 166817.272345989
+            }
+          },
+          "status_file_status": "FAILED",
+          "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+          "terminal_reason": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+          "terminal_state": "FAILED",
+          "wall_seconds": 166821.00464129448
+        },
+        "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+        "terminal_reason": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+        "terminal_state": "FAILED"
+      },
+      {
+        "method": "RM2",
+        "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+        "native_status": {
+          "exit_code": null,
+          "job_id": null,
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+          "slurm_job_id": null,
+          "stages": [
+            {
+              "max_rss_kb": 628104,
+              "name": "builddatabase",
+              "returncode": 0,
+              "role": "discovery",
+              "wall_seconds_observed": 27.696299626957625
+            },
+            {
+              "max_rss_kb": 8602932,
+              "name": "repeatmodeler",
+              "returncode": 0,
+              "role": "discovery",
+              "wall_seconds_observed": 129437.29785350687
+            }
+          ],
+          "status": "FAILED",
+          "wall_seconds": 129468.85529088974
+        },
+        "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+        "reason": "terminal ledger: FAILED: RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+        "species": "chicken",
+        "status": "NA",
+        "terminal_ledger_entry": {
+          "cell": "chicken/RM2",
+          "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+          "slurm": {
+            "cell": "chicken/RM2",
+            "elapsed": "1-11:58:11",
+            "exit_code": "1:0",
+            "job_id": "12888134",
+            "resources": "16 CPU, 128G, private-teodoro-gpu",
+            "state": "FAILED"
+          },
+          "stages": {
+            "builddatabase": {
+              "max_rss_kb": 628104,
+              "returncode": 0,
+              "wall_seconds": 27.696299626957625
+            },
+            "repeatmodeler": {
+              "max_rss_kb": 8602932,
+              "returncode": 0,
+              "wall_seconds": 129437.29785350687
+            }
+          },
+          "status_file_status": "FAILED",
+          "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+          "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "terminal_state": "FAILED",
+          "wall_seconds": 129468.85529088974
+        },
+        "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+        "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+        "terminal_state": "FAILED"
+      },
+      {
+        "method": "EDTA",
+        "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+        "native_status": {
+          "exit_code": null,
+          "job_id": null,
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "slurm_job_id": null,
+          "stages": [
+            {
+              "max_rss_kb": 127086448,
+              "name": "edta_all",
+              "returncode": 2,
+              "role": "combined_discovery_and_masking",
+              "wall_seconds_observed": 209554.33987208898
+            }
+          ],
+          "status": "FAILED",
+          "wall_seconds": 209558.30159687996
+        },
+        "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+        "reason": "terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+        "species": "zebrafish",
+        "status": "NA",
+        "terminal_ledger_entry": {
+          "cell": "zebrafish/EDTA",
+          "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file.",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+          "slurm": {
+            "cell": "zebrafish/EDTA",
+            "elapsed": "2-10:13:00",
+            "exit_code": "0:125",
+            "job_id": "12888196",
+            "resources": "16 CPU, 128G, private-teodoro-gpu",
+            "state": "OUT_OF_MEMORY"
+          },
+          "stages": {
+            "edta_all": {
+              "max_rss_kb": 127086448,
+              "returncode": 2,
+              "wall_seconds": 209554.33987208898
+            }
+          },
+          "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+          "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "terminal_state": "OUT_OF_MEMORY",
+          "wall_seconds": 209558.30159687996
+        },
+        "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+        "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+        "terminal_state": "OUT_OF_MEMORY"
+      },
+      {
+        "method": "RM2",
+        "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+        "native_status": {
+          "exit_code": null,
+          "job_id": null,
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+          "slurm_job_id": null,
+          "stages": [
+            {
+              "max_rss_kb": 365124,
+              "name": "builddatabase",
+              "returncode": 0,
+              "role": "discovery",
+              "wall_seconds_observed": 32.25567356101237
+            },
+            {
+              "max_rss_kb": 13870016,
+              "name": "repeatmodeler",
+              "returncode": 0,
+              "role": "discovery",
+              "wall_seconds_observed": 96736.45294453809
+            }
+          ],
+          "status": "FAILED",
+          "wall_seconds": 96771.56058168411
+        },
+        "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+        "reason": "terminal ledger: FAILED: RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+        "species": "zebrafish",
+        "status": "NA",
+        "terminal_ledger_entry": {
+          "cell": "zebrafish/RM2",
+          "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+          "slurm": {
+            "cell": "zebrafish/RM2",
+            "elapsed": "1-02:53:12",
+            "exit_code": "1:0",
+            "job_id": "12888197",
+            "resources": "16 CPU, 128G, private-teodoro-gpu",
+            "state": "FAILED"
+          },
+          "stages": {
+            "builddatabase": {
+              "max_rss_kb": 365124,
+              "returncode": 0,
+              "wall_seconds": 32.25567356101237
+            },
+            "repeatmodeler": {
+              "max_rss_kb": 13870016,
+              "returncode": 0,
+              "wall_seconds": 96736.45294453809
+            }
+          },
+          "status_file_status": "FAILED",
+          "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+          "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "terminal_state": "FAILED",
+          "wall_seconds": 96771.56058168411
+        },
+        "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+        "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+        "terminal_state": "FAILED"
+      }
+    ],
+    "policy": "A missing or non-terminal native cell is reported as NA; it is never represented by zero-valued metrics. Completed NTv2 and native cells remain scoreable.",
+    "terminal_ledger_loaded": true,
+    "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json"
+  },
+  "native_timing_boundary": "Native EDTA/RM2 timing fields are whole-genome cell metadata from WHOLE-GENOME-BENCHMARK; this result does not present them as class-map or full-genome CPU timing.",
+  "protocol": "UNIFIED-NTV2-CLASS-MAP-BENCH-20260918",
+  "quality_only": true,
+  "scope": "chicken chr10/chr20 and zebrafish chr10/chr20; fixed before native score inspection",
+  "species": {
+    "chicken": {
+      "assembly": "galGal6",
+      "method_outputs": {
+        "EDTA": {
+          "method": "EDTA",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 105540580,
+                "name": "edta_all",
+                "returncode": 2,
+                "role": "combined_discovery_and_masking",
+                "wall_seconds_observed": 166817.272345989
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 166821.00464129448
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+          "reason": "terminal ledger: FAILED: TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "chicken/EDTA",
+            "failure": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+            "slurm": {
+              "cell": "chicken/EDTA",
+              "elapsed": "1-22:20:35",
+              "exit_code": "1:0",
+              "job_id": "12888165",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "FAILED"
+            },
+            "stages": {
+              "edta_all": {
+                "max_rss_kb": 105540580,
+                "returncode": 2,
+                "wall_seconds": 166817.272345989
+              }
+            },
+            "status_file_status": "FAILED",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+            "terminal_reason": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+            "terminal_state": "FAILED",
+            "wall_seconds": 166821.00464129448
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+          "terminal_state": "FAILED"
+        },
+        "NTv2_class": {
+          "format": "per_base_class_runs",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/chicken/predicted_classes.bed.gz",
+          "prediction_source": "frozen class checkpoint argmax; no threshold or calibration",
+          "status": "COMPLETED"
+        },
+        "RM2": {
+          "method": "RM2",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 628104,
+                "name": "builddatabase",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 27.696299626957625
+              },
+              {
+                "max_rss_kb": 8602932,
+                "name": "repeatmodeler",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 129437.29785350687
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 129468.85529088974
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+          "reason": "terminal ledger: FAILED: RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "chicken/RM2",
+            "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+            "slurm": {
+              "cell": "chicken/RM2",
+              "elapsed": "1-11:58:11",
+              "exit_code": "1:0",
+              "job_id": "12888134",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "FAILED"
+            },
+            "stages": {
+              "builddatabase": {
+                "max_rss_kb": 628104,
+                "returncode": 0,
+                "wall_seconds": 27.696299626957625
+              },
+              "repeatmodeler": {
+                "max_rss_kb": 8602932,
+                "returncode": 0,
+                "wall_seconds": 129437.29785350687
+              }
+            },
+            "status_file_status": "FAILED",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+            "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "terminal_state": "FAILED",
+            "wall_seconds": 129468.85529088974
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "terminal_state": "FAILED"
+        }
+      },
+      "methods": {
+        "D_binary": {
+          "reason": "WHOLE D output is binary material-only and has no class prediction; it is not remapped",
+          "status": "N/A"
+        },
+        "EDTA": {
+          "method": "EDTA",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 105540580,
+                "name": "edta_all",
+                "returncode": 2,
+                "role": "combined_discovery_and_masking",
+                "wall_seconds_observed": 166817.272345989
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 166821.00464129448
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+          "reason": "terminal ledger: FAILED: TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "chicken/EDTA",
+            "failure": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA",
+            "slurm": {
+              "cell": "chicken/EDTA",
+              "elapsed": "1-22:20:35",
+              "exit_code": "1:0",
+              "job_id": "12888165",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "FAILED"
+            },
+            "stages": {
+              "edta_all": {
+                "max_rss_kb": 105540580,
+                "returncode": 2,
+                "wall_seconds": 166817.272345989
+              }
+            },
+            "status_file_status": "FAILED",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/EDTA/status.json",
+            "terminal_reason": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+            "terminal_state": "FAILED",
+            "wall_seconds": 166821.00464129448
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "TIR-Learner get_fasta_sequence.py raised a pandas slice-index TypeError; its swifter/Dask fallback then attempted child processes from a daemon. TIR output was absent and EDTA stopped before final annotation.",
+          "terminal_state": "FAILED"
+        },
+        "NTv2_class": {
+          "callable_bp": 34515527,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                32653483,
+                34005,
+                235358,
+                61607,
+                9301,
+                0,
+                0,
+                0
+              ],
+              [
+                6402,
+                9637,
+                13182,
+                432,
+                776,
+                0,
+                0,
+                0
+              ],
+              [
+                84185,
+                1204,
+                996358,
+                3009,
+                381,
+                0,
+                0,
+                0
+              ],
+              [
+                50815,
+                10,
+                8269,
+                123459,
+                17,
+                0,
+                0,
+                0
+              ],
+              [
+                100108,
+                1257,
+                9924,
+                24227,
+                51433,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                14768,
+                111,
+                702,
+                56,
+                2618,
+                0,
+                0,
+                0
+              ],
+              [
+                18432,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.4462933432937814,
+            "macro_precision": 0.4808294095085888,
+            "macro_recall": 0.45370339160825024,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 18255,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 18255,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.9906710734742104,
+                "fn_bp": 340271,
+                "fp_bp": 274710,
+                "precision": 0.9916573010854255,
+                "recall": 0.9896868055693208,
+                "support_bp": 32993754,
+                "tp_bp": 32653483
+              },
+              "DNA": {
+                "f1": 0.4090506014514365,
+                "fn_bp": 135516,
+                "fp_bp": 13093,
+                "precision": 0.7970895452995692,
+                "recall": 0.2751178128794484,
+                "support_bp": 186949,
+                "tp_bp": 51433
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.0,
+                "fn_bp": 0,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 0,
+                "tp_bp": 0
+              },
+              "LINE": {
+                "f1": 0.8483505255584458,
+                "fn_bp": 88779,
+                "fp_bp": 267435,
+                "precision": 0.7883870222417754,
+                "recall": 0.9181863672513241,
+                "support_bp": 1085137,
+                "tp_bp": 996358
+              },
+              "LTR": {
+                "f1": 0.6245396600566572,
+                "fn_bp": 59111,
+                "fp_bp": 89331,
+                "precision": 0.5801917383335683,
+                "recall": 0.6762282959960563,
+                "support_bp": 182570,
+                "tp_bp": 123459
+              },
+              "SINE": {
+                "f1": 0.25144154251572,
+                "fn_bp": 20792,
+                "fp_bp": 36588,
+                "precision": 0.20848025959978367,
+                "recall": 0.3167044595616024,
+                "support_bp": 30429,
+                "tp_bp": 9637
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.0,
+                "fn_bp": 18433,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 18433,
+                "tp_bp": 0
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 34515527
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                32653483,
+                34005,
+                235358,
+                61607,
+                9301,
+                0,
+                0,
+                0
+              ],
+              [
+                6402,
+                9637,
+                13182,
+                432,
+                776,
+                0,
+                0,
+                0
+              ],
+              [
+                84185,
+                1204,
+                996358,
+                3009,
+                381,
+                0,
+                0,
+                0
+              ],
+              [
+                50815,
+                10,
+                8269,
+                123459,
+                17,
+                0,
+                0,
+                0
+              ],
+              [
+                100108,
+                1257,
+                9924,
+                24227,
+                51433,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.6259131687276955,
+            "macro_precision": 0.6803223488822787,
+            "macro_recall": 0.6351847482515504,
+            "per_class": {
+              "BG": {
+                "f1": 0.9911702524863617,
+                "fn_bp": 340271,
+                "fp_bp": 241510,
+                "precision": 0.9926581531724297,
+                "recall": 0.9896868055693208,
+                "support_bp": 32993754,
+                "tp_bp": 32653483
+              },
+              "DNA": {
+                "f1": 0.41335385381966355,
+                "fn_bp": 135516,
+                "fp_bp": 10475,
+                "precision": 0.8307973121405957,
+                "recall": 0.2751178128794484,
+                "support_bp": 186949,
+                "tp_bp": 51433
+              },
+              "LINE": {
+                "f1": 0.8486041389507323,
+                "fn_bp": 88779,
+                "fp_bp": 266733,
+                "precision": 0.7888251915341017,
+                "recall": 0.9181863672513241,
+                "support_bp": 1085137,
+                "tp_bp": 996358
+              },
+              "LTR": {
+                "f1": 0.6246281342966425,
+                "fn_bp": 59111,
+                "fp_bp": 89275,
+                "precision": 0.5803444677390545,
+                "recall": 0.6762282959960563,
+                "support_bp": 182570,
+                "tp_bp": 123459
+              },
+              "SINE": {
+                "f1": 0.2518094640850775,
+                "fn_bp": 20792,
+                "fp_bp": 36476,
+                "precision": 0.20898661982521197,
+                "recall": 0.3167044595616024,
+                "support_bp": 30429,
+                "tp_bp": 9637
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 34478839
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 18255,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 18255,
+            "BG": 32993754,
+            "DNA": 186949,
+            "KNOWN_OTHER_TE": 0,
+            "LINE": 1085137,
+            "LTR": 182570,
+            "SINE": 30429,
+            "UNCLASSIFIED": 18433
+          },
+          "source_known_other_bp": 0,
+          "source_unknown_unclassified_bp": 18433,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.8373763117936011,
+            "any_main4_te_recovery_bp": 1243575,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                6402,
+                9637,
+                13182,
+                432,
+                776,
+                0,
+                0,
+                0
+              ],
+              [
+                84185,
+                1204,
+                996358,
+                3009,
+                381,
+                0,
+                0,
+                0
+              ],
+              [
+                50815,
+                10,
+                8269,
+                123459,
+                17,
+                0,
+                0,
+                0
+              ],
+              [
+                100108,
+                1257,
+                9924,
+                24227,
+                51433,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.6413982956303694,
+            "macro_precision": 0.8899993663212392,
+            "macro_recall": 0.5465592339221078,
+            "per_class": {
+              "DNA": {
+                "f1": 0.4294027283808379,
+                "fn_bp": 135516,
+                "fp_bp": 1174,
+                "precision": 0.9776835782310339,
+                "recall": 0.2751178128794484,
+                "support_bp": 186949,
+                "tp_bp": 51433
+              },
+              "LINE": {
+                "f1": 0.9431323271190372,
+                "fn_bp": 88779,
+                "fp_bp": 31375,
+                "precision": 0.9694716429267135,
+                "recall": 0.9181863672513241,
+                "support_bp": 1085137,
+                "tp_bp": 996358
+              },
+              "LTR": {
+                "f1": 0.7399467181305195,
+                "fn_bp": 59111,
+                "fp_bp": 27668,
+                "precision": 0.8169221912695944,
+                "recall": 0.6762282959960563,
+                "support_bp": 182570,
+                "tp_bp": 123459
+              },
+              "SINE": {
+                "f1": 0.45311140889108315,
+                "fn_bp": 20792,
+                "fp_bp": 2471,
+                "precision": 0.7959200528576148,
+                "recall": 0.3167044595616024,
+                "support_bp": 30429,
+                "tp_bp": 9637
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 1485085
+          }
+        },
+        "RM2": {
+          "method": "RM2",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 628104,
+                "name": "builddatabase",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 27.696299626957625
+              },
+              {
+                "max_rss_kb": 8602932,
+                "name": "repeatmodeler",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 129437.29785350687
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 129468.85529088974
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+          "reason": "terminal ledger: FAILED: RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "chicken/RM2",
+            "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2",
+            "slurm": {
+              "cell": "chicken/RM2",
+              "elapsed": "1-11:58:11",
+              "exit_code": "1:0",
+              "job_id": "12888134",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "FAILED"
+            },
+            "stages": {
+              "builddatabase": {
+                "max_rss_kb": 628104,
+                "returncode": 0,
+                "wall_seconds": 27.696299626957625
+              },
+              "repeatmodeler": {
+                "max_rss_kb": 8602932,
+                "returncode": 0,
+                "wall_seconds": 129437.29785350687
+              }
+            },
+            "status_file_status": "FAILED",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2/status.json",
+            "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "terminal_state": "FAILED",
+            "wall_seconds": 129468.85529088974
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "terminal_state": "FAILED"
+        }
+      },
+      "scientific_name": "Gallus gallus",
+      "source": {
+        "painted_class_interval_bp_before_union": {
+          "AMBIGUOUS_TE": 18409,
+          "BG": 739979,
+          "DNA": 188561,
+          "LINE": 1087978,
+          "LTR": 183329,
+          "SINE": 30458,
+          "UNCLASSIFIED": 18545
+        },
+        "painted_class_rows": {
+          "AMBIGUOUS_TE": 119,
+          "BG": 9868,
+          "DNA": 882,
+          "LINE": 4449,
+          "LTR": 562,
+          "SINE": 238,
+          "UNCLASSIFIED": 113
+        },
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz",
+        "policy": "UCSC fields 11/12 mapped with frozen SF5 ontology; explicit simple/low-complexity/RNA-like source rows are BG, Unknown is UNCLASSIFIED, '?' is AMBIGUOUS_TE, and unrecognized classes remain UNCLASSIFIED",
+        "raw_class_rows": {
+          "ARTEFACT": 7,
+          "DNA": 35941,
+          "DNA?": 1993,
+          "LINE": 215615,
+          "LTR": 41167,
+          "LTR?": 163,
+          "Low_complexity": 56312,
+          "RC?": 65,
+          "SINE": 5797,
+          "Satellite": 21447,
+          "Simple_repeat": 317006,
+          "Unknown": 2638,
+          "rRNA": 262,
+          "scRNA": 2,
+          "snRNA": 167,
+          "tRNA": 365
+        },
+        "rows_seen": 698947,
+        "source_unknown_bp": 36954,
+        "target_rows": 16231
+      },
+      "target_chromosomes": [
+        "chr10",
+        "chr20"
+      ],
+      "target_lengths_bp": {
+        "chr10": 21119840,
+        "chr20": 13897287
+      }
+    },
+    "zebrafish": {
+      "assembly": "danRer11",
+      "method_outputs": {
+        "EDTA": {
+          "method": "EDTA",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 127086448,
+                "name": "edta_all",
+                "returncode": 2,
+                "role": "combined_discovery_and_masking",
+                "wall_seconds_observed": 209554.33987208898
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 209558.30159687996
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "reason": "terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "zebrafish/EDTA",
+            "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+            "slurm": {
+              "cell": "zebrafish/EDTA",
+              "elapsed": "2-10:13:00",
+              "exit_code": "0:125",
+              "job_id": "12888196",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "OUT_OF_MEMORY"
+            },
+            "stages": {
+              "edta_all": {
+                "max_rss_kb": 127086448,
+                "returncode": 2,
+                "wall_seconds": 209554.33987208898
+              }
+            },
+            "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "terminal_state": "OUT_OF_MEMORY",
+            "wall_seconds": 209558.30159687996
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "terminal_state": "OUT_OF_MEMORY"
+        },
+        "NTv2_class": {
+          "format": "per_base_class_runs",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/zebrafish/predicted_classes.bed.gz",
+          "prediction_source": "frozen class checkpoint argmax; no threshold or calibration",
+          "status": "COMPLETED"
+        },
+        "RM2": {
+          "method": "RM2",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 365124,
+                "name": "builddatabase",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 32.25567356101237
+              },
+              {
+                "max_rss_kb": 13870016,
+                "name": "repeatmodeler",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 96736.45294453809
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 96771.56058168411
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+          "reason": "terminal ledger: FAILED: RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "zebrafish/RM2",
+            "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+            "slurm": {
+              "cell": "zebrafish/RM2",
+              "elapsed": "1-02:53:12",
+              "exit_code": "1:0",
+              "job_id": "12888197",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "FAILED"
+            },
+            "stages": {
+              "builddatabase": {
+                "max_rss_kb": 365124,
+                "returncode": 0,
+                "wall_seconds": 32.25567356101237
+              },
+              "repeatmodeler": {
+                "max_rss_kb": 13870016,
+                "returncode": 0,
+                "wall_seconds": 96736.45294453809
+              }
+            },
+            "status_file_status": "FAILED",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+            "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "terminal_state": "FAILED",
+            "wall_seconds": 96771.56058168411
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "terminal_state": "FAILED"
+        }
+      },
+      "methods": {
+        "D_binary": {
+          "reason": "WHOLE D output is binary material-only and has no class prediction; it is not remapped",
+          "status": "N/A"
+        },
+        "EDTA": {
+          "method": "EDTA",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 127086448,
+                "name": "edta_all",
+                "returncode": 2,
+                "role": "combined_discovery_and_masking",
+                "wall_seconds_observed": 209554.33987208898
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 209558.30159687996
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "reason": "terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "zebrafish/EDTA",
+            "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+            "slurm": {
+              "cell": "zebrafish/EDTA",
+              "elapsed": "2-10:13:00",
+              "exit_code": "0:125",
+              "job_id": "12888196",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "OUT_OF_MEMORY"
+            },
+            "stages": {
+              "edta_all": {
+                "max_rss_kb": 127086448,
+                "returncode": 2,
+                "wall_seconds": 209554.33987208898
+              }
+            },
+            "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "terminal_state": "OUT_OF_MEMORY",
+            "wall_seconds": 209558.30159687996
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "terminal_state": "OUT_OF_MEMORY"
+        },
+        "NTv2_class": {
+          "callable_bp": 100505689,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                45857249,
+                327395,
+                491831,
+                628669,
+                5782218,
+                0,
+                0,
+                0
+              ],
+              [
+                51691,
+                2007688,
+                91560,
+                64540,
+                577391,
+                0,
+                0,
+                0
+              ],
+              [
+                227552,
+                12477,
+                1505744,
+                221097,
+                707595,
+                0,
+                0,
+                0
+              ],
+              [
+                306698,
+                113256,
+                220974,
+                3161029,
+                417737,
+                0,
+                0,
+                0
+              ],
+              [
+                2213064,
+                359387,
+                141519,
+                162231,
+                29375452,
+                6,
+                6,
+                0
+              ],
+              [
+                184108,
+                73004,
+                2350,
+                18892,
+                715678,
+                0,
+                0,
+                0
+              ],
+              [
+                346112,
+                50542,
+                6863,
+                151006,
+                3602325,
+                0,
+                0,
+                0
+              ],
+              [
+                87499,
+                45534,
+                1955,
+                19212,
+                174553,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.46325153586699486,
+            "macro_precision": 0.4547661358647612,
+            "macro_recall": 0.47570122609363336,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 4156848,
+                "fp_bp": 6,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 4156848,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.8959877086401814,
+                "fn_bp": 7230113,
+                "fp_bp": 3416724,
+                "precision": 0.9306586460969973,
+                "recall": 0.8638072654655546,
+                "support_bp": 53087362,
+                "tp_bp": 45857249
+              },
+              "DNA": {
+                "f1": 0.7981959391839213,
+                "fn_bp": 2876213,
+                "fp_bp": 11977497,
+                "precision": 0.7103593023075573,
+                "recall": 0.9108197049671699,
+                "support_bp": 32251665,
+                "tp_bp": 29375452
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.0,
+                "fn_bp": 994032,
+                "fp_bp": 6,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 994032,
+                "tp_bp": 0
+              },
+              "LINE": {
+                "f1": 0.5862049835505729,
+                "fn_bp": 1168721,
+                "fp_bp": 957052,
+                "precision": 0.6113961529903411,
+                "recall": 0.5630075547819844,
+                "support_bp": 2674465,
+                "tp_bp": 1505744
+              },
+              "LTR": {
+                "f1": 0.7311805994885715,
+                "fn_bp": 1058665,
+                "fp_bp": 1265647,
+                "precision": 0.71408637090223,
+                "recall": 0.7491133243311008,
+                "support_bp": 4219694,
+                "tp_bp": 3161029
+              },
+              "SINE": {
+                "f1": 0.694443056072712,
+                "fn_bp": 785182,
+                "fp_bp": 981595,
+                "precision": 0.6716286146209642,
+                "recall": 0.7188619592032569,
+                "support_bp": 2792870,
+                "tp_bp": 2007688
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.0,
+                "fn_bp": 328753,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 328753,
+                "tp_bp": 0
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 100505689
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                45857249,
+                327395,
+                491831,
+                628669,
+                5782218,
+                0,
+                0,
+                0
+              ],
+              [
+                51691,
+                2007688,
+                91560,
+                64540,
+                577391,
+                0,
+                0,
+                0
+              ],
+              [
+                227552,
+                12477,
+                1505744,
+                221097,
+                707595,
+                0,
+                0,
+                0
+              ],
+              [
+                306698,
+                113256,
+                220974,
+                3161029,
+                417737,
+                0,
+                0,
+                0
+              ],
+              [
+                2213064,
+                359387,
+                141519,
+                162231,
+                29375452,
+                6,
+                6,
+                0
+              ]
+            ],
+            "macro_f1": 0.760376643627206,
+            "macro_precision": 0.7622884106247142,
+            "macro_recall": 0.7611219617498135,
+            "per_class": {
+              "BG": {
+                "f1": 0.9014275450953109,
+                "fn_bp": 7230113,
+                "fp_bp": 2799005,
+                "precision": 0.9424738904067708,
+                "recall": 0.8638072654655546,
+                "support_bp": 53087362,
+                "tp_bp": 45857249
+              },
+              "DNA": {
+                "f1": 0.8500818192970031,
+                "fn_bp": 2876213,
+                "fp_bp": 7484941,
+                "precision": 0.7969381118644069,
+                "recall": 0.9108197049671699,
+                "support_bp": 32251665,
+                "tp_bp": 29375452
+              },
+              "LINE": {
+                "f1": 0.5874821233247232,
+                "fn_bp": 1168721,
+                "fp_bp": 945884,
+                "precision": 0.6141812705679655,
+                "recall": 0.5630075547819844,
+                "support_bp": 2674465,
+                "tp_bp": 1505744
+              },
+              "LTR": {
+                "f1": 0.7475302875872326,
+                "fn_bp": 1058665,
+                "fp_bp": 1076537,
+                "precision": 0.7459539273252617,
+                "recall": 0.7491133243311008,
+                "support_bp": 4219694,
+                "tp_bp": 3161029
+              },
+              "SINE": {
+                "f1": 0.7153614428317608,
+                "fn_bp": 785182,
+                "fp_bp": 812515,
+                "precision": 0.7118948529591664,
+                "recall": 0.7188619592032569,
+                "support_bp": 2792870,
+                "tp_bp": 2007688
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 95026056
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 4156848,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 4156848,
+            "BG": 53087362,
+            "DNA": 32251665,
+            "KNOWN_OTHER_TE": 994032,
+            "LINE": 2674465,
+            "LTR": 4219694,
+            "SINE": 2792870,
+            "UNCLASSIFIED": 328753
+          },
+          "source_known_other_bp": 994032,
+          "source_unknown_unclassified_bp": 328753,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.9332593189477956,
+            "any_main4_te_recovery_bp": 39139677,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                51691,
+                2007688,
+                91560,
+                64540,
+                577391,
+                0,
+                0,
+                0
+              ],
+              [
+                227552,
+                12477,
+                1505744,
+                221097,
+                707595,
+                0,
+                0,
+                0
+              ],
+              [
+                306698,
+                113256,
+                220974,
+                3161029,
+                417737,
+                0,
+                0,
+                0
+              ],
+              [
+                2213064,
+                359387,
+                141519,
+                162231,
+                29375452,
+                6,
+                6,
+                0
+              ]
+            ],
+            "macro_f1": 0.78618982342664,
+            "macro_precision": 0.8487047505609726,
+            "macro_recall": 0.7354506358208781,
+            "per_class": {
+              "DNA": {
+                "f1": 0.9276970224462906,
+                "fn_bp": 2876213,
+                "fp_bp": 1702723,
+                "precision": 0.9452116155469232,
+                "recall": 0.9108197049671699,
+                "support_bp": 32251665,
+                "tp_bp": 29375452
+              },
+              "LINE": {
+                "f1": 0.6498311921078265,
+                "fn_bp": 1168721,
+                "fp_bp": 454053,
+                "precision": 0.7683163103117313,
+                "recall": 0.5630075547819844,
+                "support_bp": 2674465,
+                "tp_bp": 1505744
+              },
+              "LTR": {
+                "f1": 0.8075601343843356,
+                "fn_bp": 1058665,
+                "fp_bp": 447868,
+                "precision": 0.8758989242419498,
+                "recall": 0.7491133243311008,
+                "support_bp": 4219694,
+                "tp_bp": 3161029
+              },
+              "SINE": {
+                "f1": 0.7596709447681074,
+                "fn_bp": 785182,
+                "fp_bp": 485120,
+                "precision": 0.8053921521432859,
+                "recall": 0.7188619592032569,
+                "support_bp": 2792870,
+                "tp_bp": 2007688
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 41938694
+          }
+        },
+        "RM2": {
+          "method": "RM2",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 365124,
+                "name": "builddatabase",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 32.25567356101237
+              },
+              {
+                "max_rss_kb": 13870016,
+                "name": "repeatmodeler",
+                "returncode": 0,
+                "role": "discovery",
+                "wall_seconds_observed": 96736.45294453809
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 96771.56058168411
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+          "reason": "terminal ledger: FAILED: RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "zebrafish/RM2",
+            "failure": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2",
+            "slurm": {
+              "cell": "zebrafish/RM2",
+              "elapsed": "1-02:53:12",
+              "exit_code": "1:0",
+              "job_id": "12888197",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "FAILED"
+            },
+            "stages": {
+              "builddatabase": {
+                "max_rss_kb": 365124,
+                "returncode": 0,
+                "wall_seconds": 32.25567356101237
+              },
+              "repeatmodeler": {
+                "max_rss_kb": 13870016,
+                "returncode": 0,
+                "wall_seconds": 96736.45294453809
+              }
+            },
+            "status_file_status": "FAILED",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2/status.json",
+            "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+            "terminal_state": "FAILED",
+            "wall_seconds": 96771.56058168411
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "RepeatModeler completed discovery and -LTRStruct; the bundled default FamDB was empty/unconfigured, so no consensi.fa.classified was produced.",
+          "terminal_state": "FAILED"
+        }
+      },
+      "scientific_name": "Danio rerio",
+      "source": {
+        "painted_class_interval_bp_before_union": {
+          "AMBIGUOUS_TE": 4385928,
+          "BG": 6143156,
+          "DNA": 33954966,
+          "KNOWN_OTHER_TE": 1170849,
+          "LINE": 2713421,
+          "LTR": 4383771,
+          "SINE": 3151838,
+          "UNCLASSIFIED": 408376
+        },
+        "painted_class_rows": {
+          "AMBIGUOUS_TE": 17744,
+          "BG": 69252,
+          "DNA": 135050,
+          "KNOWN_OTHER_TE": 6333,
+          "LINE": 8180,
+          "LTR": 10020,
+          "SINE": 12936,
+          "UNCLASSIFIED": 3485
+        },
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/rmsk.txt.gz",
+        "policy": "UCSC fields 11/12 mapped with frozen SF5 ontology; explicit simple/low-complexity/RNA-like source rows are BG, Unknown is UNCLASSIFIED, '?' is AMBIGUOUS_TE, and unrecognized classes remain UNCLASSIFIED",
+        "raw_class_rows": {
+          "ARTEFACT": 8,
+          "DNA": 2408885,
+          "DNA?": 3404,
+          "LINE": 141594,
+          "LTR": 186721,
+          "Low_complexity": 82330,
+          "RC": 104254,
+          "SINE": 214366,
+          "Satellite": 142653,
+          "Satellite?": 4815,
+          "Simple_repeat": 917097,
+          "Unknown": 55451,
+          "rRNA": 3578,
+          "scRNA": 1,
+          "snRNA": 1378,
+          "tRNA": 23163
+        },
+        "rows_seen": 4289698,
+        "source_unknown_bp": 4794304,
+        "target_rows": 263000
+      },
+      "target_chromosomes": [
+        "chr10",
+        "chr20"
+      ],
+      "target_lengths_bp": {
+        "chr10": 45420867,
+        "chr20": 55201332
+      }
+    }
+  },
+  "status": "COMPLETED_NTV2_WITH_NATIVE_NA",
+  "truth_boundary": "same-assembly UCSC RepeatMasker is a comparator layer, not exhaustive biological truth; native unknown and source unknown are never silently treated as negative"
+}

@@ -13,7 +13,25 @@
 - 鸡EDTA在TIR阶段失败，斑马鱼EDTA在同阶段OOM。不得以`--force`跳过TIR、改变分母或将未完成输出当完整EDTA对照。
 - 鸭嘴兽RM2达到其冻结的24小时预算，尚无完整classified库；下游RM2 receiver和评分未启动。该臂按资源限终态保留为NA，不扩预算，既有RED和Tiberius阳性结果仍有效。[终态记录](../../../reports/PLATYPUS-STRONG-MASK-CONTROLS-20260917/TERMINAL-20260924.md)
 
+两个RM2恢复在private CPU分区启动（鸡13180658、斑马鱼13180659，各16 CPU/128 GB，无GPU），使用原benchmark的Dfam4.0资产并保留完整发现库。两者均已分类成功，但RepeatMasker的默认FamDB目录挂载仍缺失，分别7m57s/15m34s后失败；修复后13180772（鸡）及13180877（斑马鱼）只复用现有classified库执行mask，已启动，不重复分类。时限已从各自原7天预算扣去原发现与该次失败的Slurm时间；原失败根不覆盖。后续评分使用各物种fresh `RM2-mask-recovery-v2`目录。
+
+鸡EDTA已有TIR Module4/Step7检查点，已完成兼容修复的序列等价验证并排队续跑，斑马鱼EDTA保留128 GB OOM终态。新分类模型自身评分已完成，native失败行显式NA。D完整输入的同口径评分13180826亦已完成（private、4 CPU/32 GB、无GPU、79秒，fresh `score-d-terminal-20260924`），读取已结束的原native单元并保留NA；恢复产物完成后另补共同方法比较，不将待运行恢复输出当成终态。
+
+恢复链现已接好：鸡EDTA 13180896等待`afterany:13180772`，维持最多两个native恢复并行。完整binary评分13180901及固定chr10/20 class评分13180902均等待`afterany:13180772:13180877:13180896`，写入独立`score-recovery-20260924`目录。EDTA小fixture的标量/修复序列8条完全相同、named TIR_type访问通过；合成小输入未复现原swifter分支，故原故障以实际12888165日志取证，不虚报合成复现成功。四次fixture共27秒计入鸡EDTA预算，剩余437,911秒，未改科学参数。[当前作业登记](../../../reports/WHOLE-GENOME-BENCHMARK-20260918/recovery-jobs-20260924.json)
+
 本批尚未完成最终方法比较和Git结果冻结；不发布新模型权重或新仓库。
+
+| 冻结工作 | 当前可解释状态 | 尚需完成 |
+| --- | --- | --- |
+| UNIFIED-NTV2-REPRESENTATION | 900步训练、配对表示、有限中心上下文诊断均完成 | 无新增训练 |
+| D-BACKBONE-LORA-CLADE | 固定比较完成，未支持替换D | 无新增MoE搜索 |
+| EXTERNAL-ANIMAL-CLOSURE | 两个既定物种及class分层完成，草雀低召回保留 | 无新增物种 |
+| NONMAMMAL-GENE-UTILITY | 鸡、斑马鱼四臂及CDS重叠诊断完成 | 无新增接收器或区域 |
+| WHOLE-GENOME-BENCHMARK | D完整GPU/鸡CPU完成；native原失败已核实 | RM2分类/mask和鸡EDTA原阶段恢复，共同评分与累计成本；斑马鱼EDTA为OOM/NA |
+| UNIFIED-NTV2-CLASS-MAP-BENCH | 固定chr10/20的NTv2 class评分完成 | 仅待恢复native输出的同分母比较 |
+| PLATYPUS-STRONG-MASK-CONTROLS | RED可解释；RM2在固定24h预算下无结果，按NA终结 | 不扩预算；保留已完成用途及其区间 |
+
+**新增适用域约束：** D在独立chr10/20上的binary bp-F1，鸡为0.479174（P=0.938901，R=0.321670），斑马鱼为0.878294（P=0.815321，R=0.951810）。完整assembly对应F1为0.559412/0.871752，但其中包含训练/模型选择曾见染色体，不能代替独立测试。鸡原生推理覆盖全部464条contig与完整1,065,365,425 bp，低召回不能归于作业未完成；与既往采样面板分数的差异原因尚未隔离。该结果与其AUGUSTUS用途小幅阳性可同时成立，论文应将材料覆盖和下游效用分别陈述，不能宣称鸡完整TE map覆盖充分。固定阈值、窗口和分母不改。[完整D评分及边界](../../../reports/WHOLE-GENOME-BENCHMARK-20260918/D-RESULTS-13180826.md)
 
 ## 统一模型的含义
 
@@ -205,3 +223,35 @@ D−U=+0.098274，按染色体配对bootstrap的95%区间[+0.080732,+0.114279]�
 与鸡一起，两种非哺乳动物都支持D相对未mask有益，但相对参考TE mask的结果并不一致（鸡略低，斑马鱼略高）。两物种均在D微调物种集合中，AUGUSTUS也使用既有同物种参数；本结果不证明未见物种泛化，也不能与鸭嘴兽Tiberius绝对F1跨接收器排名。
 
 固定core中先合并isoform CDS，斑马鱼CDS union为1,845,174 bp；D/R_TE/RED分别遮盖25,830/15,464/77,267 bp（1.3999%/0.8381%/4.1875%）。RED虽总mask少于D，但CDS重叠更多，因此其较低用途分数不能只按总mask比例解释。该事后诊断与基因区overmasking解释相容，未隔离因果贡献。[完整结果](../../../reports/NONMAMMAL-GENE-UTILITY-20260918/zebrafish/RESULTS.md)
+
+## 整基因组D推理的实测终态
+
+下表来自终态native summary和Slurm，输入包含完整assembly及其非ACGT位置。原JSON中的`callable_bp_per_second_end_to_end`实际以总FASTA bp为分子，因此此处正确称为input-bp/s。child wall与Slurm elapsed分列，不以1 MiB pilot外推替代实测。
+
+| 物种 | 部署 | 总输入bp | 推理子进程wall（s） | input-bp/s | Slurm elapsed |
+| --- | --- | ---: | ---: | ---: | --- |
+| 鸡 | RTX3090 GPU | 1,065,365,425 | 17,223.32 | 61,864.51 | 4h47m22s |
+| 斑马鱼 | RTX3090 GPU | 1,679,203,469 | 27,093.44 | 61,978.34 | 7h31m56s |
+| 鸡 | 16 CPU，FP32 | 1,065,365,425 | 398,324.46 | 2,674.62 | 4d14h39m04s |
+
+斑马鱼完整CPU仍为事先预算规则下未提交，不能补为实测8.11天。该表是部署成本，不含模型预训练/微调，也不证明任何质量优势；与native方法比较时，后者完整构库、分类与masking成本必须分别保留，不能把本表直接与某个native局部阶段排名。[完整终态及恢复记录](../../../reports/WHOLE-GENOME-BENCHMARK-20260918/TERMINAL-EVIDENCE-20260924.md)
+
+## 统一NTv2在独立染色体上的class-map评分
+
+CPU评分13180656完成；取得原生失败登记后，13180671在相同输入上补全NA元数据，两次各1m15s，科学指标一致，原结果均保留。主记录采用后一份。固定鸡和斑马鱼chr10/20未出现在D的TRAIN/CAL/DEV坐标清单中；这是同微调物种的独立染色体评价，不是未见物种测试。比较层为同assembly UCSC RepeatMasker，非穷尽的生物学真值。
+
+| 物种 | primary known-five macro-F1 | primary support bp | full-eight端点macro-F1 | 全部ACGT bp |
+| --- | ---: | ---: | ---: | ---: |
+| 鸡 | 0.625913 | 34,478,839 | 0.446293 | 34,515,527 |
+| 斑马鱼 | 0.760377 | 95,026,056 | 0.463252 | 100,505,689 |
+
+primary按预先冻结规则只使用来源BG/SINE/LINE/LTR/DNA位置，完整八状态混淆保留其余来源状态。macro按来源support非零类别计算；鸡的KNOWN_OTHER_TE无support，full-eight端点实际平均7类，斑马鱼平均8类，不改变原规则以提高分数。逐主要类别F1如下，其precision分母也限定在primary来源位置，不能当作全基因组所有来源状态上的precision。
+
+| 物种 | BG | SINE | LINE | LTR | DNA |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 鸡 | 0.991170 | 0.251809 | 0.848604 | 0.624628 | 0.413354 |
+| 斑马鱼 | 0.901428 | 0.715361 | 0.587482 | 0.747530 | 0.850082 |
+
+统一class权重已能形成可测量的TE map，主要类别具有明显的物种差异，不能概括为所有类型可靠。鸡SINE和DNA仍弱；两物种AMBIGUOUS_TE和UNCLASSIFIED召回均为0，斑马鱼KNOWN_OTHER_TE亦为0。来源不确定状态被预测为主要TE类不等于已确认其真实类别，不能据此宣称解决Unknown分类。条件true-TE的“被判为任一主要TE类”召回为0.837376/0.933259，衡量材料检出而非精确类别正确率，不替代上述macro-F1。
+
+四个原native cell在本次结果中均为NA，D binary的class指标为N/A。待原协议内恢复输出完成，再在相同分母下补RM2/EDTA比较；当前无传统方法分类优越性结论。完整8×8计数及所有类别support保留在[终态评分](../../../reports/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/results/score-ntv2-terminal-ledger-20260924/result.json)。

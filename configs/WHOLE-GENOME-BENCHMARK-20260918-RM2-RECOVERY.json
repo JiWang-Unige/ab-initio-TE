@@ -1,0 +1,44 @@
+{
+  "experiment": "WHOLE-GENOME-BENCHMARK-20260918",
+  "recovery": "RM2_CLASSIFIER_MASK_CONTINUATION",
+  "parent_config": "configs/WHOLE-GENOME-BENCHMARK-20260918.json",
+  "status": "AUTHORIZED_CONTINUATION",
+  "scope": "Reuse the terminal RepeatModeler discovery products from the failed native cells; run only RepeatClassifier and the frozen RepeatMasker command.",
+  "species": ["chicken", "zebrafish"],
+  "discovery_contract": {
+    "required_stage": "RepeatModeler 2.0.9 with -threads 16 -srand 42 -LTRStruct",
+    "required_terminal_products": ["RM_*/consensi.fa", "RM_*/families.stk"],
+    "required_log_markers_in_order": [
+      "RepeatScout/RECON discovery complete",
+      "LTR Structural Analysis",
+      "LTRPipeline Time:",
+      "Classification Time:"
+    ],
+    "preserve_original_output": true,
+    "never_select_round_subdirectory": true
+  },
+  "runtime": {
+    "repeatmodeler_image": "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmodeler_2_0_9.sif",
+    "repeatmasker_image": "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+    "famdb4": "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2",
+    "famdb_manifest": "software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2/manifest.json",
+    "famdb_database": "Dfam 4.0",
+    "famdb_schema": "TEFM-FAMDB-ASSET-2.0.0",
+    "famdb_preparation_job": "11522328",
+    "famdb_use": "Fixed benchmark Dfam4.0 curated consensus asset; no surrogate library, class filtering, or family deletion"
+  },
+  "commands": {
+    "classifier": "RepeatClassifier -famdb_dir /opt/famdb -threads 16 -consensi /work/consensi.fa -stockholm /work/families.stk",
+    "masker": "RepeatMasker -e rmblast -pa 4 -gff -xsmall -lib /work/consensi.fa.classified -dir /work/repeatmasker <frozen source FASTA>"
+  },
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "cpus": 16,
+    "memory_gb": 128,
+    "gres": null,
+    "maximum_concurrent_jobs": 2,
+    "retry_time_policy": "7-day native cell wall budget minus the recorded failed discovery wall; exact per-species --time is recorded at submission",
+    "gpu": false
+  },
+  "output_layout": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/{species}/RM2-recovery"
+}

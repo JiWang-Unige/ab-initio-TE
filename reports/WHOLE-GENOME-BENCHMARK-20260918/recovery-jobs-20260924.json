@@ -1,0 +1,48 @@
+{
+  "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "recorded_date_local": "2026-09-24",
+  "timezone": "Europe/Paris",
+  "scientific_comparison_complete": false,
+  "completed_d_score": {
+    "job_id": "13180826",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "slurm_elapsed_seconds": 79,
+    "resources": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 32, "gpus": 0},
+    "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-d-terminal-20260924",
+    "native_cells": "All four original native attempts are NA; no recovery output was scored."
+  },
+  "active_recovery_chain": [
+    {"job_id": "13180772", "stage": "chicken RM2 mask only", "observed_state": "RUNNING", "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2"},
+    {"job_id": "13180877", "stage": "zebrafish RM2 mask only", "observed_state": "RUNNING", "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2"},
+    {"job_id": "13180896", "stage": "chicken EDTA checkpoint continuation", "observed_state": "PENDING", "dependency": "afterany:13180772", "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13180896"}
+  ],
+  "queued_scores": [
+    {
+      "job_id": "13180901",
+      "stage": "whole-genome binary score",
+      "observed_state": "PENDING",
+      "dependency": "afterany:13180772:13180877:13180896",
+      "resources": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 32, "gpus": 0, "wall_limit_hours": 4},
+      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-recovery-20260924"
+    },
+    {
+      "job_id": "13180902",
+      "stage": "fixed chr10/20 class-map score",
+      "observed_state": "PENDING",
+      "dependency": "afterany:13180772:13180877:13180896",
+      "resources": {"partition": "private-teodoro-gpu", "cpus": 8, "memory_gb": 32, "gpus": 0, "wall_limit_hours": 1},
+      "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
+      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
+      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-recovery-20260924"
+    }
+  ],
+  "rules": [
+    "Maximum two concurrent native recovery jobs; CPU-only jobs do not request GPUs.",
+    "Zebrafish EDTA original OOM remains NA; no memory or native wall budget is expanded.",
+    "afterany waits for attempts to settle; it does not assert scientific success.",
+    "Scorers retain failed/missing methods as NA and reject COMPLETED methods missing required outputs.",
+    "On the next heartbeat inspect these existing jobs before submitting anything else."
+  ]
+}

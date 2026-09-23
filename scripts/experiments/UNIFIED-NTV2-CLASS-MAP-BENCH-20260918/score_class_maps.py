@@ -453,6 +453,105 @@ def native_method(method: str, root: Path, sequences: dict[str, str]) -> tuple[d
     return arrays, stats
 
 
+def native_status_summary(status_path: Path, status: dict[str, object]) -> dict[str, object]:
+    """Keep a compact observed status alongside the immutable status file."""
+    stages: list[dict[str, object]] = []
+    for stage in status.get("stages", []):
+        if not isinstance(stage, dict):
+            continue
+        compact = {
+            key: stage[key]
+            for key in ("name", "role", "returncode", "max_rss_kb", "wall_seconds_observed")
+            if key in stage
+        }
+        if compact:
+            stages.append(compact)
+    return {
+        "path": str(status_path),
+        "status": status.get("status"),
+        "job_id": status.get("job_id"),
+        "slurm_job_id": status.get("slurm_job_id"),
+        "exit_code": status.get("exit_code"),
+        "wall_seconds": status.get("wall_seconds"),
+        "stages": stages,
+    }
+
+
+def native_method_or_na(
+    method: str,
+    root: Path,
+    sequences: dict[str, str],
+    *,
+    ledger_path: Path | None = None,
+    ledger_entry: dict[str, object] | None = None,
+) -> tuple[dict[str, np.ndarray] | None, dict[str, object]]:
+    """Load one native comparator, retaining an unavailable cell as explicit NA.
+
+    A missing/non-terminal whole-genome cell is an execution-state problem,
+    not a zero-valued prediction.  The completed methods in the same score can
+    still be evaluated, while malformed terminal annotations continue to raise
+    so that an apparently complete comparator is never silently downgraded.
+    """
+    def unavailable(
+        reason: str,
+        *,
+        status: dict[str, object] | None = None,
+        terminal_state: str | None = None,
+        terminal_reason: str | None = None,
+    ) -> tuple[None, dict[str, object]]:
+        observed = native_status_summary(root / "status.json", status) if status is not None else None
+        if ledger_entry:
+            ledger_state = ledger_entry.get("terminal_state") or ledger_entry.get("state")
+            ledger_reason = ledger_entry.get("terminal_reason") or ledger_entry.get("reason")
+            terminal_state = str(ledger_state) if ledger_state is not None else terminal_state
+            terminal_reason = str(ledger_reason) if ledger_reason is not None else terminal_reason
+            if terminal_reason:
+                reason = f"terminal ledger: {terminal_state or 'UNKNOWN'}: {terminal_reason}"
+        result: dict[str, object] = {
+            "status": "NA",
+            "reason": reason,
+            "native_root": str(root),
+            "method": method,
+            "terminal_state": terminal_state or "UNKNOWN",
+            "terminal_reason": terminal_reason or reason,
+        }
+        if observed is not None:
+            result["native_status"] = observed
+            result["native_status_path"] = str(root / "status.json")
+        if ledger_path is not None:
+            result["terminal_ledger_path"] = str(ledger_path)
+        if ledger_entry:
+            result["terminal_ledger_entry"] = ledger_entry
+        return None, result
+
+    status_path = root / "status.json"
+    ledger_matches_root = False
+    if ledger_entry and ledger_entry.get("native_root"):
+        ledger_root = Path(str(ledger_entry["native_root"]))
+        if not ledger_root.is_absolute():
+            ledger_root = ROOT / ledger_root
+        ledger_matches_root = ledger_root.resolve() == root.resolve()
+    if not ledger_matches_root:
+        ledger_entry = None
+    if not status_path.is_file():
+        return unavailable(f"native status missing: {status_path}", terminal_state="MISSING_STATUS")
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    if not isinstance(status, dict):
+        raise ValueError(f"native status is not a JSON object: {status_path}")
+    if status.get("status") != "COMPLETED":
+        return unavailable(
+            f"native cell is not terminal-success: {root} ({status.get('status')})",
+            status=status,
+            terminal_state=str(status.get("status") or "UNKNOWN"),
+        )
+    # A terminal-success cell is expected to be complete.  Let the native
+    # loader raise if its annotation, summary, or format is actually broken;
+    # that is a readiness/data-integrity error, not an ordinary NA cell.
+    arrays, stats = native_method(method, root, sequences)
+    stats = {"status": "COMPLETED", **stats}
+    return arrays, stats
+
+
 def load_class_map(path: Path, sequences: dict[str, str]) -> tuple[dict[str, np.ndarray], dict[str, object]]:
     if not path.is_file():
         raise FileNotFoundError(f"NTv2 class map missing: {path}")
@@ -584,6 +683,49 @@ def load_sequences(path: Path, target_names: list[str]) -> dict[str, str]:
     return {name: all_records[name] for name in target_names}
 
 
+def configured_native_root(species_cfg: dict[str, object], method: str) -> Path:
+    """Resolve an optional explicit recovery root without replacing old assets."""
+    overrides = species_cfg.get("native_method_roots", {})
+    if isinstance(overrides, dict) and overrides.get(method):
+        return (ROOT / str(overrides[method])).resolve()
+    return (ROOT / str(species_cfg["native_root"]) / method).resolve()
+
+
+def load_terminal_ledger(config: dict[str, object]) -> tuple[Path | None, dict[str, dict[str, object]]]:
+    """Load the fixed four-cell machine ledger when the native owner publishes it."""
+    configured = config.get("native_terminal_ledger")
+    if not configured:
+        return None, {}
+    path = (ROOT / str(configured)).resolve()
+    if not path.is_file():
+        return path, {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or not isinstance(payload.get("slurm"), list) or not isinstance(payload.get("native_status_snapshots"), list):
+        raise ValueError(f"native terminal ledger must contain slurm and native_status_snapshots lists: {path}")
+    slurm_by_cell = {
+        str(entry["cell"]): entry
+        for entry in payload["slurm"]
+        if isinstance(entry, dict) and entry.get("cell")
+    }
+    cells: dict[str, dict[str, object]] = {}
+    for snapshot in payload["native_status_snapshots"]:
+        if not isinstance(snapshot, dict) or not snapshot.get("cell") or not snapshot.get("status_path"):
+            raise ValueError(f"native terminal ledger snapshot is incomplete: {path}")
+        key = str(snapshot["cell"])
+        status_path = Path(str(snapshot["status_path"]))
+        if not status_path.is_absolute():
+            status_path = ROOT / status_path
+        slurm = slurm_by_cell.get(key, {})
+        cells[key] = {
+            **snapshot,
+            "native_root": str(status_path.resolve().parent),
+            "terminal_state": slurm.get("state") or snapshot.get("status_file_status"),
+            "terminal_reason": snapshot.get("failure") or slurm.get("state"),
+            "slurm": slurm,
+        }
+    return path, cells
+
+
 def run(args: argparse.Namespace) -> dict[str, object]:
     config = json.loads(args.config.resolve().read_text(encoding="utf-8"))
     out = args.output_dir.resolve()
@@ -591,6 +733,8 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         raise FileExistsError(f"refusing to replace non-empty score output: {out}")
     out.mkdir(parents=True, exist_ok=True)
     species_results: dict[str, object] = {}
+    native_na_cells: list[dict[str, object]] = []
+    terminal_ledger_path, terminal_ledger_cells = load_terminal_ledger(config)
     started = time.time()
     for species, species_cfg in config["species"].items():
         target_names = list(species_cfg["target_chromosomes"])
@@ -599,16 +743,30 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         ntv2_path = args.ntv2_root.resolve() / species / "predicted_classes.bed.gz"
         ntv2, ntv2_stats = load_class_map(ntv2_path, sequences)
         method_arrays: dict[str, dict[str, np.ndarray]] = {"NTv2_class": {chrom: np.where(values < 0, 0, values) for chrom, values in ntv2.items()}}
-        method_stats: dict[str, object] = {"NTv2_class": ntv2_stats}
-        normalized_root = ROOT / "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/native" / species
+        method_stats: dict[str, object] = {"NTv2_class": {"status": "COMPLETED", **ntv2_stats}}
+        normalized_root = out / "native" / species
         for method in ("EDTA", "RM2"):
-            arrays, stats = native_method(method, (ROOT / species_cfg["native_root"] / method).resolve(), sequences)
+            ledger_key = f"{species}/{method}"
+            arrays, stats = native_method_or_na(
+                method,
+                configured_native_root(species_cfg, method),
+                sequences,
+                ledger_path=terminal_ledger_path,
+                ledger_entry=terminal_ledger_cells.get(ledger_key),
+            )
+            if arrays is None:
+                method_stats[method] = stats
+                native_na_cells.append({"species": species, "method": method, **stats})
+                continue
             method_arrays[method] = arrays
             native_out = normalized_root / method / "predicted_classes.bed.gz"
             method_stats[method] = {**stats, "normalized_output": str(native_out), "normalized_label_counts": write_runs(native_out, arrays, sequences)}
         method_results: dict[str, object] = {}
         for method, arrays in method_arrays.items():
-            method_results[method] = method_metrics(source, arrays, sequences)
+            method_results[method] = {"status": "COMPLETED", **method_metrics(source, arrays, sequences)}
+        for method in ("EDTA", "RM2"):
+            if method not in method_arrays:
+                method_results[method] = dict(method_stats[method])
         method_results["D_binary"] = {"status": "N/A", "reason": "WHOLE D output is binary material-only and has no class prediction; it is not remapped"}
         species_results[species] = {
             "scientific_name": species_cfg["scientific_name"],
@@ -621,26 +779,43 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         }
     result = {
         "protocol": "UNIFIED-NTV2-CLASS-MAP-BENCH-20260918",
-        "status": "COMPLETED_COMPARATOR_RELATIVE_CLASS_MAP",
+        "status": "COMPLETED_COMPARATOR_RELATIVE_CLASS_MAP" if not native_na_cells else "COMPLETED_NTV2_WITH_NATIVE_NA",
         "quality_only": True,
         "scope": "chicken chr10/chr20 and zebrafish chr10/chr20; fixed before native score inspection",
         "elapsed_seconds": time.time() - started,
         "model_contract": config["backbone"],
         "evaluation_contract": config["evaluation"],
         "species": species_results,
+        "native_comparator_availability": {
+            "all_declared_cells_completed": not native_na_cells,
+            "na_cells": native_na_cells,
+            "terminal_ledger_path": str(terminal_ledger_path) if terminal_ledger_path is not None else None,
+            "terminal_ledger_loaded": bool(terminal_ledger_cells),
+            "policy": "A missing or non-terminal native cell is reported as NA; it is never represented by zero-valued metrics. Completed NTv2 and native cells remain scoreable.",
+        },
         "native_timing_boundary": "Native EDTA/RM2 timing fields are whole-genome cell metadata from WHOLE-GENOME-BENCHMARK; this result does not present them as class-map or full-genome CPU timing.",
         "truth_boundary": config["evaluation"]["truth_boundary"],
     }
     (out / "result.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     with (out / "metrics.tsv").open("w", encoding="utf-8") as handle:
-        handle.write("species\tmethod\tendpoint\tmacro_f1\tmacro_precision\tmacro_recall\tsupport_bp\n")
+        handle.write("species\tmethod\tstatus\tendpoint\tmacro_f1\tmacro_precision\tmacro_recall\tsupport_bp\treason\tterminal_state\tterminal_reason\tnative_status_path\tterminal_ledger_path\n")
         for species, species_result in species_results.items():
             for method, metrics in species_result["methods"].items():
                 if "primary_known" not in metrics:
+                    reason = str(metrics.get("reason", ""))
+                    handle.write(
+                        f"{species}\t{method}\t{metrics.get('status', 'NA')}\tNA\tNA\tNA\tNA\tNA\t"
+                        f"{reason}\t{metrics.get('terminal_state', '')}\t{metrics.get('terminal_reason', '')}\t"
+                        f"{metrics.get('native_status_path', '')}\t{metrics.get('terminal_ledger_path', '')}\n"
+                    )
                     continue
                 for endpoint in ("primary_known", "full8", "true_te_conditional"):
                     value = metrics[endpoint]
-                    handle.write(f"{species}\t{method}\t{endpoint}\t{value.get('macro_f1')}\t{value.get('macro_precision')}\t{value.get('macro_recall')}\t{value.get('support_total_bp')}\n")
+                    handle.write(
+                        f"{species}\t{method}\t{metrics.get('status', 'COMPLETED')}\t{endpoint}\t"
+                        f"{value.get('macro_f1')}\t{value.get('macro_precision')}\t{value.get('macro_recall')}\t"
+                        f"{value.get('support_total_bp')}\t\t\t\t\t\n"
+                    )
     print(json.dumps({"status": result["status"], "species": list(species_results), "output": str(out)}, sort_keys=True))
     return result
 

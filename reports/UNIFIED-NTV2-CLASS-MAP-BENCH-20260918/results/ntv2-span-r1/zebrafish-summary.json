@@ -1,0 +1,95 @@
+{
+  "assembly": "danRer11",
+  "batch_size": 8,
+  "contigs": [
+    {
+      "acgt_bp": 45373070,
+      "chromosome": "chr10",
+      "label_counts": {
+        "AMBIGUOUS_TE": 6,
+        "BG": 22567723,
+        "DNA": 18428248,
+        "KNOWN_OTHER_TE": 6,
+        "LINE": 1068456,
+        "LTR": 1936677,
+        "NONCALLABLE": 47797,
+        "SINE": 1371954,
+        "UNCLASSIFIED": 0
+      },
+      "length_bp": 45420867,
+      "non_acgt_bp": 47797,
+      "run_count": 273244,
+      "wall_seconds": 703.324268579483,
+      "windows": 11090
+    },
+    {
+      "acgt_bp": 55132619,
+      "chromosome": "chr20",
+      "label_counts": {
+        "AMBIGUOUS_TE": 0,
+        "BG": 26706250,
+        "DNA": 22924701,
+        "KNOWN_OTHER_TE": 0,
+        "LINE": 1394340,
+        "LTR": 2489999,
+        "NONCALLABLE": 68713,
+        "SINE": 1617329,
+        "UNCLASSIFIED": 0
+      },
+      "length_bp": 55201332,
+      "non_acgt_bp": 68713,
+      "run_count": 343558,
+      "wall_seconds": 848.5716605186462,
+      "windows": 13477
+    }
+  ],
+  "device": "cuda",
+  "input_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/prepared/zebrafish.fa",
+  "label_counts": {
+    "AMBIGUOUS_TE": 6,
+    "BG": 49273973,
+    "DNA": 41352949,
+    "KNOWN_OTHER_TE": 6,
+    "LINE": 2462796,
+    "LTR": 4426676,
+    "NONCALLABLE": 116510,
+    "SINE": 2989283,
+    "UNCLASSIFIED": 0
+  },
+  "label_map": {
+    "0": "BG",
+    "1": "SINE",
+    "2": "LINE",
+    "3": "LTR",
+    "4": "DNA",
+    "5": "KNOWN_OTHER_TE",
+    "6": "AMBIGUOUS_TE",
+    "7": "UNCLASSIFIED"
+  },
+  "labels_used": false,
+  "model": {
+    "base_model": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "class_model": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-REPRESENTATION-20260918/class_training/last2-seed42-12889091/best_model",
+    "model_loader": "UNIFIED-NTV2-REPRESENTATION-20260918/extract_matched_ntv2.py:native_token_classifier",
+    "prediction": "native 8-class argmax projected to base spans; non-ACGT output as NONCALLABLE",
+    "token_projection": "UNIFIED-NTV2-REPRESENTATION-20260918/train_matched_class.py:sequence_tokens, six-base tokens plus tail",
+    "window_alignment": "nonoverlapping, contig origin 0",
+    "window_bp": 4096
+  },
+  "noncallable_label": "NONCALLABLE",
+  "outputs": {
+    "predicted_classes_bed_gz": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/zebrafish/predicted_classes.bed.gz",
+    "summary_json": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/zebrafish/summary.json"
+  },
+  "protocol": "UNIFIED-NTV2-CLASS-MAP-BENCH-20260918",
+  "species": "zebrafish",
+  "status": "COMPLETED",
+  "target_chromosomes": [
+    "chr10",
+    "chr20"
+  ],
+  "timing": {
+    "bp_per_second": 63996.75768914951,
+    "wall_seconds": 1572.3015117645264
+  }
+}

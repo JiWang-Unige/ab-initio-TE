@@ -8,4 +8,11 @@
 #SBATCH --error=logs/wg-score-%j.err
 set -euo pipefail
 cd /home/users/j/jwang/ab-initio-TE
-python3 scripts/experiments/WHOLE-GENOME-BENCHMARK-20260918/score.py
+source /opt/ebsofts/Mamba/23.1.0-4/etc/profile.d/conda.sh
+conda activate te_benchmark
+
+ARGS=(--output-dir "${OUTPUT_DIR:-/home/users/j/jwang/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/score}")
+if [[ -n "${NATIVE_METHOD_ROOTS:-}" ]]; then
+  ARGS+=(--native-method-roots "$NATIVE_METHOD_ROOTS")
+fi
+python3 scripts/experiments/WHOLE-GENOME-BENCHMARK-20260918/score.py "${ARGS[@]}"

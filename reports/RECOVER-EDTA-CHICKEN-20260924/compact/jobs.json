@@ -1,0 +1,69 @@
+{
+  "protocol": "RECOVER-EDTA-CHICKEN-20260924",
+  "historical_attempts": [
+    {
+      "job": "12888133",
+      "state": "FAILED",
+      "elapsed_seconds": 27,
+      "reason": "container source-path engineering failure"
+    },
+    {
+      "job": "12888165",
+      "state": "FAILED",
+      "elapsed_seconds": 166835,
+      "reason": "TIR-Learner pandas/swifter nested-process compatibility failure"
+    }
+  ],
+  "fixture_attempts": [
+    {
+      "job": "13180745",
+      "state": "FAILED",
+      "elapsed_seconds": 9,
+      "reason": "fixture helper-name engineering error; no recovery code executed"
+    },
+    {
+      "job": "13180825",
+      "state": "COMPLETED",
+      "elapsed_seconds": 7,
+      "gate": "patched/scalar PASS; native unpatched nested branch NOT_REPRODUCED"
+    },
+    {
+      "job": "13180833",
+      "state": "COMPLETED",
+      "elapsed_seconds": 6,
+      "gate": "patched/scalar PASS; native unpatched nested branch NOT_REPRODUCED"
+    },
+    {
+      "job": "13180880",
+      "state": "COMPLETED",
+      "elapsed_seconds": 5,
+      "gate": "patched/scalar PASS; native unpatched nested branch NOT_REPRODUCED"
+    }
+  ],
+  "dependency": {
+    "job": "13180772",
+    "state_at_submission": "RUNNING",
+    "purpose": "chicken RM2 mask-only recovery; afterany dependency"
+  },
+  "recovery": {
+    "job": "13180896",
+    "state_at_recording": "PENDING",
+    "dependency": "afterany:13180772",
+    "elapsed_budget_seconds": 437911,
+    "slurm_time_limit": "5-01:38:31",
+    "resources": "private-teodoro-gpu, 16 CPU, 128 GB, no GPU",
+    "fresh_output_template": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-${SLURM_JOB_ID}"
+  },
+  "budget": {
+    "cell_budget_seconds": 604800,
+    "historical_elapsed_seconds": 166862,
+    "fixture_elapsed_seconds": 27,
+    "remaining_recovery_seconds": 437911
+  },
+  "scientific_gate": {
+    "native_failure_evidence": "original 12888165 stderr directly records slice-index TypeError followed by daemon-process assertion",
+    "fixture_patch_equivalence": "PASS for eight synthetic rows; coordinates int64 preserved; TIR_type named access PASS",
+    "synthetic_original_branch": "NOT_REPRODUCED; not used to override native failure evidence",
+    "recovery_submitted": true
+  }
+}

@@ -1,9 +1,13 @@
 # UNIFIED-NTV2-CLASS-MAP-BENCH-20260918 status
 
-Updated 2026-09-18. The implementation is ready and the target FASTA
-preparation completed successfully. The class-map GPU and score jobs were
-submitted with explicit dependencies and remain scheduler-gated until their
-declared inputs are complete.
+Updated 2026-09-24, after the repaired class-map score and native-recovery
+handoff. Target preparation and both repaired class-map GPU cells are
+complete. The historical dependency-gated score jobs `12898022` and
+`12890970` were cancelled before start and produced no score file. A direct,
+ledger-aware NTv2-only score is now complete in jobs `13180656` and preferred
+rerun `13180671`; the latter has numeric NTv2 endpoints and explicit `NA` rows
+for unavailable native cells. Map generation alone remains an accuracy
+non-result, and the native-recovery comparison is still pending.
 
 ## Fixed panel
 
@@ -29,8 +33,8 @@ and excluded from class metrics.
 | stage | implementation | dependency | status |
 | --- | --- | --- | --- |
 | target FASTA preparation | `prepare_targets.py` / `prepare.sbatch` | none | completed `12890879_[0-1]`, exit 0 |
-| NTv2 class map | `run_class_map.py` / `run_class_map.sbatch` | completed target prep + class train `12889091`; retry after length `12897975` for GPU serialization | original `12890969_[0-1]` FAILED; repaired `12898018_0` map generation completed, `_1` running |
-| EDTA/RM2 native normalization and score | `score_class_maps.py` / `score.sbatch` | repaired class-map array + terminal WHOLE native EDTA/RM2 cells | old `12890970` CANCELLED before start; new `12898022` dependency-gated |
+| NTv2 class map | `run_class_map.py` / `run_class_map.sbatch` | completed target prep + class train `12889091`; retry after length `12897975` for GPU serialization | original `12890969_[0-1]` FAILED; repaired `12898018_[0-1]` map generation completed |
+| EDTA/RM2 native normalization and score | `score_class_maps.py` / `score.sbatch` | repaired class-map array; completed native cells are optional and failed/missing cells are explicit `NA` | preferred NTv2-only score `13180671` complete; native recovery comparison pending |
 
 The target preparation is completed as job `12890879` (the table's stage
 label is retained for the original protocol; its current state is
@@ -50,8 +54,11 @@ The class-map array is throttled to one private RTX 3090 GPU, 8 CPUs, 96G,
 four hours. The score is CPU-only on the private partition, 8 CPUs, 32G, one
 hour. Scientific preparation and checkpoint completion are required before
 GPU inference; retry scheduling may use an `afterany` serialization gate
-once those completed inputs have been verified. The score retains `afterok`
-dependencies and does not modify the WHOLE binary scorer.
+once those completed inputs have been verified. The score wrapper does not
+modify the WHOLE binary scorer. A future score submission can use an
+`afterany` dependency after class-map and native attempts settle; the updated
+wrapper scores complete methods and records missing/non-terminal native cells
+as `NA` rather than filling metrics with zero.
 
 ## Preserved failed attempt and span-length retry
 
@@ -95,9 +102,13 @@ submission retains only the active serialization dependency.
 The actual fresh prediction root is
 `outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/`;
 the earlier prepared `ntv2-spanfix-retry-20260918-12890969/` directory is unused.
-New score job `12898022` reads `ntv2-span-r1` via the explicit
-`CLASSMAP_OUTPUT_ROOT` and writes `score-span-r1`. Its dependency is
-`afterok:12898018:12888165:12888134:12888196:12888197`.
+The previously submitted score job `12898022` was intended to read
+`ntv2-span-r1` via the explicit `CLASSMAP_OUTPUT_ROOT` and write
+`score-span-r1`; its dependency was
+`afterok:12898018:12888165:12888134:12888196:12888197`. It was cancelled
+before start after the native prerequisites failed or remained unavailable,
+so it produced no score output. The local scorer is now prepared for a
+future `afterany` submission with the same frozen labels and denominators.
 Old score `12890970` never started, was stuck on the failed array, and was
 cancelled with zero run time. It could not be reused because Slurm captured
 its old batch script and original prediction-root argument at submission.
@@ -111,9 +122,26 @@ The repaired chicken cell `12898018_0` subsequently completed (`0:0`,
 `results/ntv2-span-r1/chicken-summary.json`, reports chr10/chr20 with
 35,017,127 input bp, 34,515,527 ACGT bp, 8,550 windows, and 29,538 output
 runs. The original projection failure did not recur. This establishes
-completion of map generation, not benchmark accuracy; the common scorer
-still waits for the native comparators. At this snapshot zebrafish
-`12898018_1` is running and `12898022` remains dependency-gated.
+completion of map generation, not benchmark accuracy; no common score was
+produced by the cancelled job.
+
+Zebrafish `12898018_1` also completed (`0:0`, 26m23s allocated GPU time).
+Its native `results/ntv2-span-r1/zebrafish-summary.json` reports chr10/chr20
+with 100,622,199 input bp, 100,505,689 ACGT bp, 24,567 windows and 616,802
+output runs. For both species the native per-contig class counts sum to the
+fixed input lengths and NONCALLABLE counts match non-ACGT counts. The two
+successful cells consumed 35m53s of single-GPU allocation, or 36m45s when
+including the preserved 52-second failed attempt. This is chr10/20 class-map
+generation cost, not a whole-genome inference timing result. Score `12898022`
+was cancelled before start and has no metrics; no class accuracy or method
+superiority is inferred from these output-composition counts.
+
+Read-only remote integrity checks passed for both `predicted_classes.bed.gz`
+files: `gzip -t` succeeded, all records have four fields and valid labels, and
+per chromosome runs are contiguous from coordinate 0 to the fixed chromosome
+length with no gaps or overlaps. File label-length counts equal their native
+summary counts (including `NONCALLABLE`); absent zero-count labels have no
+emitted run by design.
 
 ## Mapping and metrics
 
@@ -132,18 +160,132 @@ The primary known-five endpoint excludes source `KNOWN_OTHER_TE`,
 bp/row counts. A full eight-state confusion and conditional true-TE endpoint
 are also required. The binary D method is `N/A` for class metrics.
 
-No scientific result is recorded until the target preparation, class map, and
-both native cells pass their terminal-output gates. Once complete, compact
-JSON, metrics TSV, normalized per-base runs, and a manuscript-ready summary
-will be added here.
+The NTv2 class map is complete, but map composition alone is not an accuracy
+result. The preferred terminal score `13180671` provides fixed-panel NTv2
+accuracy endpoints and preserves
+each missing or non-terminal native cell as a method-level `NA` row with its
+execution reason; it never turns an unavailable native comparator into zero.
+When terminal native outputs become available, only those completed methods
+are normalized and scored under the unchanged callable mask, ontology, and
+denominators. A terminal native cell with a missing annotation remains a hard
+readiness error. A future recovery score will add native comparator metrics in
+a fresh output directory; it will not replace this terminal NTv2-only result.
+
+## NTv2-only terminal score (2026-09-24)
+
+After the class-map BED.GZ integrity checks passed, the CPU scorer was run as
+job `13180656` on the private partition with 8 CPUs, 32G, and a one-hour
+limit. The class-map scheduler dependency was rejected because the historical
+array identifier was no longer valid to Slurm; the map files themselves were
+already verified complete, so the score ran directly against the fixed
+`ntv2-span-r1` root. It completed in 1m15s with exit 0 and wrote
+`results/score-ntv2-terminal-20260924/result.json` and `metrics.tsv`.
+
+The completed NTv2 class endpoints are:
+
+| species | primary-known macro-F1 | full8 macro-F1 | true-TE any-main4 recall |
+| --- | ---: | ---: | ---: |
+| chicken galGal6 chr10/chr20 | 0.625913 | 0.446293 | 0.837376 |
+| zebrafish danRer11 chr10/chr20 | 0.760377 | 0.463252 | 0.933259 |
+
+All four original native cells are explicit `NA` rows in this result. The NA
+rows retain the observed status path and compact stage snapshot; they do not
+contribute zero-valued metrics. The ledger-aware rerun records the zfish EDTA
+Slurm terminal state as `OUT_OF_MEMORY` while preserving its later wrapper
+`status.json` observation (`FAILED`, `returncode=2`, `max_rss_kb=127086448`).
+
+After the observed terminal ledger became available, the same frozen score
+was rerun as job `13180671` (private 8 CPU/32G, 1m15s, exit 0) into
+`results/score-ntv2-terminal-ledger-20260924/`. The metrics are unchanged;
+the corrected NA metadata now reports chicken EDTA/RM2 and zebrafish RM2 as
+`FAILED`, and zebrafish EDTA as scheduler `OUT_OF_MEMORY`, with the original
+status snapshot retained in parallel. This ledger-aware result is the
+preferred terminal score for downstream reporting; the earlier `13180656`
+directory remains preserved as the pre-ledger attempt.
+
+The first RM2 continuation `13180658` (chicken) failed during RepeatMasker
+after producing a classified library, while `13180659` (zebrafish) remains in
+progress in its own `RM2-recovery` root. A separate chicken mask-only
+continuation `13180772` is running in
+`native/chicken/RM2-mask-recovery-v2`; it reuses the classified library and
+does not overwrite the failed attempt. The final recovery score will use the
+latest terminal RM2/mask-only roots and the chicken EDTA recovery root via
+`afterany`; a failed or unavailable cell remains `NA`.
+
+## Partial-native scorer readiness
+
+The whole-genome native prerequisites are currently incomplete: the RM2
+discovery assets exist but the classifier/FamDB stage did not yield a complete
+classified annotation, and both EDTA cells lack terminal annotations. These
+are execution states reported by the native benchmark owner; they are not
+class-map accuracy results. The prior score job `12898022` was cancelled before
+start and produced no score; the later NTv2-only terminal score is documented
+above.
+
+The scorer supports an explicit species-level `native_method_roots` override
+for a recovery output tree. The RM2 recovery roots are now declared by the
+native ledger, but they are not promoted into the current terminal score until
+their outputs are complete. The preserved WHOLE directories remain unchanged;
+no old FAILED directory is promoted by inference and no original native
+directory is overwritten.
+
+The fixed four-cell machine terminal ledger is
+`reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json`.
+Its `slurm` and `native_status_snapshots` lists are joined by cell; the
+attempt root is derived from each snapshot's `status_path`. When that root
+matches the current native method root, the ledger's terminal state/reason are
+attached to the NA record while the original `status.json` remains present as
+an observed snapshot. A ledger entry for an old root cannot override a new
+recovery root. The scorer does not infer `OUT_OF_MEMORY` from a return code or
+a partial file; it uses the ledger's recorded scheduler state.
+
+`score_class_maps.py` now evaluates the completed NTv2 map independently. For
+each species and native method, a missing `status.json` or a non-`COMPLETED`
+status becomes a method-level `NA` record carrying the exact root/reason.
+Completed native cells are normalized and scored under the unchanged source
+paint, callable mask, ontology, and denominator rules. A cell marked
+`COMPLETED` but missing its required annotation or summary remains a hard
+readiness error, so an incomplete terminal artifact cannot be mistaken for an
+ordinary missing comparator. `metrics.tsv` includes status and reason columns;
+unavailable methods have `NA` in every metric field and are never written as
+zero.
+
+The following bounded checks passed in the `te_benchmark` environment after
+the change: `parser_smoke.py`; a three-state native fixture (missing,
+FAILED, and COMPLETED-but-missing annotation); an observed-ledger root-join
+fixture; and an end-to-end partial-score fixture in which NTv2 produced
+numeric endpoints while EDTA/RM2 produced explicit `NA` rows. Jobs `13180656`
+and ledger-aware rerun `13180671` both used CPU-only 8 CPUs, 32G, one hour on
+the private partition and completed successfully. The recovery score remains
+a separate fresh output that must wait for its native recovery dependencies,
+using `afterany` where failed attempts are intentionally retained as `NA`.
 
 ## Transfer integrity note
 
-During remote synchronization, a command initially flattened the experiment
-README and protocol document into the repository root. The root `README.md`
-was immediately restored with `git show HEAD:README.md`; the stray protocol
-file was removed, and the two files were then synchronized to their intended
-experiment directories. The local checkout had no `README.md` modification at
-that point. The remote pre-incident uncommitted contents were not captured, so
-their preservation cannot be independently proven; no further root-level
-restoration was performed.
+An earlier handoff reported that a synchronization flattened an experiment
+README and protocol document into the remote repository root, followed by a
+`git show HEAD:README.md` restoration and removal of the stray protocol file.
+This pass has no pre-incident remote status snapshot, exact command or timestamp
+with which to verify that report or establish whether uncommitted README
+contents existed. The incident is therefore retained as an unresolved transfer
+provenance note, not a newly verified overwrite or a verified absence of loss.
+The currently attributable misplaced transfer used the temporary directory
+`.codex_sync_unified_ntv2/`, which was removed; it did not write the root README.
+No further root-level restoration was performed.
+
+## Current recovery dependency update
+
+Both initial RM2 continuations completed classification but failed when the
+masker could not find its default FamDB directory. Mask-only jobs `13180772`
+(chicken) and `13180877` (zebrafish) now reuse the complete classified libraries
+in `native/{species}/RM2-mask-recovery-v2`. The config points to these fresh
+roots. They are not included in the already completed NTv2-only score above.
+Chicken EDTA recovery `13180896` is queued after chicken mask-only `13180772`.
+The config's chicken EDTA override points to
+`outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13180896`.
+Final class score `13180902` is now queued with
+`afterany:13180772:13180877:13180896`, CPU-only 8 CPU/32G/1h, reading the
+verified `ntv2-span-r1` maps and writing fresh `score-recovery-20260924`.
+This supersedes the earlier unsubmitted status. The original failures, NA rows
+and all prior score outputs remain intact. A dependency or submitted score is
+not a completed scientific comparison.
