@@ -1,0 +1,8 @@
+{
+  "core_count": 20,
+  "method": "RM2",
+  "panel_bp": 104000000,
+  "slurm_job_id": "12856283",
+  "started_epoch": 1789660280.4186413,
+  "status": "RUNNING"
+}
