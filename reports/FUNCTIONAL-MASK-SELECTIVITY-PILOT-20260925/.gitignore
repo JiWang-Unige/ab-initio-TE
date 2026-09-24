@@ -1,0 +1,3 @@
+# Full per-fragment manifests remain local and on Baobab.
+*-manifest.json
+*-manifest-pre-conf-repair.json

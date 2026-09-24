@@ -1,0 +1,23 @@
+{"job_id": "13192910", "action": "prepare", "species": "zebrafish", "dependency": null, "array": null, "cpus": 4, "memory": "32G", "wall": "02:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192911", "action": "prepare", "species": "chicken", "dependency": null, "array": null, "cpus": 4, "memory": "32G", "wall": "02:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192913", "action": "predict", "species": "chicken", "dependency": "afterok:13192911", "array": "0-9%2", "cpus": 1, "memory": "8G", "wall": "24:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192914", "action": "predict", "species": "zebrafish", "dependency": "afterok:13192910", "array": "0-9%2", "cpus": 1, "memory": "8G", "wall": "24:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192916", "action": "score", "species": "chicken", "dependency": "afterok:13192913", "array": null, "cpus": 1, "memory": "8G", "wall": "01:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192915", "action": "score", "species": "zebrafish", "dependency": "afterok:13192914", "array": null, "cpus": 1, "memory": "8G", "wall": "01:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192925", "action": "prepare", "species": "chicken", "dependency": null, "array": null, "cpus": 4, "memory": "32G", "wall": "02:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192926", "action": "prepare", "species": "zebrafish", "dependency": null, "array": null, "cpus": 4, "memory": "32G", "wall": "02:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192930", "action": "predict", "species": "chicken", "dependency": "afterok:13192925", "array": "0-9%2", "cpus": 1, "memory": "8G", "wall": "24:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192931", "action": "predict", "species": "zebrafish", "dependency": "afterok:13192926", "array": "0-9%2", "cpus": 1, "memory": "8G", "wall": "24:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192933", "action": "score", "species": "chicken", "dependency": "afterok:13192930", "array": null, "cpus": 1, "memory": "8G", "wall": "01:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192934", "action": "score", "species": "zebrafish", "dependency": "afterok:13192931", "array": null, "cpus": 1, "memory": "8G", "wall": "01:00:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id": "13192975", "action": "conf-rule-audit", "species": "chicken,zebrafish", "dependency": "afterok:13192925:13192926", "array": null, "cpus": 2, "memory": "16G", "wall": "00:30:00", "partition": "private-teodoro-gpu", "gpu": false}
+{"job_id":"13193026","action":"conf_rule_audit_v2","species":"chicken,zebrafish","dependency":null,"array":null,"cpus":2,"memory":"16G","wall":"00:30:00","partition":"private-teodoro-gpu","gpu":false}
+{"job_id":"13193069","action":"repair_conf","species":"chicken","core":"c01","dependency":null,"array":null,"cpus":1,"memory":"8G","wall":"01:00:00","partition":"private-teodoro-gpu","gpu":false}
+{"job_id":"13193088","action":"repair_conf_v2","species":"chicken","core":"c01","supersedes":"13193069","dependency":null,"array":null,"cpus":1,"memory":"8G","wall":"01:00:00","partition":"private-teodoro-gpu","gpu":false}
+{"job_id":"13193129","action":"conf_rule_audit_postrepair","species":"chicken,zebrafish","dependency":null,"array":null,"cpus":2,"memory":"16G","wall":"00:30:00","partition":"private-teodoro-gpu","gpu":false}
+{"dependency": "afterok:13192930:13193088", "event": "dependency_update", "job_id": "13192933", "reason": "chicken c01 confidence-only repair"}
+{"dependency": "afterok:13192931", "event": "dependency_update", "job_id": "13192934", "reason": "zebrafish prediction array"}
+{"array": "0-9%2", "event": "release", "job_id": "13192930", "status": "RELEASED"}
+{"array": "0-9%2", "event": "release", "job_id": "13192931", "status": "RELEASED"}
+{"event": "release", "job_id": "13192933", "status": "RELEASED_DEPENDENCY_GATED"}
+{"event": "release", "job_id": "13192934", "status": "RELEASED_DEPENDENCY_GATED"}

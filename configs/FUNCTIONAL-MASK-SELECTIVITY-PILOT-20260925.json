@@ -1,0 +1,87 @@
+{
+  "protocol": "FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925",
+  "status": "FROZEN_PILOT_CONFIGURATION",
+  "scope": "Development pilot for separating mask coverage from mask-position selection on the already exposed chicken and zebrafish native-AUGUSTUS panels; no new training, species, seed, D threshold, or region selection.",
+  "species": {
+    "chicken": {
+      "assembly": "galGal6",
+      "augustus_species": "chicken"
+    },
+    "zebrafish": {
+      "assembly": "danRer11",
+      "augustus_species": "zebrafish"
+    }
+  },
+  "inputs": {
+    "utility_root": "outputs/NONMAMMAL-GENE-UTILITY-20260918",
+    "geometry": "outputs/NONMAMMAL-GENE-UTILITY-20260918/{species}/geometry.json",
+    "reference": "outputs/NONMAMMAL-GENE-UTILITY-20260918/{species}/reference.json",
+    "existing_gff_root": "outputs/NONMAMMAL-GENE-UTILITY-20260918/{species}",
+    "rm2_masked_fasta": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/{species}/RM2-mask-recovery-v2/masked.fa",
+    "rm2_annotation_out": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/{species}/RM2-mask-recovery-v2/annotation.out"
+  },
+  "geometry": {
+    "source": "existing NONMAMMAL-GENE-UTILITY-20260918 geometry; no reselection",
+    "core_bp": 5000000,
+    "halo_bp_each_side": 100000,
+    "mask_budget_region": "the complete 5,200,000-bp core-plus-halo AUGUSTUS input",
+    "score_region": "the original 5,000,000-bp core",
+    "selection_uses_labels_or_scores": false
+  },
+  "arms": {
+    "D_FIXED": "The already generated D FASTA and the already completed D GFF from NONMAMMAL-GENE-UTILITY-20260918; immutable reference arm.",
+    "RM2_FULL": "The complete native RepeatModeler2/RepeatMasker masked FASTA extracted on the same 5,200,000-bp input.",
+    "D_COMMON_RANDOM": "D mask downsampled by fixed length strata and deterministic coordinate hash to the common stratum budget; intervention arm, not the original D result.",
+    "RM2_COMMON_RANDOM": "RM2 mask downsampled by the same fixed length strata and deterministic coordinate hash to the common stratum budget.",
+    "RM2_COMMON_CONF": "RM2 mask selected to the identical common stratum budget by native RepeatMasker alignment confidence, before any downstream score is read."
+  },
+  "common_budget": {
+    "unit": "one fixed core-plus-halo input per existing panel core",
+    "length_strata_bp": [[1, 16], [16, 64], [64, 256], [256, 1024], [1024, 4096], [4096, 16384], [16384, 65536], [65536, null]],
+    "stratum_definition": "A merged lowercase A/C/G/T run is assigned by its complete input length; the upper bound is exclusive except for the final open bin.",
+    "per_stratum_target": "min(D_FIXED masked bp in stratum, RM2_FULL masked bp in stratum)",
+    "total_target": "sum of the per-stratum targets; this intersection budget is used even when it is smaller than min(total D, total RM2), so no unmatched length bin is filled.",
+    "random_order": "stable SHA-256 priority of protocol seed, species, core ID, arm, run start and run end; no score or reference label is used",
+    "partial_run_rule": "If the last selected run would exceed its stratum target, retain the centered subinterval of the exact remaining length. The resulting selected bp is exact per stratum.",
+    "halo_rule": "Mask runs are selected and counted over the full core-plus-halo input. Core-only and left/right halo masked bp, plus actual output-run length strata, are reported separately and never used to change the target after preparation."
+  },
+  "rm2_confidence": {
+    "source": "native RepeatMasker annotation.out only",
+    "run_annotation": "Each RM2_FULL lowercase run receives the best overlapping native alignment record.",
+    "ranking": ["percent_divergence ascending", "SW_score/query_alignment_length descending", "query_alignment_length descending", "query_begin ascending", "query_end ascending", "native_ID ascending"],
+    "no_threshold": true,
+    "ties": "All listed fields and then the stable genomic coordinates are used; no downstream gene score or CDS annotation is used.",
+    "missing_alignment": "Retain the run in RM2_FULL audit; rank it after runs with a native record in RM2_COMMON_CONF and report the count."
+  },
+  "random": {
+    "seed": 20260925,
+    "no_resampling_of_model_or_species": true
+  },
+  "augustus": {
+    "version": "3.5.0",
+    "softmasking": true,
+    "UTR": false,
+    "stopCodonExcludedFromCDS": false,
+    "alternatives_from_evidence": false,
+    "alternatives_from_sampling": false,
+    "hints": "none",
+    "parameter_source": "existing same-species chicken/zebrafish parameters from NONMAMMAL-GENE-UTILITY-20260918"
+  },
+  "score": {
+    "reference": "the unchanged exact-assembly protein-coding reference.json from NONMAMMAL-GENE-UTILITY-20260918",
+    "unit": "the unchanged complete CDS-chain locus unit",
+    "owner": "the unchanged core ownership rule",
+    "bootstrap": {"unit": "existing fixed panel chromosome", "replicates": 10000, "seed": 42},
+    "primary_diagnostic": "D_COMMON_RANDOM versus RM2_COMMON_RANDOM and RM2_COMMON_CONF at the shared budget",
+    "comparators": ["D_FIXED versus RM2_FULL", "D_COMMON_RANDOM versus RM2_COMMON_RANDOM", "RM2_COMMON_CONF versus RM2_COMMON_RANDOM", "D_COMMON_RANDOM versus RM2_COMMON_CONF", "D_FIXED versus D_COMMON_RANDOM"],
+    "interpretation": "Chromosome-bootstrap intervals are regional sensitivity intervals, not biological replicate uncertainty; this pilot is development evidence and cannot be promoted to an independent confirmation result."
+  },
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "gpu": false,
+    "prepare": {"cpus": 4, "memory": "32G", "wall": "02:00:00"},
+    "predict": {"cpus": 1, "memory": "8G", "wall": "24:00:00", "max_total_concurrent": 4, "per_species_array_concurrency": 2},
+    "score": {"cpus": 1, "memory": "8G", "wall": "01:00:00"}
+  },
+  "stopping": "Complete preparation, all four new AUGUSTUS arms on all ten existing cores per species, and the paired score for both species irrespective of effect direction. Do not replace a core, alter a threshold, or add a seed after reading any output."
+}

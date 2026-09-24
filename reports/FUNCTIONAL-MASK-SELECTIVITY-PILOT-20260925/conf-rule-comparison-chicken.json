@@ -1,0 +1,111 @@
+{
+  "changed_core_count": 10,
+  "cores": [
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1670,
+      "core": "c00",
+      "new_bp": 224680,
+      "new_run_count": 1036,
+      "old_bp": 224680,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 1036
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1790,
+      "core": "c01",
+      "new_bp": 61168,
+      "new_run_count": 442,
+      "old_bp": 61168,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 431
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 566,
+      "core": "c02",
+      "new_bp": 51629,
+      "new_run_count": 423,
+      "old_bp": 51629,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 415
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 294,
+      "core": "c03",
+      "new_bp": 67191,
+      "new_run_count": 594,
+      "old_bp": 67191,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 594
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 360,
+      "core": "c04",
+      "new_bp": 56937,
+      "new_run_count": 448,
+      "old_bp": 56937,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 444
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 446,
+      "core": "c05",
+      "new_bp": 63949,
+      "new_run_count": 468,
+      "old_bp": 63949,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 468
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1142,
+      "core": "c06",
+      "new_bp": 51046,
+      "new_run_count": 377,
+      "old_bp": 51046,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 369
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1318,
+      "core": "c07",
+      "new_bp": 47886,
+      "new_run_count": 395,
+      "old_bp": 47886,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 387
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 196,
+      "core": "c08",
+      "new_bp": 31792,
+      "new_run_count": 309,
+      "old_bp": 31792,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 308
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 152,
+      "core": "c09",
+      "new_bp": 36828,
+      "new_run_count": 353,
+      "old_bp": 36828,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 352
+    }
+  ],
+  "materialized_old_rule_verified": false,
+  "new_rule": "divergence ascending, SW/aligned_length descending, alignment length descending, coordinates/ID",
+  "old_rule": "divergence ascending, raw SW score descending, alignment length descending, coordinates/ID",
+  "protocol": "FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925",
+  "species": "chicken",
+  "status": "COMPLETED_READ_ONLY_CONFIDENCE_RULE_AUDIT"
+}

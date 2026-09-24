@@ -1,0 +1,111 @@
+{
+  "changed_core_count": 10,
+  "cores": [
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 4764,
+      "core": "c00",
+      "new_bp": 2221623,
+      "new_run_count": 4913,
+      "old_bp": 2221623,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 4911
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1754,
+      "core": "c01",
+      "new_bp": 2053639,
+      "new_run_count": 4948,
+      "old_bp": 2053639,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 4947
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1968,
+      "core": "c02",
+      "new_bp": 2159754,
+      "new_run_count": 5230,
+      "old_bp": 2159754,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 5230
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1464,
+      "core": "c03",
+      "new_bp": 1910313,
+      "new_run_count": 4953,
+      "old_bp": 1910313,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 4952
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 2154,
+      "core": "c04",
+      "new_bp": 2185442,
+      "new_run_count": 5023,
+      "old_bp": 2185442,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 5022
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 858,
+      "core": "c05",
+      "new_bp": 2146176,
+      "new_run_count": 5098,
+      "old_bp": 2146176,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 5096
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 3594,
+      "core": "c06",
+      "new_bp": 2446490,
+      "new_run_count": 5016,
+      "old_bp": 2446490,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 5012
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 2288,
+      "core": "c07",
+      "new_bp": 2235088,
+      "new_run_count": 5205,
+      "old_bp": 2235088,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 5203
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 2192,
+      "core": "c08",
+      "new_bp": 2510841,
+      "new_run_count": 4823,
+      "old_bp": 2510841,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 4822
+    },
+    {
+      "changed": true,
+      "changed_bp_symmetric_difference": 1990,
+      "core": "c09",
+      "new_bp": 2142701,
+      "new_run_count": 4997,
+      "old_bp": 2142701,
+      "old_reconstruction_matches_materialized": false,
+      "old_run_count": 4994
+    }
+  ],
+  "materialized_old_rule_verified": false,
+  "new_rule": "divergence ascending, SW/aligned_length descending, alignment length descending, coordinates/ID",
+  "old_rule": "divergence ascending, raw SW score descending, alignment length descending, coordinates/ID",
+  "protocol": "FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925",
+  "species": "zebrafish",
+  "status": "COMPLETED_READ_ONLY_CONFIDENCE_RULE_AUDIT"
+}

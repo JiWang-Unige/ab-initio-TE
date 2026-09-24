@@ -1,0 +1,5291 @@
+{
+  "scope": "Preparation and input validation only; no gene-utility scores.",
+  "omitted": "Per-fragment selection_records remain in full manifests on Baobab and ignored local copies; compact export retains all core/halo/length-stratum counts.",
+  "species": {
+    "chicken": {
+      "cores": [
+        {
+          "chrom": "chr1",
+          "common_budget_bp": 224680,
+          "common_budget_by_stratum_bp": [
+            0,
+            8982,
+            57661,
+            121685,
+            36352,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            56100000,
+            61100000
+          ],
+          "halo": [
+            56000000,
+            61200000
+          ],
+          "id": "c00",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                8982,
+                57661,
+                121685,
+                36352,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                228,
+                481,
+                247,
+                27,
+                0,
+                0,
+                0
+              ],
+              "bp": 224680,
+              "core_bp": 217662,
+              "left_halo_bp": 3958,
+              "right_halo_bp": 3060,
+              "runs": 983,
+              "source_length_strata_bp": [
+                0,
+                8982,
+                57661,
+                121685,
+                36352,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                228,
+                481,
+                247,
+                27,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                2807,
+                8982,
+                57661,
+                121685,
+                36352,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                371,
+                228,
+                481,
+                247,
+                27,
+                0,
+                0,
+                0
+              ],
+              "bp": 227487,
+              "core_bp": 220379,
+              "left_halo_bp": 3970,
+              "right_halo_bp": 3138,
+              "runs": 1354,
+              "source_length_strata_bp": [
+                2807,
+                8982,
+                57661,
+                121685,
+                36352,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                371,
+                228,
+                481,
+                247,
+                27,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                7,
+                9038,
+                57678,
+                122448,
+                35509,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                329,
+                420,
+                264,
+                22,
+                0,
+                0,
+                0
+              ],
+              "bp": 224680,
+              "core_bp": 219174,
+              "left_halo_bp": 2994,
+              "right_halo_bp": 2512,
+              "runs": 1036,
+              "source_length_strata_bp": [
+                7,
+                9038,
+                57678,
+                122448,
+                35509,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                329,
+                420,
+                264,
+                22,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                8982,
+                57661,
+                122708,
+                35329,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                256,
+                416,
+                267,
+                26,
+                0,
+                0,
+                0
+              ],
+              "bp": 224680,
+              "core_bp": 216806,
+              "left_halo_bp": 5004,
+              "right_halo_bp": 2870,
+              "runs": 965,
+              "source_length_strata_bp": [
+                0,
+                8982,
+                57661,
+                122708,
+                35329,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                256,
+                416,
+                267,
+                26,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                48959,
+                110770,
+                297088,
+                102275,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1407,
+                798,
+                630,
+                68,
+                0,
+                0,
+                0
+              ],
+              "bp": 559092,
+              "core_bp": 544100,
+              "left_halo_bp": 7939,
+              "right_halo_bp": 7053,
+              "runs": 2903,
+              "source_length_strata_bp": [
+                0,
+                48959,
+                110770,
+                297088,
+                102275,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1407,
+                798,
+                630,
+                68,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr9",
+          "common_budget_bp": 61168,
+          "common_budget_by_stratum_bp": [
+            0,
+            4398,
+            24474,
+            29868,
+            2428,
+            0,
+            0,
+            0
+          ],
+          "conf_rule_repair": {
+            "archived_pre_repair_manifest": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/c01/mask_manifest-bugged-pre-repair.json",
+            "rule": "divergence ascending, SW/aligned_length descending, alignment length descending, coordinates/ID",
+            "status": "COMPLETED_CORRECTED_CONF_ONLY"
+          },
+          "core": [
+            9100000,
+            14100000
+          ],
+          "halo": [
+            9000000,
+            14200000
+          ],
+          "id": "c01",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4398,
+                24474,
+                29868,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                123,
+                202,
+                67,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 61168,
+              "core_bp": 58588,
+              "left_halo_bp": 1314,
+              "right_halo_bp": 1266,
+              "runs": 394,
+              "source_length_strata_bp": [
+                0,
+                4398,
+                24474,
+                29868,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                123,
+                202,
+                67,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1048,
+                4398,
+                24474,
+                29868,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                140,
+                123,
+                202,
+                67,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 62216,
+              "core_bp": 59570,
+              "left_halo_bp": 1314,
+              "right_halo_bp": 1332,
+              "runs": 534,
+              "source_length_strata_bp": [
+                1048,
+                4398,
+                24474,
+                29868,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                140,
+                123,
+                202,
+                67,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                0,
+                4398,
+                24474,
+                29868,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                180,
+                192,
+                69,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 61168,
+              "core_bp": 57797,
+              "left_halo_bp": 1016,
+              "right_halo_bp": 2355,
+              "runs": 442,
+              "source_length_strata_bp": [
+                0,
+                4398,
+                24474,
+                29868,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                180,
+                192,
+                69,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                7,
+                4427,
+                24642,
+                29664,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                125,
+                179,
+                73,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 61168,
+              "core_bp": 56226,
+              "left_halo_bp": 2100,
+              "right_halo_bp": 2842,
+              "runs": 380,
+              "source_length_strata_bp": [
+                7,
+                4427,
+                24642,
+                29664,
+                2428,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                125,
+                179,
+                73,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                45713,
+                63302,
+                112702,
+                21702,
+                29158,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1322,
+                479,
+                266,
+                14,
+                5,
+                0,
+                0
+              ],
+              "bp": 272577,
+              "core_bp": 261465,
+              "left_halo_bp": 4244,
+              "right_halo_bp": 6868,
+              "runs": 2086,
+              "source_length_strata_bp": [
+                0,
+                45713,
+                63302,
+                112702,
+                21702,
+                29158,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1322,
+                479,
+                266,
+                14,
+                5,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr10",
+          "common_budget_bp": 51629,
+          "common_budget_by_stratum_bp": [
+            0,
+            4490,
+            22687,
+            21686,
+            2766,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            8100000,
+            13100000
+          ],
+          "halo": [
+            8000000,
+            13200000
+          ],
+          "id": "c02",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4490,
+                22687,
+                21686,
+                2766,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                113,
+                191,
+                50,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 51629,
+              "core_bp": 48497,
+              "left_halo_bp": 1500,
+              "right_halo_bp": 1632,
+              "runs": 356,
+              "source_length_strata_bp": [
+                0,
+                4490,
+                22687,
+                21686,
+                2766,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                113,
+                191,
+                50,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1056,
+                4490,
+                22687,
+                21686,
+                2766,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                137,
+                113,
+                191,
+                50,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 52685,
+              "core_bp": 49523,
+              "left_halo_bp": 1518,
+              "right_halo_bp": 1644,
+              "runs": 493,
+              "source_length_strata_bp": [
+                1056,
+                4490,
+                22687,
+                21686,
+                2766,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                137,
+                113,
+                191,
+                50,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                18,
+                4509,
+                22659,
+                22060,
+                2383,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                2,
+                199,
+                168,
+                52,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 51629,
+              "core_bp": 48443,
+              "left_halo_bp": 1245,
+              "right_halo_bp": 1941,
+              "runs": 423,
+              "source_length_strata_bp": [
+                18,
+                4509,
+                22659,
+                22060,
+                2383,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                2,
+                199,
+                168,
+                52,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4528,
+                22687,
+                21998,
+                2416,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                135,
+                167,
+                49,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 51629,
+              "core_bp": 45096,
+              "left_halo_bp": 4649,
+              "right_halo_bp": 1884,
+              "runs": 353,
+              "source_length_strata_bp": [
+                0,
+                4528,
+                22687,
+                21998,
+                2416,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                135,
+                167,
+                49,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                42802,
+                67306,
+                93320,
+                10382,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1247,
+                498,
+                214,
+                8,
+                0,
+                0,
+                0
+              ],
+              "bp": 213810,
+              "core_bp": 197389,
+              "left_halo_bp": 8946,
+              "right_halo_bp": 7475,
+              "runs": 1967,
+              "source_length_strata_bp": [
+                0,
+                42802,
+                67306,
+                93320,
+                10382,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1247,
+                498,
+                214,
+                8,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr12",
+          "common_budget_bp": 67191,
+          "common_budget_by_stratum_bp": [
+            11,
+            6616,
+            34780,
+            24638,
+            1146,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            8100000,
+            13100000
+          ],
+          "halo": [
+            8000000,
+            13200000
+          ],
+          "id": "c03",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                11,
+                6616,
+                34780,
+                24638,
+                1146,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                2,
+                159,
+                302,
+                57,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 67191,
+              "core_bp": 65439,
+              "left_halo_bp": 1050,
+              "right_halo_bp": 702,
+              "runs": 521,
+              "source_length_strata_bp": [
+                11,
+                6616,
+                34780,
+                24638,
+                1146,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                2,
+                159,
+                302,
+                57,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1338,
+                6616,
+                34780,
+                24638,
+                1146,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                177,
+                159,
+                302,
+                57,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 68518,
+              "core_bp": 66748,
+              "left_halo_bp": 1068,
+              "right_halo_bp": 702,
+              "runs": 696,
+              "source_length_strata_bp": [
+                1338,
+                6616,
+                34780,
+                24638,
+                1146,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                177,
+                159,
+                302,
+                57,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                21,
+                6606,
+                34867,
+                24638,
+                1059,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                2,
+                247,
+                280,
+                64,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 67191,
+              "core_bp": 65294,
+              "left_halo_bp": 1716,
+              "right_halo_bp": 181,
+              "runs": 594,
+              "source_length_strata_bp": [
+                21,
+                6606,
+                34867,
+                24638,
+                1059,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                2,
+                247,
+                280,
+                64,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                11,
+                6616,
+                34780,
+                24638,
+                1146,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                187,
+                259,
+                61,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 67191,
+              "core_bp": 64784,
+              "left_halo_bp": 1392,
+              "right_halo_bp": 1015,
+              "runs": 509,
+              "source_length_strata_bp": [
+                11,
+                6616,
+                34780,
+                24638,
+                1146,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                187,
+                259,
+                61,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                11,
+                43781,
+                96517,
+                91255,
+                8390,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                1235,
+                703,
+                239,
+                6,
+                0,
+                0,
+                0
+              ],
+              "bp": 239954,
+              "core_bp": 232939,
+              "left_halo_bp": 4046,
+              "right_halo_bp": 2969,
+              "runs": 2184,
+              "source_length_strata_bp": [
+                11,
+                43781,
+                96517,
+                91255,
+                8390,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                1235,
+                703,
+                239,
+                6,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr11",
+          "common_budget_bp": 56937,
+          "common_budget_by_stratum_bp": [
+            0,
+            4898,
+            21407,
+            25548,
+            5084,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            8100000,
+            13100000
+          ],
+          "halo": [
+            8000000,
+            13200000
+          ],
+          "id": "c04",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4898,
+                21407,
+                25548,
+                5084,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                117,
+                184,
+                57,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 56937,
+              "core_bp": 52133,
+              "left_halo_bp": 702,
+              "right_halo_bp": 4102,
+              "runs": 362,
+              "source_length_strata_bp": [
+                0,
+                4898,
+                21407,
+                25548,
+                5084,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                117,
+                184,
+                57,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1155,
+                4898,
+                21407,
+                25548,
+                5084,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                144,
+                117,
+                184,
+                57,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 58092,
+              "core_bp": 53240,
+              "left_halo_bp": 708,
+              "right_halo_bp": 4144,
+              "runs": 506,
+              "source_length_strata_bp": [
+                1155,
+                4898,
+                21407,
+                25548,
+                5084,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                144,
+                117,
+                184,
+                57,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                12,
+                4886,
+                21407,
+                25548,
+                5084,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                214,
+                168,
+                61,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 56937,
+              "core_bp": 53208,
+              "left_halo_bp": 871,
+              "right_halo_bp": 2858,
+              "runs": 448,
+              "source_length_strata_bp": [
+                12,
+                4886,
+                21407,
+                25548,
+                5084,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                214,
+                168,
+                61,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                18,
+                4890,
+                21476,
+                25548,
+                5005,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                2,
+                145,
+                170,
+                59,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 56937,
+              "core_bp": 54724,
+              "left_halo_bp": 1167,
+              "right_halo_bp": 1046,
+              "runs": 380,
+              "source_length_strata_bp": [
+                18,
+                4890,
+                21476,
+                25548,
+                5005,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                2,
+                145,
+                170,
+                59,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                46424,
+                53829,
+                103207,
+                11561,
+                6176,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1352,
+                413,
+                230,
+                9,
+                1,
+                0,
+                0
+              ],
+              "bp": 221197,
+              "core_bp": 208123,
+              "left_halo_bp": 3903,
+              "right_halo_bp": 9171,
+              "runs": 2005,
+              "source_length_strata_bp": [
+                0,
+                46424,
+                53829,
+                103207,
+                11561,
+                6176,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1352,
+                413,
+                230,
+                9,
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr13",
+          "common_budget_bp": 63949,
+          "common_budget_by_stratum_bp": [
+            0,
+            4922,
+            26052,
+            27979,
+            4996,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            7100000,
+            12100000
+          ],
+          "halo": [
+            7000000,
+            12200000
+          ],
+          "id": "c05",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4922,
+                26052,
+                27979,
+                4996,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                123,
+                225,
+                62,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 63949,
+              "core_bp": 62043,
+              "left_halo_bp": 1360,
+              "right_halo_bp": 546,
+              "runs": 414,
+              "source_length_strata_bp": [
+                0,
+                4922,
+                26052,
+                27979,
+                4996,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                123,
+                225,
+                62,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1343,
+                4922,
+                26052,
+                27979,
+                4996,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                164,
+                123,
+                225,
+                62,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 65292,
+              "core_bp": 63338,
+              "left_halo_bp": 1360,
+              "right_halo_bp": 594,
+              "runs": 578,
+              "source_length_strata_bp": [
+                1343,
+                4922,
+                26052,
+                27979,
+                4996,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                164,
+                123,
+                225,
+                62,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                8,
+                4969,
+                26245,
+                27731,
+                4996,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                196,
+                199,
+                68,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 63949,
+              "core_bp": 62224,
+              "left_halo_bp": 714,
+              "right_halo_bp": 1011,
+              "runs": 468,
+              "source_length_strata_bp": [
+                8,
+                4969,
+                26245,
+                27731,
+                4996,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                196,
+                199,
+                68,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4974,
+                26000,
+                28355,
+                4620,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                142,
+                188,
+                68,
+                4,
+                0,
+                0,
+                0
+              ],
+              "bp": 63949,
+              "core_bp": 61779,
+              "left_halo_bp": 997,
+              "right_halo_bp": 1173,
+              "runs": 402,
+              "source_length_strata_bp": [
+                0,
+                4974,
+                26000,
+                28355,
+                4620,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                142,
+                188,
+                68,
+                4,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                47426,
+                75606,
+                109141,
+                24904,
+                5794,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1336,
+                554,
+                260,
+                19,
+                1,
+                0,
+                0
+              ],
+              "bp": 262871,
+              "core_bp": 253859,
+              "left_halo_bp": 5019,
+              "right_halo_bp": 3993,
+              "runs": 2170,
+              "source_length_strata_bp": [
+                0,
+                47426,
+                75606,
+                109141,
+                24904,
+                5794,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1336,
+                554,
+                260,
+                19,
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr14",
+          "common_budget_bp": 51046,
+          "common_budget_by_stratum_bp": [
+            0,
+            3654,
+            20582,
+            22930,
+            3880,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            6100000,
+            11100000
+          ],
+          "halo": [
+            6000000,
+            11200000
+          ],
+          "id": "c06",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                3654,
+                20582,
+                22930,
+                3880,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                91,
+                177,
+                53,
+                3,
+                0,
+                0,
+                0
+              ],
+              "bp": 51046,
+              "core_bp": 49446,
+              "left_halo_bp": 670,
+              "right_halo_bp": 930,
+              "runs": 324,
+              "source_length_strata_bp": [
+                0,
+                3654,
+                20582,
+                22930,
+                3880,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                91,
+                177,
+                53,
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1201,
+                3654,
+                20582,
+                22930,
+                3880,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                157,
+                91,
+                177,
+                53,
+                3,
+                0,
+                0,
+                0
+              ],
+              "bp": 52247,
+              "core_bp": 50611,
+              "left_halo_bp": 688,
+              "right_halo_bp": 948,
+              "runs": 481,
+              "source_length_strata_bp": [
+                1201,
+                3654,
+                20582,
+                22930,
+                3880,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                157,
+                91,
+                177,
+                53,
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                13,
+                3718,
+                20733,
+                22722,
+                3860,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                155,
+                163,
+                56,
+                2,
+                0,
+                0,
+                0
+              ],
+              "bp": 51046,
+              "core_bp": 48769,
+              "left_halo_bp": 715,
+              "right_halo_bp": 1562,
+              "runs": 377,
+              "source_length_strata_bp": [
+                13,
+                3718,
+                20733,
+                22722,
+                3860,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                155,
+                163,
+                56,
+                2,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                8,
+                3690,
+                20538,
+                23397,
+                3413,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                107,
+                148,
+                53,
+                3,
+                0,
+                0,
+                0
+              ],
+              "bp": 51046,
+              "core_bp": 48061,
+              "left_halo_bp": 1473,
+              "right_halo_bp": 1512,
+              "runs": 312,
+              "source_length_strata_bp": [
+                8,
+                3690,
+                20538,
+                23397,
+                3413,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                107,
+                148,
+                53,
+                3,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                37083,
+                65522,
+                104399,
+                17644,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1076,
+                486,
+                241,
+                12,
+                0,
+                0,
+                0
+              ],
+              "bp": 224648,
+              "core_bp": 214355,
+              "left_halo_bp": 4315,
+              "right_halo_bp": 5978,
+              "runs": 1815,
+              "source_length_strata_bp": [
+                0,
+                37083,
+                65522,
+                104399,
+                17644,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1076,
+                486,
+                241,
+                12,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr20",
+          "common_budget_bp": 47886,
+          "common_budget_by_stratum_bp": [
+            0,
+            3872,
+            25230,
+            17722,
+            1062,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            4100000,
+            9100000
+          ],
+          "halo": [
+            4000000,
+            9200000
+          ],
+          "id": "c07",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                3872,
+                25230,
+                17722,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                90,
+                208,
+                44,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 47886,
+              "core_bp": 45456,
+              "left_halo_bp": 1470,
+              "right_halo_bp": 960,
+              "runs": 343,
+              "source_length_strata_bp": [
+                0,
+                3872,
+                25230,
+                17722,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                90,
+                208,
+                44,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                1184,
+                3872,
+                25230,
+                17722,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                161,
+                90,
+                208,
+                44,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 49070,
+              "core_bp": 46550,
+              "left_halo_bp": 1548,
+              "right_halo_bp": 972,
+              "runs": 504,
+              "source_length_strata_bp": [
+                1184,
+                3872,
+                25230,
+                17722,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                161,
+                90,
+                208,
+                44,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                0,
+                3872,
+                25446,
+                17506,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                150,
+                201,
+                43,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 47886,
+              "core_bp": 43741,
+              "left_halo_bp": 2781,
+              "right_halo_bp": 1364,
+              "runs": 395,
+              "source_length_strata_bp": [
+                0,
+                3872,
+                25446,
+                17506,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                150,
+                201,
+                43,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                3,
+                3869,
+                25445,
+                17507,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                115,
+                183,
+                42,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 47886,
+              "core_bp": 44626,
+              "left_halo_bp": 2701,
+              "right_halo_bp": 559,
+              "runs": 342,
+              "source_length_strata_bp": [
+                3,
+                3869,
+                25445,
+                17507,
+                1062,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                115,
+                183,
+                42,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                44654,
+                81133,
+                86322,
+                23148,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1288,
+                601,
+                215,
+                14,
+                0,
+                0,
+                0
+              ],
+              "bp": 235257,
+              "core_bp": 215441,
+              "left_halo_bp": 14491,
+              "right_halo_bp": 5325,
+              "runs": 2118,
+              "source_length_strata_bp": [
+                0,
+                44654,
+                81133,
+                86322,
+                23148,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1288,
+                601,
+                215,
+                14,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr15",
+          "common_budget_bp": 31792,
+          "common_budget_by_stratum_bp": [
+            0,
+            3992,
+            14502,
+            13298,
+            0,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            4100000,
+            9100000
+          ],
+          "halo": [
+            4000000,
+            9200000
+          ],
+          "id": "c08",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                3992,
+                14502,
+                13298,
+                0,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                98,
+                127,
+                28,
+                0,
+                0,
+                0,
+                0
+              ],
+              "bp": 31792,
+              "core_bp": 31492,
+              "left_halo_bp": 138,
+              "right_halo_bp": 162,
+              "runs": 253,
+              "source_length_strata_bp": [
+                0,
+                3992,
+                14502,
+                13298,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                98,
+                127,
+                28,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                976,
+                3992,
+                14502,
+                13298,
+                0,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                126,
+                98,
+                127,
+                28,
+                0,
+                0,
+                0,
+                0
+              ],
+              "bp": 32768,
+              "core_bp": 32456,
+              "left_halo_bp": 144,
+              "right_halo_bp": 168,
+              "runs": 379,
+              "source_length_strata_bp": [
+                976,
+                3992,
+                14502,
+                13298,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                126,
+                98,
+                127,
+                28,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                0,
+                4041,
+                14553,
+                13198,
+                0,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                164,
+                107,
+                38,
+                0,
+                0,
+                0,
+                0
+              ],
+              "bp": 31792,
+              "core_bp": 31231,
+              "left_halo_bp": 485,
+              "right_halo_bp": 76,
+              "runs": 309,
+              "source_length_strata_bp": [
+                0,
+                4041,
+                14553,
+                13198,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                164,
+                107,
+                38,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                10,
+                4044,
+                14502,
+                13236,
+                0,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                113,
+                104,
+                36,
+                0,
+                0,
+                0,
+                0
+              ],
+              "bp": 31792,
+              "core_bp": 30337,
+              "left_halo_bp": 810,
+              "right_halo_bp": 645,
+              "runs": 254,
+              "source_length_strata_bp": [
+                10,
+                4044,
+                14502,
+                13236,
+                0,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                113,
+                104,
+                36,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                40521,
+                78609,
+                85973,
+                3522,
+                5826,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1133,
+                578,
+                217,
+                3,
+                1,
+                0,
+                0
+              ],
+              "bp": 214451,
+              "core_bp": 208301,
+              "left_halo_bp": 3215,
+              "right_halo_bp": 2935,
+              "runs": 1932,
+              "source_length_strata_bp": [
+                0,
+                40521,
+                78609,
+                85973,
+                3522,
+                5826,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1133,
+                578,
+                217,
+                3,
+                1,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr18",
+          "common_budget_bp": 36828,
+          "common_budget_by_stratum_bp": [
+            0,
+            4556,
+            18070,
+            12944,
+            1258,
+            0,
+            0,
+            0
+          ],
+          "core": [
+            3100000,
+            8100000
+          ],
+          "halo": [
+            3000000,
+            8200000
+          ],
+          "id": "c09",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                0,
+                4556,
+                18070,
+                12944,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                121,
+                156,
+                34,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 36828,
+              "core_bp": 34504,
+              "left_halo_bp": 850,
+              "right_halo_bp": 1474,
+              "runs": 312,
+              "source_length_strata_bp": [
+                0,
+                4556,
+                18070,
+                12944,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                121,
+                156,
+                34,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                833,
+                4556,
+                18070,
+                12944,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                107,
+                121,
+                156,
+                34,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 37661,
+              "core_bp": 35235,
+              "left_halo_bp": 862,
+              "right_halo_bp": 1564,
+              "runs": 419,
+              "source_length_strata_bp": [
+                833,
+                4556,
+                18070,
+                12944,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                107,
+                121,
+                156,
+                34,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                25,
+                4546,
+                18055,
+                12944,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                2,
+                176,
+                140,
+                34,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 36828,
+              "core_bp": 35151,
+              "left_halo_bp": 1064,
+              "right_halo_bp": 613,
+              "runs": 353,
+              "source_length_strata_bp": [
+                25,
+                4546,
+                18055,
+                12944,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                2,
+                176,
+                140,
+                34,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                15,
+                4541,
+                18245,
+                12769,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1,
+                127,
+                136,
+                33,
+                1,
+                0,
+                0,
+                0
+              ],
+              "bp": 36828,
+              "core_bp": 35919,
+              "left_halo_bp": 349,
+              "right_halo_bp": 560,
+              "runs": 298,
+              "source_length_strata_bp": [
+                15,
+                4541,
+                18245,
+                12769,
+                1258,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1,
+                127,
+                136,
+                33,
+                1,
+                0,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                0,
+                40784,
+                71552,
+                60164,
+                6797,
+                0,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                0,
+                1147,
+                539,
+                153,
+                5,
+                0,
+                0,
+                0
+              ],
+              "bp": 179297,
+              "core_bp": 170859,
+              "left_halo_bp": 5015,
+              "right_halo_bp": 3423,
+              "runs": 1844,
+              "source_length_strata_bp": [
+                0,
+                40784,
+                71552,
+                60164,
+                6797,
+                0,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                0,
+                1147,
+                539,
+                153,
+                5,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        }
+      ],
+      "inputs": {
+        "existing_U_D": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/chicken",
+        "existing_reference": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/chicken/reference.json",
+        "geometry": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/chicken/geometry.json",
+        "rm2_annotation_out": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/annotation.out",
+        "rm2_masked_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/masked.fa"
+      },
+      "manifest_repair": {
+        "backup": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/manifest-pre-conf-repair.json",
+        "core": "c01",
+        "other_cores_rewritten": false,
+        "source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/c01/mask_manifest.json",
+        "species": "chicken",
+        "status": "COMPLETED_CONF_ONLY"
+      },
+      "protocol": "FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925",
+      "selection_used_labels_or_downstream_scores": false,
+      "species": "chicken",
+      "status": "PREPARED",
+      "full_manifest_remote": "outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/manifest.json"
+    },
+    "zebrafish": {
+      "cores": [
+        {
+          "chrom": "chr16",
+          "common_budget_bp": 2221623,
+          "common_budget_by_stratum_bp": [
+            47,
+            21384,
+            243303,
+            1130909,
+            622073,
+            203907,
+            0,
+            0
+          ],
+          "core": [
+            25100000,
+            30100000
+          ],
+          "halo": [
+            25000000,
+            30200000
+          ],
+          "id": "c00",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                47,
+                21384,
+                243303,
+                1131653,
+                621621,
+                203615,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                623,
+                1578,
+                2188,
+                404,
+                33,
+                0,
+                0
+              ],
+              "bp": 2221623,
+              "core_bp": 2140099,
+              "left_halo_bp": 49362,
+              "right_halo_bp": 32162,
+              "runs": 4831,
+              "source_length_strata_bp": [
+                47,
+                21384,
+                243303,
+                1131653,
+                621621,
+                203615,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                623,
+                1578,
+                2188,
+                404,
+                33,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                9622,
+                21384,
+                243303,
+                1130909,
+                816385,
+                260413,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1300,
+                623,
+                1578,
+                2186,
+                538,
+                41,
+                0,
+                0
+              ],
+              "bp": 2482016,
+              "core_bp": 2392076,
+              "left_halo_bp": 52312,
+              "right_halo_bp": 37628,
+              "runs": 6266,
+              "source_length_strata_bp": [
+                9622,
+                21384,
+                243303,
+                1130909,
+                816385,
+                260413,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1300,
+                623,
+                1578,
+                2186,
+                538,
+                41,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                47,
+                21384,
+                243303,
+                1130909,
+                622073,
+                203907,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                630,
+                1648,
+                2187,
+                414,
+                30,
+                0,
+                0
+              ],
+              "bp": 2221623,
+              "core_bp": 2145464,
+              "left_halo_bp": 42738,
+              "right_halo_bp": 33421,
+              "runs": 4913,
+              "source_length_strata_bp": [
+                47,
+                21384,
+                243303,
+                1130909,
+                622073,
+                203907,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                630,
+                1648,
+                2187,
+                414,
+                30,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                49,
+                21382,
+                243303,
+                1130909,
+                622073,
+                203907,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                540,
+                1729,
+                2316,
+                414,
+                30,
+                0,
+                0
+              ],
+              "bp": 2221623,
+              "core_bp": 2139500,
+              "left_halo_bp": 45334,
+              "right_halo_bp": 36789,
+              "runs": 5034,
+              "source_length_strata_bp": [
+                49,
+                21382,
+                243303,
+                1130909,
+                622073,
+                203907,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                540,
+                1729,
+                2316,
+                414,
+                30,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                47,
+                78185,
+                487661,
+                1365725,
+                622073,
+                203907,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                1938,
+                3455,
+                2785,
+                414,
+                30,
+                0,
+                0
+              ],
+              "bp": 2757598,
+              "core_bp": 2656201,
+              "left_halo_bp": 53064,
+              "right_halo_bp": 48333,
+              "runs": 8626,
+              "source_length_strata_bp": [
+                47,
+                78185,
+                487661,
+                1365725,
+                622073,
+                203907,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                1938,
+                3455,
+                2785,
+                414,
+                30,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr20",
+          "common_budget_bp": 2053639,
+          "common_budget_by_stratum_bp": [
+            78,
+            21612,
+            256234,
+            1117017,
+            545141,
+            113557,
+            0,
+            0
+          ],
+          "core": [
+            25100000,
+            30100000
+          ],
+          "halo": [
+            25000000,
+            30200000
+          ],
+          "id": "c01",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                78,
+                21612,
+                256234,
+                1117821,
+                547032,
+                110862,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                12,
+                612,
+                1674,
+                2154,
+                363,
+                17,
+                0,
+                0
+              ],
+              "bp": 2053639,
+              "core_bp": 1967317,
+              "left_halo_bp": 41856,
+              "right_halo_bp": 44466,
+              "runs": 4832,
+              "source_length_strata_bp": [
+                78,
+                21612,
+                256234,
+                1117821,
+                547032,
+                110862,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                12,
+                612,
+                1674,
+                2154,
+                363,
+                17,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                9590,
+                21612,
+                256234,
+                1117017,
+                650226,
+                144634,
+                35900,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1324,
+                612,
+                1674,
+                2153,
+                430,
+                22,
+                1,
+                0
+              ],
+              "bp": 2235213,
+              "core_bp": 2134183,
+              "left_halo_bp": 49533,
+              "right_halo_bp": 51497,
+              "runs": 6216,
+              "source_length_strata_bp": [
+                9590,
+                21612,
+                256234,
+                1117017,
+                650226,
+                144634,
+                35900,
+                0
+              ],
+              "source_length_strata_runs": [
+                1324,
+                612,
+                1674,
+                2153,
+                430,
+                22,
+                1,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                87,
+                21603,
+                256407,
+                1116844,
+                545141,
+                113557,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                7,
+                632,
+                1768,
+                2162,
+                357,
+                22,
+                0,
+                0
+              ],
+              "bp": 2053639,
+              "core_bp": 1956396,
+              "left_halo_bp": 48149,
+              "right_halo_bp": 49094,
+              "runs": 4948,
+              "source_length_strata_bp": [
+                87,
+                21603,
+                256407,
+                1116844,
+                545141,
+                113557,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                7,
+                632,
+                1768,
+                2162,
+                357,
+                22,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                78,
+                21657,
+                256405,
+                1116801,
+                545141,
+                113557,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                6,
+                522,
+                1838,
+                2279,
+                357,
+                22,
+                0,
+                0
+              ],
+              "bp": 2053639,
+              "core_bp": 1952585,
+              "left_halo_bp": 50146,
+              "right_halo_bp": 50908,
+              "runs": 5024,
+              "source_length_strata_bp": [
+                78,
+                21657,
+                256405,
+                1116801,
+                545141,
+                113557,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                6,
+                522,
+                1838,
+                2279,
+                357,
+                22,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                78,
+                78049,
+                498853,
+                1316267,
+                545141,
+                113557,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                6,
+                1914,
+                3561,
+                2675,
+                357,
+                22,
+                0,
+                0
+              ],
+              "bp": 2551945,
+              "core_bp": 2433185,
+              "left_halo_bp": 57901,
+              "right_halo_bp": 60859,
+              "runs": 8535,
+              "source_length_strata_bp": [
+                78,
+                78049,
+                498853,
+                1316267,
+                545141,
+                113557,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                6,
+                1914,
+                3561,
+                2675,
+                357,
+                22,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr8",
+          "common_budget_bp": 2159754,
+          "common_budget_by_stratum_bp": [
+            56,
+            23487,
+            256757,
+            1193184,
+            542276,
+            143994,
+            0,
+            0
+          ],
+          "core": [
+            25100000,
+            30100000
+          ],
+          "halo": [
+            25000000,
+            30200000
+          ],
+          "id": "c02",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                56,
+                23487,
+                256757,
+                1193746,
+                545068,
+                140640,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                9,
+                664,
+                1693,
+                2298,
+                362,
+                23,
+                0,
+                0
+              ],
+              "bp": 2159754,
+              "core_bp": 2075511,
+              "left_halo_bp": 42517,
+              "right_halo_bp": 41726,
+              "runs": 5049,
+              "source_length_strata_bp": [
+                56,
+                23487,
+                256757,
+                1193746,
+                545068,
+                140640,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                9,
+                664,
+                1693,
+                2298,
+                362,
+                23,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                10020,
+                23487,
+                256757,
+                1193184,
+                671280,
+                169226,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1375,
+                664,
+                1693,
+                2297,
+                445,
+                28,
+                0,
+                0
+              ],
+              "bp": 2323954,
+              "core_bp": 2231915,
+              "left_halo_bp": 47407,
+              "right_halo_bp": 44632,
+              "runs": 6502,
+              "source_length_strata_bp": [
+                10020,
+                23487,
+                256757,
+                1193184,
+                671280,
+                169226,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1375,
+                664,
+                1693,
+                2297,
+                445,
+                28,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                56,
+                23487,
+                256757,
+                1193184,
+                542276,
+                143994,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                707,
+                1772,
+                2348,
+                377,
+                22,
+                0,
+                0
+              ],
+              "bp": 2159754,
+              "core_bp": 2077485,
+              "left_halo_bp": 41713,
+              "right_halo_bp": 40556,
+              "runs": 5230,
+              "source_length_strata_bp": [
+                56,
+                23487,
+                256757,
+                1193184,
+                542276,
+                143994,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                707,
+                1772,
+                2348,
+                377,
+                22,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                57,
+                23486,
+                256757,
+                1193184,
+                542276,
+                143994,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                596,
+                1805,
+                2430,
+                377,
+                22,
+                0,
+                0
+              ],
+              "bp": 2159754,
+              "core_bp": 2084142,
+              "left_halo_bp": 36965,
+              "right_halo_bp": 38647,
+              "runs": 5235,
+              "source_length_strata_bp": [
+                57,
+                23486,
+                256757,
+                1193184,
+                542276,
+                143994,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                596,
+                1805,
+                2430,
+                377,
+                22,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                56,
+                85347,
+                510957,
+                1396280,
+                542276,
+                143994,
+                20685,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                2187,
+                3640,
+                2858,
+                377,
+                22,
+                1,
+                0
+              ],
+              "bp": 2699595,
+              "core_bp": 2601905,
+              "left_halo_bp": 49389,
+              "right_halo_bp": 48301,
+              "runs": 9089,
+              "source_length_strata_bp": [
+                56,
+                85347,
+                510957,
+                1396280,
+                542276,
+                143994,
+                20685,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                2187,
+                3640,
+                2858,
+                377,
+                22,
+                1,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr17",
+          "common_budget_bp": 1910313,
+          "common_budget_by_stratum_bp": [
+            91,
+            18959,
+            255150,
+            1178457,
+            400788,
+            56868,
+            0,
+            0
+          ],
+          "core": [
+            24100000,
+            29100000
+          ],
+          "halo": [
+            24000000,
+            29200000
+          ],
+          "id": "c03",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                91,
+                18959,
+                255150,
+                1178942,
+                400303,
+                56868,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                15,
+                542,
+                1653,
+                2265,
+                276,
+                10,
+                0,
+                0
+              ],
+              "bp": 1910313,
+              "core_bp": 1836277,
+              "left_halo_bp": 47688,
+              "right_halo_bp": 26348,
+              "runs": 4761,
+              "source_length_strata_bp": [
+                91,
+                18959,
+                255150,
+                1178942,
+                400303,
+                56868,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                15,
+                542,
+                1653,
+                2265,
+                276,
+                10,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                9714,
+                18959,
+                255150,
+                1178457,
+                572489,
+                56868,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1314,
+                542,
+                1653,
+                2264,
+                392,
+                10,
+                0,
+                0
+              ],
+              "bp": 2091637,
+              "core_bp": 2005593,
+              "left_halo_bp": 53671,
+              "right_halo_bp": 32373,
+              "runs": 6175,
+              "source_length_strata_bp": [
+                9714,
+                18959,
+                255150,
+                1178457,
+                572489,
+                56868,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1314,
+                542,
+                1653,
+                2264,
+                392,
+                10,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                91,
+                18998,
+                255111,
+                1178457,
+                404267,
+                53389,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                7,
+                592,
+                1745,
+                2318,
+                284,
+                7,
+                0,
+                0
+              ],
+              "bp": 1910313,
+              "core_bp": 1830245,
+              "left_halo_bp": 46772,
+              "right_halo_bp": 33296,
+              "runs": 4953,
+              "source_length_strata_bp": [
+                91,
+                18998,
+                255111,
+                1178457,
+                404267,
+                53389,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                7,
+                592,
+                1745,
+                2318,
+                284,
+                7,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                91,
+                18978,
+                255304,
+                1178284,
+                400788,
+                56868,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                7,
+                485,
+                1814,
+                2425,
+                283,
+                8,
+                0,
+                0
+              ],
+              "bp": 1910313,
+              "core_bp": 1835256,
+              "left_halo_bp": 44491,
+              "right_halo_bp": 30566,
+              "runs": 5022,
+              "source_length_strata_bp": [
+                91,
+                18978,
+                255304,
+                1178284,
+                400788,
+                56868,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                7,
+                485,
+                1814,
+                2425,
+                283,
+                8,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                91,
+                84564,
+                487369,
+                1344495,
+                400788,
+                70534,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                7,
+                2158,
+                3487,
+                2746,
+                283,
+                10,
+                0,
+                0
+              ],
+              "bp": 2387841,
+              "core_bp": 2292783,
+              "left_halo_bp": 55514,
+              "right_halo_bp": 39544,
+              "runs": 8691,
+              "source_length_strata_bp": [
+                91,
+                84564,
+                487369,
+                1344495,
+                400788,
+                70534,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                7,
+                2158,
+                3487,
+                2746,
+                283,
+                10,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr14",
+          "common_budget_bp": 2185442,
+          "common_budget_by_stratum_bp": [
+            62,
+            21375,
+            252996,
+            1128353,
+            625966,
+            156690,
+            0,
+            0
+          ],
+          "core": [
+            24100000,
+            29100000
+          ],
+          "halo": [
+            24000000,
+            29200000
+          ],
+          "id": "c04",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                62,
+                21375,
+                252996,
+                1128353,
+                628687,
+                153969,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                8,
+                628,
+                1649,
+                2172,
+                412,
+                26,
+                0,
+                0
+              ],
+              "bp": 2185442,
+              "core_bp": 2103447,
+              "left_halo_bp": 41091,
+              "right_halo_bp": 40904,
+              "runs": 4895,
+              "source_length_strata_bp": [
+                62,
+                21375,
+                252996,
+                1128353,
+                628687,
+                153969,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                8,
+                628,
+                1649,
+                2172,
+                412,
+                26,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                10325,
+                21375,
+                252996,
+                1128353,
+                730182,
+                188833,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1429,
+                628,
+                1649,
+                2172,
+                477,
+                31,
+                0,
+                0
+              ],
+              "bp": 2332064,
+              "core_bp": 2243297,
+              "left_halo_bp": 47617,
+              "right_halo_bp": 41150,
+              "runs": 6386,
+              "source_length_strata_bp": [
+                10325,
+                21375,
+                252996,
+                1128353,
+                730182,
+                188833,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1429,
+                628,
+                1649,
+                2172,
+                477,
+                31,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                62,
+                21436,
+                253111,
+                1128177,
+                625966,
+                156690,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                648,
+                1726,
+                2219,
+                402,
+                23,
+                0,
+                0
+              ],
+              "bp": 2185442,
+              "core_bp": 2101762,
+              "left_halo_bp": 42657,
+              "right_halo_bp": 41023,
+              "runs": 5023,
+              "source_length_strata_bp": [
+                62,
+                21436,
+                253111,
+                1128177,
+                625966,
+                156690,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                648,
+                1726,
+                2219,
+                402,
+                23,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                62,
+                21375,
+                252996,
+                1128353,
+                625966,
+                156690,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                542,
+                1771,
+                2313,
+                402,
+                23,
+                0,
+                0
+              ],
+              "bp": 2185442,
+              "core_bp": 2099492,
+              "left_halo_bp": 43702,
+              "right_halo_bp": 42248,
+              "runs": 5056,
+              "source_length_strata_bp": [
+                62,
+                21375,
+                252996,
+                1128353,
+                625966,
+                156690,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                542,
+                1771,
+                2313,
+                402,
+                23,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                62,
+                75177,
+                496105,
+                1353005,
+                625966,
+                156690,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                1916,
+                3499,
+                2769,
+                402,
+                23,
+                0,
+                0
+              ],
+              "bp": 2707005,
+              "core_bp": 2603962,
+              "left_halo_bp": 50744,
+              "right_halo_bp": 52299,
+              "runs": 8614,
+              "source_length_strata_bp": [
+                62,
+                75177,
+                496105,
+                1353005,
+                625966,
+                156690,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                1916,
+                3499,
+                2769,
+                402,
+                23,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr13",
+          "common_budget_bp": 2146176,
+          "common_budget_by_stratum_bp": [
+            60,
+            23100,
+            245468,
+            1168795,
+            578867,
+            129886,
+            0,
+            0
+          ],
+          "core": [
+            23100000,
+            28100000
+          ],
+          "halo": [
+            23000000,
+            28200000
+          ],
+          "id": "c05",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                60,
+                23100,
+                245468,
+                1169641,
+                579767,
+                128140,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                8,
+                684,
+                1627,
+                2255,
+                396,
+                21,
+                0,
+                0
+              ],
+              "bp": 2146176,
+              "core_bp": 2042028,
+              "left_halo_bp": 44266,
+              "right_halo_bp": 59882,
+              "runs": 4991,
+              "source_length_strata_bp": [
+                60,
+                23100,
+                245468,
+                1169641,
+                579767,
+                128140,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                8,
+                684,
+                1627,
+                2255,
+                396,
+                21,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                10404,
+                23100,
+                245468,
+                1168795,
+                701021,
+                144964,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1385,
+                684,
+                1627,
+                2254,
+                481,
+                24,
+                0,
+                0
+              ],
+              "bp": 2293752,
+              "core_bp": 2182737,
+              "left_halo_bp": 47686,
+              "right_halo_bp": 63329,
+              "runs": 6455,
+              "source_length_strata_bp": [
+                10404,
+                23100,
+                245468,
+                1168795,
+                701021,
+                144964,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1385,
+                684,
+                1627,
+                2254,
+                481,
+                24,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                60,
+                23149,
+                245468,
+                1168746,
+                578867,
+                129886,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                684,
+                1710,
+                2288,
+                389,
+                22,
+                0,
+                0
+              ],
+              "bp": 2146176,
+              "core_bp": 2062816,
+              "left_halo_bp": 42581,
+              "right_halo_bp": 40779,
+              "runs": 5098,
+              "source_length_strata_bp": [
+                60,
+                23149,
+                245468,
+                1168746,
+                578867,
+                129886,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                684,
+                1710,
+                2288,
+                389,
+                22,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                60,
+                23142,
+                245426,
+                1168795,
+                578867,
+                129886,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                585,
+                1776,
+                2361,
+                389,
+                22,
+                0,
+                0
+              ],
+              "bp": 2146176,
+              "core_bp": 2062551,
+              "left_halo_bp": 40736,
+              "right_halo_bp": 42889,
+              "runs": 5138,
+              "source_length_strata_bp": [
+                60,
+                23142,
+                245426,
+                1168795,
+                578867,
+                129886,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                585,
+                1776,
+                2361,
+                389,
+                22,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                60,
+                85534,
+                494192,
+                1308420,
+                578867,
+                129886,
+                73795,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                2154,
+                3540,
+                2654,
+                389,
+                22,
+                2,
+                0
+              ],
+              "bp": 2670754,
+              "core_bp": 2552132,
+              "left_halo_bp": 51204,
+              "right_halo_bp": 67418,
+              "runs": 8766,
+              "source_length_strata_bp": [
+                60,
+                85534,
+                494192,
+                1308420,
+                578867,
+                129886,
+                73795,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                2154,
+                3540,
+                2654,
+                389,
+                22,
+                2,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr18",
+          "common_budget_bp": 2446490,
+          "common_budget_by_stratum_bp": [
+            54,
+            21492,
+            246986,
+            1130321,
+            763484,
+            284153,
+            0,
+            0
+          ],
+          "core": [
+            23100000,
+            28100000
+          ],
+          "halo": [
+            23000000,
+            28200000
+          ],
+          "id": "c06",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                54,
+                21492,
+                246986,
+                1130826,
+                766091,
+                281041,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                8,
+                639,
+                1618,
+                2172,
+                493,
+                46,
+                0,
+                0
+              ],
+              "bp": 2446490,
+              "core_bp": 2333720,
+              "left_halo_bp": 45952,
+              "right_halo_bp": 66818,
+              "runs": 4976,
+              "source_length_strata_bp": [
+                54,
+                21492,
+                246986,
+                1130826,
+                766091,
+                281041,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                8,
+                639,
+                1618,
+                2172,
+                493,
+                46,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                10080,
+                21492,
+                246986,
+                1130321,
+                980205,
+                375581,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1368,
+                639,
+                1618,
+                2171,
+                633,
+                62,
+                0,
+                0
+              ],
+              "bp": 2764665,
+              "core_bp": 2641335,
+              "left_halo_bp": 47485,
+              "right_halo_bp": 75845,
+              "runs": 6491,
+              "source_length_strata_bp": [
+                10080,
+                21492,
+                246986,
+                1130321,
+                980205,
+                375581,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1368,
+                639,
+                1618,
+                2171,
+                633,
+                62,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                62,
+                21484,
+                246986,
+                1130321,
+                763484,
+                284153,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                628,
+                1684,
+                2147,
+                505,
+                47,
+                0,
+                0
+              ],
+              "bp": 2446490,
+              "core_bp": 2331589,
+              "left_halo_bp": 46352,
+              "right_halo_bp": 68549,
+              "runs": 5016,
+              "source_length_strata_bp": [
+                62,
+                21484,
+                246986,
+                1130321,
+                763484,
+                284153,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                628,
+                1684,
+                2147,
+                505,
+                47,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                57,
+                21492,
+                247092,
+                1130212,
+                763484,
+                284153,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                536,
+                1740,
+                2262,
+                505,
+                47,
+                0,
+                0
+              ],
+              "bp": 2446490,
+              "core_bp": 2338165,
+              "left_halo_bp": 43682,
+              "right_halo_bp": 64643,
+              "runs": 5095,
+              "source_length_strata_bp": [
+                57,
+                21492,
+                247092,
+                1130212,
+                763484,
+                284153,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                536,
+                1740,
+                2262,
+                505,
+                47,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                54,
+                78726,
+                477983,
+                1452244,
+                763484,
+                284153,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                1968,
+                3360,
+                2914,
+                505,
+                47,
+                0,
+                0
+              ],
+              "bp": 3056644,
+              "core_bp": 2924510,
+              "left_halo_bp": 56479,
+              "right_halo_bp": 75655,
+              "runs": 8798,
+              "source_length_strata_bp": [
+                54,
+                78726,
+                477983,
+                1452244,
+                763484,
+                284153,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                1968,
+                3360,
+                2914,
+                505,
+                47,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr12",
+          "common_budget_bp": 2235088,
+          "common_budget_by_stratum_bp": [
+            39,
+            21830,
+            262448,
+            1216317,
+            574880,
+            159574,
+            0,
+            0
+          ],
+          "core": [
+            22100000,
+            27100000
+          ],
+          "halo": [
+            22000000,
+            27200000
+          ],
+          "id": "c07",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                39,
+                21830,
+                262448,
+                1216987,
+                574210,
+                159574,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                641,
+                1680,
+                2286,
+                384,
+                25,
+                0,
+                0
+              ],
+              "bp": 2235088,
+              "core_bp": 2165900,
+              "left_halo_bp": 45040,
+              "right_halo_bp": 24148,
+              "runs": 5021,
+              "source_length_strata_bp": [
+                39,
+                21830,
+                262448,
+                1216987,
+                574210,
+                159574,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                641,
+                1680,
+                2286,
+                384,
+                25,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                9841,
+                21830,
+                262448,
+                1216317,
+                793612,
+                165727,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1339,
+                641,
+                1680,
+                2285,
+                532,
+                26,
+                0,
+                0
+              ],
+              "bp": 2469775,
+              "core_bp": 2390757,
+              "left_halo_bp": 49972,
+              "right_halo_bp": 29046,
+              "runs": 6503,
+              "source_length_strata_bp": [
+                9841,
+                21830,
+                262448,
+                1216317,
+                793612,
+                165727,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1339,
+                641,
+                1680,
+                2285,
+                532,
+                26,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                49,
+                21820,
+                262448,
+                1216317,
+                574880,
+                159574,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                641,
+                1803,
+                2337,
+                394,
+                26,
+                0,
+                0
+              ],
+              "bp": 2235088,
+              "core_bp": 2149605,
+              "left_halo_bp": 59393,
+              "right_halo_bp": 26090,
+              "runs": 5205,
+              "source_length_strata_bp": [
+                49,
+                21820,
+                262448,
+                1216317,
+                574880,
+                159574,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                641,
+                1803,
+                2337,
+                394,
+                26,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                45,
+                21873,
+                262531,
+                1216185,
+                574880,
+                159574,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                4,
+                535,
+                1877,
+                2478,
+                394,
+                26,
+                0,
+                0
+              ],
+              "bp": 2235088,
+              "core_bp": 2152751,
+              "left_halo_bp": 58182,
+              "right_halo_bp": 24155,
+              "runs": 5314,
+              "source_length_strata_bp": [
+                45,
+                21873,
+                262531,
+                1216185,
+                574880,
+                159574,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                4,
+                535,
+                1877,
+                2478,
+                394,
+                26,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                39,
+                74552,
+                503459,
+                1479890,
+                574880,
+                159574,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                3,
+                1849,
+                3558,
+                3007,
+                394,
+                26,
+                0,
+                0
+              ],
+              "bp": 2792394,
+              "core_bp": 2693518,
+              "left_halo_bp": 66625,
+              "right_halo_bp": 32251,
+              "runs": 8837,
+              "source_length_strata_bp": [
+                39,
+                74552,
+                503459,
+                1479890,
+                574880,
+                159574,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                3,
+                1849,
+                3558,
+                3007,
+                394,
+                26,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr19",
+          "common_budget_bp": 2510841,
+          "common_budget_by_stratum_bp": [
+            80,
+            19280,
+            227660,
+            1092442,
+            915863,
+            255516,
+            0,
+            0
+          ],
+          "core": [
+            22100000,
+            27100000
+          ],
+          "halo": [
+            22000000,
+            27200000
+          ],
+          "id": "c08",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                80,
+                19280,
+                227660,
+                1092442,
+                918697,
+                252682,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                11,
+                580,
+                1475,
+                2083,
+                545,
+                41,
+                0,
+                0
+              ],
+              "bp": 2510841,
+              "core_bp": 2413731,
+              "left_halo_bp": 49616,
+              "right_halo_bp": 47494,
+              "runs": 4735,
+              "source_length_strata_bp": [
+                80,
+                19280,
+                227660,
+                1092442,
+                918697,
+                252682,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                11,
+                580,
+                1475,
+                2083,
+                545,
+                41,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                9712,
+                19280,
+                227660,
+                1092442,
+                1093882,
+                418037,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1296,
+                580,
+                1475,
+                2083,
+                653,
+                67,
+                0,
+                0
+              ],
+              "bp": 2861013,
+              "core_bp": 2752235,
+              "left_halo_bp": 56082,
+              "right_halo_bp": 52696,
+              "runs": 6154,
+              "source_length_strata_bp": [
+                9712,
+                19280,
+                227660,
+                1092442,
+                1093882,
+                418037,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1296,
+                580,
+                1475,
+                2083,
+                653,
+                67,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                90,
+                19271,
+                227659,
+                1092442,
+                915863,
+                255516,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                8,
+                561,
+                1568,
+                2073,
+                572,
+                41,
+                0,
+                0
+              ],
+              "bp": 2510841,
+              "core_bp": 2406899,
+              "left_halo_bp": 54097,
+              "right_halo_bp": 49845,
+              "runs": 4823,
+              "source_length_strata_bp": [
+                90,
+                19271,
+                227659,
+                1092442,
+                915863,
+                255516,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                8,
+                561,
+                1568,
+                2073,
+                572,
+                41,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                80,
+                19298,
+                227811,
+                1092273,
+                915863,
+                255516,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                6,
+                492,
+                1610,
+                2206,
+                572,
+                41,
+                0,
+                0
+              ],
+              "bp": 2510841,
+              "core_bp": 2410580,
+              "left_halo_bp": 51671,
+              "right_halo_bp": 48590,
+              "runs": 4927,
+              "source_length_strata_bp": [
+                80,
+                19298,
+                227811,
+                1092273,
+                915863,
+                255516,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                6,
+                492,
+                1610,
+                2206,
+                572,
+                41,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                80,
+                67949,
+                463221,
+                1386147,
+                915863,
+                255516,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                6,
+                1695,
+                3297,
+                2803,
+                572,
+                41,
+                0,
+                0
+              ],
+              "bp": 3088776,
+              "core_bp": 2967332,
+              "left_halo_bp": 62249,
+              "right_halo_bp": 59195,
+              "runs": 8414,
+              "source_length_strata_bp": [
+                80,
+                67949,
+                463221,
+                1386147,
+                915863,
+                255516,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                6,
+                1695,
+                3297,
+                2803,
+                572,
+                41,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        },
+        {
+          "chrom": "chr15",
+          "common_budget_bp": 2142701,
+          "common_budget_by_stratum_bp": [
+            64,
+            20648,
+            249472,
+            1186996,
+            594193,
+            91328,
+            0,
+            0
+          ],
+          "core": [
+            21100000,
+            26100000
+          ],
+          "halo": [
+            21000000,
+            26200000
+          ],
+          "id": "c09",
+          "input_bp": 5200000,
+          "mask_summaries": {
+            "D_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                64,
+                20648,
+                249472,
+                1186996,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                9,
+                599,
+                1641,
+                2255,
+                395,
+                13,
+                0,
+                0
+              ],
+              "bp": 2142701,
+              "core_bp": 2070506,
+              "left_halo_bp": 35594,
+              "right_halo_bp": 36601,
+              "runs": 4912,
+              "source_length_strata_bp": [
+                64,
+                20648,
+                249472,
+                1186996,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                9,
+                599,
+                1641,
+                2255,
+                395,
+                13,
+                0,
+                0
+              ]
+            },
+            "D_FIXED": {
+              "actual_length_strata_bp": [
+                9416,
+                20648,
+                249472,
+                1186996,
+                764470,
+                164206,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                1275,
+                599,
+                1641,
+                2255,
+                503,
+                25,
+                0,
+                0
+              ],
+              "bp": 2395208,
+              "core_bp": 2294958,
+              "left_halo_bp": 58094,
+              "right_halo_bp": 42156,
+              "runs": 6298,
+              "source_length_strata_bp": [
+                9416,
+                20648,
+                249472,
+                1186996,
+                764470,
+                164206,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                1275,
+                599,
+                1641,
+                2255,
+                503,
+                25,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_CONF": {
+              "actual_length_strata_bp": [
+                75,
+                20669,
+                249470,
+                1186966,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                7,
+                605,
+                1690,
+                2286,
+                393,
+                16,
+                0,
+                0
+              ],
+              "bp": 2142701,
+              "core_bp": 2052354,
+              "left_halo_bp": 50412,
+              "right_halo_bp": 39935,
+              "runs": 4997,
+              "source_length_strata_bp": [
+                75,
+                20669,
+                249470,
+                1186966,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                7,
+                605,
+                1690,
+                2286,
+                393,
+                16,
+                0,
+                0
+              ]
+            },
+            "RM2_COMMON_RANDOM": {
+              "actual_length_strata_bp": [
+                83,
+                20642,
+                249595,
+                1186860,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                7,
+                516,
+                1746,
+                2400,
+                393,
+                16,
+                0,
+                0
+              ],
+              "bp": 2142701,
+              "core_bp": 2058941,
+              "left_halo_bp": 45144,
+              "right_halo_bp": 38616,
+              "runs": 5078,
+              "source_length_strata_bp": [
+                83,
+                20642,
+                249595,
+                1186860,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                7,
+                516,
+                1746,
+                2400,
+                393,
+                16,
+                0,
+                0
+              ]
+            },
+            "RM2_FULL": {
+              "actual_length_strata_bp": [
+                64,
+                70775,
+                492748,
+                1405326,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "actual_length_strata_runs": [
+                5,
+                1765,
+                3446,
+                2834,
+                393,
+                16,
+                0,
+                0
+              ],
+              "bp": 2654434,
+              "core_bp": 2548135,
+              "left_halo_bp": 55032,
+              "right_halo_bp": 51267,
+              "runs": 8459,
+              "source_length_strata_bp": [
+                64,
+                70775,
+                492748,
+                1405326,
+                594193,
+                91328,
+                0,
+                0
+              ],
+              "source_length_strata_runs": [
+                5,
+                1765,
+                3446,
+                2834,
+                393,
+                16,
+                0,
+                0
+              ]
+            }
+          },
+          "rm2_runs_without_native_alignment": 0
+        }
+      ],
+      "inputs": {
+        "existing_U_D": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/zebrafish",
+        "existing_reference": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/zebrafish/reference.json",
+        "geometry": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/zebrafish/geometry.json",
+        "rm2_annotation_out": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/annotation.out",
+        "rm2_masked_fasta": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/masked.fa"
+      },
+      "protocol": "FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925",
+      "selection_used_labels_or_downstream_scores": false,
+      "species": "zebrafish",
+      "status": "PREPARED",
+      "full_manifest_remote": "outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/manifest.json"
+    }
+  }
+}
