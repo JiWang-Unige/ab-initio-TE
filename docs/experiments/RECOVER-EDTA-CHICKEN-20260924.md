@@ -153,3 +153,34 @@ were preserved.  The fresh final-only repair was then submitted as `13190938`
 with a 431,681-second budget and an `afterany:13189902` dependency.  It uses
 the prepared aggregation driver and remains an engineering recovery until the
 native final/annotation outputs and summary pass all terminal gates.
+
+## Final annotation and export closure, 2026-09-25
+
+The native aggregation and FINAL/ANNO calls in 13190938 both returned zero;
+the final library, annotation and annotation-evaluation success messages are
+present. Slurm nevertheless recorded FAILED after 5,948 seconds because the
+wrapper's recursive glob found both top-level published outputs and internal
+EDTA copies. The native top-level outputs have passed EDTA's sequence-ID
+decoding and are the authoritative export; selecting a random internal match
+would not be equivalent. `continue_aggregate_final.py` now checks those exact
+paths rather than requiring a unique recursive match.
+
+`export_completed.py` / `export_completed.sbatch` reused this completed native
+annotation in job 13192771 (private, 4 CPU/16 GB, no GPU, 4 seconds), without
+rerunning native stages or overwriting the failed source. It preserved the
+source status/logs, exported the final GFF/library/map and confirmed zero
+encoded annotation IDs. Its fresh root is `EDTA-export-13192771`.
+
+Final binary/class jobs 13192796/13192797 completed in 104/177 seconds. Their
+EDTA chicken cells are scoreable on the unchanged denominators; zebrafish
+EDTA remains OOM/NA. Existing D and RM2 numbers are exactly unchanged. The
+native `MAKER.masked` output is a filtered hardmask, not the full TEanno union,
+and was not substituted for the scientific annotation input.
+
+The descriptive FASTA library summary now reads the class suffix after `#`;
+the former parser mistakenly counted sequence identifiers. Corrected RM2
+summary files retain backups. Neither binary nor class scoring used this
+descriptive field, and old score outputs remain unchanged. The cumulative
+EDTA cell budget, including unsuccessful attempts and export, is 179,071 s
+out of 604,800 s. All outcomes and costs are recorded in the
+[final comparison](../../reports/WHOLE-GENOME-BENCHMARK-20260918/FINAL-COMPARISON-20260925.md).

@@ -1,0 +1,32 @@
+	Command being timed: "apptainer exec --cleanenv --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938:/work --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0:/opt/edta230:ro --pwd /work --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/get_fasta_sequence.py:/usr/local/share/TIR-Learner3.0/bin/get_fasta_sequence.py:ro --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/check_TIR_TSD.py:/usr/local/share/TIR-Learner3.0/bin/check_TIR_TSD.py:ro /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif env HOME=/work/home TMPDIR=/work/tmp bash -lc set -euo pipefail
+cd /work/galGal6.fa.mod.EDTA.raw
+cat galGal6.fa.mod.LTR.intact.raw.fa galGal6.fa.mod.TIR.intact.raw.fa galGal6.fa.mod.Helitron.intact.raw.fa > galGal6.fa.mod.EDTA.intact.raw.fa
+cat galGal6.fa.mod.TIR.intact.raw.bed galGal6.fa.mod.Helitron.intact.raw.bed | perl /opt/edta230/bin/bed2gff.pl - TE_struc > galGal6.fa.mod.EDTA.intact.gff3.temp
+cat galGal6.fa.mod.LTR.intact.raw.gff3 >> galGal6.fa.mod.EDTA.intact.gff3.temp
+sort -sV -k1,1 -k4,4 galGal6.fa.mod.EDTA.intact.gff3.temp | grep -v '^#' > galGal6.fa.mod.EDTA.intact.raw.gff3
+rm galGal6.fa.mod.EDTA.intact.gff3.temp
+test -s galGal6.fa.mod.EDTA.intact.raw.fa
+test -s galGal6.fa.mod.EDTA.intact.raw.gff3
+"
+	User time (seconds): 5.48
+	System time (seconds): 0.51
+	Percent of CPU this job got: 112%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:05.32
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 90508
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1411
+	Minor (reclaiming a frame) page faults: 97196
+	Voluntary context switches: 27877
+	Involuntary context switches: 900
+	Swaps: 0
+	File system inputs: 183793
+	File system outputs: 30970
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

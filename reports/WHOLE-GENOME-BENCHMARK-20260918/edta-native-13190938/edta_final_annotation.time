@@ -1,0 +1,23 @@
+	Command being timed: "apptainer exec --cleanenv --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938:/work --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0:/opt/edta230:ro --pwd /work --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/get_fasta_sequence.py:/usr/local/share/TIR-Learner3.0/bin/get_fasta_sequence.py:ro --bind /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/check_TIR_TSD.py:/usr/local/share/TIR-Learner3.0/bin/check_TIR_TSD.py:ro /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif env HOME=/work/home TMPDIR=/work/tmp perl /opt/edta230/EDTA.pl --genome /work/galGal6.fa --species others --step final --overwrite 0 --sensitive 1 --anno 1 --threads 16"
+	User time (seconds): 61525.67
+	System time (seconds): 2508.53
+	Percent of CPU this job got: 1093%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:37:34
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 2608608
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 118789
+	Minor (reclaiming a frame) page faults: 540512070
+	Voluntary context switches: 48063407
+	Involuntary context switches: 29400856
+	Swaps: 0
+	File system inputs: 1122256309
+	File system outputs: 55032504
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

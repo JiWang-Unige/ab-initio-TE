@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "binary_numeric_rows_checked": 10,
+  "class_endpoints_checked": 15,
+  "unchanged_existing_binary_and_class_metrics": true,
+  "fish_edta_retained_as_na": true,
+  "full8_confusion_totals_match_callable_bp": true,
+  "new_edta_same_frozen_denominator": true
+}

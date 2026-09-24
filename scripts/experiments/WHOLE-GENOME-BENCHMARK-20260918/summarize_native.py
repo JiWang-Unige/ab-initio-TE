@@ -192,7 +192,10 @@ def summarize_library(path: Path) -> Dict[str, object]:
     families: Counter = Counter()
     for name, _sequence in fasta_records(path):
         records += 1
-        broad, family = split_class(name)
+        # EDTA/RM2 use identifier#class/family. The identifier is not a class;
+        # an unclassified or untagged sequence must remain Unknown.
+        classification = name.partition("#")[2] or "Unknown"
+        broad, family = split_class(classification)
         if broad == "Unknown":
             unknown_records += 1
         classes[broad] += 1
@@ -201,7 +204,8 @@ def summarize_library(path: Path) -> Dict[str, object]:
         raise ValueError("empty native library: %s" % path)
     return {"path": str(path), "metadata": file_metadata(path), "records": records,
             "unknown_records": unknown_records, "classified_records": records - unknown_records,
-            "class_records": dict(sorted(classes.items())), "family_records": dict(sorted(families.items()))}
+            "class_records": dict(sorted(classes.items())), "family_records": dict(sorted(families.items())),
+            "class_field": "FASTA first-token suffix after #; absent suffix is Unknown"}
 
 
 def summarize(args: argparse.Namespace) -> Dict[str, object]:

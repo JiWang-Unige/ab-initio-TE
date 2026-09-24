@@ -1,0 +1,149 @@
+{
+  "protocol": "RECOVER-EDTA-CHICKEN-20260924",
+  "parent_protocol": "WHOLE-GENOME-BENCHMARK-20260918",
+  "status": "COMPLETED",
+  "species": "chicken",
+  "assembly": "galGal6",
+  "method": "EDTA",
+  "job": "13192771",
+  "native_job": "13190938",
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "cpus": 4,
+    "memory_gb": 16,
+    "gpus": 0
+  },
+  "source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938",
+  "preserved_source_status": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/status.json",
+  "operation": "postprocessing export only; no native rerun, training, annotation or threshold change",
+  "native_parameters": "--species others --sensitive 1 --anno 1 --threads 16; no curated library, CDS, exclude BED, or --force",
+  "native_stages": [
+    {
+      "name": "native_raw_intact_aggregate",
+      "argv": [
+        "apptainer",
+        "exec",
+        "--cleanenv",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938:/work",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0:/opt/edta230:ro",
+        "--pwd",
+        "/work",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/get_fasta_sequence.py:/usr/local/share/TIR-Learner3.0/bin/get_fasta_sequence.py:ro",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/check_TIR_TSD.py:/usr/local/share/TIR-Learner3.0/bin/check_TIR_TSD.py:ro",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+        "env",
+        "HOME=/work/home",
+        "TMPDIR=/work/tmp",
+        "bash",
+        "-lc",
+        "set -euo pipefail\ncd /work/galGal6.fa.mod.EDTA.raw\ncat galGal6.fa.mod.LTR.intact.raw.fa galGal6.fa.mod.TIR.intact.raw.fa galGal6.fa.mod.Helitron.intact.raw.fa > galGal6.fa.mod.EDTA.intact.raw.fa\ncat galGal6.fa.mod.TIR.intact.raw.bed galGal6.fa.mod.Helitron.intact.raw.bed | perl /opt/edta230/bin/bed2gff.pl - TE_struc > galGal6.fa.mod.EDTA.intact.gff3.temp\ncat galGal6.fa.mod.LTR.intact.raw.gff3 >> galGal6.fa.mod.EDTA.intact.gff3.temp\nsort -sV -k1,1 -k4,4 galGal6.fa.mod.EDTA.intact.gff3.temp | grep -v '^#' > galGal6.fa.mod.EDTA.intact.raw.gff3\nrm galGal6.fa.mod.EDTA.intact.gff3.temp\ntest -s galGal6.fa.mod.EDTA.intact.raw.fa\ntest -s galGal6.fa.mod.EDTA.intact.raw.gff3\n"
+      ],
+      "returncode": 0,
+      "wall_seconds": 5.341415928211063,
+      "stdout": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/native_raw_intact_aggregate.stdout",
+      "stderr": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/native_raw_intact_aggregate.stderr",
+      "time": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/native_raw_intact_aggregate.time",
+      "max_rss_kb": 90508
+    },
+    {
+      "name": "edta_final_annotation",
+      "argv": [
+        "apptainer",
+        "exec",
+        "--cleanenv",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938:/work",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/edta/source-2.3.0:/opt/edta230:ro",
+        "--pwd",
+        "/work",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/get_fasta_sequence.py:/usr/local/share/TIR-Learner3.0/bin/get_fasta_sequence.py:ro",
+        "--bind",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_compat/TIR-Learner3.0/bin/check_TIR_TSD.py:/usr/local/share/TIR-Learner3.0/bin/check_TIR_TSD.py:ro",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/edta_2_3_0.sif",
+        "env",
+        "HOME=/work/home",
+        "TMPDIR=/work/tmp",
+        "perl",
+        "/opt/edta230/EDTA.pl",
+        "--genome",
+        "/work/galGal6.fa",
+        "--species",
+        "others",
+        "--step",
+        "final",
+        "--overwrite",
+        "0",
+        "--sensitive",
+        "1",
+        "--anno",
+        "1",
+        "--threads",
+        "16"
+      ],
+      "returncode": 0,
+      "wall_seconds": 5854.372850803193,
+      "stdout": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_final_annotation.stdout",
+      "stderr": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_final_annotation.stderr",
+      "time": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/edta_final_annotation.time",
+      "max_rss_kb": 2608608
+    }
+  ],
+  "prior_native_slurm_seconds": 5948,
+  "native_remaining_before_export_seconds": 425733,
+  "native_raw_aggregate": {
+    "status": "PASS",
+    "source_lines": "EDTA.pl ALL lines 516-520 reproduced verbatim in pinned container",
+    "files": {
+      "fasta": {
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/galGal6.fa.mod.EDTA.raw/galGal6.fa.mod.EDTA.intact.raw.fa",
+        "bytes": 12629621
+      },
+      "gff3": {
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/galGal6.fa.mod.EDTA.raw/galGal6.fa.mod.EDTA.intact.raw.gff3",
+        "bytes": 1511420
+      }
+    },
+    "components": [
+      "LTR.intact.raw",
+      "TIR.intact.raw",
+      "Helitron.intact.raw"
+    ]
+  },
+  "sequence_id_decoding": {
+    "status": "PASS",
+    "map": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-export-13192771/galGal6.fa.mod.seqid.map",
+    "encoded_annotation_seqids": 0,
+    "basis": "EDTA.pl native seqid_codec decode_text after final annotation"
+  },
+  "native_output": {
+    "annotation_gff3": "annotation.gff3",
+    "library_fasta": "library.fasta",
+    "annotation_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/galGal6.fa.mod.EDTA.TEanno.gff3",
+    "library_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/galGal6.fa.mod.EDTA.TElib.fa",
+    "selection": "EDTA.pl top-level published outputs after native seqid decoding",
+    "masking_output": null,
+    "maker_masked_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938/galGal6.fa.mod.MAKER.masked",
+    "maker_mask_policy": "native filtered hardmask (reported 6.19%); not the full TEanno coverage or scoring input"
+  },
+  "annotation_summary": "annotation_summary.json",
+  "rm2_library_summary_repairs": {
+    "chicken": {
+      "revision": "native-fasta-hash-suffix-v1",
+      "backup": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/annotation_summary.before-header-fix-20260925.json",
+      "native_annotation_and_scores_unchanged": true
+    },
+    "zebrafish": {
+      "revision": "native-fasta-hash-suffix-v1",
+      "backup": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/annotation_summary.before-header-fix-20260925.json",
+      "native_annotation_and_scores_unchanged": true
+    }
+  },
+  "finished_epoch": 1790291284.698613,
+  "wall_seconds": 4.452019415795803
+}

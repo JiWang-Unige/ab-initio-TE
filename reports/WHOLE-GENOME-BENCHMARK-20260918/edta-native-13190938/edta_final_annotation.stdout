@@ -1,0 +1,44 @@
+
+#########################################################
+##### Extensive de-novo TE Annotator (EDTA) v2.3  #####
+##### Shujun Ou (shujun.ou.1@gmail.com)             #####
+#########################################################
+
+
+Parameters: --genome /work/galGal6.fa --species others --step final --overwrite 0 --sensitive 1 --anno 1 --threads 16
+
+
+Thu Sep 24 22:47:50 CEST 2026	Dependency checking:
+	All passed!
+
+Thu Sep 24 22:49:08 CEST 2026	Existing encoded genome galGal6.fa.mod and mapping file found, integrity verified.
+
+Thu Sep 24 22:49:08 CEST 2026	Perform EDTA final steps to generate a non-redundant comprehensive TE library.
+
+	Filter RepeatModeler results that are ignored in the raw step.
+
+	Skipping the CDS cleaning step (--cds [File]) since no CDS file is provided or it's empty.
+
+Thu Sep 24 23:03:18 CEST 2026	EDTA final stage finished! You may check out:
+		The final EDTA TE library: galGal6.fa.mod.EDTA.TElib.fa
+Thu Sep 24 23:05:52 CEST 2026	Perform post-EDTA analysis for whole-genome annotation:
+
+Fri Sep 25 00:08:29 CEST 2026	TE annotation using the EDTA library has finished! Check out:
+		Whole-genome TE annotation (total TE: 12.97%): galGal6.fa.mod.EDTA.TEanno.gff3 galGal6.fa.mod.EDTA.TEanno.gtf
+		Whole-genome TE annotation summary: galGal6.fa.mod.EDTA.TEanno.sum
+		Whole-genome TE divergence plot: galGal6.fa.mod_divergence_plot.pdf
+		Whole-genome TE density plot: galGal6.fa.mod.EDTA.TEanno.density_plots.pdf
+		Low-threshold TE masking for MAKER gene annotation (masked: 6.19%): galGal6.fa.mod.MAKER.masked
+
+Fri Sep 25 00:08:36 CEST 2026	Evaluate the level of inconsistency for whole-genome TE annotation:
+
+Fri Sep 25 00:25:24 CEST 2026	Evaluation of TE annotation finished! Check out these files:
+		(each contains unfiltered + divergence-titrated reports at <=40%, <=30%, <=20%, <=10%, <=5%)
+
+		Overall: galGal6.fa.mod.EDTA.TE.fa.stat.all.sum
+		Nested: galGal6.fa.mod.EDTA.TE.fa.stat.nested.sum
+		Non-nested: galGal6.fa.mod.EDTA.TE.fa.stat.redun.sum
+
+		If you want to learn more about the formatting and information of these files, please visit:
+			https://github.com/oushujun/EDTA/wiki/Making-sense-of-EDTA-usage-and-outputs---Q&A
+

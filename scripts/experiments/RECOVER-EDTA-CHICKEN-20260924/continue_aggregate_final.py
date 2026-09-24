@@ -210,12 +210,13 @@ test -s galGal6.fa.mod.EDTA.intact.raw.gff3
                                "--step", "final", "--overwrite", "0",
                                "--sensitive", "1", "--anno", "1", "--threads", "16"],
         )
-        final_candidates = sorted(path for path in output.rglob("*.EDTA.TEanno.gff3")
-                                 if path.is_file() and path.stat().st_size > 0)
-        library_candidates = sorted(path for path in output.rglob("*.EDTA.TElib.fa")
-                                    if path.is_file() and path.stat().st_size > 0)
-        if len(final_candidates) != 1 or len(library_candidates) != 1:
-            raise RuntimeError(f"terminal EDTA outputs not unique: gff={final_candidates}, lib={library_candidates}")
+        # EDTA deliberately retains working copies under .anno/.final. Only
+        # the top-level published output has undergone native seqid decoding.
+        final_candidates = [output / f"{NORMALIZED_BASENAME}.EDTA.TEanno.gff3"]
+        library_candidates = [output / f"{NORMALIZED_BASENAME}.EDTA.TElib.fa"]
+        for path in final_candidates + library_candidates:
+            if not path.is_file() or path.stat().st_size == 0:
+                raise RuntimeError(f"missing canonical terminal EDTA output: {path}")
         annotation = output / "annotation.gff3"
         library = output / "library.fasta"
         shutil.copy2(final_candidates[0], annotation)

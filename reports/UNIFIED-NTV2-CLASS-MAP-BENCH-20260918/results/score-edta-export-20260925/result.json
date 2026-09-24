@@ -1,0 +1,2947 @@
+{
+  "elapsed_seconds": 174.09113693237305,
+  "evaluation_contract": {
+    "callable_mask": "only A/C/G/T bases; N and other IUPAC bases are excluded from class denominators and reported separately",
+    "coordinate_convention": "0-based half-open",
+    "d_binary": "N/A for class metrics; WHOLE D output is binary material only and is not remapped into classes",
+    "full8_endpoint": "8-by-8 reference-row/prediction-column confusion on all callable bases; source Unknown/UNCLASSIFIED remains an explicit row",
+    "primary_known_endpoint": "macro metrics over reference BG/SINE/LINE/LTR/DNA positions only; source KNOWN_OTHER_TE, AMBIGUOUS_TE and UNCLASSIFIED positions are excluded from this denominator",
+    "source_mapping": "same frozen SF5 ontology policy as the matched class trainer: BG default, SINE/LINE/LTR/DNA main classes, RC/Retroposon KNOWN_OTHER_TE, ? AMBIGUOUS_TE, Unknown/Unspecified/unresolved UNCLASSIFIED",
+    "source_overlap_policy": "sort source intervals by (start,end,ontology_label_id), then ordered paint; later row wins",
+    "true_te_endpoint": "conditional readout on reference SINE/LINE/LTR/DNA bases, with per-class exact recall and any-main-TE recovery",
+    "truth_boundary": "same-assembly UCSC RepeatMasker is a comparator layer, not exhaustive biological truth; native unknown and source unknown are never silently treated as negative",
+    "unknown_reporting": "source Unknown/UNCLASSIFIED and AMBIGUOUS_TE bp/rows are reported in full even when excluded from primary known denominator"
+  },
+  "model_contract": {
+    "base_model": ".backup/pretrained_models/nucleotide-transformer-v2-500m-multi-species",
+    "checkpoint_contract": "validation-selected best_model from class job 12889091; no test or chromosome score selection",
+    "class_checkpoint_env": "CLASS_MODEL",
+    "class_training_job": "12889091",
+    "class_training_protocol": "UNIFIED-NTV2-REPRESENTATION-20260918",
+    "label_map": {
+      "0": "BG",
+      "1": "SINE",
+      "2": "LINE",
+      "3": "LTR",
+      "4": "DNA",
+      "5": "KNOWN_OTHER_TE",
+      "6": "AMBIGUOUS_TE",
+      "7": "UNCLASSIFIED"
+    },
+    "name": "NTv2-500M",
+    "prediction": "native 8-class token argmax projected back to covered bases; no threshold or calibration",
+    "token_projection": "representation trainer sequence_tokens: six-base tokens plus a final shorter token, non-ACGT token mapped to native <unk>",
+    "window_alignment": "nonoverlapping, contig origin 0",
+    "window_bp": 4096
+  },
+  "native_comparator_availability": {
+    "all_declared_cells_completed": false,
+    "na_cells": [
+      {
+        "method": "EDTA",
+        "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+        "native_status": {
+          "exit_code": null,
+          "job_id": null,
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "slurm_job_id": null,
+          "stages": [
+            {
+              "max_rss_kb": 127086448,
+              "name": "edta_all",
+              "returncode": 2,
+              "role": "combined_discovery_and_masking",
+              "wall_seconds_observed": 209554.33987208898
+            }
+          ],
+          "status": "FAILED",
+          "wall_seconds": 209558.30159687996
+        },
+        "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+        "reason": "terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+        "species": "zebrafish",
+        "status": "NA",
+        "terminal_ledger_entry": {
+          "cell": "zebrafish/EDTA",
+          "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file.",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+          "slurm": {
+            "cell": "zebrafish/EDTA",
+            "elapsed": "2-10:13:00",
+            "exit_code": "0:125",
+            "job_id": "12888196",
+            "resources": "16 CPU, 128G, private-teodoro-gpu",
+            "state": "OUT_OF_MEMORY"
+          },
+          "stages": {
+            "edta_all": {
+              "max_rss_kb": 127086448,
+              "returncode": 2,
+              "wall_seconds": 209554.33987208898
+            }
+          },
+          "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+          "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "terminal_state": "OUT_OF_MEMORY",
+          "wall_seconds": 209558.30159687996
+        },
+        "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+        "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+        "terminal_state": "OUT_OF_MEMORY"
+      }
+    ],
+    "policy": "A missing or non-terminal native cell is reported as NA; it is never represented by zero-valued metrics. Completed NTv2 and native cells remain scoreable.",
+    "terminal_ledger_loaded": true,
+    "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json"
+  },
+  "native_timing_boundary": "Native EDTA/RM2 timing fields are whole-genome cell metadata from WHOLE-GENOME-BENCHMARK; this result does not present them as class-map or full-genome CPU timing.",
+  "protocol": "UNIFIED-NTV2-CLASS-MAP-BENCH-20260918",
+  "quality_only": true,
+  "scope": "chicken chr10/chr20 and zebrafish chr10/chr20; fixed before native score inspection",
+  "species": {
+    "chicken": {
+      "assembly": "galGal6",
+      "method_outputs": {
+        "EDTA": {
+          "ambiguous_rows": 0,
+          "annotation": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-export-13192771/annotation.gff3",
+          "feature_rows": {
+            "5s_sine_retrotransposon": 10,
+            "cacta_tir_transposon": 608,
+            "copia_ltr_retrotransposon": 1,
+            "cr1_line_retrotransposon": 3611,
+            "crypton_yr_transposon": 3,
+            "dna_transposon": 1,
+            "endogenous_retrovirus_ltr_retrotransposon": 6,
+            "gypsy_ltr_retrotransposon": 22,
+            "hat_tir_transposon": 30,
+            "helitron": 307,
+            "kolobok_tir_transposon": 2,
+            "ltr_retrotransposon": 219,
+            "mir_sine_retrotransposon": 6,
+            "mutator_tir_transposon": 123,
+            "pif_harbinger_tir_transposon": 99,
+            "repeat_fragment": 141,
+            "retrovirus_ltr_retrotransposon": 29,
+            "rrna_gene": 45,
+            "tc1_mariner_tir_transposon": 15,
+            "trna_sine_retrotransposon": 38
+          },
+          "format": "EDTA_GFF3",
+          "included_rows": 5241,
+          "normalized_label_counts": {
+            "BG": 32167207,
+            "DNA": 665138,
+            "LINE": 1503495,
+            "LTR": 110434,
+            "NONCALLABLE": 501600,
+            "SINE": 3628,
+            "UNCLASSIFIED": 65625
+          },
+          "normalized_output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-export-20260925/native/chicken/EDTA/predicted_classes.bed.gz",
+          "parent_policy": "suppress repeat_region only when replaced by a complete TE child or explicit match-part evidence; retain complete TE bodies such as LTR_retrotransposon even when they have structural LTR/TIR children",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-export-13192771/annotation.gff3",
+          "raw_class_rows": {
+            "DNA": 1,
+            "DNA/Crypton": 3,
+            "DNA/DTA": 27,
+            "DNA/DTC": 589,
+            "DNA/DTH": 97,
+            "DNA/DTM": 118,
+            "DNA/DTT": 13,
+            "DNA/Helitron": 307,
+            "DNA/Kolobok": 2,
+            "DNA/PIF-Harbinger": 1,
+            "DNA/TcMar-Tigger": 2,
+            "DNA/hAT": 1,
+            "DNA/hAT-Blackjack": 1,
+            "LINE/CR1": 3611,
+            "LTR/Copia": 1,
+            "LTR/ERVK": 1,
+            "LTR/ERVL": 5,
+            "LTR/Gypsy": 22,
+            "LTR/Retrovirus": 29,
+            "LTR/unknown": 219,
+            "MITE/DTA": 1,
+            "MITE/DTC": 19,
+            "MITE/DTH": 1,
+            "MITE/DTM": 5,
+            "SINE/5S-Deu-L2": 10,
+            "SINE/MIR": 6,
+            "SINE/tRNA": 8,
+            "unknown": 141
+          },
+          "retained_feature_rows": {
+            "5s_sine_retrotransposon": 10,
+            "cacta_tir_transposon": 608,
+            "copia_ltr_retrotransposon": 1,
+            "cr1_line_retrotransposon": 3611,
+            "crypton_yr_transposon": 3,
+            "dna_transposon": 1,
+            "endogenous_retrovirus_ltr_retrotransposon": 6,
+            "gypsy_ltr_retrotransposon": 22,
+            "hat_tir_transposon": 30,
+            "helitron": 307,
+            "kolobok_tir_transposon": 2,
+            "ltr_retrotransposon": 219,
+            "mir_sine_retrotransposon": 6,
+            "mutator_tir_transposon": 123,
+            "pif_harbinger_tir_transposon": 99,
+            "repeat_fragment": 141,
+            "retrovirus_ltr_retrotransposon": 29,
+            "tc1_mariner_tir_transposon": 15,
+            "trna_sine_retrotransposon": 8
+          },
+          "rows_seen": 297984,
+          "skipped_non_te_rows": 75,
+          "skipped_parent_or_missing_class_rows": 0,
+          "status": "COMPLETED",
+          "suppressed_parent_reasons": {},
+          "suppressed_parent_rows": 0,
+          "target_rows": 5316,
+          "unknown_rows": 141,
+          "unresolved_class_rows": {
+            "unknown": 141
+          },
+          "whole_cell_status": {
+            "annotation_summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-export-13192771/annotation_summary.json",
+            "stages": [],
+            "status": "COMPLETED",
+            "wall_seconds": 4.452019415795803
+          }
+        },
+        "NTv2_class": {
+          "format": "per_base_class_runs",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/chicken/predicted_classes.bed.gz",
+          "prediction_source": "frozen class checkpoint argmax; no threshold or calibration",
+          "status": "COMPLETED"
+        },
+        "RM2": {
+          "ambiguous_rows": 0,
+          "annotation": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/annotation.out",
+          "format": "RepeatMasker_out",
+          "included_rows": 6974,
+          "normalized_label_counts": {
+            "BG": 32390842,
+            "DNA": 350980,
+            "LINE": 1277190,
+            "LTR": 120081,
+            "NONCALLABLE": 501600,
+            "SINE": 12883,
+            "UNCLASSIFIED": 363551
+          },
+          "normalized_output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-export-20260925/native/chicken/RM2/predicted_classes.bed.gz",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/annotation.out",
+          "raw_class_rows": {
+            "DNA": 906,
+            "DNA/Crypton": 108,
+            "DNA/Kolobok": 320,
+            "DNA/MULE-MuDR": 6699,
+            "DNA/Maverick": 734,
+            "DNA/Merlin": 143,
+            "DNA/PIF-Harbinger": 223,
+            "DNA/Sola-1": 233,
+            "DNA/TcMar": 147,
+            "DNA/TcMar-Mariner": 17437,
+            "DNA/hAT-Charlie": 5242,
+            "LINE": 24,
+            "LINE/CR1": 247315,
+            "LINE/L1": 590,
+            "LINE/L2": 70,
+            "LTR": 147,
+            "LTR/ERV": 1937,
+            "LTR/ERV1": 6520,
+            "LTR/ERVK": 3659,
+            "LTR/ERVL": 24208,
+            "LTR/Gypsy": 484,
+            "LTR/Ngaro": 127,
+            "Low_complexity": 52757,
+            "SINE/5S": 144,
+            "SINE/5S-Deu-L2": 551,
+            "SINE/MIR": 1221,
+            "SINE/tRNA": 574,
+            "Satellite": 199,
+            "Simple_repeat": 294421,
+            "Unknown": 46441,
+            "rRNA": 50,
+            "snRNA": 50
+          },
+          "rows_seen": 713681,
+          "skipped_non_te_rows": 9103,
+          "skipped_parent_or_missing_class_rows": 0,
+          "status": "COMPLETED",
+          "target_rows": 16077,
+          "unknown_rows": 910,
+          "unresolved_class_rows": {
+            "Unknown": 910
+          },
+          "whole_cell_status": {
+            "annotation_summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/annotation_summary.json",
+            "stages": [
+              {
+                "argv": [
+                  "apptainer",
+                  "exec",
+                  "--cleanenv",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2:/work",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/opt/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/RepeatMasker/Libraries/famdb:ro",
+                  "--pwd",
+                  "/work",
+                  "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+                  "env",
+                  "HOME=/work/home",
+                  "TMPDIR=/work/tmp",
+                  "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+                  "BLAST_USAGE_REPORT=false",
+                  "RepeatMasker",
+                  "-e",
+                  "rmblast",
+                  "-pa",
+                  "4",
+                  "-gff",
+                  "-xsmall",
+                  "-lib",
+                  "/work/consensi.fa.classified",
+                  "-dir",
+                  "/work/repeatmasker",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa"
+                ],
+                "classification_reused": true,
+                "elapsed_wall_seconds": null,
+                "mask_parallelism": "RepeatMasker -pa 4; same frozen native command",
+                "max_rss_kb": 2805628,
+                "name": "repeatmasker",
+                "returncode": 0,
+                "role": "masking",
+                "stderr": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/repeatmasker.stderr",
+                "stdout": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/repeatmasker.stdout",
+                "system_seconds": 2279.94,
+                "time_argv": [
+                  "/usr/bin/time",
+                  "-v",
+                  "-o",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/repeatmasker.time",
+                  "apptainer",
+                  "exec",
+                  "--cleanenv",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2:/work",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/opt/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/RepeatMasker/Libraries/famdb:ro",
+                  "--pwd",
+                  "/work",
+                  "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+                  "env",
+                  "HOME=/work/home",
+                  "TMPDIR=/work/tmp",
+                  "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+                  "BLAST_USAGE_REPORT=false",
+                  "RepeatMasker",
+                  "-e",
+                  "rmblast",
+                  "-pa",
+                  "4",
+                  "-gff",
+                  "-xsmall",
+                  "-lib",
+                  "/work/consensi.fa.classified",
+                  "-dir",
+                  "/work/repeatmasker",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa"
+                ],
+                "time_v": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/repeatmasker.time",
+                "user_seconds": 31178.13,
+                "wall_seconds_observed": 7922.9293481800705
+              }
+            ],
+            "status": "COMPLETED",
+            "wall_seconds": 7938.509983062744
+          }
+        }
+      },
+      "methods": {
+        "D_binary": {
+          "reason": "WHOLE D output is binary material-only and has no class prediction; it is not remapped",
+          "status": "N/A"
+        },
+        "EDTA": {
+          "callable_bp": 34515527,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                31780453,
+                326,
+                578048,
+                60447,
+                520966,
+                0,
+                0,
+                53514
+              ],
+              [
+                26967,
+                3302,
+                0,
+                0,
+                160,
+                0,
+                0,
+                0
+              ],
+              [
+                206596,
+                0,
+                859739,
+                249,
+                18553,
+                0,
+                0,
+                0
+              ],
+              [
+                35962,
+                0,
+                35688,
+                49738,
+                59850,
+                0,
+                0,
+                1332
+              ],
+              [
+                82016,
+                0,
+                30020,
+                0,
+                64257,
+                0,
+                0,
+                10656
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                17468,
+                0,
+                0,
+                0,
+                787,
+                0,
+                0,
+                0
+              ],
+              [
+                17745,
+                0,
+                0,
+                0,
+                565,
+                0,
+                0,
+                123
+              ]
+            ],
+            "macro_f1": 0.33240711769107845,
+            "macro_precision": 0.43125928994023327,
+            "macro_recall": 0.3552638213408549,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 18255,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 18255,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.975444576392911,
+                "fn_bp": 1213301,
+                "fp_bp": 386754,
+                "precision": 0.9879767615509796,
+                "recall": 0.9632263427799092,
+                "support_bp": 32993754,
+                "tp_bp": 31780453
+              },
+              "DNA": {
+                "f1": 0.15082262726693402,
+                "fn_bp": 122692,
+                "fp_bp": 600881,
+                "precision": 0.09660701989662296,
+                "recall": 0.34371406105408425,
+                "support_bp": 186949,
+                "tp_bp": 64257
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.0,
+                "fn_bp": 0,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 0,
+                "tp_bp": 0
+              },
+              "LINE": {
+                "f1": 0.6642419625501037,
+                "fn_bp": 225398,
+                "fp_bp": 643756,
+                "precision": 0.5718269764781393,
+                "recall": 0.7922861352990452,
+                "support_bp": 1085137,
+                "tp_bp": 859739
+              },
+              "LTR": {
+                "f1": 0.33950389755771254,
+                "fn_bp": 132832,
+                "fp_bp": 60696,
+                "precision": 0.450386656283391,
+                "recall": 0.2724324916470395,
+                "support_bp": 182570,
+                "tp_bp": 49738
+              },
+              "SINE": {
+                "f1": 0.193910209354905,
+                "fn_bp": 27127,
+                "fp_bp": 326,
+                "precision": 0.9101433296582139,
+                "recall": 0.10851490354595944,
+                "support_bp": 30429,
+                "tp_bp": 3302
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.002926550714982512,
+                "fn_bp": 18310,
+                "fp_bp": 65502,
+                "precision": 0.0018742857142857142,
+                "recall": 0.006672815059946834,
+                "support_bp": 18433,
+                "tp_bp": 123
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 34515527
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                31780453,
+                326,
+                578048,
+                60447,
+                520966,
+                0,
+                0,
+                53514
+              ],
+              [
+                26967,
+                3302,
+                0,
+                0,
+                160,
+                0,
+                0,
+                0
+              ],
+              [
+                206596,
+                0,
+                859739,
+                249,
+                18553,
+                0,
+                0,
+                0
+              ],
+              [
+                35962,
+                0,
+                35688,
+                49738,
+                59850,
+                0,
+                0,
+                1332
+              ],
+              [
+                82016,
+                0,
+                30020,
+                0,
+                64257,
+                0,
+                0,
+                10656
+              ]
+            ],
+            "macro_f1": 0.4649380756144879,
+            "macro_precision": 0.6036440445943946,
+            "macro_recall": 0.4960347868652075,
+            "per_class": {
+              "BG": {
+                "f1": 0.9759719919071025,
+                "fn_bp": 1213301,
+                "fp_bp": 351541,
+                "precision": 0.9890594713792117,
+                "recall": 0.9632263427799092,
+                "support_bp": 32993754,
+                "tp_bp": 31780453
+              },
+              "DNA": {
+                "f1": 0.15106231670261594,
+                "fn_bp": 122692,
+                "fp_bp": 599529,
+                "precision": 0.0968037891730166,
+                "recall": 0.34371406105408425,
+                "support_bp": 186949,
+                "tp_bp": 64257
+              },
+              "LINE": {
+                "f1": 0.6642419625501037,
+                "fn_bp": 225398,
+                "fp_bp": 643756,
+                "precision": 0.5718269764781393,
+                "recall": 0.7922861352990452,
+                "support_bp": 1085137,
+                "tp_bp": 859739
+              },
+              "LTR": {
+                "f1": 0.33950389755771254,
+                "fn_bp": 132832,
+                "fp_bp": 60696,
+                "precision": 0.450386656283391,
+                "recall": 0.2724324916470395,
+                "support_bp": 182570,
+                "tp_bp": 49738
+              },
+              "SINE": {
+                "f1": 0.193910209354905,
+                "fn_bp": 27127,
+                "fp_bp": 326,
+                "precision": 0.9101433296582139,
+                "recall": 0.10851490354595944,
+                "support_bp": 30429,
+                "tp_bp": 3302
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 34478839
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 18255,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 18255,
+            "BG": 32993754,
+            "DNA": 186949,
+            "KNOWN_OTHER_TE": 0,
+            "LINE": 1085137,
+            "LTR": 182570,
+            "SINE": 30429,
+            "UNCLASSIFIED": 18433
+          },
+          "source_known_other_bp": 0,
+          "source_unknown_unclassified_bp": 18433,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.7552133379570867,
+            "any_main4_te_recovery_bp": 1121556,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                26967,
+                3302,
+                0,
+                0,
+                160,
+                0,
+                0,
+                0
+              ],
+              [
+                206596,
+                0,
+                859739,
+                249,
+                18553,
+                0,
+                0,
+                0
+              ],
+              [
+                35962,
+                0,
+                35688,
+                49738,
+                59850,
+                0,
+                0,
+                1332
+              ],
+              [
+                82016,
+                0,
+                30020,
+                0,
+                64257,
+                0,
+                0,
+                10656
+              ]
+            ],
+            "macro_f1": 0.4671138902704335,
+            "macro_precision": 0.8434833295679208,
+            "macro_recall": 0.37923689788653214,
+            "per_class": {
+              "DNA": {
+                "f1": 0.3897091600483975,
+                "fn_bp": 122692,
+                "fp_bp": 78563,
+                "precision": 0.4499159781543201,
+                "recall": 0.34371406105408425,
+                "support_bp": 186949,
+                "tp_bp": 64257
+              },
+              "LINE": {
+                "f1": 0.8552132116837694,
+                "fn_bp": 225398,
+                "fp_bp": 65708,
+                "precision": 0.9289986352540989,
+                "recall": 0.7922861352990452,
+                "support_bp": 1085137,
+                "tp_bp": 859739
+              },
+              "LTR": {
+                "f1": 0.4277488959695902,
+                "fn_bp": 132832,
+                "fp_bp": 249,
+                "precision": 0.9950187048632645,
+                "recall": 0.2724324916470395,
+                "support_bp": 182570,
+                "tp_bp": 49738
+              },
+              "SINE": {
+                "f1": 0.19578429337997688,
+                "fn_bp": 27127,
+                "fp_bp": 0,
+                "precision": 1.0,
+                "recall": 0.10851490354595944,
+                "support_bp": 30429,
+                "tp_bp": 3302
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 1485085
+          }
+        },
+        "NTv2_class": {
+          "callable_bp": 34515527,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                32653483,
+                34005,
+                235358,
+                61607,
+                9301,
+                0,
+                0,
+                0
+              ],
+              [
+                6402,
+                9637,
+                13182,
+                432,
+                776,
+                0,
+                0,
+                0
+              ],
+              [
+                84185,
+                1204,
+                996358,
+                3009,
+                381,
+                0,
+                0,
+                0
+              ],
+              [
+                50815,
+                10,
+                8269,
+                123459,
+                17,
+                0,
+                0,
+                0
+              ],
+              [
+                100108,
+                1257,
+                9924,
+                24227,
+                51433,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                14768,
+                111,
+                702,
+                56,
+                2618,
+                0,
+                0,
+                0
+              ],
+              [
+                18432,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.4462933432937814,
+            "macro_precision": 0.4808294095085888,
+            "macro_recall": 0.45370339160825024,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 18255,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 18255,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.9906710734742104,
+                "fn_bp": 340271,
+                "fp_bp": 274710,
+                "precision": 0.9916573010854255,
+                "recall": 0.9896868055693208,
+                "support_bp": 32993754,
+                "tp_bp": 32653483
+              },
+              "DNA": {
+                "f1": 0.4090506014514365,
+                "fn_bp": 135516,
+                "fp_bp": 13093,
+                "precision": 0.7970895452995692,
+                "recall": 0.2751178128794484,
+                "support_bp": 186949,
+                "tp_bp": 51433
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.0,
+                "fn_bp": 0,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 0,
+                "tp_bp": 0
+              },
+              "LINE": {
+                "f1": 0.8483505255584458,
+                "fn_bp": 88779,
+                "fp_bp": 267435,
+                "precision": 0.7883870222417754,
+                "recall": 0.9181863672513241,
+                "support_bp": 1085137,
+                "tp_bp": 996358
+              },
+              "LTR": {
+                "f1": 0.6245396600566572,
+                "fn_bp": 59111,
+                "fp_bp": 89331,
+                "precision": 0.5801917383335683,
+                "recall": 0.6762282959960563,
+                "support_bp": 182570,
+                "tp_bp": 123459
+              },
+              "SINE": {
+                "f1": 0.25144154251572,
+                "fn_bp": 20792,
+                "fp_bp": 36588,
+                "precision": 0.20848025959978367,
+                "recall": 0.3167044595616024,
+                "support_bp": 30429,
+                "tp_bp": 9637
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.0,
+                "fn_bp": 18433,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 18433,
+                "tp_bp": 0
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 34515527
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                32653483,
+                34005,
+                235358,
+                61607,
+                9301,
+                0,
+                0,
+                0
+              ],
+              [
+                6402,
+                9637,
+                13182,
+                432,
+                776,
+                0,
+                0,
+                0
+              ],
+              [
+                84185,
+                1204,
+                996358,
+                3009,
+                381,
+                0,
+                0,
+                0
+              ],
+              [
+                50815,
+                10,
+                8269,
+                123459,
+                17,
+                0,
+                0,
+                0
+              ],
+              [
+                100108,
+                1257,
+                9924,
+                24227,
+                51433,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.6259131687276955,
+            "macro_precision": 0.6803223488822787,
+            "macro_recall": 0.6351847482515504,
+            "per_class": {
+              "BG": {
+                "f1": 0.9911702524863617,
+                "fn_bp": 340271,
+                "fp_bp": 241510,
+                "precision": 0.9926581531724297,
+                "recall": 0.9896868055693208,
+                "support_bp": 32993754,
+                "tp_bp": 32653483
+              },
+              "DNA": {
+                "f1": 0.41335385381966355,
+                "fn_bp": 135516,
+                "fp_bp": 10475,
+                "precision": 0.8307973121405957,
+                "recall": 0.2751178128794484,
+                "support_bp": 186949,
+                "tp_bp": 51433
+              },
+              "LINE": {
+                "f1": 0.8486041389507323,
+                "fn_bp": 88779,
+                "fp_bp": 266733,
+                "precision": 0.7888251915341017,
+                "recall": 0.9181863672513241,
+                "support_bp": 1085137,
+                "tp_bp": 996358
+              },
+              "LTR": {
+                "f1": 0.6246281342966425,
+                "fn_bp": 59111,
+                "fp_bp": 89275,
+                "precision": 0.5803444677390545,
+                "recall": 0.6762282959960563,
+                "support_bp": 182570,
+                "tp_bp": 123459
+              },
+              "SINE": {
+                "f1": 0.2518094640850775,
+                "fn_bp": 20792,
+                "fp_bp": 36476,
+                "precision": 0.20898661982521197,
+                "recall": 0.3167044595616024,
+                "support_bp": 30429,
+                "tp_bp": 9637
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 34478839
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 18255,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 18255,
+            "BG": 32993754,
+            "DNA": 186949,
+            "KNOWN_OTHER_TE": 0,
+            "LINE": 1085137,
+            "LTR": 182570,
+            "SINE": 30429,
+            "UNCLASSIFIED": 18433
+          },
+          "source_known_other_bp": 0,
+          "source_unknown_unclassified_bp": 18433,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.8373763117936011,
+            "any_main4_te_recovery_bp": 1243575,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                6402,
+                9637,
+                13182,
+                432,
+                776,
+                0,
+                0,
+                0
+              ],
+              [
+                84185,
+                1204,
+                996358,
+                3009,
+                381,
+                0,
+                0,
+                0
+              ],
+              [
+                50815,
+                10,
+                8269,
+                123459,
+                17,
+                0,
+                0,
+                0
+              ],
+              [
+                100108,
+                1257,
+                9924,
+                24227,
+                51433,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.6413982956303694,
+            "macro_precision": 0.8899993663212392,
+            "macro_recall": 0.5465592339221078,
+            "per_class": {
+              "DNA": {
+                "f1": 0.4294027283808379,
+                "fn_bp": 135516,
+                "fp_bp": 1174,
+                "precision": 0.9776835782310339,
+                "recall": 0.2751178128794484,
+                "support_bp": 186949,
+                "tp_bp": 51433
+              },
+              "LINE": {
+                "f1": 0.9431323271190372,
+                "fn_bp": 88779,
+                "fp_bp": 31375,
+                "precision": 0.9694716429267135,
+                "recall": 0.9181863672513241,
+                "support_bp": 1085137,
+                "tp_bp": 996358
+              },
+              "LTR": {
+                "f1": 0.7399467181305195,
+                "fn_bp": 59111,
+                "fp_bp": 27668,
+                "precision": 0.8169221912695944,
+                "recall": 0.6762282959960563,
+                "support_bp": 182570,
+                "tp_bp": 123459
+              },
+              "SINE": {
+                "f1": 0.45311140889108315,
+                "fn_bp": 20792,
+                "fp_bp": 2471,
+                "precision": 0.7959200528576148,
+                "recall": 0.3167044595616024,
+                "support_bp": 30429,
+                "tp_bp": 9637
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 1485085
+          }
+        },
+        "RM2": {
+          "callable_bp": 34515527,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                32133326,
+                2138,
+                303443,
+                46632,
+                232813,
+                0,
+                0,
+                275402
+              ],
+              [
+                22845,
+                7584,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                125242,
+                0,
+                955788,
+                1884,
+                14,
+                0,
+                0,
+                2209
+              ],
+              [
+                10129,
+                0,
+                17638,
+                71479,
+                1324,
+                0,
+                0,
+                82000
+              ],
+              [
+                65414,
+                2721,
+                321,
+                86,
+                114802,
+                0,
+                0,
+                3605
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                15788,
+                440,
+                0,
+                0,
+                2027,
+                0,
+                0,
+                0
+              ],
+              [
+                18098,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                335
+              ]
+            ],
+            "macro_f1": 0.43474762361842884,
+            "macro_precision": 0.46462179922064034,
+            "macro_recall": 0.446818317589931,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 18255,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 18255,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.9829020278721305,
+                "fn_bp": 860428,
+                "fp_bp": 257516,
+                "precision": 0.9920497281299449,
+                "recall": 0.9739214882913899,
+                "support_bp": 32993754,
+                "tp_bp": 32133326
+              },
+              "DNA": {
+                "f1": 0.4268295630092447,
+                "fn_bp": 72147,
+                "fp_bp": 236178,
+                "precision": 0.3270898626702376,
+                "recall": 0.614081915388689,
+                "support_bp": 186949,
+                "tp_bp": 114802
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.0,
+                "fn_bp": 0,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 0,
+                "tp_bp": 0
+              },
+              "LINE": {
+                "f1": 0.8091919535271789,
+                "fn_bp": 129349,
+                "fp_bp": 321402,
+                "precision": 0.7483522420313344,
+                "recall": 0.880799382935058,
+                "support_bp": 1085137,
+                "tp_bp": 955788
+              },
+              "LTR": {
+                "f1": 0.47235264380424974,
+                "fn_bp": 111091,
+                "fp_bp": 48602,
+                "precision": 0.5952565351720922,
+                "recall": 0.3915155830640302,
+                "support_bp": 182570,
+                "tp_bp": 71479
+              },
+              "SINE": {
+                "f1": 0.35020317694865166,
+                "fn_bp": 22845,
+                "fp_bp": 5299,
+                "precision": 0.5886827602266553,
+                "recall": 0.2492359262545598,
+                "support_bp": 30429,
+                "tp_bp": 7584
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.0017540001675462845,
+                "fn_bp": 18098,
+                "fp_bp": 363216,
+                "precision": 0.0009214663142172625,
+                "recall": 0.018173927195790158,
+                "support_bp": 18433,
+                "tp_bp": 335
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 34515527
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                32133326,
+                2138,
+                303443,
+                46632,
+                232813,
+                0,
+                0,
+                275402
+              ],
+              [
+                22845,
+                7584,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                125242,
+                0,
+                955788,
+                1884,
+                14,
+                0,
+                0,
+                2209
+              ],
+              [
+                10129,
+                0,
+                17638,
+                71479,
+                1324,
+                0,
+                0,
+                82000
+              ],
+              [
+                65414,
+                2721,
+                321,
+                86,
+                114802,
+                0,
+                0,
+                3605
+              ]
+            ],
+            "macro_f1": 0.6094395283260607,
+            "macro_precision": 0.6550373231425592,
+            "macro_recall": 0.6219108591867453,
+            "per_class": {
+              "BG": {
+                "f1": 0.9834116874935254,
+                "fn_bp": 860428,
+                "fp_bp": 223630,
+                "precision": 0.9930886576598862,
+                "recall": 0.9739214882913899,
+                "support_bp": 32993754,
+                "tp_bp": 32133326
+              },
+              "DNA": {
+                "f1": 0.428444006553437,
+                "fn_bp": 72147,
+                "fp_bp": 234151,
+                "precision": 0.32898986396448804,
+                "recall": 0.614081915388689,
+                "support_bp": 186949,
+                "tp_bp": 114802
+              },
+              "LINE": {
+                "f1": 0.8091919535271789,
+                "fn_bp": 129349,
+                "fp_bp": 321402,
+                "precision": 0.7483522420313344,
+                "recall": 0.880799382935058,
+                "support_bp": 1085137,
+                "tp_bp": 955788
+              },
+              "LTR": {
+                "f1": 0.47235264380424974,
+                "fn_bp": 111091,
+                "fp_bp": 48602,
+                "precision": 0.5952565351720922,
+                "recall": 0.3915155830640302,
+                "support_bp": 182570,
+                "tp_bp": 71479
+              },
+              "SINE": {
+                "f1": 0.3537973502519126,
+                "fn_bp": 22845,
+                "fp_bp": 4859,
+                "precision": 0.6094993168849956,
+                "recall": 0.2492359262545598,
+                "support_bp": 30429,
+                "tp_bp": 7584
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 34478839
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 18255,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 18255,
+            "BG": 32993754,
+            "DNA": 186949,
+            "KNOWN_OTHER_TE": 0,
+            "LINE": 1085137,
+            "LTR": 182570,
+            "SINE": 30429,
+            "UNCLASSIFIED": 18433
+          },
+          "source_known_other_bp": 0,
+          "source_unknown_unclassified_bp": 18433,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.7902854045391341,
+            "any_main4_te_recovery_bp": 1173641,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                22845,
+                7584,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                125242,
+                0,
+                955788,
+                1884,
+                14,
+                0,
+                0,
+                2209
+              ],
+              [
+                10129,
+                0,
+                17638,
+                71479,
+                1324,
+                0,
+                0,
+                82000
+              ],
+              [
+                65414,
+                2721,
+                321,
+                86,
+                114802,
+                0,
+                0,
+                3605
+              ]
+            ],
+            "macro_f1": 0.6541885684234032,
+            "macro_precision": 0.9197920803017937,
+            "macro_recall": 0.5339082019105843,
+            "per_class": {
+              "DNA": {
+                "f1": 0.7575464632500686,
+                "fn_bp": 72147,
+                "fp_bp": 1338,
+                "precision": 0.9884794213879801,
+                "recall": 0.614081915388689,
+                "support_bp": 186949,
+                "tp_bp": 114802
+              },
+              "LINE": {
+                "f1": 0.9284525014522431,
+                "fn_bp": 129349,
+                "fp_bp": 17959,
+                "precision": 0.9815568109580826,
+                "recall": 0.880799382935058,
+                "support_bp": 1085137,
+                "tp_bp": 955788
+              },
+              "LTR": {
+                "f1": 0.5583882446224695,
+                "fn_bp": 111091,
+                "fp_bp": 1970,
+                "precision": 0.9731786681915343,
+                "recall": 0.3915155830640302,
+                "support_bp": 182570,
+                "tp_bp": 71479
+              },
+              "SINE": {
+                "f1": 0.37236706436883193,
+                "fn_bp": 22845,
+                "fp_bp": 2721,
+                "precision": 0.7359534206695779,
+                "recall": 0.2492359262545598,
+                "support_bp": 30429,
+                "tp_bp": 7584
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 1485085
+          }
+        }
+      },
+      "scientific_name": "Gallus gallus",
+      "source": {
+        "painted_class_interval_bp_before_union": {
+          "AMBIGUOUS_TE": 18409,
+          "BG": 739979,
+          "DNA": 188561,
+          "LINE": 1087978,
+          "LTR": 183329,
+          "SINE": 30458,
+          "UNCLASSIFIED": 18545
+        },
+        "painted_class_rows": {
+          "AMBIGUOUS_TE": 119,
+          "BG": 9868,
+          "DNA": 882,
+          "LINE": 4449,
+          "LTR": 562,
+          "SINE": 238,
+          "UNCLASSIFIED": 113
+        },
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz",
+        "policy": "UCSC fields 11/12 mapped with frozen SF5 ontology; explicit simple/low-complexity/RNA-like source rows are BG, Unknown is UNCLASSIFIED, '?' is AMBIGUOUS_TE, and unrecognized classes remain UNCLASSIFIED",
+        "raw_class_rows": {
+          "ARTEFACT": 7,
+          "DNA": 35941,
+          "DNA?": 1993,
+          "LINE": 215615,
+          "LTR": 41167,
+          "LTR?": 163,
+          "Low_complexity": 56312,
+          "RC?": 65,
+          "SINE": 5797,
+          "Satellite": 21447,
+          "Simple_repeat": 317006,
+          "Unknown": 2638,
+          "rRNA": 262,
+          "scRNA": 2,
+          "snRNA": 167,
+          "tRNA": 365
+        },
+        "rows_seen": 698947,
+        "source_unknown_bp": 36954,
+        "target_rows": 16231
+      },
+      "target_chromosomes": [
+        "chr10",
+        "chr20"
+      ],
+      "target_lengths_bp": {
+        "chr10": 21119840,
+        "chr20": 13897287
+      }
+    },
+    "zebrafish": {
+      "assembly": "danRer11",
+      "method_outputs": {
+        "EDTA": {
+          "method": "EDTA",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 127086448,
+                "name": "edta_all",
+                "returncode": 2,
+                "role": "combined_discovery_and_masking",
+                "wall_seconds_observed": 209554.33987208898
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 209558.30159687996
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "reason": "terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "zebrafish/EDTA",
+            "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+            "slurm": {
+              "cell": "zebrafish/EDTA",
+              "elapsed": "2-10:13:00",
+              "exit_code": "0:125",
+              "job_id": "12888196",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "OUT_OF_MEMORY"
+            },
+            "stages": {
+              "edta_all": {
+                "max_rss_kb": 127086448,
+                "returncode": 2,
+                "wall_seconds": 209554.33987208898
+              }
+            },
+            "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "terminal_state": "OUT_OF_MEMORY",
+            "wall_seconds": 209558.30159687996
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "terminal_state": "OUT_OF_MEMORY"
+        },
+        "NTv2_class": {
+          "format": "per_base_class_runs",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1/zebrafish/predicted_classes.bed.gz",
+          "prediction_source": "frozen class checkpoint argmax; no threshold or calibration",
+          "status": "COMPLETED"
+        },
+        "RM2": {
+          "ambiguous_rows": 0,
+          "annotation": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/annotation.out",
+          "format": "RepeatMasker_out",
+          "included_rows": 254146,
+          "normalized_label_counts": {
+            "BG": 44324592,
+            "DNA": 40220807,
+            "KNOWN_OTHER_TE": 2670560,
+            "LINE": 3562234,
+            "LTR": 6307927,
+            "NONCALLABLE": 116510,
+            "SINE": 696437,
+            "UNCLASSIFIED": 2723132
+          },
+          "normalized_output": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-export-20260925/native/zebrafish/RM2/predicted_classes.bed.gz",
+          "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/annotation.out",
+          "raw_class_rows": {
+            "DNA": 463147,
+            "DNA/Academ-1": 59,
+            "DNA/CMC-EnSpm": 478239,
+            "DNA/Crypton-A": 14185,
+            "DNA/Crypton-H": 1062,
+            "DNA/Crypton-V": 2708,
+            "DNA/Dada": 4417,
+            "DNA/IS3EU": 22421,
+            "DNA/Kolobok": 2754,
+            "DNA/Kolobok-T2": 202953,
+            "DNA/MULE-MuDR": 12313,
+            "DNA/MULE-NOF": 7463,
+            "DNA/Maverick": 4937,
+            "DNA/Merlin": 44596,
+            "DNA/P": 17029,
+            "DNA/PIF": 4164,
+            "DNA/PIF-Harbinger": 224314,
+            "DNA/PIF-ISL2EU": 19247,
+            "DNA/PiggyBac": 29932,
+            "DNA/Sola-1": 7749,
+            "DNA/Sola-2": 7161,
+            "DNA/TcMar": 38104,
+            "DNA/TcMar-Fot1": 4776,
+            "DNA/TcMar-ISRm11": 16357,
+            "DNA/TcMar-Tc1": 206097,
+            "DNA/TcMar-Tc2": 216,
+            "DNA/TcMar-Tigger": 6239,
+            "DNA/Zator": 8330,
+            "DNA/Zisupton": 40239,
+            "DNA/hAT": 100825,
+            "DNA/hAT-Ac": 602780,
+            "DNA/hAT-Blackjack": 14000,
+            "DNA/hAT-Charlie": 157155,
+            "DNA/hAT-Tag1": 159,
+            "DNA/hAT-Tip100": 118993,
+            "DNA/hAT-hAT5": 49673,
+            "DNA/hAT-hAT6": 9092,
+            "DNA/hAT-hobo": 3386,
+            "LINE": 3196,
+            "LINE/I": 8923,
+            "LINE/L1": 38181,
+            "LINE/L1-Tx1": 21725,
+            "LINE/L2": 108160,
+            "LINE/Penelope": 6927,
+            "LINE/Proto2": 224,
+            "LINE/R2-Hero": 272,
+            "LINE/R2-NeSL": 1083,
+            "LINE/RTE-BovB": 18449,
+            "LINE/RTE-X": 6761,
+            "LINE/Rex-Babar": 25018,
+            "LTR": 16766,
+            "LTR/DIRS": 14489,
+            "LTR/ERV-Foamy": 340,
+            "LTR/ERV1": 29188,
+            "LTR/Gypsy": 61583,
+            "LTR/Ngaro": 246499,
+            "LTR/Pao": 8458,
+            "Low_complexity": 67695,
+            "PLE": 6068,
+            "RC/Helitron": 167410,
+            "RNA": 493,
+            "Retroposon": 3997,
+            "SINE": 2550,
+            "SINE/5S-Deu-L2": 24494,
+            "SINE/Alu": 6584,
+            "SINE/MIR": 281,
+            "SINE/tRNA": 16611,
+            "SINE/tRNA-Core-RTE": 2214,
+            "SINE/tRNA-V-RTE": 11678,
+            "Satellite": 85213,
+            "Simple_repeat": 794210,
+            "Unknown": 281195,
+            "rRNA": 67,
+            "tRNA": 2003
+          },
+          "rows_seen": 5036276,
+          "skipped_non_te_rows": 56193,
+          "skipped_parent_or_missing_class_rows": 0,
+          "status": "COMPLETED",
+          "target_rows": 310339,
+          "unknown_rows": 17782,
+          "unresolved_class_rows": {
+            "PLE": 414,
+            "Unknown": 17368
+          },
+          "whole_cell_status": {
+            "annotation_summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/annotation_summary.json",
+            "stages": [
+              {
+                "argv": [
+                  "apptainer",
+                  "exec",
+                  "--cleanenv",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2:/work",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/opt/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/RepeatMasker/Libraries/famdb:ro",
+                  "--pwd",
+                  "/work",
+                  "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+                  "env",
+                  "HOME=/work/home",
+                  "TMPDIR=/work/tmp",
+                  "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+                  "BLAST_USAGE_REPORT=false",
+                  "RepeatMasker",
+                  "-e",
+                  "rmblast",
+                  "-pa",
+                  "4",
+                  "-gff",
+                  "-xsmall",
+                  "-lib",
+                  "/work/consensi.fa.classified",
+                  "-dir",
+                  "/work/repeatmasker",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa"
+                ],
+                "classification_reused": true,
+                "elapsed_wall_seconds": null,
+                "mask_parallelism": "RepeatMasker -pa 4; same frozen native command",
+                "max_rss_kb": 14534312,
+                "name": "repeatmasker",
+                "returncode": 0,
+                "role": "masking",
+                "stderr": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/repeatmasker.stderr",
+                "stdout": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/repeatmasker.stdout",
+                "system_seconds": 6156.61,
+                "time_argv": [
+                  "/usr/bin/time",
+                  "-v",
+                  "-o",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/repeatmasker.time",
+                  "apptainer",
+                  "exec",
+                  "--cleanenv",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2:/work",
+                  "--bind",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/opt/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/famdb-3.0.0/Libraries/famdb:ro",
+                  "--bind",
+                  "/home/users/j/jwang/ab-initio-TE/software_outputs/tefm_new_directions/BENCH-5TOOL-DENOMINATOR-CLOSURE-20260811-R2/famdb-v2:/usr/local/share/RepeatMasker/Libraries/famdb:ro",
+                  "--pwd",
+                  "/work",
+                  "/home/users/j/jwang/ab-initio-TE/container_candidates/E1B-OCI-ACQUIRE-20260809A/repeatmasker_4_2_4.sif",
+                  "env",
+                  "HOME=/work/home",
+                  "TMPDIR=/work/tmp",
+                  "FAMDB_DIR=/usr/local/share/famdb-3.0.0/Libraries/famdb",
+                  "BLAST_USAGE_REPORT=false",
+                  "RepeatMasker",
+                  "-e",
+                  "rmblast",
+                  "-pa",
+                  "4",
+                  "-gff",
+                  "-xsmall",
+                  "-lib",
+                  "/work/consensi.fa.classified",
+                  "-dir",
+                  "/work/repeatmasker",
+                  "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa"
+                ],
+                "time_v": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/repeatmasker.time",
+                "user_seconds": 122995.96,
+                "wall_seconds_observed": 31126.43417281937
+              }
+            ],
+            "status": "COMPLETED",
+            "wall_seconds": 31155.496180057526
+          }
+        }
+      },
+      "methods": {
+        "D_binary": {
+          "reason": "WHOLE D output is binary material-only and has no class prediction; it is not remapped",
+          "status": "N/A"
+        },
+        "EDTA": {
+          "method": "EDTA",
+          "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+          "native_status": {
+            "exit_code": null,
+            "job_id": null,
+            "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "slurm_job_id": null,
+            "stages": [
+              {
+                "max_rss_kb": 127086448,
+                "name": "edta_all",
+                "returncode": 2,
+                "role": "combined_discovery_and_masking",
+                "wall_seconds_observed": 209554.33987208898
+              }
+            ],
+            "status": "FAILED",
+            "wall_seconds": 209558.30159687996
+          },
+          "native_status_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+          "reason": "terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "status": "NA",
+          "terminal_ledger_entry": {
+            "cell": "zebrafish/EDTA",
+            "failure": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "historical_observation": "The status file was observed as RUNNING before the wrapper wrote its terminal failure. The Slurm OOM record is authoritative for the resource event; this ledger preserves both observations without rewriting the original status file.",
+            "native_root": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA",
+            "slurm": {
+              "cell": "zebrafish/EDTA",
+              "elapsed": "2-10:13:00",
+              "exit_code": "0:125",
+              "job_id": "12888196",
+              "resources": "16 CPU, 128G, private-teodoro-gpu",
+              "state": "OUT_OF_MEMORY"
+            },
+            "stages": {
+              "edta_all": {
+                "max_rss_kb": 127086448,
+                "returncode": 2,
+                "wall_seconds": 209554.33987208898
+              }
+            },
+            "status_file_status": "FAILED (current file; earlier OOM observation is retained below)",
+            "status_path": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json",
+            "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+            "terminal_state": "OUT_OF_MEMORY",
+            "wall_seconds": 209558.30159687996
+          },
+          "terminal_ledger_path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json",
+          "terminal_reason": "Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.",
+          "terminal_state": "OUT_OF_MEMORY"
+        },
+        "NTv2_class": {
+          "callable_bp": 100505689,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                45857249,
+                327395,
+                491831,
+                628669,
+                5782218,
+                0,
+                0,
+                0
+              ],
+              [
+                51691,
+                2007688,
+                91560,
+                64540,
+                577391,
+                0,
+                0,
+                0
+              ],
+              [
+                227552,
+                12477,
+                1505744,
+                221097,
+                707595,
+                0,
+                0,
+                0
+              ],
+              [
+                306698,
+                113256,
+                220974,
+                3161029,
+                417737,
+                0,
+                0,
+                0
+              ],
+              [
+                2213064,
+                359387,
+                141519,
+                162231,
+                29375452,
+                6,
+                6,
+                0
+              ],
+              [
+                184108,
+                73004,
+                2350,
+                18892,
+                715678,
+                0,
+                0,
+                0
+              ],
+              [
+                346112,
+                50542,
+                6863,
+                151006,
+                3602325,
+                0,
+                0,
+                0
+              ],
+              [
+                87499,
+                45534,
+                1955,
+                19212,
+                174553,
+                0,
+                0,
+                0
+              ]
+            ],
+            "macro_f1": 0.46325153586699486,
+            "macro_precision": 0.4547661358647612,
+            "macro_recall": 0.47570122609363336,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 4156848,
+                "fp_bp": 6,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 4156848,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.8959877086401814,
+                "fn_bp": 7230113,
+                "fp_bp": 3416724,
+                "precision": 0.9306586460969973,
+                "recall": 0.8638072654655546,
+                "support_bp": 53087362,
+                "tp_bp": 45857249
+              },
+              "DNA": {
+                "f1": 0.7981959391839213,
+                "fn_bp": 2876213,
+                "fp_bp": 11977497,
+                "precision": 0.7103593023075573,
+                "recall": 0.9108197049671699,
+                "support_bp": 32251665,
+                "tp_bp": 29375452
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.0,
+                "fn_bp": 994032,
+                "fp_bp": 6,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 994032,
+                "tp_bp": 0
+              },
+              "LINE": {
+                "f1": 0.5862049835505729,
+                "fn_bp": 1168721,
+                "fp_bp": 957052,
+                "precision": 0.6113961529903411,
+                "recall": 0.5630075547819844,
+                "support_bp": 2674465,
+                "tp_bp": 1505744
+              },
+              "LTR": {
+                "f1": 0.7311805994885715,
+                "fn_bp": 1058665,
+                "fp_bp": 1265647,
+                "precision": 0.71408637090223,
+                "recall": 0.7491133243311008,
+                "support_bp": 4219694,
+                "tp_bp": 3161029
+              },
+              "SINE": {
+                "f1": 0.694443056072712,
+                "fn_bp": 785182,
+                "fp_bp": 981595,
+                "precision": 0.6716286146209642,
+                "recall": 0.7188619592032569,
+                "support_bp": 2792870,
+                "tp_bp": 2007688
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.0,
+                "fn_bp": 328753,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 328753,
+                "tp_bp": 0
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 100505689
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                45857249,
+                327395,
+                491831,
+                628669,
+                5782218,
+                0,
+                0,
+                0
+              ],
+              [
+                51691,
+                2007688,
+                91560,
+                64540,
+                577391,
+                0,
+                0,
+                0
+              ],
+              [
+                227552,
+                12477,
+                1505744,
+                221097,
+                707595,
+                0,
+                0,
+                0
+              ],
+              [
+                306698,
+                113256,
+                220974,
+                3161029,
+                417737,
+                0,
+                0,
+                0
+              ],
+              [
+                2213064,
+                359387,
+                141519,
+                162231,
+                29375452,
+                6,
+                6,
+                0
+              ]
+            ],
+            "macro_f1": 0.760376643627206,
+            "macro_precision": 0.7622884106247142,
+            "macro_recall": 0.7611219617498135,
+            "per_class": {
+              "BG": {
+                "f1": 0.9014275450953109,
+                "fn_bp": 7230113,
+                "fp_bp": 2799005,
+                "precision": 0.9424738904067708,
+                "recall": 0.8638072654655546,
+                "support_bp": 53087362,
+                "tp_bp": 45857249
+              },
+              "DNA": {
+                "f1": 0.8500818192970031,
+                "fn_bp": 2876213,
+                "fp_bp": 7484941,
+                "precision": 0.7969381118644069,
+                "recall": 0.9108197049671699,
+                "support_bp": 32251665,
+                "tp_bp": 29375452
+              },
+              "LINE": {
+                "f1": 0.5874821233247232,
+                "fn_bp": 1168721,
+                "fp_bp": 945884,
+                "precision": 0.6141812705679655,
+                "recall": 0.5630075547819844,
+                "support_bp": 2674465,
+                "tp_bp": 1505744
+              },
+              "LTR": {
+                "f1": 0.7475302875872326,
+                "fn_bp": 1058665,
+                "fp_bp": 1076537,
+                "precision": 0.7459539273252617,
+                "recall": 0.7491133243311008,
+                "support_bp": 4219694,
+                "tp_bp": 3161029
+              },
+              "SINE": {
+                "f1": 0.7153614428317608,
+                "fn_bp": 785182,
+                "fp_bp": 812515,
+                "precision": 0.7118948529591664,
+                "recall": 0.7188619592032569,
+                "support_bp": 2792870,
+                "tp_bp": 2007688
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 95026056
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 4156848,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 4156848,
+            "BG": 53087362,
+            "DNA": 32251665,
+            "KNOWN_OTHER_TE": 994032,
+            "LINE": 2674465,
+            "LTR": 4219694,
+            "SINE": 2792870,
+            "UNCLASSIFIED": 328753
+          },
+          "source_known_other_bp": 994032,
+          "source_unknown_unclassified_bp": 328753,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.9332593189477956,
+            "any_main4_te_recovery_bp": 39139677,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                51691,
+                2007688,
+                91560,
+                64540,
+                577391,
+                0,
+                0,
+                0
+              ],
+              [
+                227552,
+                12477,
+                1505744,
+                221097,
+                707595,
+                0,
+                0,
+                0
+              ],
+              [
+                306698,
+                113256,
+                220974,
+                3161029,
+                417737,
+                0,
+                0,
+                0
+              ],
+              [
+                2213064,
+                359387,
+                141519,
+                162231,
+                29375452,
+                6,
+                6,
+                0
+              ]
+            ],
+            "macro_f1": 0.78618982342664,
+            "macro_precision": 0.8487047505609726,
+            "macro_recall": 0.7354506358208781,
+            "per_class": {
+              "DNA": {
+                "f1": 0.9276970224462906,
+                "fn_bp": 2876213,
+                "fp_bp": 1702723,
+                "precision": 0.9452116155469232,
+                "recall": 0.9108197049671699,
+                "support_bp": 32251665,
+                "tp_bp": 29375452
+              },
+              "LINE": {
+                "f1": 0.6498311921078265,
+                "fn_bp": 1168721,
+                "fp_bp": 454053,
+                "precision": 0.7683163103117313,
+                "recall": 0.5630075547819844,
+                "support_bp": 2674465,
+                "tp_bp": 1505744
+              },
+              "LTR": {
+                "f1": 0.8075601343843356,
+                "fn_bp": 1058665,
+                "fp_bp": 447868,
+                "precision": 0.8758989242419498,
+                "recall": 0.7491133243311008,
+                "support_bp": 4219694,
+                "tp_bp": 3161029
+              },
+              "SINE": {
+                "f1": 0.7596709447681074,
+                "fn_bp": 785182,
+                "fp_bp": 485120,
+                "precision": 0.8053921521432859,
+                "recall": 0.7188619592032569,
+                "support_bp": 2792870,
+                "tp_bp": 2007688
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 41938694
+          }
+        },
+        "RM2": {
+          "callable_bp": 100505689,
+          "full8": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                42436793,
+                107881,
+                950507,
+                661594,
+                6461005,
+                305956,
+                0,
+                2163626
+              ],
+              [
+                16824,
+                538111,
+                35800,
+                1107172,
+                1083252,
+                5255,
+                0,
+                6456
+              ],
+              [
+                237641,
+                3700,
+                2272971,
+                18767,
+                133827,
+                1767,
+                0,
+                5792
+              ],
+              [
+                472787,
+                1857,
+                10838,
+                3570465,
+                81650,
+                1195,
+                0,
+                80902
+              ],
+              [
+                878668,
+                32140,
+                273524,
+                627667,
+                28306039,
+                1746275,
+                0,
+                387352
+              ],
+              [
+                173023,
+                1135,
+                11839,
+                39806,
+                226722,
+                512332,
+                0,
+                29175
+              ],
+              [
+                81083,
+                10671,
+                5243,
+                251582,
+                3732722,
+                39382,
+                0,
+                36165
+              ],
+              [
+                27773,
+                942,
+                1512,
+                30874,
+                195590,
+                58398,
+                0,
+                13664
+              ]
+            ],
+            "macro_f1": 0.45708061963811675,
+            "macro_precision": 0.4793504506297138,
+            "macro_recall": 0.5153379948660273,
+            "per_class": {
+              "AMBIGUOUS_TE": {
+                "f1": 0.0,
+                "fn_bp": 4156848,
+                "fp_bp": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "support_bp": 4156848,
+                "tp_bp": 0
+              },
+              "BG": {
+                "f1": 0.8712851196886986,
+                "fn_bp": 10650569,
+                "fp_bp": 1887799,
+                "precision": 0.9574096700089196,
+                "recall": 0.7993765634841679,
+                "support_bp": 53087362,
+                "tp_bp": 42436793
+              },
+              "DNA": {
+                "f1": 0.781152849319118,
+                "fn_bp": 3945626,
+                "fp_bp": 11914768,
+                "precision": 0.7037660631722282,
+                "recall": 0.8776613238417303,
+                "support_bp": 32251665,
+                "tp_bp": 28306039
+              },
+              "KNOWN_OTHER_TE": {
+                "f1": 0.27961202775097477,
+                "fn_bp": 481700,
+                "fp_bp": 2158228,
+                "precision": 0.19184440716553833,
+                "recall": 0.5154079546734914,
+                "support_bp": 994032,
+                "tp_bp": 512332
+              },
+              "LINE": {
+                "f1": 0.7289019399525295,
+                "fn_bp": 401494,
+                "fp_bp": 1289263,
+                "precision": 0.6380745902711613,
+                "recall": 0.8498787607988888,
+                "support_bp": 2674465,
+                "tp_bp": 2272971
+              },
+              "LTR": {
+                "f1": 0.6783042436653067,
+                "fn_bp": 649229,
+                "fp_bp": 2737462,
+                "precision": 0.5660282688750202,
+                "recall": 0.8461431089552939,
+                "support_bp": 4219694,
+                "tp_bp": 3570465
+              },
+              "SINE": {
+                "f1": 0.30843431088178824,
+                "fn_bp": 2254759,
+                "fp_bp": 158326,
+                "precision": 0.7726628539264858,
+                "recall": 0.19267312835899988,
+                "support_bp": 2792870,
+                "tp_bp": 538111
+              },
+              "UNCLASSIFIED": {
+                "f1": 0.008954465846517807,
+                "fn_bp": 315089,
+                "fp_bp": 2709468,
+                "precision": 0.005017751618357097,
+                "recall": 0.04156311881564579,
+                "support_bp": 328753,
+                "tp_bp": 13664
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "support_total_bp": 100505689
+          },
+          "primary_known": {
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                42436793,
+                107881,
+                950507,
+                661594,
+                6461005,
+                305956,
+                0,
+                2163626
+              ],
+              [
+                16824,
+                538111,
+                35800,
+                1107172,
+                1083252,
+                5255,
+                0,
+                6456
+              ],
+              [
+                237641,
+                3700,
+                2272971,
+                18767,
+                133827,
+                1767,
+                0,
+                5792
+              ],
+              [
+                472787,
+                1857,
+                10838,
+                3570465,
+                81650,
+                1195,
+                0,
+                80902
+              ],
+              [
+                878668,
+                32140,
+                273524,
+                627667,
+                28306039,
+                1746275,
+                0,
+                387352
+              ]
+            ],
+            "macro_f1": 0.688569252762689,
+            "macro_precision": 0.7546754599343897,
+            "macro_recall": 0.7131465770878161,
+            "per_class": {
+              "BG": {
+                "f1": 0.87381365658371,
+                "fn_bp": 10650569,
+                "fp_bp": 1605920,
+                "precision": 0.9635372144309093,
+                "recall": 0.7993765634841679,
+                "support_bp": 53087362,
+                "tp_bp": 42436793
+              },
+              "DNA": {
+                "f1": 0.8286621930992202,
+                "fn_bp": 3945626,
+                "fp_bp": 7759734,
+                "precision": 0.7848449276270885,
+                "recall": 0.8776613238417303,
+                "support_bp": 32251665,
+                "tp_bp": 28306039
+              },
+              "LINE": {
+                "f1": 0.7310815754960716,
+                "fn_bp": 401494,
+                "fp_bp": 1270669,
+                "precision": 0.6414226614441647,
+                "recall": 0.8498787607988888,
+                "support_bp": 2674465,
+                "tp_bp": 2272971
+              },
+              "LTR": {
+                "f1": 0.6997235472069135,
+                "fn_bp": 649229,
+                "fp_bp": 2415200,
+                "precision": 0.5965026442341829,
+                "recall": 0.8461431089552939,
+                "support_bp": 4219694,
+                "tp_bp": 3570465
+              },
+              "SINE": {
+                "f1": 0.30956529142752937,
+                "fn_bp": 2254759,
+                "fp_bp": 145578,
+                "precision": 0.7870698519356023,
+                "recall": 0.19267312835899988,
+                "support_bp": 2792870,
+                "tp_bp": 538111
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 95026056
+          },
+          "primary_known_reference_mask": "source BG/SINE/LINE/LTR/DNA only; source KNOWN_OTHER_TE/AMBIGUOUS_TE/UNCLASSIFIED excluded",
+          "source_ambiguous_bp": 4156848,
+          "source_class_bp": {
+            "AMBIGUOUS_TE": 4156848,
+            "BG": 53087362,
+            "DNA": 32251665,
+            "KNOWN_OTHER_TE": 994032,
+            "LINE": 2674465,
+            "LTR": 4219694,
+            "SINE": 2792870,
+            "UNCLASSIFIED": 328753
+          },
+          "source_known_other_bp": 994032,
+          "source_unknown_unclassified_bp": 328753,
+          "status": "COMPLETED",
+          "true_te_conditional": {
+            "any_main4_te_recall": 0.9084159845320887,
+            "any_main4_te_recovery_bp": 38097780,
+            "confusion_rows_true_cols_pred_bp": [
+              [
+                16824,
+                538111,
+                35800,
+                1107172,
+                1083252,
+                5255,
+                0,
+                6456
+              ],
+              [
+                237641,
+                3700,
+                2272971,
+                18767,
+                133827,
+                1767,
+                0,
+                5792
+              ],
+              [
+                472787,
+                1857,
+                10838,
+                3570465,
+                81650,
+                1195,
+                0,
+                80902
+              ],
+              [
+                878668,
+                32140,
+                273524,
+                627667,
+                28306039,
+                1746275,
+                0,
+                387352
+              ]
+            ],
+            "macro_f1": 0.7114817857247842,
+            "macro_precision": 0.8594561546499587,
+            "macro_recall": 0.6915890804887281,
+            "per_class": {
+              "DNA": {
+                "f1": 0.9152173065006836,
+                "fn_bp": 3945626,
+                "fp_bp": 1298729,
+                "precision": 0.9561310867222469,
+                "recall": 0.8776613238417303,
+                "support_bp": 32251665,
+                "tp_bp": 28306039
+              },
+              "LINE": {
+                "f1": 0.8630009351510879,
+                "fn_bp": 401494,
+                "fp_bp": 320162,
+                "precision": 0.8765346783215516,
+                "recall": 0.8498787607988888,
+                "support_bp": 2674465,
+                "tp_bp": 2272971
+              },
+              "LTR": {
+                "f1": 0.7482298652575791,
+                "fn_bp": 649229,
+                "fp_bp": 1753606,
+                "precision": 0.670626856779333,
+                "recall": 0.8461431089552939,
+                "support_bp": 4219694,
+                "tp_bp": 3570465
+              },
+              "SINE": {
+                "f1": 0.3194790359897859,
+                "fn_bp": 2254759,
+                "fp_bp": 37697,
+                "precision": 0.9345319967767034,
+                "recall": 0.19267312835899988,
+                "support_bp": 2792870,
+                "tp_bp": 538111
+              }
+            },
+            "predicted_columns": [
+              "BG",
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA",
+              "KNOWN_OTHER_TE",
+              "AMBIGUOUS_TE",
+              "UNCLASSIFIED"
+            ],
+            "row_labels": [
+              "SINE",
+              "LINE",
+              "LTR",
+              "DNA"
+            ],
+            "support_total_bp": 41938694
+          }
+        }
+      },
+      "scientific_name": "Danio rerio",
+      "source": {
+        "painted_class_interval_bp_before_union": {
+          "AMBIGUOUS_TE": 4385928,
+          "BG": 6143156,
+          "DNA": 33954966,
+          "KNOWN_OTHER_TE": 1170849,
+          "LINE": 2713421,
+          "LTR": 4383771,
+          "SINE": 3151838,
+          "UNCLASSIFIED": 408376
+        },
+        "painted_class_rows": {
+          "AMBIGUOUS_TE": 17744,
+          "BG": 69252,
+          "DNA": 135050,
+          "KNOWN_OTHER_TE": 6333,
+          "LINE": 8180,
+          "LTR": 10020,
+          "SINE": 12936,
+          "UNCLASSIFIED": 3485
+        },
+        "path": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/rmsk.txt.gz",
+        "policy": "UCSC fields 11/12 mapped with frozen SF5 ontology; explicit simple/low-complexity/RNA-like source rows are BG, Unknown is UNCLASSIFIED, '?' is AMBIGUOUS_TE, and unrecognized classes remain UNCLASSIFIED",
+        "raw_class_rows": {
+          "ARTEFACT": 8,
+          "DNA": 2408885,
+          "DNA?": 3404,
+          "LINE": 141594,
+          "LTR": 186721,
+          "Low_complexity": 82330,
+          "RC": 104254,
+          "SINE": 214366,
+          "Satellite": 142653,
+          "Satellite?": 4815,
+          "Simple_repeat": 917097,
+          "Unknown": 55451,
+          "rRNA": 3578,
+          "scRNA": 1,
+          "snRNA": 1378,
+          "tRNA": 23163
+        },
+        "rows_seen": 4289698,
+        "source_unknown_bp": 4794304,
+        "target_rows": 263000
+      },
+      "target_chromosomes": [
+        "chr10",
+        "chr20"
+      ],
+      "target_lengths_bp": {
+        "chr10": 45420867,
+        "chr20": 55201332
+      }
+    }
+  },
+  "status": "COMPLETED_NTV2_WITH_NATIVE_NA",
+  "truth_boundary": "same-assembly UCSC RepeatMasker is a comparator layer, not exhaustive biological truth; native unknown and source unknown are never silently treated as negative"
+}

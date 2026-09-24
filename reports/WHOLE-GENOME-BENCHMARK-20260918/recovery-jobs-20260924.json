@@ -2,7 +2,7 @@
   "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
   "recorded_date_local": "2026-09-24",
   "timezone": "Europe/Paris",
-  "scientific_comparison_complete": false,
+  "scientific_comparison_complete": true,
   "completed_d_score": {
     "job_id": "13180826",
     "state": "COMPLETED",
@@ -24,7 +24,7 @@
     "Scorers retain failed/missing methods as NA and reject COMPLETED methods missing required outputs.",
     "On the next heartbeat inspect these existing jobs before submitting anything else."
   ],
-  "observed_at_utc": "2026-09-24T20:33:56Z",
+  "observed_at_utc": "2026-09-24T23:18:36.211308+00:00",
   "native_recovery_history": [
     {
       "job_id": "13180772",
@@ -82,13 +82,11 @@
       },
       "slurm_elapsed_seconds": 3255,
       "reason": "Stopped the known-invalid FINAL/ANNO after source review established missing RAW aggregate GFF; preserved completed Helitron and filter inputs, all outputs and costs. Cancellation prevents spending the fixed budget on a downstream stage that must be rerun. Native status file may remain RUNNING and is not rewritten."
-    }
-  ],
-  "active_recovery_chain": [
+    },
     {
       "job_id": "13190938",
       "stage": "native RAW intact aggregation, then FINAL/ANNO only",
-      "observed_state": "PENDING",
+      "observed_state": "FAILED",
       "remaining_budget_seconds": 431681,
       "slurm_time_limit_requested": "4-23:54:41",
       "dependency": "afterany:13189902",
@@ -101,7 +99,25 @@
       "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938",
       "reuses": "raw and completed EDTA.combine only; no old EDTA.final or TEanno",
       "scientific_parameter_change": false,
-      "pending_reason": "Resources"
+      "slurm_elapsed_seconds": 5948,
+      "reason": "Native RAW aggregate and FINAL/ANNO completed rc0; exporter recursively selected top-level and internal copies. Source failure preserved; export-only repair is separate.",
+      "native_completion": true
+    },
+    {
+      "job_id": "13192771",
+      "stage": "export completed native annotation only",
+      "observed_state": "COMPLETED",
+      "slurm_elapsed_seconds": 4,
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 4,
+        "memory_gb": 16,
+        "gpus": 0
+      },
+      "source_job": "13190938",
+      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-export-13192771",
+      "scientific_parameter_change": false,
+      "sequence_id_decoding": "PASS; zero encoded annotation seqids"
     }
   ],
   "completed_scores": [
@@ -188,20 +204,11 @@
         "zebrafish/EDTA"
       ],
       "numeric_comparison": "All numeric TSV fields unchanged from 13180901/13180902; chicken EDTA NA reason now refers to 13189201, corrected RM2 native composition retained."
-    }
-  ],
-  "rm2_summary_repair": {
-    "job_id": "13189316",
-    "state": "COMPLETED",
-    "slurm_elapsed_seconds": 70,
-    "resources": "8 CPU/64G/private; no GPU",
-    "scope": "Derived annotation summary only; preserved original-gff backup, corrected canonical and sidecar; no annotation, native status or completed score numeric changed."
-  },
-  "queued_scores": [
+    },
     {
       "job_id": "13189916",
       "stage": "whole-genome binary score",
-      "observed_state": "PENDING",
+      "observed_state": "COMPLETED",
       "dependency": "afterany:13190938",
       "resources": {
         "partition": "private-teodoro-gpu",
@@ -212,12 +219,18 @@
       "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-helitron-cont-20260924",
       "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
       "hold_history": "EDTA.pl RAW intact aggregation was bypassed; require corrected native aggregate and valid affected FINAL/ANNO outputs before releasing scoring.",
-      "release_reason": "Both native-root configs now target the fresh aggregate/final-only root; dependency changed to 13190938, then the existing score jobs released without resubmission."
+      "release_reason": "Both native-root configs now target the fresh aggregate/final-only root; dependency changed to 13190938, then the existing score jobs released without resubmission.",
+      "slurm_elapsed_seconds": 100,
+      "na_cells": [
+        "chicken/EDTA",
+        "zebrafish/EDTA"
+      ],
+      "reason": "Native export wrapper failed; completed intermediate score retained with EDTA NA."
     },
     {
       "job_id": "13189917",
       "stage": "fixed chr10/20 class-map score",
-      "observed_state": "PENDING",
+      "observed_state": "COMPLETED",
       "dependency": "afterany:13190938",
       "resources": {
         "partition": "private-teodoro-gpu",
@@ -229,13 +242,84 @@
       "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
       "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
       "hold_history": "EDTA.pl RAW intact aggregation was bypassed; require corrected native aggregate and valid affected FINAL/ANNO outputs before releasing scoring.",
-      "release_reason": "Both native-root configs now target the fresh aggregate/final-only root; dependency changed to 13190938, then the existing score jobs released without resubmission."
+      "release_reason": "Both native-root configs now target the fresh aggregate/final-only root; dependency changed to 13190938, then the existing score jobs released without resubmission.",
+      "slurm_elapsed_seconds": 163,
+      "na_cells": [
+        "chicken/EDTA",
+        "zebrafish/EDTA"
+      ],
+      "reason": "Native export wrapper failed; completed intermediate score retained with EDTA NA."
+    },
+    {
+      "job_id": "13192796",
+      "stage": "whole-genome binary score",
+      "observed_state": "COMPLETED",
+      "slurm_elapsed_seconds": 104,
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 4,
+        "memory_gb": 32,
+        "gpus": 0
+      },
+      "dependency": "afterany:13192771",
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-edta-export-20260925",
+      "na_cells": [
+        "zebrafish/EDTA"
+      ],
+      "numeric_comparison": "Existing D/NTv2/RM2 metric objects unchanged; native EDTA scored on frozen denominator; TP/FP/FN and macro/confusion consistency PASS."
+    },
+    {
+      "job_id": "13192797",
+      "stage": "fixed chr10/20 class-map score",
+      "observed_state": "COMPLETED",
+      "slurm_elapsed_seconds": 177,
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 8,
+        "memory_gb": 32,
+        "gpus": 0
+      },
+      "dependency": "afterany:13192771",
+      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-export-20260925",
+      "na_cells": [
+        "zebrafish/EDTA"
+      ],
+      "numeric_comparison": "Existing D/NTv2/RM2 metric objects unchanged; native EDTA scored on frozen denominator; TP/FP/FN and macro/confusion consistency PASS."
     }
   ],
+  "rm2_summary_repair": {
+    "job_id": "13189316",
+    "state": "COMPLETED",
+    "slurm_elapsed_seconds": 70,
+    "resources": "8 CPU/64G/private; no GPU",
+    "scope": "Derived annotation summary only; preserved original-gff backup, corrected canonical and sidecar; no annotation, native status or completed score numeric changed."
+  },
   "next_action": {
-    "when": "Inspect 13190938 native logs, aggregate outputs, final annotation and both dependent scorers; no duplicate submissions.",
-    "budget": "431681 seconds remaining at 13190938 submission after charging 13189902 elapsed3255; retain all prior costs.",
-    "readiness": "Require native raw aggregate and correct FINAL/ANNO outputs, sequence-ID decoding and summary. Do not infer scientific completion from scheduler exit alone.",
-    "score_roots": "Both score jobs read the aggregate-final-13190938 root, still write fresh score-helitron-cont-20260924; prior score directories untouched."
-  }
+    "old_batch": "Complete; retain original failures and resource-limited NA. No further native retries or new species.",
+    "new_work": "Separately user-authorized FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925 and FUNCTIONAL-MASK-EVIDENCE-20260925 have their own protocols and ledgers."
+  },
+  "completion_boundary": "All frozen cells have interpretable terminal outcomes; zebrafish EDTA remains OOM/NA and is not a successful annotation.",
+  "edta_budget_final": {
+    "limit_seconds": 604800,
+    "original_seconds": 166862,
+    "fixtures_seconds": 27,
+    "recovery_and_export_seconds": [
+      306,
+      2669,
+      3255,
+      5948,
+      4
+    ],
+    "charged_seconds": 179071,
+    "unused_seconds": 425729,
+    "cost_boundary": "Cumulative elapsed allocation; main native16CPU, export4CPU, fixture allocations retained separately. Scoring recorded separately."
+  },
+  "rm2_library_header_repair": {
+    "job_id": "13192771",
+    "field": "FASTA first-token suffix after #",
+    "backups": "annotation_summary.before-header-fix-20260925.json in both RM2-mask-recovery-v2 roots",
+    "native_annotations_and_scientific_scores_changed": false
+  },
+  "active_recovery_chain": [],
+  "queued_scores": []
 }
