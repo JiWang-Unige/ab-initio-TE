@@ -2,6 +2,27 @@
 
 This is an independent machine ledger for the frozen whole-genome benchmark. It preserves the original native output directories and their `status.json` files. The machine-readable record is [observed-terminal-20260924.json](observed-terminal-20260924.json).
 
+**20:21 UTC update:** `13189902` remains running. Helitron completed in
+1,775.75 child-wall seconds with nonempty FASTA/GFF3/BED; filter completed
+and FINAL began. However, the native stderr reports missing aggregate
+`galGal6.fa.mod.EDTA.intact.raw.gff3`. The branch-only recovery omitted the
+EDTA.pl RAW intact aggregation. Both dependent scores (`13189916`,
+`13189917`) are held pending a contract-preserving aggregate/downstream
+repair. A later exit 0 alone cannot establish readiness for this attempt.
+The native running tree is not modified or cancelled; its actual elapsed
+cost will be retained at terminal state.
+
+**Subsequent recovery decision:** once source review proved that FINAL/ANNO
+must be redone and the new driver/input checks passed, only `13189902` was
+cancelled to avoid further invalid downstream computation. Slurm records
+3,255 job-level seconds; all files remain preserved, including the original
+status snapshot even if it still says RUNNING. Job `13190938` reuses raw and
+filter-combine products in a fresh `EDTA-aggregate-final-13190938` root,
+creates the native intact aggregate, and reruns FINAL/ANNO with 431,681
+seconds remaining. The two existing score jobs were redirected to this new
+dependency/root and released; no new score job was submitted. Native
+completion is still pending.
+
 **19:29 UTC update:** chicken EDTA `13189201` finished TIR successfully but
 failed in its subsequent filter stage after 2,669 total Slurm seconds. Its
 annotation remains unavailable. Follow-up binary/class scores

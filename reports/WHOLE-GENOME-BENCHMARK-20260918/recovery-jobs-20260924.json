@@ -24,7 +24,7 @@
     "Scorers retain failed/missing methods as NA and reject COMPLETED methods missing required outputs.",
     "On the next heartbeat inspect these existing jobs before submitting anything else."
   ],
-  "observed_at_utc": "2026-09-24T19:38:50Z",
+  "observed_at_utc": "2026-09-24T20:33:56Z",
   "native_recovery_history": [
     {
       "job_id": "13180772",
@@ -58,13 +58,11 @@
       "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201",
       "slurm_elapsed_seconds": 2669,
       "reason": "TIR native stage completed; filter failed because the original workflow had stopped before producing galGal6.fa.mod.Helitron.intact.raw.fa. Same-contract continuation must execute the outstanding native Helitron branch before filter/final/annotation; no --force."
-    }
-  ],
-  "active_recovery_chain": [
+    },
     {
       "job_id": "13189902",
       "stage": "missing native Helitron branch, then unchanged filter/final/annotation",
-      "observed_state": "RUNNING",
+      "observed_state": "CANCELLED",
       "remaining_budget_seconds": 434936,
       "resources": {
         "partition": "private-teodoro-gpu",
@@ -75,7 +73,35 @@
       "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-helitron-cont-13189902",
       "reused_from": "13189201 completed TIR; LTR/SINE/LINE/RM2 retained",
       "tir_rerun": false,
-      "native_log_evidence": "Fresh continuation copied successfully; helitron_raw_continuation.stderr records EDTA_raw dependency check. No terminal annotation claimed."
+      "native_log_evidence": "Helitron native rc0, 1775.7456 s, FASTA/GFF3/BED nonempty; filter completed 20:20:50 UTC and FINAL began. stderr: missing galGal6.fa.mod.EDTA.intact.raw.gff3. Native RAW intact aggregation was bypassed by the branch-only recovery entry.",
+      "readiness": "NOT_SCORE_READY: aggregate intact RAW GFF missing; scheduler RUNNING does not establish terminal validity.",
+      "helitron_artifacts_bytes": {
+        "fasta": 878648,
+        "gff3": 17562,
+        "bed": 8834
+      },
+      "slurm_elapsed_seconds": 3255,
+      "reason": "Stopped the known-invalid FINAL/ANNO after source review established missing RAW aggregate GFF; preserved completed Helitron and filter inputs, all outputs and costs. Cancellation prevents spending the fixed budget on a downstream stage that must be rerun. Native status file may remain RUNNING and is not rewritten."
+    }
+  ],
+  "active_recovery_chain": [
+    {
+      "job_id": "13190938",
+      "stage": "native RAW intact aggregation, then FINAL/ANNO only",
+      "observed_state": "PENDING",
+      "remaining_budget_seconds": 431681,
+      "slurm_time_limit_requested": "4-23:54:41",
+      "dependency": "afterany:13189902",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 16,
+        "memory_gb": 128,
+        "gpus": 0
+      },
+      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938",
+      "reuses": "raw and completed EDTA.combine only; no old EDTA.final or TEanno",
+      "scientific_parameter_change": false,
+      "pending_reason": "Resources"
     }
   ],
   "completed_scores": [
@@ -176,7 +202,7 @@
       "job_id": "13189916",
       "stage": "whole-genome binary score",
       "observed_state": "PENDING",
-      "dependency": "afterany:13189902",
+      "dependency": "afterany:13190938",
       "resources": {
         "partition": "private-teodoro-gpu",
         "cpus": 4,
@@ -184,13 +210,15 @@
         "gpus": 0
       },
       "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-helitron-cont-20260924",
-      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json"
+      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
+      "hold_history": "EDTA.pl RAW intact aggregation was bypassed; require corrected native aggregate and valid affected FINAL/ANNO outputs before releasing scoring.",
+      "release_reason": "Both native-root configs now target the fresh aggregate/final-only root; dependency changed to 13190938, then the existing score jobs released without resubmission."
     },
     {
       "job_id": "13189917",
       "stage": "fixed chr10/20 class-map score",
       "observed_state": "PENDING",
-      "dependency": "afterany:13189902",
+      "dependency": "afterany:13190938",
       "resources": {
         "partition": "private-teodoro-gpu",
         "cpus": 8,
@@ -199,7 +227,15 @@
       },
       "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-helitron-cont-20260924",
       "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
-      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1"
+      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
+      "hold_history": "EDTA.pl RAW intact aggregation was bypassed; require corrected native aggregate and valid affected FINAL/ANNO outputs before releasing scoring.",
+      "release_reason": "Both native-root configs now target the fresh aggregate/final-only root; dependency changed to 13190938, then the existing score jobs released without resubmission."
     }
-  ]
+  ],
+  "next_action": {
+    "when": "Inspect 13190938 native logs, aggregate outputs, final annotation and both dependent scorers; no duplicate submissions.",
+    "budget": "431681 seconds remaining at 13190938 submission after charging 13189902 elapsed3255; retain all prior costs.",
+    "readiness": "Require native raw aggregate and correct FINAL/ANNO outputs, sequence-ID decoding and summary. Do not infer scientific completion from scheduler exit alone.",
+    "score_roots": "Both score jobs read the aggregate-final-13190938 root, still write fresh score-helitron-cont-20260924; prior score directories untouched."
+  }
 }

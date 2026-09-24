@@ -1,5 +1,25 @@
 # UNIFIED-NTV2-CLASS-MAP-BENCH-20260918 status
 
+## 20:21 UTC readiness hold, 2026-09-24
+
+The Helitron branch of `13189902` completed and generated nonempty native
+FASTA/GFF3/BED. Filtering also completed, but FINAL reports missing
+`galGal6.fa.mod.EDTA.intact.raw.gff3`: the recovery's branch-specific entry
+bypassed EDTA.pl's RAW intact aggregation. Class score `13189917` and binary
+score `13189916` are now `JobHeldUser`. Do not release them merely because
+`13189902` exits successfully. The native aggregate and affected downstream
+artifacts must be restored under the original contract first. No scientific
+score changed; the running native tree remains preserved.
+
+After validating the final-only repair and reusable inputs, the known-invalid
+native downstream attempt `13189902` was cancelled to conserve the original
+budget (3,255 Slurm seconds; all files preserved). New job `13190938` performs
+the exact native aggregate and FINAL/ANNO in a fresh root. Both scorer configs
+now use `EDTA-aggregate-final-13190938`; existing held scores `13189916` and
+`13189917` were redirected to `afterany:13190938` and released. They still
+write `score-helitron-cont-20260924`; no duplicate score jobs were submitted.
+No native terminal success or new accuracy result is asserted yet.
+
 ## 19:29 UTC follow-up, 2026-09-24
 
 Chicken EDTA `13189201` completed its native TIR stage but failed in the

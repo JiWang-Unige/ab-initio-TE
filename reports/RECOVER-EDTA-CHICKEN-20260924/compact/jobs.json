@@ -73,7 +73,7 @@
     },
     "continuation": {
       "job": "13189902",
-      "state_at_recording": "RUNNING",
+      "state_at_recording": "CANCELLED",
       "fresh_output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-helitron-cont-13189902",
       "reuses": "13189201 successful M4/S7 TIR output and completed LTR/SINE/LINE/RM2 artifacts",
       "native_stages": [
@@ -82,7 +82,26 @@
       ],
       "filter_cascade": "EDTA 2.3.0 goto FILTER falls through FINAL then ANNO; no separate final/anno invocation is required",
       "resources": "private-teodoro-gpu, 16 CPU, 128 GB, no GPU",
+      "slurm_elapsed_seconds": 3255,
+      "terminal_action": "cancelled by root after Helitron rc0 and filter reached FINAL but before accepting invalid downstream output",
+      "remaining_budget_seconds_after_job": 431681,
       "remaining_budget_seconds_at_submission": 434936,
+      "scientific_parameter_change": false
+    },
+    "aggregate_final_followup": {
+      "state_at_recording": "SUBMITTED_RUNNING",
+      "job": "13190938",
+      "dependency": "afterany:13189902",
+      "fresh_output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-aggregate-final-13190938",
+      "driver": "scripts/experiments/RECOVER-EDTA-CHICKEN-20260924/continue_aggregate_final.py",
+      "reuses": "13189902 raw tree and filter-stage EDTA.combine stage1/intact-clean only",
+      "excludes": "13189902 partial EDTA.final and EDTA.anno trees",
+      "native_aggregate": "EDTA.pl ALL lines 516-520 reproduced in-container",
+      "native_stage_after_aggregate": "EDTA.pl --step final --overwrite 0 --sensitive 1 --anno 1 --threads 16 (FINAL falls through ANNO)",
+      "prior_terminal_job": "13189902 CANCELLED after 3255 s; remaining budget 431681 s",
+      "submitted_with_budget_seconds": 431681,
+      "slurm_time_limit": "4-23:54:41",
+      "submit_after": "terminal EDTA final/annotation gates and frozen summarize_native output",
       "scientific_parameter_change": false
     }
   },
@@ -93,7 +112,11 @@
     "failed_recovery_elapsed_seconds": 306,
     "remaining_recovery_seconds_before_continuation": 434936,
     "continuation_job": "13189902",
-    "continuation_state_at_recording": "RUNNING"
+    "continuation_state_at_recording": "CANCELLED",
+    "continuation_elapsed_seconds": 3255,
+    "remaining_recovery_seconds_after_continuation": 431681,
+    "aggregate_final_job": "13190938",
+    "aggregate_final_state_at_recording": "SUBMITTED_RUNNING"
   },
   "scientific_gate": {
     "native_failure_evidence": "original 12888165 stderr directly records slice-index TypeError followed by daemon-process assertion",

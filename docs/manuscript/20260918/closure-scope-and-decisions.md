@@ -4,6 +4,14 @@
 
 ## 2026-09-24 更新：终态与恢复边界
 
+### 20:21 UTC复核：Helitron完成，原生RAW合并步骤仍需补齐
+
+`13189902`的Helitron分支已完成（子进程1775.75s），FASTA/GFF3/BED均非空；filter于20:20:50 UTC完成并进入FINAL。但stderr报告缺失`galGal6.fa.mod.EDTA.intact.raw.gff3`：分支式恢复入口跳过了EDTA.pl在RAW之后执行的intact汇总步骤。因此当前仍不可用于完整EDTA比较，即使后续退出码为0也不能直接采纳。当前原生作业保留运行，评分`13189916`/`13189917`已hold，待按EDTA原生规则补齐聚合并核实受影响的FINAL/ANNO产物后再放行。没有新增科学分数或改变参数/分母。
+
+源码核实表明，可复用已完成raw和combine过滤产物，在新目录补做EDTA.pl ALL段原有的intact FASTA/GFF聚合，再以`--step final --overwrite 0 --sensitive 1 --anno 1`重做FINAL→ANNO；不复制本次受影响的final/TEanno缓存。当前作业终态后按实际Slurm耗时扣减原预算再执行，不重跑TIR、Helitron或filter。
+
+在确认该缺口使当前FINAL→ANNO必须重做、修复脚本及真实输入均就绪后，停止`13189902`以避免继续消耗固定预算；Slurm为CANCELLED、实际3,255s，全部文件保留，不改其可能残留RUNNING的原status。新作业`13190938`在fresh `EDTA-aggregate-final-13190938`补做原生聚合及FINAL→ANNO，预算为431,681s。两个既有评分已将依赖改为`afterany:13190938`，更新native根后解除hold，不重复提交。尚无新的完整EDTA科学结果。
+
 ### 19:29 UTC复核：TIR已完成，EDTA下游仍缺失
 
 鸡EDTA `13189201`在44m29s后失败，但这次TIR Module4、postprocessing及检查点消费均已实际成功；失败发生于随后的`edta_filter_final_annotation`（88.98s、exit2）。不能将TIR中间产物视为完整EDTA注释。该次2,669s成本保留，原生cell预算余434,936s，后续只允许同协议工程恢复。原生日志已定位为Helitron原始产物缺失：原流程尚未执行该分支，恢复脚本过早跳至filter；将补齐同参数Helitron分支后再过滤，不用`--force`或替代库，不重做已成功TIR。

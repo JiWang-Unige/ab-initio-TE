@@ -122,3 +122,34 @@ named-family patch before genome-scale recovery starts.  The Helitron
 continuation adds no new fixture: the filter failure is directly identified
 by native EDTA stderr and source, so an empty-file or forced-library
 workaround is explicitly rejected.
+
+## Raw aggregation follow-up
+
+The Helitron continuation exposed a second EDTA pipeline boundary.  The
+native `EDTA_raw.pl --type helitron` call creates the Helitron-specific raw
+FASTA/GFF/BED files, but it does not execute the aggregation that belongs to
+the `EDTA.pl` `ALL` label.  The pinned source performs that aggregation at
+`EDTA.pl` lines 516–520: it concatenates the LTR, TIR, and Helitron intact
+FASTAs; converts the TIR and Helitron BED files with the native `bed2gff.pl`
+using `TE_struc`; appends the LTR intact GFF; and sorts the result into
+`galGal6.fa.mod.EDTA.intact.raw.gff3`.
+
+The first Helitron continuation reached FINAL, but its stderr reported that
+this aggregate GFF was absent.  Its filter-stage `EDTA.fa.stg1` and
+`EDTA.intact.fa.cln` outputs are valid reusable inputs, while its partial
+`EDTA.final` and annotation trees are excluded from recovery.  The prepared
+follow-up driver `continue_aggregate_final.py` copies only the raw tree and
+those filter combine outputs into a new root, reproduces the exact native
+aggregation in the pinned container, and runs
+`EDTA.pl --step final --overwrite 0 --sensitive 1 --anno 1 --threads 16`.
+In EDTA 2.3.0, `--step final` naturally falls through to ANNO.  It does not
+rerun TIR, Helitron, or filter, and it does not alter the current continuation
+output.  Submission is held until the continuation's terminal Slurm elapsed
+time is known so the seven-day cell budget can be charged exactly.
+
+Root cancelled `13189902` after 3,255 Slurm seconds once this missing
+aggregation was confirmed.  Its raw tree, filter combine outputs, and logs
+were preserved.  The fresh final-only repair was then submitted as `13190938`
+with a 431,681-second budget and an `afterany:13189902` dependency.  It uses
+the prepared aggregation driver and remains an engineering recovery until the
+native final/annotation outputs and summary pass all terminal gates.
