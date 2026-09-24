@@ -53,21 +53,47 @@
       "reason": "checkpoint dtype filename check used .csv_dtypes.txt; copied checkpoint itself was complete"
     },
     "job": "13189201",
-    "state_at_recording": "RUNNING",
+    "state_at_recording": "FAILED",
     "dependency": "none; RM2 mask gate 13180772 was COMPLETED before submission",
     "elapsed_budget_seconds": 437605,
     "slurm_time_limit": "5-01:33:25",
     "resources": "private-teodoro-gpu, 16 CPU, 128 GB, no GPU",
     "fresh_output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201",
     "fresh_copy_gate": "PASS: copied M4/S7 info, CSV, _dtypes, processed fasta, and relative links",
-    "current_stage": "tir_raw_resume running; stdout confirms M4/S7 checkpoint loaded and Step8 is active"
+    "current_stage": "tir_raw_resume COMPLETED (rc=0); edta_filter_final_annotation FAILED (rc=2) because native Helitron raw library is absent",
+    "filter_failure": {
+      "stderr_markers": [
+        "Helitron raw library file galGal6.fa.mod.EDTA.raw/galGal6.fa.mod.Helitron.intact.raw.fa not exists!",
+        "ERROR: Stage 1 library not found"
+      ],
+      "native_source_basis": "EDTA.pl filter requires non-empty Helitron input; EDTA_raw.pl --type helitron is the unchanged producer",
+      "slurm_elapsed_seconds": 2669,
+      "tir_wall_seconds": 2407.3619326883927,
+      "filter_wall_seconds": 88.97724774526432
+    },
+    "continuation": {
+      "job": "13189902",
+      "state_at_recording": "RUNNING",
+      "fresh_output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-helitron-cont-13189902",
+      "reuses": "13189201 successful M4/S7 TIR output and completed LTR/SINE/LINE/RM2 artifacts",
+      "native_stages": [
+        "EDTA_raw.pl --type helitron --overwrite 0 --species others --threads 16",
+        "EDTA.pl --step filter --overwrite 0 --sensitive 1 --anno 1 --threads 16"
+      ],
+      "filter_cascade": "EDTA 2.3.0 goto FILTER falls through FINAL then ANNO; no separate final/anno invocation is required",
+      "resources": "private-teodoro-gpu, 16 CPU, 128 GB, no GPU",
+      "remaining_budget_seconds_at_submission": 434936,
+      "scientific_parameter_change": false
+    }
   },
   "budget": {
     "cell_budget_seconds": 604800,
     "historical_elapsed_seconds": 166862,
     "fixture_elapsed_seconds": 27,
     "failed_recovery_elapsed_seconds": 306,
-    "remaining_recovery_seconds": 437605
+    "remaining_recovery_seconds_before_continuation": 434936,
+    "continuation_job": "13189902",
+    "continuation_state_at_recording": "RUNNING"
   },
   "scientific_gate": {
     "native_failure_evidence": "original 12888165 stderr directly records slice-index TypeError followed by daemon-process assertion",

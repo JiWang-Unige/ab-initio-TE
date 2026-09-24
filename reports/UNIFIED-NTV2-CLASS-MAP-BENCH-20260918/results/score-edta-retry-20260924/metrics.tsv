@@ -1,0 +1,17 @@
+species	method	status	endpoint	macro_f1	macro_precision	macro_recall	support_bp	reason	terminal_state	terminal_reason	native_status_path	terminal_ledger_path
+chicken	NTv2_class	COMPLETED	primary_known	0.6259131687276955	0.6803223488822787	0.6351847482515504	34478839					
+chicken	NTv2_class	COMPLETED	full8	0.4462933432937814	0.4808294095085888	0.45370339160825024	34515527					
+chicken	NTv2_class	COMPLETED	true_te_conditional	0.6413982956303694	0.8899993663212392	0.5465592339221078	1485085					
+chicken	RM2	COMPLETED	primary_known	0.6094395283260607	0.6550373231425592	0.6219108591867453	34478839					
+chicken	RM2	COMPLETED	full8	0.43474762361842884	0.46462179922064034	0.446818317589931	34515527					
+chicken	RM2	COMPLETED	true_te_conditional	0.6541885684234032	0.9197920803017937	0.5339082019105843	1485085					
+chicken	EDTA	NA	NA	NA	NA	NA	NA	native cell is not terminal-success: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201 (FAILED)	FAILED	native cell is not terminal-success: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201 (FAILED)	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201/status.json	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json
+chicken	D_binary	N/A	NA	NA	NA	NA	NA	WHOLE D output is binary material-only and has no class prediction; it is not remapped				
+zebrafish	NTv2_class	COMPLETED	primary_known	0.760376643627206	0.7622884106247142	0.7611219617498135	95026056					
+zebrafish	NTv2_class	COMPLETED	full8	0.46325153586699486	0.4547661358647612	0.47570122609363336	100505689					
+zebrafish	NTv2_class	COMPLETED	true_te_conditional	0.78618982342664	0.8487047505609726	0.7354506358208781	41938694					
+zebrafish	RM2	COMPLETED	primary_known	0.688569252762689	0.7546754599343897	0.7131465770878161	95026056					
+zebrafish	RM2	COMPLETED	full8	0.45708061963811675	0.4793504506297138	0.5153379948660273	100505689					
+zebrafish	RM2	COMPLETED	true_te_conditional	0.7114817857247842	0.8594561546499587	0.6915890804887281	41938694					
+zebrafish	EDTA	NA	NA	NA	NA	NA	NA	terminal ledger: OUT_OF_MEMORY: Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.	OUT_OF_MEMORY	Slurm terminal state was OUT_OF_MEMORY and TIR-Learner was killed; the wrapper later persisted RuntimeError('EDTA failed'). No final EDTA annotation exists.	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/EDTA/status.json	/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/reports/WHOLE-GENOME-BENCHMARK-20260918/observed-terminal-20260924.json
+zebrafish	D_binary	N/A	NA	NA	NA	NA	NA	WHOLE D output is binary material-only and has no class prediction; it is not remapped				

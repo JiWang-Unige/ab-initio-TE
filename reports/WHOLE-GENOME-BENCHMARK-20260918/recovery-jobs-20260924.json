@@ -24,7 +24,7 @@
     "Scorers retain failed/missing methods as NA and reject COMPLETED methods missing required outputs.",
     "On the next heartbeat inspect these existing jobs before submitting anything else."
   ],
-  "observed_at_utc": "2026-09-24T18:39:39Z and subsequent same-turn submissions",
+  "observed_at_utc": "2026-09-24T19:38:50Z",
   "native_recovery_history": [
     {
       "job_id": "13180772",
@@ -48,16 +48,34 @@
       "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13180896",
       "slurm_elapsed_seconds": 306,
       "reason": "Checkpoint check used .csv_dtypes.txt instead of real _dtypes.txt; no TIR stage started."
+    },
+    {
+      "job_id": "13189201",
+      "stage": "chicken EDTA checkpoint continuation; dtype filename fixed",
+      "observed_state": "FAILED",
+      "remaining_budget_seconds": 437605,
+      "checkpoint_evidence": "Successfully loaded Module 4 Step 7; Module 4 and postprocessing completed; tir_raw_resume returncode 0, wall 2407.36 s.",
+      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201",
+      "slurm_elapsed_seconds": 2669,
+      "reason": "TIR native stage completed; filter failed because the original workflow had stopped before producing galGal6.fa.mod.Helitron.intact.raw.fa. Same-contract continuation must execute the outstanding native Helitron branch before filter/final/annotation; no --force."
     }
   ],
   "active_recovery_chain": [
     {
-      "job_id": "13189201",
-      "stage": "chicken EDTA checkpoint continuation; dtype filename fixed",
+      "job_id": "13189902",
+      "stage": "missing native Helitron branch, then unchanged filter/final/annotation",
       "observed_state": "RUNNING",
-      "remaining_budget_seconds": 437605,
-      "checkpoint_evidence": "Successfully loaded Module 4 Step 7; Step 8 passed; Step 9 Check TIR and TSD active at 2026-09-24T18:52:15Z",
-      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201"
+      "remaining_budget_seconds": 434936,
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 16,
+        "memory_gb": 128,
+        "gpus": 0
+      },
+      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-helitron-cont-13189902",
+      "reused_from": "13189201 completed TIR; LTR/SINE/LINE/RM2 retained",
+      "tir_rerun": false,
+      "native_log_evidence": "Fresh continuation copied successfully; helitron_raw_continuation.stderr records EDTA_raw dependency check. No terminal annotation claimed."
     }
   ],
   "completed_scores": [
@@ -101,13 +119,11 @@
         "chicken/EDTA",
         "zebrafish/EDTA"
       ]
-    }
-  ],
-  "queued_scores": [
+    },
     {
       "job_id": "13189350",
       "stage": "whole-genome binary score",
-      "observed_state": "PENDING",
+      "observed_state": "COMPLETED",
       "dependency": "afterany:13189201",
       "resources": {
         "partition": "private-teodoro-gpu",
@@ -117,12 +133,18 @@
         "wall_limit_hours": 4
       },
       "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
-      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-edta-retry-20260924"
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-edta-retry-20260924",
+      "slurm_elapsed_seconds": 103,
+      "na_cells": [
+        "chicken/EDTA",
+        "zebrafish/EDTA"
+      ],
+      "numeric_comparison": "All numeric TSV fields unchanged from 13180901/13180902; chicken EDTA NA reason now refers to 13189201, corrected RM2 native composition retained."
     },
     {
       "job_id": "13189351",
       "stage": "fixed chr10/20 class-map score",
-      "observed_state": "PENDING",
+      "observed_state": "COMPLETED",
       "dependency": "afterany:13189201",
       "resources": {
         "partition": "private-teodoro-gpu",
@@ -133,7 +155,13 @@
       },
       "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
       "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
-      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-retry-20260924"
+      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-retry-20260924",
+      "slurm_elapsed_seconds": 197,
+      "na_cells": [
+        "chicken/EDTA",
+        "zebrafish/EDTA"
+      ],
+      "numeric_comparison": "All numeric TSV fields unchanged from 13180901/13180902; chicken EDTA NA reason now refers to 13189201, corrected RM2 native composition retained."
     }
   ],
   "rm2_summary_repair": {
@@ -142,5 +170,36 @@
     "slurm_elapsed_seconds": 70,
     "resources": "8 CPU/64G/private; no GPU",
     "scope": "Derived annotation summary only; preserved original-gff backup, corrected canonical and sidecar; no annotation, native status or completed score numeric changed."
-  }
+  },
+  "queued_scores": [
+    {
+      "job_id": "13189916",
+      "stage": "whole-genome binary score",
+      "observed_state": "PENDING",
+      "dependency": "afterany:13189902",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 4,
+        "memory_gb": 32,
+        "gpus": 0
+      },
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-helitron-cont-20260924",
+      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json"
+    },
+    {
+      "job_id": "13189917",
+      "stage": "fixed chr10/20 class-map score",
+      "observed_state": "PENDING",
+      "dependency": "afterany:13189902",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 8,
+        "memory_gb": 32,
+        "gpus": 0
+      },
+      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-helitron-cont-20260924",
+      "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
+      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1"
+    }
+  ]
 }

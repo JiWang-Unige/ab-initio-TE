@@ -33,7 +33,7 @@
       "source_labels": ".backup/data/genome_data/current_eukaryotes/animals/chicken/rmsk.txt.gz",
       "native_root": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken",
       "native_method_roots": {
-        "EDTA": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201",
+        "EDTA": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-helitron-cont-13189902",
         "RM2": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2"
       },
       "target_chromosomes": ["chr10", "chr20"]

@@ -1,5 +1,21 @@
 # UNIFIED-NTV2-CLASS-MAP-BENCH-20260918 status
 
+## 19:29 UTC follow-up, 2026-09-24
+
+Chicken EDTA `13189201` completed its native TIR stage but failed in the
+subsequent filter/final/annotation stage, so no completed EDTA annotation is
+available. Class score `13189351` completed in 197 seconds with chicken EDTA
+still explicit NA. All numeric endpoints and support counts are unchanged
+from `13180902`; the failed attempt's root is updated in the NA metadata.
+The complete snapshot is in `results/score-edta-retry-20260924/`. Its
+successful scorer exit does not close the missing native comparator.
+
+The native failure is missing Helitron raw output after the original TIR
+interruption. Continuation `13189902` reuses the completed TIR and runs the
+outstanding native branch under the same cell budget. The config points to
+`EDTA-helitron-cont-13189902`; class score `13189917` waits on
+`afterany:13189902`, writing fresh `score-helitron-cont-20260924`.
+
 ## Latest completed comparison, 2026-09-24
 
 Score `13180902` completed in 170 seconds. Both RM2 methods are now scored

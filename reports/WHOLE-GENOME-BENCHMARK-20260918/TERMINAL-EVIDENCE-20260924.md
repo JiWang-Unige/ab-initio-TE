@@ -2,6 +2,15 @@
 
 This is an independent machine ledger for the frozen whole-genome benchmark. It preserves the original native output directories and their `status.json` files. The machine-readable record is [observed-terminal-20260924.json](observed-terminal-20260924.json).
 
+**19:29 UTC update:** chicken EDTA `13189201` finished TIR successfully but
+failed in its subsequent filter stage after 2,669 total Slurm seconds. Its
+annotation remains unavailable. Follow-up binary/class scores
+`13189350`/`13189351` completed in 103/197 seconds with all prior numeric
+results unchanged and both EDTA species still NA. See [the follow-up
+snapshot](SCORE-FOLLOWUP-20260924.md). The recovery investigation is limited
+to continuing the preserved native workflow under the remaining original
+budget; the older active-job descriptions below are historical snapshots.
+
 The initial native jobs did not produce a complete set of four cells (EDTA and RepeatModeler2 on the two assemblies). Both RepeatModeler2 cells completed all five discovery rounds and the `-LTRStruct` stage, then failed at the bundled FamDB classification step because the container's default FamDB was empty or not configured. Their top-level `RM_*/consensi.fa` and `families.stk` are therefore valid terminal post-`-LTRStruct` discovery products. The classification-only recovery used those files in fresh roots and the fixed benchmark Dfam 4.0 asset; it did not repeat discovery. Both RM2 recovery masks subsequently completed successfully, so the two RM2 native annotations are now available for comparator scoring.
 
 Chicken EDTA reached the TIR-Learner stage but stopped in the nested swifter/Dask path, where daemon-process creation is the confirmed fatal event. Source review also found a pandas 3 positional-index compatibility issue at `x[0]` for `TIR_type`; the exploratory slice-index message is not treated as an independent biological coordinate failure. Zebrafish EDTA reached the same stage, was killed with the Slurm terminal state `OUT_OF_MEMORY` under 128 GB, and has no final annotation. The current zebrafish EDTA `status.json` is now `FAILED` because the wrapper later persisted `RuntimeError('EDTA failed')`; the earlier `RUNNING` observation and the Slurm OOM event are retained in the independent ledger rather than overwriting that file. `--force` was not used because it would substitute missing TIR categories with the EDTA fallback library and change the frozen contract.

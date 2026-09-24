@@ -4,6 +4,14 @@
 
 ## 2026-09-24 更新：终态与恢复边界
 
+### 19:29 UTC复核：TIR已完成，EDTA下游仍缺失
+
+鸡EDTA `13189201`在44m29s后失败，但这次TIR Module4、postprocessing及检查点消费均已实际成功；失败发生于随后的`edta_filter_final_annotation`（88.98s、exit2）。不能将TIR中间产物视为完整EDTA注释。该次2,669s成本保留，原生cell预算余434,936s，后续只允许同协议工程恢复。原生日志已定位为Helitron原始产物缺失：原流程尚未执行该分支，恢复脚本过早跳至filter；将补齐同参数Helitron分支后再过滤，不用`--force`或替代库，不重做已成功TIR。
+
+依赖其终态的binary/class评分`13189350`/`13189351`已分别在103/197s完成，所有已存在数值与前次RM2比较完全相同；鸡EDTA仍为失败NA，斑马鱼EDTA仍为OOM/NA。新的完整JSON使用已修正RM2组成摘要，既往科学指标未改写。本批尚未全部收束。[本次评分记录](../../../reports/WHOLE-GENOME-BENCHMARK-20260918/SCORE-FOLLOWUP-20260924.md)
+
+Helitron续跑`13189902`在private以16 CPU/128 GB、无GPU启动，fresh `EDTA-helitron-cont-13189902`复用已成功的TIR及此前raw产物；原预算剩434,936s。后续binary/class评分`13189916`/`13189917`均依赖`afterany:13189902`，写入fresh `score-helitron-cont-20260924`，不覆盖前两轮评分。作业启动不构成原生注释完成。
+
 ### 本轮18:39 UTC后的最新终态
 
 两个RM2完整注释均已完成（mask-only 13180772/13180877），共同binary评分13180901和class评分13180902也已完成。固定独立chr10/20上，D/RM2的binary F1为鸡0.479174/0.699844、斑马鱼0.878294/0.871789；鸡的高precision不足以补偿低recall。统一NTv2-class/RM2的primary known-five macro-F1为鸡0.625913/0.609440、斑马鱼0.760377/0.688569，但鸡条件TE-four端点为0.641398/0.654189，模型并非所有端点更好；完整八状态差值亦很小。所有固定类别、物种、失败臂均保留，无事后调参或换分母。
