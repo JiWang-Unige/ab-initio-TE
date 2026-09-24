@@ -1,0 +1,12 @@
+# Downloaded source records are provenance inputs, not release artifacts.
+source_records/
+zebrafish_zb_supplement/
+assembly_reports/
+
+# Keep only compact derived panel outputs if this evidence directory is staged.
+*
+!.gitignore
+!README.md
+!structural_panels/
+!structural_panels/*.tsv
+!structural_panels/*.json

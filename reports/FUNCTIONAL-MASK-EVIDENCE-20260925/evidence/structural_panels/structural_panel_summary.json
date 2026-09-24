@@ -1,0 +1,246 @@
+{
+  "status": "EXTRACTED_ASSEMBLY_MATCHED_STRUCTURAL_PANEL",
+  "source_policy": "independent source records only; no D/U/R outputs read",
+  "coordinate_convention": "source 1-based inclusive; output start0/end0 0-based half-open",
+  "assemblies": {
+    "chicken": "GCA_000002315.5/GRCg6a",
+    "zebrafish": "GCA_000002035.4/GRCz11"
+  },
+  "candidate_counts": {
+    "all_coordinate_resolved": 22,
+    "chicken": 2,
+    "zebrafish": 20,
+    "full_length_structural_candidates": 21,
+    "primary_autonomous_candidates": 1,
+    "independent_source_family_units": 2,
+    "family_unit_note": "The 22 loci are not 22 independent families: they are one chicken ALVE source family and one zebrafish ZB/Tc1-mariner source family, with GGERV20 population count unresolved.",
+    "primary_in_existing_core": 0,
+    "primary_in_existing_halo": 0,
+    "all_in_existing_core": 0,
+    "all_in_existing_halo": 0
+  },
+  "existing_geometry": {
+    "chicken": [
+      {
+        "chrom": "chr1",
+        "index": 0,
+        "start": 56100000,
+        "end": 61100000,
+        "halo_start": 56000000,
+        "halo_end": 61200000,
+        "id": "c00",
+        "record_id": "chr1|base_mask_core=0|core=56100000-61100000|halo=56000000-61200000"
+      },
+      {
+        "chrom": "chr9",
+        "index": 1,
+        "start": 9100000,
+        "end": 14100000,
+        "halo_start": 9000000,
+        "halo_end": 14200000,
+        "id": "c01",
+        "record_id": "chr9|base_mask_core=1|core=9100000-14100000|halo=9000000-14200000"
+      },
+      {
+        "chrom": "chr10",
+        "index": 2,
+        "start": 8100000,
+        "end": 13100000,
+        "halo_start": 8000000,
+        "halo_end": 13200000,
+        "id": "c02",
+        "record_id": "chr10|base_mask_core=2|core=8100000-13100000|halo=8000000-13200000"
+      },
+      {
+        "chrom": "chr12",
+        "index": 3,
+        "start": 8100000,
+        "end": 13100000,
+        "halo_start": 8000000,
+        "halo_end": 13200000,
+        "id": "c03",
+        "record_id": "chr12|base_mask_core=3|core=8100000-13100000|halo=8000000-13200000"
+      },
+      {
+        "chrom": "chr11",
+        "index": 4,
+        "start": 8100000,
+        "end": 13100000,
+        "halo_start": 8000000,
+        "halo_end": 13200000,
+        "id": "c04",
+        "record_id": "chr11|base_mask_core=4|core=8100000-13100000|halo=8000000-13200000"
+      },
+      {
+        "chrom": "chr13",
+        "index": 5,
+        "start": 7100000,
+        "end": 12100000,
+        "halo_start": 7000000,
+        "halo_end": 12200000,
+        "id": "c05",
+        "record_id": "chr13|base_mask_core=5|core=7100000-12100000|halo=7000000-12200000"
+      },
+      {
+        "chrom": "chr14",
+        "index": 6,
+        "start": 6100000,
+        "end": 11100000,
+        "halo_start": 6000000,
+        "halo_end": 11200000,
+        "id": "c06",
+        "record_id": "chr14|base_mask_core=6|core=6100000-11100000|halo=6000000-11200000"
+      },
+      {
+        "chrom": "chr20",
+        "index": 7,
+        "start": 4100000,
+        "end": 9100000,
+        "halo_start": 4000000,
+        "halo_end": 9200000,
+        "id": "c07",
+        "record_id": "chr20|base_mask_core=7|core=4100000-9100000|halo=4000000-9200000"
+      },
+      {
+        "chrom": "chr15",
+        "index": 8,
+        "start": 4100000,
+        "end": 9100000,
+        "halo_start": 4000000,
+        "halo_end": 9200000,
+        "id": "c08",
+        "record_id": "chr15|base_mask_core=8|core=4100000-9100000|halo=4000000-9200000"
+      },
+      {
+        "chrom": "chr18",
+        "index": 9,
+        "start": 3100000,
+        "end": 8100000,
+        "halo_start": 3000000,
+        "halo_end": 8200000,
+        "id": "c09",
+        "record_id": "chr18|base_mask_core=9|core=3100000-8100000|halo=3000000-8200000"
+      }
+    ],
+    "zebrafish": [
+      {
+        "chrom": "chr16",
+        "index": 0,
+        "start": 25100000,
+        "end": 30100000,
+        "halo_start": 25000000,
+        "halo_end": 30200000,
+        "id": "c00",
+        "record_id": "chr16|base_mask_core=0|core=25100000-30100000|halo=25000000-30200000"
+      },
+      {
+        "chrom": "chr20",
+        "index": 1,
+        "start": 25100000,
+        "end": 30100000,
+        "halo_start": 25000000,
+        "halo_end": 30200000,
+        "id": "c01",
+        "record_id": "chr20|base_mask_core=1|core=25100000-30100000|halo=25000000-30200000"
+      },
+      {
+        "chrom": "chr8",
+        "index": 2,
+        "start": 25100000,
+        "end": 30100000,
+        "halo_start": 25000000,
+        "halo_end": 30200000,
+        "id": "c02",
+        "record_id": "chr8|base_mask_core=2|core=25100000-30100000|halo=25000000-30200000"
+      },
+      {
+        "chrom": "chr17",
+        "index": 3,
+        "start": 24100000,
+        "end": 29100000,
+        "halo_start": 24000000,
+        "halo_end": 29200000,
+        "id": "c03",
+        "record_id": "chr17|base_mask_core=3|core=24100000-29100000|halo=24000000-29200000"
+      },
+      {
+        "chrom": "chr14",
+        "index": 4,
+        "start": 24100000,
+        "end": 29100000,
+        "halo_start": 24000000,
+        "halo_end": 29200000,
+        "id": "c04",
+        "record_id": "chr14|base_mask_core=4|core=24100000-29100000|halo=24000000-29200000"
+      },
+      {
+        "chrom": "chr13",
+        "index": 5,
+        "start": 23100000,
+        "end": 28100000,
+        "halo_start": 23000000,
+        "halo_end": 28200000,
+        "id": "c05",
+        "record_id": "chr13|base_mask_core=5|core=23100000-28100000|halo=23000000-28200000"
+      },
+      {
+        "chrom": "chr18",
+        "index": 6,
+        "start": 23100000,
+        "end": 28100000,
+        "halo_start": 23000000,
+        "halo_end": 28200000,
+        "id": "c06",
+        "record_id": "chr18|base_mask_core=6|core=23100000-28100000|halo=23000000-28200000"
+      },
+      {
+        "chrom": "chr12",
+        "index": 7,
+        "start": 22100000,
+        "end": 27100000,
+        "halo_start": 22000000,
+        "halo_end": 27200000,
+        "id": "c07",
+        "record_id": "chr12|base_mask_core=7|core=22100000-27100000|halo=22000000-27200000"
+      },
+      {
+        "chrom": "chr19",
+        "index": 8,
+        "start": 22100000,
+        "end": 27100000,
+        "halo_start": 22000000,
+        "halo_end": 27200000,
+        "id": "c08",
+        "record_id": "chr19|base_mask_core=8|core=22100000-27100000|halo=22000000-27200000"
+      },
+      {
+        "chrom": "chr15",
+        "index": 9,
+        "start": 21100000,
+        "end": 26100000,
+        "halo_start": 21000000,
+        "halo_end": 26200000,
+        "id": "c09",
+        "record_id": "chr15|base_mask_core=9|core=21100000-26100000|halo=21000000-26200000"
+      }
+    ]
+  },
+  "unresolved_sources": [
+    {
+      "source": "PMC7597685",
+      "family": "GGERV20",
+      "reported_count": ">=65 full-length copies in GRCg6a",
+      "coordinate_status": "not provided in accessible article/supplement",
+      "primary_panel_status": "excluded until a coordinate-bearing source is found",
+      "reason": "a population count without per-copy coordinates cannot be intersected with fixed cores without guessing",
+      "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7597685/"
+    }
+  ],
+  "inputs": {
+    "zebrafish_docx": "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/FUNCTIONAL-MASK-EVIDENCE-20260925/evidence/zebrafish_zb_supplement/nested/Supplymental tables and figures.docx",
+    "zebrafish_assembly_report": "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/FUNCTIONAL-MASK-EVIDENCE-20260925/evidence/assembly_reports/GCA_000002035.4_GRCz11_assembly_report.txt",
+    "chicken_assembly_report": "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/FUNCTIONAL-MASK-EVIDENCE-20260925/evidence/assembly_reports/GCA_000002315.5_GRCg6a_assembly_report.txt",
+    "chicken_cores": "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/NONMAMMAL-GENE-UTILITY-20260918/chicken/geometry.json",
+    "zebrafish_cores": "/Users/jiwang/Desktop/TE/ab-initio-TE/reports/NONMAMMAL-GENE-UTILITY-20260918/zebrafish/geometry.json"
+  }
+}

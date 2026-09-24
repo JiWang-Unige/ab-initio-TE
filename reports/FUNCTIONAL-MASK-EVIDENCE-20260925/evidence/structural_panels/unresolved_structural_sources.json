@@ -1,0 +1,11 @@
+[
+  {
+    "source": "PMC7597685",
+    "family": "GGERV20",
+    "reported_count": ">=65 full-length copies in GRCg6a",
+    "coordinate_status": "not provided in accessible article/supplement",
+    "primary_panel_status": "excluded until a coordinate-bearing source is found",
+    "reason": "a population count without per-copy coordinates cannot be intersected with fixed cores without guessing",
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7597685/"
+  }
+]
