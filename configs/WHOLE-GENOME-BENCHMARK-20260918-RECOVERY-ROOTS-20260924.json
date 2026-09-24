@@ -1,6 +1,6 @@
 {
   "chicken": {
-    "EDTA": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13180896",
+    "EDTA": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201",
     "RM2": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2"
   },
   "zebrafish": {

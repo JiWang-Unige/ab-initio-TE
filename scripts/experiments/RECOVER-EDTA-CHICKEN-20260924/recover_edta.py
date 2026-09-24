@@ -216,7 +216,7 @@ def copy_preserved_tree(failed: Path, output: Path) -> Dict[str, object]:
     checkpoint_files = []
     for value in working_files.values():
         csv_path = checkpoint / f"{value}.csv"
-        dtype_path = checkpoint / f"{value}.csv_dtypes.txt"
+        dtype_path = checkpoint / f"{value}_dtypes.txt"
         if not csv_path.is_file() or not dtype_path.is_file():
             raise ValueError(f"copied checkpoint working file is incomplete: {value}")
         checkpoint_files.extend([str(csv_path), str(dtype_path)])

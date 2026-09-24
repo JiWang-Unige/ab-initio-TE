@@ -3,7 +3,7 @@
 #SBATCH --partition=private-teodoro-gpu
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
-#SBATCH --time=5-01:38:58
+#SBATCH --time=5-01:33:25
 #SBATCH --output=logs/edta-chicken-recovery-%j.out
 #SBATCH --error=logs/edta-chicken-recovery-%j.err
 set -euo pipefail

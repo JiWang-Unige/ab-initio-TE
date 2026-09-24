@@ -46,19 +46,28 @@
     "purpose": "chicken RM2 mask-only recovery; afterany dependency"
   },
   "recovery": {
-    "job": "13180896",
-    "state_at_recording": "PENDING",
-    "dependency": "afterany:13180772",
-    "elapsed_budget_seconds": 437911,
-    "slurm_time_limit": "5-01:38:31",
+    "failed_job": {
+      "job": "13180896",
+      "state": "FAILED",
+      "elapsed_seconds": 306,
+      "reason": "checkpoint dtype filename check used .csv_dtypes.txt; copied checkpoint itself was complete"
+    },
+    "job": "13189201",
+    "state_at_recording": "RUNNING",
+    "dependency": "none; RM2 mask gate 13180772 was COMPLETED before submission",
+    "elapsed_budget_seconds": 437605,
+    "slurm_time_limit": "5-01:33:25",
     "resources": "private-teodoro-gpu, 16 CPU, 128 GB, no GPU",
-    "fresh_output_template": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-${SLURM_JOB_ID}"
+    "fresh_output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201",
+    "fresh_copy_gate": "PASS: copied M4/S7 info, CSV, _dtypes, processed fasta, and relative links",
+    "current_stage": "tir_raw_resume running; stdout confirms M4/S7 checkpoint loaded and Step8 is active"
   },
   "budget": {
     "cell_budget_seconds": 604800,
     "historical_elapsed_seconds": 166862,
     "fixture_elapsed_seconds": 27,
-    "remaining_recovery_seconds": 437911
+    "failed_recovery_elapsed_seconds": 306,
+    "remaining_recovery_seconds": 437605
   },
   "scientific_gate": {
     "native_failure_evidence": "original 12888165 stderr directly records slice-index TypeError followed by daemon-process assertion",

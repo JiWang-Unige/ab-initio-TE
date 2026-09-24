@@ -1,5 +1,21 @@
 # UNIFIED-NTV2-CLASS-MAP-BENCH-20260918 status
 
+## Latest completed comparison, 2026-09-24
+
+Score `13180902` completed in 170 seconds. Both RM2 methods are now scored
+against the same fixed chr10/20 labels and callable denominators as NTv2.
+Primary known-five F1 is NTv2/RM2 0.625913/0.609440 in chicken and
+0.760377/0.688569 in zebrafish; conditional chicken TE-four favors RM2 and
+full-eight differences are small. See [the complete comparison and limits](RM2-COMPARISON-13180902.md).
+
+Chicken EDTA `13180896` failed in checkpoint-file validation before native
+TIR. The corrected fresh attempt `13189201` has demonstrably resumed Module4
+Step7 and entered Step8. The config now points to that new root. Follow-up
+class score `13189351` waits on `afterany:13189201`, writes fresh
+`score-edta-retry-20260924`, and preserves all earlier completed scores.
+Zebrafish EDTA remains OOM/NA. The earlier pending/unsubmitted entries below
+are historical snapshots, not the current state.
+
 Updated 2026-09-24, after the repaired class-map score and native-recovery
 handoff. Target preparation and both repaired class-map GPU cells are
 complete. The historical dependency-gated score jobs `12898022` and

@@ -55,10 +55,12 @@ The two source-checked overlay edits are:
 No integer truncation, threshold change, library change, `--force`, or input
 change is permitted.  The recovery runs with the same EDTA image, source
 overlay, species, sensitivity, annotation flag, and 16 CPU/128 GB private
-allocation.  It is submitted as job `13180896` after chicken RM2 mask recovery
-job `13180772` so the native CPU recovery concurrency remains at most two.  The
-historical 166,862 s plus the four fixture allocations (27 s) leave 437,911 s
-(`5-01:38:31`) for this recovery cell.
+allocation.  The first recovery attempt (`13180896`) failed after 306 s at an
+engineering checkpoint filename check; its output is preserved.  After fixing
+that exact filename, fresh retry `13189201` started after chicken RM2 mask
+recovery `13180772` completed.  The historical 166,862 s, four fixture
+allocations (27 s), and failed retry (306 s) leave 437,605 s (`5-01:33:25`)
+for the active recovery cell.
 
 The recovery binds the fresh output as `/work` and sets the container working
 directory to `/work`.  It records the checkpoint files and rejects stale
@@ -72,6 +74,12 @@ summary fails.  It also checks that the copied annotation has no `_J...`
 encoded sequence IDs.  EDTA 2.3.0's source decodes the final GFF with its
 native `seqid_codec.pl` using `galGal6.fa.mod.seqid.map`; the recovery records
 that source-backed check and does not perform a coordinate or name rewrite.
+
+The active retry's `tir_raw_resume.stdout` now records `Successfully loaded
+checkpoint` with the frozen `Module: 4` and `Step: 7`, followed by
+`Module 4, Step 8: Get FASTA sequences from CNN prediction`.  This confirms
+that the fresh retry consumes the preserved checkpoint.  The TIR stage remains
+running; no terminal annotation or score is claimed yet.
 
 ## Fixture gate
 

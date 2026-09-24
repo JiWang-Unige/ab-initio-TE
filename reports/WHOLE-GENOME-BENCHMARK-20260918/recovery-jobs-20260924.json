@@ -8,41 +8,139 @@
     "state": "COMPLETED",
     "exit_code": "0:0",
     "slurm_elapsed_seconds": 79,
-    "resources": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 32, "gpus": 0},
+    "resources": {
+      "partition": "private-teodoro-gpu",
+      "cpus": 4,
+      "memory_gb": 32,
+      "gpus": 0
+    },
     "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-d-terminal-20260924",
     "native_cells": "All four original native attempts are NA; no recovery output was scored."
   },
-  "active_recovery_chain": [
-    {"job_id": "13180772", "stage": "chicken RM2 mask only", "observed_state": "RUNNING", "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2"},
-    {"job_id": "13180877", "stage": "zebrafish RM2 mask only", "observed_state": "RUNNING", "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2"},
-    {"job_id": "13180896", "stage": "chicken EDTA checkpoint continuation", "observed_state": "PENDING", "dependency": "afterany:13180772", "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13180896"}
-  ],
-  "queued_scores": [
-    {
-      "job_id": "13180901",
-      "stage": "whole-genome binary score",
-      "observed_state": "PENDING",
-      "dependency": "afterany:13180772:13180877:13180896",
-      "resources": {"partition": "private-teodoro-gpu", "cpus": 4, "memory_gb": 32, "gpus": 0, "wall_limit_hours": 4},
-      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
-      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-recovery-20260924"
-    },
-    {
-      "job_id": "13180902",
-      "stage": "fixed chr10/20 class-map score",
-      "observed_state": "PENDING",
-      "dependency": "afterany:13180772:13180877:13180896",
-      "resources": {"partition": "private-teodoro-gpu", "cpus": 8, "memory_gb": 32, "gpus": 0, "wall_limit_hours": 1},
-      "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
-      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
-      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-recovery-20260924"
-    }
-  ],
   "rules": [
     "Maximum two concurrent native recovery jobs; CPU-only jobs do not request GPUs.",
     "Zebrafish EDTA original OOM remains NA; no memory or native wall budget is expanded.",
     "afterany waits for attempts to settle; it does not assert scientific success.",
     "Scorers retain failed/missing methods as NA and reject COMPLETED methods missing required outputs.",
     "On the next heartbeat inspect these existing jobs before submitting anything else."
-  ]
+  ],
+  "observed_at_utc": "2026-09-24T18:39:39Z and subsequent same-turn submissions",
+  "native_recovery_history": [
+    {
+      "job_id": "13180772",
+      "stage": "chicken RM2 mask only",
+      "observed_state": "COMPLETED",
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2",
+      "slurm_elapsed_seconds": 7948
+    },
+    {
+      "job_id": "13180877",
+      "stage": "zebrafish RM2 mask only",
+      "observed_state": "COMPLETED",
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2",
+      "slurm_elapsed_seconds": 31219
+    },
+    {
+      "job_id": "13180896",
+      "stage": "chicken EDTA checkpoint continuation",
+      "observed_state": "FAILED",
+      "dependency": "afterany:13180772",
+      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13180896",
+      "slurm_elapsed_seconds": 306,
+      "reason": "Checkpoint check used .csv_dtypes.txt instead of real _dtypes.txt; no TIR stage started."
+    }
+  ],
+  "active_recovery_chain": [
+    {
+      "job_id": "13189201",
+      "stage": "chicken EDTA checkpoint continuation; dtype filename fixed",
+      "observed_state": "RUNNING",
+      "remaining_budget_seconds": 437605,
+      "checkpoint_evidence": "Successfully loaded Module 4 Step 7; Step 8 passed; Step 9 Check TIR and TSD active at 2026-09-24T18:52:15Z",
+      "output": "outputs/RECOVER-EDTA-CHICKEN-20260924/native/chicken/EDTA-recovery-13189201"
+    }
+  ],
+  "completed_scores": [
+    {
+      "job_id": "13180901",
+      "stage": "whole-genome binary score",
+      "observed_state": "COMPLETED",
+      "dependency": "afterany:13180772:13180877:13180896",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 4,
+        "memory_gb": 32,
+        "gpus": 0,
+        "wall_limit_hours": 4
+      },
+      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-recovery-20260924",
+      "slurm_elapsed_seconds": 121,
+      "na_cells": [
+        "chicken/EDTA",
+        "zebrafish/EDTA"
+      ]
+    },
+    {
+      "job_id": "13180902",
+      "stage": "fixed chr10/20 class-map score",
+      "observed_state": "COMPLETED",
+      "dependency": "afterany:13180772:13180877:13180896",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 8,
+        "memory_gb": 32,
+        "gpus": 0,
+        "wall_limit_hours": 1
+      },
+      "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
+      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
+      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-recovery-20260924",
+      "slurm_elapsed_seconds": 170,
+      "na_cells": [
+        "chicken/EDTA",
+        "zebrafish/EDTA"
+      ]
+    }
+  ],
+  "queued_scores": [
+    {
+      "job_id": "13189350",
+      "stage": "whole-genome binary score",
+      "observed_state": "PENDING",
+      "dependency": "afterany:13189201",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 4,
+        "memory_gb": 32,
+        "gpus": 0,
+        "wall_limit_hours": 4
+      },
+      "native_method_roots": "configs/WHOLE-GENOME-BENCHMARK-20260918-RECOVERY-ROOTS-20260924.json",
+      "output": "outputs/WHOLE-GENOME-BENCHMARK-20260918/score-edta-retry-20260924"
+    },
+    {
+      "job_id": "13189351",
+      "stage": "fixed chr10/20 class-map score",
+      "observed_state": "PENDING",
+      "dependency": "afterany:13189201",
+      "resources": {
+        "partition": "private-teodoro-gpu",
+        "cpus": 8,
+        "memory_gb": 32,
+        "gpus": 0,
+        "wall_limit_hours": 1
+      },
+      "config": "configs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918.json",
+      "ntv2_root": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/ntv2-span-r1",
+      "output": "outputs/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/score-edta-retry-20260924"
+    }
+  ],
+  "rm2_summary_repair": {
+    "job_id": "13189316",
+    "state": "COMPLETED",
+    "slurm_elapsed_seconds": 70,
+    "resources": "8 CPU/64G/private; no GPU",
+    "scope": "Derived annotation summary only; preserved original-gff backup, corrected canonical and sidecar; no annotation, native status or completed score numeric changed."
+  }
 }

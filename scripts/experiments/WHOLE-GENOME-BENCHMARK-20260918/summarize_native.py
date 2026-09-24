@@ -73,7 +73,10 @@ def summarize_gff(path: Path) -> Dict[str, object]:
     class_rows: Counter = Counter()
     family_rows: Counter = Counter()
     intervals: Dict[str, List[Tuple[int, int]]] = defaultdict(list)
-    class_intervals: Dict[str, List[Tuple[int, int]]] = defaultdict(list)
+    # Keep the chromosome key below the class key.  Merging intervals from
+    # different contigs in one coordinate space undercounts any class whose
+    # copies share the same local coordinates on multiple contigs.
+    class_intervals: Dict[str, Dict[str, List[Tuple[int, int]]]] = defaultdict(lambda: defaultdict(list))
     if not path.exists() or path.stat().st_size == 0:
         raise FileNotFoundError("missing or empty native annotation: %s" % path)
     with path.open("r", encoding="utf-8", errors="replace") as handle:
@@ -97,17 +100,88 @@ def summarize_gff(path: Path) -> Dict[str, object]:
             class_rows[broad] += 1
             family_rows[family] += 1
             intervals[fields[0]].append((start, end))
-            class_intervals[broad].append((start, end))
+            class_intervals[broad][fields[0]].append((start, end))
     merged = {chrom: merge_intervals(values) for chrom, values in intervals.items()}
-    class_merged = {label: merge_intervals(values) for label, values in class_intervals.items()}
+    class_merged = {
+        label: {chrom: merge_intervals(values) for chrom, values in by_chrom.items()}
+        for label, by_chrom in class_intervals.items()
+    }
     return {
         "path": str(path), "metadata": file_metadata(path), "rows": rows,
         "unknown_rows": unknown_rows, "classified_rows": rows - unknown_rows,
         "class_rows": dict(sorted(class_rows.items())), "family_rows": dict(sorted(family_rows.items())),
         "union_bp": sum(right - left for values in merged.values() for left, right in values),
-        "class_union_bp": {label: sum(right - left for left, right in class_merged[label])
-                           for label in sorted(class_merged)},
+        "class_union_bp": {
+            label: sum(right - left for values in class_merged[label].values() for left, right in values)
+            for label in sorted(class_merged)
+        },
         "contigs": len(merged),
+    }
+
+
+def summarize_repeatmasker_out(path: Path) -> Dict[str, object]:
+    """Summarize RepeatMasker output using its native class/family columns.
+
+    RepeatMasker GFF3 records expose the target name as ``Target=Motif:...``;
+    that target is not the repeat class.  The tabular ``.out`` format has the
+    native repeat name (column 10) and class/family (column 11), so RM2
+    summaries must use this file.  Class intervals are indexed by both class
+    and contig before merging to avoid cross-contig coordinate collisions.
+    """
+    rows = 0
+    unknown_rows = 0
+    class_rows: Counter = Counter()
+    family_rows: Counter = Counter()
+    class_family_rows: Counter = Counter()
+    intervals: Dict[str, List[Tuple[int, int]]] = defaultdict(list)
+    class_intervals: Dict[str, Dict[str, List[Tuple[int, int]]]] = defaultdict(lambda: defaultdict(list))
+    if not path.exists() or path.stat().st_size == 0:
+        raise FileNotFoundError("missing or empty native RepeatMasker output: %s" % path)
+    with path.open("r", encoding="utf-8", errors="replace") as handle:
+        for raw in handle:
+            fields = raw.split()
+            # Header/separator lines do not have the 15 columns of a data row.
+            if len(fields) < 11:
+                continue
+            try:
+                start = int(fields[5]) - 1
+                end = int(fields[6])
+            except (ValueError, IndexError):
+                continue
+            if end <= start:
+                continue
+            chrom = fields[4]
+            repeat_name = fields[9]
+            class_family = fields[10]
+            broad, _unused_family = split_class(class_family)
+            rows += 1
+            unknown_rows += int(broad == "Unknown")
+            class_rows[broad] += 1
+            family_rows[repeat_name] += 1
+            class_family_rows[class_family] += 1
+            intervals[chrom].append((start, end))
+            class_intervals[broad][chrom].append((start, end))
+    merged = {chrom: merge_intervals(values) for chrom, values in intervals.items()}
+    class_merged = {
+        label: {chrom: merge_intervals(values) for chrom, values in by_chrom.items()}
+        for label, by_chrom in class_intervals.items()
+    }
+    return {
+        "path": str(path), "metadata": file_metadata(path), "source_format": "RepeatMasker .out",
+        "rows": rows, "unknown_rows": unknown_rows, "classified_rows": rows - unknown_rows,
+        "class_rows": dict(sorted(class_rows.items())),
+        "family_rows": dict(sorted(family_rows.items())),
+        "class_family_rows": dict(sorted(class_family_rows.items())),
+        "union_bp": sum(right - left for values in merged.values() for left, right in values),
+        "class_union_bp": {
+            label: sum(right - left for values in class_merged[label].values() for left, right in values)
+            for label in sorted(class_merged)
+        },
+        "contigs": len(merged),
+        "field_contract": {
+            "contig": 5, "start_1_based": 6, "end_1_based_inclusive": 7,
+            "repeat_name": 10, "class_family": 11,
+        },
     }
 
 
@@ -140,12 +214,16 @@ def summarize(args: argparse.Namespace) -> Dict[str, object]:
         raise ValueError("native output is not terminal-success: %s" % status.get("status"))
     annotation = out / "annotation.gff3"
     library = out / "library.fasta"
+    if args.method == "RM2":
+        annotation_summary = summarize_repeatmasker_out(out / "annotation.out")
+    else:
+        annotation_summary = summarize_gff(annotation)
     summary = {
         "protocol": "WHOLE-GENOME-BENCHMARK-20260918",
         "status": "COMPLETED",
         "species": args.species,
         "method": args.method,
-        "annotation": summarize_gff(annotation),
+        "annotation": annotation_summary,
         "library": summarize_library(library),
         "unknown_policy": "Missing, empty, '?', '-', unclassified and unknown class fields remain Unknown; no row is filtered",
         "classification_scope": "Native output attributes and native library headers; class counts are descriptive and may overlap in bp",

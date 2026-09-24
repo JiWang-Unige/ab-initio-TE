@@ -4,6 +4,20 @@
 
 ## 2026-09-24 更新：终态与恢复边界
 
+### 本轮18:39 UTC后的最新终态
+
+两个RM2完整注释均已完成（mask-only 13180772/13180877），共同binary评分13180901和class评分13180902也已完成。固定独立chr10/20上，D/RM2的binary F1为鸡0.479174/0.699844、斑马鱼0.878294/0.871789；鸡的高precision不足以补偿低recall。统一NTv2-class/RM2的primary known-five macro-F1为鸡0.625913/0.609440、斑马鱼0.760377/0.688569，但鸡条件TE-four端点为0.641398/0.654189，模型并非所有端点更好；完整八状态差值亦很小。所有固定类别、物种、失败臂均保留，无事后调参或换分母。
+
+RM2按原发现＋失败恢复＋完整mask的累计Slurm时间为鸡38h18m36s、斑马鱼35h49m05s；D鸡完整CPU为110h39m04s，因此当前没有CPU速度优势证据。GPU推理单列，不能用不同硬件直接宣称同资源优势。六个预声明TE根类别及Unknown构成binary native预测口径；鱼的PLE原标签在审计中保留但不在binary接纳列表内，不在看到分数后更改规则，亦不以小F1差宣称普遍优越。
+
+RM2的GFF派生摘要有两处工程错误：把Target中的Motif当类别、类别区间跨contig合并。binary和class评分均直接读`.out`，数值不受该描述性错误影响；保留原摘要后修正，已完成score文件不重写。报告与紧凑导出明确排除旧无效描述字段。
+
+鸡EDTA恢复13180896在启动TIR前因检查器误查`*.csv_dtypes.txt`而失败（真实文件为`*_dtypes.txt`），306秒成本保留；修正后的13189201已在fresh目录继续，剩余437,605秒。斑马鱼EDTA仍为原128 GB OOM/NA。最后缺口仍是鸡EDTA原协议续跑及其同口径比较，本批尚未全部收束。[binary比较与累计成本](../../../reports/WHOLE-GENOME-BENCHMARK-20260918/RM2-COMPARISON-13180901.md)；[class比较与逐类边界](../../../reports/UNIFIED-NTV2-CLASS-MAP-BENCH-20260918/RM2-COMPARISON-13180902.md)。
+
+新恢复日志已明确显示`Successfully loaded checkpoint`、Module4/Step7及随后Step8，确认从原检查点续跑而非重做前段。两项后续评分13189350（binary）/13189351（class）等待`afterany:13189201`，输出fresh `score-edta-retry-20260924`。RM2派生摘要修正13189316已完成（70秒），原GFF摘要作版本备份，canonical摘要和旁路副本使用真实`.out`类别、按contig统计的类别union；原注释、status和已完成评分数值不改。
+
+### 早次heartbeat记录（保留历史状态）
+
 9月23日22:42 UTC的实时检查确认原批次已无运行作业。下文9月18日的运行中描述是历史快照；当前科学结果和失败状态如下。
 
 - 统一NTv2训练、配对表示、长度诊断、有限LoRA和两个外部动物评价均已完成，既有解释边界不变。
@@ -27,8 +41,8 @@
 | D-BACKBONE-LORA-CLADE | 固定比较完成，未支持替换D | 无新增MoE搜索 |
 | EXTERNAL-ANIMAL-CLOSURE | 两个既定物种及class分层完成，草雀低召回保留 | 无新增物种 |
 | NONMAMMAL-GENE-UTILITY | 鸡、斑马鱼四臂及CDS重叠诊断完成 | 无新增接收器或区域 |
-| WHOLE-GENOME-BENCHMARK | D完整GPU/鸡CPU完成；native原失败已核实 | RM2分类/mask和鸡EDTA原阶段恢复，共同评分与累计成本；斑马鱼EDTA为OOM/NA |
-| UNIFIED-NTV2-CLASS-MAP-BENCH | 固定chr10/20的NTv2 class评分完成 | 仅待恢复native输出的同分母比较 |
+| WHOLE-GENOME-BENCHMARK | D完整GPU/鸡CPU及RM2两物种完整注释、同口径评分完成 | 鸡EDTA原阶段恢复及共同评分；斑马鱼EDTA为OOM/NA |
+| UNIFIED-NTV2-CLASS-MAP-BENCH | 固定chr10/20的NTv2/RM2 class比较完成 | 仅待鸡EDTA完成后的同分母补充 |
 | PLATYPUS-STRONG-MASK-CONTROLS | RED可解释；RM2在固定24h预算下无结果，按NA终结 | 不扩预算；保留已完成用途及其区间 |
 
 **新增适用域约束：** D在独立chr10/20上的binary bp-F1，鸡为0.479174（P=0.938901，R=0.321670），斑马鱼为0.878294（P=0.815321，R=0.951810）。完整assembly对应F1为0.559412/0.871752，但其中包含训练/模型选择曾见染色体，不能代替独立测试。鸡原生推理覆盖全部464条contig与完整1,065,365,425 bp，低召回不能归于作业未完成；与既往采样面板分数的差异原因尚未隔离。该结果与其AUGUSTUS用途小幅阳性可同时成立，论文应将材料覆盖和下游效用分别陈述，不能宣称鸡完整TE map覆盖充分。固定阈值、窗口和分母不改。[完整D评分及边界](../../../reports/WHOLE-GENOME-BENCHMARK-20260918/D-RESULTS-13180826.md)
