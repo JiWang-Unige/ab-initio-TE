@@ -1,0 +1,17 @@
+{
+  "protocol": "TRADITIONAL-GENE-PIPELINE-20260925",
+  "job_id": "13193436",
+  "stage": "BRAKER3 image acquisition and native entrypoint checks only",
+  "image_uri": "docker://teambraker/braker3:v3.1.1",
+  "resources": {
+    "partition": "private-teodoro-gpu",
+    "cpus": 4,
+    "memory_gb": 16,
+    "gpus": 0,
+    "time_limit_seconds": 3600
+  },
+  "submitted_at_recorded_utc": "2026-09-25T00:21:40.772108+00:00",
+  "output": "outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436",
+  "scientific_annotation_started": false,
+  "next_action": "Read Slurm plus status and version logs; do not equate entrypoint readiness with successful training or annotation. Freeze input evidence and evaluation split before full BRAKER matrix."
+}

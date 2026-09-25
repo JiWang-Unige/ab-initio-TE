@@ -1,6 +1,6 @@
 # FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925
 
-状态：**冻结的开发 pilot；准备、规则审计和受影响 arm 修复已完成，AUGUSTUS/score 链仍在运行；不是独立确认测试。**
+状态：**冻结的开发 pilot；鸡十个core、四个新臂和评分13192933已完成并核对；斑马鱼AUGUSTUS/score链仍在运行。不是独立确认测试。**
 
 本 pilot 只复用已经暴露的鸡和斑马鱼 10×5 Mb core + 100 kb halo 用途面板、固定六物种 NTv2-500M binary D 输出以及同 assembly 的全基因组 RM2 输出。它不训练模型，不增加物种、seed 或 D 阈值，也不按 AUGUSTUS 分数更换区域。两个物种原来的 `D`、U、R_TE、RED 结果仍保留；新增结果只用于判断现有收益能否由 mask 覆盖量解释。
 

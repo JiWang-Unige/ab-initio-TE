@@ -35,10 +35,11 @@ exception. Its original mask, GFF, command record and manifest are retained as
 `*-bugged-pre-repair`; only its `RM2_COMMON_CONF` FASTA/GFF was regenerated
 under the corrected rule (repair job `13193088`). No other arm was rerun.
 
-Prediction arrays `13192930` and `13192931` are released at `%2` per species.
-Scores `13192933` and `13192934` are released but remain dependency-gated until
-all prediction cells are completed; chicken score additionally waits for the
-c01 repair. Scores have not been read into this report yet.
+Prediction arrays `13192930` and `13192931` were released at `%2` per species.
+Chicken's ten cells, c01 repair and score `13192933` have now completed; its
+validated results are linked below. Zebrafish's array remains in progress,
+with score `13192934` dependency-gated until all ten cells complete. Its
+scientific result is not yet available.
 
 `slurm-launch-snapshot.tsv` preserves the launch-time states and elapsed
 allocation of failed preparation, cancelled dependents, audits and repair.
@@ -47,4 +48,14 @@ event history: its final dependency-update/release records supersede original
 submission dependencies. Both original preparation failures (wrong input-root
 join) and the first confidence-repair failure remain charged to this pilot.
 
-Snapshot retrieved at 2026-09-24T23:41:19.698193+00:00.
+The launch snapshot was retrieved at 2026-09-24T23:41:19.698193+00:00;
+the chicken terminal update below supersedes its active-job states.
+
+## Chicken terminal update
+
+Chicken prediction and score 13192933 have completed and passed native-output/count validation. See [results](chicken/RESULTS.md); zebrafish remains in progress. All fixed controls and the original U/D values are retained.
+
+`slurm-chicken-terminal-snapshot.tsv` updates allocation accounting for the
+completed chicken work while retaining all failed/cancelled preparations and
+shared audits. Zebrafish rows still marked running are interim elapsed times,
+not final total costs; the snapshot retrieval time is in `jobs.jsonl`.

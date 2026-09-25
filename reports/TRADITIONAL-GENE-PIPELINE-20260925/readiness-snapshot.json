@@ -1,0 +1,9 @@
+{
+  "protocol": "TRADITIONAL-GENE-PIPELINE-20260925",
+  "job_id": "13193436",
+  "image_uri": "docker://teambraker/braker3:v3.1.1",
+  "status": "RUNNING",
+  "scope": "image and executable readiness only; no training or genome annotation",
+  "checks": [],
+  "observed_at_utc": "2026-09-25T00:28:48.258675+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "reference_loci": 1064,
+  "cores": 10,
+  "arms": 6,
+  "new_native_arms": 4,
+  "U_and_D_exactly_unchanged": true,
+  "per_core_counts_sum_to_total": true,
+  "all_TP_plus_FN_1064": true,
+  "F1_recomputed_from_counts": true,
+  "pair_deltas_and_gain_loss_counts_consistent": true,
+  "boundary": "Development-panel reference consistency; bootstrap is regional sensitivity, not independent confirmation."
+}
