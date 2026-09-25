@@ -1,0 +1,58 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "stage": "complete genome mask preparation",
+  "species": "chicken",
+  "job_id": "13194295",
+  "started_epoch": 1790321539.3074667,
+  "status": "MASKS_READY",
+  "sources": {
+    "genome": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/chicken/galGal6.fa",
+    "D": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/chicken/gpu/prediction/material_runs.bed",
+    "RM2_FULL": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/chicken/RM2-mask-recovery-v2/annotation.out"
+  },
+  "red": {
+    "argv": [
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/refs/repos/Red/bin/Red",
+      "-gnm",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome",
+      "-msk",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_masked",
+      "-rpt",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_repeats",
+      "-cor",
+      "8",
+      "-frm",
+      "2"
+    ],
+    "started_epoch": 1790321573.4770782,
+    "returncode": 0,
+    "wall_seconds": 5021.103299617767
+  },
+  "sequence_identity": "same ordered records and uppercase sequence; D/RM2 constructed in source coordinates; RED compared base-for-base",
+  "source_status_path": "outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/status.json",
+  "record_count": 464,
+  "total_bp": 1065365425,
+  "lowercase_acgt_counts": {
+    "source_lowercase_acgt": 226021873,
+    "D_mask_bp": 40685285,
+    "RM2_FULL_mask_bp": 152009313,
+    "RED_FULL_mask_bp": 333937733
+  },
+  "mask_fraction_of_total_sequence": {
+    "D_mask_bp": 0.038189042036914235,
+    "RM2_FULL_mask_bp": 0.14268279168154907,
+    "RED_FULL_mask_bp": 0.3134490055372315
+  },
+  "native_red_stdout": "\n\nThis is Red (REpeat Detector) designed and developed by Hani Zakaria Girgis, PhD.\n\nVersion: 2.0\n\nUsing 8 threads.\nCalculating the length, k, of the k-mer based on the input genome ... \n\t/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome/genome.fa\nThe recommended k is 14.\n\nUsing the default background order: 6.\nUsing the default threshold: 2.\nUsing the default minimum of the observed count of k-mers: 3.\nCalculating GC content ...\n\t/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome/genome.fa\nUsing the default half width: 20 based on the GC content of 42.2272\n\nList of final parameters: \n-cor: 8\n-frm: 2\n-gau: 20\n-gnm: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome\n-len: 14\n-min: 3\n-msk: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_masked\n-ord: 6\n-rpt: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_repeats\n-thr: 2\n\nDeleting pre-existing files under /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_masked\nDeleting pre-existing files under /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_repeats\n\n\nStage 1: Building the table ...\nCounting k-mers in /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome/genome.fa ...\nProcessing 0 to 33554431\nProcessing 67108864 to 100663295\nProcessing 201326592 to 234881023\nProcessing 33554432 to 67108863\nProcessing 234881024 to 268435455\nProcessing 167772160 to 201326591\nProcessing 100663296 to 134217727\nProcessing 134217728 to 167772159\nEnrichment view is ready.\n\n\nStage 2: Calculating the percentage ...\nCalculating the percentage in: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome/genome.fa ...\nThe percentage is 60.7318\n\n\nStage 3: Training ...\nTraining on: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome/genome.fa\n\n\nStage 4: Scanning ...\nScanning: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome/genome.fa\nPrinting locations to: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_repeats/genome.bed\nPrinting masked sequence to: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_masked/genome.msk\nGenome length: 1065365425 - Repeats length: 333937738 - Repeats content: 31.3449%\n",
+  "native_red_time": "\tCommand being timed: \"/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/refs/repos/Red/bin/Red -gnm /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_genome -msk /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_masked -rpt /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/red_repeats -cor 8 -frm 2\"\n\tUser time (seconds): 607.12\n\tSystem time (seconds): 326.86\n\tPercent of CPU this job got: 18%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 1:23:40\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 6328488\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 10\n\tMinor (reclaiming a frame) page faults: 2824134\n\tVoluntary context switches: 37147436\n\tInvoluntary context switches: 1334\n\tSwaps: 0\n\tFile system inputs: 14747756\n\tFile system outputs: 2183704\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+  "slurm": {
+    "job_id": "13194295",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 5198,
+    "allocated_cpus": 8,
+    "allocated_cpu_hours": 11.551111111111112,
+    "batch_max_rss_kb": 11727140
+  },
+  "interpretation": "Input preparation only. Coverage uses lowercase ACGT over all source sequence bp, not TE accuracy. RED native repeat-span count can include ambiguous bases."
+}

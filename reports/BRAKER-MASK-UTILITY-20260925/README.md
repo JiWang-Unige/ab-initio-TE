@@ -46,3 +46,9 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 评分保留所有源类别、逐染色体恢复量以及相对D的gross gains/losses；不从RNA缺失定义FP。UTR-off预测CDS链不能自动代表完整转录本重建。正负链、跨旧halo、部分预测FP、exact intron链和primary/full输出隔离的合成fixture已通过。具体定义写入固定协议。
 
 脚本输出改为score-primary.json/score-full.json避免互相覆盖；鱼需要指向已保留的zebrafish-r2目录。正式六臂的依赖与原生输入检查已包含该冻结清单，仍需等待两份RNA BAM。此次只有评价准备完成，没有新的模型准确率结果。
+
+## 09:12 UTC heartbeat：鸡完整掩码准备完成
+
+鸡作业13194295原生状态MASKS_READY，464条序列、共1,065,365,425 bp，RED输出与源序列逐记录大写碱基一致。D、RM2_FULL、RED_FULL实际小写ACGT分别40,685,285、152,009,313、333,937,733 bp；覆盖不同是固定方法输出，不能从覆盖量推断基因注释效果。原生RED记录保留，掩码准备共5,198秒、11.5511 allocated CPU-hours。[完成摘要](chicken-masks-summary.json)
+
+共同RNA作业13194313已按依赖自动启动，正在获取预定鸡RNA；未产出最终BAM，尚不能称RNA_READY。鱼13194296仍在写出RED掩码，无原生报错；鱼RNA和六臂ETP仍依赖等待。本轮无新提交、无修改模型/阈值/评价分母，无新的基因注释准确率结果。
