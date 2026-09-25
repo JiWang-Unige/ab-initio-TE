@@ -1,0 +1,54 @@
+[
+  {
+    "run_accession": "SRR13642599",
+    "sample_accession": "SAMN17812692",
+    "scientific_name": "Gallus gallus",
+    "tax_id": "9031",
+    "library_strategy": "RNA-Seq",
+    "library_layout": "PAIRED",
+    "instrument_model": "HiSeq X Ten",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/099/SRR13642599/SRR13642599_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/099/SRR13642599/SRR13642599_2.fastq.gz",
+    "fastq_bytes": "2883345648;2987434226",
+    "read_count": "46331004",
+    "base_count": "13899301200"
+  },
+  {
+    "run_accession": "SRR13642601",
+    "sample_accession": "SAMN17812690",
+    "scientific_name": "Gallus gallus",
+    "tax_id": "9031",
+    "library_strategy": "RNA-Seq",
+    "library_layout": "PAIRED",
+    "instrument_model": "HiSeq X Ten",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/001/SRR13642601/SRR13642601_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/001/SRR13642601/SRR13642601_2.fastq.gz",
+    "fastq_bytes": "2320166060;2704711539",
+    "read_count": "33641559",
+    "base_count": "10092467700"
+  },
+  {
+    "run_accession": "SRR13642607",
+    "sample_accession": "SAMN17812684",
+    "scientific_name": "Gallus gallus",
+    "tax_id": "9031",
+    "library_strategy": "RNA-Seq",
+    "library_layout": "PAIRED",
+    "instrument_model": "HiSeq X Ten",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/007/SRR13642607/SRR13642607_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/007/SRR13642607/SRR13642607_2.fastq.gz",
+    "fastq_bytes": "2293175302;2360076250",
+    "read_count": "45648092",
+    "base_count": "13694427600"
+  },
+  {
+    "run_accession": "SRR13642613",
+    "sample_accession": "SAMN17812678",
+    "scientific_name": "Gallus gallus",
+    "tax_id": "9031",
+    "library_strategy": "RNA-Seq",
+    "library_layout": "PAIRED",
+    "instrument_model": "HiSeq X Ten",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/013/SRR13642613/SRR13642613_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/013/SRR13642613/SRR13642613_2.fastq.gz",
+    "fastq_bytes": "2310531481;2630617759",
+    "read_count": "32430109",
+    "base_count": "9729032700"
+  }
+]

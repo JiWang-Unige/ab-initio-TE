@@ -1,0 +1,28 @@
+[
+  {
+    "run_accession": "SRR31188006",
+    "sample_accession": "SAMN44525335",
+    "scientific_name": "Danio rerio",
+    "tax_id": "7955",
+    "library_strategy": "RNA-Seq",
+    "library_layout": "PAIRED",
+    "instrument_model": "Illumina NovaSeq 6000",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/006/SRR31188006/SRR31188006_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/006/SRR31188006/SRR31188006_2.fastq.gz",
+    "fastq_bytes": "1386807206;1423501433",
+    "read_count": "22399208",
+    "base_count": "6719762400"
+  },
+  {
+    "run_accession": "SRR31188005",
+    "sample_accession": "SAMN44525334",
+    "scientific_name": "Danio rerio",
+    "tax_id": "7955",
+    "library_strategy": "RNA-Seq",
+    "library_layout": "PAIRED",
+    "instrument_model": "Illumina NovaSeq 6000",
+    "fastq_ftp": "ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/005/SRR31188005/SRR31188005_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/005/SRR31188005/SRR31188005_2.fastq.gz",
+    "fastq_bytes": "1567762730;1677780726",
+    "read_count": "22904743",
+    "base_count": "6871422900"
+  }
+]

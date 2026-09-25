@@ -1,0 +1,161 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "protein": {
+    "source": "OrthoDB v12 Vertebrata partition distributed by the BRAKER authors",
+    "url": "https://bioinf.uni-greifswald.de/bioinf/partitioned_odb12/Vertebrata.fa.gz",
+    "source_page": "https://bioinf.uni-greifswald.de/bioinf/partitioned_odb12/",
+    "observed_content_length": 6188932489,
+    "observed_last_modified": "Thu, 14 Nov 2024 10:55:26 GMT",
+    "excluded_species_taxids": [
+      9031,
+      7955
+    ],
+    "taxid_rule": "OrthoDB identifier prefix before the first underscore; remove every target species strain/version suffix",
+    "header_example": ">10020_0:000000\t10020_0",
+    "use": "identical deployment protein file for all six BRAKER arms",
+    "knowledge_limit": "External proteins may carry annotation biases and homology to target genes; target species entries excluded, no target RefSeq-derived input"
+  },
+  "rna": {
+    "chicken": {
+      "status": "FROZEN",
+      "bioproject": "PRJNA699861",
+      "geo": "GSE166257",
+      "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE166257",
+      "selection": "Pre-outcome selection by tissue or WT developmental stage and fixed download budget; no mask/annotation scores",
+      "runs": [
+        {
+          "accession": "SRR13642599",
+          "geo_sample": "GSM5067017",
+          "sample": "Ileum rep1",
+          "sample_accession": "SAMN17812692",
+          "taxid": 9031,
+          "instrument": "HiSeq X Ten",
+          "mates": [
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/099/SRR13642599/SRR13642599_1.fastq.gz",
+              "bytes": 2883345648
+            },
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/099/SRR13642599/SRR13642599_2.fastq.gz",
+              "bytes": 2987434226
+            }
+          ]
+        },
+        {
+          "accession": "SRR13642601",
+          "geo_sample": "GSM5067019",
+          "sample": "Macrophage (lung) rep1",
+          "sample_accession": "SAMN17812690",
+          "taxid": 9031,
+          "instrument": "HiSeq X Ten",
+          "mates": [
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/001/SRR13642601/SRR13642601_1.fastq.gz",
+              "bytes": 2320166060
+            },
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/001/SRR13642601/SRR13642601_2.fastq.gz",
+              "bytes": 2704711539
+            }
+          ]
+        },
+        {
+          "accession": "SRR13642607",
+          "geo_sample": "GSM5067025",
+          "sample": "Ovary rep1",
+          "sample_accession": "SAMN17812684",
+          "taxid": 9031,
+          "instrument": "HiSeq X Ten",
+          "mates": [
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/007/SRR13642607/SRR13642607_1.fastq.gz",
+              "bytes": 2293175302
+            },
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/007/SRR13642607/SRR13642607_2.fastq.gz",
+              "bytes": 2360076250
+            }
+          ]
+        },
+        {
+          "accession": "SRR13642613",
+          "geo_sample": "GSM5067031",
+          "sample": "Thymus rep1",
+          "sample_accession": "SAMN17812678",
+          "taxid": 9031,
+          "instrument": "HiSeq X Ten",
+          "mates": [
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/013/SRR13642613/SRR13642613_1.fastq.gz",
+              "bytes": 2310531481
+            },
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/013/SRR13642613/SRR13642613_2.fastq.gz",
+              "bytes": 2630617759
+            }
+          ]
+        }
+      ],
+      "total_compressed_bytes": 20490058265
+    },
+    "zebrafish": {
+      "status": "FROZEN",
+      "bioproject": "PRJNA1180635",
+      "geo": "GSE280830",
+      "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE280830",
+      "selection": "Pre-outcome selection by tissue or WT developmental stage and fixed download budget; no mask/annotation scores",
+      "runs": [
+        {
+          "accession": "SRR31188006",
+          "geo_sample": "GSM8606275",
+          "sample": "WT embryo 24 hpf",
+          "sample_accession": "SAMN44525335",
+          "taxid": 7955,
+          "instrument": "Illumina NovaSeq 6000",
+          "mates": [
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/006/SRR31188006/SRR31188006_1.fastq.gz",
+              "bytes": 1386807206
+            },
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/006/SRR31188006/SRR31188006_2.fastq.gz",
+              "bytes": 1423501433
+            }
+          ]
+        },
+        {
+          "accession": "SRR31188005",
+          "geo_sample": "GSM8606276",
+          "sample": "WT embryo 48 hpf",
+          "sample_accession": "SAMN44525334",
+          "taxid": 7955,
+          "instrument": "Illumina NovaSeq 6000",
+          "mates": [
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/005/SRR31188005/SRR31188005_1.fastq.gz",
+              "bytes": 1567762730
+            },
+            {
+              "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR311/005/SRR31188005/SRR31188005_2.fastq.gz",
+              "bytes": 1677780726
+            }
+          ]
+        }
+      ],
+      "total_compressed_bytes": 6055852095
+    }
+  },
+  "rna_status": "FROZEN before acquisition and before any target BRAKER output",
+  "evaluation": {
+    "refseq": "reuse exact ncbiRefSeq files from NONMAMMAL-GENE-UTILITY-20260918, not a fresh changing download",
+    "long_read": {
+      "species": "zebrafish",
+      "assembly": "GRCz11/danRer11",
+      "commit": "f5a23b0baed4c3032b7615d279f6c5d0da71d2b5",
+      "url": "https://raw.githubusercontent.com/crystalBo/zebrafish_full-length_iso-seq/f5a23b0baed4c3032b7615d279f6c5d0da71d2b5/merge.annotated.gtf.gz",
+      "bytes": 5921281,
+      "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12139336/",
+      "role": "structure recovery only; processed using reference comparison; not full CDS truth, absence not FP, u not necessarily coding"
+    }
+  }
+}

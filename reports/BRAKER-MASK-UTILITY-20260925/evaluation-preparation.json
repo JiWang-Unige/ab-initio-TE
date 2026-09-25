@@ -1,0 +1,29 @@
+{
+  "predictions_read": false,
+  "primary_endpoint": "exact normalized CDS-chain gene-locus agreement to complete protein-coding RefSeq; prediction start/stop completeness reported separately",
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "ready_requirements": {
+    "chicken_reference_prepared": true,
+    "zebrafish_long_read_parsed": true,
+    "zebrafish_reference_prepared": true
+  },
+  "sealed_labels_read": false,
+  "species": {
+    "chicken": {
+      "evaluation_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/evaluation/chicken",
+      "primary_bp": 201407137,
+      "primary_regions": 33,
+      "reference_gene_loci": 6588,
+      "reference_isoforms": 17234
+    },
+    "zebrafish": {
+      "evaluation_dir": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/evaluation/zebrafish-r2",
+      "long_read_summary": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/evaluation/zebrafish-r2/long-read-summary.json",
+      "primary_bp": 769648038,
+      "primary_regions": 27,
+      "reference_gene_loci": 14576,
+      "reference_isoforms": 27249
+    }
+  },
+  "status": "EVALUATION_READY"
+}
