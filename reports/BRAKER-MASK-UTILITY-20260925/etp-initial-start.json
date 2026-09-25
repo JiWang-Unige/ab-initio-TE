@@ -1,0 +1,95 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "status": "RUNNING_NOT_SCIENTIFIC_RESULT",
+  "arms": [
+    {
+      "species": "chicken",
+      "arm": "D",
+      "job_id": "13194349_0",
+      "status": "RUNNING",
+      "braker.command.json": {
+        "argv": [
+          "apptainer",
+          "exec",
+          "--cleanenv",
+          "--bind",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+          "--bind",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/arms/D:/work",
+          "--pwd",
+          "/work",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+          "braker.pl",
+          "--genome=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/D.fa",
+          "--prot_seq=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/inputs/proteins/vertebrata.exclude-chicken-zebrafish.fa",
+          "--bam=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam",
+          "--workingdir=/work/run",
+          "--species=te_etp_chicken_d_20260925",
+          "--AUGUSTUS_CONFIG_PATH=/work/augustus-config",
+          "--threads=16"
+        ],
+        "started_epoch": 1790335199.9419746
+      },
+      "braker.stdout": "# Fri Sep 25 13:20:03 2026: Creating directory /work/run.\n# Fri Sep 25 13:20:03 2026:Both protein and RNA-Seq data in input detected. BRAKER will be executed in ETP mode (BRAKER3).\n#*********\n# Fri Sep 25 13:20:12 2026: Log information is stored in file /work/run/braker.log\n",
+      "braker.stderr": "#*********\n# WARNING: Detected whitespace in fasta header of file /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/inputs/proteins/vertebrata.exclude-chicken-zebrafish.fa. This may later on cause problems! The pipeline will create a new file without spaces or \"|\" characters and a genome_header.map file to look up the old and new headers. This message will be suppressed from now on!\n#*********\n",
+      "slurm": {
+        "JobId": "13195479",
+        "ArrayJobId": "13194349",
+        "ArrayTaskId": "0",
+        "ArrayTaskThrottle": "2",
+        "JobState": "RUNNING",
+        "StartTime": "2026-09-25T13:18:55",
+        "TimeLimit": "3-00:00:00",
+        "Partition": "private-teodoro-gpu",
+        "AllocTRES": "cpu=16,mem=96G,node=1,billing=40",
+        "NodeList": "gpu034"
+      },
+      "braker.log_tail": "r $CDBTOOLS_PATH.\n# Fri Sep 25 13:20:04 2026: Success! Setting $CDBTOOLS_PATH to /opt/cdbfasta!\n#**********************************************************************************\n#                               CREATING DIRECTORY STRUCTURE                       \n#**********************************************************************************\n# Fri Sep 25 13:20:12 2026: creating file that contains citations for this BRAKER run at /work/run/what-to-cite.txt...\n# Fri Sep 25 13:20:12 2026: create working directory /work/run/GeneMark-ETP.\nmkdir /work/run/GeneMark-ETP\n# Fri Sep 25 13:20:12 2026: create working directory /work/run/species\nmkdir /work/run/species\n# Fri Sep 25 13:20:12 2026: create working directory /work/run/errors\nmkdir /work/run/errors\n# Fri Sep 25 13:20:13 2026: changing into working directory /work/run\ncd /work/run\n# Fri Sep 25 13:20:13 2026: getting GC content of the genome\n/opt/BRAKER/scripts/get_gc_content.py --sequences /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/D.fa --print_sequence_length 1> /work/run/gc_content.out 2> /work/run/errors/gc_content.stderr\n# Fri Sep 25 13:21:18 2026: Creating parameter template files for AUGUSTUS with new_species.pl\n# Fri Sep 25 13:21:18 2026: new_species.pl will create parameter files for species te_etp_chicken_d_20260925 in /work/augustus-config/species/te_etp_chicken_d_20260925\n/usr/bin/perl /opt/Augustus/scripts/new_species.pl --species=te_etp_chicken_d_20260925 --AUGUSTUS_CONFIG_PATH=/work/augustus-config 1> /dev/null 2>/work/run/errors/new_species.stderr\n"
+    },
+    {
+      "species": "zebrafish",
+      "arm": "D",
+      "job_id": "13194349_1",
+      "status": "RUNNING",
+      "braker.command.json": {
+        "argv": [
+          "apptainer",
+          "exec",
+          "--cleanenv",
+          "--bind",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+          "--bind",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/arms/D:/work",
+          "--pwd",
+          "/work",
+          "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+          "braker.pl",
+          "--genome=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/D.fa",
+          "--prot_seq=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/inputs/proteins/vertebrata.exclude-chicken-zebrafish.fa",
+          "--bam=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/rna/SRR31188006.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/rna/SRR31188005.bam",
+          "--workingdir=/work/run",
+          "--species=te_etp_zebrafish_d_20260925",
+          "--AUGUSTUS_CONFIG_PATH=/work/augustus-config",
+          "--threads=16"
+        ],
+        "started_epoch": 1790335199.9416783
+      },
+      "braker.stdout": "# Fri Sep 25 13:20:03 2026: Creating directory /work/run.\n# Fri Sep 25 13:20:03 2026:Both protein and RNA-Seq data in input detected. BRAKER will be executed in ETP mode (BRAKER3).\n#*********\n# Fri Sep 25 13:20:12 2026: Log information is stored in file /work/run/braker.log\n",
+      "braker.stderr": "",
+      "slurm": {
+        "JobId": "13195480",
+        "ArrayJobId": "13194349",
+        "ArrayTaskId": "1",
+        "ArrayTaskThrottle": "2",
+        "JobState": "RUNNING",
+        "StartTime": "2026-09-25T13:18:55",
+        "TimeLimit": "3-00:00:00",
+        "Partition": "private-teodoro-gpu",
+        "AllocTRES": "cpu=16,mem=96G,node=1,billing=40",
+        "NodeList": "gpu035"
+      },
+      "braker.log_tail": "OLS_PATH.\n# Fri Sep 25 13:20:04 2026: Success! Setting $CDBTOOLS_PATH to /opt/cdbfasta!\n#**********************************************************************************\n#                               CREATING DIRECTORY STRUCTURE                       \n#**********************************************************************************\n# Fri Sep 25 13:20:12 2026: creating file that contains citations for this BRAKER run at /work/run/what-to-cite.txt...\n# Fri Sep 25 13:20:12 2026: create working directory /work/run/GeneMark-ETP.\nmkdir /work/run/GeneMark-ETP\n# Fri Sep 25 13:20:12 2026: create working directory /work/run/species\nmkdir /work/run/species\n# Fri Sep 25 13:20:12 2026: create working directory /work/run/errors\nmkdir /work/run/errors\n# Fri Sep 25 13:20:13 2026: changing into working directory /work/run\ncd /work/run\n# Fri Sep 25 13:20:13 2026: getting GC content of the genome\n/opt/BRAKER/scripts/get_gc_content.py --sequences /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/D.fa --print_sequence_length 1> /work/run/gc_content.out 2> /work/run/errors/gc_content.stderr\n# Fri Sep 25 13:21:40 2026: Creating parameter template files for AUGUSTUS with new_species.pl\n# Fri Sep 25 13:21:40 2026: new_species.pl will create parameter files for species te_etp_zebrafish_d_20260925 in /work/augustus-config/species/te_etp_zebrafish_d_20260925\n/usr/bin/perl /opt/Augustus/scripts/new_species.pl --species=te_etp_zebrafish_d_20260925 --AUGUSTUS_CONFIG_PATH=/work/augustus-config 1> /dev/null 2>/work/run/errors/new_species.stderr\n"
+    }
+  ],
+  "recorded_at": "2026-09-25T11:23:09.634023+00:00"
+}

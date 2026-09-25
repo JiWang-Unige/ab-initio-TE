@@ -67,3 +67,11 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 | SRR13642613 | Thymus | 32,430,109 | 63.82% |
 
 比对率描述部署证据的异质性，不代表基因预测准确率，也不证明完整组织覆盖。鱼RNA作业13194314已自动启动、仍在准备；六臂13194349等待其完成。本轮没有新的基因注释结果、没有重复提交或变更科学参数。
+
+## 11:20 UTC heartbeat：共同输入完成，正式 ETP 开始
+
+鱼RNA作业13194314已到RNA_READY：四个FASTQ与冻结字节数一致，两份BAM/索引、quickcheck和flagstat通过，primary reads逐样本恰为输入pairs的两倍。SRR31188006（24 hpf）22,399,208 pairs、overall alignment 95.04%；SRR31188005（48 hpf）22,904,743 pairs、92.36%。24 hpf样本有48.46%的read pairs多位置concordant比对，故overall alignment不能当作唯一定位率。两个固定样本均保留。耗时2,582秒、11.4756 allocated CPU-hours。[鱼RNA原生摘要](zebrafish-rna-summary.json)
+
+两物种掩码、共享蛋白、各物种RNA以及冻结评价域全部就绪。正式数组13194349已在11:18:55 UTC自动启动D两臂：13194349_0鸡（Slurm内部ID13195479）、13194349_1鱼（13195480）。原生日志明确进入ETP模式，BRAKER 3.0.8；实际命令无skipOptimize/gm_max_intergenic样例参数。资源为private、每臂16CPU/96GB/72h、无GPU，数组并发2；其余四臂等待JobArrayTaskLimit。[正式启动记录](etp-initial-start.json)
+
+当前仅为正式流程启动，尚无最终GTF和新准确率。继续按冻结主域、完整常染色体及长读长辅助定义完成全部固定臂分析；不因先启动D或任何中途表现调整其余臂。
