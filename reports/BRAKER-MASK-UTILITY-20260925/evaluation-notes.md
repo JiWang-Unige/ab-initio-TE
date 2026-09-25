@@ -112,6 +112,32 @@ not a biological replicate or a claim of independent genome-wide truth. The
 score JSON marks `sealed_labels_read=false`; the input RefSeq is a reference
 agreement layer.
 
+Scores are written to `score-primary.json` and `score-full.json` separately;
+use `--domain full` for the latter. Existing outputs are not overwritten;
+`--output` can name a new file when an explicit reanalysis is warranted. The
+successful fish preparation is `evaluation/zebrafish-r2`, so fish scoring
+must pass that directory explicitly.
+
+## Positive-only long-read structure endpoint
+
+Before any target BRAKER prediction, private job 13194397 froze
+`evaluation/zebrafish-r2/long-read-denominators.json` using
+`long_read_score.py`. At least one source transcript's entire exon span must
+fit in a single allowed region. Deduplication uses chromosome, strand, and
+complete intron chain. The resulting primary/full denominators are
+27,862/48,068 structures; the reference-CDS-compatible subsets are
+4,874/8,523. Source class codes, including `u`, remain visible.
+
+Fish scoring automatically adds exact intron-chain recovery, chromosome
+counts, and D-versus-comparator gained/lost structures. These are descriptive
+positive-set recovery endpoints, with no RNA-derived FP or precision. The
+all-structure set may contain noncoding transcripts and UTR introns absent
+from UTR-off BRAKER CDS predictions; a mismatch is not proof of an incorrect
+coding prediction. The compatible subset is explicitly reference-assisted
+and does not establish independent CDS endpoints. Tests cover strand,
+excluded-halo containment, partial predictions, and separate primary/full
+outputs.
+
 ## Resource and interpretation boundary
 
 The script is lightweight and can be run inside the already planned private

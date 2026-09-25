@@ -3,6 +3,7 @@
 import argparse
 from collections import Counter
 import json
+from pathlib import Path
 import shutil
 from common import OUT, IMAGE, container, dump, native, state
 
@@ -26,7 +27,9 @@ def main():
     ready(OUT / args.species / "masks/status.json", "MASKS_READY")
     proteins = ready(OUT / "inputs/proteins/status.json", "PROTEINS_READY")
     rna = ready(OUT / args.species / "rna/status.json", "RNA_READY")
-    ready(OUT / "evaluation/preparation.json", "EVALUATION_READY")
+    evaluation = ready(OUT / "evaluation/preparation.json", "EVALUATION_READY")
+    ready(Path(evaluation["species"]["zebrafish"]["evaluation_dir"]) / "long-read-denominators.json",
+          "LONG_READ_DENOMINATORS_FIXED")
     out = OUT / args.species / "arms" / args.arm
     out.mkdir(parents=True, exist_ok=False)
     result = state("complete native BRAKER ETP", args.species)

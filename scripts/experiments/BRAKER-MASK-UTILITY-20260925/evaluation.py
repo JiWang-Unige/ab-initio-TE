@@ -831,6 +831,7 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
     for name, path in arms.items():
         result = parse_gtf_predictions(Path(path), regions, mapping, units)
         result["gtf"] = str(Path(path).resolve())
+        result["per_chromosome"] = {k: dict(v) for k, v in _per_chrom_counts(result, report).items()}
         results[name] = result
     comparisons = {}
     for right in ("RM2_FULL", "RED_FULL"):
@@ -844,8 +845,17 @@ def score(args: argparse.Namespace) -> Dict[str, object]:
               "arms": results, "comparisons": comparisons, "bootstrap": {"seed": 42, "replicates": args.bootstrap_replicates,
                                                                             "unit": "chromosome-resampled regional sensitivity, not biological replication"},
               "predictions_read": True, "sealed_labels_read": False}
-    dump(evaluation / "score.json", result)
-    print(json.dumps(result, indent=2, sort_keys=True))
+    if args.species == "zebrafish":
+        # These positive-only denominators were fixed before target prediction.
+        from long_read_score import score as score_long_read
+        frozen = json.loads((evaluation / "long-read-denominators.json").read_text())
+        result["long_read"] = score_long_read(results, frozen, args.domain)
+    output = args.output or evaluation / ("score-" + args.domain + ".json")
+    if output.exists():
+        raise FileExistsError(output)
+    dump(output, result)
+    print(json.dumps({"output": str(output), "species": args.species, "domain": args.domain,
+                      "metrics": {k: v["metrics"] for k, v in results.items()}}, sort_keys=True))
     return result
 
 
@@ -933,6 +943,7 @@ def main() -> None:
     score_parser.add_argument("--species", choices=("chicken", "zebrafish"), required=True)
     score_parser.add_argument("--evaluation-dir", type=Path)
     score_parser.add_argument("--domain", choices=("primary", "full"), default="primary")
+    score_parser.add_argument("--output", type=Path, help="New score file; defaults to score-{domain}.json")
     score_parser.add_argument("--gtf", type=Path)
     score_parser.add_argument("--name", default="BRAKER")
     score_parser.add_argument("--arm", action="append", default=[], metavar="NAME=GTF")

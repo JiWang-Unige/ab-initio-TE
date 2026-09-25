@@ -36,3 +36,13 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 鱼独立长读长文件取得48,086个多外显子结构，8,523个与全域完整RefSeq CDS内含子链匹配，主域匹配4,874个。该子集仅增强结构支持，不提供独立CDS起止/蛋白功能真值；其余结构不自动视为非编码。后续须依据preparation.json里的鱼zebrafish-r2路径评分。[长读长资格统计](zebrafish-long-read-summary.json)
 
 正式六臂仍等待两个物种的全基因组mask和共同RNA BAM完成；已排入依赖队列，后续由已恢复的heartbeat自动核实、分析及Git同步。
+
+## 08:30 UTC heartbeat：辅助结构评分就绪
+
+核对Slurm和原生日志：两个RED作业在持续写出掩码、无报错，RNA和六臂按依赖等待，不重复提交或重启原作业。正式BRAKER尚未产生目标预测。
+
+已补完独立长读长的正证据评分，并由private作业13194397在8秒固定可评价分母：主域27,862条完整内含子链（参考CDS相容4,874条），全常染色体域48,068条（相容8,523条）。原48,086是整个源文件的多外显子结构数，不能直接用于主域。原始RefSeq gene-locus分母保持6,588/14,576。[冻结分母摘要](long-read-denominators-summary.json)
+
+评分保留所有源类别、逐染色体恢复量以及相对D的gross gains/losses；不从RNA缺失定义FP。UTR-off预测CDS链不能自动代表完整转录本重建。正负链、跨旧halo、部分预测FP、exact intron链和primary/full输出隔离的合成fixture已通过。具体定义写入固定协议。
+
+脚本输出改为score-primary.json/score-full.json避免互相覆盖；鱼需要指向已保留的zebrafish-r2目录。正式六臂的依赖与原生输入检查已包含该冻结清单，仍需等待两份RNA BAM。此次只有评价准备完成，没有新的模型准确率结果。
