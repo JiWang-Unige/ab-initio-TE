@@ -75,3 +75,9 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 两物种掩码、共享蛋白、各物种RNA以及冻结评价域全部就绪。正式数组13194349已在11:18:55 UTC自动启动D两臂：13194349_0鸡（Slurm内部ID13195479）、13194349_1鱼（13195480）。原生日志明确进入ETP模式，BRAKER 3.0.8；实际命令无skipOptimize/gm_max_intergenic样例参数。资源为private、每臂16CPU/96GB/72h、无GPU，数组并发2；其余四臂等待JobArrayTaskLimit。[正式启动记录](etp-initial-start.json)
 
 当前仅为正式流程启动，尚无最终GTF和新准确率。继续按冻结主域、完整常染色体及长读长辅助定义完成全部固定臂分析；不因先启动D或任何中途表现调整其余臂。
+
+## 16:12 UTC：原生 GeneMark 警告核实
+
+鸡D进入GeneMark模型构建与原生masking-penalty优化。`build_mod.pl`第50/56行出现两条`uninitialized value`警告；读取固定容器源码后，定位为未定义的`Parameters.gcode`与1/6比较，而非模型训练退出。实际生成的`GeneMark-ETP/proteins.fa/model/output.mod`与`ref.mod`均为`$TAA_ON 1`、`$TAG_ON 1`、`$TGA_ON 1`，标准终止密码子开关保留。未修改容器、模型或参数，原生日志继续保存；若后续出现实际失败再按终态处理。
+
+此处GeneMark自动选择masking penalty属于预先允许的各臂原生自训练，不是重调D阈值或使用评价标签。两臂仍在运行，最终GTF尚未产生；以上只解释工程警告，不是科学结果。
