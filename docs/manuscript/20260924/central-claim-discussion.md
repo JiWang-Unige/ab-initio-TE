@@ -14,6 +14,30 @@
 
 用户希望用一个高价值实验包提升中心结论，而非继续增加零散方向。既有冻结任务独立继续。本文件记录本轮证据、Pro 讨论和作者下一步可作出的选择；不以目标期刊反推需要出现的结果。
 
+## 2026-09-25 对“训练标准与 RM2 对照”的解释
+
+作者指出，D 由 RepeatMasker 派生标签监督，未显著超过完整 RM2 不应自动被视为失败。Agent 同意这个应用价值判断：**显著优于完整 RM2 不是有用模型的必要条件**，但不能把训练来源当作下游差值跨零的已证原因，也不把跨零解释成等效或正式非劣。
+
+本轮核对后，四种对象必须分开：
+
+| 对象 | 实际来源及作用 |
+| --- | --- |
+| D 的 binary 训练标签 | 项目 RepeatMasker+Dfam Label-A 的 P/N/U/hardN 规则；并非将全部 RepeatMasker 输出直接标为 TE。UCSC 是另一个比较来源。 |
+| R_TE | 同 assembly 的 UCSC 历史 TE 注释掩码。鸡 galGal6 官方下载记录为 RepeatMasker open-4-0-7，Dfam_Consensus/RepBase RELEASE 20170127。 |
+| RM2_FULL | 本次完整目标基因组上重新发现的 RM2 库，再由 RepeatMasker 注释；不是 D 的训练标签，也不等于完整 Dfam 数据库。这里“完整”指本次流程和输出已完成，不代表生物学 TE 覆盖完备。 |
+| 刚才区间跨零的指标 | 固定 AUGUSTUS 输出相对 ncbiRefSeq 完整 CDS-chain/locus 的基因 F1；不是以 RepeatMasker 标签计算的 TE bp-F1。RefSeq 本身也不是穷尽生物学真值。 |
+
+训练来源见 [X0 冻结标签定义](../../experiments/CROSS-SPECIES-L1-MATERIAL-ROUTE-20260903.md#comparator-definition) 和读取 `self_out` 的 `scripts/experiments/CROSS-SPECIES-L1-20260903/x0_label_split_audit.py`；本轮另检查原始物化目录 `outputs/CROSS-SPECIES-L1-MATERIAL-TRAIN-20260903/12176202` 的训练记录及来源 manifest。鸡历史注释版本见 [UCSC 下载说明](https://hgdownload.soe.ucsc.edu/goldenPath/galGal6/bigZips/)。[RM2 官方说明](https://github.com/Dfam-consortium/RepeatModeler)说明其输出可用于 RepeatMasker 并可提交 Dfam；这不建立“本次 RM2 库 = Dfam = D 训练标签”的关系。
+
+因此，基于教师标签的 TE 一致性评价应明确为 annotation agreement；相似的下游基因 F1 可以是有价值的应用信号。RepeatMasker 的标签不是独立基因注释终点的理论性能上限，训练来源也不能给同源性、外部泛化或计算成本优势免责。
+
+建议将论证分为两层，不更改当前任何冻结终点：
+
+1. **应用层**：检验是否能把现有 TE 注释知识转化为部署时不需提供目标 TE 核酸库或先运行目标基因组构库的模型，在标准基因注释流程中保留实用价值。“推理不需库”不等于“训练没有库知识”；鸡/鱼均参与过 D 微调，不能单凭它们证明未见物种能力。
+2. **中心升级层**：在上述应用成立之外，用强对照、独立宿主/CDS及自主 TE 证据和配对位置干预，检验可迁移的掩码选择是否同时保护宿主基因并减少 TE 编码模型误纳。现有鸡等覆盖结果支持继续核查，但不足以证明这个机制。
+
+执行仍先完成既定鱼 pilot 和 BRAKER 准备，随后依据独立证据资格冻结确认比较。若新确认阶段需要正式非劣性，允许损失应由应用需要在读取新结果前设定，不能用鸡现有区间反推。CPU/GPU成本按已测事实分别报告；不以“免构库”自动推导更快。目前不新增物种、阈值、训练或新的并行方向。
+
 ## 本轮咨询
 
 - [内置浏览器中的 6 Pro 对话](https://chatgpt.com/g/g-p-6a29d586630481918525796032225f68-ji-wangke-ti/c/6ab58b06-e384-83eb-b635-fcfbabd19a61)。已发送完整正负证据摘要，等待到最终回复与复制按钮出现，实际读取了完整回复；界面显示思考 16m 9s。本文件是归纳与 Agent 的独立判断，不是逐字转录，也不是人工同行评审。
