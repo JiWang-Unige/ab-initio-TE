@@ -14,6 +14,12 @@ The historical U/D/R_TE/RED results remain in
 them. The pilot is development evidence and cannot be reported as an
 independent confirmation test.
 
+**Both fixed species are complete and validated.** See the
+[joint closure report and next-stage recommendation](CLOSURE-20260925.md).
+Fish native D improves over full RM2, but the chicken equal-budget advantage
+does not reproduce in fish. No independent functional-selectivity claim is
+released by this pilot.
+
 ## Current execution audit
 
 Preparation completed with exit 0 for chicken `13192925` and zebrafish
@@ -37,9 +43,8 @@ under the corrected rule (repair job `13193088`). No other arm was rerun.
 
 Prediction arrays `13192930` and `13192931` were released at `%2` per species.
 Chicken's ten cells, c01 repair and score `13192933` have now completed; its
-validated results are linked below. Zebrafish's array remains in progress,
-with score `13192934` dependency-gated until all ten cells complete. Its
-scientific result is not yet available.
+validated results are linked below. Zebrafish's ten cells and score
+`13192934` (13 s) are now complete, with [native-output and count validation](zebrafish/validation.json).
 
 `slurm-launch-snapshot.tsv` preserves the launch-time states and elapsed
 allocation of failed preparation, cancelled dependents, audits and repair.
@@ -53,9 +58,25 @@ the chicken terminal update below supersedes its active-job states.
 
 ## Chicken terminal update
 
-Chicken prediction and score 13192933 have completed and passed native-output/count validation. See [results](chicken/RESULTS.md); zebrafish remains in progress. All fixed controls and the original U/D values are retained.
+Chicken prediction and score 13192933 have completed and passed native-output/count validation. See [results](chicken/RESULTS.md) and the subsequent [fish terminal result](zebrafish/RESULTS.md). All fixed controls and the original U/D values are retained.
 
 `slurm-chicken-terminal-snapshot.tsv` updates allocation accounting for the
 completed chicken work while retaining all failed/cancelled preparations and
 shared audits. Zebrafish rows still marked running are interim elapsed times,
 not final total costs; the snapshot retrieval time is in `jobs.jsonl`.
+
+The final `slurm-terminal.tsv` and `terminal-cost.json` supersede interim
+accounting. All registered jobs are terminal; incremental pilot allocation
+totals include failed preparation and repair, not only successful predictions.
+
+## Descriptive source-stratum correction
+
+Terminal review found that the `source_length_strata` summary fields had
+duplicated post-truncation actual strata. `prepare-summary.json` now uses the
+retained selection records' source bins; all 60 common-budget cells match
+their frozen source quotas. `source-stratum-audit.json` records the checks,
+and `prepare-summary-pre-source-field-fix.json` preserves the original compact
+export. Native manifests retain their historical fields and selection records;
+only the corrected compact summary should be used for source-bin counts.
+No sequence, mask, prediction or score was changed. Actual output lengths and
+core/halo residuals remain as measured.

@@ -65,4 +65,13 @@ small nonzero bootstrap interval despite zero aggregate F1 difference.
 Neither the independent host complete-CDS evidence set nor the autonomous-TE
 exclusion endpoint is ready. This result therefore does not prove that the
 model distinguishes functional host genes from autonomous TE coding loci.
-Zebrafish is still running and must be reported regardless of direction.
+Zebrafish has now completed; its native D advantage over full RM2 does not
+persist at the common budget. See the [fish result](../zebrafish/RESULTS.md)
+and [joint interpretation](../CLOSURE-20260925.md). This limits the generality
+of the chicken position-selection signal.
+
+The compact preparation summary's `source_length_strata` fields originally
+duplicated the actual post-truncation strata. They have been corrected from
+the retained selection records, with all source quotas verified. The original
+summary is preserved; no mask, prediction, threshold or scientific score was
+changed by this descriptive repair.

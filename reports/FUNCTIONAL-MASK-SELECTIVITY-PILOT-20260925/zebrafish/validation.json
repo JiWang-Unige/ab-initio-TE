@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "reference_loci": 1064,
+  "reference_loci": 984,
   "cores": 10,
   "arms": 6,
   "new_native_arms": 4,

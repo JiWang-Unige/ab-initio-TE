@@ -1,0 +1,906 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "species": "chicken",
+      "core": "c00",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        8982,
+        57661,
+        121685,
+        36352,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c00",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        8982,
+        57661,
+        121685,
+        36352,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c00",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        8982,
+        57661,
+        121685,
+        36352,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c01",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4398,
+        24474,
+        29868,
+        2428,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c01",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        4398,
+        24474,
+        29868,
+        2428,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c01",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4398,
+        24474,
+        29868,
+        2428,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c02",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4490,
+        22687,
+        21686,
+        2766,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c02",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        4490,
+        22687,
+        21686,
+        2766,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c02",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4490,
+        22687,
+        21686,
+        2766,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c03",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        11,
+        6616,
+        34780,
+        24638,
+        1146,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c03",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        11,
+        6616,
+        34780,
+        24638,
+        1146,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c03",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        11,
+        6616,
+        34780,
+        24638,
+        1146,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c04",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4898,
+        21407,
+        25548,
+        5084,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c04",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        4898,
+        21407,
+        25548,
+        5084,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c04",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4898,
+        21407,
+        25548,
+        5084,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c05",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4922,
+        26052,
+        27979,
+        4996,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c05",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        4922,
+        26052,
+        27979,
+        4996,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c05",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4922,
+        26052,
+        27979,
+        4996,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c06",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        3654,
+        20582,
+        22930,
+        3880,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c06",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        3654,
+        20582,
+        22930,
+        3880,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c06",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        3654,
+        20582,
+        22930,
+        3880,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c07",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        3872,
+        25230,
+        17722,
+        1062,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c07",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        3872,
+        25230,
+        17722,
+        1062,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c07",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        3872,
+        25230,
+        17722,
+        1062,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c08",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        3992,
+        14502,
+        13298,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c08",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        3992,
+        14502,
+        13298,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c08",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        3992,
+        14502,
+        13298,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c09",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4556,
+        18070,
+        12944,
+        1258,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c09",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        0,
+        4556,
+        18070,
+        12944,
+        1258,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "chicken",
+      "core": "c09",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        0,
+        4556,
+        18070,
+        12944,
+        1258,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c00",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        47,
+        21384,
+        243303,
+        1130909,
+        622073,
+        203907,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c00",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        47,
+        21384,
+        243303,
+        1130909,
+        622073,
+        203907,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c00",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        47,
+        21384,
+        243303,
+        1130909,
+        622073,
+        203907,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c01",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        78,
+        21612,
+        256234,
+        1117017,
+        545141,
+        113557,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c01",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        78,
+        21612,
+        256234,
+        1117017,
+        545141,
+        113557,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c01",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        78,
+        21612,
+        256234,
+        1117017,
+        545141,
+        113557,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c02",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        56,
+        23487,
+        256757,
+        1193184,
+        542276,
+        143994,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c02",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        56,
+        23487,
+        256757,
+        1193184,
+        542276,
+        143994,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c02",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        56,
+        23487,
+        256757,
+        1193184,
+        542276,
+        143994,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c03",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        91,
+        18959,
+        255150,
+        1178457,
+        400788,
+        56868,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c03",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        91,
+        18959,
+        255150,
+        1178457,
+        400788,
+        56868,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c03",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        91,
+        18959,
+        255150,
+        1178457,
+        400788,
+        56868,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c04",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        62,
+        21375,
+        252996,
+        1128353,
+        625966,
+        156690,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c04",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        62,
+        21375,
+        252996,
+        1128353,
+        625966,
+        156690,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c04",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        62,
+        21375,
+        252996,
+        1128353,
+        625966,
+        156690,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c05",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        60,
+        23100,
+        245468,
+        1168795,
+        578867,
+        129886,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c05",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        60,
+        23100,
+        245468,
+        1168795,
+        578867,
+        129886,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c05",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        60,
+        23100,
+        245468,
+        1168795,
+        578867,
+        129886,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c06",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        54,
+        21492,
+        246986,
+        1130321,
+        763484,
+        284153,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c06",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        54,
+        21492,
+        246986,
+        1130321,
+        763484,
+        284153,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c06",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        54,
+        21492,
+        246986,
+        1130321,
+        763484,
+        284153,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c07",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        39,
+        21830,
+        262448,
+        1216317,
+        574880,
+        159574,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c07",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        39,
+        21830,
+        262448,
+        1216317,
+        574880,
+        159574,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c07",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        39,
+        21830,
+        262448,
+        1216317,
+        574880,
+        159574,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c08",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        80,
+        19280,
+        227660,
+        1092442,
+        915863,
+        255516,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c08",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        80,
+        19280,
+        227660,
+        1092442,
+        915863,
+        255516,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c08",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        80,
+        19280,
+        227660,
+        1092442,
+        915863,
+        255516,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c09",
+      "arm": "D_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        64,
+        20648,
+        249472,
+        1186996,
+        594193,
+        91328,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c09",
+      "arm": "RM2_COMMON_CONF",
+      "source_quota_verified_bp": [
+        64,
+        20648,
+        249472,
+        1186996,
+        594193,
+        91328,
+        0,
+        0
+      ]
+    },
+    {
+      "species": "zebrafish",
+      "core": "c09",
+      "arm": "RM2_COMMON_RANDOM",
+      "source_quota_verified_bp": [
+        64,
+        20648,
+        249472,
+        1186996,
+        594193,
+        91328,
+        0,
+        0
+      ]
+    }
+  ],
+  "scope": "Descriptive summary correction only; all 60 selection-source budgets match frozen quotas."
+}

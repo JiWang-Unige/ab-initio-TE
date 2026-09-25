@@ -1,0 +1,836 @@
+{
+  "observed_at_utc": "2026-09-25T01:51:24.258985+00:00",
+  "status": "NATIVE_OUTPUTS_VERIFIED",
+  "cells": [
+    {
+      "core": "c00",
+      "status": "COMPLETED",
+      "job_id": "13192947",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c00/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 435.4327300218865
+          },
+          "gff_bytes": 340719,
+          "predicted_chains": 123
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c00/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 415.7154812631197
+          },
+          "gff_bytes": 367080,
+          "predicted_chains": 139
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c00/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 420.9444462242536
+          },
+          "gff_bytes": 343324,
+          "predicted_chains": 124
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c00/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 418.23239342169836
+          },
+          "gff_bytes": 345815,
+          "predicted_chains": 123
+        }
+      }
+    },
+    {
+      "core": "c01",
+      "status": "COMPLETED",
+      "job_id": "13192948",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c01/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 426.2878682631999
+          },
+          "gff_bytes": 369151,
+          "predicted_chains": 123
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c01/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 409.2135076960549
+          },
+          "gff_bytes": 381390,
+          "predicted_chains": 128
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c01/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 411.73637225525454
+          },
+          "gff_bytes": 375121,
+          "predicted_chains": 125
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c01/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 407.95721647003666
+          },
+          "gff_bytes": 382512,
+          "predicted_chains": 129
+        }
+      }
+    },
+    {
+      "core": "c02",
+      "status": "COMPLETED",
+      "job_id": "13193310",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c02/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 436.62704594200477
+          },
+          "gff_bytes": 278072,
+          "predicted_chains": 97
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c02/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 422.5884636868723
+          },
+          "gff_bytes": 299469,
+          "predicted_chains": 114
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c02/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 420.00385689083487
+          },
+          "gff_bytes": 281965,
+          "predicted_chains": 99
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c02/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 417.7405140628107
+          },
+          "gff_bytes": 284294,
+          "predicted_chains": 101
+        }
+      }
+    },
+    {
+      "core": "c03",
+      "status": "COMPLETED",
+      "job_id": "13193314",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c03/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 434.31375252315775
+          },
+          "gff_bytes": 323705,
+          "predicted_chains": 104
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c03/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 417.65627643093467
+          },
+          "gff_bytes": 322997,
+          "predicted_chains": 104
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c03/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 407.7048986121081
+          },
+          "gff_bytes": 333516,
+          "predicted_chains": 110
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c03/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 417.0094142588787
+          },
+          "gff_bytes": 338648,
+          "predicted_chains": 116
+        }
+      }
+    },
+    {
+      "core": "c04",
+      "status": "COMPLETED",
+      "job_id": "13193429",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c04/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 454.04358002590016
+          },
+          "gff_bytes": 179971,
+          "predicted_chains": 63
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c04/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 455.0573374130763
+          },
+          "gff_bytes": 193442,
+          "predicted_chains": 73
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c04/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 437.4496384500526
+          },
+          "gff_bytes": 185425,
+          "predicted_chains": 66
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c04/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 438.79767076391727
+          },
+          "gff_bytes": 184496,
+          "predicted_chains": 65
+        }
+      }
+    },
+    {
+      "core": "c05",
+      "status": "COMPLETED",
+      "job_id": "13193430",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c05/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 428.04518038686365
+          },
+          "gff_bytes": 259685,
+          "predicted_chains": 90
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c05/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 422.23915165895596
+          },
+          "gff_bytes": 271379,
+          "predicted_chains": 97
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c05/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 415.4346181410365
+          },
+          "gff_bytes": 262023,
+          "predicted_chains": 91
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c05/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 416.3896483210847
+          },
+          "gff_bytes": 263538,
+          "predicted_chains": 91
+        }
+      }
+    },
+    {
+      "core": "c06",
+      "status": "COMPLETED",
+      "job_id": "13193499",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c06/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 446.2596523743123
+          },
+          "gff_bytes": 146717,
+          "predicted_chains": 54
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c06/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 426.69928377401084
+          },
+          "gff_bytes": 187163,
+          "predicted_chains": 79
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c06/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 427.6303124236874
+          },
+          "gff_bytes": 152860,
+          "predicted_chains": 56
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c06/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 427.3915726998821
+          },
+          "gff_bytes": 157224,
+          "predicted_chains": 60
+        }
+      }
+    },
+    {
+      "core": "c07",
+      "status": "COMPLETED",
+      "job_id": "13193505",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c07/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 431.14791759708896
+          },
+          "gff_bytes": 235395,
+          "predicted_chains": 78
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c07/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 413.57498992374167
+          },
+          "gff_bytes": 248135,
+          "predicted_chains": 86
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c07/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 417.9552925270982
+          },
+          "gff_bytes": 242404,
+          "predicted_chains": 82
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c07/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 416.4498626124114
+          },
+          "gff_bytes": 246557,
+          "predicted_chains": 85
+        }
+      }
+    },
+    {
+      "core": "c08",
+      "status": "COMPLETED",
+      "job_id": "13193512",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c08/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 442.4219083697535
+          },
+          "gff_bytes": 268466,
+          "predicted_chains": 98
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c08/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 420.7762718531303
+          },
+          "gff_bytes": 328749,
+          "predicted_chains": 127
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c08/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 421.7592357243411
+          },
+          "gff_bytes": 280119,
+          "predicted_chains": 100
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c08/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 429.33351411670446
+          },
+          "gff_bytes": 296108,
+          "predicted_chains": 103
+        }
+      }
+    },
+    {
+      "core": "c09",
+      "status": "COMPLETED",
+      "job_id": "13192931",
+      "arms": {
+        "RM2_FULL": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c09/RM2_FULL.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 418.54290697630495
+          },
+          "gff_bytes": 344741,
+          "predicted_chains": 100
+        },
+        "D_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c09/D_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 407.9124888051301
+          },
+          "gff_bytes": 388168,
+          "predicted_chains": 131
+        },
+        "RM2_COMMON_RANDOM": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c09/RM2_COMMON_RANDOM.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 407.45635369280353
+          },
+          "gff_bytes": 346227,
+          "predicted_chains": 100
+        },
+        "RM2_COMMON_CONF": {
+          "native_command": {
+            "argv": [
+              "/opt/ebsofts/AUGUSTUS/3.5.0-foss-2022b/bin/augustus",
+              "--species=zebrafish",
+              "--gff3=on",
+              "--softmasking=1",
+              "--UTR=off",
+              "--stopCodonExcludedFromCDS=false",
+              "--alternatives-from-evidence=false",
+              "--alternatives-from-sampling=false",
+              "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/c09/RM2_COMMON_CONF.fasta"
+            ],
+            "exit_code": 0,
+            "seconds": 406.5114282509312
+          },
+          "gff_bytes": 351232,
+          "predicted_chains": 104
+        }
+      }
+    }
+  ]
+}

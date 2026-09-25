@@ -1,6 +1,8 @@
 # FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925
 
-状态：**冻结的开发 pilot；鸡十个core、四个新臂和评分13192933已完成并核对；斑马鱼AUGUSTUS/score链仍在运行。不是独立确认测试。**
+状态：**两物种十个core、四个新臂及评分13192933/13192934全部完成并核对；已达可解释停点。不是独立确认测试。**
+
+[两物种结果及下一阶段建议](../../reports/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/CLOSURE-20260925.md)：鱼原始D较完整RM2的F1差为+0.015632，但同预算D较RM2随机/可信度筛选分别为−0.000817/−0.000970，区间跨零。鸡的同预算位置选择信号未在鱼重现；保留应用价值，不升级为跨物种功能选择性已确认。
 
 本 pilot 只复用已经暴露的鸡和斑马鱼 10×5 Mb core + 100 kb halo 用途面板、固定六物种 NTv2-500M binary D 输出以及同 assembly 的全基因组 RM2 输出。它不训练模型，不增加物种、seed 或 D 阈值，也不按 AUGUSTUS 分数更换区域。两个物种原来的 `D`、U、R_TE、RED 结果仍保留；新增结果只用于判断现有收益能否由 mask 覆盖量解释。
 
@@ -75,3 +77,5 @@ q_b=\min(\mathrm{bp}_{D,b},\mathrm{bp}_{RM2,b}),
 规则审计先发现原 materialized preparation 不是全体都能由“旧 raw-SW”或“修订后的 SW/aligned-length”重建。保存的前修复 JSON 记录了三种状态：原 materialized（mixed/prepared）、旧 raw-SW reconstruction、修订后的 confidence reconstruction。修订后的重建与 zebrafish 十个 core、chicken 九个 core 逐区间一致；唯一例外是 chicken/c01，因此只保留该 core 的原 mask、GFF、command 和 manifest 为 `*-bugged-pre-repair`，重新物化并重跑该 core 的 `RM2_COMMON_CONF`。之后的 post-repair audit（job `13193129`）显示 chicken/zebrafish 共 20 个 core 全部与修订规则逐区间一致，旧 raw-SW 规则仍全部不一致。该修复没有重跑 `RM2_FULL`、`D_COMMON_RANDOM` 或 `RM2_COMMON_RANDOM`。
 
 有效作业链为 chicken prediction array `13192930`、zebrafish prediction array `13192931`，以及 chicken c01 confidence-only repair `13193088`；两项 score 分别为 `13192933` 和 `13192934`，依赖对应 prediction array，且 chicken score 额外依赖 repair。所有人工 hold 已解除；prediction 任务按每物种 `%2` 并发运行。分数必须等全部新 arm 的 `status=COMPLETED`、command exit 0 和 GFF 检查通过后读取。
+
+终态：以上全部预测和评分完成；80个新增GFF、原生命令及逐core计数通过核对，旧U/D指标逐项不变。终态审计另修复一个描述字段错误：原`source_length_strata`复制了截断后的实际长度分组，现由保留的selection records汇总真实来源层，60个共同预算臂全部满足原配额。原紧凑摘要另存，原生manifest、FASTA、GFF和分数不改；未重新运行预测。`terminal_audit.py`记录可重做的导出与计数核对。

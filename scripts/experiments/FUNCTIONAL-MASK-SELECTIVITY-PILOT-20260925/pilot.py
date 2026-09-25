@@ -285,8 +285,15 @@ def attach_native_quality(runs, records, halo_start):
     return result
 
 
-def mask_summary(runs, core_start: int, core_end: int):
+def mask_summary(runs, core_start: int, core_end: int, selection_records=None):
     grouped = runs_by_bin(runs)
+    source_bp = [sum(right - left for left, right in group) for group in grouped]
+    source_runs = [len(group) for group in grouped]
+    if selection_records is not None:
+        source_bp, source_runs = [0] * len(grouped), [0] * len(grouped)
+        for row in selection_records:
+            source_bp[row["stratum"]] += row["length"]
+            source_runs[row["stratum"]] += 1
     core_masked = sum(max(0, min(right, core_end) - max(left, core_start)) for left, right in runs)
     left_halo_end = core_start
     right_halo_start = core_end
@@ -298,8 +305,8 @@ def mask_summary(runs, core_start: int, core_end: int):
         "core_bp": core_masked,
         "left_halo_bp": left_halo_masked,
         "right_halo_bp": right_halo_masked,
-        "source_length_strata_bp": [sum(right - left for left, right in group) for group in grouped],
-        "source_length_strata_runs": [len(group) for group in grouped],
+        "source_length_strata_bp": source_bp,
+        "source_length_strata_runs": source_runs,
         "actual_length_strata_bp": [sum(right - left for left, right in group) for group in runs_by_bin(runs)],
         "actual_length_strata_runs": [len(group) for group in runs_by_bin(runs)],
     }
@@ -405,21 +412,22 @@ def prepare(species):
         write_fasta(cell / "U.fasta", u_record, u_seq)
         for arm, runs in masks.items():
             write_fasta(cell / (arm + ".fasta"), u_record, mask_sequence(u_seq, runs))
+        selections = {
+            "D_COMMON_RANDOM": d_common_meta,
+            "RM2_COMMON_RANDOM": rm2_common_random_meta,
+            "RM2_COMMON_CONF": rm2_common_conf_meta,
+        }
         row_manifest = {
             "id": core_id,
             "chrom": geometry_row["chrom"],
             "core": [geometry_row["start"], geometry_row["end"]],
             "halo": [left, right],
             "input_bp": len(u_seq),
-            "mask_summaries": {arm: mask_summary(runs, 100000, len(u_seq) - 100000) for arm, runs in masks.items()},
+            "mask_summaries": {arm: mask_summary(runs, 100000, len(u_seq) - 100000, selections.get(arm)) for arm, runs in masks.items()},
             "common_budget_by_stratum_bp": quotas,
             "common_budget_bp": sum(quotas),
             "rm2_runs_without_native_alignment": sum(1 for row in rm2_quality if row["quality"] is None),
-            "selection_records": {
-                "D_COMMON_RANDOM": d_common_meta,
-                "RM2_COMMON_RANDOM": rm2_common_random_meta,
-                "RM2_COMMON_CONF": rm2_common_conf_meta,
-            },
+            "selection_records": selections,
         }
         dump(cell / "mask_manifest.json", row_manifest)
         manifest["cores"].append(row_manifest)

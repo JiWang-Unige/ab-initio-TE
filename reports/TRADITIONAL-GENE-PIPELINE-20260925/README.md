@@ -34,7 +34,8 @@ the native command records point to it. No container data are exported to Git.
 
 The existing fixed-parameter AUGUSTUS chicken pilot is scientifically
 interpretable, with [all controls retained](../FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/RESULTS.md).
-Its zebrafish counterpart is still running. Tiberius results remain part of
+Its zebrafish counterpart has also [completed](../FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/zebrafish/RESULTS.md).
+Tiberius results remain part of
 the evidence; the official preference for unmasked weights does not invalidate
 all softmask-aware experiments or establish that a traditional receiver is
 more accurate.

@@ -1,0 +1,7 @@
+{
+  "observed_at_utc": "2026-09-25T01:52:26.638109+00:00",
+  "all_registered_jobs_terminal": true,
+  "allocation_wall_seconds_sum": 20837,
+  "allocated_cpu_hours": 5.892777777777778,
+  "scope": "Pilot incremental jobs only, including preparations, failures, audits, repair and scores; excludes reused D, whole-genome RM2 and historical U/D prediction costs; sum of allocations is not elapsed end-to-end wall time."
+}

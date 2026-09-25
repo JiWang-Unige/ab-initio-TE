@@ -13,7 +13,7 @@
   "submitted_at_recorded_utc": "2026-09-25T00:21:40.772108+00:00",
   "output": "outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436",
   "scientific_annotation_started": false,
-  "next_action": "Native-entrypoint preparation is at an interpretable stopping point. Retain unpacked sandbox and the original SIF-packaging failure. Wait for fish pilot; freeze input evidence, independent evaluation and resources before a full BRAKER workflow.",
+  "next_action": "Native-entrypoint preparation and the two-species pilot are at interpretable stopping points. Preserve the sandbox and acquisition failure; see the pilot CLOSURE-20260925.md recommendation. Freeze deployment inputs, independent evaluation and resources before any full BRAKER workflow.",
   "original_terminal": {
     "state": "FAILED",
     "exit_code": "1:0",
