@@ -10,6 +10,8 @@
 
 作者随后要求加强与传统基因注释流程结合。经核实官方mask建议，当前以固定AUGUSTUS用途矩阵作为主要受控应用层，保留Tiberius为跨接收器旁证；新增 `TRADITIONAL-GENE-PIPELINE-20260925`，启动BRAKER3镜像/原生入口准备并记录RNA/蛋白证据隔离要求。BRAKER整流程自身的参数学习不能混同于当前固定接收器的mask效应，也不能把曾用作独立验证的RNA直接改为hints后继续称独立验证。具体记录见[传统流程协议](../../experiments/TRADITIONAL-GENE-PIPELINE-20260925.md)。
 
+BRAKER入口准备现已完成：原SIF封装超时，复用已解包sandbox的恢复 `13193511` 在7秒通过BRAKER/AUGUSTUS版本检查及GeneMark路径检查，累计含失败成本3009秒。固定容器标签为 `v3.1.1`，内部实际报告BRAKER **3.0.8**、AUGUSTUS **3.5.0**；尚未运行真实训练或注释。[原生入口记录](../../../reports/TRADITIONAL-GENE-PIPELINE-20260925/README.md)
+
 鸡pilot已完成：common-budget D相对RM2随机/可信度筛选的F1差为+0.012447/+0.007264，区域bootstrap区间均为正；但D相对完整RM2的+0.004360区间跨零，历史R_TE仍略高于D。该结果留下值得完成鱼实验的选择位置信号，不证明普遍流程优势或自主TE功能判别。它不允许改变鱼实验或按鸡结果另选区域。[鸡终态结果](../../../reports/FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/RESULTS.md)
 
 用户希望用一个高价值实验包提升中心结论，而非继续增加零散方向。既有冻结任务独立继续。本文件记录本轮证据、Pro 讨论和作者下一步可作出的选择；不以目标期刊反推需要出现的结果。

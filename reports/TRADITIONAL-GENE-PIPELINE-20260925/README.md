@@ -6,12 +6,31 @@ The author authorized strengthening the traditional gene-annotation route on
 
 ## Current state
 
-Job **13193436** is acquiring the official `teambraker/braker3:v3.1.1` image
-and will check BRAKER, AUGUSTUS and GeneMark entry points. It uses private
-4-CPU/16-GB allocation, a one-hour limit, and no GPU. This is software
-readiness work, not an annotation or training experiment. See [job record](jobs.json)
-and the timestamped [readiness snapshot](readiness-snapshot.json). The snapshot
-is still `RUNNING`; no native-entrypoint result is being claimed yet.
+**`ENTRYPOINTS_READY` — bounded preparation completed.** The official
+`teambraker/braker3:v3.1.1` OCI image was unpacked, but job **13193436**
+timed out after 3,000 s while packaging the SIF (Slurm elapsed 3,002 s).
+The [original failure](readiness-13193436.json) and [log excerpt](pull-13193436-excerpt.log)
+are retained. No finished SIF is claimed.
+
+Recovery **13193511** reused that extracted directory directly as an
+Apptainer sandbox. It requested only 590 s of the original one-hour budget's
+remaining 598 s and completed in **7 s**, without another pull or compression.
+Both jobs used private 4 CPU/16 GB and no GPU. Cumulative allocated time is
+**3,009 s (50m09s; 3.3433 allocated CPU-hours)**, including the failure.
+See [job record](jobs.json), [native status](native-13193511/status.json),
+and the timestamped [readiness snapshot](readiness-snapshot.json).
+
+The actual programs report **BRAKER 3.0.8** and **AUGUSTUS 3.5.0**; the
+container tag `v3.1.1` must not be substituted for the measured BRAKER version.
+The GeneMark executable path `/opt/ETP/bin/gmetp.pl` is present. Version
+commands returned 0 and their outputs were read; GeneMark was only located,
+not trained or otherwise functionally exercised. The full workflow's
+dependencies/licensing and mask consumption are still untested.
+
+The reusable artifact is the original extraction directory
+`outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs`
+on Baobab. Retain this directory despite its historical `tmp` parent name;
+the native command records point to it. No container data are exported to Git.
 
 The existing fixed-parameter AUGUSTUS chicken pilot is scientifically
 interpretable, with [all controls retained](../FUNCTIONAL-MASK-SELECTIVITY-PILOT-20260925/chicken/RESULTS.md).

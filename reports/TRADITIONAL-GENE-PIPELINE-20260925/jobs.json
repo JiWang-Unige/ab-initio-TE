@@ -13,5 +13,47 @@
   "submitted_at_recorded_utc": "2026-09-25T00:21:40.772108+00:00",
   "output": "outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436",
   "scientific_annotation_started": false,
-  "next_action": "Read Slurm plus status and version logs; do not equate entrypoint readiness with successful training or annotation. Freeze input evidence and evaluation split before full BRAKER matrix."
+  "next_action": "Native-entrypoint preparation is at an interpretable stopping point. Retain unpacked sandbox and the original SIF-packaging failure. Wait for fish pilot; freeze input evidence, independent evaluation and resources before a full BRAKER workflow.",
+  "original_terminal": {
+    "state": "FAILED",
+    "exit_code": "1:0",
+    "elapsed_seconds": 3002,
+    "native_status": "ACQUISITION_FAILED",
+    "native_pull_exit_code": 124,
+    "native_pull_seconds": 3000.007280357182,
+    "failure_stage": "SIF packaging after OCI extraction"
+  },
+  "recovery_jobs": [
+    {
+      "job_id": "13193511",
+      "action": "reuse extracted sandbox for the same three native entrypoint checks; no download or compression",
+      "source_job": "13193436",
+      "source_artifact": "outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+      "partition": "private-teodoro-gpu",
+      "cpus": 4,
+      "memory_gb": 16,
+      "gpus": 0,
+      "time_limit_seconds": 590,
+      "submitted_at_recorded_utc": "2026-09-25T01:13:37.309135+00:00",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 7,
+      "native_status": "ENTRYPOINTS_READY"
+    }
+  ],
+  "budget": {
+    "original_allocation_ceiling_seconds": 3600,
+    "original_charged_seconds": 3002,
+    "recovery_ceiling_seconds": 590,
+    "remaining_if_recovery_uses_ceiling_seconds": 8,
+    "recovery_charged_seconds": 7,
+    "cumulative_allocated_wall_seconds": 3009,
+    "cumulative_allocated_cpu_hours": 3.3433333333333333,
+    "remaining_seconds": 591
+  },
+  "observed_versions": {
+    "BRAKER": "3.0.8",
+    "AUGUSTUS": "3.5.0",
+    "GeneMark_entry": "/opt/ETP/bin/gmetp.pl; executable path only, no version or native training run"
+  }
 }

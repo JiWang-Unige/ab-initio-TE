@@ -1,0 +1,20 @@
+{
+  "protocol": "TRADITIONAL-GENE-PIPELINE-20260925",
+  "job_id": "13193436",
+  "image_uri": "docker://teambraker/braker3:v3.1.1",
+  "status": "ACQUISITION_FAILED",
+  "scope": "image and executable readiness only; no training or genome annotation",
+  "checks": [
+    {
+      "name": "pull",
+      "argv": [
+        "apptainer",
+        "pull",
+        "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/braker3-v3.1.1.sif",
+        "docker://teambraker/braker3:v3.1.1"
+      ],
+      "returncode": 124,
+      "wall_seconds": 3000.007280357182
+    }
+  ]
+}

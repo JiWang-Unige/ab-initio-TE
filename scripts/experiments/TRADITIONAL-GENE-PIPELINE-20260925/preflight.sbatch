@@ -9,4 +9,4 @@
 set -euo pipefail
 cd "${SLURM_SUBMIT_DIR}"
 export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK}"
-python3 -u scripts/experiments/TRADITIONAL-GENE-PIPELINE-20260925/preflight.py
+python3 -u scripts/experiments/TRADITIONAL-GENE-PIPELINE-20260925/preflight.py "$@"

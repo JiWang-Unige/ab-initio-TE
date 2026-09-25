@@ -54,11 +54,5 @@
     "RNA/protein evidence qualification",
     "mask use in a full workflow",
     "scientific prediction or accuracy"
-  ],
-  "observed_at_utc": "2026-09-25T01:14:36.473369+00:00",
-  "observed_versions": {
-    "BRAKER": "3.0.8",
-    "AUGUSTUS": "3.5.0",
-    "GeneMark_entry": "/opt/ETP/bin/gmetp.pl; executable path only, no version or native training run"
-  }
+  ]
 }

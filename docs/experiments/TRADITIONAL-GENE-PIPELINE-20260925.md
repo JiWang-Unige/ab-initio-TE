@@ -27,3 +27,11 @@ BRAKER3（已发表ETP流程）优先作为实际流程；BRAKER4可作为同一
 - 新的确认性矩阵需要在读取新结果前固定。当前只执行已有AUGUSTUS矩阵和BRAKER入口准备，不启动未定输入的全基因组训练，不增加物种、GLM训练、湿实验或多seed搜索。
 
 本轮公开产物为协议、脚本、入口日志/状态和明确的资源缺口；镜像留在Baobab。入口成功不等于完整流程可运行，更不等于科学结果成立。下一步是否开展完整BRAKER确认，结合两个固定物种的pilot终态和独立评价证据资格决定。
+
+## 入口准备终态（2026-09-25）
+
+原作业 `13193436` 完成 OCI 解包后，在 SIF 封装阶段触发 3000 秒子进程超时；Slurm 成本为 3002 秒，原生状态 `ACQUISITION_FAILED`，没有完成的 SIF。保留原 status 和日志。必要工程恢复 `13193511` 直接以已解包的 rootfs 作为 Apptainer sandbox 执行相同入口检查，不重复下载或压缩；仍为 private 4 CPU/16 GB、无 GPU，时限590秒，未超过原一小时预算剩余598秒。
+
+恢复7秒完成：`braker.pl --version` 和 `augustus --version` 均成功，实际版本分别为 **BRAKER 3.0.8、AUGUSTUS 3.5.0**。`gmetp.pl` 可定位于 `/opt/ETP/bin/gmetp.pl`；此项只核实路径，不声称 GeneMark 训练/许可已运行。镜像标签 `v3.1.1` 与内部 BRAKER 报告版本不同，后续必须同时记录二者，不能将标签当程序版本。累计3009秒（50分09秒、3.3433 allocated CPU-hours），失败成本计入。复用目录留在原输出位置，不清理其 `tmp` 父目录。
+
+本准备项已达可解释停点；不追加构建镜像或训练测试。鱼pilot未完成，完整BRAKER矩阵和独立确认仍须锁定输入与证据隔离后再决定。[原生记录及限制](../../reports/TRADITIONAL-GENE-PIPELINE-20260925/README.md)
