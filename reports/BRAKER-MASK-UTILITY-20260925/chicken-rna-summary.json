@@ -1,0 +1,562 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "stage": "deployment short-read RNA alignment",
+  "species": "chicken",
+  "job_id": "13194313",
+  "started_epoch": 1790326739.0721786,
+  "status": "RNA_READY",
+  "input": {
+    "status": "FROZEN",
+    "bioproject": "PRJNA699861",
+    "geo": "GSE166257",
+    "source_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE166257",
+    "selection": "Pre-outcome selection by tissue or WT developmental stage and fixed download budget; no mask/annotation scores",
+    "runs": [
+      {
+        "accession": "SRR13642599",
+        "geo_sample": "GSM5067017",
+        "sample": "Ileum rep1",
+        "sample_accession": "SAMN17812692",
+        "taxid": 9031,
+        "instrument": "HiSeq X Ten",
+        "mates": [
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/099/SRR13642599/SRR13642599_1.fastq.gz",
+            "bytes": 2883345648
+          },
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/099/SRR13642599/SRR13642599_2.fastq.gz",
+            "bytes": 2987434226
+          }
+        ]
+      },
+      {
+        "accession": "SRR13642601",
+        "geo_sample": "GSM5067019",
+        "sample": "Macrophage (lung) rep1",
+        "sample_accession": "SAMN17812690",
+        "taxid": 9031,
+        "instrument": "HiSeq X Ten",
+        "mates": [
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/001/SRR13642601/SRR13642601_1.fastq.gz",
+            "bytes": 2320166060
+          },
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/001/SRR13642601/SRR13642601_2.fastq.gz",
+            "bytes": 2704711539
+          }
+        ]
+      },
+      {
+        "accession": "SRR13642607",
+        "geo_sample": "GSM5067025",
+        "sample": "Ovary rep1",
+        "sample_accession": "SAMN17812684",
+        "taxid": 9031,
+        "instrument": "HiSeq X Ten",
+        "mates": [
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/007/SRR13642607/SRR13642607_1.fastq.gz",
+            "bytes": 2293175302
+          },
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/007/SRR13642607/SRR13642607_2.fastq.gz",
+            "bytes": 2360076250
+          }
+        ]
+      },
+      {
+        "accession": "SRR13642613",
+        "geo_sample": "GSM5067031",
+        "sample": "Thymus rep1",
+        "sample_accession": "SAMN17812678",
+        "taxid": 9031,
+        "instrument": "HiSeq X Ten",
+        "mates": [
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/013/SRR13642613/SRR13642613_1.fastq.gz",
+            "bytes": 2310531481
+          },
+          {
+            "url": "https://ftp.sra.ebi.ac.uk/vol1/fastq/SRR136/013/SRR13642613/SRR13642613_2.fastq.gz",
+            "bytes": 2630617759
+          }
+        ]
+      }
+    ],
+    "total_compressed_bytes": 20490058265
+  },
+  "bam_paths": [
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam",
+    "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam"
+  ],
+  "mapping_rule": "HISAT2 --dta default unstranded alignment to uppercase exact assembly; no known splice site or GTF input",
+  "source_status_path": "outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/status.json",
+  "samples": [
+    {
+      "accession": "SRR13642599",
+      "sample": "Ileum rep1",
+      "bam_bytes": 3704069197,
+      "bai_bytes": 2114464,
+      "native_alignment_summary": "HISAT2 summary stats:\n\tTotal pairs: 46331004\n\t\tAligned concordantly or discordantly 0 time: 5157781 (11.13%)\n\t\tAligned concordantly 1 time: 38473263 (83.04%)\n\t\tAligned concordantly >1 times: 2353989 (5.08%)\n\t\tAligned discordantly 1 time: 345971 (0.75%)\n\tTotal unpaired reads: 10315562\n\t\tAligned 0 time: 7839531 (76.00%)\n\t\tAligned 1 time: 2269148 (22.00%)\n\t\tAligned >1 times: 206883 (2.01%)\n\tOverall alignment rate: 91.54%\n",
+      "native_flagstat": "99773578 + 0 in total (QC-passed reads + QC-failed reads)\n92662008 + 0 primary\n7111570 + 0 secondary\n0 + 0 supplementary\n0 + 0 duplicates\n0 + 0 primary duplicates\n91934047 + 0 mapped (92.14% : N/A)\n84822477 + 0 primary mapped (91.54% : N/A)\n92662008 + 0 paired in sequencing\n46331004 + 0 read1\n46331004 + 0 read2\n81654504 + 0 properly paired (88.12% : N/A)\n82749664 + 0 with itself and mate mapped\n2072813 + 0 singletons (2.24% : N/A)\n264564 + 0 with mate mapped to a different chr\n226835 + 0 with mate mapped to a different chr (mapQ>=5)\n",
+      "overall_alignment_percent": 91.54,
+      "total_read_pairs": 46331004,
+      "native_commands": {
+        "align": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "bash",
+            "-o",
+            "pipefail",
+            "-c",
+            "hisat2 -p 12 --dta --new-summary --summary-file /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.hisat2-summary.txt -x /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/index/genome -1 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642599_1.fastq.gz -2 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642599_2.fastq.gz | samtools sort -@ 3 -m 2G -o /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam -"
+          ],
+          "started_epoch": 1790329868.6147778,
+          "returncode": 0,
+          "wall_seconds": 629.5441522598267
+        },
+        "quickcheck": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "quickcheck",
+            "-v",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam"
+          ],
+          "started_epoch": 1790330498.1637082,
+          "returncode": 0,
+          "wall_seconds": 1.8828182220458984
+        },
+        "index": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "index",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam"
+          ],
+          "started_epoch": 1790330500.0523744,
+          "returncode": 0,
+          "wall_seconds": 16.954235553741455
+        },
+        "flagstat": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "flagstat",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam"
+          ],
+          "started_epoch": 1790330517.0087776,
+          "returncode": 0,
+          "wall_seconds": 16.326593160629272
+        }
+      },
+      "quickcheck_stderr": "",
+      "mates": [
+        {
+          "filename": "SRR13642599_1.fastq.gz",
+          "bytes": 2883345648,
+          "matches_frozen_bytes": true
+        },
+        {
+          "filename": "SRR13642599_2.fastq.gz",
+          "bytes": 2987434226,
+          "matches_frozen_bytes": true
+        }
+      ],
+      "bam_primary_reads_match_input_pairs": true
+    },
+    {
+      "accession": "SRR13642601",
+      "sample": "Macrophage (lung) rep1",
+      "bam_bytes": 4263507817,
+      "bai_bytes": 1723528,
+      "native_alignment_summary": "HISAT2 summary stats:\n\tTotal pairs: 33641559\n\t\tAligned concordantly or discordantly 0 time: 12790344 (38.02%)\n\t\tAligned concordantly 1 time: 19864269 (59.05%)\n\t\tAligned concordantly >1 times: 795707 (2.37%)\n\t\tAligned discordantly 1 time: 191239 (0.57%)\n\tTotal unpaired reads: 25580688\n\t\tAligned 0 time: 20877901 (81.62%)\n\t\tAligned 1 time: 4546615 (17.77%)\n\t\tAligned >1 times: 156172 (0.61%)\n\tOverall alignment rate: 68.97%\n",
+      "native_flagstat": "71251131 + 0 in total (QC-passed reads + QC-failed reads)\n67283118 + 0 primary\n3968013 + 0 secondary\n0 + 0 supplementary\n0 + 0 duplicates\n0 + 0 primary duplicates\n50373230 + 0 mapped (70.70% : N/A)\n46405217 + 0 primary mapped (68.97% : N/A)\n67283118 + 0 paired in sequencing\n33641559 + 0 read1\n33641559 + 0 read2\n41319952 + 0 properly paired (61.41% : N/A)\n41995366 + 0 with itself and mate mapped\n4409851 + 0 singletons (6.55% : N/A)\n21082 + 0 with mate mapped to a different chr\n17403 + 0 with mate mapped to a different chr (mapQ>=5)\n",
+      "overall_alignment_percent": 68.97,
+      "total_read_pairs": 33641559,
+      "native_commands": {
+        "align": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "bash",
+            "-o",
+            "pipefail",
+            "-c",
+            "hisat2 -p 12 --dta --new-summary --summary-file /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.hisat2-summary.txt -x /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/index/genome -1 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642601_1.fastq.gz -2 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642601_2.fastq.gz | samtools sort -@ 3 -m 2G -o /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam -"
+          ],
+          "started_epoch": 1790330533.3374603,
+          "returncode": 0,
+          "wall_seconds": 493.56073093414307
+        },
+        "quickcheck": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "quickcheck",
+            "-v",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam"
+          ],
+          "started_epoch": 1790331026.9000711,
+          "returncode": 0,
+          "wall_seconds": 0.9469380378723145
+        },
+        "index": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "index",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam"
+          ],
+          "started_epoch": 1790331027.8480134,
+          "returncode": 0,
+          "wall_seconds": 14.5666184425354
+        },
+        "flagstat": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "flagstat",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam"
+          ],
+          "started_epoch": 1790331042.417039,
+          "returncode": 0,
+          "wall_seconds": 11.183434963226318
+        }
+      },
+      "quickcheck_stderr": "",
+      "mates": [
+        {
+          "filename": "SRR13642601_1.fastq.gz",
+          "bytes": 2320166060,
+          "matches_frozen_bytes": true
+        },
+        {
+          "filename": "SRR13642601_2.fastq.gz",
+          "bytes": 2704711539,
+          "matches_frozen_bytes": true
+        }
+      ],
+      "bam_primary_reads_match_input_pairs": true
+    },
+    {
+      "accession": "SRR13642607",
+      "sample": "Ovary rep1",
+      "bam_bytes": 4104724117,
+      "bai_bytes": 2026664,
+      "native_alignment_summary": "HISAT2 summary stats:\n\tTotal pairs: 45648092\n\t\tAligned concordantly or discordantly 0 time: 7440105 (16.30%)\n\t\tAligned concordantly 1 time: 29734727 (65.14%)\n\t\tAligned concordantly >1 times: 8198642 (17.96%)\n\t\tAligned discordantly 1 time: 274618 (0.60%)\n\tTotal unpaired reads: 14880210\n\t\tAligned 0 time: 12449895 (83.67%)\n\t\tAligned 1 time: 1966358 (13.21%)\n\t\tAligned >1 times: 463957 (3.12%)\n\tOverall alignment rate: 86.36%\n",
+      "native_flagstat": "118498572 + 0 in total (QC-passed reads + QC-failed reads)\n91296184 + 0 primary\n27202388 + 0 secondary\n0 + 0 supplementary\n0 + 0 duplicates\n0 + 0 primary duplicates\n106048677 + 0 mapped (89.49% : N/A)\n78846289 + 0 primary mapped (86.36% : N/A)\n91296184 + 0 paired in sequencing\n45648092 + 0 read1\n45648092 + 0 read2\n75866738 + 0 properly paired (83.10% : N/A)\n77131994 + 0 with itself and mate mapped\n1714295 + 0 singletons (1.88% : N/A)\n63566 + 0 with mate mapped to a different chr\n34939 + 0 with mate mapped to a different chr (mapQ>=5)\n",
+      "overall_alignment_percent": 86.36,
+      "total_read_pairs": 45648092,
+      "native_commands": {
+        "align": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "bash",
+            "-o",
+            "pipefail",
+            "-c",
+            "hisat2 -p 12 --dta --new-summary --summary-file /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.hisat2-summary.txt -x /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/index/genome -1 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642607_1.fastq.gz -2 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642607_2.fastq.gz | samtools sort -@ 3 -m 2G -o /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam -"
+          ],
+          "started_epoch": 1790331053.6025822,
+          "returncode": 0,
+          "wall_seconds": 674.0195069313049
+        },
+        "quickcheck": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "quickcheck",
+            "-v",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam"
+          ],
+          "started_epoch": 1790331727.6237235,
+          "returncode": 0,
+          "wall_seconds": 0.700347900390625
+        },
+        "index": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "index",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam"
+          ],
+          "started_epoch": 1790331728.325449,
+          "returncode": 0,
+          "wall_seconds": 19.13160228729248
+        },
+        "flagstat": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "flagstat",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam"
+          ],
+          "started_epoch": 1790331747.461626,
+          "returncode": 0,
+          "wall_seconds": 15.751402139663696
+        }
+      },
+      "quickcheck_stderr": "",
+      "mates": [
+        {
+          "filename": "SRR13642607_1.fastq.gz",
+          "bytes": 2293175302,
+          "matches_frozen_bytes": true
+        },
+        {
+          "filename": "SRR13642607_2.fastq.gz",
+          "bytes": 2360076250,
+          "matches_frozen_bytes": true
+        }
+      ],
+      "bam_primary_reads_match_input_pairs": true
+    },
+    {
+      "accession": "SRR13642613",
+      "sample": "Thymus rep1",
+      "bam_bytes": 4159403256,
+      "bai_bytes": 1671200,
+      "native_alignment_summary": "HISAT2 summary stats:\n\tTotal pairs: 32430109\n\t\tAligned concordantly or discordantly 0 time: 13872559 (42.78%)\n\t\tAligned concordantly 1 time: 17855725 (55.06%)\n\t\tAligned concordantly >1 times: 519258 (1.60%)\n\t\tAligned discordantly 1 time: 182567 (0.56%)\n\tTotal unpaired reads: 27745118\n\t\tAligned 0 time: 23469062 (84.59%)\n\t\tAligned 1 time: 4177433 (15.06%)\n\t\tAligned >1 times: 98623 (0.36%)\n\tOverall alignment rate: 63.82%\n",
+      "native_flagstat": "67319064 + 0 in total (QC-passed reads + QC-failed reads)\n64860218 + 0 primary\n2458846 + 0 secondary\n0 + 0 supplementary\n0 + 0 duplicates\n0 + 0 primary duplicates\n43850002 + 0 mapped (65.14% : N/A)\n41391156 + 0 primary mapped (63.82% : N/A)\n64860218 + 0 paired in sequencing\n32430109 + 0 read1\n32430109 + 0 read2\n36749966 + 0 properly paired (56.66% : N/A)\n37357180 + 0 with itself and mate mapped\n4033976 + 0 singletons (6.22% : N/A)\n16712 + 0 with mate mapped to a different chr\n13446 + 0 with mate mapped to a different chr (mapQ>=5)\n",
+      "overall_alignment_percent": 63.82,
+      "total_read_pairs": 32430109,
+      "native_commands": {
+        "align": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "bash",
+            "-o",
+            "pipefail",
+            "-c",
+            "hisat2 -p 12 --dta --new-summary --summary-file /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.hisat2-summary.txt -x /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/index/genome -1 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642613_1.fastq.gz -2 /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/fastq/SRR13642613_2.fastq.gz | samtools sort -@ 3 -m 2G -o /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam -"
+          ],
+          "started_epoch": 1790331763.2161305,
+          "returncode": 0,
+          "wall_seconds": 472.6723265647888
+        },
+        "quickcheck": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "quickcheck",
+            "-v",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam"
+          ],
+          "started_epoch": 1790332235.8895195,
+          "returncode": 0,
+          "wall_seconds": 2.01534104347229
+        },
+        "index": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "index",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam"
+          ],
+          "started_epoch": 1790332237.9064744,
+          "returncode": 0,
+          "wall_seconds": 15.833579301834106
+        },
+        "flagstat": {
+          "argv": [
+            "apptainer",
+            "exec",
+            "--cleanenv",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+            "--bind",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna:/work",
+            "--pwd",
+            "/work",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+            "samtools",
+            "flagstat",
+            "-@",
+            "4",
+            "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam"
+          ],
+          "started_epoch": 1790332253.7412033,
+          "returncode": 0,
+          "wall_seconds": 12.194578409194946
+        }
+      },
+      "quickcheck_stderr": "",
+      "mates": [
+        {
+          "filename": "SRR13642613_1.fastq.gz",
+          "bytes": 2310531481,
+          "matches_frozen_bytes": true
+        },
+        {
+          "filename": "SRR13642613_2.fastq.gz",
+          "bytes": 2630617759,
+          "matches_frozen_bytes": true
+        }
+      ],
+      "bam_primary_reads_match_input_pairs": true
+    }
+  ],
+  "slurm": {
+    "job_id": "13194313",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 5527,
+    "allocated_cpus": 16,
+    "allocated_cpu_hours": 24.564444444444444,
+    "batch_max_rss_kb": 9104860
+  },
+  "interpretation": "Shared deployment evidence preparation, not gene prediction performance. Keep all four frozen RNA runs despite heterogeneous alignment rates; no result-based evidence selection."
+}

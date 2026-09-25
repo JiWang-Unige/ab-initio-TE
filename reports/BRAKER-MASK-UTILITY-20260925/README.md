@@ -52,3 +52,18 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 鸡作业13194295原生状态MASKS_READY，464条序列、共1,065,365,425 bp，RED输出与源序列逐记录大写碱基一致。D、RM2_FULL、RED_FULL实际小写ACGT分别40,685,285、152,009,313、333,937,733 bp；覆盖不同是固定方法输出，不能从覆盖量推断基因注释效果。原生RED记录保留，掩码准备共5,198秒、11.5511 allocated CPU-hours。[完成摘要](chicken-masks-summary.json)
 
 共同RNA作业13194313已按依赖自动启动，正在获取预定鸡RNA；未产出最终BAM，尚不能称RNA_READY。鱼13194296仍在写出RED掩码，无原生报错；鱼RNA和六臂ETP仍依赖等待。本轮无新提交、无修改模型/阈值/评价分母，无新的基因注释准确率结果。
+
+## 10:47 UTC heartbeat：两物种掩码与鸡 RNA 终态核实
+
+鱼全基因组掩码作业13194296已完成：1,923条序列、1,679,203,469 bp；D / RM2_FULL / RED_FULL小写ACGT分别894,533,834 / 1,001,834,539 / 858,140,069 bp。RED原生repeat-span统计比实际小写ACGT多842 bp，两者不作为同一统计口径；实际掩码按协议仅保留小写ACGT，未改变掩码规则。源序列顺序与大写碱基逐记录一致。耗时11,009秒，24.4644 allocated CPU-hours。[鱼掩码摘要](zebrafish-masks-summary.json)
+
+鸡共享RNA作业13194313已完成，原生状态RNA_READY。八个FASTQ与冻结字节数一致，共158,050,764个read pairs；四份BAM及索引存在，quickcheck通过，flagstat中的primary reads逐样本恰为输入pairs的两倍。各臂继续共用全部四份BAM，不因比对率差异筛选样本。耗时5,527秒，24.5644 allocated CPU-hours。[RNA原生日志与摘要](chicken-rna-summary.json)
+
+| 鸡 RNA run | 预定组织/细胞 | Read pairs | HISAT2 overall alignment |
+|---|---|---:|---:|
+| SRR13642599 | Ileum | 46,331,004 | 91.54% |
+| SRR13642601 | Lung macrophage | 33,641,559 | 68.97% |
+| SRR13642607 | Ovary | 45,648,092 | 86.36% |
+| SRR13642613 | Thymus | 32,430,109 | 63.82% |
+
+比对率描述部署证据的异质性，不代表基因预测准确率，也不证明完整组织覆盖。鱼RNA作业13194314已自动启动、仍在准备；六臂13194349等待其完成。本轮没有新的基因注释结果、没有重复提交或变更科学参数。

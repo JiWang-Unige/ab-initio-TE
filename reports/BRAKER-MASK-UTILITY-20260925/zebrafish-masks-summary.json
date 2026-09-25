@@ -1,0 +1,58 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "stage": "complete genome mask preparation",
+  "species": "zebrafish",
+  "job_id": "13194296",
+  "started_epoch": 1790321542.2161868,
+  "status": "MASKS_READY",
+  "sources": {
+    "genome": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/.backup/data/genome_data/current_eukaryotes/animals/zebrafish/danRer11.fa",
+    "D": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/d/zebrafish/gpu/prediction/material_runs.bed",
+    "RM2_FULL": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/WHOLE-GENOME-BENCHMARK-20260918/native/zebrafish/RM2-mask-recovery-v2/annotation.out"
+  },
+  "red": {
+    "argv": [
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/refs/repos/Red/bin/Red",
+      "-gnm",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome",
+      "-msk",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_masked",
+      "-rpt",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_repeats",
+      "-cor",
+      "8",
+      "-frm",
+      "2"
+    ],
+    "started_epoch": 1790321626.1831553,
+    "returncode": 0,
+    "wall_seconds": 10725.123431444168
+  },
+  "sequence_identity": "same ordered records and uppercase sequence; D/RM2 constructed in source coordinates; RED compared base-for-base",
+  "source_status_path": "outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/status.json",
+  "record_count": 1923,
+  "total_bp": 1679203469,
+  "lowercase_acgt_counts": {
+    "source_lowercase_acgt": 866781138,
+    "D_mask_bp": 894533834,
+    "RM2_FULL_mask_bp": 1001834539,
+    "RED_FULL_mask_bp": 858140069
+  },
+  "mask_fraction_of_total_sequence": {
+    "D_mask_bp": 0.5327131884337478,
+    "RM2_FULL_mask_bp": 0.5966129522091882,
+    "RED_FULL_mask_bp": 0.5110399572429659
+  },
+  "native_red_stdout": "\n\nThis is Red (REpeat Detector) designed and developed by Hani Zakaria Girgis, PhD.\n\nVersion: 2.0\n\nUsing 8 threads.\nCalculating the length, k, of the k-mer based on the input genome ... \n\t/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome/genome.fa\nThe recommended k is 15.\n\nUsing the default background order: 6.\nUsing the default threshold: 2.\nUsing the default minimum of the observed count of k-mers: 3.\nCalculating GC content ...\n\t/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome/genome.fa\nUsing the default half width: 20 based on the GC content of 36.5976\n\nList of final parameters: \n-cor: 8\n-frm: 2\n-gau: 20\n-gnm: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome\n-len: 15\n-min: 3\n-msk: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_masked\n-ord: 6\n-rpt: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_repeats\n-thr: 2\n\nDeleting pre-existing files under /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_masked\nDeleting pre-existing files under /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_repeats\n\n\nStage 1: Building the table ...\nCounting k-mers in /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome/genome.fa ...\nProcessing 0 to 134217727\nProcessing 134217728 to 268435455\nProcessing 268435456 to 402653183\nProcessing 536870912 to 671088639\nProcessing 805306368 to 939524095\nProcessing 671088640 to 805306367\nProcessing 402653184 to 536870911\nProcessing 939524096 to 1073741823\nEnrichment view is ready.\n\n\nStage 2: Calculating the percentage ...\nCalculating the percentage in: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome/genome.fa ...\nThe percentage is 48.7781\nThe percentage is increased to 52.5\n\n\nStage 3: Training ...\nTraining on: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome/genome.fa\n\tSkipping a short segment: 2901930-2901953\n\tSkipping a short segment: 911-936\n\n\nStage 4: Scanning ...\nScanning: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome/genome.fa\nPrinting locations to: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_repeats/genome.bed\nPrinting masked sequence to: /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_masked/genome.msk\nGenome length: 1679203469 - Repeats length: 858140911 - Repeats content: 51.104%\n",
+  "native_red_time": "\tCommand being timed: \"/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/refs/repos/Red/bin/Red -gnm /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_genome -msk /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_masked -rpt /srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/red_repeats -cor 8 -frm 2\"\n\tUser time (seconds): 1216.07\n\tSystem time (seconds): 585.99\n\tPercent of CPU this job got: 16%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 2:58:45\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 9902964\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 1\n\tMinor (reclaiming a frame) page faults: 15974807\n\tVoluntary context switches: 71629009\n\tInvoluntary context switches: 1679\n\tSwaps: 0\n\tFile system inputs: 23245362\n\tFile system outputs: 3444162\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+  "slurm": {
+    "job_id": "13194296",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 11009,
+    "allocated_cpus": 8,
+    "allocated_cpu_hours": 24.464444444444446,
+    "batch_max_rss_kb": 10164960
+  },
+  "interpretation": "Input preparation only. Coverage uses lowercase ACGT over all source sequence bp, not TE accuracy. RED native repeat-span count can include ambiguous bases."
+}
