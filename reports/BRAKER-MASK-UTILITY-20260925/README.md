@@ -81,3 +81,18 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 鸡D进入GeneMark模型构建与原生masking-penalty优化。`build_mod.pl`第50/56行出现两条`uninitialized value`警告；读取固定容器源码后，定位为未定义的`Parameters.gcode`与1/6比较，而非模型训练退出。实际生成的`GeneMark-ETP/proteins.fa/model/output.mod`与`ref.mod`均为`$TAA_ON 1`、`$TAG_ON 1`、`$TGA_ON 1`，标准终止密码子开关保留。未修改容器、模型或参数，原生日志继续保存；若后续出现实际失败再按终态处理。
 
 此处GeneMark自动选择masking penalty属于预先允许的各臂原生自训练，不是重调D阈值或使用评价标签。两臂仍在运行，最终GTF尚未产生；以上只解释工程警告，不是科学结果。
+
+## 2026-09-27 08:55 UTC：鸡 D 原生终态及单臂评分
+
+鸡 D（13194349_0）于06:22:51 UTC完成完整ETP；原生日志有BRAKER RUN FINISHED，最终braker.gtf为71,871,974 bytes，已解析255,067条CDS feature、23,961条transcript feature和18,318条gene feature。这些是原生文件行数，不是主评价域的基因分母。Slurm耗时155,036秒（43小时03分56秒），689.0489 allocated CPU-hours；batch MaxRSS为23,738,768 KB。GNU time原生过程的峰值内存单列，不与Slurm采样峰值混用。[原生终态摘要](chicken-D-prediction-summary.json)
+
+已用private CPU作业13233773评分这一个完成臂，11秒、0.0122 allocated CPU-hours。单臂文件为score-D-primary.json和score-D-full.json，完整矩阵仍使用预定score-primary.json/score-full.json；不覆盖冻结准备或提前生成比较结论。[评分摘要及逐染色体计数](chicken-D-score-summary.json)
+
+| 鸡 D 评价域 | 参考 gene-loci | TP | FP | FN | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 冻结主域 | 6,588 | 4,480 | 3,451 | 2,108 | 0.564872 | 0.680024 | 0.617122 |
+| 完整常染色体 | 16,262 | 11,601 | 8,246 | 4,661 | 0.584522 | 0.713381 | 0.642554 |
+
+逐染色体TP/FP/FN之和与总体一致，TP+FN与冻结参考分母一致。主域8,670条唯一预测CDS链中5,219条匹配参考，折叠为4,480个参考loci的TP；同一locus的多个正确isoform不增加TP或FP，其余3,451条不匹配链记FP。16条缺完整codon feature的预测仍保留在评价中。完整常染色体包含D监督暴露区域，不能当作独立验证。以上均为RefSeq一致性，尚不能判定掩码用途改善、优于RM2/RED或未见物种泛化。
+
+鸡RM2_FULL（13194349_2，内部13233079）已于06:22:52 UTC自动接续，鱼D正在全基因组AUGUSTUS预测；其余三臂依次排队。仍为每臂16CPU/96GB/72h、无GPU、最多两臂ETP并发。全部输入、其他臂和评价规则保持冻结，不根据这个单臂分数改变实验。

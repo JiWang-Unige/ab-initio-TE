@@ -1,0 +1,361 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "species": "chicken",
+  "arm": "D",
+  "matrix_complete": false,
+  "comparative_claim": null,
+  "domains": {
+    "primary": {
+      "full_score_source": "outputs/BRAKER-MASK-UTILITY-20260925/evaluation/chicken/score-D-primary.json",
+      "reference": {
+        "excluded": {
+          "non_autosome": 4076,
+          "noncoding_or_incomplete": 11328,
+          "outside_primary": 29532
+        },
+        "gene_loci": 6588,
+        "isoform_count": 17234,
+        "source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/chicken/ncbiRefSeq.txt.gz"
+      },
+      "metrics": {
+        "f1": 0.6171223913492665,
+        "fn": 2108,
+        "fp": 3451,
+        "precision": 0.5648720211827007,
+        "recall": 0.6800242865816636,
+        "tp": 4480
+      },
+      "matched_chains": 5219,
+      "multiple_matching_isoforms_beyond_one_per_locus": 739,
+      "unique_cds_chains": 8670,
+      "complete_cds_feature_chains": 8654,
+      "partial_cds_feature_chains": 16,
+      "per_chromosome": {
+        "chr10": {
+          "fn": 90,
+          "fp": 167,
+          "tp": 252
+        },
+        "chr11": {
+          "fn": 66,
+          "fp": 132,
+          "tp": 262
+        },
+        "chr12": {
+          "fn": 65,
+          "fp": 128,
+          "tp": 195
+        },
+        "chr13": {
+          "fn": 98,
+          "fp": 141,
+          "tp": 195
+        },
+        "chr14": {
+          "fn": 59,
+          "fp": 121,
+          "tp": 232
+        },
+        "chr15": {
+          "fn": 44,
+          "fp": 116,
+          "tp": 145
+        },
+        "chr16": {
+          "fn": 115,
+          "fp": 90,
+          "tp": 47
+        },
+        "chr17": {
+          "fn": 68,
+          "fp": 138,
+          "tp": 238
+        },
+        "chr18": {
+          "fn": 45,
+          "fp": 85,
+          "tp": 141
+        },
+        "chr19": {
+          "fn": 71,
+          "fp": 165,
+          "tp": 277
+        },
+        "chr20": {
+          "fn": 52,
+          "fp": 100,
+          "tp": 201
+        },
+        "chr21": {
+          "fn": 63,
+          "fp": 129,
+          "tp": 199
+        },
+        "chr22": {
+          "fn": 70,
+          "fp": 93,
+          "tp": 144
+        },
+        "chr23": {
+          "fn": 70,
+          "fp": 115,
+          "tp": 196
+        },
+        "chr24": {
+          "fn": 42,
+          "fp": 74,
+          "tp": 148
+        },
+        "chr25": {
+          "fn": 115,
+          "fp": 152,
+          "tp": 219
+        },
+        "chr26": {
+          "fn": 71,
+          "fp": 140,
+          "tp": 214
+        },
+        "chr27": {
+          "fn": 142,
+          "fp": 216,
+          "tp": 249
+        },
+        "chr28": {
+          "fn": 86,
+          "fp": 168,
+          "tp": 238
+        },
+        "chr30": {
+          "fn": 70,
+          "fp": 61,
+          "tp": 63
+        },
+        "chr31": {
+          "fn": 195,
+          "fp": 279,
+          "tp": 45
+        },
+        "chr32": {
+          "fn": 37,
+          "fp": 29,
+          "tp": 39
+        },
+        "chr33": {
+          "fn": 290,
+          "fp": 421,
+          "tp": 247
+        },
+        "chr9": {
+          "fn": 84,
+          "fp": 191,
+          "tp": 294
+        }
+      },
+      "skipped": {
+        "missing_id_or_non_autosome": 179246,
+        "outside_primary_domain": 1422
+      }
+    },
+    "full": {
+      "full_score_source": "outputs/BRAKER-MASK-UTILITY-20260925/evaluation/chicken/score-D-full.json",
+      "reference": {
+        "excluded": {
+          "non_autosome": 4076,
+          "noncoding_or_incomplete": 11328
+        },
+        "gene_loci": 16262,
+        "isoform_count": 46766,
+        "source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/chicken/ncbiRefSeq.txt.gz"
+      },
+      "metrics": {
+        "f1": 0.6425544878008252,
+        "fn": 4661,
+        "fp": 8246,
+        "precision": 0.5845215901647605,
+        "recall": 0.7133808879596606,
+        "tp": 11601
+      },
+      "matched_chains": 13693,
+      "multiple_matching_isoforms_beyond_one_per_locus": 2092,
+      "unique_cds_chains": 21939,
+      "complete_cds_feature_chains": 21911,
+      "partial_cds_feature_chains": 28,
+      "per_chromosome": {
+        "chr1": {
+          "fn": 675,
+          "fp": 1119,
+          "tp": 1552
+        },
+        "chr10": {
+          "fn": 114,
+          "fp": 205,
+          "tp": 318
+        },
+        "chr11": {
+          "fn": 79,
+          "fp": 154,
+          "tp": 310
+        },
+        "chr12": {
+          "fn": 84,
+          "fp": 172,
+          "tp": 285
+        },
+        "chr13": {
+          "fn": 132,
+          "fp": 205,
+          "tp": 279
+        },
+        "chr14": {
+          "fn": 85,
+          "fp": 165,
+          "tp": 341
+        },
+        "chr15": {
+          "fn": 81,
+          "fp": 213,
+          "tp": 296
+        },
+        "chr16": {
+          "fn": 115,
+          "fp": 90,
+          "tp": 47
+        },
+        "chr17": {
+          "fn": 68,
+          "fp": 138,
+          "tp": 238
+        },
+        "chr18": {
+          "fn": 66,
+          "fp": 150,
+          "tp": 263
+        },
+        "chr19": {
+          "fn": 71,
+          "fp": 165,
+          "tp": 277
+        },
+        "chr2": {
+          "fn": 439,
+          "fp": 746,
+          "tp": 1016
+        },
+        "chr20": {
+          "fn": 70,
+          "fp": 137,
+          "tp": 282
+        },
+        "chr21": {
+          "fn": 63,
+          "fp": 129,
+          "tp": 199
+        },
+        "chr22": {
+          "fn": 70,
+          "fp": 93,
+          "tp": 144
+        },
+        "chr23": {
+          "fn": 70,
+          "fp": 115,
+          "tp": 196
+        },
+        "chr24": {
+          "fn": 42,
+          "fp": 74,
+          "tp": 148
+        },
+        "chr25": {
+          "fn": 115,
+          "fp": 152,
+          "tp": 219
+        },
+        "chr26": {
+          "fn": 71,
+          "fp": 140,
+          "tp": 214
+        },
+        "chr27": {
+          "fn": 142,
+          "fp": 216,
+          "tp": 249
+        },
+        "chr28": {
+          "fn": 86,
+          "fp": 168,
+          "tp": 238
+        },
+        "chr3": {
+          "fn": 314,
+          "fp": 592,
+          "tp": 901
+        },
+        "chr30": {
+          "fn": 70,
+          "fp": 61,
+          "tp": 63
+        },
+        "chr31": {
+          "fn": 195,
+          "fp": 279,
+          "tp": 45
+        },
+        "chr32": {
+          "fn": 37,
+          "fp": 29,
+          "tp": 39
+        },
+        "chr33": {
+          "fn": 290,
+          "fp": 421,
+          "tp": 247
+        },
+        "chr4": {
+          "fn": 282,
+          "fp": 588,
+          "tp": 881
+        },
+        "chr5": {
+          "fn": 259,
+          "fp": 479,
+          "tp": 747
+        },
+        "chr6": {
+          "fn": 152,
+          "fp": 285,
+          "tp": 410
+        },
+        "chr7": {
+          "fn": 102,
+          "fp": 259,
+          "tp": 400
+        },
+        "chr8": {
+          "fn": 122,
+          "fp": 282,
+          "tp": 405
+        },
+        "chr9": {
+          "fn": 100,
+          "fp": 225,
+          "tp": 352
+        }
+      },
+      "skipped": {
+        "missing_id_or_non_autosome": 21381
+      }
+    }
+  },
+  "metric_definition": "Frozen gene-locus endpoint: one TP per matched reference locus, unmatched unique prediction chains count as FP; multiple correct isoforms at a matched locus do not add TP or FP. RefSeq agreement is not exhaustive biological truth.",
+  "score_job": {
+    "job_id": "13233773",
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 11,
+    "allocated_cpus": 4,
+    "allocated_cpu_hours": 0.012222222222222223,
+    "batch_max_rss_kb": 336232
+  }
+}

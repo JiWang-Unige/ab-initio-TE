@@ -76,8 +76,14 @@ with positive- and negative-strand fixtures.
 
 ## BRAKER GTF scoring
 
-After all arms have been run with the same evidence and resources, score the
-primary domain with either one GTF:
+The final comparison requires all fixed arms with the same evidence and
+resources. A completed arm can also be scored as it becomes available using
+`score-arm.sbatch SPECIES ARM`; its separate `score-ARM-primary.json` and
+`score-ARM-full.json` files do not replace the final matrix and do not support
+a comparative claim. This launcher reads the frozen evaluation directory from
+`preparation.json`, including the zebrafish-r2 recovery directory.
+
+Score the primary domain with either one GTF:
 
 ```text
 python3 scripts/experiments/BRAKER-MASK-UTILITY-20260925/evaluation.py \
