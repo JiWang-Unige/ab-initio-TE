@@ -96,3 +96,11 @@ GTF scorer已用真实bundled BRAKER格式核对，独立start/stop codon行会�
 逐染色体TP/FP/FN之和与总体一致，TP+FN与冻结参考分母一致。主域8,670条唯一预测CDS链中5,219条匹配参考，折叠为4,480个参考loci的TP；同一locus的多个正确isoform不增加TP或FP，其余3,451条不匹配链记FP。16条缺完整codon feature的预测仍保留在评价中。完整常染色体包含D监督暴露区域，不能当作独立验证。以上均为RefSeq一致性，尚不能判定掩码用途改善、优于RM2/RED或未见物种泛化。
 
 鸡RM2_FULL（13194349_2，内部13233079）已于06:22:52 UTC自动接续，鱼D正在全基因组AUGUSTUS预测；其余三臂依次排队。仍为每臂16CPU/96GB/72h、无GPU、最多两臂ETP并发。全部输入、其他臂和评价规则保持冻结，不根据这个单臂分数改变实验。
+
+## 2026-09-28：鱼 D 原生终态核实，评分已排队
+
+本次恢复连接后按集群UTC时间核实：鱼D（13194349_1）已于2026-09-27 12:30:46 UTC完成完整ETP，原生日志有BRAKER RUN FINISHED，状态PREDICTION_READY。最终braker.gtf为107,307,642 bytes，原生解析得到369,505条CDS feature、35,484条transcript feature和28,084条gene feature。Slurm耗时177,111秒（49小时11分51秒），787.1600 allocated CPU-hours；batch MaxRSS为22,954,200 KB。两个D臂ETP累计1,476.2089 allocated CPU-hours，预处理和评分成本另列。[鱼D原生摘要](zebrafish-D-prediction-summary.json)
+
+鱼D的冻结CDS及长读长结构评分已提交private CPU作业13246903（4CPU/16GB/2h，无GPU）。截至核实时仍在排队，尚未产生score-D-primary.json/score-D-full.json；不能用提交状态代替指标。沿用zebrafish-r2的14,576个主域参考loci与27,862条长读长结构，不改变分母或把无RNA匹配定义为FP。
+
+鱼RM2_FULL（13194349_3，内部13234648）于2026-09-27 12:30:46 UTC自动接续。两物种RM2目前均在原生AUGUSTUS优化阶段，两个RED臂等待数组并发名额；ETP仍最多两臂并行。未新增训练、输入或阈值，也未因中途分数修改对照。当前仍无D对RM2/RED的完整比较结论。

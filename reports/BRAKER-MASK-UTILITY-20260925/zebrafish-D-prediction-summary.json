@@ -1,0 +1,66 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "stage": "complete native BRAKER ETP",
+  "species": "zebrafish",
+  "job_id": "13195480",
+  "started_epoch": 1790335137.2991214,
+  "status": "PREDICTION_READY",
+  "arm": "D",
+  "native": {
+    "argv": [
+      "apptainer",
+      "exec",
+      "--cleanenv",
+      "--bind",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+      "--bind",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/arms/D:/work",
+      "--pwd",
+      "/work",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+      "braker.pl",
+      "--genome=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/D.fa",
+      "--prot_seq=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/inputs/proteins/vertebrata.exclude-chicken-zebrafish.fa",
+      "--bam=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/rna/SRR31188006.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/rna/SRR31188005.bam",
+      "--workingdir=/work/run",
+      "--species=te_etp_zebrafish_d_20260925",
+      "--AUGUSTUS_CONFIG_PATH=/work/augustus-config",
+      "--threads=16"
+    ],
+    "started_epoch": 1790335199.9416783,
+    "returncode": 0,
+    "wall_seconds": 177044.97016572952
+  },
+  "final_gtf": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/arms/D/run/braker.gtf",
+  "features": {
+    "gene": 28084,
+    "transcript": 35484,
+    "stop_codon": 35452,
+    "CDS": 369505,
+    "exon": 369505,
+    "intron": 334021,
+    "start_codon": 35444,
+    "mRNA": 1699
+  },
+  "scientifically_scored": false,
+  "slurm": {
+    "job_id": "13194349_1",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "started_utc": "2026-09-25T11:18:55Z",
+    "ended_utc": "2026-09-27T12:30:46Z",
+    "elapsed_seconds": 177111,
+    "allocated_cpus": 16,
+    "allocated_cpu_hours": 787.16,
+    "batch_max_rss_kb": 22954200
+  },
+  "final_gtf_bytes": 107307642,
+  "native_run_finished_marker": true,
+  "native_time": {
+    "user_seconds": 1544698.43,
+    "system_seconds": 147400.8,
+    "max_rss_kb": 16336256,
+    "scope": "GNU time native child process tree; distinct from Slurm batch MaxRSS and allocated CPU-hours"
+  },
+  "interpretation": "Native prediction completed; no comparative utility conclusion before fixed controls are scored."
+}
