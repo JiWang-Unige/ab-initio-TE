@@ -80,7 +80,11 @@ The final comparison requires all fixed arms with the same evidence and
 resources. A completed arm can also be scored as it becomes available using
 `score-arm.sbatch SPECIES ARM`; its separate `score-ARM-primary.json` and
 `score-ARM-full.json` files do not replace the final matrix and do not support
-a comparative claim. This launcher reads the frozen evaluation directory from
+a comparative claim. The launcher also accepts multiple completed arms, for
+example `score-arm.sbatch chicken D RM2_FULL`, to evaluate a prespecified pair
+with the same fixed scorer and bootstrap. Pair files are named
+`score-D-RM2_FULL-primary.json` and `score-D-RM2_FULL-full.json`; they preserve
+the single-arm records and do not replace the complete matrix. This launcher reads the frozen evaluation directory from
 `preparation.json`, including the zebrafish-r2 recovery directory.
 
 Score the primary domain with either one GTF:

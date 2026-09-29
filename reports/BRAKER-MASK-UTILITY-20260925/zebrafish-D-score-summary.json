@@ -1,0 +1,2679 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "species": "zebrafish",
+  "arm": "D",
+  "matrix_complete": false,
+  "comparative_claim": null,
+  "domains": {
+    "primary": {
+      "full_score_source": "outputs/BRAKER-MASK-UTILITY-20260925/evaluation/zebrafish-r2/score-D-primary.json",
+      "reference": {
+        "excluded": {
+          "non_autosome": 11126,
+          "noncoding_or_incomplete": 6376,
+          "outside_primary": 20468
+        },
+        "gene_loci": 14576,
+        "isoform_count": 27249,
+        "source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/zebrafish/ncbiRefSeq.txt.gz"
+      },
+      "metrics": {
+        "f1": 0.6861617021276596,
+        "fn": 4498,
+        "fp": 4721,
+        "precision": 0.680991958916143,
+        "recall": 0.691410537870472,
+        "tp": 10078
+      },
+      "unique_cds_chains": 16305,
+      "complete_cds_feature_chains": 16296,
+      "partial_cds_feature_chains": 9,
+      "per_chromosome": {
+        "chr10": {
+          "fn": 354,
+          "fp": 296,
+          "tp": 597
+        },
+        "chr11": {
+          "fn": 264,
+          "fp": 313,
+          "tp": 572
+        },
+        "chr12": {
+          "fn": 237,
+          "fp": 227,
+          "tp": 555
+        },
+        "chr13": {
+          "fn": 230,
+          "fp": 290,
+          "tp": 568
+        },
+        "chr14": {
+          "fn": 236,
+          "fp": 246,
+          "tp": 544
+        },
+        "chr15": {
+          "fn": 322,
+          "fp": 255,
+          "tp": 534
+        },
+        "chr16": {
+          "fn": 247,
+          "fp": 283,
+          "tp": 699
+        },
+        "chr17": {
+          "fn": 222,
+          "fp": 276,
+          "tp": 553
+        },
+        "chr18": {
+          "fn": 266,
+          "fp": 238,
+          "tp": 493
+        },
+        "chr19": {
+          "fn": 187,
+          "fp": 229,
+          "tp": 641
+        },
+        "chr20": {
+          "fn": 246,
+          "fp": 236,
+          "tp": 624
+        },
+        "chr21": {
+          "fn": 326,
+          "fp": 309,
+          "tp": 680
+        },
+        "chr22": {
+          "fn": 378,
+          "fp": 375,
+          "tp": 616
+        },
+        "chr23": {
+          "fn": 242,
+          "fp": 301,
+          "tp": 653
+        },
+        "chr24": {
+          "fn": 207,
+          "fp": 260,
+          "tp": 496
+        },
+        "chr25": {
+          "fn": 249,
+          "fp": 289,
+          "tp": 570
+        },
+        "chr8": {
+          "fn": 285,
+          "fp": 298,
+          "tp": 683
+        }
+      },
+      "skipped": {
+        "missing_id_or_non_autosome": 216056,
+        "outside_primary_domain": 1285
+      },
+      "matched_chains": 11584,
+      "multiple_matching_isoforms_beyond_one_per_locus": 1506,
+      "long_read": {
+        "boundary": "BRAKER UTR-off CDS intron chains are compared to observed transcript intron chains; UTR introns can prevent equality. RefSeq-CDS-compatible subset is explicitly reference-assisted, not independent CDS endpoint truth.",
+        "comparisons": {},
+        "domain": "primary",
+        "domains_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/evaluation/zebrafish-r2/long-read-structures.json",
+        "interpretation": "positive-only structural recovery; no precision/FP derived from unobserved RNA; source class u may include noncoding transcripts",
+        "arms": {
+          "D": {
+            "all_observed_structures": {
+              "observed": 27862,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 1508,
+                  "recovered": 253
+                },
+                "chr11": {
+                  "observed": 1727,
+                  "recovered": 232
+                },
+                "chr12": {
+                  "observed": 1446,
+                  "recovered": 237
+                },
+                "chr13": {
+                  "observed": 1678,
+                  "recovered": 264
+                },
+                "chr14": {
+                  "observed": 1648,
+                  "recovered": 255
+                },
+                "chr15": {
+                  "observed": 1535,
+                  "recovered": 196
+                },
+                "chr16": {
+                  "observed": 1754,
+                  "recovered": 274
+                },
+                "chr17": {
+                  "observed": 1517,
+                  "recovered": 220
+                },
+                "chr18": {
+                  "observed": 1452,
+                  "recovered": 207
+                },
+                "chr19": {
+                  "observed": 1897,
+                  "recovered": 297
+                },
+                "chr20": {
+                  "observed": 1702,
+                  "recovered": 281
+                },
+                "chr21": {
+                  "observed": 1858,
+                  "recovered": 284
+                },
+                "chr22": {
+                  "observed": 1765,
+                  "recovered": 228
+                },
+                "chr23": {
+                  "observed": 1825,
+                  "recovered": 241
+                },
+                "chr24": {
+                  "observed": 1436,
+                  "recovered": 201
+                },
+                "chr25": {
+                  "observed": 1327,
+                  "recovered": 213
+                },
+                "chr8": {
+                  "observed": 1787,
+                  "recovered": 263
+                }
+              },
+              "recovered": 4146,
+              "recovery_fraction": 0.14880482377431628
+            },
+            "reference_cds_compatible": {
+              "observed": 4874,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 306,
+                  "recovered": 244
+                },
+                "chr11": {
+                  "observed": 290,
+                  "recovered": 219
+                },
+                "chr12": {
+                  "observed": 263,
+                  "recovered": 221
+                },
+                "chr13": {
+                  "observed": 300,
+                  "recovered": 248
+                },
+                "chr14": {
+                  "observed": 294,
+                  "recovered": 237
+                },
+                "chr15": {
+                  "observed": 257,
+                  "recovered": 188
+                },
+                "chr16": {
+                  "observed": 299,
+                  "recovered": 255
+                },
+                "chr17": {
+                  "observed": 268,
+                  "recovered": 207
+                },
+                "chr18": {
+                  "observed": 248,
+                  "recovered": 197
+                },
+                "chr19": {
+                  "observed": 336,
+                  "recovered": 280
+                },
+                "chr20": {
+                  "observed": 322,
+                  "recovered": 266
+                },
+                "chr21": {
+                  "observed": 326,
+                  "recovered": 266
+                },
+                "chr22": {
+                  "observed": 288,
+                  "recovered": 205
+                },
+                "chr23": {
+                  "observed": 287,
+                  "recovered": 226
+                },
+                "chr24": {
+                  "observed": 247,
+                  "recovered": 185
+                },
+                "chr25": {
+                  "observed": 236,
+                  "recovered": 201
+                },
+                "chr8": {
+                  "observed": 307,
+                  "recovered": 252
+                }
+              },
+              "recovered": 3897,
+              "recovery_fraction": 0.799548625359048
+            },
+            "source_class_=": {
+              "observed": 6903,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 417,
+                  "recovered": 212
+                },
+                "chr11": {
+                  "observed": 427,
+                  "recovered": 198
+                },
+                "chr12": {
+                  "observed": 367,
+                  "recovered": 197
+                },
+                "chr13": {
+                  "observed": 418,
+                  "recovered": 225
+                },
+                "chr14": {
+                  "observed": 437,
+                  "recovered": 225
+                },
+                "chr15": {
+                  "observed": 366,
+                  "recovered": 166
+                },
+                "chr16": {
+                  "observed": 491,
+                  "recovered": 218
+                },
+                "chr17": {
+                  "observed": 379,
+                  "recovered": 184
+                },
+                "chr18": {
+                  "observed": 340,
+                  "recovered": 172
+                },
+                "chr19": {
+                  "observed": 476,
+                  "recovered": 242
+                },
+                "chr20": {
+                  "observed": 399,
+                  "recovered": 229
+                },
+                "chr21": {
+                  "observed": 440,
+                  "recovered": 237
+                },
+                "chr22": {
+                  "observed": 383,
+                  "recovered": 180
+                },
+                "chr23": {
+                  "observed": 449,
+                  "recovered": 196
+                },
+                "chr24": {
+                  "observed": 321,
+                  "recovered": 166
+                },
+                "chr25": {
+                  "observed": 357,
+                  "recovered": 180
+                },
+                "chr8": {
+                  "observed": 436,
+                  "recovered": 214
+                }
+              },
+              "recovered": 3441,
+              "recovery_fraction": 0.49847892220773576
+            },
+            "source_class_c": {
+              "observed": 111,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 5,
+                  "recovered": 1
+                },
+                "chr12": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 6,
+                  "recovered": 2
+                },
+                "chr15": {
+                  "observed": 9,
+                  "recovered": 2
+                },
+                "chr16": {
+                  "observed": 5,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 10,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 10,
+                  "recovered": 2
+                },
+                "chr20": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 15,
+                  "recovered": 7
+                },
+                "chr23": {
+                  "observed": 7,
+                  "recovered": 1
+                },
+                "chr24": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 5,
+                  "recovered": 1
+                },
+                "chr8": {
+                  "observed": 4,
+                  "recovered": 0
+                }
+              },
+              "recovered": 17,
+              "recovery_fraction": 0.15315315315315314
+            },
+            "source_class_i": {
+              "observed": 260,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 18,
+                  "recovered": 2
+                },
+                "chr12": {
+                  "observed": 17,
+                  "recovered": 1
+                },
+                "chr13": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 13,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 14,
+                  "recovered": 1
+                },
+                "chr17": {
+                  "observed": 22,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 12,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 11,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 21,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 31,
+                  "recovered": 1
+                },
+                "chr23": {
+                  "observed": 14,
+                  "recovered": 0
+                },
+                "chr24": {
+                  "observed": 18,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 14,
+                  "recovered": 1
+                }
+              },
+              "recovered": 6,
+              "recovery_fraction": 0.023076923076923078
+            },
+            "source_class_j": {
+              "observed": 11666,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 588,
+                  "recovered": 22
+                },
+                "chr11": {
+                  "observed": 721,
+                  "recovered": 13
+                },
+                "chr12": {
+                  "observed": 596,
+                  "recovered": 22
+                },
+                "chr13": {
+                  "observed": 717,
+                  "recovered": 25
+                },
+                "chr14": {
+                  "observed": 745,
+                  "recovered": 19
+                },
+                "chr15": {
+                  "observed": 661,
+                  "recovered": 18
+                },
+                "chr16": {
+                  "observed": 710,
+                  "recovered": 36
+                },
+                "chr17": {
+                  "observed": 634,
+                  "recovered": 19
+                },
+                "chr18": {
+                  "observed": 477,
+                  "recovered": 20
+                },
+                "chr19": {
+                  "observed": 892,
+                  "recovered": 35
+                },
+                "chr20": {
+                  "observed": 756,
+                  "recovered": 37
+                },
+                "chr21": {
+                  "observed": 805,
+                  "recovered": 33
+                },
+                "chr22": {
+                  "observed": 724,
+                  "recovered": 26
+                },
+                "chr23": {
+                  "observed": 744,
+                  "recovered": 22
+                },
+                "chr24": {
+                  "observed": 627,
+                  "recovered": 21
+                },
+                "chr25": {
+                  "observed": 598,
+                  "recovered": 22
+                },
+                "chr8": {
+                  "observed": 671,
+                  "recovered": 27
+                }
+              },
+              "recovered": 417,
+              "recovery_fraction": 0.035744899708554774
+            },
+            "source_class_k": {
+              "observed": 5578,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 289,
+                  "recovered": 13
+                },
+                "chr11": {
+                  "observed": 331,
+                  "recovered": 9
+                },
+                "chr12": {
+                  "observed": 274,
+                  "recovered": 12
+                },
+                "chr13": {
+                  "observed": 308,
+                  "recovered": 11
+                },
+                "chr14": {
+                  "observed": 272,
+                  "recovered": 7
+                },
+                "chr15": {
+                  "observed": 303,
+                  "recovered": 8
+                },
+                "chr16": {
+                  "observed": 314,
+                  "recovered": 12
+                },
+                "chr17": {
+                  "observed": 319,
+                  "recovered": 11
+                },
+                "chr18": {
+                  "observed": 456,
+                  "recovered": 8
+                },
+                "chr19": {
+                  "observed": 361,
+                  "recovered": 12
+                },
+                "chr20": {
+                  "observed": 324,
+                  "recovered": 11
+                },
+                "chr21": {
+                  "observed": 341,
+                  "recovered": 9
+                },
+                "chr22": {
+                  "observed": 329,
+                  "recovered": 8
+                },
+                "chr23": {
+                  "observed": 409,
+                  "recovered": 15
+                },
+                "chr24": {
+                  "observed": 256,
+                  "recovered": 9
+                },
+                "chr25": {
+                  "observed": 199,
+                  "recovered": 8
+                },
+                "chr8": {
+                  "observed": 493,
+                  "recovered": 17
+                }
+              },
+              "recovered": 180,
+              "recovery_fraction": 0.0322696306920043
+            },
+            "source_class_m": {
+              "observed": 1049,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 72,
+                  "recovered": 6
+                },
+                "chr11": {
+                  "observed": 60,
+                  "recovered": 1
+                },
+                "chr12": {
+                  "observed": 60,
+                  "recovered": 3
+                },
+                "chr13": {
+                  "observed": 59,
+                  "recovered": 1
+                },
+                "chr14": {
+                  "observed": 53,
+                  "recovered": 1
+                },
+                "chr15": {
+                  "observed": 60,
+                  "recovered": 1
+                },
+                "chr16": {
+                  "observed": 64,
+                  "recovered": 3
+                },
+                "chr17": {
+                  "observed": 45,
+                  "recovered": 3
+                },
+                "chr18": {
+                  "observed": 42,
+                  "recovered": 1
+                },
+                "chr19": {
+                  "observed": 56,
+                  "recovered": 2
+                },
+                "chr20": {
+                  "observed": 68,
+                  "recovered": 2
+                },
+                "chr21": {
+                  "observed": 87,
+                  "recovered": 2
+                },
+                "chr22": {
+                  "observed": 63,
+                  "recovered": 3
+                },
+                "chr23": {
+                  "observed": 78,
+                  "recovered": 3
+                },
+                "chr24": {
+                  "observed": 58,
+                  "recovered": 2
+                },
+                "chr25": {
+                  "observed": 61,
+                  "recovered": 1
+                },
+                "chr8": {
+                  "observed": 63,
+                  "recovered": 3
+                }
+              },
+              "recovered": 38,
+              "recovery_fraction": 0.03622497616777884
+            },
+            "source_class_n": {
+              "observed": 1149,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 75,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 80,
+                  "recovered": 0
+                },
+                "chr12": {
+                  "observed": 74,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 92,
+                  "recovered": 1
+                },
+                "chr14": {
+                  "observed": 49,
+                  "recovered": 1
+                },
+                "chr15": {
+                  "observed": 55,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 64,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 47,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 57,
+                  "recovered": 1
+                },
+                "chr19": {
+                  "observed": 33,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 80,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 86,
+                  "recovered": 1
+                },
+                "chr22": {
+                  "observed": 71,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 68,
+                  "recovered": 2
+                },
+                "chr24": {
+                  "observed": 102,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 58,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 58,
+                  "recovered": 0
+                }
+              },
+              "recovered": 6,
+              "recovery_fraction": 0.005221932114882507
+            },
+            "source_class_o": {
+              "observed": 215,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 6,
+                  "recovered": 2
+                },
+                "chr12": {
+                  "observed": 8,
+                  "recovered": 1
+                },
+                "chr13": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 37,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 16,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 5,
+                  "recovered": 1
+                },
+                "chr20": {
+                  "observed": 6,
+                  "recovered": 1
+                },
+                "chr21": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 66,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 11,
+                  "recovered": 0
+                }
+              },
+              "recovered": 5,
+              "recovery_fraction": 0.023255813953488372
+            },
+            "source_class_s": {
+              "observed": 4,
+              "per_chromosome": {
+                "chr17": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 1,
+                  "recovered": 0
+                }
+              },
+              "recovered": 0,
+              "recovery_fraction": 0.0
+            },
+            "source_class_u": {
+              "observed": 700,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 30,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 52,
+                  "recovered": 2
+                },
+                "chr12": {
+                  "observed": 27,
+                  "recovered": 1
+                },
+                "chr13": {
+                  "observed": 44,
+                  "recovered": 1
+                },
+                "chr14": {
+                  "observed": 57,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 26,
+                  "recovered": 1
+                },
+                "chr16": {
+                  "observed": 76,
+                  "recovered": 3
+                },
+                "chr17": {
+                  "observed": 32,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 42,
+                  "recovered": 4
+                },
+                "chr19": {
+                  "observed": 40,
+                  "recovered": 3
+                },
+                "chr20": {
+                  "observed": 39,
+                  "recovered": 1
+                },
+                "chr21": {
+                  "observed": 52,
+                  "recovered": 2
+                },
+                "chr22": {
+                  "observed": 48,
+                  "recovered": 2
+                },
+                "chr23": {
+                  "observed": 33,
+                  "recovered": 2
+                },
+                "chr24": {
+                  "observed": 36,
+                  "recovered": 2
+                },
+                "chr25": {
+                  "observed": 35,
+                  "recovered": 1
+                },
+                "chr8": {
+                  "observed": 31,
+                  "recovered": 1
+                }
+              },
+              "recovered": 27,
+              "recovery_fraction": 0.03857142857142857
+            },
+            "source_class_x": {
+              "observed": 204,
+              "per_chromosome": {
+                "chr10": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 25,
+                  "recovered": 4
+                },
+                "chr12": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 11,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 5,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 10,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 33,
+                  "recovered": 1
+                },
+                "chr23": {
+                  "observed": 12,
+                  "recovered": 0
+                },
+                "chr24": {
+                  "observed": 12,
+                  "recovered": 1
+                },
+                "chr25": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 6,
+                  "recovered": 0
+                }
+              },
+              "recovered": 7,
+              "recovery_fraction": 0.03431372549019608
+            },
+            "source_class_y": {
+              "observed": 23,
+              "per_chromosome": {
+                "chr11": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr12": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 2,
+                  "recovered": 1
+                },
+                "chr17": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 3,
+                  "recovered": 1
+                },
+                "chr19": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 3,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 1,
+                  "recovered": 0
+                }
+              },
+              "recovered": 2,
+              "recovery_fraction": 0.08695652173913043
+            }
+          }
+        }
+      }
+    },
+    "full": {
+      "full_score_source": "outputs/BRAKER-MASK-UTILITY-20260925/evaluation/zebrafish-r2/score-D-full.json",
+      "reference": {
+        "excluded": {
+          "non_autosome": 11126,
+          "noncoding_or_incomplete": 6376
+        },
+        "gene_loci": 25526,
+        "isoform_count": 47717,
+        "source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/NONMAMMAL-GENE-UTILITY-20260918/zebrafish/ncbiRefSeq.txt.gz"
+      },
+      "metrics": {
+        "f1": 0.67127747702622,
+        "fn": 8104,
+        "fp": 8959,
+        "precision": 0.6603995299647474,
+        "recall": 0.6825197837499021,
+        "tp": 17422
+      },
+      "unique_cds_chains": 29061,
+      "complete_cds_feature_chains": 29044,
+      "partial_cds_feature_chains": 17,
+      "per_chromosome": {
+        "chr1": {
+          "fn": 413,
+          "fp": 439,
+          "tp": 807
+        },
+        "chr10": {
+          "fn": 354,
+          "fp": 296,
+          "tp": 597
+        },
+        "chr11": {
+          "fn": 264,
+          "fp": 313,
+          "tp": 572
+        },
+        "chr12": {
+          "fn": 245,
+          "fp": 263,
+          "tp": 631
+        },
+        "chr13": {
+          "fn": 245,
+          "fp": 321,
+          "tp": 653
+        },
+        "chr14": {
+          "fn": 248,
+          "fp": 262,
+          "tp": 602
+        },
+        "chr15": {
+          "fn": 355,
+          "fp": 300,
+          "tp": 620
+        },
+        "chr16": {
+          "fn": 270,
+          "fp": 330,
+          "tp": 816
+        },
+        "chr17": {
+          "fn": 243,
+          "fp": 321,
+          "tp": 643
+        },
+        "chr18": {
+          "fn": 278,
+          "fp": 253,
+          "tp": 533
+        },
+        "chr19": {
+          "fn": 215,
+          "fp": 265,
+          "tp": 713
+        },
+        "chr2": {
+          "fn": 358,
+          "fp": 425,
+          "tp": 843
+        },
+        "chr20": {
+          "fn": 270,
+          "fp": 264,
+          "tp": 734
+        },
+        "chr21": {
+          "fn": 326,
+          "fp": 309,
+          "tp": 680
+        },
+        "chr22": {
+          "fn": 378,
+          "fp": 375,
+          "tp": 616
+        },
+        "chr23": {
+          "fn": 242,
+          "fp": 301,
+          "tp": 653
+        },
+        "chr24": {
+          "fn": 207,
+          "fp": 260,
+          "tp": 496
+        },
+        "chr25": {
+          "fn": 249,
+          "fp": 289,
+          "tp": 570
+        },
+        "chr3": {
+          "fn": 492,
+          "fp": 472,
+          "tp": 928
+        },
+        "chr4": {
+          "fn": 797,
+          "fp": 1117,
+          "tp": 622
+        },
+        "chr5": {
+          "fn": 363,
+          "fp": 388,
+          "tp": 990
+        },
+        "chr6": {
+          "fn": 279,
+          "fp": 317,
+          "tp": 755
+        },
+        "chr7": {
+          "fn": 464,
+          "fp": 485,
+          "tp": 927
+        },
+        "chr8": {
+          "fn": 307,
+          "fp": 320,
+          "tp": 778
+        },
+        "chr9": {
+          "fn": 242,
+          "fp": 274,
+          "tp": 643
+        }
+      },
+      "skipped": {
+        "missing_id_or_non_autosome": 74702
+      },
+      "matched_chains": 20102,
+      "multiple_matching_isoforms_beyond_one_per_locus": 2680,
+      "long_read": {
+        "boundary": "BRAKER UTR-off CDS intron chains are compared to observed transcript intron chains; UTR introns can prevent equality. RefSeq-CDS-compatible subset is explicitly reference-assisted, not independent CDS endpoint truth.",
+        "comparisons": {},
+        "domain": "full",
+        "domains_source": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/evaluation/zebrafish-r2/long-read-structures.json",
+        "interpretation": "positive-only structural recovery; no precision/FP derived from unobserved RNA; source class u may include noncoding transcripts",
+        "arms": {
+          "D": {
+            "all_observed_structures": {
+              "observed": 48068,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 2048,
+                  "recovered": 360
+                },
+                "chr10": {
+                  "observed": 1508,
+                  "recovered": 253
+                },
+                "chr11": {
+                  "observed": 1727,
+                  "recovered": 232
+                },
+                "chr12": {
+                  "observed": 1612,
+                  "recovered": 272
+                },
+                "chr13": {
+                  "observed": 1861,
+                  "recovered": 305
+                },
+                "chr14": {
+                  "observed": 1776,
+                  "recovered": 282
+                },
+                "chr15": {
+                  "observed": 1730,
+                  "recovered": 239
+                },
+                "chr16": {
+                  "observed": 2005,
+                  "recovered": 309
+                },
+                "chr17": {
+                  "observed": 1775,
+                  "recovered": 264
+                },
+                "chr18": {
+                  "observed": 1581,
+                  "recovered": 226
+                },
+                "chr19": {
+                  "observed": 2029,
+                  "recovered": 325
+                },
+                "chr2": {
+                  "observed": 2101,
+                  "recovered": 350
+                },
+                "chr20": {
+                  "observed": 1951,
+                  "recovered": 324
+                },
+                "chr21": {
+                  "observed": 1858,
+                  "recovered": 284
+                },
+                "chr22": {
+                  "observed": 1765,
+                  "recovered": 228
+                },
+                "chr23": {
+                  "observed": 1825,
+                  "recovered": 241
+                },
+                "chr24": {
+                  "observed": 1436,
+                  "recovered": 201
+                },
+                "chr25": {
+                  "observed": 1327,
+                  "recovered": 213
+                },
+                "chr3": {
+                  "observed": 2493,
+                  "recovered": 373
+                },
+                "chr4": {
+                  "observed": 2873,
+                  "recovered": 216
+                },
+                "chr5": {
+                  "observed": 2693,
+                  "recovered": 443
+                },
+                "chr6": {
+                  "observed": 2086,
+                  "recovered": 319
+                },
+                "chr7": {
+                  "observed": 2325,
+                  "recovered": 384
+                },
+                "chr8": {
+                  "observed": 1992,
+                  "recovered": 301
+                },
+                "chr9": {
+                  "observed": 1691,
+                  "recovered": 299
+                }
+              },
+              "recovered": 7243,
+              "recovery_fraction": 0.15068236664724974
+            },
+            "reference_cds_compatible": {
+              "observed": 8523,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 420,
+                  "recovered": 344
+                },
+                "chr10": {
+                  "observed": 306,
+                  "recovered": 244
+                },
+                "chr11": {
+                  "observed": 290,
+                  "recovered": 219
+                },
+                "chr12": {
+                  "observed": 301,
+                  "recovered": 254
+                },
+                "chr13": {
+                  "observed": 347,
+                  "recovered": 288
+                },
+                "chr14": {
+                  "observed": 324,
+                  "recovered": 263
+                },
+                "chr15": {
+                  "observed": 299,
+                  "recovered": 225
+                },
+                "chr16": {
+                  "observed": 341,
+                  "recovered": 289
+                },
+                "chr17": {
+                  "observed": 315,
+                  "recovered": 246
+                },
+                "chr18": {
+                  "observed": 272,
+                  "recovered": 215
+                },
+                "chr19": {
+                  "observed": 366,
+                  "recovered": 307
+                },
+                "chr2": {
+                  "observed": 415,
+                  "recovered": 337
+                },
+                "chr20": {
+                  "observed": 371,
+                  "recovered": 308
+                },
+                "chr21": {
+                  "observed": 326,
+                  "recovered": 266
+                },
+                "chr22": {
+                  "observed": 288,
+                  "recovered": 205
+                },
+                "chr23": {
+                  "observed": 287,
+                  "recovered": 226
+                },
+                "chr24": {
+                  "observed": 247,
+                  "recovered": 185
+                },
+                "chr25": {
+                  "observed": 236,
+                  "recovered": 201
+                },
+                "chr3": {
+                  "observed": 427,
+                  "recovered": 348
+                },
+                "chr4": {
+                  "observed": 241,
+                  "recovered": 197
+                },
+                "chr5": {
+                  "observed": 551,
+                  "recovered": 423
+                },
+                "chr6": {
+                  "observed": 404,
+                  "recovered": 302
+                },
+                "chr7": {
+                  "observed": 446,
+                  "recovered": 358
+                },
+                "chr8": {
+                  "observed": 346,
+                  "recovered": 286
+                },
+                "chr9": {
+                  "observed": 357,
+                  "recovered": 283
+                }
+              },
+              "recovered": 6819,
+              "recovery_fraction": 0.8000703977472721
+            },
+            "source_class_=": {
+              "observed": 12223,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 572,
+                  "recovered": 300
+                },
+                "chr10": {
+                  "observed": 417,
+                  "recovered": 212
+                },
+                "chr11": {
+                  "observed": 427,
+                  "recovered": 198
+                },
+                "chr12": {
+                  "observed": 430,
+                  "recovered": 228
+                },
+                "chr13": {
+                  "observed": 478,
+                  "recovered": 261
+                },
+                "chr14": {
+                  "observed": 489,
+                  "recovered": 250
+                },
+                "chr15": {
+                  "observed": 422,
+                  "recovered": 202
+                },
+                "chr16": {
+                  "observed": 567,
+                  "recovered": 247
+                },
+                "chr17": {
+                  "observed": 451,
+                  "recovered": 218
+                },
+                "chr18": {
+                  "observed": 375,
+                  "recovered": 187
+                },
+                "chr19": {
+                  "observed": 524,
+                  "recovered": 266
+                },
+                "chr2": {
+                  "observed": 562,
+                  "recovered": 293
+                },
+                "chr20": {
+                  "observed": 489,
+                  "recovered": 265
+                },
+                "chr21": {
+                  "observed": 440,
+                  "recovered": 237
+                },
+                "chr22": {
+                  "observed": 383,
+                  "recovered": 180
+                },
+                "chr23": {
+                  "observed": 449,
+                  "recovered": 196
+                },
+                "chr24": {
+                  "observed": 321,
+                  "recovered": 166
+                },
+                "chr25": {
+                  "observed": 357,
+                  "recovered": 180
+                },
+                "chr3": {
+                  "observed": 626,
+                  "recovered": 304
+                },
+                "chr4": {
+                  "observed": 514,
+                  "recovered": 164
+                },
+                "chr5": {
+                  "observed": 704,
+                  "recovered": 378
+                },
+                "chr6": {
+                  "observed": 553,
+                  "recovered": 266
+                },
+                "chr7": {
+                  "observed": 701,
+                  "recovered": 334
+                },
+                "chr8": {
+                  "observed": 504,
+                  "recovered": 249
+                },
+                "chr9": {
+                  "observed": 468,
+                  "recovered": 250
+                }
+              },
+              "recovered": 6031,
+              "recovery_fraction": 0.4934140554691974
+            },
+            "source_class_c": {
+              "observed": 208,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr10": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 5,
+                  "recovered": 1
+                },
+                "chr12": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 6,
+                  "recovered": 2
+                },
+                "chr15": {
+                  "observed": 12,
+                  "recovered": 2
+                },
+                "chr16": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 11,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 10,
+                  "recovered": 2
+                },
+                "chr2": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 15,
+                  "recovered": 7
+                },
+                "chr23": {
+                  "observed": 7,
+                  "recovered": 1
+                },
+                "chr24": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 5,
+                  "recovered": 1
+                },
+                "chr3": {
+                  "observed": 10,
+                  "recovered": 2
+                },
+                "chr4": {
+                  "observed": 11,
+                  "recovered": 3
+                },
+                "chr5": {
+                  "observed": 16,
+                  "recovered": 0
+                },
+                "chr6": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr7": {
+                  "observed": 18,
+                  "recovered": 1
+                },
+                "chr8": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr9": {
+                  "observed": 15,
+                  "recovered": 2
+                }
+              },
+              "recovered": 25,
+              "recovery_fraction": 0.1201923076923077
+            },
+            "source_class_i": {
+              "observed": 475,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr10": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 18,
+                  "recovered": 2
+                },
+                "chr12": {
+                  "observed": 17,
+                  "recovered": 1
+                },
+                "chr13": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 14,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 14,
+                  "recovered": 1
+                },
+                "chr17": {
+                  "observed": 22,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 13,
+                  "recovered": 0
+                },
+                "chr2": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 11,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 21,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 31,
+                  "recovered": 1
+                },
+                "chr23": {
+                  "observed": 14,
+                  "recovered": 0
+                },
+                "chr24": {
+                  "observed": 18,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr3": {
+                  "observed": 37,
+                  "recovered": 0
+                },
+                "chr4": {
+                  "observed": 78,
+                  "recovered": 1
+                },
+                "chr5": {
+                  "observed": 34,
+                  "recovered": 0
+                },
+                "chr6": {
+                  "observed": 18,
+                  "recovered": 0
+                },
+                "chr7": {
+                  "observed": 17,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 15,
+                  "recovered": 1
+                },
+                "chr9": {
+                  "observed": 8,
+                  "recovered": 0
+                }
+              },
+              "recovered": 7,
+              "recovery_fraction": 0.014736842105263158
+            },
+            "source_class_j": {
+              "observed": 19563,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 833,
+                  "recovered": 33
+                },
+                "chr10": {
+                  "observed": 588,
+                  "recovered": 22
+                },
+                "chr11": {
+                  "observed": 721,
+                  "recovered": 13
+                },
+                "chr12": {
+                  "observed": 641,
+                  "recovered": 25
+                },
+                "chr13": {
+                  "observed": 786,
+                  "recovered": 28
+                },
+                "chr14": {
+                  "observed": 786,
+                  "recovered": 20
+                },
+                "chr15": {
+                  "observed": 728,
+                  "recovered": 23
+                },
+                "chr16": {
+                  "observed": 797,
+                  "recovered": 40
+                },
+                "chr17": {
+                  "observed": 750,
+                  "recovered": 25
+                },
+                "chr18": {
+                  "observed": 520,
+                  "recovered": 24
+                },
+                "chr19": {
+                  "observed": 935,
+                  "recovered": 39
+                },
+                "chr2": {
+                  "observed": 754,
+                  "recovered": 29
+                },
+                "chr20": {
+                  "observed": 847,
+                  "recovered": 43
+                },
+                "chr21": {
+                  "observed": 805,
+                  "recovered": 33
+                },
+                "chr22": {
+                  "observed": 724,
+                  "recovered": 26
+                },
+                "chr23": {
+                  "observed": 744,
+                  "recovered": 22
+                },
+                "chr24": {
+                  "observed": 627,
+                  "recovered": 21
+                },
+                "chr25": {
+                  "observed": 598,
+                  "recovered": 22
+                },
+                "chr3": {
+                  "observed": 1056,
+                  "recovered": 46
+                },
+                "chr4": {
+                  "observed": 1168,
+                  "recovered": 27
+                },
+                "chr5": {
+                  "observed": 1014,
+                  "recovered": 50
+                },
+                "chr6": {
+                  "observed": 798,
+                  "recovered": 28
+                },
+                "chr7": {
+                  "observed": 939,
+                  "recovered": 23
+                },
+                "chr8": {
+                  "observed": 741,
+                  "recovered": 29
+                },
+                "chr9": {
+                  "observed": 663,
+                  "recovered": 30
+                }
+              },
+              "recovered": 721,
+              "recovery_fraction": 0.03685528804375607
+            },
+            "source_class_k": {
+              "observed": 9311,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 416,
+                  "recovered": 20
+                },
+                "chr10": {
+                  "observed": 289,
+                  "recovered": 13
+                },
+                "chr11": {
+                  "observed": 331,
+                  "recovered": 9
+                },
+                "chr12": {
+                  "observed": 308,
+                  "recovered": 12
+                },
+                "chr13": {
+                  "observed": 345,
+                  "recovered": 12
+                },
+                "chr14": {
+                  "observed": 290,
+                  "recovered": 7
+                },
+                "chr15": {
+                  "observed": 335,
+                  "recovered": 10
+                },
+                "chr16": {
+                  "observed": 366,
+                  "recovered": 14
+                },
+                "chr17": {
+                  "observed": 367,
+                  "recovered": 14
+                },
+                "chr18": {
+                  "observed": 492,
+                  "recovered": 8
+                },
+                "chr19": {
+                  "observed": 381,
+                  "recovered": 12
+                },
+                "chr2": {
+                  "observed": 489,
+                  "recovered": 21
+                },
+                "chr20": {
+                  "observed": 353,
+                  "recovered": 12
+                },
+                "chr21": {
+                  "observed": 341,
+                  "recovered": 9
+                },
+                "chr22": {
+                  "observed": 329,
+                  "recovered": 8
+                },
+                "chr23": {
+                  "observed": 409,
+                  "recovered": 15
+                },
+                "chr24": {
+                  "observed": 256,
+                  "recovered": 9
+                },
+                "chr25": {
+                  "observed": 199,
+                  "recovered": 8
+                },
+                "chr3": {
+                  "observed": 412,
+                  "recovered": 11
+                },
+                "chr4": {
+                  "observed": 364,
+                  "recovered": 7
+                },
+                "chr5": {
+                  "observed": 599,
+                  "recovered": 12
+                },
+                "chr6": {
+                  "observed": 340,
+                  "recovered": 19
+                },
+                "chr7": {
+                  "observed": 398,
+                  "recovered": 16
+                },
+                "chr8": {
+                  "observed": 541,
+                  "recovered": 18
+                },
+                "chr9": {
+                  "observed": 361,
+                  "recovered": 15
+                }
+              },
+              "recovered": 311,
+              "recovery_fraction": 0.03340135323810547
+            },
+            "source_class_m": {
+              "observed": 1939,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 79,
+                  "recovered": 4
+                },
+                "chr10": {
+                  "observed": 72,
+                  "recovered": 6
+                },
+                "chr11": {
+                  "observed": 60,
+                  "recovered": 1
+                },
+                "chr12": {
+                  "observed": 76,
+                  "recovered": 4
+                },
+                "chr13": {
+                  "observed": 68,
+                  "recovered": 2
+                },
+                "chr14": {
+                  "observed": 58,
+                  "recovered": 2
+                },
+                "chr15": {
+                  "observed": 76,
+                  "recovered": 1
+                },
+                "chr16": {
+                  "observed": 80,
+                  "recovered": 3
+                },
+                "chr17": {
+                  "observed": 58,
+                  "recovered": 3
+                },
+                "chr18": {
+                  "observed": 54,
+                  "recovered": 1
+                },
+                "chr19": {
+                  "observed": 62,
+                  "recovered": 2
+                },
+                "chr2": {
+                  "observed": 88,
+                  "recovered": 2
+                },
+                "chr20": {
+                  "observed": 90,
+                  "recovered": 2
+                },
+                "chr21": {
+                  "observed": 87,
+                  "recovered": 2
+                },
+                "chr22": {
+                  "observed": 63,
+                  "recovered": 3
+                },
+                "chr23": {
+                  "observed": 78,
+                  "recovered": 3
+                },
+                "chr24": {
+                  "observed": 58,
+                  "recovered": 2
+                },
+                "chr25": {
+                  "observed": 61,
+                  "recovered": 1
+                },
+                "chr3": {
+                  "observed": 99,
+                  "recovered": 3
+                },
+                "chr4": {
+                  "observed": 86,
+                  "recovered": 6
+                },
+                "chr5": {
+                  "observed": 100,
+                  "recovered": 0
+                },
+                "chr6": {
+                  "observed": 147,
+                  "recovered": 3
+                },
+                "chr7": {
+                  "observed": 89,
+                  "recovered": 7
+                },
+                "chr8": {
+                  "observed": 70,
+                  "recovered": 3
+                },
+                "chr9": {
+                  "observed": 80,
+                  "recovered": 1
+                }
+              },
+              "recovered": 67,
+              "recovery_fraction": 0.03455389375966993
+            },
+            "source_class_n": {
+              "observed": 1918,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 44,
+                  "recovered": 0
+                },
+                "chr10": {
+                  "observed": 75,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 80,
+                  "recovered": 0
+                },
+                "chr12": {
+                  "observed": 79,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 97,
+                  "recovered": 1
+                },
+                "chr14": {
+                  "observed": 59,
+                  "recovered": 1
+                },
+                "chr15": {
+                  "observed": 70,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 75,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 53,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 58,
+                  "recovered": 1
+                },
+                "chr19": {
+                  "observed": 37,
+                  "recovered": 0
+                },
+                "chr2": {
+                  "observed": 74,
+                  "recovered": 1
+                },
+                "chr20": {
+                  "observed": 95,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 86,
+                  "recovered": 1
+                },
+                "chr22": {
+                  "observed": 71,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 68,
+                  "recovered": 2
+                },
+                "chr24": {
+                  "observed": 102,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 58,
+                  "recovered": 0
+                },
+                "chr3": {
+                  "observed": 92,
+                  "recovered": 5
+                },
+                "chr4": {
+                  "observed": 101,
+                  "recovered": 3
+                },
+                "chr5": {
+                  "observed": 105,
+                  "recovered": 1
+                },
+                "chr6": {
+                  "observed": 128,
+                  "recovered": 0
+                },
+                "chr7": {
+                  "observed": 88,
+                  "recovered": 1
+                },
+                "chr8": {
+                  "observed": 65,
+                  "recovered": 0
+                },
+                "chr9": {
+                  "observed": 58,
+                  "recovered": 0
+                }
+              },
+              "recovered": 18,
+              "recovery_fraction": 0.009384775808133473
+            },
+            "source_class_o": {
+              "observed": 411,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr10": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 6,
+                  "recovered": 2
+                },
+                "chr12": {
+                  "observed": 8,
+                  "recovered": 1
+                },
+                "chr13": {
+                  "observed": 12,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 38,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 18,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 6,
+                  "recovered": 1
+                },
+                "chr2": {
+                  "observed": 16,
+                  "recovered": 1
+                },
+                "chr20": {
+                  "observed": 7,
+                  "recovered": 1
+                },
+                "chr21": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 66,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr25": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr3": {
+                  "observed": 27,
+                  "recovered": 1
+                },
+                "chr4": {
+                  "observed": 92,
+                  "recovered": 1
+                },
+                "chr5": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr6": {
+                  "observed": 13,
+                  "recovered": 0
+                },
+                "chr7": {
+                  "observed": 19,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 11,
+                  "recovered": 0
+                },
+                "chr9": {
+                  "observed": 3,
+                  "recovered": 0
+                }
+              },
+              "recovered": 8,
+              "recovery_fraction": 0.019464720194647202
+            },
+            "source_class_s": {
+              "observed": 9,
+              "per_chromosome": {
+                "chr17": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr2": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr3": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr4": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr5": {
+                  "observed": 1,
+                  "recovered": 0
+                }
+              },
+              "recovered": 0,
+              "recovery_fraction": 0.0
+            },
+            "source_class_u": {
+              "observed": 1555,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 67,
+                  "recovered": 3
+                },
+                "chr10": {
+                  "observed": 30,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 52,
+                  "recovered": 2
+                },
+                "chr12": {
+                  "observed": 29,
+                  "recovered": 1
+                },
+                "chr13": {
+                  "observed": 45,
+                  "recovered": 1
+                },
+                "chr14": {
+                  "observed": 58,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 29,
+                  "recovered": 1
+                },
+                "chr16": {
+                  "observed": 82,
+                  "recovered": 3
+                },
+                "chr17": {
+                  "observed": 32,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 44,
+                  "recovered": 4
+                },
+                "chr19": {
+                  "observed": 48,
+                  "recovered": 3
+                },
+                "chr2": {
+                  "observed": 85,
+                  "recovered": 3
+                },
+                "chr20": {
+                  "observed": 40,
+                  "recovered": 1
+                },
+                "chr21": {
+                  "observed": 52,
+                  "recovered": 2
+                },
+                "chr22": {
+                  "observed": 48,
+                  "recovered": 2
+                },
+                "chr23": {
+                  "observed": 33,
+                  "recovered": 2
+                },
+                "chr24": {
+                  "observed": 36,
+                  "recovered": 2
+                },
+                "chr25": {
+                  "observed": 35,
+                  "recovered": 1
+                },
+                "chr3": {
+                  "observed": 94,
+                  "recovered": 1
+                },
+                "chr4": {
+                  "observed": 350,
+                  "recovered": 4
+                },
+                "chr5": {
+                  "observed": 101,
+                  "recovered": 2
+                },
+                "chr6": {
+                  "observed": 61,
+                  "recovered": 1
+                },
+                "chr7": {
+                  "observed": 41,
+                  "recovered": 2
+                },
+                "chr8": {
+                  "observed": 34,
+                  "recovered": 1
+                },
+                "chr9": {
+                  "observed": 29,
+                  "recovered": 1
+                }
+              },
+              "recovered": 44,
+              "recovery_fraction": 0.02829581993569132
+            },
+            "source_class_x": {
+              "observed": 395,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr10": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 25,
+                  "recovered": 4
+                },
+                "chr12": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 11,
+                  "recovered": 0
+                },
+                "chr14": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr15": {
+                  "observed": 6,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr17": {
+                  "observed": 10,
+                  "recovered": 1
+                },
+                "chr18": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr19": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr2": {
+                  "observed": 16,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 8,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 33,
+                  "recovered": 1
+                },
+                "chr23": {
+                  "observed": 12,
+                  "recovered": 0
+                },
+                "chr24": {
+                  "observed": 12,
+                  "recovered": 1
+                },
+                "chr25": {
+                  "observed": 9,
+                  "recovered": 0
+                },
+                "chr3": {
+                  "observed": 26,
+                  "recovered": 0
+                },
+                "chr4": {
+                  "observed": 98,
+                  "recovered": 0
+                },
+                "chr5": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr6": {
+                  "observed": 14,
+                  "recovered": 2
+                },
+                "chr7": {
+                  "observed": 15,
+                  "recovered": 0
+                },
+                "chr8": {
+                  "observed": 7,
+                  "recovered": 0
+                },
+                "chr9": {
+                  "observed": 2,
+                  "recovered": 0
+                }
+              },
+              "recovered": 9,
+              "recovery_fraction": 0.02278481012658228
+            },
+            "source_class_y": {
+              "observed": 61,
+              "per_chromosome": {
+                "chr1": {
+                  "observed": 3,
+                  "recovered": 0
+                },
+                "chr11": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr12": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr13": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr16": {
+                  "observed": 2,
+                  "recovered": 1
+                },
+                "chr17": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr18": {
+                  "observed": 3,
+                  "recovered": 1
+                },
+                "chr19": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr2": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr20": {
+                  "observed": 3,
+                  "recovered": 0
+                },
+                "chr21": {
+                  "observed": 4,
+                  "recovered": 0
+                },
+                "chr22": {
+                  "observed": 2,
+                  "recovered": 0
+                },
+                "chr23": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr3": {
+                  "observed": 13,
+                  "recovered": 0
+                },
+                "chr4": {
+                  "observed": 10,
+                  "recovered": 0
+                },
+                "chr5": {
+                  "observed": 1,
+                  "recovered": 0
+                },
+                "chr6": {
+                  "observed": 5,
+                  "recovered": 0
+                },
+                "chr9": {
+                  "observed": 4,
+                  "recovered": 0
+                }
+              },
+              "recovered": 2,
+              "recovery_fraction": 0.03278688524590164
+            }
+          }
+        }
+      }
+    }
+  },
+  "metric_definition": "Frozen gene-locus endpoint: one TP per matched reference locus; unmatched unique prediction chains count as FP. RefSeq agreement is not exhaustive biological truth.",
+  "score_job": {
+    "job_id": "13246903",
+    "slurm_state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 24,
+    "allocated_cpus": 4,
+    "allocated_cpu_hours": 0.02666666666666667,
+    "batch_max_rss_kb": 621244,
+    "started_utc": "2026-09-29T10:07:01Z",
+    "ended_utc": "2026-09-29T10:07:25Z"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "stage": "complete native BRAKER ETP",
+  "species": "chicken",
+  "job_id": "13233079",
+  "started_epoch": 1790490176.1168478,
+  "status": "PREDICTION_READY",
+  "arm": "RM2_FULL",
+  "native": {
+    "argv": [
+      "apptainer",
+      "exec",
+      "--cleanenv",
+      "--bind",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+      "--bind",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/arms/RM2_FULL:/work",
+      "--pwd",
+      "/work",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+      "braker.pl",
+      "--genome=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/masks/RM2_FULL.fa",
+      "--prot_seq=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/inputs/proteins/vertebrata.exclude-chicken-zebrafish.fa",
+      "--bam=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642599.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642601.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642607.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/rna/SRR13642613.bam",
+      "--workingdir=/work/run",
+      "--species=te_etp_chicken_rm2_full_20260925",
+      "--AUGUSTUS_CONFIG_PATH=/work/augustus-config",
+      "--threads=16"
+    ],
+    "started_epoch": 1790490247.6026108,
+    "returncode": 0,
+    "wall_seconds": 160974.9446258545
+  },
+  "final_gtf": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/chicken/arms/RM2_FULL/run/braker.gtf",
+  "features": {
+    "gene": 15984,
+    "transcript": 21416,
+    "start_codon": 21400,
+    "CDS": 244770,
+    "exon": 244770,
+    "stop_codon": 21402,
+    "intron": 223354,
+    "mRNA": 1059
+  },
+  "scientifically_scored": false,
+  "final_gtf_bytes": 68517021,
+  "native_run_finished_marker": true,
+  "native_time": {
+    "user_seconds": 1453701.43,
+    "system_seconds": 115356.04,
+    "max_rss_kb": 15777864,
+    "scope": "GNU time native child process tree; distinct from Slurm batch MaxRSS and allocated CPU-hours"
+  },
+  "interpretation": "Native prediction completed; fixed comparator scoring and RED arm still required for full utility conclusion.",
+  "slurm": {
+    "job_id": "13194349_2",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "started_utc": "2026-09-27T06:22:52Z",
+    "ended_utc": "2026-09-29T03:07:03Z",
+    "elapsed_seconds": 161051,
+    "allocated_cpus": 16,
+    "allocated_cpu_hours": 715.7822222222222,
+    "batch_max_rss_kb": 24109488
+  }
+}
