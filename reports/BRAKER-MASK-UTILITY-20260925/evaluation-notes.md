@@ -128,6 +128,29 @@ use `--domain full` for the latter. Existing outputs are not overwritten;
 successful fish preparation is `evaluation/zebrafish-r2`, so fish scoring
 must pass that directory explicitly.
 
+## Completed matrix and compact closure
+
+The final launcher invocation uses `score-arm.sbatch SPECIES D RM2_FULL
+RED_FULL`, yielding `score-D-RM2_FULL-RED_FULL-primary.json` and
+`score-D-RM2_FULL-RED_FULL-full.json`. These explicitly named files are the
+completed matrix; the earlier single-arm and pair files remain unchanged.
+Compact per-species summaries preserve every chromosome count, gross
+gain/loss unit ID, and long-read source class. `summarize.py` verifies exact
+D/RM2 replay against the prior compact pair results, frozen denominators,
+chromosome totals and the common RNA/protein command arguments; it records
+native completion and allocated costs separately from scientific endpoints.
+
+The protocol also requires a separate report on the old utility panel.
+`summarize.py` reuses the original NONMAMMAL-GENE-UTILITY reference.json and
+geometry.json, preserving 1,064 chicken / 984 fish loci and the original
+CDS-start-in-core, CDS-end-within-halo ownership rule. It selects the current
+whole-genome ETP chains from the full score, retaining this experiment's
+codon-inclusive CDS normalization, then matches the original reference.
+The panel's fixed coordinates/reference were already exposed; its result is
+a descriptive overlap check, not a new independent replicate or a replay
+of the older fixed AUGUSTUS predictions. No historical denominator, raw
+prediction, or score is overwritten. See [final results](FINAL-RESULTS.md).
+
 ## Positive-only long-read structure endpoint
 
 Before any target BRAKER prediction, private job 13194397 froze

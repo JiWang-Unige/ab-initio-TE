@@ -1,0 +1,65 @@
+{
+  "protocol": "BRAKER-MASK-UTILITY-20260925",
+  "stage": "complete native BRAKER ETP",
+  "species": "zebrafish",
+  "job_id": "13194349",
+  "started_epoch": 1790704293.6810985,
+  "status": "PREDICTION_READY",
+  "arm": "RED_FULL",
+  "native": {
+    "argv": [
+      "apptainer",
+      "exec",
+      "--cleanenv",
+      "--bind",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE:/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE",
+      "--bind",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/arms/RED_FULL:/work",
+      "--pwd",
+      "/work",
+      "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/TRADITIONAL-GENE-PIPELINE-20260925/preflight-13193436/tmp/build-temp-1854282490/rootfs",
+      "braker.pl",
+      "--genome=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/masks/RED_FULL.fa",
+      "--prot_seq=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/inputs/proteins/vertebrata.exclude-chicken-zebrafish.fa",
+      "--bam=/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/rna/SRR31188006.bam,/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/rna/SRR31188005.bam",
+      "--workingdir=/work/run",
+      "--species=te_etp_zebrafish_red_full_20260925",
+      "--AUGUSTUS_CONFIG_PATH=/work/augustus-config",
+      "--threads=16"
+    ],
+    "started_epoch": 1790704475.4359803,
+    "returncode": 0,
+    "wall_seconds": 181616.26332712173
+  },
+  "final_gtf": "/srv/beegfs/scratch/shares/ds4dh/common/ab-initio-TE/outputs/BRAKER-MASK-UTILITY-20260925/zebrafish/arms/RED_FULL/run/braker.gtf",
+  "features": {
+    "gene": 26457,
+    "transcript": 33511,
+    "stop_codon": 33479,
+    "CDS": 357102,
+    "exon": 357102,
+    "intron": 323591,
+    "start_codon": 33478,
+    "mRNA": 1518
+  },
+  "scientifically_scored": false,
+  "final_gtf_bytes": 103387688,
+  "native_run_finished_marker": true,
+  "slurm": {
+    "job_id": "13194349_5",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "started_utc": "2026-09-29T17:51:30Z",
+    "ended_utc": "2026-10-01T20:21:34Z",
+    "elapsed_seconds": 181804,
+    "allocated_cpus": 16,
+    "allocated_cpu_hours": 808.0177777777777,
+    "batch_max_rss_kb": 23277632
+  },
+  "native_time": {
+    "user_seconds": 1578137.03,
+    "system_seconds": 165151.46,
+    "max_rss_kb": 16079284,
+    "scope": "GNU time native child process tree; distinct from Slurm batch MaxRSS and allocated CPU-hours"
+  }
+}

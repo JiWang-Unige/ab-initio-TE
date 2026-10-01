@@ -53,3 +53,9 @@ BRAKER 每臂分别自动训练 GeneMark/AUGUSTUS，使用独立工作目录和�
 BRAKER使用UTR-off，因此辅助端点是其预测CDS内含子链与观测转录本内含子链的完全相等（相同链方向和全部junction），不要求转录本首尾相同。RNA独有UTR内含子可导致不匹配；不能据此声称完整转录本/完整CDS恢复，更不能把未获RNA匹配的预测定为FP。不派生precision或RNA负例；保留逐染色体恢复量、结构gross gains/losses及全部类别。辅助层只描述恢复比例，不从它推导显著性。
 
 结构清单冻结作业为private 2CPU/8GB/15min，无GPU，无模型或阈值更改；这只补完现有辅助评价的资格定义与评分实现。正式六臂需这份清单ready。评分分别输出score-primary.json和score-full.json，避免全域结果覆盖主域；RefSeq CDS主端点与其10,000次固定bootstrap保持不变。
+
+## 2026-10-02 终态记录（协议与分母保持冻结）
+
+六臂原生ETP均在原预算内完成，固定三臂评分、完整常染色体、旧面板重叠描述及鱼长读长分层均完成。实际完整矩阵分别保留为`score-D-RM2_FULL-RED_FULL-primary.json`和`score-D-RM2_FULL-RED_FULL-full.json`，不覆盖历史单臂或两臂文件。旧面板直接复用原reference.json及core/halo归属，保留鸡1,064、鱼984个loci；它是已有暴露区域的描述，不构成新增独立重复。
+
+鸡主域D F1 0.617122，低于RM2 0.632981、RED 0.643607；鱼D 0.686162，高于RM2 0.677143、RED 0.677371。鱼全域D−RED接近零并略为负，辅助长读长差异很小。因此本批支持逐物种的有限用途判断，未建立普遍优势、外部物种能力或功能选择性。六臂ETP4,523.2711 allocated CPU-hours；本批登记准备（含失败）及评分合计4,597.8833，旧实验及历史构库另列。详细结果与下一步建议见 [最终报告](../../reports/BRAKER-MASK-UTILITY-20260925/FINAL-RESULTS.md)。以上是观察终态，不新增实验或更改冻结标准。
